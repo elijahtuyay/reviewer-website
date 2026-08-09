@@ -1,0 +1,503 @@
+[
+  {
+    "id": "ls-001",
+    "section": "language-skills",
+    "topic": "Grammar & Error Spotting",
+    "difficulty": "easy",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "Neither of the students have submitted the assignment.",
+      "Neither of the students has submitted the assignment.",
+      "Neither of the student have submit the assignment.",
+      "Neither the student has submit the assignment."
+    ],
+    "correctIndex": 1,
+    "explanation": "\"Neither\" is a singular indefinite pronoun and always takes a singular verb (\"has\"), regardless of the plural noun in the \"of the ___\" phrase. Option A wrongly uses \"have\"; C and D have subject-verb and article errors.",
+    "source": "original"
+  },
+  {
+    "id": "ls-002",
+    "section": "language-skills",
+    "topic": "Grammar & Error Spotting",
+    "difficulty": "easy",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "He is good in mathematics.",
+      "He is good at mathematics.",
+      "He is good on mathematics.",
+      "He is good for mathematics."
+    ],
+    "correctIndex": 1,
+    "explanation": "\"Good at\" is the standard idiomatic preposition pairing used for skills and subjects in English.",
+    "source": "original"
+  },
+  {
+    "id": "ls-003",
+    "section": "language-skills",
+    "topic": "Grammar & Error Spotting",
+    "difficulty": "medium",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "By the time we reached the station, the train left.",
+      "By the time we reached the station, the train had left.",
+      "By the time we reach the station, the train had left.",
+      "By the time we reached the station, the train has left."
+    ],
+    "correctIndex": 1,
+    "explanation": "The past perfect tense (\"had left\") is required for an action completed before another past action (\"reached\"). This is called sequencing of tenses.",
+    "source": "original"
+  },
+  {
+    "id": "ls-004",
+    "section": "language-skills",
+    "topic": "Grammar & Error Spotting",
+    "difficulty": "easy",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "She is an European citizen.",
+      "She is a European citizen.",
+      "She is the European citizen.",
+      "She is European citizen."
+    ],
+    "correctIndex": 1,
+    "explanation": "\"European\" begins with a consonant sound (/j/, as in \"yu-ro-pee-an\"), so the article \"a\" is used, not \"an\" — the choice between a/an depends on sound, not spelling.",
+    "source": "original"
+  },
+  {
+    "id": "ls-005",
+    "section": "language-skills",
+    "topic": "Grammar & Error Spotting",
+    "difficulty": "easy",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "This is the most tallest building in the city.",
+      "This is the tallest building in the city.",
+      "This is more tallest building in the city.",
+      "This is tallest building in the city."
+    ],
+    "correctIndex": 1,
+    "explanation": "Double superlatives like \"most tallest\" are incorrect; \"tallest\" alone is the correct superlative form, and it requires the definite article \"the\" before it.",
+    "source": "original"
+  },
+  {
+    "id": "ls-006",
+    "section": "language-skills",
+    "topic": "Grammar & Error Spotting",
+    "difficulty": "medium",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "She likes reading, writing, and to swim.",
+      "She likes reading, writing, and swimming.",
+      "She likes to read, writing, and swim.",
+      "She likes read, write, and swim."
+    ],
+    "correctIndex": 1,
+    "explanation": "Items in a list or series must share the same grammatical form (parallelism). Here, all three activities must be in gerund form: reading, writing, swimming.",
+    "source": "original"
+  },
+  {
+    "id": "ls-007",
+    "section": "language-skills",
+    "topic": "Grammar & Error Spotting",
+    "difficulty": "medium",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "Walking to the store, the rain started falling.",
+      "Walking to the store, I got caught in the rain.",
+      "The rain, walking to the store, started falling.",
+      "I walking to the store, the rain started falling."
+    ],
+    "correctIndex": 1,
+    "explanation": "An introductory participial phrase (\"Walking to the store\") must modify the subject actually performing the action — here, \"I\". Options A and C wrongly imply the rain was walking, a dangling modifier error.",
+    "source": "original"
+  },
+  {
+    "id": "ls-008",
+    "section": "language-skills",
+    "topic": "Grammar & Error Spotting",
+    "difficulty": "easy",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "She gave me some useful informations.",
+      "She gave me some useful information.",
+      "She gave me an useful information.",
+      "She gave me some useful informations pieces."
+    ],
+    "correctIndex": 1,
+    "explanation": "\"Information\" is an uncountable noun in English and has no plural form; \"informations\" is incorrect.",
+    "source": "original"
+  },
+  {
+    "id": "ls-009",
+    "section": "language-skills",
+    "topic": "Vocabulary",
+    "difficulty": "easy",
+    "prompt": "Choose the word closest in meaning to \"Meticulous\".",
+    "options": ["Careless", "Painstaking", "Hasty", "Indifferent"],
+    "correctIndex": 1,
+    "explanation": "\"Meticulous\" means showing extreme care and precision, which is the meaning of \"painstaking\".",
+    "source": "original"
+  },
+  {
+    "id": "ls-010",
+    "section": "language-skills",
+    "topic": "Vocabulary",
+    "difficulty": "medium",
+    "prompt": "Choose the word most nearly opposite in meaning to \"Benevolent\".",
+    "options": ["Malevolent", "Generous", "Kind", "Charitable"],
+    "correctIndex": 0,
+    "explanation": "\"Benevolent\" means kind and well-meaning; its antonym is \"malevolent\", meaning having ill intentions.",
+    "source": "original"
+  },
+  {
+    "id": "ls-011",
+    "section": "language-skills",
+    "topic": "Vocabulary",
+    "difficulty": "medium",
+    "prompt": "Choose the word closest in meaning to \"Ephemeral\".",
+    "options": ["Permanent", "Transient", "Eternal", "Durable"],
+    "correctIndex": 1,
+    "explanation": "\"Ephemeral\" means lasting for a very short time, which matches \"transient\".",
+    "source": "original"
+  },
+  {
+    "id": "ls-012",
+    "section": "language-skills",
+    "topic": "Vocabulary",
+    "difficulty": "medium",
+    "prompt": "Choose the word most nearly opposite in meaning to \"Verbose\".",
+    "options": ["Wordy", "Concise", "Elaborate", "Rambling"],
+    "correctIndex": 1,
+    "explanation": "\"Verbose\" means using more words than necessary; its antonym is \"concise\", meaning brief and to the point.",
+    "source": "original"
+  },
+  {
+    "id": "ls-013",
+    "section": "language-skills",
+    "topic": "Vocabulary",
+    "difficulty": "medium",
+    "prompt": "Author is to Book as Composer is to ___?",
+    "options": ["Instrument", "Symphony", "Orchestra", "Concert"],
+    "correctIndex": 1,
+    "explanation": "An author creates a book; a composer creates a symphony. The relationship is creator-to-creation.",
+    "source": "original"
+  },
+  {
+    "id": "ls-014",
+    "section": "language-skills",
+    "topic": "Vocabulary",
+    "difficulty": "easy",
+    "prompt": "Choose the word closest in meaning to \"Candid\".",
+    "options": ["Deceptive", "Frank", "Secretive", "Evasive"],
+    "correctIndex": 1,
+    "explanation": "\"Candid\" means truthful and straightforward, which matches \"frank\".",
+    "source": "original"
+  },
+  {
+    "id": "ls-015",
+    "section": "language-skills",
+    "topic": "Vocabulary",
+    "difficulty": "medium",
+    "prompt": "Choose the word most nearly opposite in meaning to \"Frugal\".",
+    "options": ["Thrifty", "Economical", "Extravagant", "Sparing"],
+    "correctIndex": 2,
+    "explanation": "\"Frugal\" means careful with money or resources; its antonym is \"extravagant\", meaning wastefully spending.",
+    "source": "original"
+  },
+  {
+    "id": "ls-016",
+    "section": "language-skills",
+    "topic": "Vocabulary",
+    "difficulty": "easy",
+    "prompt": "Doctor is to Patient as Teacher is to ___?",
+    "options": ["Classroom", "Student", "School", "Lesson"],
+    "correctIndex": 1,
+    "explanation": "A doctor's professional relationship is with a patient; a teacher's parallel professional relationship is with a student.",
+    "source": "original"
+  },
+  {
+    "id": "ls-017",
+    "section": "language-skills",
+    "topic": "Sentence Correction",
+    "difficulty": "medium",
+    "prompt": "Choose the best version of the sentence: \"The reason why he failed is because he did not study.\"",
+    "options": [
+      "The reason why he failed is because he did not study.",
+      "The reason he failed is that he did not study.",
+      "The reason why he failed is that because he did not study.",
+      "He failed because the reason is he did not study."
+    ],
+    "correctIndex": 1,
+    "explanation": "\"The reason why...is because\" is a redundant construction. The concise, correct form is \"The reason...is that\".",
+    "source": "original"
+  },
+  {
+    "id": "ls-018",
+    "section": "language-skills",
+    "topic": "Sentence Correction",
+    "difficulty": "medium",
+    "prompt": "Choose the best version of the sentence: \"Each of the players have their own locker.\"",
+    "options": [
+      "Each of the players have their own locker.",
+      "Each of the players has their own locker.",
+      "Each of the player have their own locker.",
+      "Each of the players has its own locker."
+    ],
+    "correctIndex": 1,
+    "explanation": "\"Each\" is singular and takes \"has\". \"Their\" is acceptable as a gender-neutral singular possessive referring back to \"each\", while \"its\" in option D wrongly treats the players as non-human.",
+    "source": "original"
+  },
+  {
+    "id": "ls-019",
+    "section": "language-skills",
+    "topic": "Sentence Correction",
+    "difficulty": "hard",
+    "prompt": "Choose the best version of the sentence: \"Not only he was late, but also he forgot his notes.\"",
+    "options": [
+      "Not only he was late, but also he forgot his notes.",
+      "Not only was he late, but he also forgot his notes.",
+      "Not only he was late, but he also forgot his notes.",
+      "Not only was he late, but also forgot his notes."
+    ],
+    "correctIndex": 1,
+    "explanation": "\"Not only\" at the start of a clause requires subject-verb inversion (\"was he\"), and the correlative pair \"not only...but also\" must remain structurally parallel.",
+    "source": "original"
+  },
+  {
+    "id": "ls-020",
+    "section": "language-skills",
+    "topic": "Sentence Correction",
+    "difficulty": "medium",
+    "prompt": "Choose the best version of the sentence: \"The committee were divided in their opinion about the new policy.\"",
+    "options": [
+      "The committee were divided in their opinion about the new policy.",
+      "The committee was divided in its opinion about the new policy.",
+      "The committee was divided in their opinion about the new policy.",
+      "The committees was divided in its opinion about the new policy."
+    ],
+    "correctIndex": 1,
+    "explanation": "\"Committee\" is treated as a singular collective noun (\"was\"/\"its\") when acting as one unit, which is standard usage in formal English.",
+    "source": "original"
+  },
+  {
+    "id": "ls-021",
+    "section": "language-skills",
+    "topic": "Sentence Correction",
+    "difficulty": "easy",
+    "prompt": "Choose the best version of the sentence: \"Between you and I, this plan will not work.\"",
+    "options": [
+      "Between you and I, this plan will not work.",
+      "Between you and me, this plan will not work.",
+      "Between yourself and me, this plan will not work.",
+      "Between I and you, this plan will not work."
+    ],
+    "correctIndex": 1,
+    "explanation": "\"Between\" is a preposition and must be followed by object pronouns (\"you and me\"), not the subject pronoun \"I\".",
+    "source": "original"
+  },
+  {
+    "id": "ls-022",
+    "section": "language-skills",
+    "topic": "Sentence Correction",
+    "difficulty": "hard",
+    "prompt": "Choose the best version of the sentence: \"He is one of the students who has finished the assignment.\"",
+    "options": [
+      "He is one of the students who has finished the assignment.",
+      "He is one of the students who have finished the assignment.",
+      "He is one of the student who have finished the assignment.",
+      "He is one of the students who finishes the assignment."
+    ],
+    "correctIndex": 1,
+    "explanation": "\"Who\" refers back to \"students\" (plural) in \"one of the students who...\", so the verb must agree with the plural noun: \"have finished\".",
+    "source": "original"
+  },
+  {
+    "id": "ls-023",
+    "section": "language-skills",
+    "topic": "Para-jumbles",
+    "difficulty": "medium",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: As a result, crop yields in the region fell sharply. Q: The monsoon arrived nearly a month late this year. R: Farmers were therefore forced to delay planting. S: This delay affected the entire agricultural cycle.",
+    "options": ["QRSP", "QRPS", "PQRS", "SRQP"],
+    "correctIndex": 0,
+    "explanation": "Q introduces the cause (late monsoon) → R gives the immediate consequence (delayed planting) → S broadens the effect (whole cycle affected) → P states the final outcome (yields fell), forming a clear cause-and-effect chain.",
+    "source": "original"
+  },
+  {
+    "id": "ls-024",
+    "section": "language-skills",
+    "topic": "Para-jumbles",
+    "difficulty": "hard",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: However, the results were not as expected. Q: The scientists conducted the experiment three times. R: They decided to revise their hypothesis. S: Each time, they recorded the data carefully.",
+    "options": ["QSPR", "QPSR", "SQPR", "QSRP"],
+    "correctIndex": 0,
+    "explanation": "Q sets up the experiment → S describes the careful process during it → P introduces the contrasting outcome (\"however\") → R gives the resulting decision, forming a logical narrative sequence.",
+    "source": "original"
+  },
+  {
+    "id": "ls-025",
+    "section": "language-skills",
+    "topic": "Para-jumbles",
+    "difficulty": "medium",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: This made it difficult for small businesses to compete. Q: A new law was passed to regulate online marketplaces. R: The law imposed strict fees on small sellers. S: Eventually, many of them shut down their online stores.",
+    "options": ["QRPS", "QPRS", "RQPS", "QRSP"],
+    "correctIndex": 0,
+    "explanation": "Q introduces the law → R explains its specific provision (fees) → P shows the consequence (difficulty competing) → S gives the final result (stores shutting down), a chronological cause-effect chain.",
+    "source": "original"
+  },
+  {
+    "id": "ls-026",
+    "section": "language-skills",
+    "topic": "Para-jumbles",
+    "difficulty": "hard",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: The city then invested in a network of bicycle lanes. Q: Traffic congestion had become a major problem downtown. R: Over time, more residents began commuting by bicycle. S: This reduced both congestion and pollution levels.",
+    "options": ["QPRS", "QRPS", "PQRS", "QPSR"],
+    "correctIndex": 0,
+    "explanation": "Q states the problem → P describes the city's response → R shows the gradual behavioral shift caused by that response → S gives the resulting positive outcome.",
+    "source": "original"
+  },
+  {
+    "id": "ls-027",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage: \"In recent years, several cities have begun encouraging residents to keep beehives on rooftops and in community gardens. Proponents argue that urban beekeeping helps pollinate city gardens and parks, supporting biodiversity in otherwise concrete-heavy environments. Critics, however, point out that a sudden rise in managed honeybee colonies can crowd out native wild bee species, which are often more effective pollinators for local plants but receive far less public attention. Some ecologists now recommend that cities balance beekeeping initiatives with programs that specifically protect native pollinator habitats.\" According to the passage, what is one concern critics raise about urban beekeeping?",
+    "options": [
+      "It is too expensive for city governments to support.",
+      "It may crowd out native wild bee species.",
+      "Honeybees cannot survive in urban environments.",
+      "It reduces the number of community gardens."
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage directly states that critics point out managed honeybee colonies can crowd out native wild bee species.",
+    "source": "original"
+  },
+  {
+    "id": "ls-028",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage (same as above, urban beekeeping): \"...Some ecologists now recommend that cities balance beekeeping initiatives with programs that specifically protect native pollinator habitats, rather than treating honeybee introduction alone as a solution to urban biodiversity loss.\" What do some ecologists recommend, according to the passage?",
+    "options": [
+      "Banning beekeeping in cities entirely.",
+      "Focusing exclusively on honeybee population growth.",
+      "Balancing beekeeping with protection of native pollinator habitats.",
+      "Moving all beehives to rural areas."
+    ],
+    "correctIndex": 2,
+    "explanation": "The passage explicitly recommends balancing beekeeping initiatives with programs protecting native pollinator habitats.",
+    "source": "original"
+  },
+  {
+    "id": "ls-029",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage (same as above, urban beekeeping): \"Proponents argue that urban beekeeping helps pollinate city gardens...\" The word \"proponents\" in the passage most nearly means:",
+    "options": ["Opponents", "Supporters", "Scientists", "Beginners"],
+    "correctIndex": 1,
+    "explanation": "\"Proponents\" means people who advocate for or support something — here, urban beekeeping.",
+    "source": "original"
+  },
+  {
+    "id": "ls-030",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers.\" What was the main finding of the study regarding productivity?",
+    "options": [
+      "Remote workers were significantly less productive.",
+      "There was no significant difference in output across the three groups.",
+      "In-office workers were the most productive.",
+      "Hybrid workers were the least productive."
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage states directly that the study found no significant difference in output between the three groups.",
+    "source": "original"
+  },
+  {
+    "id": "ls-031",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage (same as above, remote work study): \"...hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office.\" Which group reported the highest job satisfaction?",
+    "options": [
+      "Fully remote employees",
+      "Fully in-office employees",
+      "Hybrid employees",
+      "All groups reported equal satisfaction"
+    ],
+    "correctIndex": 2,
+    "explanation": "The passage explicitly states hybrid workers reported the highest levels of job satisfaction.",
+    "source": "original"
+  },
+  {
+    "id": "ls-032",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage (same as above, remote work study): \"...The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" What concern do the study's authors raise at the end of the passage?",
+    "options": [
+      "That productivity metrics may not capture long-term effects of isolation.",
+      "That hybrid work is too expensive to maintain.",
+      "That in-office work will soon become obsolete.",
+      "That remote workers are less honest about their output."
+    ],
+    "correctIndex": 0,
+    "explanation": "The passage's final sentence states this caution directly: productivity metrics alone may not capture the long-term effects of isolation on retention.",
+    "source": "original"
+  },
+  {
+    "id": "ls-033",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage (same as above, remote work study): \"Fully remote employees, meanwhile, reported feeling more isolated over time...\" The word \"isolated\" in the passage is closest in meaning to:",
+    "options": ["Motivated", "Disconnected", "Overworked", "Efficient"],
+    "correctIndex": 1,
+    "explanation": "\"Isolated\" means cut off or disconnected from others, which matches \"disconnected\".",
+    "source": "original"
+  },
+  {
+    "id": "ls-034",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage: \"The invention of the printing press in the fifteenth century is often credited with transforming the spread of knowledge across Europe. Before its widespread adoption, books were copied by hand, a slow and costly process that limited literacy to a small elite. Once printed books became more affordable, literacy rates gradually rose, and ideas that had once circulated only among scholars began reaching merchants, craftsmen, and eventually the general public.\" According to the passage, what limited literacy before the printing press became widespread?",
+    "options": [
+      "A lack of interest in reading among the general public.",
+      "The slow, costly process of copying books by hand.",
+      "Strict government censorship of written material.",
+      "The absence of a standardized written language."
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage states that hand-copying books was slow and costly, which limited literacy to a small elite.",
+    "source": "original"
+  },
+  {
+    "id": "ls-035",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage (same as above, printing press): \"Some historians argue that this shift did not happen overnight; rather, it took several generations for printed material to fully displace oral tradition and handwritten manuscripts as the dominant means of sharing information.\" What do some historians argue about the shift caused by the printing press?",
+    "options": [
+      "It happened overnight, immediately replacing older traditions.",
+      "It took several generations to fully displace oral and handwritten traditions.",
+      "It had no real effect on literacy rates.",
+      "It was resisted only by scholars."
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage states this directly: some historians argue the shift took several generations, not that it happened overnight.",
+    "source": "original"
+  },
+  {
+    "id": "ls-036",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage (same as above, printing press): \"...it took several generations for printed material to fully displace oral tradition and handwritten manuscripts...\" The word \"displace\" in the passage most nearly means:",
+    "options": ["Reinforce", "Replace", "Relocate", "Preserve"],
+    "correctIndex": 1,
+    "explanation": "\"Displace\" means to take the place of or replace something.",
+    "source": "original"
+  }
+]

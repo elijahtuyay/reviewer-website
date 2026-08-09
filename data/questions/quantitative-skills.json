@@ -1,0 +1,422 @@
+[
+  {
+    "id": "qs-001",
+    "section": "quantitative-skills",
+    "topic": "Arithmetic — Percentages",
+    "difficulty": "easy",
+    "prompt": "A shirt is priced at $80. The store offers a 25% discount. What is the sale price?",
+    "options": ["$60", "$65", "$55", "$70"],
+    "correctIndex": 0,
+    "explanation": "25% of $80 is $20, so the sale price is $80 − $20 = $60. Equivalently, $80 × 0.75 = $60.",
+    "source": "original"
+  },
+  {
+    "id": "qs-002",
+    "section": "quantitative-skills",
+    "topic": "Arithmetic — Percentages",
+    "difficulty": "medium",
+    "prompt": "The price of an item increases by 20% and then decreases by 20%. What is the net percentage change?",
+    "options": ["No change", "4% decrease", "4% increase", "40% decrease"],
+    "correctIndex": 1,
+    "explanation": "Let the original price be 100. After a 20% increase: 120. After a 20% decrease on the new value: 120 × 0.8 = 96. Net change = 96 − 100 = −4, a 4% decrease. Successive equal percentage changes in opposite directions never cancel out exactly.",
+    "source": "original"
+  },
+  {
+    "id": "qs-003",
+    "section": "quantitative-skills",
+    "topic": "Arithmetic — Ratios",
+    "difficulty": "easy",
+    "prompt": "The ratio of boys to girls in a class is 3:5. If there are 24 boys, how many girls are there?",
+    "options": ["30", "40", "45", "36"],
+    "correctIndex": 1,
+    "explanation": "3 parts = 24 boys, so 1 part = 8. Girls = 5 parts = 5 × 8 = 40.",
+    "source": "original"
+  },
+  {
+    "id": "qs-004",
+    "section": "quantitative-skills",
+    "topic": "Arithmetic — Ratios",
+    "difficulty": "medium",
+    "prompt": "Two numbers are in the ratio 4:7. If their sum is 121, find the larger number.",
+    "options": ["44", "77", "66", "55"],
+    "correctIndex": 1,
+    "explanation": "4 + 7 = 11 parts total = 121, so 1 part = 11. The larger number = 7 × 11 = 77.",
+    "source": "original"
+  },
+  {
+    "id": "qs-005",
+    "section": "quantitative-skills",
+    "topic": "Arithmetic — Profit & Loss",
+    "difficulty": "easy",
+    "prompt": "A trader buys an item for $200 and sells it for $250. What is the profit percentage?",
+    "options": ["20%", "25%", "30%", "50%"],
+    "correctIndex": 1,
+    "explanation": "Profit = $250 − $200 = $50. Profit % = (50 / 200) × 100 = 25%.",
+    "source": "original"
+  },
+  {
+    "id": "qs-006",
+    "section": "quantitative-skills",
+    "topic": "Arithmetic — Profit & Loss",
+    "difficulty": "medium",
+    "prompt": "A man sells a watch for $342, incurring a loss of 5%. What was the cost price?",
+    "options": ["$354", "$360", "$350", "$365"],
+    "correctIndex": 1,
+    "explanation": "If cost price × 0.95 = $342, then cost price = 342 / 0.95 = $360. Check: $360 × 0.95 = $342.",
+    "source": "original"
+  },
+  {
+    "id": "qs-007",
+    "section": "quantitative-skills",
+    "topic": "Arithmetic — Discounts",
+    "difficulty": "medium",
+    "prompt": "A shop offers successive discounts of 10% and 20% on an item marked $500. What is the final price?",
+    "options": ["$350", "$360", "$370", "$400"],
+    "correctIndex": 1,
+    "explanation": "After a 10% discount: $500 × 0.9 = $450. After a further 20% discount: $450 × 0.8 = $360. Successive discounts are applied sequentially, not added together.",
+    "source": "original"
+  },
+  {
+    "id": "qs-008",
+    "section": "quantitative-skills",
+    "topic": "Arithmetic — Mixtures & Alligations",
+    "difficulty": "medium",
+    "prompt": "A vessel contains a mixture of milk and water in the ratio 5:3. If the vessel holds 32 liters of the mixture, how many liters of milk does it contain?",
+    "options": ["16 L", "18 L", "20 L", "24 L"],
+    "correctIndex": 2,
+    "explanation": "5 + 3 = 8 parts = 32 L, so 1 part = 4 L. Milk = 5 parts = 5 × 4 = 20 L.",
+    "source": "original"
+  },
+  {
+    "id": "qs-009",
+    "section": "quantitative-skills",
+    "topic": "Arithmetic — Mixtures & Alligations",
+    "difficulty": "hard",
+    "prompt": "How many liters of a 40% acid solution must be mixed with 10 liters of a 10% acid solution to get a 25% acid solution?",
+    "options": ["5 L", "8 L", "10 L", "12 L"],
+    "correctIndex": 2,
+    "explanation": "Let x = liters of the 40% solution. 0.40x + 0.10(10) = 0.25(x + 10) → 0.4x + 1 = 0.25x + 2.5 → 0.15x = 1.5 → x = 10 L. Check: 0.4(10) + 1 = 5, and 0.25(20) = 5.",
+    "source": "original"
+  },
+  {
+    "id": "qs-010",
+    "section": "quantitative-skills",
+    "topic": "Arithmetic — Probability",
+    "difficulty": "easy",
+    "prompt": "A bag contains 4 red balls and 6 blue balls. What is the probability of drawing a red ball at random?",
+    "options": ["1/2", "2/5", "3/5", "1/3"],
+    "correctIndex": 1,
+    "explanation": "Probability = favorable outcomes / total outcomes = 4 / 10 = 2/5.",
+    "source": "original"
+  },
+  {
+    "id": "qs-011",
+    "section": "quantitative-skills",
+    "topic": "Arithmetic — Probability",
+    "difficulty": "medium",
+    "prompt": "A fair coin is tossed twice. What is the probability of getting exactly one head?",
+    "options": ["1/4", "1/2", "3/4", "1/3"],
+    "correctIndex": 1,
+    "explanation": "The four equally likely outcomes are HH, HT, TH, TT. Exactly one head occurs in HT and TH, so the probability is 2/4 = 1/2.",
+    "source": "original"
+  },
+  {
+    "id": "qs-012",
+    "section": "quantitative-skills",
+    "topic": "Arithmetic — Partnership",
+    "difficulty": "medium",
+    "prompt": "A and B invest $3,000 and $5,000 respectively in a business. If the total profit is $1,600, what is A's share?",
+    "options": ["$500", "$600", "$700", "$800"],
+    "correctIndex": 1,
+    "explanation": "Investment ratio A:B = 3:5, so total parts = 8. A's share = (3/8) × $1,600 = $600.",
+    "source": "original"
+  },
+  {
+    "id": "qs-013",
+    "section": "quantitative-skills",
+    "topic": "Algebra",
+    "difficulty": "easy",
+    "prompt": "If 3x − 7 = 2x + 5, what is the value of x?",
+    "options": ["10", "12", "14", "16"],
+    "correctIndex": 1,
+    "explanation": "3x − 2x = 5 + 7 → x = 12.",
+    "source": "original"
+  },
+  {
+    "id": "qs-014",
+    "section": "quantitative-skills",
+    "topic": "Algebra",
+    "difficulty": "medium",
+    "prompt": "If x² − 5x + 6 = 0, what are the values of x?",
+    "options": ["2 and 3", "1 and 6", "−2 and −3", "2 and −3"],
+    "correctIndex": 0,
+    "explanation": "Factoring: (x − 2)(x − 3) = 0, so x = 2 or x = 3.",
+    "source": "original"
+  },
+  {
+    "id": "qs-015",
+    "section": "quantitative-skills",
+    "topic": "Algebra",
+    "difficulty": "medium",
+    "prompt": "If a + b = 10 and a − b = 4, what is the value of ab?",
+    "options": ["20", "21", "24", "18"],
+    "correctIndex": 1,
+    "explanation": "Adding the equations: 2a = 14 → a = 7. Then b = 10 − 7 = 3. So ab = 7 × 3 = 21.",
+    "source": "original"
+  },
+  {
+    "id": "qs-016",
+    "section": "quantitative-skills",
+    "topic": "Algebra",
+    "difficulty": "easy",
+    "prompt": "Simplify: (x + 3)(x − 3)",
+    "options": ["x² − 9", "x² + 9", "x² − 6x − 9", "x² + 6x − 9"],
+    "correctIndex": 0,
+    "explanation": "This is a difference of squares: (x + 3)(x − 3) = x² − 9.",
+    "source": "original"
+  },
+  {
+    "id": "qs-017",
+    "section": "quantitative-skills",
+    "topic": "Algebra",
+    "difficulty": "medium",
+    "prompt": "If 2^x = 32, what is the value of x?",
+    "options": ["4", "5", "6", "16"],
+    "correctIndex": 1,
+    "explanation": "32 = 2⁵, so x = 5.",
+    "source": "original"
+  },
+  {
+    "id": "qs-018",
+    "section": "quantitative-skills",
+    "topic": "Algebra",
+    "difficulty": "medium",
+    "prompt": "A number increased by 20% gives 96. What is the number?",
+    "options": ["76", "78", "80", "84"],
+    "correctIndex": 2,
+    "explanation": "Let the number be x. x × 1.2 = 96 → x = 80.",
+    "source": "original"
+  },
+  {
+    "id": "qs-019",
+    "section": "quantitative-skills",
+    "topic": "Geometry",
+    "difficulty": "medium",
+    "prompt": "A right triangle has legs of length 6 cm and 8 cm. What is the length of the hypotenuse?",
+    "options": ["9 cm", "10 cm", "12 cm", "14 cm"],
+    "correctIndex": 1,
+    "explanation": "By the Pythagorean theorem: √(6² + 8²) = √(36 + 64) = √100 = 10 cm.",
+    "source": "original"
+  },
+  {
+    "id": "qs-020",
+    "section": "quantitative-skills",
+    "topic": "Geometry",
+    "difficulty": "medium",
+    "prompt": "What is the area of a circle with radius 7 cm? (Use π = 22/7)",
+    "options": ["132 cm²", "144 cm²", "154 cm²", "168 cm²"],
+    "correctIndex": 2,
+    "explanation": "Area = πr² = (22/7) × 7² = (22/7) × 49 = 22 × 7 = 154 cm².",
+    "source": "original"
+  },
+  {
+    "id": "qs-021",
+    "section": "quantitative-skills",
+    "topic": "Geometry",
+    "difficulty": "medium",
+    "prompt": "The angles of a triangle are in the ratio 2:3:4. What is the measure of the largest angle?",
+    "options": ["60°", "80°", "90°", "100°"],
+    "correctIndex": 1,
+    "explanation": "Total parts = 2 + 3 + 4 = 9, and the angle sum is 180°, so 1 part = 20°. The largest angle = 4 × 20° = 80°.",
+    "source": "original"
+  },
+  {
+    "id": "qs-022",
+    "section": "quantitative-skills",
+    "topic": "Geometry",
+    "difficulty": "easy",
+    "prompt": "A rectangle has a length of 12 cm and a width of 5 cm. What is its perimeter?",
+    "options": ["17 cm", "34 cm", "60 cm", "26 cm"],
+    "correctIndex": 1,
+    "explanation": "Perimeter = 2 × (length + width) = 2 × (12 + 5) = 2 × 17 = 34 cm.",
+    "source": "original"
+  },
+  {
+    "id": "qs-023",
+    "section": "quantitative-skills",
+    "topic": "Geometry",
+    "difficulty": "hard",
+    "prompt": "Two triangles are similar, with corresponding sides in the ratio 2:5. If the area of the smaller triangle is 8 cm², what is the area of the larger triangle?",
+    "options": ["20 cm²", "40 cm²", "50 cm²", "32 cm²"],
+    "correctIndex": 2,
+    "explanation": "For similar figures, the ratio of areas equals the square of the ratio of corresponding sides: 2² : 5² = 4 : 25. So 4 units of area = 8 cm² → 1 unit = 2 cm². Larger area = 25 × 2 = 50 cm².",
+    "source": "original"
+  },
+  {
+    "id": "qs-024",
+    "section": "quantitative-skills",
+    "topic": "Geometry — Coordinate Geometry",
+    "difficulty": "medium",
+    "prompt": "The coordinates of two points are A(2, 3) and B(6, 6). What is the distance between them?",
+    "options": ["4", "5", "6", "7"],
+    "correctIndex": 1,
+    "explanation": "Using the distance formula: √[(6−2)² + (6−3)²] = √(16 + 9) = √25 = 5.",
+    "source": "original"
+  },
+  {
+    "id": "qs-025",
+    "section": "quantitative-skills",
+    "topic": "Number Properties",
+    "difficulty": "medium",
+    "prompt": "What is the smallest positive integer that is divisible by both 8 and 12?",
+    "options": ["16", "20", "24", "32"],
+    "correctIndex": 2,
+    "explanation": "The least common multiple (LCM) of 8 and 12 is 24, since 8 = 2³ and 12 = 2² × 3, and LCM takes the highest power of each prime: 2³ × 3 = 24.",
+    "source": "original"
+  },
+  {
+    "id": "qs-026",
+    "section": "quantitative-skills",
+    "topic": "Number Properties",
+    "difficulty": "easy",
+    "prompt": "What is the sum of the first 10 positive even integers?",
+    "options": ["100", "110", "120", "90"],
+    "correctIndex": 1,
+    "explanation": "The first 10 even integers are 2, 4, ..., 20. Sum = 2 × (1 + 2 + ... + 10) = 2 × 55 = 110.",
+    "source": "original"
+  },
+  {
+    "id": "qs-027",
+    "section": "quantitative-skills",
+    "topic": "Number Properties",
+    "difficulty": "hard",
+    "prompt": "How many factors does 36 have?",
+    "options": ["6", "8", "9", "12"],
+    "correctIndex": 2,
+    "explanation": "36 = 2² × 3². The number of factors is (2+1)(2+1) = 9. Listed: 1, 2, 3, 4, 6, 9, 12, 18, 36.",
+    "source": "original"
+  },
+  {
+    "id": "qs-028",
+    "section": "quantitative-skills",
+    "topic": "Number Properties",
+    "difficulty": "medium",
+    "prompt": "What is the remainder when 47 is divided by 6?",
+    "options": ["3", "4", "5", "6"],
+    "correctIndex": 2,
+    "explanation": "47 = 6 × 7 + 5, so the remainder is 5.",
+    "source": "original"
+  },
+  {
+    "id": "qs-029",
+    "section": "quantitative-skills",
+    "topic": "Data Interpretation",
+    "difficulty": "medium",
+    "prompt": "A company's quarterly sales were: Q1 = $40,000, Q2 = $55,000, Q3 = $35,000, Q4 = $70,000. What was the total sales for the year?",
+    "options": ["$180,000", "$190,000", "$200,000", "$210,000"],
+    "correctIndex": 2,
+    "explanation": "Total = 40,000 + 55,000 + 35,000 + 70,000 = $200,000.",
+    "source": "original"
+  },
+  {
+    "id": "qs-030",
+    "section": "quantitative-skills",
+    "topic": "Data Interpretation",
+    "difficulty": "hard",
+    "prompt": "Using the same quarterly sales data (Q1=$40,000, Q2=$55,000, Q3=$35,000, Q4=$70,000), what percentage of the annual total ($200,000) was earned in Q4?",
+    "options": ["30%", "32.5%", "35%", "40%"],
+    "correctIndex": 2,
+    "explanation": "Q4 percentage = (70,000 / 200,000) × 100 = 35%.",
+    "source": "original"
+  },
+  {
+    "id": "qs-031",
+    "section": "quantitative-skills",
+    "topic": "Data Interpretation",
+    "difficulty": "hard",
+    "prompt": "Using the same quarterly sales data (Q1=$40,000, Q2=$55,000, Q3=$35,000, Q4=$70,000), by what percentage did sales increase from Q3 to Q4?",
+    "options": ["50%", "75%", "100%", "120%"],
+    "correctIndex": 2,
+    "explanation": "Increase = 70,000 − 35,000 = 35,000. Percentage increase = (35,000 / 35,000) × 100 = 100%.",
+    "source": "original"
+  },
+  {
+    "id": "qs-032",
+    "section": "quantitative-skills",
+    "topic": "Data Interpretation",
+    "difficulty": "medium",
+    "prompt": "Using the same quarterly sales data (Q1=$40,000, Q2=$55,000, Q3=$35,000, Q4=$70,000), what was the average quarterly sales for the year?",
+    "options": ["$45,000", "$50,000", "$55,000", "$60,000"],
+    "correctIndex": 1,
+    "explanation": "Average = total sales / number of quarters = $200,000 / 4 = $50,000.",
+    "source": "original"
+  },
+  {
+    "id": "qs-033",
+    "section": "quantitative-skills",
+    "topic": "Data Sufficiency",
+    "difficulty": "hard",
+    "prompt": "Is x > 10?\n(1) x > 8\n(2) x = 12",
+    "options": [
+      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
+      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
+      "EACH statement alone is sufficient.",
+      "Statements (1) and (2) together are NOT sufficient."
+    ],
+    "correctIndex": 1,
+    "explanation": "Statement (1) alone: x > 8 does not guarantee x > 10 (e.g., x = 9 fails, x = 11 works), so it is not sufficient. Statement (2) alone: x = 12 directly confirms x > 10, so it is sufficient by itself.",
+    "source": "original"
+  },
+  {
+    "id": "qs-034",
+    "section": "quantitative-skills",
+    "topic": "Data Sufficiency",
+    "difficulty": "hard",
+    "prompt": "Is integer n divisible by 6?\n(1) n is divisible by 2.\n(2) n is divisible by 3.",
+    "options": [
+      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
+      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
+      "EACH statement alone is sufficient.",
+      "Statements (1) and (2) together are NOT sufficient."
+    ],
+    "correctIndex": 2,
+    "explanation": "Statement (1) alone: divisibility by 2 doesn't guarantee divisibility by 6 (e.g., n=4). Statement (2) alone: divisibility by 3 doesn't guarantee divisibility by 6 (e.g., n=9). Together: since 2 and 3 are coprime, divisibility by both means n is divisible by their product, 6 — sufficient only when combined.",
+    "source": "original"
+  },
+  {
+    "id": "qs-035",
+    "section": "quantitative-skills",
+    "topic": "Data Sufficiency",
+    "difficulty": "hard",
+    "prompt": "What is the value of x?\n(1) x² = 9\n(2) x > 0",
+    "options": [
+      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
+      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
+      "EACH statement alone is sufficient.",
+      "Statements (1) and (2) together are NOT sufficient."
+    ],
+    "correctIndex": 2,
+    "explanation": "Statement (1) alone gives x = 3 or x = −3, two possible values — not sufficient. Statement (2) alone only says x is positive, with no specific value — not sufficient. Together, x² = 9 and x > 0 pin down x = 3 uniquely.",
+    "source": "original"
+  },
+  {
+    "id": "qs-036",
+    "section": "quantitative-skills",
+    "topic": "Data Sufficiency",
+    "difficulty": "hard",
+    "prompt": "What is the area of rectangle R?\n(1) The length of R is 8.\n(2) The perimeter of R is 26.",
+    "options": [
+      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
+      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
+      "EACH statement alone is sufficient.",
+      "Statements (1) and (2) together are NOT sufficient."
+    ],
+    "correctIndex": 2,
+    "explanation": "Statement (1) alone gives only the length, not the width — not sufficient. Statement (2) alone gives length + width = 13, but not either value individually — not sufficient. Together: length = 8, so width = 13 − 8 = 5, and area = 8 × 5 = 40 — sufficient only when combined.",
+    "source": "original"
+  }
+]

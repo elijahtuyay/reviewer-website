@@ -1,0 +1,483 @@
+[
+  {
+    "id": "lr-001",
+    "section": "logical-reasoning",
+    "topic": "Syllogisms",
+    "difficulty": "easy",
+    "prompt": "Statements: All roses are flowers. All flowers are plants.\nConclusions: I. All roses are plants. II. All plants are roses.\nWhich of the conclusions logically follow(s)?",
+    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "correctIndex": 0,
+    "explanation": "Since roses are a subset of flowers, and flowers are a subset of plants, roses must be a subset of plants (I follows). Conclusion II reverses the relationship incorrectly — plants can include many things besides roses.",
+    "source": "original"
+  },
+  {
+    "id": "lr-002",
+    "section": "logical-reasoning",
+    "topic": "Syllogisms",
+    "difficulty": "medium",
+    "prompt": "Statements: Some doctors are teachers. All teachers are readers.\nConclusions: I. Some doctors are readers. II. All doctors are readers.\nWhich of the conclusions logically follow(s)?",
+    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "correctIndex": 0,
+    "explanation": "Since some doctors are teachers, and all teachers are readers, those same doctors must be readers — so \"some doctors are readers\" follows. \"All doctors are readers\" does not follow, since only some doctors were established to be teachers.",
+    "source": "original"
+  },
+  {
+    "id": "lr-003",
+    "section": "logical-reasoning",
+    "topic": "Syllogisms",
+    "difficulty": "medium",
+    "prompt": "Statements: No cats are dogs. All dogs are animals.\nConclusions: I. No cats are animals. II. Some animals are not cats.\nWhich of the conclusions logically follow(s)?",
+    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "correctIndex": 1,
+    "explanation": "Dogs are animals, and no dogs are cats, so those dog-animals are not cats — meaning \"some animals are not cats\" follows. \"No cats are animals\" does not follow, since cats could still be animals of some other kind, just not dogs.",
+    "source": "original"
+  },
+  {
+    "id": "lr-004",
+    "section": "logical-reasoning",
+    "topic": "Syllogisms",
+    "difficulty": "hard",
+    "prompt": "Statements: All pens are pencils. Some pencils are erasers.\nConclusions: I. Some pens are erasers. II. Some erasers are pens.\nWhich of the conclusions logically follow(s)?",
+    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "correctIndex": 3,
+    "explanation": "The pencils that are erasers might be entirely outside the subset of pencils that are pens — the statements don't establish any overlap between pens and erasers. This is a classic syllogism trap where no valid conclusion connects the two end terms.",
+    "source": "original"
+  },
+  {
+    "id": "lr-005",
+    "section": "logical-reasoning",
+    "topic": "Syllogisms",
+    "difficulty": "medium",
+    "prompt": "Statements: All squares are rectangles. All rectangles are quadrilaterals.\nConclusions: I. All squares are quadrilaterals. II. Some quadrilaterals are squares.\nWhich of the conclusions logically follow(s)?",
+    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "correctIndex": 2,
+    "explanation": "By the transitive chain, squares ⊆ rectangles ⊆ quadrilaterals, so all squares are quadrilaterals (I follows). Since squares exist and are quadrilaterals, it's also valid to say some quadrilaterals are squares (II follows).",
+    "source": "original"
+  },
+  {
+    "id": "lr-006",
+    "section": "logical-reasoning",
+    "topic": "Syllogisms",
+    "difficulty": "hard",
+    "prompt": "Statements: Some artists are musicians. No musicians are engineers.\nConclusions: I. Some artists are not engineers. II. No artists are engineers.\nWhich of the conclusions logically follow(s)?",
+    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "correctIndex": 0,
+    "explanation": "Some artists are musicians, and no musicians are engineers, so those artist-musicians are not engineers — \"some artists are not engineers\" follows. \"No artists are engineers\" is too strong, since other artists (not musicians) could still be engineers.",
+    "source": "original"
+  },
+  {
+    "id": "lr-007",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Assumption",
+    "difficulty": "medium",
+    "prompt": "Argument: \"The city should build a new highway to reduce traffic congestion downtown, since traffic has increased 30% over the past five years.\" Which of the following is an assumption underlying this argument?",
+    "options": [
+      "A new highway will not simply attract more cars and eventually recreate congestion.",
+      "Traffic congestion is the city's most important problem.",
+      "The city has sufficient funds to build the highway.",
+      "Downtown businesses support the highway project."
+    ],
+    "correctIndex": 0,
+    "explanation": "The argument assumes the highway will genuinely reduce congestion rather than just redistribute or eventually recreate it through induced demand — a common gap in this type of infrastructure argument.",
+    "source": "original"
+  },
+  {
+    "id": "lr-008",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Assumption",
+    "difficulty": "hard",
+    "prompt": "Argument: \"Since employees who take regular breaks report higher job satisfaction, the company should mandate hourly breaks to improve overall satisfaction.\" Which assumption does this argument rely on?",
+    "options": [
+      "All employees currently take breaks at different times.",
+      "Job satisfaction is influenced only by break frequency.",
+      "Mandating breaks will produce the same effect as employees voluntarily choosing to take them.",
+      "The company has enough staff to cover during breaks."
+    ],
+    "correctIndex": 2,
+    "explanation": "The argument assumes a mandated break has the same positive effect as a self-chosen one — the observed correlation between voluntary breaks and satisfaction doesn't guarantee the same result if breaks are imposed.",
+    "source": "original"
+  },
+  {
+    "id": "lr-009",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Assumption",
+    "difficulty": "hard",
+    "prompt": "Argument: \"Reading fiction improves empathy, so schools should require students to read more novels to become more empathetic adults.\" What does this argument assume?",
+    "options": [
+      "Empathy cannot be taught through any other method.",
+      "The observed link between reading fiction and empathy reflects causation, not just correlation.",
+      "All novels are equally effective at building empathy.",
+      "Students currently dislike reading fiction."
+    ],
+    "correctIndex": 1,
+    "explanation": "The argument assumes a causal relationship, when the initial claim only establishes a correlation between reading fiction and empathy.",
+    "source": "original"
+  },
+  {
+    "id": "lr-010",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Assumption",
+    "difficulty": "medium",
+    "prompt": "Argument: \"Since the new fitness app has 500,000 downloads, it must be effective at helping people get fit.\" What is the flawed assumption here?",
+    "options": [
+      "Downloads indicate the app was affordable.",
+      "High download numbers indicate effectiveness, rather than just popularity or marketing reach.",
+      "All 500,000 users are still actively using the app.",
+      "Fitness apps are more effective than gyms."
+    ],
+    "correctIndex": 1,
+    "explanation": "The argument wrongly assumes downloads (popularity) equal actual effectiveness, ignoring that popularity could stem from marketing rather than real results.",
+    "source": "original"
+  },
+  {
+    "id": "lr-011",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Inference",
+    "difficulty": "easy",
+    "prompt": "\"All members of the hiking club own hiking boots. Sarah does not own hiking boots.\" What can be validly concluded?",
+    "options": [
+      "Sarah is not a member of the hiking club.",
+      "Sarah dislikes hiking.",
+      "Sarah will buy hiking boots soon.",
+      "All hiking club members go hiking often."
+    ],
+    "correctIndex": 0,
+    "explanation": "This is the contrapositive of \"all members own boots\": if someone doesn't own boots, they're not a member — a valid logical inference.",
+    "source": "original"
+  },
+  {
+    "id": "lr-012",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Inference",
+    "difficulty": "easy",
+    "prompt": "\"Every time it rains heavily, the river level rises. The river level has not risen today.\" What can be validly concluded?",
+    "options": [
+      "It did not rain heavily today.",
+      "It will rain heavily tomorrow.",
+      "The river is at its lowest level ever.",
+      "It rained lightly today."
+    ],
+    "correctIndex": 0,
+    "explanation": "By the contrapositive of the stated rule, no rise in river level means it did not rain heavily today — a valid inference.",
+    "source": "original"
+  },
+  {
+    "id": "lr-013",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Inference",
+    "difficulty": "medium",
+    "prompt": "\"Sales of umbrellas increase every time it rains in the city. Yesterday, umbrella sales were unusually high.\" What can be reasonably inferred?",
+    "options": [
+      "It definitely rained in the city yesterday.",
+      "It is possible that it rained in the city yesterday.",
+      "The umbrella shop lowered its prices.",
+      "It will rain again tomorrow."
+    ],
+    "correctIndex": 1,
+    "explanation": "Concluding it \"definitely\" rained would be affirming the consequent, a logical fallacy — other factors could also raise sales. Only \"possible\" is validly supported.",
+    "source": "original"
+  },
+  {
+    "id": "lr-014",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Inference",
+    "difficulty": "medium",
+    "prompt": "\"In a survey, 80% of respondents who exercise regularly reported feeling more energetic. 20% of respondents overall do not exercise regularly.\" Which of the following can be concluded?",
+    "options": [
+      "Exercise directly causes increased energy in all people.",
+      "Most people who exercise regularly report feeling more energetic.",
+      "People who do not exercise never feel energetic.",
+      "Exactly 80% of all respondents exercise regularly."
+    ],
+    "correctIndex": 1,
+    "explanation": "This is the only claim directly supported by the stated statistic, without overreaching into unproven causation or misreading the unrelated 20% figure.",
+    "source": "original"
+  },
+  {
+    "id": "lr-015",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Strengthen",
+    "difficulty": "medium",
+    "prompt": "Argument: \"The new drug reduces headache duration, since patients who took it recovered faster than those who didn't.\" Which finding would most strengthen this argument?",
+    "options": [
+      "The study was conducted using a randomized, placebo-controlled design.",
+      "The drug is more expensive than existing headache medications.",
+      "Some patients reported mild side effects.",
+      "The study included both men and women."
+    ],
+    "correctIndex": 0,
+    "explanation": "A randomized, placebo-controlled design rules out confounding factors, directly strengthening the causal claim that the drug itself caused the faster recovery.",
+    "source": "original"
+  },
+  {
+    "id": "lr-016",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Strengthen",
+    "difficulty": "medium",
+    "prompt": "Argument: \"Switching to solar panels will lower the town's electricity costs, based on similar towns that adopted solar and saw savings.\" Which fact would most strengthen this argument?",
+    "options": [
+      "The comparison towns have a similar climate and energy usage pattern to this town.",
+      "Solar panels have become more popular nationwide.",
+      "The town has a moderate budget for infrastructure projects.",
+      "Electricity prices have risen slightly this year."
+    ],
+    "correctIndex": 0,
+    "explanation": "Establishing that the comparison towns are genuinely similar strengthens the analogy the argument relies on.",
+    "source": "original"
+  },
+  {
+    "id": "lr-017",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Strengthen",
+    "difficulty": "hard",
+    "prompt": "Argument: \"The new teaching method improves test scores, as shown by a pilot classroom that used it and scored higher than average.\" What would most strengthen this claim?",
+    "options": [
+      "The pilot classroom had students with similar starting ability levels to the average classroom.",
+      "The teacher in the pilot classroom was experienced.",
+      "The pilot classroom had fewer students than average.",
+      "The school has adopted new textbooks recently."
+    ],
+    "correctIndex": 0,
+    "explanation": "Ruling out that the pilot group simply started out stronger strengthens the claim that the teaching method itself caused the improvement.",
+    "source": "original"
+  },
+  {
+    "id": "lr-018",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Weaken",
+    "difficulty": "medium",
+    "prompt": "Argument: \"Company X's new marketing campaign caused its sales to double last quarter.\" Which finding would most weaken this argument?",
+    "options": [
+      "A major competitor went out of business during the same quarter.",
+      "The marketing campaign used social media advertising.",
+      "Company X has been in business for ten years.",
+      "The campaign cost less than previous campaigns."
+    ],
+    "correctIndex": 0,
+    "explanation": "An alternative explanation — the competitor's exit — undermines the claim that the campaign alone caused the sales increase.",
+    "source": "original"
+  },
+  {
+    "id": "lr-019",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Weaken",
+    "difficulty": "hard",
+    "prompt": "Argument: \"Since students who attend the tutoring program score higher on exams, the tutoring program must be effective at improving scores.\" What would most weaken this argument?",
+    "options": [
+      "Students who choose to attend tutoring tend to already be higher-performing, more motivated students.",
+      "The tutoring program has been running for three years.",
+      "Tutoring sessions are held twice a week.",
+      "The program is offered for free to all students."
+    ],
+    "correctIndex": 0,
+    "explanation": "This points to self-selection bias — already high-performing, motivated students opting in — which undermines the causal claim that tutoring itself raised scores.",
+    "source": "original"
+  },
+  {
+    "id": "lr-020",
+    "section": "logical-reasoning",
+    "topic": "Critical Reasoning — Weaken",
+    "difficulty": "hard",
+    "prompt": "Argument: \"The new traffic light system must have reduced accidents, since accident reports dropped 15% after it was installed.\" Which fact would most weaken this conclusion?",
+    "options": [
+      "The city also lowered the speed limit on the same roads at the same time.",
+      "The traffic light system was expensive to install.",
+      "Drivers generally dislike new traffic light systems.",
+      "The city has more traffic lights than neighboring cities."
+    ],
+    "correctIndex": 0,
+    "explanation": "An alternative simultaneous change — the lowered speed limit — offers a competing explanation for the drop in accidents, weakening the attribution to the traffic lights alone.",
+    "source": "original"
+  },
+  {
+    "id": "lr-021",
+    "section": "logical-reasoning",
+    "topic": "Statement & Argument",
+    "difficulty": "easy",
+    "prompt": "Statement: \"Should all employees be required to work from the office at least three days a week?\" Which of the following is a strong argument?",
+    "options": [
+      "Yes, because in-person collaboration has been shown to improve team problem-solving on complex projects.",
+      "No, because some employees dislike commuting.",
+      "Yes, because office buildings need to be used to justify their cost.",
+      "No, because working from home is more comfortable."
+    ],
+    "correctIndex": 0,
+    "explanation": "This is the only option offering a substantive reason tied to a meaningful, relevant outcome. The others are either too weak/personal or rely on a non-relevant justification like sunk cost.",
+    "source": "original"
+  },
+  {
+    "id": "lr-022",
+    "section": "logical-reasoning",
+    "topic": "Statement & Course of Action",
+    "difficulty": "medium",
+    "prompt": "Statement: \"The government has decided to increase the minimum age for a driving license from 18 to 21.\" Which of the following is a valid course of action following this decision?",
+    "options": [
+      "Driving schools should update their enrollment policies to reflect the new minimum age.",
+      "All current license holders under 21 should have their licenses revoked immediately.",
+      "The government should cancel all future license renewals.",
+      "Public transportation should be discontinued in cities."
+    ],
+    "correctIndex": 0,
+    "explanation": "This is the only reasonable, proportionate, and directly relevant response to the policy change; the others are overreaching or unrelated to the stated decision.",
+    "source": "original"
+  },
+  {
+    "id": "lr-023",
+    "section": "logical-reasoning",
+    "topic": "Statement & Course of Action",
+    "difficulty": "easy",
+    "prompt": "Statement: \"Reports indicate a rise in cyberattacks on small businesses in the region.\" Which course of action is most appropriate for local authorities to take?",
+    "options": [
+      "Offer small businesses subsidized access to cybersecurity training and tools.",
+      "Require all small businesses to shut down their websites.",
+      "Ban the use of computers in small businesses.",
+      "Ignore the issue, since it primarily affects large corporations."
+    ],
+    "correctIndex": 0,
+    "explanation": "This is the only proportionate, constructive response that directly addresses the stated problem.",
+    "source": "original"
+  },
+  {
+    "id": "lr-024",
+    "section": "logical-reasoning",
+    "topic": "Seating Arrangement",
+    "difficulty": "easy",
+    "prompt": "Five friends — A, B, C, D, and E — are sitting in a row. B sits immediately to the right of A. C sits immediately to the right of B. D sits at one of the ends. E sits between D and A. If D is at the leftmost end, what is the order from left to right?",
+    "options": ["D, E, A, B, C", "E, D, A, B, C", "D, A, E, B, C", "D, E, B, A, C"],
+    "correctIndex": 0,
+    "explanation": "D is leftmost. E sits between D and A, so E is next: D, E, then A. Since B is immediately right of A, and C is immediately right of B, the block A-B-C follows in order: D, E, A, B, C.",
+    "source": "original"
+  },
+  {
+    "id": "lr-025",
+    "section": "logical-reasoning",
+    "topic": "Seating Arrangement",
+    "difficulty": "hard",
+    "prompt": "Six friends P, Q, R, S, T, U sit evenly spaced around a circular table, facing the center. Q sits second to the right of P. R sits immediately to the left of Q. S sits directly opposite P. T sits immediately to the right of S. Where does U sit?",
+    "options": ["Immediately to the left of P", "Immediately to the right of Q", "Opposite R", "Immediately to the left of S"],
+    "correctIndex": 0,
+    "explanation": "Numbering seats 1-6 clockwise with P at 1: Q is second to the right (clockwise) of P, so Q is at 3. R is immediately left (counterclockwise) of Q, so R is at 2. S is opposite P, so S is at 4. T is immediately right of S, so T is at 5. The only remaining seat is 6, which is immediately to the left (counterclockwise) of P — so U sits there.",
+    "source": "original"
+  },
+  {
+    "id": "lr-026",
+    "section": "logical-reasoning",
+    "topic": "Seating Arrangement",
+    "difficulty": "hard",
+    "prompt": "Four houses are arranged in a row: House 1, House 2, House 3, House 4 (left to right). The blue house is immediately to the right of the red house. The green house is at one of the ends. The yellow house is not adjacent to the green house. Which house is the red house?",
+    "options": ["House 1", "House 2", "House 3", "House 4"],
+    "correctIndex": 1,
+    "explanation": "Testing both possible positions for the green house (House 1 or House 4) and checking the yellow-not-adjacent-to-green constraint, only two arrangements satisfy all conditions: Green-Red-Blue-Yellow (1-2-3-4) or Yellow-Red-Blue-Green (1-2-3-4). In both valid arrangements, the red house is House 2.",
+    "source": "original"
+  },
+  {
+    "id": "lr-027",
+    "section": "logical-reasoning",
+    "topic": "Coding-Decoding",
+    "difficulty": "easy",
+    "prompt": "In a certain code, \"SUN\" is written as \"TVO\". How is \"MOON\" written in the same code?",
+    "options": ["NPPO", "MPPO", "NPPN", "MPQO"],
+    "correctIndex": 0,
+    "explanation": "Each letter is shifted forward by one position in the alphabet (S→T, U→V, N→O). Applying this to MOON: M→N, O→P, O→P, N→O, giving \"NPPO\".",
+    "source": "original"
+  },
+  {
+    "id": "lr-028",
+    "section": "logical-reasoning",
+    "topic": "Coding-Decoding",
+    "difficulty": "medium",
+    "prompt": "In a certain code, each letter is replaced by double its position in the alphabet, so \"CAT\" (C=3, A=1, T=20) is written as \"6-2-40\". How is \"DOG\" written in the same code?",
+    "options": ["8-30-14", "8-15-14", "4-30-7", "8-14-30"],
+    "correctIndex": 0,
+    "explanation": "D is the 4th letter (4×2=8), O is the 15th letter (15×2=30), G is the 7th letter (7×2=14). So DOG becomes \"8-30-14\".",
+    "source": "original"
+  },
+  {
+    "id": "lr-029",
+    "section": "logical-reasoning",
+    "topic": "Coding-Decoding",
+    "difficulty": "medium",
+    "prompt": "If \"PAPER\" is coded as \"QBQFS\" (each letter shifted forward by one position), how is \"PENCIL\" coded in the same pattern?",
+    "options": ["QFODJM", "QFODJN", "PFODJM", "QGODJM"],
+    "correctIndex": 0,
+    "explanation": "Shifting each letter of PENCIL forward by one: P→Q, E→F, N→O, C→D, I→J, L→M, giving \"QFODJM\".",
+    "source": "original"
+  },
+  {
+    "id": "lr-030",
+    "section": "logical-reasoning",
+    "topic": "Blood Relations",
+    "difficulty": "easy",
+    "prompt": "Pointing to a photograph, a man says, \"She is the daughter of my grandfather's only son.\" How is the woman related to the man?",
+    "options": ["Sister", "Daughter", "Mother", "Cousin"],
+    "correctIndex": 0,
+    "explanation": "The grandfather's only son is the man's own father (since there's only one son, and the man descends from him). The daughter of the man's father is his sister.",
+    "source": "original"
+  },
+  {
+    "id": "lr-031",
+    "section": "logical-reasoning",
+    "topic": "Blood Relations",
+    "difficulty": "medium",
+    "prompt": "A is B's brother. C is A's mother. D is C's father. E is D's mother. How is B related to D?",
+    "options": ["Grandchild", "Child", "Sibling", "Niece/Nephew"],
+    "correctIndex": 0,
+    "explanation": "A and B are siblings, sharing the same mother, C. D is C's father, making D the maternal grandfather of both A and B. So B is D's grandchild.",
+    "source": "original"
+  },
+  {
+    "id": "lr-032",
+    "section": "logical-reasoning",
+    "topic": "Series & Patterns",
+    "difficulty": "easy",
+    "prompt": "Find the next number in the series: 2, 6, 12, 20, 30, ?",
+    "options": ["40", "42", "44", "36"],
+    "correctIndex": 1,
+    "explanation": "Each term follows the pattern n(n+1): 1×2=2, 2×3=6, 3×4=12, 4×5=20, 5×6=30, so the next term is 6×7=42.",
+    "source": "original"
+  },
+  {
+    "id": "lr-033",
+    "section": "logical-reasoning",
+    "topic": "Series & Patterns",
+    "difficulty": "medium",
+    "prompt": "Find the next letter in the series: B, D, G, K, P, ?",
+    "options": ["T", "U", "V", "W"],
+    "correctIndex": 2,
+    "explanation": "The gaps between letter positions increase by one each time: B(2)→D(4) is +2, D→G(7) is +3, G→K(11) is +4, K→P(16) is +5. The next gap is +6, giving position 22, which is V.",
+    "source": "original"
+  },
+  {
+    "id": "lr-034",
+    "section": "logical-reasoning",
+    "topic": "Series & Patterns",
+    "difficulty": "hard",
+    "prompt": "Find the missing number: 5, 11, 23, 47, ?",
+    "options": ["90", "94", "95", "96"],
+    "correctIndex": 2,
+    "explanation": "Each term follows the pattern: previous term × 2 + 1. 5×2+1=11, 11×2+1=23, 23×2+1=47, 47×2+1=95.",
+    "source": "original"
+  },
+  {
+    "id": "lr-035",
+    "section": "logical-reasoning",
+    "topic": "Direction Sense",
+    "difficulty": "easy",
+    "prompt": "A man walks 5 km north, then turns right and walks 3 km, then turns right again and walks 5 km. How far is he from his starting point?",
+    "options": ["3 km", "5 km", "8 km", "13 km"],
+    "correctIndex": 0,
+    "explanation": "North 5 km, then right turn (east) 3 km, then right turn again (south) 5 km. The north and south legs cancel out (5 km each, opposite directions), leaving only the 3 km eastward displacement.",
+    "source": "original"
+  },
+  {
+    "id": "lr-036",
+    "section": "logical-reasoning",
+    "topic": "Direction Sense",
+    "difficulty": "medium",
+    "prompt": "Starting from her house, Priya walks 4 km east, then 3 km south to reach the market. What is the shortest distance between her house and the market?",
+    "options": ["5 km", "7 km", "6 km", "4 km"],
+    "correctIndex": 0,
+    "explanation": "The shortest (straight-line) distance is found using the Pythagorean theorem: √(4² + 3²) = √(16 + 9) = √25 = 5 km.",
+    "source": "original"
+  }
+]
