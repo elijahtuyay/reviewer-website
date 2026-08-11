@@ -1,15 +1,18 @@
 "use client";
 
-import { use, useMemo, useState } from "react";
+import { use, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SECTIONS, getSectionConfig } from "@/lib/exam-config";
 import { getQuestionsForSection } from "@/lib/data/questions";
 import { scoreAttempt } from "@/lib/scoring";
 import { SectionId } from "@/data/schema";
+import { getStoredProgress, saveStoredProgress } from "@/lib/local-progress";
 import Timer from "@/components/Timer";
 import QuestionCard from "@/components/QuestionCard";
 import ResultSummary from "@/components/ResultSummary";
+import ProgressTracker from "@/components/ProgressTracker";
+import SectionNav from "@/components/SectionNav";
 
 type Phase = "taking" | "review";
 
@@ -27,15 +30,44 @@ export default function QuizPage({ params }: { params: Promise<{ section: string
 
   const [answers, setAnswers] = useState<Record<string, number | null>>({});
   const [phase, setPhase] = useState<Phase>("taking");
+  const [hydrated, setHydrated] = useState(false);
+
+  // Resume any previously saved progress for this section on mount.
+  useEffect(() => {
+    const stored = getStoredProgress(section);
+    setAnswers(stored.answers);
+    setPhase(stored.submitted ? "review" : "taking");
+    setHydrated(true);
+  }, [section]);
 
   const answeredCount = Object.values(answers).filter((v) => v !== null && v !== undefined).length;
+  const answeredNumbers = questions
+    .map((q, i) => (answers[q.id] !== null && answers[q.id] !== undefined ? i + 1 : null))
+    .filter((n): n is number => n !== null);
+
+  function persist(nextAnswers: Record<string, number | null>, submitted: boolean) {
+    const cleaned: Record<string, number> = {};
+    for (const [id, value] of Object.entries(nextAnswers)) {
+      if (value !== null && value !== undefined) cleaned[id] = value;
+    }
+    saveStoredProgress(section, { answers: cleaned, submitted });
+  }
 
   function handleSelect(questionId: string, optionIndex: number) {
-    setAnswers((prev) => ({ ...prev, [questionId]: optionIndex }));
+    setAnswers((prev) => {
+      const next = { ...prev, [questionId]: optionIndex };
+      persist(next, false);
+      return next;
+    });
   }
 
   function handleSubmit() {
+    persist(answers, true);
     setPhase("review");
+  }
+
+  function handleJump(questionNumber: number) {
+    document.getElementById(`question-${questionNumber}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   const result = useMemo(() => {
@@ -47,64 +79,85 @@ export default function QuizPage({ params }: { params: Promise<{ section: string
     return scoreAttempt(questions, answerList);
   }, [phase, questions, answers]);
 
+  if (!hydrated) return null;
+
   return (
-    <div className="flex flex-1 justify-center bg-white">
-      <main className="w-full max-w-2xl px-6 py-10 sm:py-16">
-        <div className="flex items-center justify-between border-b border-neutral-200 pb-4">
+    <div className="flex flex-1 justify-center bg-background">
+      <div className="w-full max-w-6xl px-6 py-10 sm:py-16">
+        <div className="flex items-center justify-between border-b border-line pb-4">
           <div>
-            <Link href="/" className="text-sm text-neutral-500 hover:text-neutral-800">
-              ← All sections
+            <Link href="/nmat" className="text-sm text-muted hover:text-foreground">
+              ← Exam setup
             </Link>
-            <h1 className="mt-1 text-xl font-semibold text-neutral-900">{sectionConfig.label}</h1>
+            <h1 className="mt-1 text-xl font-semibold text-foreground">{sectionConfig.label}</h1>
           </div>
           {phase === "taking" ? (
             <div className="text-right">
               <Timer minutes={sectionConfig.minutes} onExpire={handleSubmit} />
-              <p className="mt-1 text-xs text-neutral-500">
+              <p className="mt-1 text-xs text-muted">
                 {answeredCount}/{questions.length} answered
               </p>
             </div>
           ) : (
             <Link
               href="/"
-              className="rounded-md border border-neutral-300 px-3 py-1.5 text-sm text-neutral-700 hover:bg-neutral-50"
+              className="rounded-md border border-line px-3 py-1.5 text-sm text-foreground hover:bg-panel-hover"
             >
               Done
             </Link>
           )}
         </div>
 
-        {phase === "review" && result && (
-          <div className="mt-8">
-            <ResultSummary result={result} sectionLabel={sectionConfig.label} />
-          </div>
-        )}
+        <div className="mt-4 flex gap-8">
+          <aside className="hidden w-56 shrink-0 flex-col gap-6 lg:flex">
+            <div className="sticky top-6 flex flex-col gap-6">
+              <SectionNav
+                currentSection={section}
+                currentAnsweredCount={answeredCount}
+                locked={phase === "taking"}
+              />
+              {phase === "taking" && (
+                <ProgressTracker
+                  totalQuestions={questions.length}
+                  answeredNumbers={answeredNumbers}
+                  onJump={handleJump}
+                />
+              )}
+            </div>
+          </aside>
 
-        <div className="mt-4">
-          {questions.map((question, index) => (
-            <QuestionCard
-              key={question.id}
-              question={question}
-              index={index}
-              selectedIndex={answers[question.id] ?? null}
-              onSelect={(optionIndex) => handleSelect(question.id, optionIndex)}
-              reviewMode={phase === "review"}
-            />
-          ))}
+          <main className="min-w-0 flex-1">
+            {phase === "review" && result && (
+              <div className="mb-4">
+                <ResultSummary result={result} sectionLabel={sectionConfig.label} />
+              </div>
+            )}
+
+            {questions.map((question, index) => (
+              <QuestionCard
+                key={question.id}
+                question={question}
+                index={index}
+                selectedIndex={answers[question.id] ?? null}
+                onSelect={(optionIndex) => handleSelect(question.id, optionIndex)}
+                reviewMode={phase === "review"}
+              />
+            ))}
+
+            {phase === "taking" && (
+              <div className="sticky bottom-0 mt-6 border-t border-line bg-background py-4">
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  className="w-full rounded-md bg-foreground py-2.5 text-sm font-medium text-background hover:opacity-90"
+                >
+                  Submit ({answeredCount}/{questions.length} answered)
+                </button>
+              </div>
+            )}
+          </main>
         </div>
-
-        {phase === "taking" && (
-          <div className="sticky bottom-0 mt-6 border-t border-neutral-200 bg-white py-4">
-            <button
-              type="button"
-              onClick={handleSubmit}
-              className="w-full rounded-md bg-neutral-900 py-2.5 text-sm font-medium text-white hover:bg-neutral-800"
-            >
-              Submit ({answeredCount}/{questions.length} answered)
-            </button>
-          </div>
-        )}
-      </main>
+      </div>
     </div>
   );
 }
