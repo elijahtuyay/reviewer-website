@@ -4,7 +4,7 @@ import { use, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SECTIONS, getSectionConfig } from "@/lib/exam-config";
-import { getQuestionsForSection } from "@/lib/data/questions";
+import { drawRandomQuestionIds, getQuestionsByIds } from "@/lib/data/questions";
 import { scoreAttempt } from "@/lib/scoring";
 import { SectionId } from "@/data/schema";
 import { getStoredProgress, saveStoredProgress } from "@/lib/local-progress";
@@ -26,18 +26,30 @@ export default function QuizPage({ params }: { params: Promise<{ section: string
   const section = sectionParam as SectionId;
 
   const sectionConfig = getSectionConfig(section);
-  const questions = useMemo(() => getQuestionsForSection(section), [section]);
 
+  const [questionIds, setQuestionIds] = useState<string[]>([]);
   const [answers, setAnswers] = useState<Record<string, number | null>>({});
   const [phase, setPhase] = useState<Phase>("taking");
   const [hydrated, setHydrated] = useState(false);
 
-  // Resume any previously saved progress for this section on mount.
+  const questions = useMemo(() => getQuestionsByIds(section, questionIds), [section, questionIds]);
+
+  // Resume any previously saved question set/progress for this section on mount,
+  // or draw a fresh random subset from the full bank if none exists yet.
   useEffect(() => {
     const stored = getStoredProgress(section);
+    const ids =
+      stored.questionIds && stored.questionIds.length > 0
+        ? stored.questionIds
+        : drawRandomQuestionIds(section, sectionConfig.questionCount);
+    setQuestionIds(ids);
     setAnswers(stored.answers);
     setPhase(stored.submitted ? "review" : "taking");
     setHydrated(true);
+    if (!stored.questionIds || stored.questionIds.length === 0) {
+      saveStoredProgress(section, { answers: stored.answers, submitted: stored.submitted, questionIds: ids });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [section]);
 
   const answeredCount = Object.values(answers).filter((v) => v !== null && v !== undefined).length;
@@ -50,7 +62,7 @@ export default function QuizPage({ params }: { params: Promise<{ section: string
     for (const [id, value] of Object.entries(nextAnswers)) {
       if (value !== null && value !== undefined) cleaned[id] = value;
     }
-    saveStoredProgress(section, { answers: cleaned, submitted });
+    saveStoredProgress(section, { answers: cleaned, submitted, questionIds });
   }
 
   function handleSelect(questionId: string, optionIndex: number) {
