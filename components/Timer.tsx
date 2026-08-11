@@ -32,7 +32,7 @@ export default function Timer({ minutes, onExpire }: TimerProps) {
 
   return (
     <div
-      className={`font-mono text-sm tabular-nums ${isLow ? "font-semibold text-red-600" : "text-neutral-600"}`}
+      className={`font-mono text-sm tabular-nums ${isLow ? "font-semibold text-red-600 dark:text-red-400" : "text-muted"}`}
     >
       {mins}:{secs.toString().padStart(2, "0")}
     </div>
