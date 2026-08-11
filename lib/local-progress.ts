@@ -3,9 +3,10 @@ import { SectionId } from "@/data/schema";
 export interface StoredProgress {
   answers: Record<string, number>;
   submitted: boolean;
+  questionIds: string[];
 }
 
-const EMPTY_PROGRESS: StoredProgress = { answers: {}, submitted: false };
+const EMPTY_PROGRESS: StoredProgress = { answers: {}, submitted: false, questionIds: [] };
 
 function storageKey(section: SectionId): string {
   return `nmat-progress:${section}`;

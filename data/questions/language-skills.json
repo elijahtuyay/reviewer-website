@@ -2,7 +2,7 @@
   {
     "id": "ls-001",
     "section": "language-skills",
-    "topic": "Grammar & Error Spotting",
+    "topic": "Error Identification",
     "difficulty": "easy",
     "prompt": "Which of the following sentences is grammatically correct?",
     "options": [
@@ -18,7 +18,7 @@
   {
     "id": "ls-002",
     "section": "language-skills",
-    "topic": "Grammar & Error Spotting",
+    "topic": "Prepositions",
     "difficulty": "easy",
     "prompt": "Which of the following sentences is grammatically correct?",
     "options": [
@@ -34,7 +34,7 @@
   {
     "id": "ls-003",
     "section": "language-skills",
-    "topic": "Grammar & Error Spotting",
+    "topic": "Error Identification",
     "difficulty": "medium",
     "prompt": "Which of the following sentences is grammatically correct?",
     "options": [
@@ -50,7 +50,7 @@
   {
     "id": "ls-004",
     "section": "language-skills",
-    "topic": "Grammar & Error Spotting",
+    "topic": "Error Identification",
     "difficulty": "easy",
     "prompt": "Which of the following sentences is grammatically correct?",
     "options": [
@@ -66,7 +66,7 @@
   {
     "id": "ls-005",
     "section": "language-skills",
-    "topic": "Grammar & Error Spotting",
+    "topic": "Error Identification",
     "difficulty": "easy",
     "prompt": "Which of the following sentences is grammatically correct?",
     "options": [
@@ -82,7 +82,7 @@
   {
     "id": "ls-006",
     "section": "language-skills",
-    "topic": "Grammar & Error Spotting",
+    "topic": "Error Identification",
     "difficulty": "medium",
     "prompt": "Which of the following sentences is grammatically correct?",
     "options": [
@@ -98,7 +98,7 @@
   {
     "id": "ls-007",
     "section": "language-skills",
-    "topic": "Grammar & Error Spotting",
+    "topic": "Error Identification",
     "difficulty": "medium",
     "prompt": "Which of the following sentences is grammatically correct?",
     "options": [
@@ -114,7 +114,7 @@
   {
     "id": "ls-008",
     "section": "language-skills",
-    "topic": "Grammar & Error Spotting",
+    "topic": "Error Identification",
     "difficulty": "easy",
     "prompt": "Which of the following sentences is grammatically correct?",
     "options": [
@@ -130,51 +130,51 @@
   {
     "id": "ls-009",
     "section": "language-skills",
-    "topic": "Vocabulary",
+    "topic": "Sentence Completion",
     "difficulty": "easy",
-    "prompt": "Choose the word closest in meaning to \"Meticulous\".",
-    "options": ["Careless", "Painstaking", "Hasty", "Indifferent"],
+    "prompt": "Choose the word that best completes the sentence: \"The editor was so ____ in her review that she caught even the smallest typographical errors that others had missed.\"",
+    "options": ["careless", "meticulous", "hasty", "indifferent"],
     "correctIndex": 1,
-    "explanation": "\"Meticulous\" means showing extreme care and precision, which is the meaning of \"painstaking\".",
+    "explanation": "\"Meticulous\" means showing extreme care and precision, which fits the context of catching the smallest errors. The other options describe carelessness or lack of attention, which contradict the sentence.",
     "source": "original"
   },
   {
     "id": "ls-010",
     "section": "language-skills",
-    "topic": "Vocabulary",
+    "topic": "Sentence Completion",
     "difficulty": "medium",
-    "prompt": "Choose the word most nearly opposite in meaning to \"Benevolent\".",
-    "options": ["Malevolent", "Generous", "Kind", "Charitable"],
-    "correctIndex": 0,
-    "explanation": "\"Benevolent\" means kind and well-meaning; its antonym is \"malevolent\", meaning having ill intentions.",
+    "prompt": "Choose the word that best completes the sentence: \"Despite his charming smile, the character's ____ intentions were revealed when he betrayed his closest allies for personal gain.\"",
+    "options": ["benevolent", "malevolent", "charitable", "generous"],
+    "correctIndex": 1,
+    "explanation": "\"Malevolent\" means having or showing a wish to do evil, which fits a character who betrays his allies for personal gain. The other options mean kind or generous, which would contradict the betrayal described.",
     "source": "original"
   },
   {
     "id": "ls-011",
     "section": "language-skills",
-    "topic": "Vocabulary",
+    "topic": "Sentence Completion",
     "difficulty": "medium",
-    "prompt": "Choose the word closest in meaning to \"Ephemeral\".",
-    "options": ["Permanent", "Transient", "Eternal", "Durable"],
+    "prompt": "Choose the word that best completes the sentence: \"The cherry blossoms are prized precisely because their beauty is so ____, lasting only a week or two each spring.\"",
+    "options": ["permanent", "transient", "eternal", "durable"],
     "correctIndex": 1,
-    "explanation": "\"Ephemeral\" means lasting for a very short time, which matches \"transient\".",
+    "explanation": "\"Transient\" means lasting for a very short time, which matches the description of blossoms that last only a week or two. The other options all suggest lasting a long time, which contradicts the sentence.",
     "source": "original"
   },
   {
     "id": "ls-012",
     "section": "language-skills",
-    "topic": "Vocabulary",
+    "topic": "Sentence Completion",
     "difficulty": "medium",
-    "prompt": "Choose the word most nearly opposite in meaning to \"Verbose\".",
-    "options": ["Wordy", "Concise", "Elaborate", "Rambling"],
+    "prompt": "Choose the word that best completes the sentence: \"After criticism that his reports were too verbose, the manager made an effort to write more ____ summaries that got straight to the point.\"",
+    "options": ["wordy", "concise", "elaborate", "rambling"],
     "correctIndex": 1,
-    "explanation": "\"Verbose\" means using more words than necessary; its antonym is \"concise\", meaning brief and to the point.",
+    "explanation": "\"Concise\" means brief and to the point, which matches the goal of getting \"straight to the point\" after being criticized for verbosity. The other options are near-synonyms of \"verbose\" and would not fix the problem described.",
     "source": "original"
   },
   {
     "id": "ls-013",
     "section": "language-skills",
-    "topic": "Vocabulary",
+    "topic": "Analogies",
     "difficulty": "medium",
     "prompt": "Author is to Book as Composer is to ___?",
     "options": ["Instrument", "Symphony", "Orchestra", "Concert"],
@@ -185,29 +185,29 @@
   {
     "id": "ls-014",
     "section": "language-skills",
-    "topic": "Vocabulary",
+    "topic": "Sentence Completion",
     "difficulty": "easy",
-    "prompt": "Choose the word closest in meaning to \"Candid\".",
-    "options": ["Deceptive", "Frank", "Secretive", "Evasive"],
+    "prompt": "Choose the word that best completes the sentence: \"Rather than sugarcoating the feedback, the coach gave a ____ assessment of the team's weaknesses.\"",
+    "options": ["deceptive", "candid", "secretive", "evasive"],
     "correctIndex": 1,
-    "explanation": "\"Candid\" means truthful and straightforward, which matches \"frank\".",
+    "explanation": "\"Candid\" means truthful and straightforward, which fits a coach who avoids \"sugarcoating\" and speaks plainly. The other options describe dishonesty or avoidance, which contradict the sentence.",
     "source": "original"
   },
   {
     "id": "ls-015",
     "section": "language-skills",
-    "topic": "Vocabulary",
+    "topic": "Sentence Completion",
     "difficulty": "medium",
-    "prompt": "Choose the word most nearly opposite in meaning to \"Frugal\".",
-    "options": ["Thrifty", "Economical", "Extravagant", "Sparing"],
+    "prompt": "Choose the word that best completes the sentence: \"Known for her frugal habits, Maria surprised everyone with an uncharacteristically ____ birthday party, complete with a live orchestra and a fireworks display.\"",
+    "options": ["thrifty", "economical", "extravagant", "sparing"],
     "correctIndex": 2,
-    "explanation": "\"Frugal\" means careful with money or resources; its antonym is \"extravagant\", meaning wastefully spending.",
+    "explanation": "\"Extravagant\" means excessively lavish, which fits a party with a live orchestra and fireworks and contrasts with Maria's usual frugality (signaled by \"uncharacteristically\"). The other options are synonyms of \"frugal\" and would not be uncharacteristic of her.",
     "source": "original"
   },
   {
     "id": "ls-016",
     "section": "language-skills",
-    "topic": "Vocabulary",
+    "topic": "Analogies",
     "difficulty": "easy",
     "prompt": "Doctor is to Patient as Teacher is to ___?",
     "options": ["Classroom", "Student", "School", "Lesson"],
@@ -218,7 +218,7 @@
   {
     "id": "ls-017",
     "section": "language-skills",
-    "topic": "Sentence Correction",
+    "topic": "Error Identification",
     "difficulty": "medium",
     "prompt": "Choose the best version of the sentence: \"The reason why he failed is because he did not study.\"",
     "options": [
@@ -234,7 +234,7 @@
   {
     "id": "ls-018",
     "section": "language-skills",
-    "topic": "Sentence Correction",
+    "topic": "Error Identification",
     "difficulty": "medium",
     "prompt": "Choose the best version of the sentence: \"Each of the players have their own locker.\"",
     "options": [
@@ -250,7 +250,7 @@
   {
     "id": "ls-019",
     "section": "language-skills",
-    "topic": "Sentence Correction",
+    "topic": "Error Identification",
     "difficulty": "hard",
     "prompt": "Choose the best version of the sentence: \"Not only he was late, but also he forgot his notes.\"",
     "options": [
@@ -266,23 +266,23 @@
   {
     "id": "ls-020",
     "section": "language-skills",
-    "topic": "Sentence Correction",
+    "topic": "Error Identification",
     "difficulty": "medium",
-    "prompt": "Choose the best version of the sentence: \"The committee were divided in their opinion about the new policy.\"",
+    "prompt": "Choose the best version of the sentence: \"A number of employees has requested extended leave this year.\"",
     "options": [
-      "The committee were divided in their opinion about the new policy.",
-      "The committee was divided in its opinion about the new policy.",
-      "The committee was divided in their opinion about the new policy.",
-      "The committees was divided in its opinion about the new policy."
+      "A number of employees has requested extended leave this year.",
+      "A number of employees have requested extended leave this year.",
+      "A number of employee have requested extended leave this year.",
+      "A number of employees have request extended leave this year."
     ],
     "correctIndex": 1,
-    "explanation": "\"Committee\" is treated as a singular collective noun (\"was\"/\"its\") when acting as one unit, which is standard usage in formal English.",
+    "explanation": "\"A number of\" (meaning \"several\") functions as a plural subject and takes a plural verb (\"have\"), while \"the number of\" is treated as singular and takes a singular verb. Option A wrongly uses the singular \"has\"; C has a noun-number error (\"employee\"); D has an incorrect verb form (\"have request\").",
     "source": "original"
   },
   {
     "id": "ls-021",
     "section": "language-skills",
-    "topic": "Sentence Correction",
+    "topic": "Error Identification",
     "difficulty": "easy",
     "prompt": "Choose the best version of the sentence: \"Between you and I, this plan will not work.\"",
     "options": [
@@ -298,7 +298,7 @@
   {
     "id": "ls-022",
     "section": "language-skills",
-    "topic": "Sentence Correction",
+    "topic": "Error Identification",
     "difficulty": "hard",
     "prompt": "Choose the best version of the sentence: \"He is one of the students who has finished the assignment.\"",
     "options": [
@@ -314,7 +314,7 @@
   {
     "id": "ls-023",
     "section": "language-skills",
-    "topic": "Para-jumbles",
+    "topic": "Para Forming",
     "difficulty": "medium",
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: As a result, crop yields in the region fell sharply. Q: The monsoon arrived nearly a month late this year. R: Farmers were therefore forced to delay planting. S: This delay affected the entire agricultural cycle.",
     "options": ["QRSP", "QRPS", "PQRS", "SRQP"],
@@ -325,7 +325,7 @@
   {
     "id": "ls-024",
     "section": "language-skills",
-    "topic": "Para-jumbles",
+    "topic": "Para Forming",
     "difficulty": "hard",
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: However, the results were not as expected. Q: The scientists conducted the experiment three times. R: They decided to revise their hypothesis. S: Each time, they recorded the data carefully.",
     "options": ["QSPR", "QPSR", "SQPR", "QSRP"],
@@ -336,7 +336,7 @@
   {
     "id": "ls-025",
     "section": "language-skills",
-    "topic": "Para-jumbles",
+    "topic": "Para Forming",
     "difficulty": "medium",
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: This made it difficult for small businesses to compete. Q: A new law was passed to regulate online marketplaces. R: The law imposed strict fees on small sellers. S: Eventually, many of them shut down their online stores.",
     "options": ["QRPS", "QPRS", "RQPS", "QRSP"],
@@ -347,7 +347,7 @@
   {
     "id": "ls-026",
     "section": "language-skills",
-    "topic": "Para-jumbles",
+    "topic": "Para Forming",
     "difficulty": "hard",
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: The city then invested in a network of bicycle lanes. Q: Traffic congestion had become a major problem downtown. R: Over time, more residents began commuting by bicycle. S: This reduced both congestion and pollution levels.",
     "options": ["QPRS", "QRPS", "PQRS", "QPSR"],
@@ -498,6 +498,775 @@
     "options": ["Reinforce", "Replace", "Relocate", "Preserve"],
     "correctIndex": 1,
     "explanation": "\"Displace\" means to take the place of or replace something.",
+    "source": "original"
+  },
+  {
+    "id": "ls-037",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "easy",
+    "prompt": "Choose the correct preposition to complete the sentence: \"He is allergic ___ peanuts.\"",
+    "options": ["to", "of", "with", "for"],
+    "correctIndex": 0,
+    "explanation": "The standard idiom is \"allergic to\" something.",
+    "source": "original"
+  },
+  {
+    "id": "ls-038",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "easy",
+    "prompt": "Choose the correct preposition to complete the sentence: \"The company is known ___ its excellent customer service.\"",
+    "options": ["for", "of", "with", "at"],
+    "correctIndex": 0,
+    "explanation": "The standard idiom is \"known for\" a quality or reputation.",
+    "source": "original"
+  },
+  {
+    "id": "ls-039",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "easy",
+    "prompt": "Choose the correct preposition to complete the sentence: \"She apologized ___ being late to the meeting.\"",
+    "options": ["about", "of", "for", "from"],
+    "correctIndex": 2,
+    "explanation": "The standard idiom is \"apologize for\" an action or mistake.",
+    "source": "original"
+  },
+  {
+    "id": "ls-040",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "medium",
+    "prompt": "Choose the correct preposition to complete the sentence: \"They arrived ___ the airport two hours early.\"",
+    "options": ["in", "to", "at", "on"],
+    "correctIndex": 2,
+    "explanation": "\"Arrive at\" is used for smaller or specific locations such as an airport, station, or building, while \"arrive in\" is used for cities or countries.",
+    "source": "original"
+  },
+  {
+    "id": "ls-041",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "medium",
+    "prompt": "Choose the correct preposition to complete the sentence: \"He is capable ___ solving the problem on his own.\"",
+    "options": ["of", "to", "for", "with"],
+    "correctIndex": 0,
+    "explanation": "The standard idiom is \"capable of\" doing something.",
+    "source": "original"
+  },
+  {
+    "id": "ls-042",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "medium",
+    "prompt": "Choose the correct preposition to complete the sentence: \"The teacher insisted ___ punctuality from every student.\"",
+    "options": ["on", "for", "at", "about"],
+    "correctIndex": 0,
+    "explanation": "The standard idiom is \"insist on\" something.",
+    "source": "original"
+  },
+  {
+    "id": "ls-043",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "easy",
+    "prompt": "Choose the correct preposition to complete the sentence: \"She was accused ___ cheating on the exam.\"",
+    "options": ["for", "with", "of", "about"],
+    "correctIndex": 2,
+    "explanation": "The standard idiom is \"accused of\" a wrongdoing.",
+    "source": "original"
+  },
+  {
+    "id": "ls-044",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "medium",
+    "prompt": "Choose the correct preposition to complete the sentence: \"The results are consistent ___ our expectations.\"",
+    "options": ["to", "with", "of", "for"],
+    "correctIndex": 1,
+    "explanation": "The standard idiom is \"consistent with\" something.",
+    "source": "original"
+  },
+  {
+    "id": "ls-045",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "easy",
+    "prompt": "Choose the correct preposition to complete the sentence: \"He congratulated her ___ her promotion.\"",
+    "options": ["for", "of", "on", "about"],
+    "correctIndex": 2,
+    "explanation": "The standard idiom is \"congratulate someone on\" an achievement.",
+    "source": "original"
+  },
+  {
+    "id": "ls-046",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "easy",
+    "prompt": "Choose the correct preposition to complete the sentence: \"The book consists ___ twelve chapters.\"",
+    "options": ["in", "of", "with", "from"],
+    "correctIndex": 1,
+    "explanation": "The standard idiom is \"consist of\" parts or components.",
+    "source": "original"
+  },
+  {
+    "id": "ls-047",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "easy",
+    "prompt": "Choose the correct preposition to complete the sentence: \"She is interested ___ learning French.\"",
+    "options": ["on", "in", "at", "for"],
+    "correctIndex": 1,
+    "explanation": "The standard idiom is \"interested in\" a subject or activity.",
+    "source": "original"
+  },
+  {
+    "id": "ls-048",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "medium",
+    "prompt": "Choose the correct preposition to complete the sentence: \"The proposal was met ___ strong opposition from the board.\"",
+    "options": ["by", "with", "from", "at"],
+    "correctIndex": 1,
+    "explanation": "The standard idiom is \"met with\" a reaction or response, such as opposition or approval.",
+    "source": "original"
+  },
+  {
+    "id": "ls-049",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "hard",
+    "prompt": "Choose the correct preposition to complete the sentence: \"In temperament, he differs greatly ___ his brother.\"",
+    "options": ["with", "from", "to", "of"],
+    "correctIndex": 1,
+    "explanation": "\"Differ from\" is used to compare two unlike things or people. (\"Differ with\" is reserved for disagreeing with someone's opinion.)",
+    "source": "original"
+  },
+  {
+    "id": "ls-050",
+    "section": "language-skills",
+    "topic": "Prepositions",
+    "difficulty": "medium",
+    "prompt": "Choose the correct preposition to complete the sentence: \"The manager is responsible ___ the entire department's performance.\"",
+    "options": ["of", "for", "with", "to"],
+    "correctIndex": 1,
+    "explanation": "The standard idiom is \"responsible for\" a duty or outcome.",
+    "source": "original"
+  },
+  {
+    "id": "ls-051",
+    "section": "language-skills",
+    "topic": "Analogies",
+    "difficulty": "easy",
+    "prompt": "Pen is to Writer as Brush is to ___?",
+    "options": ["Painter", "Paint", "Canvas", "Palette"],
+    "correctIndex": 0,
+    "explanation": "A pen is the tool a writer uses; a brush is the parallel tool a painter uses. The relationship is tool-to-user.",
+    "source": "original"
+  },
+  {
+    "id": "ls-052",
+    "section": "language-skills",
+    "topic": "Analogies",
+    "difficulty": "easy",
+    "prompt": "Fish is to Water as Bird is to ___?",
+    "options": ["Air", "Nest", "Wing", "Feather"],
+    "correctIndex": 0,
+    "explanation": "A fish's natural environment is water; a bird's parallel natural environment is air. The relationship is animal-to-habitat.",
+    "source": "original"
+  },
+  {
+    "id": "ls-053",
+    "section": "language-skills",
+    "topic": "Analogies",
+    "difficulty": "easy",
+    "prompt": "Puppy is to Dog as Kitten is to ___?",
+    "options": ["Cat", "Feline", "Litter", "Paw"],
+    "correctIndex": 0,
+    "explanation": "A puppy is a young dog; a kitten is the parallel young form of a cat. The relationship is young animal-to-adult animal.",
+    "source": "original"
+  },
+  {
+    "id": "ls-054",
+    "section": "language-skills",
+    "topic": "Analogies",
+    "difficulty": "medium",
+    "prompt": "Thermometer is to Temperature as Scale is to ___?",
+    "options": ["Height", "Weight", "Length", "Volume"],
+    "correctIndex": 1,
+    "explanation": "A thermometer is an instrument used to measure temperature; a scale is the parallel instrument used to measure weight. The relationship is instrument-to-measurement.",
+    "source": "original"
+  },
+  {
+    "id": "ls-055",
+    "section": "language-skills",
+    "topic": "Analogies",
+    "difficulty": "medium",
+    "prompt": "Chapter is to Book as Scene is to ___?",
+    "options": ["Actor", "Play", "Stage", "Script"],
+    "correctIndex": 1,
+    "explanation": "A chapter is a structural part of a book; a scene is the parallel structural part of a play. The relationship is part-to-whole.",
+    "source": "original"
+  },
+  {
+    "id": "ls-056",
+    "section": "language-skills",
+    "topic": "Analogies",
+    "difficulty": "medium",
+    "prompt": "Optimist is to Hopeful as Pessimist is to ___?",
+    "options": ["Gloomy", "Cheerful", "Confident", "Ambitious"],
+    "correctIndex": 0,
+    "explanation": "An optimist is characterized as hopeful; a pessimist is characterized by the parallel negative trait, gloomy. The relationship is person-to-defining trait.",
+    "source": "original"
+  },
+  {
+    "id": "ls-057",
+    "section": "language-skills",
+    "topic": "Analogies",
+    "difficulty": "medium",
+    "prompt": "Key is to Lock as Password is to ___?",
+    "options": ["Diary", "Screen", "Account", "Website"],
+    "correctIndex": 2,
+    "explanation": "A key is the specific mechanism that secures a lock; a password is the parallel specific mechanism that secures an account. \"Screen\" and \"Website\" are not themselves secured by a password, and \"Diary\" is a distractor with no direct tool-to-secured-item link. The relationship is tool-to-what-it-secures.",
+    "source": "original"
+  },
+  {
+    "id": "ls-058",
+    "section": "language-skills",
+    "topic": "Analogies",
+    "difficulty": "easy",
+    "prompt": "Bee is to Hive as Bird is to ___?",
+    "options": ["Nest", "Wing", "Feather", "Egg"],
+    "correctIndex": 0,
+    "explanation": "A hive is the structure a bee builds and lives in; a nest is the parallel structure a bird builds and lives in. The relationship is animal-to-dwelling.",
+    "source": "original"
+  },
+  {
+    "id": "ls-059",
+    "section": "language-skills",
+    "topic": "Analogies",
+    "difficulty": "medium",
+    "prompt": "Sculptor is to Marble as Carpenter is to ___?",
+    "options": ["Furniture", "Nail", "Wood", "Hammer"],
+    "correctIndex": 2,
+    "explanation": "A sculptor shapes marble to create art; a carpenter shapes the parallel raw material, wood, to create furniture. The relationship is craftsperson-to-raw material.",
+    "source": "original"
+  },
+  {
+    "id": "ls-060",
+    "section": "language-skills",
+    "topic": "Analogies",
+    "difficulty": "hard",
+    "prompt": "Drought is to Famine as Negligence is to ___?",
+    "options": ["Punishment", "Accident", "Warning", "Safety"],
+    "correctIndex": 1,
+    "explanation": "A drought is a cause that can lead to the effect of famine; negligence is the parallel cause that can lead to the effect of an accident. The relationship is cause-to-effect.",
+    "source": "original"
+  },
+  {
+    "id": "ls-061",
+    "section": "language-skills",
+    "topic": "Analogies",
+    "difficulty": "easy",
+    "prompt": "Library is to Books as Museum is to ___?",
+    "options": ["Visitors", "Artifacts", "History", "Paintings"],
+    "correctIndex": 1,
+    "explanation": "A library is a place that houses and displays books; a museum is the parallel place that houses and displays artifacts. The relationship is place-to-what-it-houses. \"Artifacts\" is the general term parallel to \"books,\" while \"paintings\" is too narrow a subset.",
+    "source": "original"
+  },
+  {
+    "id": "ls-062",
+    "section": "language-skills",
+    "topic": "Analogies",
+    "difficulty": "easy",
+    "prompt": "Cub is to Lion as Fawn is to ___?",
+    "options": ["Deer", "Doe", "Buck", "Antelope"],
+    "correctIndex": 0,
+    "explanation": "A cub is the young of a lion; a fawn is the parallel young of a deer. The relationship is young animal-to-adult species. \"Doe\" and \"buck\" refer specifically to an adult female or male deer, not the general species name that parallels \"lion.\"",
+    "source": "original"
+  },
+  {
+    "id": "ls-063",
+    "section": "language-skills",
+    "topic": "Analogies",
+    "difficulty": "medium",
+    "prompt": "Tailor is to Clothes as Cobbler is to ___?",
+    "options": ["Leather", "Needle", "Shoes", "Boots"],
+    "correctIndex": 2,
+    "explanation": "A tailor makes clothes, a general category of product; a cobbler makes the parallel general category, shoes. \"Boots\" is too specific a subtype, just as \"shirt\" would be too specific a substitute for \"clothes.\"",
+    "source": "original"
+  },
+  {
+    "id": "ls-064",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "medium",
+    "prompt": "Choose the word that best completes the sentence: \"The negotiations reached a ____ for weeks, with neither side willing to compromise.\"",
+    "options": ["stalemate", "celebration", "agreement", "discussion"],
+    "correctIndex": 0,
+    "explanation": "\"Stalemate\" means a deadlock in which neither side can make progress, which fits a situation where \"neither side willing to compromise.\"",
+    "source": "original"
+  },
+  {
+    "id": "ls-065",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "medium",
+    "prompt": "Choose the word that best completes the sentence: \"Her ____ remarks about her colleague's work created tension in the office.\"",
+    "options": ["disparaging", "flattering", "neutral", "encouraging"],
+    "correctIndex": 0,
+    "explanation": "\"Disparaging\" means expressing a critical or belittling attitude, which fits remarks that \"created tension.\" The other options describe positive or neutral remarks, which would not cause tension.",
+    "source": "original"
+  },
+  {
+    "id": "ls-066",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "easy",
+    "prompt": "Choose the word that best completes the sentence: \"The witness gave a ____ account of the accident, recalling every detail with precision.\"",
+    "options": ["vague", "vivid", "brief", "careless"],
+    "correctIndex": 1,
+    "explanation": "\"Vivid\" means producing clear, detailed impressions, which fits an account that recalls \"every detail with precision.\"",
+    "source": "original"
+  },
+  {
+    "id": "ls-067",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "hard",
+    "prompt": "Choose the word that best completes the sentence: \"Because the evidence was purely ____, the jury could not reach a firm conclusion.\"",
+    "options": ["circumstantial", "conclusive", "irrefutable", "definitive"],
+    "correctIndex": 0,
+    "explanation": "\"Circumstantial\" evidence relies on inference rather than direct proof, which explains why the jury \"could not reach a firm conclusion.\" The other options describe evidence strong enough to settle a case, which would contradict the sentence.",
+    "source": "original"
+  },
+  {
+    "id": "ls-068",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "hard",
+    "prompt": "Choose the word that best completes the sentence: \"The professor's lecture was so ____ that even the most attentive students struggled to follow it.\"",
+    "options": ["convoluted", "straightforward", "simple", "lucid"],
+    "correctIndex": 0,
+    "explanation": "\"Convoluted\" means excessively complicated, which explains why \"even the most attentive students struggled to follow.\" The other options describe clarity, which would contradict the sentence.",
+    "source": "original"
+  },
+  {
+    "id": "ls-069",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "medium",
+    "prompt": "Choose the word that best completes the sentence: \"Despite the heavy rain, the outdoor concert continued ____, much to the delight of the fans.\"",
+    "options": ["unabated", "cancelled", "postponed", "interrupted"],
+    "correctIndex": 0,
+    "explanation": "\"Unabated\" means without any reduction in force or intensity, which fits a concert that \"continued\" despite the rain. The other options describe the concert stopping, which contradicts \"continued.\"",
+    "source": "original"
+  },
+  {
+    "id": "ls-070",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "medium",
+    "prompt": "Choose the word that best completes the sentence: \"The company's profits have ____ declined every year for the past three years, dropping by roughly ten percent annually.\"",
+    "options": ["steadily", "abruptly", "temporarily", "randomly"],
+    "correctIndex": 0,
+    "explanation": "\"Steadily\" means consistently over time, which fits a decline that happened \"every year\" at a \"roughly\" consistent rate. \"Abruptly\" and \"randomly\" contradict the described consistency, and \"temporarily\" contradicts a decline lasting three straight years.",
+    "source": "original"
+  },
+  {
+    "id": "ls-071",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "easy",
+    "prompt": "Choose the word that best completes the sentence: \"The new policy was met with ____ from employees who feared losing their benefits.\"",
+    "options": ["resistance", "enthusiasm", "indifference", "gratitude"],
+    "correctIndex": 0,
+    "explanation": "\"Resistance\" fits employees who \"feared losing their benefits\" and would therefore oppose the policy. The other options describe positive or neutral reactions, which contradict the fear described.",
+    "source": "original"
+  },
+  {
+    "id": "ls-072",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "medium",
+    "prompt": "Choose the word that best completes the sentence: \"Although the twins looked identical, their personalities were completely ____.\"",
+    "options": ["disparate", "identical", "similar", "matching"],
+    "correctIndex": 0,
+    "explanation": "\"Disparate\" means fundamentally different, which fits the contrast signaled by \"although\" between identical looks and different personalities. The other options mean the same or similar, which would contradict the contrast.",
+    "source": "original"
+  },
+  {
+    "id": "ls-073",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "easy",
+    "prompt": "Choose the word that best completes the sentence: \"The old bridge was declared ____ after inspectors found severe structural cracks.\"",
+    "options": ["hazardous", "sturdy", "reliable", "pristine"],
+    "correctIndex": 0,
+    "explanation": "\"Hazardous\" means dangerous, which fits a bridge with \"severe structural cracks.\" The other options describe safety and good condition, which would contradict the finding.",
+    "source": "original"
+  },
+  {
+    "id": "ls-074",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "medium",
+    "prompt": "Choose the word that best completes the sentence: \"The manager's ____ leadership style empowered employees to make their own decisions.\"",
+    "options": ["autocratic", "participative", "indifferent", "erratic"],
+    "correctIndex": 1,
+    "explanation": "\"Participative\" describes a style that involves and empowers others, which fits a manager who \"empowered employees to make their own decisions.\" The other options describe controlling, uninvolved, or inconsistent leadership, which contradict the sentence.",
+    "source": "original"
+  },
+  {
+    "id": "ls-075",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "hard",
+    "prompt": "Choose the word that best completes the sentence: \"Critics praised the novel for its ____ portrayal of small-town life, capturing both its warmth and its narrowness.\"",
+    "options": ["nuanced", "superficial", "one-dimensional", "exaggerated"],
+    "correctIndex": 0,
+    "explanation": "\"Nuanced\" means showing subtle distinctions, which fits a portrayal that captures \"both its warmth and its narrowness.\" The other options describe shallow or distorted portrayals, which contradict the balanced description.",
+    "source": "original"
+  },
+  {
+    "id": "ls-076",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "medium",
+    "prompt": "Choose the word that best completes the sentence: \"The committee's decision was ____; it could not be appealed or reversed.\"",
+    "options": ["irrevocable", "tentative", "negotiable", "provisional"],
+    "correctIndex": 0,
+    "explanation": "\"Irrevocable\" means unable to be changed or reversed, which matches the clause \"could not be appealed or reversed.\" The other options describe decisions that are still open to change.",
+    "source": "original"
+  },
+  {
+    "id": "ls-077",
+    "section": "language-skills",
+    "topic": "Sentence Completion",
+    "difficulty": "easy",
+    "prompt": "Choose the word that best completes the sentence: \"Years of drought had left the once-fertile valley completely ____.\"",
+    "options": ["barren", "lush", "fertile", "verdant"],
+    "correctIndex": 0,
+    "explanation": "\"Barren\" means incapable of producing vegetation, which fits land affected by \"years of drought.\" The other options describe fruitful, green land, which contradicts the drought described.",
+    "source": "original"
+  },
+  {
+    "id": "ls-078",
+    "section": "language-skills",
+    "topic": "Para Forming",
+    "difficulty": "medium",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: This led to significant delays in the delivery of medical supplies. Q: A severe storm disrupted shipping routes across the region. R: Ports were forced to suspend operations for several days. S: Officials have since invested in better storm-tracking systems to prevent future disruptions.",
+    "options": ["QRPS", "QPRS", "RQPS", "QRSP"],
+    "correctIndex": 0,
+    "explanation": "Q introduces the cause (storm disrupted shipping) → R gives the immediate consequence (ports suspended operations) → P states the resulting effect (delivery delays) → S describes the later response (investment in tracking systems).",
+    "source": "original"
+  },
+  {
+    "id": "ls-079",
+    "section": "language-skills",
+    "topic": "Para Forming",
+    "difficulty": "medium",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: The company therefore launched an aggressive marketing campaign. Q: Sales of the product had been steadily declining for two quarters. R: Within weeks, sales figures began to recover. S: Analysts attributed the turnaround to the renewed brand visibility.",
+    "options": ["QPRS", "QRPS", "PQRS", "QPSR"],
+    "correctIndex": 0,
+    "explanation": "Q states the problem (declining sales) → P describes the response (\"therefore\" launched a campaign) → R shows the result (sales recover) → S explains why (analysts' attribution), a clear cause-and-effect sequence.",
+    "source": "original"
+  },
+  {
+    "id": "ls-080",
+    "section": "language-skills",
+    "topic": "Para Forming",
+    "difficulty": "hard",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: Volunteers spent weeks cataloging the artifacts before the exhibit opened. Q: The museum announced a new exhibit on ancient trade routes. R: The exhibit ultimately drew record numbers of visitors. S: Curators had spent months acquiring rare pieces from private collectors.",
+    "options": ["QSPR", "QPSR", "SQPR", "QSRP"],
+    "correctIndex": 0,
+    "explanation": "Q announces the exhibit → S describes the earlier acquisition work → P describes the cataloging that followed, just before opening → R gives the final outcome after opening (record visitors).",
+    "source": "original"
+  },
+  {
+    "id": "ls-081",
+    "section": "language-skills",
+    "topic": "Para Forming",
+    "difficulty": "medium",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: As a result, the startup struggled to retain its early employees. Q: The company failed to secure a second round of funding. R: Cash reserves dwindled rapidly over the following months. S: Salaries were delayed, and morale declined sharply.",
+    "options": ["QRSP", "QRPS", "RQSP", "QSRP"],
+    "correctIndex": 0,
+    "explanation": "Q introduces the cause (failed funding) → R shows the immediate consequence (cash dwindled) → S shows the next effect (delayed salaries, low morale) → P states the final outcome (struggled to retain employees).",
+    "source": "original"
+  },
+  {
+    "id": "ls-082",
+    "section": "language-skills",
+    "topic": "Para Forming",
+    "difficulty": "medium",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: The village had relied on the river for irrigation for generations. Q: A new dam was constructed upstream, diverting much of the water flow. R: Crop yields in the village fell drastically within two seasons. S: Residents petitioned the regional government for a fairer water-sharing agreement.",
+    "options": ["PQRS", "QPRS", "PQSR", "QRPS"],
+    "correctIndex": 0,
+    "explanation": "P gives the background (reliance on the river) → Q introduces the disruptive event (dam diverting water) → R shows the consequence (crop yields fell) → S gives the resulting action (residents petitioned).",
+    "source": "original"
+  },
+  {
+    "id": "ls-083",
+    "section": "language-skills",
+    "topic": "Para Forming",
+    "difficulty": "hard",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph. P: The airline consequently offered full refunds to affected passengers. Q: A technical malfunction grounded the entire fleet for two days. R: Thousands of passengers found their flights cancelled without warning. S: Public criticism mounted over the airline's slow communication.",
+    "options": ["QRSP", "QRPS", "RQSP", "QSRP"],
+    "correctIndex": 0,
+    "explanation": "Q introduces the cause (technical malfunction grounded the fleet) → R shows the immediate consequence (cancelled flights) → S shows the resulting public reaction (criticism) → P states the airline's final response (\"consequently\" offered refunds).",
+    "source": "original"
+  },
+  {
+    "id": "ls-084",
+    "section": "language-skills",
+    "topic": "Error Identification",
+    "difficulty": "easy",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "There is many reasons to celebrate today.",
+      "There are many reasons to celebrate today.",
+      "There is many reason to celebrate today.",
+      "There are many reason to celebrate today."
+    ],
+    "correctIndex": 1,
+    "explanation": "The verb in a \"there is/are\" construction must agree with the noun that follows it. Since \"reasons\" is plural, the correct verb is \"are\".",
+    "source": "original"
+  },
+  {
+    "id": "ls-085",
+    "section": "language-skills",
+    "topic": "Error Identification",
+    "difficulty": "medium",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "Of the two candidates, she is the most qualified.",
+      "Of the two candidates, she is the better qualified.",
+      "Of the two candidates, she is the goodest qualified.",
+      "Of the two candidates, she is more qualified than the both."
+    ],
+    "correctIndex": 1,
+    "explanation": "Standard usage requires the comparative form (\"better\") when comparing exactly two things, and the superlative form (\"most\") only for three or more.",
+    "source": "original"
+  },
+  {
+    "id": "ls-086",
+    "section": "language-skills",
+    "topic": "Error Identification",
+    "difficulty": "medium",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "If I was rich, I would travel the world.",
+      "If I were rich, I would travel the world.",
+      "If I would be rich, I would travel the world.",
+      "If I am rich, I would travel the world."
+    ],
+    "correctIndex": 1,
+    "explanation": "Hypothetical, contrary-to-fact conditions require the subjunctive mood, which uses \"were\" for all subjects, not \"was\".",
+    "source": "original"
+  },
+  {
+    "id": "ls-087",
+    "section": "language-skills",
+    "topic": "Error Identification",
+    "difficulty": "hard",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "She lay down for a nap after lunch.",
+      "She laid down for a nap after lunch.",
+      "She lied down for a nap after lunch.",
+      "She layed down for a nap after lunch."
+    ],
+    "correctIndex": 0,
+    "explanation": "\"Lie\" (to recline) is intransitive and its past tense is \"lay\". \"Lay\" (to place something) is transitive and its past tense is \"laid\". Since the subject is reclining herself, not placing an object, \"lay\" is the correct past-tense form.",
+    "source": "original"
+  },
+  {
+    "id": "ls-088",
+    "section": "language-skills",
+    "topic": "Error Identification",
+    "difficulty": "medium",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "There were less mistakes in his second essay than in his first.",
+      "There were fewer mistakes in his second essay than in his first.",
+      "There was fewer mistakes in his second essay than in his first.",
+      "There were fewer mistake in his second essay than in his first."
+    ],
+    "correctIndex": 1,
+    "explanation": "\"Fewer\" is used for countable nouns like \"mistakes\", while \"less\" is used for uncountable quantities. The verb \"were\" must also agree with the plural noun \"mistakes\".",
+    "source": "original"
+  },
+  {
+    "id": "ls-089",
+    "section": "language-skills",
+    "topic": "Error Identification",
+    "difficulty": "hard",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "She almost drove her kids to school every day.",
+      "She drove her kids to school almost every day.",
+      "She drove almost her kids to school every day.",
+      "She drove her kids almost to school every day."
+    ],
+    "correctIndex": 1,
+    "explanation": "A modifier like \"almost\" must sit next to the word it modifies. To convey that she drove nearly every day, \"almost\" should modify \"every day\"; placing it before \"drove\" instead implies she nearly drove but did not.",
+    "source": "original"
+  },
+  {
+    "id": "ls-090",
+    "section": "language-skills",
+    "topic": "Error Identification",
+    "difficulty": "hard",
+    "prompt": "Which of the following sentences is grammatically correct?",
+    "options": [
+      "Either the manager or the employees is responsible for the error.",
+      "Either the manager or the employees are responsible for the error.",
+      "Either the managers or the employee are responsible for the error.",
+      "Either the manager or the employees responsible for the error."
+    ],
+    "correctIndex": 1,
+    "explanation": "With \"either...or\", the verb agrees with the subject nearer to it. Since \"employees\" (plural) is closer to the verb, \"are\" is correct.",
+    "source": "original"
+  },
+  {
+    "id": "ls-091",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" What is the primary purpose of the passage?",
+    "options": [
+      "To criticize marine biologists for neglecting coral reefs.",
+      "To explain coral gardening and the limitations scientists associate with it.",
+      "To argue that pollution has no effect on coral reefs.",
+      "To describe the history of underwater photography."
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage explains how coral gardening works and then discusses the limitations and caveats that researchers attach to it, making option B the accurate summary of its purpose.",
+    "source": "original"
+  },
+  {
+    "id": "ls-092",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage (same as above, coral gardening): \"...transplanted corals often show survival rates above sixty percent within the first year.\" According to the passage, what survival rate do transplanted corals often show within the first year?",
+    "options": ["Above sixty percent", "Below ten percent", "Exactly fifty percent", "Nearly one hundred percent"],
+    "correctIndex": 0,
+    "explanation": "The passage states this figure directly: survival rates above sixty percent within the first year.",
+    "source": "original"
+  },
+  {
+    "id": "ls-093",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage (same as above, coral gardening): \"...before being transplanted onto degraded sections of a reef.\" The word \"degraded\" in the passage most nearly means:",
+    "options": ["Improved", "Damaged", "Expanded", "Protected"],
+    "correctIndex": 1,
+    "explanation": "\"Degraded\" means worn down or damaged in quality, which fits sections of a reef in need of restoration.",
+    "source": "original"
+  },
+  {
+    "id": "ls-094",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage (same as above, coral gardening): \"Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef.\" What can be inferred from the passage about the future of coral gardening if ocean temperatures and pollution levels are not addressed?",
+    "options": [
+      "Coral gardening alone will fully restore damaged reefs.",
+      "Newly planted corals will remain vulnerable to the same stresses that caused reef decline.",
+      "Coral gardening will become unnecessary.",
+      "Ocean temperatures will decrease naturally over time."
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage states directly that without addressing temperatures and pollution, newly planted corals \"remain vulnerable to the same stresses that damaged the original reef.\"",
+    "source": "original"
+  },
+  {
+    "id": "ls-095",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage: \"Long before modern postal services existed, ancient empires relied on relay systems to move messages across vast distances. The Persian Empire, for example, maintained a network of way-stations along its royal road, where messengers could exchange tired horses for fresh ones and continue their journey without pause. This system allowed urgent dispatches to travel hundreds of miles in a matter of days, a remarkable feat for its time. Centuries later, similar relay networks appeared in the Mongol Empire, whose yam system connected distant provinces through a chain of staffed outposts. These early networks were built primarily to serve rulers and military commanders, not ordinary citizens, who had few means of sending private correspondence. It was not until postal services became publicly available, centuries afterward, that everyday people gained routine access to long-distance written communication. Historians note that the efficiency of these ancient relay systems depended heavily on political stability; when empires fragmented or fell into conflict, the networks supporting them quickly deteriorated, and messages that once took days to deliver could take weeks or fail to arrive at all.\" According to the passage, what was the primary purpose of early relay message systems such as the Persian royal road?",
+    "options": [
+      "To entertain traveling merchants",
+      "To serve rulers and military commanders",
+      "To provide postal service to ordinary citizens",
+      "To map new trade routes"
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage states these networks \"were built primarily to serve rulers and military commanders, not ordinary citizens.\"",
+    "source": "original"
+  },
+  {
+    "id": "ls-096",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage (same as above, postal systems): \"...when empires fragmented or fell into conflict, the networks supporting them quickly deteriorated...\" The word \"deteriorated\" in the passage most nearly means:",
+    "options": ["Improved", "Expanded", "Worsened", "Remained unchanged"],
+    "correctIndex": 2,
+    "explanation": "\"Deteriorated\" means to become progressively worse, matching \"worsened\".",
+    "source": "original"
+  },
+  {
+    "id": "ls-097",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage (same as above, postal systems): \"Historians note that the efficiency of these ancient relay systems depended heavily on political stability...\" What does the passage suggest was necessary for ancient relay systems to function efficiently?",
+    "options": ["Political stability", "Advanced writing technology", "A large population", "Warm climates"],
+    "correctIndex": 0,
+    "explanation": "The passage states directly that the systems' efficiency \"depended heavily on political stability.\"",
+    "source": "original"
+  },
+  {
+    "id": "ls-098",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage: \"Researchers studying sleep have found that it plays an active role in strengthening memories formed during the day, a process known as memory consolidation. Rather than simply resting, the brain appears to replay and reorganize recent experiences during certain sleep stages, particularly during deep, slow-wave sleep. Studies involving both animals and humans have shown that people who sleep shortly after learning new information tend to retain it better than those who stay awake for a comparable period. Interestingly, not all types of memory benefit equally; procedural memory, such as the skill of playing a musical instrument, appears to depend more heavily on later stages of sleep, while factual memory seems to consolidate earlier in the night. This has led some researchers to recommend that students avoid pulling all-nighters before exams, since skipping sleep may undermine the very consolidation process needed to retain studied material. Although much about the relationship between sleep and memory remains under investigation, the existing evidence points clearly toward sleep being an active, necessary participant in learning rather than a passive break from it.\" What is memory consolidation, as described in the passage?",
+    "options": [
+      "The process by which the brain strengthens and reorganizes memories during sleep.",
+      "The process of forgetting unimportant information.",
+      "A technique used to memorize facts quickly while awake.",
+      "A type of sleep disorder."
+    ],
+    "correctIndex": 0,
+    "explanation": "The passage defines memory consolidation as sleep's active role in \"strengthening memories\" by replaying and reorganizing recent experiences.",
+    "source": "original"
+  },
+  {
+    "id": "ls-099",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage (same as above, sleep and memory): \"...procedural memory...appears to depend more heavily on later stages of sleep, while factual memory seems to consolidate earlier in the night.\" According to the passage, what distinguishes procedural memory from factual memory in terms of sleep?",
+    "options": [
+      "Procedural memory does not require sleep at all.",
+      "Procedural memory depends more on later stages of sleep, while factual memory consolidates earlier.",
+      "Factual memory depends more on later stages of sleep, while procedural memory consolidates earlier.",
+      "Both types of memory consolidate at exactly the same time."
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage states this distinction directly: procedural memory depends more on later sleep stages, while factual memory consolidates earlier in the night.",
+    "source": "original"
+  },
+  {
+    "id": "ls-100",
+    "section": "language-skills",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage (same as above, sleep and memory): \"...students avoid pulling all-nighters before exams, since skipping sleep may undermine the very consolidation process needed to retain studied material.\" Why does the passage suggest students should avoid pulling all-nighters before exams?",
+    "options": [
+      "Because staying awake improves memory consolidation.",
+      "Because skipping sleep may undermine the consolidation process needed to retain studied material.",
+      "Because all-nighters cause permanent memory loss.",
+      "Because exams are easier after a full night's sleep regardless of studying."
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage states this reasoning directly: skipping sleep \"may undermine the very consolidation process needed to retain studied material.\"",
     "source": "original"
   }
 ]
