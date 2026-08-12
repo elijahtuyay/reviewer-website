@@ -13,6 +13,7 @@ import ResultSummary from "@/components/ResultSummary";
 import ProgressTracker from "@/components/ProgressTracker";
 import SectionNav from "@/components/SectionNav";
 import PauseOverlay from "@/components/PauseOverlay";
+import MobileNavSheet from "@/components/MobileNavSheet";
 
 type Phase = "taking" | "review";
 
@@ -36,6 +37,7 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
   const [phase, setPhase] = useState<Phase>("taking");
   const [hydrated, setHydrated] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const questions = useMemo(
     () => getQuestionsByIds(examId, section, questionIds),
@@ -94,6 +96,7 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
 
   function handleJump(questionNumber: number) {
     document.getElementById(`question-${questionNumber}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setMobileNavOpen(false);
   }
 
   const result = useMemo(() => {
@@ -114,37 +117,48 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
         inert={paused || undefined}
         aria-hidden={paused || undefined}
       >
-        <div className="sticky top-0 z-20 flex h-20 items-center justify-between border-b border-line bg-background/95 backdrop-blur">
-          <div>
+        <div className="sticky top-0 z-20 flex h-20 items-center justify-between gap-3 border-b border-line bg-background/95 backdrop-blur">
+          <div className="min-w-0">
             <Link href={`/${examId}`} className="text-sm text-muted hover:text-foreground">
               ← Exam setup
             </Link>
-            <h1 className="mt-1 text-xl font-semibold text-foreground">{sectionConfig.label}</h1>
+            <h1 className="mt-1 truncate text-lg font-semibold text-foreground sm:text-xl">
+              {sectionConfig.label}
+            </h1>
           </div>
-          {phase === "taking" ? (
-            <div className="flex items-center gap-3">
-              <div className="text-right">
-                <Timer minutes={sectionConfig.minutes} onExpire={handleSubmit} paused={paused} />
-                <p className="mt-1 text-xs text-muted">
-                  {answeredCount}/{questions.length} answered
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setPaused(true)}
-                className="rounded-md border border-line px-3 py-1.5 text-sm text-foreground hover:bg-panel-hover"
-              >
-                Pause
-              </button>
-            </div>
-          ) : (
-            <Link
-              href="/"
-              className="rounded-md border border-line px-3 py-1.5 text-sm text-foreground hover:bg-panel-hover"
+          <div className="flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setMobileNavOpen(true)}
+              className="flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm text-foreground hover:bg-panel-hover lg:hidden"
             >
-              Done
-            </Link>
-          )}
+              Sections
+            </button>
+            {phase === "taking" ? (
+              <div className="flex items-center gap-3">
+                <div className="text-right">
+                  <Timer minutes={sectionConfig.minutes} onExpire={handleSubmit} paused={paused} />
+                  <p className="mt-1 text-xs text-muted">
+                    {answeredCount}/{questions.length} answered
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setPaused(true)}
+                  className="flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm text-foreground hover:bg-panel-hover"
+                >
+                  Pause
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/"
+                className="flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm text-foreground hover:bg-panel-hover"
+              >
+                Done
+              </Link>
+            )}
+          </div>
         </div>
 
         <div className="mt-4 flex gap-8">
@@ -166,6 +180,25 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
               )}
             </div>
           </aside>
+
+          <MobileNavSheet open={mobileNavOpen} onClose={() => setMobileNavOpen(false)}>
+            <div className="flex flex-col gap-6">
+              <SectionNav
+                examId={examId}
+                currentSection={section}
+                currentAnsweredCount={answeredCount}
+                locked={phase === "taking"}
+                currentResult={result}
+              />
+              {phase === "taking" && (
+                <ProgressTracker
+                  totalQuestions={questions.length}
+                  answeredNumbers={answeredNumbers}
+                  onJump={handleJump}
+                />
+              )}
+            </div>
+          </MobileNavSheet>
 
           <main className="min-w-0 flex-1">
             {phase === "review" && result && (
