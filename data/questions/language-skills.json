@@ -4,7 +4,7 @@
     "section": "language-skills",
     "topic": "Error Identification",
     "difficulty": "easy",
-    "prompt": "Which of the following sentences is grammatically correct?",
+    "prompt": "Which sentence correctly applies subject-verb agreement with the pronoun \"neither\"?",
     "options": [
       "Neither of the students have submitted the assignment.",
       "Neither of the students has submitted the assignment.",
@@ -20,7 +20,7 @@
     "section": "language-skills",
     "topic": "Prepositions",
     "difficulty": "easy",
-    "prompt": "Which of the following sentences is grammatically correct?",
+    "prompt": "Which sentence pairs \"good\" with the correct preposition?",
     "options": [
       "He is good in mathematics.",
       "He is good at mathematics.",
@@ -36,7 +36,7 @@
     "section": "language-skills",
     "topic": "Error Identification",
     "difficulty": "hard",
-    "prompt": "Which of the following sentences is grammatically correct?",
+    "prompt": "Which sentence correctly sequences the past and past perfect tenses?",
     "options": [
       "By the time we reached the station, the train left.",
       "By the time we reached the station, the train had left.",
@@ -52,7 +52,7 @@
     "section": "language-skills",
     "topic": "Error Identification",
     "difficulty": "medium",
-    "prompt": "Which of the following sentences is grammatically correct?",
+    "prompt": "Which sentence uses the correct article before \"European\"?",
     "options": [
       "She is an European citizen.",
       "She is a European citizen.",
@@ -68,7 +68,7 @@
     "section": "language-skills",
     "topic": "Error Identification",
     "difficulty": "easy",
-    "prompt": "Which of the following sentences is grammatically correct?",
+    "prompt": "Which sentence correctly forms the superlative degree?",
     "options": [
       "This is the most tallest building in the city.",
       "This is the tallest building in the city.",
@@ -84,7 +84,7 @@
     "section": "language-skills",
     "topic": "Error Identification",
     "difficulty": "hard",
-    "prompt": "Which of the following sentences is grammatically correct?",
+    "prompt": "Which sentence keeps parallel structure across a series of activities?",
     "options": [
       "She likes reading, writing, and to swim.",
       "She likes reading, writing, and swimming.",
@@ -100,7 +100,7 @@
     "section": "language-skills",
     "topic": "Error Identification",
     "difficulty": "medium",
-    "prompt": "Which of the following sentences is grammatically correct?",
+    "prompt": "Which sentence avoids a dangling modifier?",
     "options": [
       "Walking to the store, the rain started falling.",
       "Walking to the store, I got caught in the rain.",
@@ -116,7 +116,7 @@
     "section": "language-skills",
     "topic": "Error Identification",
     "difficulty": "medium",
-    "prompt": "Which of the following sentences is grammatically correct?",
+    "prompt": "Which sentence correctly treats \"information\" as an uncountable noun?",
     "options": [
       "She gave me some useful informations.",
       "She gave me some useful information.",
@@ -1052,7 +1052,7 @@
     "section": "language-skills",
     "topic": "Error Identification",
     "difficulty": "easy",
-    "prompt": "Which of the following sentences is grammatically correct?",
+    "prompt": "Which sentence correctly matches \"there is/are\" with the noun that follows it?",
     "options": [
       "There is many reasons to celebrate today.",
       "There are many reasons to celebrate today.",
@@ -1068,7 +1068,7 @@
     "section": "language-skills",
     "topic": "Error Identification",
     "difficulty": "medium",
-    "prompt": "Which of the following sentences is grammatically correct?",
+    "prompt": "Which sentence uses the correct comparative form when comparing two candidates?",
     "options": [
       "Of the two candidates, she is the most qualified.",
       "Of the two candidates, she is the better qualified.",
@@ -1084,7 +1084,7 @@
     "section": "language-skills",
     "topic": "Error Identification",
     "difficulty": "medium",
-    "prompt": "Which of the following sentences is grammatically correct?",
+    "prompt": "Which sentence correctly uses the subjunctive mood in a hypothetical condition?",
     "options": [
       "If I was rich, I would travel the world.",
       "If I were rich, I would travel the world.",
@@ -1111,7 +1111,7 @@
     "section": "language-skills",
     "topic": "Error Identification",
     "difficulty": "medium",
-    "prompt": "Which of the following sentences is grammatically correct?",
+    "prompt": "Which sentence correctly distinguishes \"fewer\" from \"less\"?",
     "options": [
       "There were less mistakes in his second essay than in his first.",
       "There were fewer mistakes in his second essay than in his first.",
@@ -1127,7 +1127,7 @@
     "section": "language-skills",
     "topic": "Error Identification",
     "difficulty": "hard",
-    "prompt": "Which of the following sentences is grammatically correct?",
+    "prompt": "Which sentence places the modifier \"almost\" correctly?",
     "options": [
       "She almost drove her kids to school every day.",
       "She drove her kids to school almost every day.",
