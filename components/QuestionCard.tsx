@@ -1,4 +1,5 @@
 import { Question } from "@/data/schema";
+import MathText from "@/components/MathText";
 
 interface QuestionCardProps {
   question: Question;
@@ -25,7 +26,9 @@ export default function QuestionCard({
     >
       <div className="flex items-baseline gap-3">
         <span className="text-sm font-medium text-muted">{index + 1}</span>
-        <p className="whitespace-pre-line text-foreground">{question.prompt}</p>
+        <p className="text-foreground">
+          <MathText text={question.prompt} />
+        </p>
       </div>
 
       <div className="mt-4 ml-7 flex flex-col gap-2">
@@ -41,7 +44,7 @@ export default function QuestionCard({
               style = "border-red-600 bg-red-50 dark:border-red-500 dark:bg-red-950/40";
             }
           } else if (isSelected) {
-            style = "border-blue-600 bg-blue-50 dark:border-blue-400 dark:bg-blue-950/40";
+            style = "border-accent bg-accent/10 dark:bg-accent/20";
           }
 
           return (
@@ -52,7 +55,7 @@ export default function QuestionCard({
               onClick={() => onSelect?.(optionIndex)}
               className={`rounded-md border px-4 py-2 text-left text-sm text-foreground transition-colors ${style} ${reviewMode ? "cursor-default" : "cursor-pointer"}`}
             >
-              {option}
+              <MathText text={option} />
             </button>
           );
         })}
@@ -71,7 +74,9 @@ export default function QuestionCard({
           >
             {isAnswered ? (isCorrect ? "Correct" : "Incorrect") : "Not answered"}
           </p>
-          <p className="mt-2 text-foreground">{question.explanation}</p>
+          <p className="mt-2 text-foreground">
+            <MathText text={question.explanation} />
+          </p>
         </div>
       )}
     </div>
