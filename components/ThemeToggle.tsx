@@ -6,6 +6,7 @@ export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reads the DOM class set by the pre-hydration ThemeInitScript, unavailable during render/SSR
     setIsDark(document.documentElement.classList.contains("dark"));
   }, []);
 
@@ -21,7 +22,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Toggle dark mode"
-      className="flex h-8 w-8 items-center justify-center rounded-md border border-line text-muted hover:bg-panel-hover"
+      className="flex h-11 w-11 items-center justify-center rounded-md border border-line text-muted hover:bg-panel-hover"
     >
       {isDark ? (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">

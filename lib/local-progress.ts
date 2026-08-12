@@ -25,7 +25,12 @@ export function getStoredProgress(examId: ExamId, section: SectionId): StoredPro
 
 export function saveStoredProgress(examId: ExamId, section: SectionId, progress: StoredProgress): void {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(storageKey(examId, section), JSON.stringify(progress));
+  try {
+    window.localStorage.setItem(storageKey(examId, section), JSON.stringify(progress));
+  } catch {
+    // Storage disabled/full (e.g. Safari private browsing quota) — progress just
+    // won't persist across reloads; the in-memory quiz state still works fine.
+  }
 }
 
 export function getAnsweredCount(examId: ExamId, section: SectionId): number {

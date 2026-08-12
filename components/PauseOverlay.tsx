@@ -17,7 +17,7 @@ export default function PauseOverlay({ onResume }: PauseOverlayProps) {
       <button
         type="button"
         onClick={onResume}
-        className="rounded-md bg-accent px-6 py-2.5 text-sm font-medium text-accent-foreground hover:opacity-90"
+        className="flex h-11 items-center justify-center rounded-md bg-accent px-6 text-sm font-medium text-accent-foreground hover:opacity-90"
       >
         Resume
       </button>
