@@ -2,55 +2,69 @@
 
 import { use, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { SECTIONS, getSectionConfig } from "@/lib/exam-config";
+import { getExamConfig, getSectionConfig, isValidExamId } from "@/lib/exam-config";
 import { drawRandomQuestionIds, getQuestionsByIds } from "@/lib/data/questions";
 import { scoreAttempt } from "@/lib/scoring";
-import { SectionId } from "@/data/schema";
+import { ExamId, SectionId } from "@/data/schema";
 import { getStoredProgress, saveStoredProgress } from "@/lib/local-progress";
 import Timer from "@/components/Timer";
 import QuestionCard from "@/components/QuestionCard";
 import ResultSummary from "@/components/ResultSummary";
 import ProgressTracker from "@/components/ProgressTracker";
 import SectionNav from "@/components/SectionNav";
+import PauseOverlay from "@/components/PauseOverlay";
 
 type Phase = "taking" | "review";
 
-export default function QuizPage({ params }: { params: Promise<{ section: string }> }) {
-  const { section: sectionParam } = use(params);
+export default function QuizPage({ params }: { params: Promise<{ examId: string; section: string }> }) {
+  const { examId: examIdParam, section: sectionParam } = use(params);
 
-  const isValidSection = SECTIONS.some((s) => s.id === sectionParam);
-  if (!isValidSection) {
-    notFound();
-  }
-  const section = sectionParam as SectionId;
+  // The parent server layout already 404s for an invalid/unavailable examId or
+  // section before this client component ever renders, so these checks are a
+  // type-narrowing formality, not a real gate — `notFound()` isn't a supported
+  // call from a Client Component.
+  const examIdValid = isValidExamId(examIdParam);
+  const examId = (examIdValid ? examIdParam : "nmat") as ExamId;
+  const exam = getExamConfig(examId);
+  const sectionValid = exam.sections.some((s) => s.id === sectionParam);
+  const section = (sectionValid ? sectionParam : exam.sections[0].id) as SectionId;
 
-  const sectionConfig = getSectionConfig(section);
+  const sectionConfig = getSectionConfig(examId, section);
 
   const [questionIds, setQuestionIds] = useState<string[]>([]);
   const [answers, setAnswers] = useState<Record<string, number | null>>({});
   const [phase, setPhase] = useState<Phase>("taking");
   const [hydrated, setHydrated] = useState(false);
+  const [paused, setPaused] = useState(false);
 
-  const questions = useMemo(() => getQuestionsByIds(section, questionIds), [section, questionIds]);
+  const questions = useMemo(
+    () => getQuestionsByIds(examId, section, questionIds),
+    [examId, section, questionIds]
+  );
 
   // Resume any previously saved question set/progress for this section on mount,
   // or draw a fresh random subset from the full bank if none exists yet.
   useEffect(() => {
-    const stored = getStoredProgress(section);
+    /* eslint-disable react-hooks/set-state-in-effect -- reads localStorage, which is unavailable during render/SSR */
+    const stored = getStoredProgress(examId, section);
     const ids =
       stored.questionIds && stored.questionIds.length > 0
         ? stored.questionIds
-        : drawRandomQuestionIds(section, sectionConfig.questionCount);
+        : drawRandomQuestionIds(examId, section, sectionConfig.questionCount);
     setQuestionIds(ids);
     setAnswers(stored.answers);
     setPhase(stored.submitted ? "review" : "taking");
     setHydrated(true);
+    /* eslint-enable react-hooks/set-state-in-effect */
     if (!stored.questionIds || stored.questionIds.length === 0) {
-      saveStoredProgress(section, { answers: stored.answers, submitted: stored.submitted, questionIds: ids });
+      saveStoredProgress(examId, section, {
+        answers: stored.answers,
+        submitted: stored.submitted,
+        questionIds: ids,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [section]);
+  }, [examId, section]);
 
   const answeredCount = Object.values(answers).filter((v) => v !== null && v !== undefined).length;
   const answeredNumbers = questions
@@ -62,7 +76,7 @@ export default function QuizPage({ params }: { params: Promise<{ section: string
     for (const [id, value] of Object.entries(nextAnswers)) {
       if (value !== null && value !== undefined) cleaned[id] = value;
     }
-    saveStoredProgress(section, { answers: cleaned, submitted, questionIds });
+    saveStoredProgress(examId, section, { answers: cleaned, submitted, questionIds });
   }
 
   function handleSelect(questionId: string, optionIndex: number) {
@@ -88,27 +102,40 @@ export default function QuizPage({ params }: { params: Promise<{ section: string
       questionId: q.id,
       selectedIndex: answers[q.id] ?? null,
     }));
-    return scoreAttempt(questions, answerList);
-  }, [phase, questions, answers]);
+    return scoreAttempt(questions, answerList, exam.pointsPerCorrectAnswer);
+  }, [phase, questions, answers, exam.pointsPerCorrectAnswer]);
 
-  if (!hydrated) return null;
+  if (!examIdValid || !sectionValid || !hydrated) return null;
 
   return (
     <div className="flex flex-1 justify-center bg-background">
-      <div className="w-full max-w-6xl px-6 py-10 sm:py-16">
-        <div className="flex items-center justify-between border-b border-line pb-4">
+      <div
+        className="w-full max-w-6xl px-6 py-10 sm:py-16"
+        inert={paused || undefined}
+        aria-hidden={paused || undefined}
+      >
+        <div className="sticky top-0 z-20 flex h-20 items-center justify-between border-b border-line bg-background/95 backdrop-blur">
           <div>
-            <Link href="/nmat" className="text-sm text-muted hover:text-foreground">
+            <Link href={`/${examId}`} className="text-sm text-muted hover:text-foreground">
               ← Exam setup
             </Link>
             <h1 className="mt-1 text-xl font-semibold text-foreground">{sectionConfig.label}</h1>
           </div>
           {phase === "taking" ? (
-            <div className="text-right">
-              <Timer minutes={sectionConfig.minutes} onExpire={handleSubmit} />
-              <p className="mt-1 text-xs text-muted">
-                {answeredCount}/{questions.length} answered
-              </p>
+            <div className="flex items-center gap-3">
+              <div className="text-right">
+                <Timer minutes={sectionConfig.minutes} onExpire={handleSubmit} paused={paused} />
+                <p className="mt-1 text-xs text-muted">
+                  {answeredCount}/{questions.length} answered
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setPaused(true)}
+                className="rounded-md border border-line px-3 py-1.5 text-sm text-foreground hover:bg-panel-hover"
+              >
+                Pause
+              </button>
             </div>
           ) : (
             <Link
@@ -122,11 +149,13 @@ export default function QuizPage({ params }: { params: Promise<{ section: string
 
         <div className="mt-4 flex gap-8">
           <aside className="hidden w-56 shrink-0 flex-col gap-6 lg:flex">
-            <div className="sticky top-6 flex flex-col gap-6">
+            <div className="sticky top-24 flex flex-col gap-6">
               <SectionNav
+                examId={examId}
                 currentSection={section}
                 currentAnsweredCount={answeredCount}
                 locked={phase === "taking"}
+                currentResult={result}
               />
               {phase === "taking" && (
                 <ProgressTracker
@@ -161,7 +190,7 @@ export default function QuizPage({ params }: { params: Promise<{ section: string
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  className="w-full rounded-md bg-foreground py-2.5 text-sm font-medium text-background hover:opacity-90"
+                  className="w-full rounded-md bg-accent py-2.5 text-sm font-medium text-accent-foreground hover:opacity-90"
                 >
                   Submit ({answeredCount}/{questions.length} answered)
                 </button>
@@ -170,6 +199,8 @@ export default function QuizPage({ params }: { params: Promise<{ section: string
           </main>
         </div>
       </div>
+
+      {paused && <PauseOverlay onResume={() => setPaused(false)} />}
     </div>
   );
 }

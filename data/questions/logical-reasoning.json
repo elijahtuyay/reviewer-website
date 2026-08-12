@@ -3,11 +3,16 @@
     "id": "lr-001",
     "section": "logical-reasoning",
     "topic": "Syllogisms",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "prompt": "Statements: All roses are flowers. All flowers are plants.\nConclusions: I. All roses are plants. II. All plants are roses.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
     "correctIndex": 0,
-    "explanation": "Since roses are a subset of flowers, and flowers are a subset of plants, roses must be a subset of plants (I follows). Conclusion II reverses the relationship incorrectly — plants can include many things besides roses.",
+    "explanation": "Since roses are a subset of flowers, and flowers are a subset of plants, roses must be a subset of plants (I follows). Conclusion II reverses the relationship incorrectly: plants can include many things besides roses.",
     "source": "original"
   },
   {
@@ -16,9 +21,14 @@
     "topic": "Syllogisms",
     "difficulty": "medium",
     "prompt": "Statements: Some doctors are teachers. All teachers are readers.\nConclusions: I. Some doctors are readers. II. All doctors are readers.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
     "correctIndex": 0,
-    "explanation": "Since some doctors are teachers, and all teachers are readers, those same doctors must be readers — so \"some doctors are readers\" follows. \"All doctors are readers\" does not follow, since only some doctors were established to be teachers.",
+    "explanation": "Since some doctors are teachers, and all teachers are readers, those same doctors must be readers, so \"some doctors are readers\" follows. \"All doctors are readers\" does not follow, since only some doctors were established to be teachers.",
     "source": "original"
   },
   {
@@ -27,9 +37,14 @@
     "topic": "Syllogisms",
     "difficulty": "medium",
     "prompt": "Statements: No cats are dogs. All dogs are animals.\nConclusions: I. No cats are animals. II. Some animals are not cats.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
     "correctIndex": 1,
-    "explanation": "Dogs are animals, and no dogs are cats, so those dog-animals are not cats — meaning \"some animals are not cats\" follows. \"No cats are animals\" does not follow, since cats could still be animals of some other kind, just not dogs.",
+    "explanation": "Dogs are animals, and no dogs are cats, so those dog-animals are not cats, meaning \"some animals are not cats\" follows. \"No cats are animals\" does not follow, since cats could still be animals of some other kind, just not dogs.",
     "source": "original"
   },
   {
@@ -38,20 +53,30 @@
     "topic": "Syllogisms",
     "difficulty": "hard",
     "prompt": "Statements: All pens are pencils. Some pencils are erasers.\nConclusions: I. Some pens are erasers. II. Some erasers are pens.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
     "correctIndex": 3,
-    "explanation": "The pencils that are erasers might be entirely outside the subset of pencils that are pens — the statements don't establish any overlap between pens and erasers. This is a classic syllogism trap where no valid conclusion connects the two end terms.",
+    "explanation": "The pencils that are erasers might be entirely outside the subset of pencils that are pens: the statements don't establish any overlap between pens and erasers. This is a classic syllogism trap where no valid conclusion connects the two end terms.",
     "source": "original"
   },
   {
     "id": "lr-005",
     "section": "logical-reasoning",
     "topic": "Syllogisms",
-    "difficulty": "medium",
-    "prompt": "Statements: All squares are rectangles. All rectangles are quadrilaterals.\nConclusions: I. All squares are quadrilaterals. II. Some quadrilaterals are squares.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
-    "correctIndex": 2,
-    "explanation": "By the transitive chain, squares ⊆ rectangles ⊆ quadrilaterals, so all squares are quadrilaterals (I follows). Since squares exist and are quadrilaterals, it's also valid to say some quadrilaterals are squares (II follows).",
+    "difficulty": "hard",
+    "prompt": "Statements: All squares are rectangles. All rectangles are quadrilaterals. Some rectangles are not colored.\nConclusions: I. All squares are quadrilaterals. II. Some squares are not colored.\nWhich of the conclusions logically follow(s)?",
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
+    "correctIndex": 0,
+    "explanation": "By the transitive chain, squares are a subset of rectangles, which are a subset of quadrilaterals, so all squares are quadrilaterals (I follows). The rectangles that are not colored might be entirely non-square rectangles: no overlap between squares and the \"not colored\" rectangles is established, so \"some squares are not colored\" does not follow.",
     "source": "original"
   },
   {
@@ -60,9 +85,14 @@
     "topic": "Syllogisms",
     "difficulty": "hard",
     "prompt": "Statements: Some artists are musicians. No musicians are engineers.\nConclusions: I. Some artists are not engineers. II. No artists are engineers.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
     "correctIndex": 0,
-    "explanation": "Some artists are musicians, and no musicians are engineers, so those artist-musicians are not engineers — \"some artists are not engineers\" follows. \"No artists are engineers\" is too strong, since other artists (not musicians) could still be engineers.",
+    "explanation": "Some artists are musicians, and no musicians are engineers, so those artist-musicians are not engineers: \"some artists are not engineers\" follows. \"No artists are engineers\" is too strong, since other artists (not musicians) could still be engineers.",
     "source": "original"
   },
   {
@@ -78,7 +108,7 @@
       "Downtown businesses support the highway project."
     ],
     "correctIndex": 0,
-    "explanation": "The argument assumes the highway will genuinely reduce congestion rather than just redistribute or eventually recreate it through induced demand — a common gap in this type of infrastructure argument.",
+    "explanation": "The argument assumes the highway will genuinely reduce congestion rather than just redistribute or eventually recreate it through induced demand, a common gap in this type of infrastructure argument.",
     "source": "original"
   },
   {
@@ -94,7 +124,7 @@
       "The company has enough staff to cover during breaks."
     ],
     "correctIndex": 2,
-    "explanation": "The argument assumes a mandated break has the same positive effect as a self-chosen one — the observed correlation between voluntary breaks and satisfaction doesn't guarantee the same result if breaks are imposed.",
+    "explanation": "The argument assumes a mandated break has the same positive effect as a self-chosen one: the observed correlation between voluntary breaks and satisfaction doesn't guarantee the same result if breaks are imposed.",
     "source": "original"
   },
   {
@@ -142,14 +172,14 @@
       "All hiking club members go hiking often."
     ],
     "correctIndex": 0,
-    "explanation": "This is the contrapositive of \"all members own boots\": if someone doesn't own boots, they're not a member — a valid logical inference.",
+    "explanation": "This is the contrapositive of \"all members own boots\": if someone doesn't own boots, they're not a member, a valid logical inference.",
     "source": "original"
   },
   {
     "id": "lr-012",
     "section": "logical-reasoning",
     "topic": "Critical Reasoning — Inference",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "prompt": "\"Every time it rains heavily, the river level rises. The river level has not risen today.\" What can be validly concluded?",
     "options": [
       "It did not rain heavily today.",
@@ -158,7 +188,7 @@
       "It rained lightly today."
     ],
     "correctIndex": 0,
-    "explanation": "By the contrapositive of the stated rule, no rise in river level means it did not rain heavily today — a valid inference.",
+    "explanation": "By the contrapositive of the stated rule, no rise in river level means it did not rain heavily today, a valid inference.",
     "source": "original"
   },
   {
@@ -174,23 +204,23 @@
       "It will rain again tomorrow."
     ],
     "correctIndex": 1,
-    "explanation": "Concluding it \"definitely\" rained would be affirming the consequent, a logical fallacy — other factors could also raise sales. Only \"possible\" is validly supported.",
+    "explanation": "Concluding it \"definitely\" rained would be affirming the consequent, a logical fallacy: other factors could also raise sales. Only \"possible\" is validly supported.",
     "source": "original"
   },
   {
     "id": "lr-014",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Inference",
+    "topic": "Seating Arrangement — Linear",
     "difficulty": "medium",
-    "prompt": "\"In a survey, 80% of respondents who exercise regularly reported feeling more energetic. 20% of respondents overall do not exercise regularly.\" Which of the following can be concluded?",
+    "prompt": "Five colleagues (H, I, J, K, L) sit in a row of five chairs, numbered 1 to 5 from left to right. J sits exactly two seats to the right of H. I sits immediately to the left of K. L does not sit at either end. K sits at seat 5. Where does H sit?",
     "options": [
-      "Exercise directly causes increased energy in all people.",
-      "Most people who exercise regularly report feeling more energetic.",
-      "People who do not exercise never feel energetic.",
-      "Exactly 80% of all respondents exercise regularly."
+      "Seat 1",
+      "Seat 2",
+      "Seat 3",
+      "Seat 4"
     ],
-    "correctIndex": 1,
-    "explanation": "This is the only claim directly supported by the stated statistic, without overreaching into unproven causation or misreading the unrelated 20% figure.",
+    "correctIndex": 0,
+    "explanation": "K=5, so I (immediately left of K) = 4. The remaining seats {1, 2, 3} go to H, J, L with J=H+2. Only H=1, J=3 fits within that set (H=2 would put J=4, already taken). That leaves L=2, which satisfies \"not at either end\" since seats 1 and 5 are the ends. H sits at seat 1.",
     "source": "original"
   },
   {
@@ -254,7 +284,7 @@
       "The campaign cost less than previous campaigns."
     ],
     "correctIndex": 0,
-    "explanation": "An alternative explanation — the competitor's exit — undermines the claim that the campaign alone caused the sales increase.",
+    "explanation": "An alternative explanation (the competitor's exit) undermines the claim that the campaign alone caused the sales increase.",
     "source": "original"
   },
   {
@@ -270,7 +300,7 @@
       "The program is offered for free to all students."
     ],
     "correctIndex": 0,
-    "explanation": "This points to self-selection bias — already high-performing, motivated students opting in — which undermines the causal claim that tutoring itself raised scores.",
+    "explanation": "This points to self-selection bias (already high-performing, motivated students opting in) which undermines the causal claim that tutoring itself raised scores.",
     "source": "original"
   },
   {
@@ -286,66 +316,71 @@
       "The city has more traffic lights than neighboring cities."
     ],
     "correctIndex": 0,
-    "explanation": "An alternative simultaneous change — the lowered speed limit — offers a competing explanation for the drop in accidents, weakening the attribution to the traffic lights alone.",
+    "explanation": "An alternative simultaneous change (the lowered speed limit) offers a competing explanation for the drop in accidents, weakening the attribution to the traffic lights alone.",
     "source": "original"
   },
   {
     "id": "lr-021",
     "section": "logical-reasoning",
-    "topic": "Statement & Argument",
-    "difficulty": "easy",
-    "prompt": "Statement: \"Should all employees be required to work from the office at least three days a week?\" Which of the following is a strong argument?",
+    "topic": "Analytical Puzzle — Floors",
+    "difficulty": "medium",
+    "prompt": "A five-story building has floors numbered 1 (bottom) to 5 (top), each occupied by a different tenant: M, N, O, P, Q. O lives exactly two floors above N. P lives immediately below Q. M does not live on floor 1 or floor 5. P does not live on floor 1. Which floor does N live on?",
     "options": [
-      "Yes, because in-person collaboration has been shown to improve team problem-solving on complex projects.",
-      "No, because some employees dislike commuting.",
-      "Yes, because office buildings need to be used to justify their cost.",
-      "No, because working from home is more comfortable."
+      "Floor 1",
+      "Floor 2",
+      "Floor 3",
+      "Floor 4"
     ],
     "correctIndex": 0,
-    "explanation": "This is the only option offering a substantive reason tied to a meaningful, relevant outcome. The others are either too weak/personal or rely on a non-relevant justification like sunk cost.",
+    "explanation": "With O=N+2, the only candidate pairs are (N=1,O=3), (N=2,O=4), (N=3,O=5). Testing N=2,O=4 leaves {1,3,5} for M,P,Q, but P and Q must be consecutive floors (Q=P+1), and no consecutive pair exists in {1,3,5}, so this case fails. Testing N=3,O=5 leaves {1,2,4}, giving P=1,Q=2,M=4, but this violates \"P does not live on floor 1.\" Only N=1,O=3 works: the remaining floors {2,4,5} give P=4,Q=5 (consecutive), leaving M=2, which satisfies \"M is not on floor 1 or 5.\" N lives on floor 1.",
     "source": "original"
   },
   {
     "id": "lr-022",
     "section": "logical-reasoning",
-    "topic": "Statement & Course of Action",
-    "difficulty": "medium",
-    "prompt": "Statement: \"The government has decided to increase the minimum age for a driving license from 18 to 21.\" Which of the following is a valid course of action following this decision?",
+    "topic": "Seating Arrangement — Circular",
+    "difficulty": "hard",
+    "prompt": "Seven friends (A, B, C, D, E, F, G) sit evenly spaced around a circular table, all facing the center. B sits three seats clockwise from A. C sits immediately to the right of B. D sits immediately to the left of A. E sits two seats clockwise from D. F sits immediately to the right of E. Where does G sit relative to A?",
     "options": [
-      "Driving schools should update their enrollment policies to reflect the new minimum age.",
-      "All current license holders under 21 should have their licenses revoked immediately.",
-      "The government should cancel all future license renewals.",
-      "Public transportation should be discontinued in cities."
+      "Second to the left of A",
+      "Immediately to the right of A",
+      "Third to the right of A",
+      "Second to the right of A"
     ],
     "correctIndex": 0,
-    "explanation": "This is the only reasonable, proportionate, and directly relevant response to the policy change; the others are overreaching or unrelated to the stated decision.",
+    "explanation": "Numbering seats 1-7 clockwise with A=1: B (three seats clockwise) = 4. C (immediately right of B) = 5. D (immediately left of A) = 7. E (two seats clockwise from D) = 7+2=9, which wraps to 2. F (immediately right of E) = 3. Every seat except 6 is now taken, so G=6. Going counterclockwise from A (1 to 7 to 6) is two steps, so G sits second to the left of A.",
     "source": "original"
   },
   {
     "id": "lr-023",
     "section": "logical-reasoning",
-    "topic": "Statement & Course of Action",
-    "difficulty": "easy",
-    "prompt": "Statement: \"Reports indicate a rise in cyberattacks on small businesses in the region.\" Which course of action is most appropriate for local authorities to take?",
+    "topic": "Analytical Puzzle — Ranking",
+    "difficulty": "hard",
+    "prompt": "Seven runners (A, B, C, D, E, F, G) finish a race in distinct positions, 1st through 7th, with no ties. C finishes immediately after A. E finishes exactly three positions after B. F finishes immediately after D. A finishes before B. G does not finish 1st or 7th. In which position does G finish?",
     "options": [
-      "Offer small businesses subsidized access to cybersecurity training and tools.",
-      "Require all small businesses to shut down their websites.",
-      "Ban the use of computers in small businesses.",
-      "Ignore the issue, since it primarily affects large corporations."
+      "3rd",
+      "2nd",
+      "5th",
+      "6th"
     ],
     "correctIndex": 0,
-    "explanation": "This is the only proportionate, constructive response that directly addresses the stated problem.",
+    "explanation": "Testing the constraints systematically, the only assignment consistent with all five clues is A=1st, C=2nd, G=3rd, B=4th, D=5th, F=6th, E=7th. This satisfies C=A+1, E=B+3, F=D+1, A before B, and G excluded from 1st and 7th, and no other arrangement of the seven runners satisfies every clue simultaneously. G finishes 3rd.",
     "source": "original"
   },
   {
     "id": "lr-024",
     "section": "logical-reasoning",
     "topic": "Seating Arrangement",
-    "difficulty": "easy",
-    "prompt": "Five friends — A, B, C, D, and E — are sitting in a row. B sits immediately to the right of A. C sits immediately to the right of B. D sits at one of the ends. E sits between D and A. If D is at the leftmost end, what is the order from left to right?",
-    "options": ["D, E, A, B, C", "E, D, A, B, C", "D, A, E, B, C", "D, E, B, A, C"],
+    "difficulty": "hard",
+    "prompt": "Five friends (A, B, C, D, and E) sit in a row of five chairs, numbered 1 to 5 from left to right. B sits immediately to the right of A. C sits immediately to the right of B. D sits at one of the ends. E sits somewhere between D and A. E does not sit at seat 2. What is the order from left to right?",
+    "options": [
+      "A, B, C, E, D",
+      "D, E, A, B, C",
+      "A, B, C, D, E",
+      "E, A, B, C, D"
+    ],
     "correctIndex": 0,
-    "explanation": "D is leftmost. E sits between D and A, so E is next: D, E, then A. Since B is immediately right of A, and C is immediately right of B, the block A-B-C follows in order: D, E, A, B, C.",
+    "explanation": "The block A-B-C occupies three consecutive seats, and D sits at an end. Testing A=1 (so B=2, C=3) forces D=5 (the only remaining end), with E strictly between D and A, i.e. E in {2,3,4}; since 2 and 3 are taken and E cannot be seat 2 anyway, E=4. Testing A=3 (B=4, C=5) instead forces D=1, with E between D and A, i.e. E=2, but that violates \"E does not sit at seat 2.\" Only the first case survives: order A, B, C, E, D.",
     "source": "original"
   },
   {
@@ -354,9 +389,14 @@
     "topic": "Seating Arrangement",
     "difficulty": "hard",
     "prompt": "Six friends P, Q, R, S, T, U sit evenly spaced around a circular table, facing the center. Q sits second to the right of P. R sits immediately to the left of Q. S sits directly opposite P. T sits immediately to the right of S. Where does U sit?",
-    "options": ["Immediately to the left of P", "Immediately to the right of Q", "Opposite R", "Immediately to the left of S"],
+    "options": [
+      "Immediately to the left of P",
+      "Immediately to the right of Q",
+      "Opposite R",
+      "Immediately to the left of S"
+    ],
     "correctIndex": 0,
-    "explanation": "Numbering seats 1-6 clockwise with P at 1: Q is second to the right (clockwise) of P, so Q is at 3. R is immediately left (counterclockwise) of Q, so R is at 2. S is opposite P, so S is at 4. T is immediately right of S, so T is at 5. The only remaining seat is 6, which is immediately to the left (counterclockwise) of P — so U sits there.",
+    "explanation": "Numbering seats 1-6 clockwise with P at 1: Q is second to the right (clockwise) of P, so Q is at 3. R is immediately left (counterclockwise) of Q, so R is at 2. S is opposite P, so S is at 4. T is immediately right of S, so T is at 5. The only remaining seat is 6, which is immediately to the left (counterclockwise) of P, so U sits there.",
     "source": "original"
   },
   {
@@ -365,7 +405,12 @@
     "topic": "Seating Arrangement",
     "difficulty": "hard",
     "prompt": "Four houses are arranged in a row: House 1, House 2, House 3, House 4 (left to right). The blue house is immediately to the right of the red house. The green house is at one of the ends. The yellow house is not adjacent to the green house. Which house is the red house?",
-    "options": ["House 1", "House 2", "House 3", "House 4"],
+    "options": [
+      "House 1",
+      "House 2",
+      "House 3",
+      "House 4"
+    ],
     "correctIndex": 1,
     "explanation": "Testing both possible positions for the green house (House 1 or House 4) and checking the yellow-not-adjacent-to-green constraint, only two arrangements satisfy all conditions: Green-Red-Blue-Yellow (1-2-3-4) or Yellow-Red-Blue-Green (1-2-3-4). In both valid arrangements, the red house is House 2.",
     "source": "original"
@@ -376,7 +421,12 @@
     "topic": "Coding-Decoding",
     "difficulty": "easy",
     "prompt": "In a certain code, \"SUN\" is written as \"TVO\". How is \"MOON\" written in the same code?",
-    "options": ["NPPO", "MPPO", "NPPN", "MPQO"],
+    "options": [
+      "NPPO",
+      "MPPO",
+      "NPPN",
+      "MPQO"
+    ],
     "correctIndex": 0,
     "explanation": "Each letter is shifted forward by one position in the alphabet (S→T, U→V, N→O). Applying this to MOON: M→N, O→P, O→P, N→O, giving \"NPPO\".",
     "source": "original"
@@ -387,7 +437,12 @@
     "topic": "Coding-Decoding",
     "difficulty": "medium",
     "prompt": "In a certain code, each letter is replaced by double its position in the alphabet, so \"CAT\" (C=3, A=1, T=20) is written as \"6-2-40\". How is \"DOG\" written in the same code?",
-    "options": ["8-30-14", "8-15-14", "4-30-7", "8-14-30"],
+    "options": [
+      "8-30-14",
+      "8-15-14",
+      "4-30-7",
+      "8-14-30"
+    ],
     "correctIndex": 0,
     "explanation": "D is the 4th letter (4×2=8), O is the 15th letter (15×2=30), G is the 7th letter (7×2=14). So DOG becomes \"8-30-14\".",
     "source": "original"
@@ -398,7 +453,12 @@
     "topic": "Coding-Decoding",
     "difficulty": "medium",
     "prompt": "If \"PAPER\" is coded as \"QBQFS\" (each letter shifted forward by one position), how is \"PENCIL\" coded in the same pattern?",
-    "options": ["QFODJM", "QFODJN", "PFODJM", "QGODJM"],
+    "options": [
+      "QFODJM",
+      "QFODJN",
+      "PFODJM",
+      "QGODJM"
+    ],
     "correctIndex": 0,
     "explanation": "Shifting each letter of PENCIL forward by one: P→Q, E→F, N→O, C→D, I→J, L→M, giving \"QFODJM\".",
     "source": "original"
@@ -409,7 +469,12 @@
     "topic": "Blood Relations",
     "difficulty": "easy",
     "prompt": "Pointing to a boy in a photograph, a woman says, \"His mother is the only daughter of my mother.\" How is the woman related to the boy?",
-    "options": ["Mother", "Sister", "Aunt", "Grandmother"],
+    "options": [
+      "Mother",
+      "Sister",
+      "Aunt",
+      "Grandmother"
+    ],
     "correctIndex": 0,
     "explanation": "\"My mother\" unambiguously refers to the woman's own mother, who has only one daughter. Since the woman herself is female and is a child of her own mother, she must be that only daughter. So \"his mother\" is the woman herself, making her the boy's mother.",
     "source": "original"
@@ -420,7 +485,12 @@
     "topic": "Blood Relations",
     "difficulty": "medium",
     "prompt": "A is B's brother. C is A's mother. D is C's father. E is D's mother. How is B related to D?",
-    "options": ["Grandchild", "Child", "Sibling", "Niece/Nephew"],
+    "options": [
+      "Grandchild",
+      "Child",
+      "Sibling",
+      "Niece/Nephew"
+    ],
     "correctIndex": 0,
     "explanation": "A and B are siblings, sharing the same mother, C. D is C's father, making D the maternal grandfather of both A and B. So B is D's grandchild.",
     "source": "original"
@@ -431,9 +501,14 @@
     "topic": "Series & Patterns",
     "difficulty": "easy",
     "prompt": "Find the next number in the series: 2, 6, 12, 20, 30, ?",
-    "options": ["40", "42", "44", "36"],
+    "options": [
+      "40",
+      "42",
+      "44",
+      "36"
+    ],
     "correctIndex": 1,
-    "explanation": "Each term follows the pattern n(n+1): 1×2=2, 2×3=6, 3×4=12, 4×5=20, 5×6=30, so the next term is 6×7=42.",
+    "explanation": "Each term follows the pattern $n(n+1)$: 1×2=2, 2×3=6, 3×4=12, 4×5=20, 5×6=30, so the next term is 6×7=42.",
     "source": "original"
   },
   {
@@ -442,7 +517,12 @@
     "topic": "Series & Patterns",
     "difficulty": "medium",
     "prompt": "Find the next letter in the series: B, D, G, K, P, ?",
-    "options": ["T", "U", "V", "W"],
+    "options": [
+      "T",
+      "U",
+      "V",
+      "W"
+    ],
     "correctIndex": 2,
     "explanation": "The gaps between letter positions increase by one each time: B(2)→D(4) is +2, D→G(7) is +3, G→K(11) is +4, K→P(16) is +5. The next gap is +6, giving position 22, which is V.",
     "source": "original"
@@ -453,9 +533,14 @@
     "topic": "Series & Patterns",
     "difficulty": "hard",
     "prompt": "Find the missing number: 5, 11, 23, 47, ?",
-    "options": ["90", "94", "95", "96"],
+    "options": [
+      "90",
+      "94",
+      "95",
+      "96"
+    ],
     "correctIndex": 2,
-    "explanation": "Each term follows the pattern: previous term × 2 + 1. 5×2+1=11, 11×2+1=23, 23×2+1=47, 47×2+1=95.",
+    "explanation": "Each term follows the pattern $a_{n+1} = 2a_n + 1$. 5×2+1=11, 11×2+1=23, 23×2+1=47, 47×2+1=95.",
     "source": "original"
   },
   {
@@ -464,7 +549,12 @@
     "topic": "Direction Sense",
     "difficulty": "easy",
     "prompt": "A man walks 5 km north, then turns right and walks 3 km, then turns right again and walks 5 km. How far is he from his starting point?",
-    "options": ["3 km", "5 km", "8 km", "13 km"],
+    "options": [
+      "3 km",
+      "5 km",
+      "8 km",
+      "13 km"
+    ],
     "correctIndex": 0,
     "explanation": "North 5 km, then right turn (east) 3 km, then right turn again (south) 5 km. The north and south legs cancel out (5 km each, opposite directions), leaving only the 3 km eastward displacement.",
     "source": "original"
@@ -472,12 +562,17 @@
   {
     "id": "lr-036",
     "section": "logical-reasoning",
-    "topic": "Direction Sense",
-    "difficulty": "medium",
-    "prompt": "Starting from her house, Priya walks 4 km east, then 3 km south to reach the market. What is the shortest distance between her house and the market?",
-    "options": ["5 km", "7 km", "6 km", "4 km"],
+    "topic": "Analytical Puzzle — Boxes",
+    "difficulty": "hard",
+    "prompt": "Six boxes (A, B, C, D, E, F) are stacked one on top of another, numbered position 1 (bottom) to 6 (top). B is exactly two positions above A. D is directly above C. E is at the very top. A is below C. F is not at the bottom. Which position does A occupy?",
+    "options": [
+      "Position 1",
+      "Position 3",
+      "Position 4",
+      "Position 2"
+    ],
     "correctIndex": 0,
-    "explanation": "The shortest (straight-line) distance is found using the Pythagorean theorem: √(4² + 3²) = √(16 + 9) = √25 = 5 km.",
+    "explanation": "E=6 (the top). With B=A+2 and D=C+1, and A below C, testing A=1 gives B=3; the remaining positions {2,4,5} then need C and D consecutive, which only C=4,D=5 satisfies, leaving F=2 (not the bottom, consistent with the clue). No other value of A satisfies every constraint at once. A occupies position 1 (the bottom).",
     "source": "original"
   },
   {
@@ -486,7 +581,12 @@
     "topic": "Deductions",
     "difficulty": "easy",
     "prompt": "Statements: All teachers are educators. All educators are professionals.\nConclusions: I. All teachers are professionals. II. All professionals are teachers.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
     "correctIndex": 0,
     "explanation": "By the transitive chain, teachers ⊆ educators ⊆ professionals, so all teachers are professionals (I follows). Conclusion II reverses the relationship incorrectly.",
     "source": "original"
@@ -494,12 +594,17 @@
   {
     "id": "lr-038",
     "section": "logical-reasoning",
-    "topic": "Deductions",
-    "difficulty": "easy",
-    "prompt": "Statements: No fish are mammals. All whales are mammals.\nConclusions: I. No fish are whales. II. Some mammals are not fish.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
-    "correctIndex": 2,
-    "explanation": "Since whales are a subset of mammals, and no fish are mammals, no whales can be fish — so no fish are whales (I follows). Since whales are mammals but not fish, some mammals are not fish (II follows).",
+    "topic": "Analytical Puzzle — Grouping",
+    "difficulty": "hard",
+    "prompt": "Eight students are divided into two teams of four for a project: Team X and Team Y. A is on Team X. B is on Team Y. C is on the same team as B. D is on a different team from A. E is on the same team as A. F is on the same team as D. G is on a different team from F. H is on the same team as G. Which team is H on?",
+    "options": [
+      "Team X",
+      "Team Y",
+      "Both teams",
+      "Cannot be determined"
+    ],
+    "correctIndex": 0,
+    "explanation": "Following the chain: A=X, so E=X (same as A). B=Y, so C=Y (same as B). D is different from A, so D=Y, and F=Y (same as D). G is different from F, so G=X, and H=X (same as G). Team X ends up with A, E, G, H, and Team Y with B, C, D, F, four each. H is on Team X.",
     "source": "original"
   },
   {
@@ -508,7 +613,12 @@
     "topic": "Deductions",
     "difficulty": "medium",
     "prompt": "Statements: Some students are athletes. No athletes are lazy people.\nConclusions: I. Some students are not lazy people. II. No students are lazy people.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
     "correctIndex": 0,
     "explanation": "The students who are athletes cannot be lazy people (since no athletes are lazy), so some students are not lazy people (I follows). \"No students are lazy people\" is too strong, since non-athlete students could still be lazy.",
     "source": "original"
@@ -517,11 +627,16 @@
     "id": "lr-040",
     "section": "logical-reasoning",
     "topic": "Deductions",
-    "difficulty": "medium",
-    "prompt": "Statements: All doctors are graduates. Some graduates are wealthy.\nConclusions: I. Some doctors are wealthy. II. Some graduates are doctors.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
-    "correctIndex": 1,
-    "explanation": "\"All doctors are graduates\" converts validly to \"Some graduates are doctors\" (II follows). But \"some graduates are wealthy\" doesn't guarantee those particular graduates are doctors, so \"some doctors are wealthy\" does not follow — a classic undistributed middle trap.",
+    "difficulty": "hard",
+    "prompt": "Statements: All doctors are graduates. Some graduates are wealthy. No wealthy people are dishonest.\nConclusions: I. Some graduates are doctors. II. No doctors are dishonest.\nWhich of the conclusions logically follow(s)?",
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
+    "correctIndex": 0,
+    "explanation": "\"All doctors are graduates\" converts validly to \"Some graduates are doctors\" (I follows). For II, we know the wealthy graduates are not dishonest, but nothing establishes that doctors overlap with that wealthy subset: a doctor could be a non-wealthy graduate who is dishonest, so \"no doctors are dishonest\" does not follow.",
     "source": "original"
   },
   {
@@ -530,7 +645,12 @@
     "topic": "Deductions",
     "difficulty": "hard",
     "prompt": "Statements: No mathematicians are poets. All poets are dreamers.\nConclusions: I. No mathematicians are dreamers. II. Some dreamers are not mathematicians.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
     "correctIndex": 1,
     "explanation": "\"No mathematicians are dreamers\" is too strong, since mathematicians could be dreamers through some route other than poetry. Since poets are dreamers and no poets are mathematicians, those poet-dreamers are not mathematicians, so some dreamers are not mathematicians (II follows).",
     "source": "original"
@@ -538,34 +658,49 @@
   {
     "id": "lr-042",
     "section": "logical-reasoning",
-    "topic": "Deductions",
-    "difficulty": "easy",
-    "prompt": "Statements: All birds can fly. Penguins cannot fly.\nConclusions: I. Penguins are not birds. II. All flying creatures are birds.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "topic": "Seating Arrangement — Linear",
+    "difficulty": "medium",
+    "prompt": "Six colleagues (P, Q, R, S, T, U) sit in a row of six chairs, numbered 1 to 6 from left to right. P sits at seat 1. Q sits two seats to the right of P. R sits immediately to the left of Q. S sits at seat 6. T does not sit at seat 1. T sits immediately to the right of U. Where does U sit?",
+    "options": [
+      "Seat 4",
+      "Seat 5",
+      "Seat 3",
+      "Seat 2"
+    ],
     "correctIndex": 0,
-    "explanation": "By the contrapositive of \"all birds can fly,\" anything that cannot fly is not a bird — so penguins are not birds (I follows, taking the premise as a strict rule). \"All flying creatures are birds\" reverses the relationship incorrectly.",
+    "explanation": "P=1, Q=P+2=3, R=Q-1=2, S=6. The remaining seats {4, 5} go to T and U with T=U+1, so U=4 and T=5 is the only fit (U=5,T=6 is impossible since S already occupies 6). This also satisfies \"T does not sit at seat 1.\" U sits at seat 4.",
     "source": "original"
   },
   {
     "id": "lr-043",
     "section": "logical-reasoning",
-    "topic": "Deductions",
-    "difficulty": "medium",
-    "prompt": "Statements: Some engineers are managers. Some managers are directors.\nConclusions: I. Some engineers are directors. II. No engineers are directors.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
-    "correctIndex": 3,
-    "explanation": "Two particular (\"some\") premises never yield a valid conclusion — the managers who are directors might be entirely different managers from the ones who are engineers. Neither conclusion is supported.",
+    "topic": "Seating Arrangement — Circular",
+    "difficulty": "hard",
+    "prompt": "Six people (A, B, C, D, E, F) sit evenly spaced around a circular table, all facing the center. B sits two seats clockwise from A. C sits immediately to the right of B. D sits immediately to the left of A. F sits immediately to the right of C. Where does E sit relative to A?",
+    "options": [
+      "Immediately to the right of A",
+      "Immediately to the left of A",
+      "Opposite A",
+      "Third to the right of A"
+    ],
+    "correctIndex": 0,
+    "explanation": "Numbering seats 1-6 clockwise with A=1: B (two seats clockwise) = 3, C (immediately right of B) = 4, D (immediately left of A) = 6, F (immediately right of C) = 5. The only remaining seat is 2, for E, which is the clockwise neighbor of A, i.e., immediately to the right of A.",
     "source": "original"
   },
   {
     "id": "lr-044",
     "section": "logical-reasoning",
     "topic": "Deductions",
-    "difficulty": "medium",
-    "prompt": "Statements: All library books are catalogued items. No catalogued items are lost.\nConclusions: I. No library books are lost. II. Some catalogued items are library books.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
-    "correctIndex": 2,
-    "explanation": "Since library books are catalogued items, and no catalogued items are lost, no library books are lost (I follows). \"All library books are catalogued items\" also converts validly to \"Some catalogued items are library books\" (II follows).",
+    "difficulty": "hard",
+    "prompt": "Statements: All library books are catalogued items. No catalogued items are lost. Some catalogued items are reference materials.\nConclusions: I. No library books are lost. II. Some reference materials are library books.\nWhich of the conclusions logically follow(s)?",
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
+    "correctIndex": 0,
+    "explanation": "Since library books are catalogued items, and no catalogued items are lost, no library books are lost (I follows). The catalogued items that are reference materials might be an entirely different subset from the catalogued items that are library books: no overlap between them is established, so \"some reference materials are library books\" does not follow.",
     "source": "original"
   },
   {
@@ -574,7 +709,12 @@
     "topic": "Deductions",
     "difficulty": "medium",
     "prompt": "Statements: Either the meeting is on Monday or it is on Wednesday. The meeting is not on Monday.\nConclusions: I. The meeting is on Wednesday. II. The meeting could be on Tuesday.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
     "correctIndex": 0,
     "explanation": "This is a valid disjunctive syllogism: given the meeting is either Monday or Wednesday, and it isn't Monday, it must be Wednesday (I follows). Conclusion II contradicts the stated either/or, so it does not follow.",
     "source": "original"
@@ -582,12 +722,17 @@
   {
     "id": "lr-046",
     "section": "logical-reasoning",
-    "topic": "Deductions",
-    "difficulty": "easy",
-    "prompt": "Statements: All roses have thorns. This flower has no thorns.\nConclusions: I. This flower is not a rose. II. This flower is not beautiful.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "topic": "Analytical Puzzle — Floors",
+    "difficulty": "medium",
+    "prompt": "A six-story building has floors numbered 1 (bottom) to 6 (top), each occupied by a different tenant: J, K, L, M, N, O. L is exactly three floors above J. M is exactly one floor above K. N lives on floor 1. O does not live on the top floor. Which floor does J live on?",
+    "options": [
+      "Floor 3",
+      "Floor 2",
+      "Floor 4",
+      "Floor 5"
+    ],
     "correctIndex": 0,
-    "explanation": "By the contrapositive of \"all roses have thorns,\" anything without thorns is not a rose (I follows). Nothing is stated about beauty, so II does not follow.",
+    "explanation": "N=1. With L=J+3 and M=K+1, testing J=3 gives L=6; the remaining floors {2,4,5} then need K and M consecutive, which only K=4,M=5 satisfies, leaving O=2 (not the top floor, consistent with the clue). No other value of J satisfies every constraint at once. J lives on floor 3.",
     "source": "original"
   },
   {
@@ -596,7 +741,12 @@
     "topic": "Deductions",
     "difficulty": "medium",
     "prompt": "Statements: No vegetarians eat meat. Some athletes eat meat.\nConclusions: I. Some athletes are not vegetarians. II. No athletes are vegetarians.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
     "correctIndex": 0,
     "explanation": "The meat-eating athletes cannot be vegetarians (since vegetarians never eat meat), so some athletes are not vegetarians (I follows). \"No athletes are vegetarians\" is too strong, since other athletes could still be vegetarian.",
     "source": "original"
@@ -607,7 +757,12 @@
     "topic": "Deductions",
     "difficulty": "hard",
     "prompt": "Statements: All squares are polygons. Some polygons are not colored.\nConclusions: I. Some squares are not colored. II. Some polygons are squares.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
     "correctIndex": 1,
     "explanation": "\"All squares are polygons\" converts validly to \"Some polygons are squares\" (II follows). But the polygons that aren't colored might exclude every square, so \"some squares are not colored\" does not follow.",
     "source": "original"
@@ -618,9 +773,14 @@
     "topic": "Deductions",
     "difficulty": "medium",
     "prompt": "Statements: Every scientist in the lab wears a badge. No one wearing a badge is unauthorized.\nConclusions: I. No scientist in the lab is unauthorized. II. All badge wearers are scientists.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
     "correctIndex": 0,
-    "explanation": "Since scientists wear badges, and no badge wearer is unauthorized, no scientist is unauthorized (I follows). II reverses the relationship — other staff could also wear badges without being scientists.",
+    "explanation": "Since scientists wear badges, and no badge wearer is unauthorized, no scientist is unauthorized (I follows). II reverses the relationship: other staff could also wear badges without being scientists.",
     "source": "original"
   },
   {
@@ -629,9 +789,14 @@
     "topic": "Deductions",
     "difficulty": "hard",
     "prompt": "Statements: All melodies are compositions. No compositions are silent. Some silent things are recordings.\nConclusions: I. No melodies are silent. II. Some recordings are not melodies.\nWhich of the conclusions logically follow(s)?",
-    "options": ["Only conclusion I follows", "Only conclusion II follows", "Both conclusions follow", "Neither conclusion follows"],
+    "options": [
+      "Only conclusion I follows",
+      "Only conclusion II follows",
+      "Both conclusions follow",
+      "Neither conclusion follows"
+    ],
     "correctIndex": 2,
-    "explanation": "Since melodies are compositions, and no compositions are silent, no melodies are silent (I follows). Some silent things are recordings, and since no melodies are silent, those silent recordings cannot be melodies — so some recordings are not melodies (II follows).",
+    "explanation": "Since melodies are compositions, and no compositions are silent, no melodies are silent (I follows). Some silent things are recordings, and since no melodies are silent, those silent recordings cannot be melodies, so some recordings are not melodies (II follows).",
     "source": "original"
   },
   {
@@ -679,7 +844,7 @@
       "All technicians must retake exams."
     ],
     "correctIndex": 0,
-    "explanation": "This is the contrapositive of \"all certified technicians passed the exam\": if someone didn't pass, they aren't certified — a valid inference.",
+    "explanation": "This is the contrapositive of \"all certified technicians passed the exam\": if someone didn't pass, they aren't certified, a valid inference.",
     "source": "original"
   },
   {
@@ -695,7 +860,7 @@
       "All machines will break down eventually."
     ],
     "correctIndex": 1,
-    "explanation": "Concluding Machine 12 was \"definitely\" serviced yearly would be affirming the consequent — other causes could also explain frequent breakdowns. Only \"possible\" is validly supported.",
+    "explanation": "Concluding Machine 12 was \"definitely\" serviced yearly would be affirming the consequent: other causes could also explain frequent breakdowns. Only \"possible\" is validly supported.",
     "source": "original"
   },
   {
@@ -711,23 +876,23 @@
       "Customers were surveyed about the packaging's appearance."
     ],
     "correctIndex": 0,
-    "explanation": "Ruling out other simultaneous changes strengthens the claim that the packaging itself — not some other factor — caused the drop in damage complaints.",
+    "explanation": "Ruling out other simultaneous changes strengthens the claim that the packaging itself (not some other factor) caused the drop in damage complaints.",
     "source": "original"
   },
   {
     "id": "lr-056",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Strengthen",
+    "topic": "Analytical Puzzle — Ranking",
     "difficulty": "hard",
-    "prompt": "Argument: \"The city's new bike-lane network has made cycling safer, as cycling injuries per rider have dropped 25% since installation.\" Which finding would most strengthen this claim?",
+    "prompt": "Seven students (A, B, C, D, E, F, G) scored differently on a test, ranked 1st (highest) through 7th (lowest), with no ties. C ranked exactly two places below A. E ranked immediately below B. F ranked immediately above D. G ranked 4th. A ranked better than D. B did not rank last. Who ranked 1st?",
     "options": [
-      "Traffic enforcement and posted speed limits in the city remained unchanged during this period.",
-      "The city spent significant funds on the bike lanes.",
-      "More people commute by bike now than before.",
-      "The bike lanes are painted green for visibility."
+      "B",
+      "A",
+      "E",
+      "F"
     ],
     "correctIndex": 0,
-    "explanation": "Ruling out an alternative explanation — stricter enforcement or lower speed limits — strengthens the claim that the bike lanes themselves caused the drop in injury rate.",
+    "explanation": "G=4th. With C=A+2 and F=D-1, and A ranked better than D, testing A=3 gives C=5; the remaining ranks {1,2,6,7} then need B and E consecutive with E=B+1, which only B=1,E=2 satisfies, leaving D=7,F=6 (F=D-1 holds, and B=1 is not last, consistent with the clue). No other value of A satisfies every constraint at once. B ranked 1st.",
     "source": "original"
   },
   {
@@ -743,23 +908,23 @@
       "The company's office lease expires next year."
     ],
     "correctIndex": 0,
-    "explanation": "This points to self-selection bias — the employees who already opt for remote work may be unrepresentative — undermining the claim that remote work itself would boost productivity for everyone.",
+    "explanation": "This points to self-selection bias (the employees who already opt for remote work may be unrepresentative) undermining the claim that remote work itself would boost productivity for everyone.",
     "source": "original"
   },
   {
     "id": "lr-058",
     "section": "logical-reasoning",
-    "topic": "Statement & Course of Action",
-    "difficulty": "medium",
-    "prompt": "Statement: \"A recent audit found that several local bridges have structural wear exceeding safety thresholds.\" Which course of action is most appropriate for the transportation department?",
+    "topic": "Analytical Puzzle — Boxes",
+    "difficulty": "hard",
+    "prompt": "Six boxes (P, Q, R, S, T, U) are stacked one on top of another, numbered position 1 (bottom) to 6 (top). Q is exactly two positions above P. R is directly below Q. S is at the very bottom. T is directly above U. T is not at the top. Which position does P occupy?",
     "options": [
-      "Prioritize inspection and repair of the specific bridges identified as exceeding safety thresholds.",
-      "Immediately demolish all bridges in the region.",
-      "Ban all vehicles from using any roads in the region.",
-      "Take no action, since bridges are built to last."
+      "Position 4",
+      "Position 2",
+      "Position 3",
+      "Position 5"
     ],
     "correctIndex": 0,
-    "explanation": "This is the only proportionate, targeted response directly addressing the specific problem identified by the audit.",
+    "explanation": "S=1. With Q=P+2 and R=Q-1, there are two candidates: P=2 (Q=4,R=3) or P=4 (Q=6,R=5). If P=2, the remaining positions {5,6} force T=6,U=5, but that puts T at the top, violating the clue. So P=4 is correct: the remaining positions {2,3} give U=2,T=3, which is not the top, consistent with the clue. P occupies position 4.",
     "source": "original"
   },
   {
@@ -767,8 +932,13 @@
     "section": "logical-reasoning",
     "topic": "Seating Arrangement — Linear",
     "difficulty": "easy",
-    "prompt": "Five students — P, Q, R, S, T — sit in a row of five chairs, numbered 1 to 5 from left to right. Q sits at seat 3. P sits immediately to the left of Q. S sits immediately to the right of Q. T sits immediately to the left of P. R sits at the rightmost end. What is the order from left to right?",
-    "options": ["T, P, Q, S, R", "P, T, Q, S, R", "T, P, Q, R, S", "R, T, P, Q, S"],
+    "prompt": "Five students (P, Q, R, S, T) sit in a row of five chairs, numbered 1 to 5 from left to right. Q sits at seat 3. P sits immediately to the left of Q. S sits immediately to the right of Q. T sits immediately to the left of P. R sits at the rightmost end. What is the order from left to right?",
+    "options": [
+      "T, P, Q, S, R",
+      "P, T, Q, S, R",
+      "T, P, Q, R, S",
+      "R, T, P, Q, S"
+    ],
     "correctIndex": 0,
     "explanation": "Q=3, so P (immediately left of Q) = seat 2, and S (immediately right of Q) = seat 4. T (immediately left of P) = seat 1. R takes the only remaining seat, 5 (the rightmost end, consistent with the clue). Order: T, P, Q, S, R.",
     "source": "original"
@@ -778,8 +948,13 @@
     "section": "logical-reasoning",
     "topic": "Seating Arrangement — Linear",
     "difficulty": "medium",
-    "prompt": "Six colleagues — A, B, C, D, E, F — sit in a row of six chairs, left to right. C sits at the leftmost end. D sits immediately to the right of A. B sits immediately to the right of D. F sits immediately to the right of B. E sits immediately to the right of F. Where does A sit?",
-    "options": ["Second from the left", "Third from the left", "Fourth from the left", "Fifth from the left"],
+    "prompt": "Six colleagues (A, B, C, D, E, F) sit in a row of six chairs, left to right. C sits at the leftmost end. D sits immediately to the right of A. B sits immediately to the right of D. F sits immediately to the right of B. E sits immediately to the right of F. Where does A sit?",
+    "options": [
+      "Second from the left",
+      "Third from the left",
+      "Fourth from the left",
+      "Fifth from the left"
+    ],
     "correctIndex": 0,
     "explanation": "C occupies seat 1. The chain A-D-B-F-E forms a block of 5 consecutive people, and only seats 2-6 remain, so this block must fill them in order: A=2, D=3, B=4, F=5, E=6. A sits second from the left.",
     "source": "original"
@@ -790,9 +965,14 @@
     "topic": "Seating Arrangement — Circular",
     "difficulty": "medium",
     "prompt": "Six people sit evenly spaced around a circular table, facing the center: J, K, L, M, N, O. K sits second to the right of J. L sits immediately to the left of K. M sits directly opposite J. N sits immediately to the right of M. Where does O sit?",
-    "options": ["Immediately to the left of J", "Immediately to the right of K", "Opposite L", "Immediately to the left of M"],
+    "options": [
+      "Immediately to the left of J",
+      "Immediately to the right of K",
+      "Opposite L",
+      "Immediately to the left of M"
+    ],
     "correctIndex": 0,
-    "explanation": "Numbering seats 1-6 clockwise with J at 1: K (second to the right) is at 3, L (immediately left of K) is at 2, M (opposite J) is at 4, N (immediately right of M) is at 5. The only remaining seat is 6, which is immediately to the left (counterclockwise neighbor) of J — so O sits there.",
+    "explanation": "Numbering seats 1-6 clockwise with J at 1: K (second to the right) is at 3, L (immediately left of K) is at 2, M (opposite J) is at 4, N (immediately right of M) is at 5. The only remaining seat is 6, which is immediately to the left (counterclockwise neighbor) of J, so O sits there.",
     "source": "original"
   },
   {
@@ -801,7 +981,12 @@
     "topic": "Seating Arrangement — Circular",
     "difficulty": "medium",
     "prompt": "Six colleagues sit around a circular table facing the center: R, S, T, U, V, W. T sits immediately to the right of R. U sits second to the left of T. V sits directly opposite U. S sits immediately to the right of V. Where does W sit relative to R?",
-    "options": ["Second to the left of R", "Immediately to the right of R", "Directly opposite R", "Immediately to the left of R"],
+    "options": [
+      "Second to the left of R",
+      "Immediately to the right of R",
+      "Directly opposite R",
+      "Immediately to the left of R"
+    ],
     "correctIndex": 0,
     "explanation": "Numbering seats 1-6 clockwise with R at 1: T=2, U (second to the left of T) = 6, V (opposite U) = 3, S (immediately right of V) = 4. The only remaining seat is 5, for W. Going counterclockwise from R (1→6→5), W is two seats to the left of R.",
     "source": "original"
@@ -811,10 +996,15 @@
     "section": "logical-reasoning",
     "topic": "Analytical Puzzle — Ranking",
     "difficulty": "easy",
-    "prompt": "In a race, five runners — Ana, Cara, Ben, Dan, and Emma — finish in distinct positions with no ties. Ana finishes before Ben but after Cara. Ben finishes before Emma. Dan finishes last. Who finishes first?",
-    "options": ["Cara", "Ana", "Ben", "Dan"],
+    "prompt": "In a race, five runners (Ana, Cara, Ben, Dan, and Emma) finish in distinct positions with no ties. Ana finishes before Ben but after Cara. Ben finishes before Emma. Dan finishes last. Who finishes first?",
+    "options": [
+      "Cara",
+      "Ana",
+      "Ben",
+      "Dan"
+    ],
     "correctIndex": 0,
-    "explanation": "The clues establish the chain Cara before Ana before Ben before Emma, and Dan is explicitly last. Combining these: Cara, Ana, Ben, Emma, Dan — so Cara finishes first.",
+    "explanation": "The clues establish the chain Cara before Ana before Ben before Emma, and Dan is explicitly last. Combining these: Cara, Ana, Ben, Emma, Dan, so Cara finishes first.",
     "source": "original"
   },
   {
@@ -823,7 +1013,12 @@
     "topic": "Analytical Puzzle — Ranking",
     "difficulty": "medium",
     "prompt": "Five students scored differently on a test: Mia, Noah, Olivia, Paul, and Quinn. Noah scored higher than Paul but lower than Mia. Olivia scored the highest of all. Quinn scored lower than Paul. Who scored the lowest?",
-    "options": ["Quinn", "Paul", "Noah", "Mia"],
+    "options": [
+      "Quinn",
+      "Paul",
+      "Noah",
+      "Mia"
+    ],
     "correctIndex": 0,
     "explanation": "The clues give the full order from highest to lowest: Olivia, Mia, Noah, Paul, Quinn. Quinn scored the lowest.",
     "source": "original"
@@ -833,8 +1028,13 @@
     "section": "logical-reasoning",
     "topic": "Analytical Puzzle — Ranking",
     "difficulty": "hard",
-    "prompt": "Six chess players — A, B, C, D, E, F — are ranked 1st (best) through 6th (worst), with no ties. C ranks immediately below A. E ranks exactly three places below B. D ranks 2nd. F ranks better than C but worse than B. What is A's rank?",
-    "options": ["5th", "3rd", "4th", "6th"],
+    "prompt": "Six chess players (A, B, C, D, E, F) are ranked 1st (best) through 6th (worst), with no ties. C ranks immediately below A. E ranks exactly three places below B. D ranks 2nd. F ranks better than C but worse than B. What is A's rank?",
+    "options": [
+      "5th",
+      "3rd",
+      "4th",
+      "6th"
+    ],
     "correctIndex": 0,
     "explanation": "Testing each possible rank for A (with C = A+1) against the remaining constraints, only A = 5th works: this forces C = 6th, and among the remaining ranks {1, 3, 4} for B, E, F, only B = 1st, E = 4th (three below B), F = 3rd satisfies both \"E is three below B\" and \"B < F < C\" (1 < 3 < 6). All other values for A lead to a contradiction with at least one clue.",
     "source": "original"
@@ -845,9 +1045,14 @@
     "topic": "Analytical Puzzle — Floors",
     "difficulty": "medium",
     "prompt": "A seven-story building has floors numbered 1 (bottom) to 7 (top), each occupied by a different family: J, K, L, M, N, O, and P. L lives on floor 4. M lives immediately below L. N lives on the topmost floor. K lives three floors above J. O lives immediately above K. Which floor does J live on?",
-    "options": ["Floor 2", "Floor 1", "Floor 3", "Floor 5"],
+    "options": [
+      "Floor 2",
+      "Floor 1",
+      "Floor 3",
+      "Floor 5"
+    ],
     "correctIndex": 0,
-    "explanation": "L=4 and M=3 (immediately below L). N=7 (topmost). The remaining floors {1, 2, 5, 6} must hold J, K=J+3, O=K+1, and P. Testing J=2 gives K=5 and O=6, all within the remaining set with P=1 left over — the only value of J that works without conflict. J lives on floor 2.",
+    "explanation": "L=4 and M=3 (immediately below L). N=7 (topmost). The remaining floors {1, 2, 5, 6} must hold J, K=J+3, O=K+1, and P. Testing J=2 gives K=5 and O=6, all within the remaining set with P=1 left over: the only value of J that works without conflict. J lives on floor 2.",
     "source": "original"
   },
   {
@@ -856,7 +1061,12 @@
     "topic": "Analytical Puzzle — Floors",
     "difficulty": "hard",
     "prompt": "A six-story building has floors numbered 1 (bottom) to 6 (top), each occupied by a different resident: A, B, C, D, E, F. D lives on floor 1. C lives directly above D. E lives on floor 3. F lives directly below B. B lives on an even-numbered floor. Which floor does A live on?",
-    "options": ["Floor 4", "Floor 5", "Floor 6", "Floor 2"],
+    "options": [
+      "Floor 4",
+      "Floor 5",
+      "Floor 6",
+      "Floor 2"
+    ],
     "correctIndex": 0,
     "explanation": "D=1, C=2 (directly above D), E=3. Remaining floors {4, 5, 6} go to A, B, F with F=B-1 and B even. Testing B=4 gives F=3, which conflicts with E; so B=6, F=5, leaving A=4 as the only remaining floor.",
     "source": "original"
@@ -866,8 +1076,13 @@
     "section": "logical-reasoning",
     "topic": "Analytical Puzzle — Boxes",
     "difficulty": "medium",
-    "prompt": "Five boxes — P, Q, R, S, T — are stacked one on top of another. Q is at the very bottom. R is at the very top. R is directly above T. S is directly below P. Which box is directly above Q?",
-    "options": ["S", "P", "T", "R"],
+    "prompt": "Five boxes (P, Q, R, S, T) are stacked one on top of another. Q is at the very bottom. R is at the very top. R is directly above T. S is directly below P. Which box is directly above Q?",
+    "options": [
+      "S",
+      "P",
+      "T",
+      "R"
+    ],
     "correctIndex": 0,
     "explanation": "Numbering positions 1 (bottom) to 5 (top): Q=1, R=5, T=4 (directly below R). The remaining positions {2, 3} go to S and P with S directly below P, so S=2 and P=3 (the only valid pairing). The box directly above Q (position 1) is S at position 2.",
     "source": "original"
@@ -877,8 +1092,13 @@
     "section": "logical-reasoning",
     "topic": "Analytical Puzzle — Boxes",
     "difficulty": "easy",
-    "prompt": "Four boxes — A, B, C, D — are placed in a stack. Box A is at the bottom. Box B is directly on top of Box D. Box C is directly on top of Box B. What is the order from bottom to top?",
-    "options": ["A, D, B, C", "A, B, D, C", "A, D, C, B", "D, A, B, C"],
+    "prompt": "Four boxes (A, B, C, D) are placed in a stack. Box A is at the bottom. Box B is directly on top of Box D. Box C is directly on top of Box B. What is the order from bottom to top?",
+    "options": [
+      "A, D, B, C",
+      "A, B, D, C",
+      "A, D, C, B",
+      "D, A, B, C"
+    ],
     "correctIndex": 0,
     "explanation": "A occupies the bottom position. The chain D-B-C (B above D, C above B) forms a consecutive block of 3, which must fill the remaining three positions in order: D, then B, then C. Order from bottom to top: A, D, B, C.",
     "source": "original"
@@ -887,9 +1107,14 @@
     "id": "lr-070",
     "section": "logical-reasoning",
     "topic": "Analytical Puzzle — Grouping",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "prompt": "Eight students are divided into two teams of four for a project: Team X and Team Y. Priya is on Team X. Liam is on Team Y. Noah is on the same team as Liam. Sam is on a different team from Priya. Which team is Sam on?",
-    "options": ["Team Y", "Team X", "Both teams", "Cannot be determined"],
+    "options": [
+      "Team Y",
+      "Team X",
+      "Both teams",
+      "Cannot be determined"
+    ],
     "correctIndex": 0,
     "explanation": "Priya is on Team X. Sam is on a different team from Priya, so Sam is on Team Y.",
     "source": "original"
@@ -899,8 +1124,13 @@
     "section": "logical-reasoning",
     "topic": "Seating Arrangement — Linear",
     "difficulty": "medium",
-    "prompt": "Six friends — J, K, L, M, N, O — sit in a row of six chairs, numbered 1 to 6 from left to right. L sits third from the left. N sits second from the right. J sits immediately to the left of L. Exactly one person sits between L and O. M sits immediately to the right of N. Who sits at seat 1?",
-    "options": ["O", "J", "K", "N"],
+    "prompt": "Six friends (J, K, L, M, N, O) sit in a row of six chairs, numbered 1 to 6 from left to right. L sits third from the left. N sits second from the right. J sits immediately to the left of L. Exactly one person sits between L and O. M sits immediately to the right of N. Who sits at seat 1?",
+    "options": [
+      "O",
+      "J",
+      "K",
+      "N"
+    ],
     "correctIndex": 0,
     "explanation": "L=3 and N=5 (second from the right of 6). J=2 (immediately left of L). \"Exactly one person between L and O\" means O is at position 1 or 5, but 5 is taken by N, so O=1. M=6 (immediately right of N), leaving K=4. Seat 1 is occupied by O.",
     "source": "original"
@@ -910,10 +1140,15 @@
     "section": "logical-reasoning",
     "topic": "Seating Arrangement — Circular",
     "difficulty": "medium",
-    "prompt": "Five people — A, B, C, D, E — sit evenly spaced around a circular table, all facing the center. B sits second to the right of A. C sits immediately to the left of B. D sits immediately to the right of B. Where does E sit relative to A?",
-    "options": ["Immediately to the left of A", "Immediately to the right of A", "Second to the right of A", "Opposite A"],
+    "prompt": "Five people (A, B, C, D, E) sit evenly spaced around a circular table, all facing the center. B sits second to the right of A. C sits immediately to the left of B. D sits immediately to the right of B. Where does E sit relative to A?",
+    "options": [
+      "Immediately to the left of A",
+      "Immediately to the right of A",
+      "Second to the right of A",
+      "Opposite A"
+    ],
     "correctIndex": 0,
-    "explanation": "Numbering seats 1-5 clockwise with A at 1: B (second to the right) = 3, C (immediately left of B) = 2, D (immediately right of B) = 4. The only remaining seat is 5, for E — which is the counterclockwise neighbor of A, i.e., immediately to the left of A.",
+    "explanation": "Numbering seats 1-5 clockwise with A at 1: B (second to the right) = 3, C (immediately left of B) = 2, D (immediately right of B) = 4. The only remaining seat is 5, for E, which is the counterclockwise neighbor of A, i.e., immediately to the left of A.",
     "source": "original"
   },
   {
@@ -921,10 +1156,15 @@
     "section": "logical-reasoning",
     "topic": "Seating Arrangement — Linear",
     "difficulty": "medium",
-    "prompt": "Five people — Amy, Ben, Cleo, Dev, and Ella — stand in a line for a photo, numbered position 1 to 5 from left to right. Amy is at position 1. Ben is not at either end. Cleo is somewhere to the right of Ben. Dev is immediately to the left of Ella. Ella is not at position 5. Cleo is not adjacent to Ella. What is Ella's position?",
-    "options": ["3", "4", "2", "5"],
+    "prompt": "Five people (Amy, Ben, Cleo, Dev, and Ella) stand in a line for a photo, numbered position 1 to 5 from left to right. Amy is at position 1. Ben is not at either end. Cleo is somewhere to the right of Ben. Dev is immediately to the left of Ella. Ella is not at position 5. Cleo is not adjacent to Ella. What is Ella's position?",
+    "options": [
+      "3",
+      "4",
+      "2",
+      "5"
+    ],
     "correctIndex": 0,
-    "explanation": "Amy=1. Dev and Ella must be consecutive (Ella=Dev+1) within positions {2,3,4,5}, and Ella≠5, leaving two candidate pairs: (Dev=2,Ella=3) or (Dev=3,Ella=4). Testing (Dev=3,Ella=4) forces Ben=2 and Cleo=5, but then Cleo is adjacent to Ella — violating the \"not adjacent\" clue. So (Dev=2,Ella=3) is the only valid case, with Ben=4 and Cleo=5. Ella sits at position 3.",
+    "explanation": "Amy=1. Dev and Ella must be consecutive (Ella=Dev+1) within positions {2,3,4,5}, and Ella≠5, leaving two candidate pairs: (Dev=2,Ella=3) or (Dev=3,Ella=4). Testing (Dev=3,Ella=4) forces Ben=2 and Cleo=5, but then Cleo is adjacent to Ella, violating the \"not adjacent\" clue. So (Dev=2,Ella=3) is the only valid case, with Ben=4 and Cleo=5. Ella sits at position 3.",
     "source": "original"
   },
   {
@@ -932,10 +1172,15 @@
     "section": "logical-reasoning",
     "topic": "Seating Arrangement — Circular",
     "difficulty": "easy",
-    "prompt": "Four friends — W, X, Y, Z — sit evenly spaced around a square table, facing the center. X sits directly opposite W. Y sits immediately to the right of W. Where does Z sit relative to X?",
-    "options": ["Immediately to the right of X", "Immediately to the left of X", "Directly opposite X", "Immediately to the right of Y"],
+    "prompt": "Four friends (W, X, Y, Z) sit evenly spaced around a square table, facing the center. X sits directly opposite W. Y sits immediately to the right of W. Where does Z sit relative to X?",
+    "options": [
+      "Immediately to the right of X",
+      "Immediately to the left of X",
+      "Directly opposite X",
+      "Immediately to the right of Y"
+    ],
     "correctIndex": 0,
-    "explanation": "Numbering seats 1-4 clockwise with W at 1: X (opposite W) = 3, Y (immediately right of W) = 2. The only remaining seat is 4, for Z — which is the clockwise neighbor of X (seat 3), i.e., immediately to the right of X.",
+    "explanation": "Numbering seats 1-4 clockwise with W at 1: X (opposite W) = 3, Y (immediately right of W) = 2. The only remaining seat is 4, for Z, which is the clockwise neighbor of X (seat 3), i.e., immediately to the right of X.",
     "source": "original"
   },
   {
@@ -944,7 +1189,12 @@
     "topic": "Seating Arrangement — Linear",
     "difficulty": "medium",
     "prompt": "Seven students sit in a row of seven chairs, numbered 1 to 7 left to right. G sits at seat 1. D sits immediately to the right of G. F sits three seats to the right of D. B sits immediately to the left of F. The remaining students, A, C, and E, occupy the remaining seats, with C sitting immediately to the right of E. Which seat does A occupy?",
-    "options": ["3", "6", "7", "2"],
+    "options": [
+      "3",
+      "6",
+      "7",
+      "2"
+    ],
     "correctIndex": 0,
     "explanation": "G=1, D=2, F=5 (three seats right of D), B=4 (immediately left of F). The remaining seats {3, 6, 7} go to A, C, E, with C directly right of E. The only consecutive pair within {3, 6, 7} is (6, 7), so E=6, C=7, leaving A=3 by elimination.",
     "source": "original"
@@ -953,9 +1203,14 @@
     "id": "lr-076",
     "section": "logical-reasoning",
     "topic": "Coding-Decoding",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "prompt": "In a certain code, each letter is replaced by the letter 2 positions before it in the alphabet, so \"GARDEN\" is written as \"EYPBCL\". How is \"FLOWER\" written in the same code?",
-    "options": ["DJMUCP", "DJNUCP", "DJMUCQ", "EJMUCP"],
+    "options": [
+      "DJMUCP",
+      "DJNUCP",
+      "DJMUCQ",
+      "EJMUCP"
+    ],
     "correctIndex": 0,
     "explanation": "Shifting each letter of FLOWER back by 2: F→D, L→J, O→M, W→U, E→C, R→P, giving \"DJMUCP\".",
     "source": "original"
@@ -966,20 +1221,30 @@
     "topic": "Coding-Decoding",
     "difficulty": "medium",
     "prompt": "In a code language, \"sun rises east\" is written as \"pit dor kaf\", \"sun sets west\" is written as \"pit lom naz\", and \"moon rises west\" is written as \"ruv dor naz\". What is the code for \"rises\"?",
-    "options": ["dor", "pit", "kaf", "naz"],
+    "options": [
+      "dor",
+      "pit",
+      "kaf",
+      "naz"
+    ],
     "correctIndex": 0,
-    "explanation": "Comparing sentences 1 and 3, both contain \"rises\" and both codes share the word \"dor\" — no other word or code is common to both, so \"rises\" = \"dor\". (Cross-checking: \"sun\"=\"pit\" from sentences 1-2, \"west\"=\"naz\" from sentences 2-3, leaving \"east\"=\"kaf\", \"sets\"=\"lom\", \"moon\"=\"ruv\" with no conflicts.)",
+    "explanation": "Comparing sentences 1 and 3, both contain \"rises\" and both codes share the word \"dor\": no other word or code is common to both, so \"rises\" = \"dor\". (Cross-checking: \"sun\"=\"pit\" from sentences 1-2, \"west\"=\"naz\" from sentences 2-3, leaving \"east\"=\"kaf\", \"sets\"=\"lom\", \"moon\"=\"ruv\" with no conflicts.)",
     "source": "original"
   },
   {
     "id": "lr-078",
     "section": "logical-reasoning",
-    "topic": "Coding-Decoding",
-    "difficulty": "easy",
-    "prompt": "If the word \"WORLD\" is coded as \"23-15-18-12-4\" (each letter replaced by its position in the alphabet), what is the code for \"CHAIR\"?",
-    "options": ["3-8-1-9-18", "3-8-1-9-17", "4-8-1-9-18", "3-9-1-9-18"],
+    "topic": "Analytical Puzzle — Grouping",
+    "difficulty": "hard",
+    "prompt": "Eight students are divided into two teams of four for a project: Team X and Team Y. M and N are on different teams. O is on the same team as M. P is on the same team as N. M is on Team X. Exactly two of Q, R, and S are on Team X. Q is on Team X. R is on the same team as Q. T is on a different team from M. Which team is T on?",
+    "options": [
+      "Team Y",
+      "Team X",
+      "Both teams",
+      "Cannot be determined"
+    ],
     "correctIndex": 0,
-    "explanation": "C=3, H=8, A=1, I=9, R=18, giving the code \"3-8-1-9-18\".",
+    "explanation": "M=X, so O=X (same as M) and N=Y (different from M), so P=Y (same as N). Q=X and R=X (same as Q), and since exactly two of Q, R, S are on Team X, S must be Y. Team X now has M, O, Q, R (four), so Team Y must hold N, P, S, and T, four each. T is on Team Y, which also follows directly since T is stated to be on a different team from M (Team X).",
     "source": "original"
   },
   {
@@ -988,7 +1253,12 @@
     "topic": "Coding-Decoding",
     "difficulty": "hard",
     "prompt": "In a code, each letter is replaced by the letter immediately after it in the alphabet, and then the whole word is reversed. Using this rule, \"CAT\" becomes \"UBD\" (C→D, A→B, T→U gives DBU, then reversed gives UBD). Using the same rule, what does \"LION\" become?",
-    "options": ["OPJM", "MJPO", "OJPM", "PJOM"],
+    "options": [
+      "OPJM",
+      "MJPO",
+      "OJPM",
+      "PJOM"
+    ],
     "correctIndex": 0,
     "explanation": "Shift each letter forward by one: L→M, I→J, O→P, N→O, giving \"MJPO\". Reversing this string gives \"OPJM\".",
     "source": "original"
@@ -996,12 +1266,17 @@
   {
     "id": "lr-080",
     "section": "logical-reasoning",
-    "topic": "Coding-Decoding",
-    "difficulty": "easy",
-    "prompt": "If \"DOG\" is coded as \"4-15-7\" (each letter's position in the alphabet), how is \"CAT\" coded?",
-    "options": ["3-1-20", "3-1-19", "4-1-20", "3-2-20"],
+    "topic": "Seating Arrangement — Linear",
+    "difficulty": "hard",
+    "prompt": "Seven colleagues (A, B, C, D, E, F, G) sit in a row of seven chairs, numbered 1 to 7 from left to right. B sits two seats to the right of A. C sits immediately to the left of B. D sits at seat 7. E sits exactly two seats to the right of F. G does not sit at seat 1. A sits to the left of F. Where does A sit?",
+    "options": [
+      "Seat 1",
+      "Seat 2",
+      "Seat 3",
+      "Seat 4"
+    ],
     "correctIndex": 0,
-    "explanation": "C=3, A=1, T=20, giving the code \"3-1-20\".",
+    "explanation": "D=7. With B=A+2, C=B-1, and E=F+2, testing A=1 gives B=3, C=2; the remaining seats {4,5,6} then need F and E with E=F+2, which only F=4,E=6 satisfies, leaving G=5 (not seat 1, consistent with the clue, and A=1 is indeed left of F=4). No other value of A satisfies every constraint at once. A sits at seat 1.",
     "source": "original"
   },
   {
@@ -1010,7 +1285,12 @@
     "topic": "Blood Relations",
     "difficulty": "easy",
     "prompt": "Pointing to a man, Riya says, \"He is the son of my father's sister.\" How is the man related to Riya?",
-    "options": ["Cousin", "Brother", "Nephew", "Uncle"],
+    "options": [
+      "Cousin",
+      "Brother",
+      "Nephew",
+      "Uncle"
+    ],
     "correctIndex": 0,
     "explanation": "Riya's father's sister is Riya's aunt. The aunt's son is Riya's cousin.",
     "source": "original"
@@ -1021,9 +1301,14 @@
     "topic": "Blood Relations",
     "difficulty": "medium",
     "prompt": "A is a man. Pointing to B, A says, \"B's mother is my mother's only daughter.\" How is A related to B?",
-    "options": ["Uncle", "Father", "Grandfather", "Cousin"],
+    "options": [
+      "Uncle",
+      "Father",
+      "Grandfather",
+      "Cousin"
+    ],
     "correctIndex": 0,
-    "explanation": "Since A is male, he cannot be his own mother's \"only daughter\" — so that daughter must be A's sister, who is B's mother. A is therefore the brother of B's mother, making A the boy's/girl's uncle.",
+    "explanation": "Since A is male, he cannot be his own mother's \"only daughter\", so that daughter must be A's sister, who is B's mother. A is therefore the brother of B's mother, making A the boy's/girl's uncle.",
     "source": "original"
   },
   {
@@ -1032,9 +1317,14 @@
     "topic": "Blood Relations",
     "difficulty": "medium",
     "prompt": "Sam is a woman. Pointing to a photograph, Sam says, \"The girl's father is the only son of my mother.\" How is the girl related to Sam?",
-    "options": ["Aunt", "Mother", "Sister", "Grandmother"],
+    "options": [
+      "Aunt",
+      "Mother",
+      "Sister",
+      "Grandmother"
+    ],
     "correctIndex": 0,
-    "explanation": "Since Sam is female, she cannot be her own mother's \"only son\" — so that son must be Sam's brother, who is the girl's father. Sam is therefore the girl's father's sister, i.e., the girl's aunt.",
+    "explanation": "Since Sam is female, she cannot be her own mother's \"only son\", so that son must be Sam's brother, who is the girl's father. Sam is therefore the girl's father's sister, i.e., the girl's aunt.",
     "source": "original"
   },
   {
@@ -1043,7 +1333,12 @@
     "topic": "Blood Relations",
     "difficulty": "hard",
     "prompt": "P is the brother of Q. Q is the daughter of R. R is the husband of S. S has only one daughter, Q. T is the son of S. How is T related to P?",
-    "options": ["Brother", "Cousin", "Uncle", "Father"],
+    "options": [
+      "Brother",
+      "Cousin",
+      "Uncle",
+      "Father"
+    ],
     "correctIndex": 0,
     "explanation": "Q is the daughter of R and S. P, being Q's brother, is also a child of R and S. T, being a son of S (and thus of the couple R and S), is likewise their child. Since P and T are both children of the same parents, T is P's brother.",
     "source": "original"
@@ -1054,7 +1349,12 @@
     "topic": "Blood Relations",
     "difficulty": "hard",
     "prompt": "Arjun says, \"I have as many brothers as sisters.\" His sister Meena says, \"I have twice as many brothers as sisters.\" How many sons and daughters do their parents have?",
-    "options": ["4 sons and 3 daughters", "3 sons and 4 daughters", "5 sons and 2 daughters", "4 sons and 4 daughters"],
+    "options": [
+      "4 sons and 3 daughters",
+      "3 sons and 4 daughters",
+      "5 sons and 2 daughters",
+      "4 sons and 4 daughters"
+    ],
     "correctIndex": 0,
     "explanation": "Let b = number of sons, g = number of daughters. Arjun (a son) has b-1 brothers and g sisters; \"equal\" gives b-1=g. Meena (a daughter) has b brothers and g-1 sisters; \"twice as many\" gives b=2(g-1). Substituting b=g+1 into the second equation: g+1=2g-2, so g=3 and b=4. The family has 4 sons and 3 daughters.",
     "source": "original"
@@ -1065,9 +1365,14 @@
     "topic": "Series & Patterns",
     "difficulty": "easy",
     "prompt": "Find the next number in the series: 3, 7, 15, 31, 63, ?",
-    "options": ["127", "125", "128", "126"],
+    "options": [
+      "127",
+      "125",
+      "128",
+      "126"
+    ],
     "correctIndex": 0,
-    "explanation": "Each term follows the pattern: previous term × 2 + 1. 63×2+1=127.",
+    "explanation": "Each term follows the pattern $a_{n+1} = 2a_n + 1$. 63×2+1=127.",
     "source": "original"
   },
   {
@@ -1076,7 +1381,12 @@
     "topic": "Series & Patterns",
     "difficulty": "medium",
     "prompt": "Find the next letter in the series: A, C, F, J, O, ?",
-    "options": ["U", "T", "V", "W"],
+    "options": [
+      "U",
+      "T",
+      "V",
+      "W"
+    ],
     "correctIndex": 0,
     "explanation": "The gaps between letter positions increase by one each time: A(1)→C(3) is +2, C→F(6) is +3, F→J(10) is +4, J→O(15) is +5. The next gap is +6, giving position 21, which is U.",
     "source": "original"
@@ -1087,7 +1397,12 @@
     "topic": "Series & Patterns",
     "difficulty": "medium",
     "prompt": "Find the missing term in the series: 2A, 4C, 8E, 16G, ?",
-    "options": ["32I", "32H", "30I", "32J"],
+    "options": [
+      "32I",
+      "32H",
+      "30I",
+      "32J"
+    ],
     "correctIndex": 0,
     "explanation": "The numbers double each time (2, 4, 8, 16, 32), and the letters skip forward by two positions each time (A, C, E, G, I). The next term is \"32I\".",
     "source": "original"
@@ -1098,7 +1413,12 @@
     "topic": "Series & Patterns",
     "difficulty": "hard",
     "prompt": "Find the next number in the series: 1, 4, 9, 18, 35, ?",
-    "options": ["68", "69", "70", "67"],
+    "options": [
+      "68",
+      "69",
+      "70",
+      "67"
+    ],
     "correctIndex": 0,
     "explanation": "The differences between consecutive terms are 3, 5, 9, 17, and the differences of those differences double each time (2, 4, 8, next 16). So the next difference is 17+16=33, giving the next term as 35+33=68.",
     "source": "original"
@@ -1106,12 +1426,17 @@
   {
     "id": "lr-090",
     "section": "logical-reasoning",
-    "topic": "Series & Patterns",
-    "difficulty": "easy",
-    "prompt": "Find the next number in the series: 100, 90, 81, 73, 66, ?",
-    "options": ["60", "59", "61", "58"],
+    "topic": "Seating Arrangement — Circular",
+    "difficulty": "hard",
+    "prompt": "Eight people (A, B, C, D, E, F, G, H) sit evenly spaced around a circular table, all facing the center. B sits directly opposite A. C sits two seats clockwise from B. D sits immediately to the left of C. E sits immediately to the right of A. F sits two seats clockwise from E. G sits immediately to the right of C. Where does H sit relative to A?",
+    "options": [
+      "Second to the right of A",
+      "Second to the left of A",
+      "Directly opposite A",
+      "Third to the right of A"
+    ],
     "correctIndex": 0,
-    "explanation": "The differences between consecutive terms decrease by 1 each time: -10, -9, -8, -7, so the next difference is -6, giving 66-6=60.",
+    "explanation": "Numbering seats 1-8 clockwise with A=1: B (opposite A) = 5. C (two seats clockwise from B) = 7. D (immediately left of C) = 6. E (immediately right of A) = 2. F (two seats clockwise from E) = 4. G (immediately right of C) = 8. The only remaining seat is 3, for H, which is two seats clockwise from A, i.e., second to the right of A.",
     "source": "original"
   },
   {
@@ -1120,7 +1445,12 @@
     "topic": "Direction Sense",
     "difficulty": "easy",
     "prompt": "A man walks 6 km east, then turns left and walks 6 km, then turns left again and walks 6 km. How far and in which direction is he from his starting point?",
-    "options": ["6 km, north", "6 km, east", "6 km, south", "12 km, north"],
+    "options": [
+      "6 km, north",
+      "6 km, east",
+      "6 km, south",
+      "12 km, north"
+    ],
     "correctIndex": 0,
     "explanation": "East 6 km, then left turn (north) 6 km, then left turn again (west) 6 km. The east and west legs cancel out (6 km each, opposite directions), leaving only the 6 km northward displacement from the middle leg.",
     "source": "original"
@@ -1131,7 +1461,12 @@
     "topic": "Direction Sense",
     "difficulty": "medium",
     "prompt": "Point B is 8 km north of Point A. Point C is 6 km east of Point B. Point D is 8 km south of Point C. What is the direction and distance of Point D from Point A?",
-    "options": ["6 km east", "6 km west", "8 km east", "6 km north"],
+    "options": [
+      "6 km east",
+      "6 km west",
+      "8 km east",
+      "6 km north"
+    ],
     "correctIndex": 0,
     "explanation": "Using coordinates with A at (0,0): B=(0,8), C=(6,8), D=(6,0). The north (+8) and south (-8) legs cancel, leaving D directly 6 km east of A.",
     "source": "original"
@@ -1142,9 +1477,14 @@
     "topic": "Direction Sense",
     "difficulty": "medium",
     "prompt": "Facing north, Riya turns 90° clockwise and walks 4 km, then turns 90° clockwise again and walks 3 km. What is the shortest distance between her starting point and her current position?",
-    "options": ["5 km", "7 km", "6 km", "4 km"],
+    "options": [
+      "5 km",
+      "7 km",
+      "6 km",
+      "4 km"
+    ],
     "correctIndex": 0,
-    "explanation": "Turning 90° clockwise from north faces her east; walking 4 km east gives (4,0). Turning 90° clockwise again faces her south; walking 3 km south gives (4,-3). The straight-line distance is √(4²+3²) = 5 km.",
+    "explanation": "Turning 90° clockwise from north faces her east; walking 4 km east gives (4,0). Turning 90° clockwise again faces her south; walking 3 km south gives (4,-3). The straight-line distance is $\\sqrt{4^2+3^2} = 5$ km.",
     "source": "original"
   },
   {
@@ -1153,31 +1493,46 @@
     "topic": "Direction Sense",
     "difficulty": "hard",
     "prompt": "A cyclist starts at point O, rides 10 km north to point P, then 6 km west to point Q, then 10 km south to point R, then 2 km east to point S. What is the shortest distance from S to O, and in which direction is O from S?",
-    "options": ["4 km, east", "4 km, west", "6 km, east", "4 km, north"],
+    "options": [
+      "4 km, east",
+      "4 km, west",
+      "6 km, east",
+      "4 km, north"
+    ],
     "correctIndex": 0,
-    "explanation": "Using coordinates with O at (0,0): P=(0,10), Q=(-6,10), R=(-6,0), S=(-4,0). The north and south legs (10 km each) cancel, leaving S 4 km west of O — equivalently, O is 4 km east of S.",
+    "explanation": "Using coordinates with O at (0,0): P=(0,10), Q=(-6,10), R=(-6,0), S=(-4,0). The north and south legs (10 km each) cancel, leaving S 4 km west of O; equivalently, O is 4 km east of S.",
     "source": "original"
   },
   {
     "id": "lr-095",
     "section": "logical-reasoning",
     "topic": "Venn Diagram — Set Logic",
-    "difficulty": "easy",
-    "prompt": "In a class of 50 students, 30 play football, 25 play cricket, and 10 play both football and cricket. How many students play neither sport?",
-    "options": ["5", "10", "15", "20"],
+    "difficulty": "hard",
+    "prompt": "In a class of 50 students, 6 students play neither football nor cricket. The number of students who play only cricket is exactly twice the number who play only football. 14 students play both football and cricket. How many students play only football?",
+    "options": [
+      "10",
+      "12",
+      "8",
+      "15"
+    ],
     "correctIndex": 0,
-    "explanation": "Students playing at least one sport = 30+25-10 = 45 (by inclusion-exclusion). Students playing neither = 50-45 = 5.",
+    "explanation": "Students playing at least one sport = 50 - 6 = 44. Let x = students playing only football, so only cricket = 2x (given). Then x + 2x + 14 = 44, so 3x = 30, giving x = 10 students who play only football.",
     "source": "original"
   },
   {
     "id": "lr-096",
     "section": "logical-reasoning",
-    "topic": "Venn Diagram — Set Logic",
-    "difficulty": "medium",
-    "prompt": "In a survey of 120 people, 70 like tea, 60 like coffee, and 15 like neither tea nor coffee. How many people like both tea and coffee?",
-    "options": ["25", "20", "30", "35"],
+    "topic": "Analytical Puzzle — Floors",
+    "difficulty": "hard",
+    "prompt": "A seven-story building has floors numbered 1 (bottom) to 7 (top), each occupied by a different tenant: A, B, C, D, E, F, G. B lives exactly three floors above A. C lives exactly two floors below B. D lives on floor 1. E is exactly one floor above F. G does not live on the top floor. A lives above floor 1 but below floor 4. Which floor does A live on?",
+    "options": [
+      "Floor 2",
+      "Floor 3",
+      "Floor 4",
+      "Floor 5"
+    ],
     "correctIndex": 0,
-    "explanation": "People who like at least one drink = 120-15 = 105. By inclusion-exclusion, 70+60-both = 105, so both = 130-105 = 25.",
+    "explanation": "D=1. Testing A=2 (satisfying \"above floor 1, below floor 4\"): B=A+3=5, C=B-2=3. The remaining floors {4,6,7} then need E and F consecutive with E=F+1, which only F=6,E=7 satisfies, leaving G=4 (not the top floor, consistent with the clue). Testing A=3 instead forces B=6, C=4, leaving {2,5,7} for E,F,G with no consecutive pair available for E=F+1, so that case fails. A lives on floor 2.",
     "source": "original"
   },
   {
@@ -1186,7 +1541,12 @@
     "topic": "Venn Diagram — Set Logic",
     "difficulty": "hard",
     "prompt": "In a group of 200 people, 90 read Newspaper A, 80 read Newspaper B, 70 read Newspaper C, 30 read both A and B, 25 read both B and C, 20 read both A and C, and 10 read all three. How many people read none of the three newspapers?",
-    "options": ["25", "20", "30", "15"],
+    "options": [
+      "25",
+      "20",
+      "30",
+      "15"
+    ],
     "correctIndex": 0,
     "explanation": "By inclusion-exclusion: |A∪B∪C| = 90+80+70-30-25-20+10 = 175. People reading none = 200-175 = 25.",
     "source": "original"
@@ -1197,20 +1557,30 @@
     "topic": "Calendar & Clock Puzzles",
     "difficulty": "easy",
     "prompt": "If January 1, 2023 was a Sunday, what day of the week was January 1, 2024? (2023 has 365 days, since it is not a leap year.)",
-    "options": ["Monday", "Tuesday", "Sunday", "Wednesday"],
+    "options": [
+      "Monday",
+      "Tuesday",
+      "Sunday",
+      "Wednesday"
+    ],
     "correctIndex": 0,
-    "explanation": "365 days is exactly 52 weeks plus 1 extra day (365 = 52×7 + 1), so the day of the week advances by one: Sunday + 1 = Monday.",
+    "explanation": "365 days is exactly 52 weeks plus 1 extra day ($365 = 52 \\times 7 + 1$), so the day of the week advances by one: Sunday + 1 = Monday.",
     "source": "original"
   },
   {
     "id": "lr-099",
     "section": "logical-reasoning",
-    "topic": "Calendar & Clock Puzzles",
-    "difficulty": "medium",
-    "prompt": "If the 5th of a month falls on a Wednesday, what day of the week is the 26th of the same month?",
-    "options": ["Wednesday", "Thursday", "Tuesday", "Sunday"],
+    "topic": "Analytical Puzzle — Ranking",
+    "difficulty": "hard",
+    "prompt": "Six students (A, B, C, D, E, F) scored differently on a test, ranked 1st (highest) through 6th (lowest), with no ties. B ranked immediately below A. D ranked exactly two places below C. E ranked 6th. F did not rank 1st. A ranked better than C. Who ranked 1st?",
+    "options": [
+      "A",
+      "C",
+      "F",
+      "B"
+    ],
     "correctIndex": 0,
-    "explanation": "The 26th is 21 days after the 5th. Since 21 is exactly divisible by 7 (3 full weeks), the 26th falls on the same day of the week as the 5th: Wednesday.",
+    "explanation": "E=6th. With B=A+1 and D=C+2, and A better (lower-numbered) than C, testing A=1 gives B=2; the remaining ranks {3,4,5} then need C and D exactly two apart, which only C=3,D=5 satisfies, leaving F=4 (not 1st, consistent with the clue). No other value of A satisfies every constraint at once. A ranked 1st.",
     "source": "original"
   },
   {
@@ -1219,9 +1589,14 @@
     "topic": "Calendar & Clock Puzzles",
     "difficulty": "hard",
     "prompt": "At what time between 3 and 4 o'clock will the minute hand and hour hand of a clock be exactly opposite each other (180° apart)?",
-    "options": ["49 1/11 minutes past 3", "45 minutes past 3", "50 minutes past 3", "49 minutes past 3"],
+    "options": [
+      "49 1/11 minutes past 3",
+      "45 minutes past 3",
+      "50 minutes past 3",
+      "49 minutes past 3"
+    ],
     "correctIndex": 0,
-    "explanation": "At t minutes past 3:00, the hour hand is at 90+0.5t degrees and the minute hand is at 6t degrees. Setting the minute hand 180° ahead: 6t-(90+0.5t)=180, so 5.5t=270, giving t=270/5.5=49 1/11 minutes.",
+    "explanation": "At t minutes past 3:00, the hour hand is at $90 + 0.5t$ degrees and the minute hand is at $6t$ degrees. Setting the minute hand 180° ahead: $6t - (90 + 0.5t) = 180$, so $5.5t = 270$, giving $t = \\frac{270}{5.5} = 49\\frac{1}{11}$ minutes.",
     "source": "original"
   }
 ]

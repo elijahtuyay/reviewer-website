@@ -1,4 +1,8 @@
-export type SectionId = "language-skills" | "quantitative-skills" | "logical-reasoning";
+/** Which exam this data belongs to — each exam has its own sections, theme, and question bank. */
+export type ExamId = "nmat" | "gmat";
+
+/** Section ids are exam-scoped strings (e.g. NMAT's "language-skills" vs. GMAT's "quant") rather than a single closed union, since each exam defines its own set. */
+export type SectionId = string;
 
 export type Difficulty = "easy" | "medium" | "hard";
 
@@ -23,6 +27,7 @@ export interface Answer {
 }
 
 export interface QuizAttempt {
+  exam: ExamId;
   section: SectionId;
   answers: Answer[];
   startedAt: number;

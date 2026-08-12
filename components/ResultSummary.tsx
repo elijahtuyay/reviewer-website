@@ -9,7 +9,7 @@ export default function ResultSummary({ result, sectionLabel }: ResultSummaryPro
   return (
     <div className="border-b border-line pb-8">
       <p className="text-sm font-medium tracking-wide text-muted uppercase">
-        {sectionLabel} — Results
+        {sectionLabel}: Results
       </p>
       <div className="mt-3 flex items-baseline gap-2">
         <span className="text-4xl font-semibold text-foreground">{result.score}</span>

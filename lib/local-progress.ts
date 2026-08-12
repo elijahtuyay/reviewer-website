@@ -1,4 +1,4 @@
-import { SectionId } from "@/data/schema";
+import { ExamId, SectionId } from "@/data/schema";
 
 export interface StoredProgress {
   answers: Record<string, number>;
@@ -8,14 +8,14 @@ export interface StoredProgress {
 
 const EMPTY_PROGRESS: StoredProgress = { answers: {}, submitted: false, questionIds: [] };
 
-function storageKey(section: SectionId): string {
-  return `nmat-progress:${section}`;
+function storageKey(examId: ExamId, section: SectionId): string {
+  return `progress:${examId}:${section}`;
 }
 
-export function getStoredProgress(section: SectionId): StoredProgress {
+export function getStoredProgress(examId: ExamId, section: SectionId): StoredProgress {
   if (typeof window === "undefined") return EMPTY_PROGRESS;
   try {
-    const raw = window.localStorage.getItem(storageKey(section));
+    const raw = window.localStorage.getItem(storageKey(examId, section));
     if (!raw) return EMPTY_PROGRESS;
     return JSON.parse(raw) as StoredProgress;
   } catch {
@@ -23,11 +23,11 @@ export function getStoredProgress(section: SectionId): StoredProgress {
   }
 }
 
-export function saveStoredProgress(section: SectionId, progress: StoredProgress): void {
+export function saveStoredProgress(examId: ExamId, section: SectionId, progress: StoredProgress): void {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(storageKey(section), JSON.stringify(progress));
+  window.localStorage.setItem(storageKey(examId, section), JSON.stringify(progress));
 }
 
-export function getAnsweredCount(section: SectionId): number {
-  return Object.keys(getStoredProgress(section).answers).length;
+export function getAnsweredCount(examId: ExamId, section: SectionId): number {
+  return Object.keys(getStoredProgress(examId, section).answers).length;
 }

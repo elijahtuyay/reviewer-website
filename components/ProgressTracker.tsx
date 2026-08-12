@@ -22,7 +22,7 @@ export default function ProgressTracker({ totalQuestions, answeredNumbers, onJum
               onClick={() => onJump(num)}
               className={`flex h-7 w-7 items-center justify-center rounded text-[11px] font-medium transition-colors ${
                 isAnswered
-                  ? "bg-blue-600 text-white dark:bg-blue-500"
+                  ? "bg-accent text-accent-foreground"
                   : "bg-panel-hover text-muted hover:bg-line"
               }`}
             >
