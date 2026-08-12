@@ -5,15 +5,23 @@ import { useEffect, useRef, useState } from "react";
 interface TimerProps {
   minutes: number;
   onExpire: () => void;
+  /** Freezes the countdown without resetting it — used while the pause overlay is showing. */
+  paused?: boolean;
 }
 
-export default function Timer({ minutes, onExpire }: TimerProps) {
+export default function Timer({ minutes, onExpire, paused = false }: TimerProps) {
   const [secondsLeft, setSecondsLeft] = useState(minutes * 60);
   const onExpireRef = useRef(onExpire);
-  onExpireRef.current = onExpire;
+  const pausedRef = useRef(paused);
+
+  useEffect(() => {
+    onExpireRef.current = onExpire;
+    pausedRef.current = paused;
+  }, [onExpire, paused]);
 
   useEffect(() => {
     const interval = setInterval(() => {
+      if (pausedRef.current) return;
       setSecondsLeft((prev) => {
         if (prev <= 1) {
           clearInterval(interval);

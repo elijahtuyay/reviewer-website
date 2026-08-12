@@ -9,6 +9,9 @@
   --panel-hover: #efe9dc;
   --line: #e3ddcf;
   --muted: #6f6858;
+  /* Default accent (NMAT green) — overridden per-exam by app/[examId]/layout.tsx. */
+  --accent: #0f7b4d;
+  --accent-foreground: #ffffff;
 }
 
 .dark {
@@ -27,6 +30,8 @@
   --color-panel-hover: var(--panel-hover);
   --color-line: var(--line);
   --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -35,4 +40,26 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Apple-style route transition: a quick, gentle fade + rise on every page mount. */
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition {
+  animation: page-fade-in 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
 }

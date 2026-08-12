@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import ThemeInitScript from "@/components/ThemeInitScript";
 import SiteHeader from "@/components/SiteHeader";
+import PageTransition from "@/components/PageTransition";
+import "katex/dist/katex.min.css";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "NMAT Reviewer",
-  description: "Practice quizzes for NMAT by GMAC — timed sections, instant review, and explained answers.",
+  description: "Practice quizzes for NMAT by GMAC: timed sections, instant review, and explained answers.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -29,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <ThemeInitScript />
         <SiteHeader />
-        {children}
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   );
