@@ -42,6 +42,17 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/*
+ * Consistent, high-visibility focus ring for every interactive element —
+ * the one design convention all three government design systems (USWDS,
+ * Canada.ca, Singapore's SGDS) treat as non-negotiable, since keyboard/
+ * screen-reader users otherwise lose track of where they are.
+ */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 /* Apple-style route transition: a quick, gentle fade + rise on every page mount. */
 @keyframes page-fade-in {
   from {
