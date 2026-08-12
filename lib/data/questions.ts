@@ -1,20 +1,28 @@
-import { Question, SectionId } from "@/data/schema";
+import { ExamId, Question, SectionId } from "@/data/schema";
 import languageSkills from "@/data/questions/language-skills.json";
 import quantitativeSkills from "@/data/questions/quantitative-skills.json";
 import logicalReasoning from "@/data/questions/logical-reasoning.json";
 
-const QUESTIONS_BY_SECTION: Record<SectionId, Question[]> = {
-  "language-skills": languageSkills as Question[],
-  "quantitative-skills": quantitativeSkills as Question[],
-  "logical-reasoning": logicalReasoning as Question[],
+/** GMAT has no question bank yet (scaffolded route/config only) — sections resolve to empty arrays until a real bank is authored. */
+const QUESTIONS_BY_EXAM: Record<ExamId, Record<string, Question[]>> = {
+  nmat: {
+    "language-skills": languageSkills as Question[],
+    "quantitative-skills": quantitativeSkills as Question[],
+    "logical-reasoning": logicalReasoning as Question[],
+  },
+  gmat: {
+    quant: [],
+    verbal: [],
+    "data-insights": [],
+  },
 };
 
-export function getQuestionsForSection(section: SectionId): Question[] {
-  return QUESTIONS_BY_SECTION[section];
+export function getQuestionsForSection(examId: ExamId, section: SectionId): Question[] {
+  return QUESTIONS_BY_EXAM[examId]?.[section] ?? [];
 }
 
-export function getAllQuestions(): Question[] {
-  return Object.values(QUESTIONS_BY_SECTION).flat();
+export function getAllQuestions(examId: ExamId): Question[] {
+  return Object.values(QUESTIONS_BY_EXAM[examId] ?? {}).flat();
 }
 
 function shuffle<T>(items: T[]): T[] {
@@ -27,14 +35,14 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 /** Draws a fresh random subset of `count` questions from the section's full bank. */
-export function drawRandomQuestionIds(section: SectionId, count: number): string[] {
-  return shuffle(QUESTIONS_BY_SECTION[section])
+export function drawRandomQuestionIds(examId: ExamId, section: SectionId, count: number): string[] {
+  return shuffle(getQuestionsForSection(examId, section))
     .slice(0, count)
     .map((q) => q.id);
 }
 
 /** Reconstructs the exact question set for a previously-drawn attempt, in the original bank order. */
-export function getQuestionsByIds(section: SectionId, ids: string[]): Question[] {
+export function getQuestionsByIds(examId: ExamId, section: SectionId, ids: string[]): Question[] {
   const idSet = new Set(ids);
-  return QUESTIONS_BY_SECTION[section].filter((q) => idSet.has(q.id));
+  return getQuestionsForSection(examId, section).filter((q) => idSet.has(q.id));
 }

@@ -1,5 +1,4 @@
 import { Answer, Question } from "@/data/schema";
-import { POINTS_PER_CORRECT_ANSWER } from "@/lib/exam-config";
 
 export interface TopicBreakdown {
   topic: string;
@@ -16,7 +15,7 @@ export interface ScoreResult {
   byTopic: TopicBreakdown[];
 }
 
-export function scoreAttempt(questions: Question[], answers: Answer[]): ScoreResult {
+export function scoreAttempt(questions: Question[], answers: Answer[], pointsPerCorrectAnswer: number): ScoreResult {
   const answerByQuestionId = new Map(answers.map((a) => [a.questionId, a.selectedIndex]));
   const topicMap = new Map<string, TopicBreakdown>();
 
@@ -45,7 +44,7 @@ export function scoreAttempt(questions: Question[], answers: Answer[]): ScoreRes
   }
 
   return {
-    score: correctCount * POINTS_PER_CORRECT_ANSWER,
+    score: correctCount * pointsPerCorrectAnswer,
     correctCount,
     incorrectCount,
     unansweredCount,
