@@ -114,8 +114,8 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
     <div className="flex flex-1 justify-center bg-background">
       <div
         className="w-full max-w-6xl px-6 py-10 sm:py-16"
-        inert={paused || undefined}
-        aria-hidden={paused || undefined}
+        inert={paused || mobileNavOpen || undefined}
+        aria-hidden={paused || mobileNavOpen || undefined}
       >
         <div className="sticky top-0 z-20 flex h-20 items-center justify-between gap-3 border-b border-line bg-background/95 backdrop-blur">
           <div className="min-w-0">
@@ -181,25 +181,6 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
             </div>
           </aside>
 
-          <MobileNavSheet open={mobileNavOpen} onClose={() => setMobileNavOpen(false)}>
-            <div className="flex flex-col gap-6">
-              <SectionNav
-                examId={examId}
-                currentSection={section}
-                currentAnsweredCount={answeredCount}
-                locked={phase === "taking"}
-                currentResult={result}
-              />
-              {phase === "taking" && (
-                <ProgressTracker
-                  totalQuestions={questions.length}
-                  answeredNumbers={answeredNumbers}
-                  onJump={handleJump}
-                />
-              )}
-            </div>
-          </MobileNavSheet>
-
           <main className="min-w-0 flex-1">
             {phase === "review" && result && (
               <div className="mb-4">
@@ -234,6 +215,25 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
       </div>
 
       {paused && <PauseOverlay onResume={() => setPaused(false)} />}
+
+      <MobileNavSheet open={mobileNavOpen} onClose={() => setMobileNavOpen(false)}>
+        <div className="flex flex-col gap-6">
+          <SectionNav
+            examId={examId}
+            currentSection={section}
+            currentAnsweredCount={answeredCount}
+            locked={phase === "taking"}
+            currentResult={result}
+          />
+          {phase === "taking" && (
+            <ProgressTracker
+              totalQuestions={questions.length}
+              answeredNumbers={answeredNumbers}
+              onJump={handleJump}
+            />
+          )}
+        </div>
+      </MobileNavSheet>
     </div>
   );
 }

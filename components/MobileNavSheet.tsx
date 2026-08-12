@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 interface MobileNavSheetProps {
   open: boolean;
   onClose: () => void;
@@ -12,6 +14,20 @@ interface MobileNavSheetProps {
  * per-question jump grid would be entirely unreachable on phones/tablets.
  */
 export default function MobileNavSheet({ open, onClose, children }: MobileNavSheetProps) {
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open, onClose]);
+
   if (!open) return null;
 
   return (
