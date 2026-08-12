@@ -2,7 +2,6 @@
 
 import { use, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { getExamConfig, getSectionConfig, isValidExamId } from "@/lib/exam-config";
 import { drawRandomQuestionIds, getQuestionsByIds } from "@/lib/data/questions";
 import { scoreAttempt } from "@/lib/scoring";
@@ -20,17 +19,15 @@ type Phase = "taking" | "review";
 export default function QuizPage({ params }: { params: Promise<{ examId: string; section: string }> }) {
   const { examId: examIdParam, section: sectionParam } = use(params);
 
-  if (!isValidExamId(examIdParam)) {
-    notFound();
-  }
-  const examId = examIdParam as ExamId;
+  // The parent server layout already 404s for an invalid/unavailable examId or
+  // section before this client component ever renders, so these checks are a
+  // type-narrowing formality, not a real gate — `notFound()` isn't a supported
+  // call from a Client Component.
+  const examIdValid = isValidExamId(examIdParam);
+  const examId = (examIdValid ? examIdParam : "nmat") as ExamId;
   const exam = getExamConfig(examId);
-
-  const isValidSection = exam.sections.some((s) => s.id === sectionParam);
-  if (!isValidSection) {
-    notFound();
-  }
-  const section = sectionParam as SectionId;
+  const sectionValid = exam.sections.some((s) => s.id === sectionParam);
+  const section = (sectionValid ? sectionParam : exam.sections[0].id) as SectionId;
 
   const sectionConfig = getSectionConfig(examId, section);
 
@@ -108,11 +105,15 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
     return scoreAttempt(questions, answerList, exam.pointsPerCorrectAnswer);
   }, [phase, questions, answers, exam.pointsPerCorrectAnswer]);
 
-  if (!hydrated) return null;
+  if (!examIdValid || !sectionValid || !hydrated) return null;
 
   return (
     <div className="flex flex-1 justify-center bg-background">
-      <div className="w-full max-w-6xl px-6 py-10 sm:py-16">
+      <div
+        className="w-full max-w-6xl px-6 py-10 sm:py-16"
+        inert={paused || undefined}
+        aria-hidden={paused || undefined}
+      >
         <div className="sticky top-0 z-20 flex h-20 items-center justify-between border-b border-line bg-background/95 backdrop-blur">
           <div>
             <Link href={`/${examId}`} className="text-sm text-muted hover:text-foreground">
