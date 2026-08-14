@@ -35,12 +35,15 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 /**
- * Reorders an already-random subset so no more than 2 consecutive questions
- * share a topic. Without this, questions display in bank order (see
- * getQuestionsByIds below), and since the bank is authored topic-by-topic,
- * a random subset drawn from it still lands in visible topic clusters.
- * Greedily picks from whichever remaining topic has the most items left,
- * skipping a topic only if picking it would make a 3rd-in-a-row.
+ * Reorders an already-random subset so topics are spread out, aiming for no
+ * more than 2 consecutive questions sharing a topic. Without this, questions
+ * display in bank order (see getQuestionsByIds below), and since the bank is
+ * authored topic-by-topic, a random subset drawn from it still lands in
+ * visible topic clusters. Greedily picks from whichever remaining topic has
+ * the most items left, skipping a topic only if picking it would make a
+ * 3rd-in-a-row. This is a best-effort guarantee, not a hard one: a heavily
+ * topic-imbalanced draw (one topic dominating the subset) can still force a
+ * run longer than 2 once every other topic is exhausted.
  */
 function interleaveByTopic(items: Question[]): Question[] {
   const groups = new Map<string, Question[]>();

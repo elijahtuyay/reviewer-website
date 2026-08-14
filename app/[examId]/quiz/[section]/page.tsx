@@ -234,13 +234,14 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
             locked={phase === "taking"}
             currentResult={result}
           />
-          {phase === "taking" && (
-            <ProgressTracker
-              totalQuestions={questions.length}
-              answeredNumbers={answeredNumbers}
-              onJump={handleJump}
-            />
-          )}
+          <ProgressTracker
+            totalQuestions={questions.length}
+            answeredNumbers={answeredNumbers}
+            onJump={handleJump}
+            reviewMode={phase === "review"}
+            correctNumbers={correctNumbers}
+            incorrectNumbers={incorrectNumbers}
+          />
         </div>
       </MobileNavSheet>
     </div>
