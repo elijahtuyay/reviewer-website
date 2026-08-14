@@ -6,12 +6,12 @@
     "difficulty": "medium",
     "prompt": "A shirt is priced at ₱80. The store offers a 25% discount, and then adds 8% sales tax on the discounted price. What is the final price the customer pays?",
     "options": [
-      "₱64.80",
-      "₱65.00",
       "₱60.00",
-      "₱68.40"
+      "₱68.40",
+      "₱65.00",
+      "₱64.80"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "The 25% discount brings the price to ₱80 × 0.75 = ₱60. Applying 8% sales tax on that discounted amount gives ₱60 × 1.08 = ₱64.80. Computing the tax on the pre-discount price instead is a common mistake that leads to a wrong answer.",
     "source": "original"
   },
@@ -38,12 +38,12 @@
     "difficulty": "easy",
     "prompt": "The ratio of boys to girls in a class is 3:5. If there are 24 boys, how many girls are there?",
     "options": [
+      "45",
       "30",
       "40",
-      "45",
       "36"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "3 parts correspond to 24 boys, so 1 part equals 8. The number of girls is 5 parts, which is $5 \\times 8 = 40$.",
     "source": "original"
   },
@@ -56,8 +56,8 @@
     "options": [
       "44",
       "77",
-      "66",
-      "55"
+      "55",
+      "66"
     ],
     "correctIndex": 1,
     "explanation": "The ratio has $4 + 7 = 11$ total parts, corresponding to a sum of 121, so 1 part equals 11. The larger number is $7 \\times 11 = 77$.",
@@ -70,12 +70,12 @@
     "difficulty": "easy",
     "prompt": "A trader buys an item for ₱200 and sells it for ₱250. What is the profit percentage?",
     "options": [
-      "20%",
       "25%",
+      "20%",
       "30%",
       "50%"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Profit equals ₱250 - ₱200 = ₱50. As a percentage of the cost price, that is (50 / 200) × 100 = 25%.",
     "source": "original"
   },
@@ -87,11 +87,11 @@
     "prompt": "A man sells a watch for ₱342, incurring a loss of 5%. What was the cost price?",
     "options": [
       "₱354",
-      "₱360",
       "₱350",
-      "₱365"
+      "₱365",
+      "₱360"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "If the cost price times 0.95 equals ₱342, then the cost price is ₱342 / 0.95 = ₱360. Checking: ₱360 × 0.95 = ₱342.",
     "source": "original"
   },
@@ -102,12 +102,12 @@
     "difficulty": "hard",
     "prompt": "A shop offers successive discounts of 10%, 20%, and 5% on an item marked ₱500. What single discount percentage would produce the same final price?",
     "options": [
-      "31.6%",
-      "35%",
       "30%",
+      "35%",
+      "31.6%",
       "33%"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Applying the discounts in sequence: ₱500 × 0.9 = ₱450, then ₱450 × 0.8 = ₱360, then ₱360 × 0.95 = ₱342. The total drop is ₱500 - ₱342 = ₱158, which is ₱158/500 = 31.6% of the original price. Successive discounts combine multiplicatively rather than by simple addition, so adding ₱10% + 20% + 5% = 35% is a trap that overstates the actual discount.",
     "source": "original"
   },
@@ -118,12 +118,12 @@
     "difficulty": "hard",
     "prompt": "A vessel contains a mixture of milk and water in the ratio 5:3, totaling 32 liters. If 8 liters of pure water is added to the mixture, what is the new ratio of milk to water?",
     "options": [
-      "1:1",
-      "5:4",
+      "5:6",
       "4:3",
-      "5:6"
+      "5:4",
+      "1:1"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "The original mixture has $5 + 3 = 8$ parts for 32 L, so 1 part equals 4 L, giving 20 L of milk and 12 L of water. Adding 8 L of pure water raises the water to $12 + 8 = 20$ L while the milk stays at 20 L, so the new ratio of milk to water is $20:20 = 1:1$.",
     "source": "original"
   },
@@ -135,11 +135,11 @@
     "prompt": "How many liters of a 40% acid solution must be mixed with 10 liters of a 10% acid solution to get a 25% acid solution?",
     "options": [
       "5 L",
-      "8 L",
       "10 L",
+      "8 L",
       "12 L"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Let $x$ be the liters of the 40% solution. Then $0.40x + 0.10(10) = 0.25(x + 10)$, which simplifies to $0.4x + 1 = 0.25x + 2.5$, so $0.15x = 1.5$ and $x = 10$ L. Checking: $0.4(10) + 1 = 5$, and $0.25(20) = 5$.",
     "source": "original"
   },
@@ -150,12 +150,12 @@
     "difficulty": "easy",
     "prompt": "A bag contains 4 red balls and 6 blue balls. What is the probability of drawing a red ball at random?",
     "options": [
-      "$\\frac{1}{2}$",
-      "$\\frac{2}{5}$",
+      "$\\frac{1}{3}$",
       "$\\frac{3}{5}$",
-      "$\\frac{1}{3}$"
+      "$\\frac{1}{2}$",
+      "$\\frac{2}{5}$"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "Probability equals favorable outcomes divided by total outcomes: $4/10 = \\frac{2}{5}$.",
     "source": "original"
   },
@@ -166,12 +166,12 @@
     "difficulty": "medium",
     "prompt": "A fair coin is tossed twice. What is the probability of getting exactly one head?",
     "options": [
+      "$\\frac{3}{4}$",
       "$\\frac{1}{4}$",
       "$\\frac{1}{2}$",
-      "$\\frac{3}{4}$",
       "$\\frac{1}{3}$"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "The four equally likely outcomes are HH, HT, TH, and TT. Exactly one head occurs in HT and TH, so the probability is $2/4 = \\frac{1}{2}$.",
     "source": "original"
   },
@@ -182,12 +182,12 @@
     "difficulty": "hard",
     "prompt": "A invests ₱3,000 for the full 12 months. B invests ₱6,000 but joins the business only after 8 months have passed, so B's money is invested for just 4 months. If the total profit at year end is ₱2,000, what is A's share?",
     "options": [
-      "₱1,200",
       "₱1,000",
       "₱1,400",
-      "₱1,333"
+      "₱1,333",
+      "₱1,200"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Because B's capital works for fewer months, the profit must be split by capital-months rather than by raw investment amounts. A's capital-months are ₱3,000 × 12 = 36,000. B's capital-months are ₱6,000 × 4 = 24,000. The ratio is ₱36,000:24,000 = 3:2, so A's share is (3/5) × ₱2,000 = ₱1,200.",
     "source": "original"
   },
@@ -198,12 +198,12 @@
     "difficulty": "medium",
     "prompt": "If $3x - 7 = 2x + 5$, what is the value of $x^2 - 3x$?",
     "options": [
-      "108",
-      "120",
+      "96",
       "144",
-      "96"
+      "108",
+      "120"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From $3x - 7 = 2x + 5$, subtracting $2x$ from both sides and adding 7 gives $x = 12$. Substituting into $x^2 - 3x$: $12^2 - 3(12) = 144 - 36 = 108$.",
     "source": "original"
   },
@@ -214,12 +214,12 @@
     "difficulty": "medium",
     "prompt": "If $x^2 - 5x + 6 = 0$, what are the values of x?",
     "options": [
-      "2 and 3",
+      "2 and −3",
       "1 and 6",
-      "−2 and −3",
-      "2 and −3"
+      "2 and 3",
+      "−2 and −3"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Factoring gives $(x - 2)(x - 3) = 0$, so $x = 2$ or $x = 3$.",
     "source": "original"
   },
@@ -230,12 +230,12 @@
     "difficulty": "medium",
     "prompt": "If a + b = 10 and a − b = 4, what is the value of ab?",
     "options": [
-      "20",
-      "21",
       "24",
-      "18"
+      "20",
+      "18",
+      "21"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "Adding the two equations gives $2a = 14$, so $a = 7$. Then $b = 10 - 7 = 3$, and $ab = 7 \\times 3 = 21$.",
     "source": "original"
   },
@@ -246,12 +246,12 @@
     "difficulty": "easy",
     "prompt": "Simplify: $(x + 3)(x - 3)$",
     "options": [
-      "$x^2 - 9$",
-      "$x^2 + 9$",
       "$x^2 - 6x - 9$",
-      "$x^2 + 6x - 9$"
+      "$x^2 + 6x - 9$",
+      "$x^2 - 9$",
+      "$x^2 + 9$"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "This is a difference of squares: $(x + 3)(x - 3) = x^2 - 9$.",
     "source": "original"
   },
@@ -279,11 +279,11 @@
     "prompt": "A number increased by 20% gives 96. What is the number?",
     "options": [
       "76",
-      "78",
       "80",
+      "78",
       "84"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Let the number be x. Then $x \\times 1.2 = 96$, so $x = 80$.",
     "source": "original"
   },
@@ -294,10 +294,10 @@
     "difficulty": "medium",
     "prompt": "A right triangle has legs of length 6 cm and 8 cm. What is the length of the hypotenuse?",
     "options": [
-      "9 cm",
+      "14 cm",
       "10 cm",
       "12 cm",
-      "14 cm"
+      "9 cm"
     ],
     "correctIndex": 1,
     "explanation": "By the Pythagorean theorem: $\\sqrt{6^2 + 8^2} = \\sqrt{36 + 64} = \\sqrt{100} = 10$ cm.",
@@ -310,12 +310,12 @@
     "difficulty": "medium",
     "prompt": "What is the area of a circle with radius 7 cm? (Use $\\pi = \\frac{22}{7}$)",
     "options": [
-      "132 cm²",
-      "144 cm²",
       "154 cm²",
-      "168 cm²"
+      "168 cm²",
+      "144 cm²",
+      "132 cm²"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "Area equals $\\pi r^2 = \\frac{22}{7} \\times 7^2 = \\frac{22}{7} \\times 49 = 22 \\times 7 = 154$ cm².",
     "source": "original"
   },
@@ -342,12 +342,12 @@
     "difficulty": "medium",
     "prompt": "A rectangle has a length of 12 cm and a width of 5 cm. If the length is increased by 3 cm and the width is increased by 2 cm, what is the perimeter of the new rectangle?",
     "options": [
-      "44 cm",
-      "40 cm",
       "38 cm",
-      "42 cm"
+      "44 cm",
+      "42 cm",
+      "40 cm"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "The new dimensions are length = $12 + 3 = 15$ cm and width = $5 + 2 = 7$ cm. Perimeter = $2 \\times (15 + 7) = 2 \\times 22 = 44$ cm.",
     "source": "original"
   },
@@ -358,8 +358,8 @@
     "difficulty": "hard",
     "prompt": "Two triangles are similar, with corresponding sides in the ratio 2:5. If the area of the smaller triangle is 8 cm², what is the area of the larger triangle?",
     "options": [
-      "20 cm²",
       "40 cm²",
+      "20 cm²",
       "50 cm²",
       "32 cm²"
     ],
@@ -374,12 +374,12 @@
     "difficulty": "hard",
     "prompt": "Points A(2, 3), B(6, 6), and C(2, 6) are plotted on a coordinate plane. What is the area of triangle ABC?",
     "options": [
-      "6",
+      "8",
       "10",
       "12",
-      "8"
+      "6"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Segment AC runs vertically from (2, 3) to (2, 6), a length of $6 - 3 = 3$. Segment BC runs horizontally from (2, 6) to (6, 6), a length of $6 - 2 = 4$. These two sides meet at a right angle at C, so the area is $\\frac{1}{2} \\times 4 \\times 3 = 6$.",
     "source": "original"
   },
@@ -390,12 +390,12 @@
     "difficulty": "medium",
     "prompt": "What is the smallest positive integer that is divisible by both 8 and 12?",
     "options": [
-      "16",
-      "20",
       "24",
-      "32"
+      "20",
+      "32",
+      "16"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "The least common multiple of 8 and 12 is 24, since $8 = 2^3$ and $12 = 2^2 \\times 3$, and the LCM takes the highest power of each prime present: $2^3 \\times 3 = 24$.",
     "source": "original"
   },
@@ -407,11 +407,11 @@
     "prompt": "What is the sum of the first 10 positive even integers?",
     "options": [
       "100",
-      "110",
+      "90",
       "120",
-      "90"
+      "110"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "The first 10 even integers are 2, 4, ..., 20. Their sum is $2 \\times (1 + 2 + ... + 10) = 2 \\times 55 = 110$.",
     "source": "original"
   },
@@ -422,12 +422,12 @@
     "difficulty": "hard",
     "prompt": "How many factors does 36 have?",
     "options": [
-      "6",
-      "8",
       "9",
-      "12"
+      "8",
+      "12",
+      "6"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "$36 = 2^2 \\times 3^2$. The number of factors is $(2+1)(2+1) = 9$. Listed out: 1, 2, 3, 4, 6, 9, 12, 18, 36.",
     "source": "original"
   },
@@ -438,12 +438,12 @@
     "difficulty": "medium",
     "prompt": "What is the remainder when 47 is divided by 6?",
     "options": [
+      "5",
       "3",
       "4",
-      "5",
       "6"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "$47 = 6 \\times 7 + 5$, so the remainder is 5.",
     "source": "original"
   },
@@ -456,10 +456,10 @@
     "options": [
       "₱180,000",
       "₱190,000",
-      "₱200,000",
-      "₱210,000"
+      "₱210,000",
+      "₱200,000"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "Total = ₱40,000 + ₱55,000 + ₱35,000 + ₱70,000 = ₱200,000.",
     "source": "original"
   },
@@ -470,12 +470,12 @@
     "difficulty": "hard",
     "prompt": "Quarterly sales for the year were:\nQ1: ₱40,000\nQ2: ₱55,000\nQ3: ₱35,000\nQ4: ₱70,000\n\nWhat percentage of the annual total of ₱200,000 was earned in Q4?",
     "options": [
-      "30%",
-      "32.5%",
       "35%",
-      "40%"
+      "40%",
+      "32.5%",
+      "30%"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "Q4's share is (70,000 / 200,000) × 100 = 35%.",
     "source": "original"
   },
@@ -486,12 +486,12 @@
     "difficulty": "hard",
     "prompt": "Quarterly sales for the year were:\nQ1: ₱40,000\nQ2: ₱55,000\nQ3: ₱35,000\nQ4: ₱70,000\n\nBy what percentage did sales increase from Q3 to Q4?",
     "options": [
-      "50%",
-      "75%",
       "100%",
+      "75%",
+      "50%",
       "120%"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "The increase is ₱70,000 - ₱35,000 = ₱35,000. As a percentage of Q3: (35,000 / 35,000) × 100 = 100%.",
     "source": "original"
   },
@@ -502,12 +502,12 @@
     "difficulty": "medium",
     "prompt": "Quarterly sales for the year were:\nQ1: ₱40,000\nQ2: ₱55,000\nQ3: ₱35,000\nQ4: ₱70,000\n\nWhat was the average quarterly sales for the year?",
     "options": [
-      "₱45,000",
       "₱50,000",
       "₱55,000",
-      "₱60,000"
+      "₱60,000",
+      "₱45,000"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Average = total sales divided by number of quarters = ₱200,000 / 4 = ₱50,000.",
     "source": "original"
   },
@@ -518,13 +518,13 @@
     "difficulty": "hard",
     "prompt": "Is x > 10?\n(1) x > 8\n(2) x = 12",
     "options": [
-      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
-      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
       "EACH statement alone is sufficient.",
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
+      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
       "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "Statement (1) alone: x > 8 does not guarantee x > 10, since x = 9 fails while x = 11 works, so it is not sufficient. Statement (2) alone: x = 12 directly confirms x > 10, so it is sufficient by itself.",
     "source": "original"
   },
@@ -537,11 +537,11 @@
     "options": [
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
       "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
-      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
       "EACH statement alone is sufficient.",
+      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
       "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "Statement (1) alone: divisibility by 2 doesn't guarantee divisibility by 6, for example n = 4. Statement (2) alone: divisibility by 3 doesn't guarantee divisibility by 6, for example n = 9. Together, since 2 and 3 are coprime, divisibility by both means n is divisible by their product, 6, so the statements are sufficient only in combination.",
     "source": "original"
   },
@@ -552,13 +552,13 @@
     "difficulty": "hard",
     "prompt": "What is the value of x?\n(1) $x^2$ = 9\n(2) x > 0",
     "options": [
+      "Statements (1) and (2) together are NOT sufficient.",
+      "EACH statement alone is sufficient.",
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
       "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
-      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
-      "EACH statement alone is sufficient.",
-      "Statements (1) and (2) together are NOT sufficient."
+      "BOTH statements together are sufficient, but neither statement alone is sufficient."
     ],
-    "correctIndex": 2,
+    "correctIndex": 4,
     "explanation": "Statement (1) alone gives $x = 3$ or $x = -3$, two possible values, so it is not sufficient. Statement (2) alone only says x is positive, with no specific value, so it is also not sufficient. Together, $x^2 = 9$ and $x > 0$ pin down $x = 3$ uniquely.",
     "source": "original"
   },
@@ -570,12 +570,12 @@
     "prompt": "What is the area of rectangle R?\n(1) The length of R is 8.\n(2) The perimeter of R is 26.",
     "options": [
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
-      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
       "EACH statement alone is sufficient.",
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
       "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Statement (1) alone gives only the length, not the width, so it is not sufficient. Statement (2) alone gives length + width = 13, but not either value individually, so it is also not sufficient. Together, length = 8 means width = $13 - 8 = 5$, and area = $8 \\times 5 = 40$, so the statements are sufficient only in combination.",
     "source": "original"
   },
@@ -586,12 +586,12 @@
     "difficulty": "medium",
     "prompt": "What is the difference between the sum of the first 15 positive integers and the sum of the first 10 positive integers?",
     "options": [
-      "65",
       "60",
+      "75",
       "70",
-      "75"
+      "65"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "The sum of the first n positive integers is $\\frac{n(n+1)}{2}$. The sum of the first 15 is $\\frac{15 \\times 16}{2} = 120$, and the sum of the first 10 is $\\frac{10 \\times 11}{2} = 55$. The difference is $120 - 55 = 65$.",
     "source": "original"
   },
@@ -602,12 +602,12 @@
     "difficulty": "easy",
     "prompt": "Which of the following is a prime number?",
     "options": [
-      "57",
-      "51",
       "61",
-      "63"
+      "51",
+      "63",
+      "57"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "51 = 3 × 17, 57 = 3 × 19, and 63 = 7 × 9 are all composite. 61 has no divisors other than 1 and itself, so it is prime.",
     "source": "original"
   },
@@ -619,11 +619,11 @@
     "prompt": "What is the greatest common divisor (GCD) of 48 and 60?",
     "options": [
       "24",
-      "12",
       "6",
-      "4"
+      "4",
+      "12"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "$48 = 2^4 \\times 3$ and $60 = 2^2 \\times 3 \\times 5$. The GCD takes the lowest power of each shared prime: $2^2 \\times 3 = 12$.",
     "source": "original"
   },
@@ -634,12 +634,12 @@
     "difficulty": "medium",
     "prompt": "What is the remainder when $2^{10}$ is divided by 7?",
     "options": [
-      "1",
-      "3",
       "2",
-      "4"
+      "4",
+      "3",
+      "1"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "$2^{10} = 1024$. Since $1024 = 7 \\times 146 + 2$, the remainder is 2.",
     "source": "original"
   },
@@ -650,12 +650,12 @@
     "difficulty": "hard",
     "prompt": "If n is a positive integer and $n^2$ is divisible by 24, what is the smallest possible value of n?",
     "options": [
-      "6",
       "24",
-      "12",
-      "4"
+      "6",
+      "4",
+      "12"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "$24 = 2^3 \\times 3$. Since exponents in $n^2$ are always even (twice those in n), for $n^2$ to contain $2^3$ the exponent of 2 in n must be at least 2, giving $2^4$ in $n^2$, and for $n^2$ to contain $3^1$ the exponent of 3 in n must be at least 1, giving $3^2$ in $n^2$. So n must be divisible by $2^2 \\times 3 = 12$. Checking: $12^2 = 144 = 24 \\times 6$, which works, and no smaller positive integer satisfies both conditions.",
     "source": "original"
   },
@@ -666,12 +666,12 @@
     "difficulty": "medium",
     "prompt": "What is the units digit of $7^{123}$?",
     "options": [
-      "7",
-      "9",
       "1",
-      "3"
+      "7",
+      "3",
+      "9"
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "The units digits of powers of 7 cycle with period 4: $7^1 \\to 7$, $7^2 \\to 9$, $7^3 \\to 3$, $7^4 \\to 1$, then repeat. Since $123 = 4 \\times 30 + 3$, $7^{123}$ has the same units digit as $7^3$, which is 3.",
     "source": "original"
   },
@@ -682,12 +682,12 @@
     "difficulty": "hard",
     "prompt": "How many positive integers less than 150 are multiples of 4 or 6, but not both?",
     "options": [
-      "37",
       "49",
+      "37",
       "25",
       "43"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Multiples of 4 below 150 (4, 8, ..., 148) number 37. Multiples of 6 below 150 (6, 12, ..., 144) number 24. Multiples of 12, which are multiples of both 4 and 6, number 12. So multiples of 4 only equal $37 - 12 = 25$, and multiples of 6 only equal $24 - 12 = 12$. The count of numbers divisible by exactly one of the two is $25 + 12 = 37$.",
     "source": "original"
   },
@@ -700,10 +700,10 @@
     "options": [
       "5",
       "11",
-      "7",
-      "13"
+      "13",
+      "7"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "$91 = 7 \\times 13$. It is not divisible by 2, 3, or 5, so its least prime factor is 7.",
     "source": "original"
   },
@@ -715,11 +715,11 @@
     "prompt": "The product of two consecutive positive integers is 210. What is the sum of the two integers?",
     "options": [
       "27",
-      "31",
       "29",
-      "25"
+      "25",
+      "31"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Let the integers be n and n+1: $n(n+1) = 210$ leads to $n^2 + n - 210 = 0$. Solving with the quadratic formula, $n = \\frac{-1 + \\sqrt{841}}{2} = \\frac{-1 + 29}{2} = 14$. So the integers are 14 and 15, and their sum is 29.",
     "source": "original"
   },
@@ -730,12 +730,12 @@
     "difficulty": "medium",
     "prompt": "If p and q are distinct prime numbers, each greater than 2, which of the following is always even?",
     "options": [
-      "$p^2$",
-      "p × q",
+      "p + 2",
       "p + q",
-      "p + 2"
+      "$p^2$",
+      "p × q"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Every prime greater than 2 is odd. Odd plus odd is even, so p + q is always even. p × q is odd times odd, which is odd; $p^2$ is odd times odd, which is odd; and p + 2 is odd plus even, which is odd. Only p + q is always even.",
     "source": "original"
   },
@@ -746,12 +746,12 @@
     "difficulty": "hard",
     "prompt": "What is the sum of all positive divisors of 60?",
     "options": [
-      "152",
-      "180",
       "168",
-      "140"
+      "140",
+      "180",
+      "152"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "$60 = 2^2 \\times 3 \\times 5$. The sum-of-divisors formula gives $(1+2+4)(1+3)(1+5) = 7 \\times 4 \\times 6 = 168$.",
     "source": "original"
   },
@@ -762,12 +762,12 @@
     "difficulty": "medium",
     "prompt": "If x is a positive integer and $3^x$ has a units digit of 7, what is the smallest possible value of x?",
     "options": [
+      "4",
       "2",
       "5",
-      "3",
-      "4"
+      "3"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "Units digits of powers of 3 cycle with period 4: $3^1 \\to 3$, $3^2 \\to 9$, $3^3 \\to 7$, $3^4 \\to 1$, then repeat. The smallest x giving units digit 7 is x = 3.",
     "source": "original"
   },
@@ -778,12 +778,12 @@
     "difficulty": "easy",
     "prompt": "What is the simple interest on ₱2,000 at 6% per annum for 3 years?",
     "options": [
+      "₱300",
       "₱320",
       "₱360",
-      "₱300",
       "₱400"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "Simple interest = (P × R × T)/100 = (2,000 × 6 × 3)/100 = ₱360.",
     "source": "original"
   },
@@ -794,12 +794,12 @@
     "difficulty": "hard",
     "prompt": "The average of 6 numbers is 24. If two numbers, 30 and 22, are removed from the set, what is the average of the remaining 4 numbers?",
     "options": [
-      "23",
-      "22",
       "24",
-      "21"
+      "23",
+      "21",
+      "22"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "The sum of all 6 numbers is $6 \\times 24 = 144$. Removing 30 and 22 takes away $30 + 22 = 52$, leaving a sum of $144 - 52 = 92$ for the remaining 4 numbers. Their average is $92 / 4 = 23$.",
     "source": "original"
   },
@@ -810,12 +810,12 @@
     "difficulty": "hard",
     "prompt": "A car travels from town A to town B, a distance of 240 km, at a speed of 60 km/h. It then returns from B to A at a speed of 40 km/h. What is the average speed for the entire round trip?",
     "options": [
-      "48 km/h",
       "50 km/h",
-      "45 km/h",
-      "52 km/h"
+      "52 km/h",
+      "48 km/h",
+      "45 km/h"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Average speed for a round trip is total distance divided by total time, not the simple average of the two speeds. The outward trip takes $240/60 = 4$ hours, and the return trip takes $240/40 = 6$ hours. Total distance is 480 km over a total time of 10 hours, so average speed = $480/10 = 48$ km/h.",
     "source": "original"
   },
@@ -826,12 +826,12 @@
     "difficulty": "hard",
     "prompt": "A can complete a job in 12 days, and B can complete the same job in 18 days. Working together, how many days will they take to complete the job?",
     "options": [
-      "7 days",
-      "7.5 days",
+      "7.2 days",
       "8 days",
-      "7.2 days"
+      "7 days",
+      "7.5 days"
     ],
-    "correctIndex": 3,
+    "correctIndex": 0,
     "explanation": "A's rate is $\\frac{1}{12}$ job per day, and B's rate is $\\frac{1}{18}$ job per day. Their combined rate is $\\frac{1}{12} + \\frac{1}{18} = \\frac{3}{36} + \\frac{2}{36} = \\frac{5}{36}$ job per day. The time to finish is $\\frac{36}{5} = 7.2$ days.",
     "source": "original"
   },
@@ -843,11 +843,11 @@
     "prompt": "Solve for x: 5x + 3 = 2x + 18",
     "options": [
       "3",
-      "5",
       "4",
+      "5",
       "6"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "$5x - 2x = 18 - 3$ gives $3x = 15$, so $x = 5$.",
     "source": "original"
   },
@@ -859,11 +859,11 @@
     "prompt": "If 3(x − 2) = 2(x + 5), what is the value of x?",
     "options": [
       "14",
-      "16",
+      "17",
       "15",
-      "17"
+      "16"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "Expanding gives $3x - 6 = 2x + 10$. Subtracting $2x$ and adding 6 to both sides gives $x = 16$.",
     "source": "original"
   },
@@ -874,12 +874,12 @@
     "difficulty": "medium",
     "prompt": "If $x^2 + x - 12 = 0$, what is the sum of the two roots of the equation?",
     "options": [
-      "1",
-      "−4",
       "−1",
-      "3"
+      "3",
+      "−4",
+      "1"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "Factoring gives $(x + 4)(x - 3) = 0$, so the roots are −4 and 3. Their sum is −1, which also matches the formula sum of roots $= -b/a = -1/1 = -1$.",
     "source": "original"
   },
@@ -890,12 +890,12 @@
     "difficulty": "medium",
     "prompt": "If $f(x) = 2x^2 - 3x + 1$, what is $f(3)$?",
     "options": [
-      "8",
-      "10",
+      "11",
       "9",
-      "11"
+      "8",
+      "10"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "$f(3) = 2(3^2) - 3(3) + 1 = 2(9) - 9 + 1 = 18 - 9 + 1 = 10$.",
     "source": "original"
   },
@@ -906,10 +906,10 @@
     "difficulty": "hard",
     "prompt": "If x/y = 3/4 and x + y = 35, what is the value of y?",
     "options": [
-      "15",
+      "12",
       "25",
       "20",
-      "12"
+      "15"
     ],
     "correctIndex": 2,
     "explanation": "Let $x = 3k$ and $y = 4k$. Then $x + y = 7k = 35$, so $k = 5$. Therefore $y = 4k = 20$.",
@@ -922,12 +922,12 @@
     "difficulty": "easy",
     "prompt": "A single fair die is rolled. What is the probability of getting a number greater than 4?",
     "options": [
-      "$\\frac{1}{6}$",
       "$\\frac{1}{2}$",
       "$\\frac{1}{3}$",
-      "$\\frac{2}{3}$"
+      "$\\frac{2}{3}$",
+      "$\\frac{1}{6}$"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Numbers greater than 4 on a die are 5 and 6, which is 2 outcomes out of 6 total. Probability = $2/6 = \\frac{1}{3}$.",
     "source": "original"
   },
@@ -938,12 +938,12 @@
     "difficulty": "medium",
     "prompt": "A bag has 3 red, 2 green, and 5 blue marbles. One marble is drawn at random. What is the probability that it is NOT blue?",
     "options": [
-      "$\\frac{2}{5}$",
       "$\\frac{1}{2}$",
       "$\\frac{1}{5}$",
-      "$\\frac{3}{5}$"
+      "$\\frac{3}{5}$",
+      "$\\frac{2}{5}$"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Total marbles = $3 + 2 + 5 = 10$. Not blue means red or green, which is 5 marbles. Probability = $5/10 = \\frac{1}{2}$.",
     "source": "original"
   },
@@ -955,11 +955,11 @@
     "prompt": "Two fair dice are rolled. What is the probability that the sum of the two numbers is 7?",
     "options": [
       "$\\frac{1}{12}$",
-      "$\\frac{1}{9}$",
       "$\\frac{1}{6}$",
+      "$\\frac{1}{9}$",
       "$\\frac{5}{36}$"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "There are 36 equally likely outcomes. The pairs summing to 7 are (1,6), (2,5), (3,4), (4,3), (5,2), and (6,1), a total of 6 outcomes. Probability = $6/36 = \\frac{1}{6}$.",
     "source": "original"
   },
@@ -970,8 +970,8 @@
     "difficulty": "medium",
     "prompt": "If 4x − 3y = 10 and x = 2y, what is the value of y?",
     "options": [
-      "1",
       "3",
+      "1",
       "2",
       "4"
     ],
@@ -986,12 +986,12 @@
     "difficulty": "hard",
     "prompt": "A box contains 5 defective and 15 non-defective bulbs. Two bulbs are drawn at random, one after another, without replacement. What is the probability that both are non-defective?",
     "options": [
-      "$\\frac{15}{38}$",
-      "$\\frac{3}{4}$",
       "$\\frac{21}{38}$",
-      "$\\frac{7}{19}$"
+      "$\\frac{7}{19}$",
+      "$\\frac{15}{38}$",
+      "$\\frac{3}{4}$"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "$P(\\text{first non-defective}) = 15/20$. Given that, $P(\\text{second non-defective}) = 14/19$. Multiplying: $\\frac{15}{20} \\times \\frac{14}{19} = \\frac{210}{380} = \\frac{21}{38}$.",
     "source": "original"
   },
@@ -1002,12 +1002,12 @@
     "difficulty": "easy",
     "prompt": "A company's monthly expenses are ₱12,000 for rent and ₱28,000 for salaries. If utilities cost half as much as rent, what is the total monthly expense from these three categories?",
     "options": [
-      "₱46,000",
-      "₱44,000",
       "₱45,000",
+      "₱44,000",
+      "₱46,000",
       "₱48,000"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Utilities cost half of rent: ₱12,000 / 2 = ₱6,000. Total expense = ₱12,000 + ₱28,000 + ₱6,000 = ₱46,000.",
     "source": "original"
   },
@@ -1018,12 +1018,12 @@
     "difficulty": "medium",
     "prompt": "A company spends ₱28,000 on salaries out of a total monthly expense of ₱50,000. If salaries are cut by 10% next month while the total expense stays at ₱50,000, what percentage of the total expense will salaries represent?",
     "options": [
-      "50.4%",
-      "48%",
       "52%",
-      "56%"
+      "48%",
+      "56%",
+      "50.4%"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A 10% cut reduces salaries to ₱28,000 × 0.9 = ₱25,200. As a percentage of the unchanged ₱50,000 total, this is (25,200 / 50,000) × 100 = 50.4%.",
     "source": "original"
   },
@@ -1034,12 +1034,12 @@
     "difficulty": "hard",
     "prompt": "A company's monthly expenses are:\nRent: ₱12,000\nSalaries: ₱28,000\nUtilities: ₱5,000\nMarketing: ₱5,000\n\nIf Rent and Utilities are combined into one \"Facilities\" category, what is the ratio of Facilities to Salaries, expressed in simplest form?",
     "options": [
-      "17:28",
-      "12:28",
       "17:33",
-      "5:8"
+      "5:8",
+      "12:28",
+      "17:28"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Facilities combines Rent and Utilities: ₱12,000 + ₱5,000 = ₱17,000. The ratio of Facilities to Salaries is ₱17,000:28,000, which simplifies to 17:28 since 17 and 28 share no common factor.",
     "source": "original"
   },
@@ -1067,11 +1067,11 @@
     "prompt": "Student scores:\nA: Math 80, Science 70, English 90\nB: Math 75, Science 85, English 60\nC: Math 90, Science 60, English 75\nD: Math 65, Science 95, English 75\n\nWhat is student A's total score across all three subjects?",
     "options": [
       "220",
+      "250",
       "230",
-      "240",
-      "250"
+      "240"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "A's total = $80 + 70 + 90 = 240$.",
     "source": "original"
   },
@@ -1082,12 +1082,12 @@
     "difficulty": "medium",
     "prompt": "Student scores:\nA: Math 80, Science 70, English 90\nB: Math 75, Science 85, English 60\nC: Math 90, Science 60, English 75\nD: Math 65, Science 95, English 75\n\nWhich student has the highest total score across all three subjects?",
     "options": [
-      "A",
-      "B",
       "C",
+      "B",
+      "A",
       "D"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Totals: A = 80+70+90 = 240, B = 75+85+60 = 220, C = 90+60+75 = 225, D = 65+95+75 = 235. The highest total is A's 240.",
     "source": "original"
   },
@@ -1098,12 +1098,12 @@
     "difficulty": "hard",
     "prompt": "Student scores:\nA: Math 80, Science 70, English 90\nB: Math 75, Science 85, English 60\nC: Math 90, Science 60, English 75\nD: Math 65, Science 95, English 75\n\nWhat is the average Math score across all four students, and by how many points does that average differ from the average Science score?",
     "options": [
-      "77.5 vs 77.5, a difference of 0",
+      "75 vs 78.75, a difference of 3.75",
       "77.5 vs 80, a difference of 2.5",
       "80 vs 77.5, a difference of 2.5",
-      "75 vs 78.75, a difference of 3.75"
+      "77.5 vs 77.5, a difference of 0"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Math scores: 80, 75, 90, 65, summing to 310, for an average of $310/4 = 77.5$. Science scores: 70, 85, 60, 95, summing to 310 as well, also averaging $310/4 = 77.5$. The two averages happen to be identical, a difference of 0.",
     "source": "original"
   },
@@ -1114,12 +1114,12 @@
     "difficulty": "hard",
     "prompt": "Student scores:\nA: Math 80, Science 70, English 90\nB: Math 75, Science 85, English 60\nC: Math 90, Science 60, English 75\nD: Math 65, Science 95, English 75\n\nBy how many points does C's Math score exceed the average Math score of all four students?",
     "options": [
-      "10",
-      "12.5",
+      "17.5",
       "15",
-      "17.5"
+      "10",
+      "12.5"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "The average Math score is $(80+75+90+65)/4 = 310/4 = 77.5$. C's Math score is 90, so the difference is $90 - 77.5 = 12.5$.",
     "source": "original"
   },
@@ -1130,12 +1130,12 @@
     "difficulty": "medium",
     "prompt": "Student scores:\nA: Math 80, Science 70, English 90\nB: Math 75, Science 85, English 60\nC: Math 90, Science 60, English 75\nD: Math 65, Science 95, English 75\n\nWhat is the difference between D's Science score and C's Science score?",
     "options": [
-      "25",
       "30",
       "35",
-      "40"
+      "40",
+      "25"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "D's Science score is 95 and C's Science score is 60. The difference is $95 - 60 = 35$.",
     "source": "original"
   },
@@ -1146,12 +1146,12 @@
     "difficulty": "medium",
     "prompt": "A box contains 4 red pens and 6 blue pens. Two pens are drawn at random without replacement. What is the probability that both pens are red?",
     "options": [
-      "$\\frac{2}{15}$",
       "$\\frac{1}{5}$",
       "$\\frac{4}{25}$",
-      "$\\frac{3}{10}$"
+      "$\\frac{3}{10}$",
+      "$\\frac{2}{15}$"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "$P(\\text{first pen red}) = 4/10$. Given that, $P(\\text{second pen red}) = 3/9$. Multiplying: $\\frac{4}{10} \\times \\frac{3}{9} = \\frac{12}{90} = \\frac{2}{15}$.",
     "source": "original"
   },
@@ -1163,11 +1163,11 @@
     "prompt": "Student scores:\nA: Math 80, Science 70, English 90\nB: Math 75, Science 85, English 60\nC: Math 90, Science 60, English 75\nD: Math 65, Science 95, English 75\n\nHow many students scored above 80 in Science?",
     "options": [
       "1",
-      "2",
+      "4",
       "3",
-      "4"
+      "2"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "Science scores: A=70, B=85, C=60, D=95. Only B (85) and D (95) are above 80, so the count is 2 students.",
     "source": "original"
   },
@@ -1178,12 +1178,12 @@
     "difficulty": "easy",
     "prompt": "A bar chart shows monthly rainfall (in mm):\nJan: 45\nFeb: 80\nMar: 55\nApr: 100\nMay: 120\n\nWhat is the total rainfall over these five months?",
     "options": [
-      "400",
-      "380",
       "410",
+      "380",
+      "400",
       "390"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Total = $45 + 80 + 55 + 100 + 120 = 400$ mm.",
     "source": "original"
   },
@@ -1195,8 +1195,8 @@
     "prompt": "A bar chart shows monthly rainfall (in mm):\nJan: 45\nFeb: 80\nMar: 55\nApr: 100\nMay: 120\n\nIf June's rainfall was 50% higher than May's, what would be the new average monthly rainfall across all six months?",
     "options": [
       "≈96.7 mm",
-      "90 mm",
       "100 mm",
+      "90 mm",
       "93.3 mm"
     ],
     "correctIndex": 0,
@@ -1210,12 +1210,12 @@
     "difficulty": "medium",
     "prompt": "A bar chart shows monthly rainfall (in mm):\nJan: 45\nFeb: 80\nMar: 55\nApr: 100\nMay: 120\n\nWhat percentage of the total rainfall fell in April?",
     "options": [
-      "25%",
       "20%",
-      "28%",
-      "22.5%"
+      "25%",
+      "22.5%",
+      "28%"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "April's share = $(100 / 400) \\times 100 = 25\\%$.",
     "source": "original"
   },
@@ -1226,12 +1226,12 @@
     "difficulty": "hard",
     "prompt": "A bar chart shows monthly rainfall (in mm):\nJan: 45\nFeb: 80\nMar: 55\nApr: 100\nMay: 120\n\nBy approximately what percentage did rainfall increase from March to April?",
     "options": [
-      "90%",
-      "81.8%",
       "72.7%",
-      "60%"
+      "60%",
+      "81.8%",
+      "90%"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "The increase is $100 - 55 = 45$ mm. As a percentage of March's value: $(45 / 55) \\times 100 \\approx 81.8\\%$.",
     "source": "original"
   },
@@ -1242,12 +1242,12 @@
     "difficulty": "medium",
     "prompt": "A bar chart shows monthly rainfall (in mm):\nJan: 45\nFeb: 80\nMar: 55\nApr: 100\nMay: 120\n\nWhich month had the lowest rainfall, and what was it?",
     "options": [
+      "Feb, 80 mm",
       "Mar, 55 mm",
       "Jan, 45 mm",
-      "Feb, 80 mm",
       "May, 120 mm"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "Comparing all five values (45, 80, 55, 100, 120), the lowest is January's 45 mm.",
     "source": "original"
   },
@@ -1258,12 +1258,12 @@
     "difficulty": "easy",
     "prompt": "A line chart shows a company's annual revenue (in ₱ million):\n2019: 2.5\n2020: 3.0\n2021: 2.0\n2022: 4.5\n2023: 5.0\n\nIn which year was revenue lowest?",
     "options": [
-      "2020",
       "2021",
+      "2020",
       "2019",
       "2022"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Comparing all five values, 2021's revenue of ₱2.0 million is the lowest.",
     "source": "original"
   },
@@ -1275,8 +1275,8 @@
     "prompt": "A line chart shows a company's annual revenue (in ₱ million):\n2019: 2.5\n2020: 3.0\n2021: 2.0\n2022: 4.5\n2023: 5.0\n\nIf 2024's revenue grows by the same percentage as the growth from 2022 to 2023, what will 2024's revenue be, to the nearest ₱0.1 million?",
     "options": [
       "₱5.6M",
-      "₱5.5M",
       "₱5.4M",
+      "₱5.5M",
       "₱5.7M"
     ],
     "correctIndex": 0,
@@ -1290,12 +1290,12 @@
     "difficulty": "medium",
     "prompt": "A line chart shows a company's annual revenue (in ₱ million):\n2019: 2.5\n2020: 3.0\n2021: 2.0\n2022: 4.5\n2023: 5.0\n\nWhat was the approximate percentage decline in revenue from 2020 to 2021?",
     "options": [
-      "40%",
       "33.3%",
+      "25%",
       "20%",
-      "25%"
+      "40%"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "The decline is ₱3.0 - 2.0 = 1.0. As a percentage of 2020's value: (1.0 / 3.0) × 100 ≈ 33.3%.",
     "source": "original"
   },
@@ -1307,11 +1307,11 @@
     "prompt": "A line chart shows a company's annual revenue (in ₱ million):\n2019: 2.5\n2020: 3.0\n2021: 2.0\n2022: 4.5\n2023: 5.0\n\nWhat was the percentage increase in revenue from 2021 to 2023?",
     "options": [
       "125%",
+      "200%",
       "150%",
-      "100%",
-      "200%"
+      "100%"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "The increase is ₱5.0 - 2.0 = 3.0. As a percentage of 2021's value: (3.0 / 2.0) × 100 = 150%.",
     "source": "original"
   },
@@ -1323,11 +1323,11 @@
     "prompt": "A line chart shows a company's annual revenue (in ₱ million):\n2019: 2.5\n2020: 3.0\n2021: 2.0\n2022: 4.5\n2023: 5.0\n\nWhat was the average annual revenue over the five years?",
     "options": [
       "3.2",
-      "3.6",
       "3.4",
+      "3.6",
       "3.0"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Total revenue is ₱2.5+3.0+2.0+4.5+5.0 = 17.0. Average = ₱17.0 / 5 = ₱3.4 million.",
     "source": "original"
   },
@@ -1338,12 +1338,12 @@
     "difficulty": "easy",
     "prompt": "A household's monthly budget is ₱4,000. If 35% goes to Housing and the remaining amount is split equally between Food and Savings, how much is allocated to Food?",
     "options": [
-      "₱1,300",
       "₱1,400",
-      "₱1,200",
-      "₱1,500"
+      "₱1,300",
+      "₱1,500",
+      "₱1,200"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Housing takes 35% of ₱4,000 = ₱1,400, leaving ₱4,000 - ₱1,400 = ₱2,600. Splitting the remainder equally between Food and Savings gives ₱2,600 / 2 = ₱1,300 for Food.",
     "source": "original"
   },
@@ -1355,9 +1355,9 @@
     "prompt": "A household's monthly budget of ₱4,000 is split among five categories. If the amounts allocated to Housing and Food are in the ratio 7:4 and together they total ₱2,200, how much is allocated to Housing?",
     "options": [
       "₱1,400",
+      "₱1,500",
       "₱1,300",
-      "₱1,200",
-      "₱1,500"
+      "₱1,200"
     ],
     "correctIndex": 0,
     "explanation": "Housing and Food are in the ratio 7:4, so together they represent ₱7 + 4 = 11 parts of the ₱2,200 combined amount. One part equals ₱2,200 / 11 = ₱200. Housing, at 7 parts, is ₱7 × ₱200 = ₱1,400.",
@@ -1370,12 +1370,12 @@
     "difficulty": "medium",
     "prompt": "A pie chart shows a household's monthly budget of ₱4,000 allocated by category:\nHousing: 35%\nFood: 20%\nTransportation: 15%\nSavings: 20%\nOther: 10%\n\nWhat is the combined amount spent on Food and Transportation?",
     "options": [
-      "₱1,500",
-      "₱1,300",
+      "₱1,200",
       "₱1,400",
-      "₱1,200"
+      "₱1,300",
+      "₱1,500"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Food + Transportation = ₱20% + 15% = 35% of ₱4,000 = ₱0.35 × 4,000 = ₱1,400.",
     "source": "original"
   },
@@ -1386,12 +1386,12 @@
     "difficulty": "medium",
     "prompt": "A pie chart shows a household's monthly budget of ₱4,000 allocated by category:\nHousing: 35%\nFood: 20%\nTransportation: 15%\nSavings: 20%\nOther: 10%\n\nHow much more is spent on Housing than on Other?",
     "options": [
-      "₱900",
       "₱1,000",
-      "₱1,100",
-      "₱800"
+      "₱900",
+      "₱800",
+      "₱1,100"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Housing minus Other is ₱35% - 10% = 25% of ₱4,000 = ₱0.25 × 4,000 = ₱1,000.",
     "source": "original"
   },
@@ -1402,12 +1402,12 @@
     "difficulty": "hard",
     "prompt": "A pie chart shows a household's monthly budget allocated by category:\nHousing: 35%\nFood: 20%\nTransportation: 15%\nSavings: 20%\nOther: 10%\n\nIf the household's total monthly income increases to ₱5,000 while keeping the same percentage allocations, how much would be spent on Savings?",
     "options": [
-      "₱950",
       "₱1,000",
       "₱1,050",
-      "₱900"
+      "₱900",
+      "₱950"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Savings = 20% of the new income = ₱0.20 × 5,000 = ₱1,000.",
     "source": "original"
   },
@@ -1419,12 +1419,12 @@
     "prompt": "Is x positive?\n(1) $x^2$ = 16\n(2) $x^3$ = −64",
     "options": [
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
+      "Statements (1) and (2) together are NOT sufficient.",
       "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
-      "EACH statement alone is sufficient.",
-      "Statements (1) and (2) together are NOT sufficient."
+      "EACH statement alone is sufficient."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "Statement (1) alone: $x^2 = 16$ gives $x = 4$ or $x = -4$, so whether x is positive is undetermined, meaning it is not sufficient. Statement (2) alone: a real number has only one real cube root, and $(-4)^3 = -64$, so $x = -4$ uniquely. This definitively answers 'No, x is not positive,' which counts as sufficient.",
     "source": "original"
   },
@@ -1435,12 +1435,12 @@
     "difficulty": "medium",
     "prompt": "If $2y + 3 = 11$ and $z = 3y - 1$, what is the value of z?",
     "options": [
-      "11",
-      "10",
+      "9",
       "12",
-      "9"
+      "11",
+      "10"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From $2y + 3 = 11$, we get $2y = 8$, so $y = 4$. Substituting into $z = 3y - 1$: $z = 3(4) - 1 = 11$.",
     "source": "original"
   },
@@ -1451,13 +1451,13 @@
     "difficulty": "medium",
     "prompt": "Is m a multiple of 5?\n(1) m is a multiple of 15.\n(2) m is a multiple of 10.",
     "options": [
-      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
-      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
-      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
       "EACH statement alone is sufficient.",
-      "Statements (1) and (2) together are NOT sufficient."
+      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
+      "Statements (1) and (2) together are NOT sufficient.",
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
+      "BOTH statements together are sufficient, but neither statement alone is sufficient."
     ],
-    "correctIndex": 3,
+    "correctIndex": 0,
     "explanation": "Statement (1) alone: $15 = 3 \\times 5$, so any multiple of 15 is automatically a multiple of 5, giving a definite 'Yes,' which is sufficient. Statement (2) alone: $10 = 2 \\times 5$, so any multiple of 10 is automatically a multiple of 5, also a definite 'Yes' and sufficient. Each statement alone answers the question.",
     "source": "original"
   },
@@ -1468,12 +1468,12 @@
     "difficulty": "hard",
     "prompt": "The perimeter of a rectangle is 48 cm, and its length is 3 cm more than twice its width. What is the area of the rectangle?",
     "options": [
-      "119 cm²",
+      "105 cm²",
       "112 cm²",
-      "126 cm²",
-      "105 cm²"
+      "119 cm²",
+      "126 cm²"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Let width = w and length = $2w + 3$. The perimeter equation is $2(w + 2w + 3) = 48$, which simplifies to $6w + 6 = 48$, so $w = 7$. Then length = $2(7) + 3 = 17$. Area = width times length = $7 \\times 17 = 119$ cm².",
     "source": "original"
   },
@@ -1484,13 +1484,13 @@
     "difficulty": "medium",
     "prompt": "If a and b are integers, is a·b even?\n(1) a is even.\n(2) b is odd.",
     "options": [
-      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
-      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
+      "Statements (1) and (2) together are NOT sufficient.",
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
+      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
       "EACH statement alone is sufficient.",
-      "Statements (1) and (2) together are NOT sufficient."
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient."
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Statement (1) alone: if a is even, then a × b is even regardless of b's parity, since even times anything is even, giving a definite 'Yes,' which is sufficient. Statement (2) alone: knowing only that b is odd tells us nothing about a, so a·b could be even (if a is even) or odd (if a is odd), so it is not sufficient.",
     "source": "original"
   },
@@ -1501,13 +1501,13 @@
     "difficulty": "hard",
     "prompt": "Is x/y > 1?\n(1) x > y\n(2) x and y are positive.",
     "options": [
-      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
-      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
-      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
       "EACH statement alone is sufficient.",
-      "Statements (1) and (2) together are NOT sufficient."
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
+      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
+      "Statements (1) and (2) together are NOT sufficient.",
+      "BOTH statements together are sufficient, but neither statement alone is sufficient."
     ],
-    "correctIndex": 2,
+    "correctIndex": 4,
     "explanation": "Statement (1) alone: x > y doesn't fix the signs of x and y. For example, x=2, y=−5 gives x/y = −0.4, which is not greater than 1, but x=5, y=2 gives x/y = 2.5, which is, so it is not sufficient. Statement (2) alone: both being positive doesn't establish which is larger. For example, x=1, y=2 gives x/y=0.5, but x=3, y=2 gives x/y=1.5, so it is also not sufficient. Together, since y > 0, dividing both sides of x > y by y preserves the inequality direction, giving x/y > 1 always, so the statements are sufficient only in combination.",
     "source": "original"
   },
@@ -1518,13 +1518,13 @@
     "difficulty": "medium",
     "prompt": "A jar contains only red and blue marbles. What is the probability of randomly selecting a red marble?\n(1) The jar contains 12 red marbles.\n(2) The jar contains 8 blue marbles.",
     "options": [
-      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
       "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
-      "EACH statement alone is sufficient.",
-      "Statements (1) and (2) together are NOT sufficient."
+      "Statements (1) and (2) together are NOT sufficient.",
+      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
+      "EACH statement alone is sufficient."
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Statement (1) alone gives the red count but not the total, so it is not sufficient. Statement (2) alone gives the blue count but not the red count, so it is also not sufficient. Together, total = $12 + 8 = 20$, so $P(\\text{red}) = 12/20 = 3/5$, meaning the statements are sufficient only in combination.",
     "source": "original"
   },
@@ -1535,13 +1535,13 @@
     "difficulty": "hard",
     "prompt": "Is n an even integer?\n(1) n/2 is an integer.\n(2) $n^2$ is even.",
     "options": [
-      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
       "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
+      "Statements (1) and (2) together are NOT sufficient.",
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
-      "EACH statement alone is sufficient.",
-      "Statements (1) and (2) together are NOT sufficient."
+      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
+      "EACH statement alone is sufficient."
     ],
-    "correctIndex": 3,
+    "correctIndex": 4,
     "explanation": "Statement (1) alone: if n/2 is an integer, n is divisible by 2, meaning it is even, giving a definite 'Yes,' which is sufficient. Statement (2) alone: if n were odd, $n^2$ would be odd, since odd times odd is odd, so $n^2$ being even forces n to be even, also a definite 'Yes' and sufficient on its own.",
     "source": "original"
   },
@@ -1552,13 +1552,13 @@
     "difficulty": "hard",
     "prompt": "What is the value of x + y?\n(1) x − y = 6\n(2) 2x − 2y = 12",
     "options": [
-      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
       "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
+      "Statements (1) and (2) together are NOT sufficient.",
+      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
-      "EACH statement alone is sufficient.",
-      "Statements (1) and (2) together are NOT sufficient."
+      "EACH statement alone is sufficient."
     ],
-    "correctIndex": 4,
+    "correctIndex": 1,
     "explanation": "Statement (1) alone: x − y = 6 has infinitely many (x, y) pairs with different sums. For example, x=6,y=0 gives sum 6, while x=7,y=1 gives sum 8, so it is not sufficient. Statement (2) alone: $2x - 2y = 12$ simplifies to x − y = 6, the exact same equation, so it is not sufficient for the same reason. Together, statement (2) provides no new information beyond statement (1) since it is just twice the same equation, so x + y still cannot be pinned down, meaning the statements are NOT sufficient even combined.",
     "source": "original"
   },
@@ -1569,12 +1569,12 @@
     "difficulty": "hard",
     "prompt": "A number x is increased by 50% and then decreased by 20%, giving 84. A second number y is 15 less than x. What is the value of y?",
     "options": [
-      "55",
       "50",
       "60",
-      "65"
+      "65",
+      "55"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Increasing by 50% and then decreasing by 20% multiplies x by $1.5 \\times 0.8 = 1.2$, so $1.2x = 84$, giving $x = 70$. Since $y = x - 15$, $y = 70 - 15 = 55$.",
     "source": "original"
   },
@@ -1585,12 +1585,12 @@
     "difficulty": "hard",
     "prompt": "The average of five consecutive even integers is 24. What is the largest of the five integers?",
     "options": [
-      "28",
-      "26",
+      "32",
       "30",
-      "32"
+      "26",
+      "28"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "For an evenly spaced set of numbers, the average equals the middle term. The five consecutive even integers are symmetric around their middle value, so the middle term is 24. The largest term is two steps of 2 above the middle: $24 + 4 = 28$.",
     "source": "original"
   },
@@ -1601,12 +1601,12 @@
     "difficulty": "hard",
     "prompt": "For how many integer values of x between −5 and 5 (inclusive) is $x^2 > x$ true?",
     "options": [
-      "9",
-      "8",
+      "11",
       "10",
-      "11"
+      "9",
+      "8"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "$x^2 > x$ is equivalent to $x(x-1) > 0$, which is true when $x < 0$ or $x > 1$. Among the integers from −5 to 5, the values satisfying $x < 0$ are −5, −4, −3, −2, −1 (5 values), and those satisfying $x > 1$ are 2, 3, 4, 5 (4 values), giving $5 + 4 = 9$ total. x = 0 and x = 1 both fail, since $0^2 = 0$ is not greater than 0, and $1^2 = 1$ is not greater than 1.",
     "source": "original"
   }
