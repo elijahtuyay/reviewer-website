@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-13, at `main` HEAD `f0e6707`, VERSION.txt `1.4.1`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-15, at `main` HEAD `d3479a6`, VERSION.txt `1.5.0`.
 
 ## What this project is
 
@@ -86,22 +86,23 @@ This Next.js version (16.3.0) has **breaking changes vs. typical training data**
 - **PR #4**, `305160c` (v1.3.0) — the big `reminders.txt` batch: multi-exam architecture, KaTeX math rendering, sticky header, pause overlay, page transitions, brand accent color, full content overhaul (topic ratios, difficulty, em-dash removal) across all 300 questions.
 - **PR #5**, `2b26e9a` (v1.4.0) — post-merge autonomous audit (5 background agents: 3 design-system research, 2 bug hunts) + fixes: timer drift, localStorage write crash, mobile nav, tap targets, focus rings, lint cleanup.
 - **PR #6**, `f0e6707` (v1.4.1) — follow-up fix: color-only correctness indicator.
+- **PR #7**, `d3479a6` (v1.5.0) — response to user's post-PDF-review feedback batch. Fixed a severe pre-existing bug found while investigating (not explicitly reported): the correct answer's option slot was heavily skewed toward A bank-wide (logical-reasoning was 86/119 correctIndex 0, several topics literally 100% "always A") — fixed with a mechanical options-array shuffle across all 300 questions. Also: Para Forming (10 questions) had the printed P/Q/R/S line order always exactly matching the correct sequence, plus telltale concluding adverbs marking the last sentence — both fixed. Sentence Completion (12 questions) had distractor sets that were 3 near-synonyms vs. 1 obvious answer — rewritten to be individually plausible. Reading Comprehension trimmed 26→18 (two whole passages retired), replaced with 8 new "Vocabulary in Context" questions. Topic-bunching fixed via a display-order interleave (`interleaveByTopic` in `lib/data/questions.ts`, best-effort not a hard guarantee for topic-imbalanced draws). PauseOverlay copy simplified + crossfade transition added. ProgressTracker now stays visible after submission and color-codes cells green/red.
 
-**Current state: `main` is clean, builds and lints with zero errors/warnings, at v1.4.1.**
+**Current state: `main` is clean, builds and lints with zero errors/warnings, at v1.5.0.**
+
+## Lesson learned: never run multiple agents against the same data file concurrently
+
+During PR #7, three background content-editing agents were dispatched in parallel, all targeting `data/questions/language-skills.json` (different topics: Para Forming, Sentence Completion, Reading Comprehension/Vocabulary). They collided — each did a full-file read-modify-write, and whichever wrote last silently clobbered the others' work (and my own direct edits made in between). This wasn't caught by any agent's self-report; only independent verification (re-reading the file fresh and checking against expected state) caught it. Recovery required resuming each agent serially (one at a time, waiting for full completion + verification before starting the next) rather than trying to merge divergent edits.
+
+**Rule going forward: never dispatch more than one agent with write access to the same file at the same time.** If multiple content edits are needed on one file, either do them yourself sequentially, or dispatch agents one at a time and verify each one's result against the actual current file state before starting the next. This is the same class of near-miss documented elsewhere in this file (the `git mv` question-bank-relocation near-miss) — concurrent writers to shared state in this repo have bitten this project twice now.
 
 Stale local+remote branches from already-merged PRs still exist and were NOT cleaned up (not destructive, left for the user to decide): `chore/versioning-workflow`, `feature/question-bank-expansion-and-random-draw`, `feature/ui-theme-and-navigation`, `feature/batch-ux-content-overhaul`, `feature/gov-design-polish`, `feature/gov-design-typography`. Safe to delete (all merged), but ask before doing so since it's a git-history-visible action.
 
-## Open loop — READ THIS, it's the most likely reason a new session was started
+## Open loop status
 
-A full **300-question PDF answer key** (question + all options + correct answer marked + explanation, organized by section) was generated for the user to manually review for content inconsistencies:
+The PDF-answer-key review loop mentioned in earlier versions of this doc is **closed** — the user came back with a feedback batch (pause screen copy, transitions, PQRS predictability, topic bunching, RC overload, weak distractors, a specific modifier-question bug, progress-grid coloring) and all of it shipped in PR #7 (v1.5.0), see above. No PDF-review open loop remains as of this writing.
 
-```
-C:\Users\elija\Downloads\NMAT-Question-Bank-Answer-Key.pdf
-```
-
-Generated via a one-off Node script (`data/questions/*.json` → self-contained HTML using local KaTeX assets from `node_modules/katex` → headless Chrome `--print-to-pdf`, no new npm dependencies added). The generator script itself was a scratchpad file, not committed to the repo (it's a report generator, not app code — regenerate similarly if asked again; the pattern is: build HTML with `renderMathInElement` from `node_modules/katex/dist/contrib/auto-render.min.js`, then `"C:\Program Files\Google\Chrome\Application\chrome.exe" --headless --disable-gpu --no-pdf-header-footer --print-to-pdf=<out>.pdf <file>.html`).
-
-**The user is expected to come back with a list of specific inconsistencies found in that PDF.** When they do: this is content-correction work on `data/questions/*.json`, subject to the same copyright rule above (fix using original composition, verify math/logic by hand or with a script, don't just pattern-match), and should go through the normal branch → PR → review → merge workflow like everything else. Treat their list as ground truth for what's broken — they're checking against the real NMAT Official Guide (or just doing their own logic/math verification), not guessing.
+If asked to regenerate the answer-key PDF in the future: one-off Node script (`data/questions/*.json` → self-contained HTML using local KaTeX assets from `node_modules/katex` → headless Chrome `--print-to-pdf`, no new npm dependencies needed). Pattern: build HTML with `renderMathInElement` from `node_modules/katex/dist/contrib/auto-render.min.js`, then `"C:\Program Files\Google\Chrome\Application\chrome.exe" --headless --disable-gpu --no-pdf-header-footer --print-to-pdf=<out>.pdf <file>.html`. Not committed to the repo (it's a report generator, not app code).
 
 ## Environment quirks worth knowing
 
