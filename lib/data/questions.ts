@@ -34,15 +34,53 @@ function shuffle<T>(items: T[]): T[] {
   return result;
 }
 
-/** Draws a fresh random subset of `count` questions from the section's full bank. */
-export function drawRandomQuestionIds(examId: ExamId, section: SectionId, count: number): string[] {
-  return shuffle(getQuestionsForSection(examId, section))
-    .slice(0, count)
-    .map((q) => q.id);
+/**
+ * Reorders an already-random subset so no more than 2 consecutive questions
+ * share a topic. Without this, questions display in bank order (see
+ * getQuestionsByIds below), and since the bank is authored topic-by-topic,
+ * a random subset drawn from it still lands in visible topic clusters.
+ * Greedily picks from whichever remaining topic has the most items left,
+ * skipping a topic only if picking it would make a 3rd-in-a-row.
+ */
+function interleaveByTopic(items: Question[]): Question[] {
+  const groups = new Map<string, Question[]>();
+  for (const item of items) {
+    const group = groups.get(item.topic) ?? [];
+    group.push(item);
+    groups.set(item.topic, group);
+  }
+
+  const result: Question[] = [];
+  let lastTopic: string | null = null;
+  let secondLastTopic: string | null = null;
+
+  while (result.length < items.length) {
+    const candidates = [...groups.entries()]
+      .filter(([, group]) => group.length > 0)
+      .sort((a, b) => b[1].length - a[1].length);
+
+    const wouldRepeat = ([topic]: [string, Question[]]) =>
+      topic === lastTopic && topic === secondLastTopic;
+    const [topic, group] = candidates.find((c) => !wouldRepeat(c)) ?? candidates[0];
+
+    const next = group.shift() as Question;
+    result.push(next);
+    secondLastTopic = lastTopic;
+    lastTopic = topic;
+  }
+
+  return result;
 }
 
-/** Reconstructs the exact question set for a previously-drawn attempt, in the original bank order. */
+/** Draws a fresh random subset of `count` questions from the section's full bank, arranged so no topic repeats more than twice in a row. */
+export function drawRandomQuestionIds(examId: ExamId, section: SectionId, count: number): string[] {
+  const drawn = shuffle(getQuestionsForSection(examId, section)).slice(0, count);
+  return interleaveByTopic(drawn).map((q) => q.id);
+}
+
+/** Reconstructs the exact question set for a previously-drawn attempt, preserving the drawn/interleaved display order. */
 export function getQuestionsByIds(examId: ExamId, section: SectionId, ids: string[]): Question[] {
-  const idSet = new Set(ids);
-  return getQuestionsForSection(examId, section).filter((q) => idSet.has(q.id));
+  const questions = getQuestionsForSection(examId, section);
+  const byId = new Map(questions.map((q) => [q.id, q]));
+  return ids.map((id) => byId.get(id)).filter((q): q is Question => q !== undefined);
 }
