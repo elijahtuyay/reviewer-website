@@ -6,12 +6,12 @@
     "difficulty": "easy",
     "prompt": "Which sentence correctly applies subject-verb agreement with the pronoun \"neither\"?",
     "options": [
+      "Neither of the student have submit the assignment.",
       "Neither of the students have submitted the assignment.",
       "Neither of the students has submitted the assignment.",
-      "Neither of the student have submit the assignment.",
       "Neither the student has submit the assignment."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "\"Neither\" is a singular indefinite pronoun and always takes a singular verb (\"has\"), regardless of the plural noun in the \"of the ___\" phrase. Option A wrongly uses \"have\"; C and D have subject-verb and article errors.",
     "source": "original"
   },
@@ -23,11 +23,11 @@
     "prompt": "Which sentence pairs \"good\" with the correct preposition?",
     "options": [
       "He is good in mathematics.",
-      "He is good at mathematics.",
+      "He is good for mathematics.",
       "He is good on mathematics.",
-      "He is good for mathematics."
+      "He is good at mathematics."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "\"Good at\" is the standard idiomatic preposition pairing used for skills and subjects in English.",
     "source": "original"
   },
@@ -38,9 +38,9 @@
     "difficulty": "hard",
     "prompt": "Which sentence correctly sequences the past and past perfect tenses?",
     "options": [
-      "By the time we reached the station, the train left.",
-      "By the time we reached the station, the train had left.",
       "By the time we reach the station, the train had left.",
+      "By the time we reached the station, the train had left.",
+      "By the time we reached the station, the train left.",
       "By the time we reached the station, the train has left."
     ],
     "correctIndex": 1,
@@ -54,12 +54,12 @@
     "difficulty": "medium",
     "prompt": "Which sentence uses the correct article before \"European\"?",
     "options": [
+      "She is European citizen.",
       "She is an European citizen.",
       "She is a European citizen.",
-      "She is the European citizen.",
-      "She is European citizen."
+      "She is the European citizen."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "\"European\" begins with a consonant sound (/j/, as in \"yu-ro-pee-an\"), so the correct article is \"a,\" not \"an,\" since the choice between a/an depends on sound rather than spelling.",
     "source": "original"
   },
@@ -70,12 +70,12 @@
     "difficulty": "easy",
     "prompt": "Which sentence correctly forms the superlative degree?",
     "options": [
-      "This is the most tallest building in the city.",
-      "This is the tallest building in the city.",
       "This is more tallest building in the city.",
-      "This is tallest building in the city."
+      "This is the most tallest building in the city.",
+      "This is tallest building in the city.",
+      "This is the tallest building in the city."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "Double superlatives like \"most tallest\" are incorrect; \"tallest\" alone is the correct superlative form, and it requires the definite article \"the\" before it.",
     "source": "original"
   },
@@ -87,11 +87,11 @@
     "prompt": "Which sentence keeps parallel structure across a series of activities?",
     "options": [
       "She likes reading, writing, and to swim.",
+      "She likes read, write, and swim.",
       "She likes reading, writing, and swimming.",
-      "She likes to read, writing, and swim.",
-      "She likes read, write, and swim."
+      "She likes to read, writing, and swim."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "Items in a list or series must share the same grammatical form (parallelism). Here, all three activities must be in gerund form: reading, writing, swimming. Each wrong option mixes a gerund with an infinitive or bare verb somewhere in the series, which is easy to miss on a quick read.",
     "source": "original"
   },
@@ -102,10 +102,10 @@
     "difficulty": "medium",
     "prompt": "Which sentence avoids a dangling modifier?",
     "options": [
-      "Walking to the store, the rain started falling.",
+      "I walking to the store, the rain started falling.",
       "Walking to the store, I got caught in the rain.",
-      "The rain, walking to the store, started falling.",
-      "I walking to the store, the rain started falling."
+      "Walking to the store, the rain started falling.",
+      "The rain, walking to the store, started falling."
     ],
     "correctIndex": 1,
     "explanation": "An introductory participial phrase (\"Walking to the store\") must modify the subject actually performing the action, which here is \"I.\" Options A and C wrongly imply the rain was walking, a dangling modifier error.",
@@ -118,12 +118,12 @@
     "difficulty": "medium",
     "prompt": "Which sentence correctly treats \"information\" as an uncountable noun?",
     "options": [
-      "She gave me some useful informations.",
       "She gave me some useful information.",
       "She gave me an useful information.",
-      "She gave me some useful informations pieces."
+      "She gave me some useful informations pieces.",
+      "She gave me some useful informations."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "\"Information\" is an uncountable noun in English and has no plural form, so \"informations\" is incorrect in every option that uses it.",
     "source": "original"
   },
@@ -133,9 +133,14 @@
     "topic": "Sentence Completion",
     "difficulty": "medium",
     "prompt": "Choose the word that best completes the sentence: \"The editor was so ____ in her review that she caught even the smallest typographical errors that others had missed.\"",
-    "options": ["careless", "meticulous", "hasty", "indifferent"],
-    "correctIndex": 1,
-    "explanation": "\"Meticulous\" means showing extreme care and precision, which fits the context of catching the smallest errors. The other options describe carelessness or lack of attention, which contradict the sentence.",
+    "options": [
+      "meticulous",
+      "efficient",
+      "opinionated",
+      "hasty"
+    ],
+    "correctIndex": 0,
+    "explanation": "Meticulous means showing extreme care and precision, which explains how the editor caught even the smallest errors that others missed. Efficient describes working quickly with minimal wasted effort, which does not by itself explain the ability to spot tiny mistakes. Hasty means rushed, which would make her more likely to miss errors, not catch them. Opinionated describes having strong personal views, a trait unrelated to carefulness in proofreading.",
     "source": "original"
   },
   {
@@ -145,12 +150,12 @@
     "difficulty": "hard",
     "prompt": "Passage: \"Researchers studying sleep have found that it plays an active role in strengthening memories formed during the day, a process known as memory consolidation. Rather than simply resting, the brain appears to replay and reorganize recent experiences during certain sleep stages, particularly during deep, slow-wave sleep. Studies involving both animals and humans have shown that people who sleep shortly after learning new information tend to retain it better than those who stay awake for a comparable period. Interestingly, not all types of memory benefit equally; procedural memory, such as the skill of playing a musical instrument, appears to depend more heavily on later stages of sleep, while factual memory seems to consolidate earlier in the night. This has led some researchers to recommend that students avoid pulling all-nighters before exams, since skipping sleep may undermine the very consolidation process needed to retain studied material. Although much about the relationship between sleep and memory remains under investigation, the existing evidence points clearly toward sleep being an active, necessary participant in learning rather than a passive break from it.\" Based on the passage, which finding would most directly challenge the claim that sleep is an active, necessary participant in learning?",
     "options": [
-      "A study showing that students who stayed awake all night performed just as well on a factual recall test as those who slept.",
+      "A study showing that students who napped briefly after studying outperformed those who did not nap.",
       "A study showing that musicians who slept eight hours improved faster at a new piece than those who slept four.",
       "A study showing that slow-wave sleep activity increases after intensive learning sessions.",
-      "A study showing that students who napped briefly after studying outperformed those who did not nap."
+      "A study showing that students who stayed awake all night performed just as well on a factual recall test as those who slept."
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "\"Malevolent\" describes a general wish to do harm, which matches a character whose underlying intentions turn out to be evil despite his charming exterior. \"Vindictive\" is a closer trap than it first appears, since it also carries a negative sense, but it specifically means motivated by revenge, and nothing in the sentence suggests the betrayal was payback for a prior wrong. \"Benevolent\" and \"altruistic\" both describe kindness, which contradicts the betrayal described.",
     "source": "original"
   },
@@ -160,9 +165,14 @@
     "topic": "Sentence Completion",
     "difficulty": "medium",
     "prompt": "Choose the word that best completes the sentence: \"The cherry blossoms are prized precisely because their beauty is so ____, lasting only a week or two each spring.\"",
-    "options": ["permanent", "transient", "eternal", "durable"],
-    "correctIndex": 1,
-    "explanation": "\"Transient\" means lasting for a very short time, which matches the description of blossoms that last only a week or two. The other options all suggest lasting a long time, which contradicts the sentence.",
+    "options": [
+      "vibrant",
+      "delicate",
+      "transient",
+      "durable"
+    ],
+    "correctIndex": 2,
+    "explanation": "Transient means lasting for a very short time, matching blossoms that last \"only a week or two.\" Vibrant describes vivid color or energy, a quality the blossoms may have but one that says nothing about how long they last. Delicate describes physical fragility, which is plausible for blossoms but does not itself explain their short duration; something delicate could still last a long time if left undisturbed. Durable describes something built to withstand wear over a long period, the opposite of what the sentence describes.",
     "source": "original"
   },
   {
@@ -171,9 +181,14 @@
     "topic": "Sentence Completion",
     "difficulty": "medium",
     "prompt": "Choose the word that best completes the sentence: \"After criticism that his reports were too verbose, the manager made an effort to write more ____ summaries that got straight to the point.\"",
-    "options": ["wordy", "concise", "elaborate", "rambling"],
-    "correctIndex": 1,
-    "explanation": "\"Concise\" means brief and to the point, which matches the goal of getting \"straight to the point\" after being criticized for verbosity. The other options are near-synonyms of \"verbose\" and would not fix the problem described.",
+    "options": [
+      "concise",
+      "abrupt",
+      "detailed",
+      "informal"
+    ],
+    "correctIndex": 0,
+    "explanation": "Concise means brief and clear, which matches the goal of writing summaries that \"get straight to the point\" after criticism for being too verbose. Detailed suggests including more information, which runs counter to the goal of shortening the reports. Informal describes a casual tone, an unrelated quality that does not address length at all. Abrupt suggests being curtly or rudely brief, which fixes the length problem but introduces a negative tone the sentence does not describe.",
     "source": "original"
   },
   {
@@ -182,25 +197,14 @@
     "topic": "Analogies",
     "difficulty": "medium",
     "prompt": "Author is to Book as Composer is to ___?",
-    "options": ["Instrument", "Symphony", "Orchestra", "Concert"],
+    "options": [
+      "Instrument",
+      "Symphony",
+      "Concert",
+      "Orchestra"
+    ],
     "correctIndex": 1,
     "explanation": "An author creates a book; a composer creates a symphony. The relationship is creator to creation, so \"Orchestra\" and \"Concert,\" which describe who performs the work rather than the work itself, do not fit as well as \"Symphony.\"",
-    "source": "original"
-  },
-  {
-    "id": "ls-014",
-    "section": "language-skills",
-    "topic": "Reading Comprehension",
-    "difficulty": "medium",
-    "prompt": "Passage: \"Long before modern postal services existed, ancient empires relied on relay systems to move messages across vast distances. The Persian Empire, for example, maintained a network of way-stations along its royal road, where messengers could exchange tired horses for fresh ones and continue their journey without pause. This system allowed urgent dispatches to travel hundreds of miles in a matter of days, a remarkable feat for its time. Centuries later, similar relay networks appeared in the Mongol Empire, whose yam system connected distant provinces through a chain of staffed outposts. These early networks were built primarily to serve rulers and military commanders, not ordinary citizens, who had few means of sending private correspondence. It was not until postal services became publicly available, centuries afterward, that everyday people gained routine access to long-distance written communication. Historians note that the efficiency of these ancient relay systems depended heavily on political stability; when empires fragmented or fell into conflict, the networks supporting them quickly deteriorated, and messages that once took days to deliver could take weeks or fail to arrive at all.\" According to the passage, what changed once postal services became publicly available?",
-    "options": [
-      "Everyday people gained routine access to long-distance written communication.",
-      "Ancient relay systems were immediately abandoned everywhere.",
-      "Messengers no longer needed fresh horses to travel long distances.",
-      "Political stability was no longer necessary for message delivery."
-    ],
-    "correctIndex": 0,
-    "explanation": "The passage states directly that it was not until postal services became publicly available that everyday people gained routine access to long-distance written communication.",
     "source": "original"
   },
   {
@@ -209,8 +213,13 @@
     "topic": "Prepositions",
     "difficulty": "hard",
     "prompt": "Choose the correct preposition to complete the sentence: \"The board's decision was independent ___ any pressure from shareholders.\"",
-    "options": ["of", "from", "to", "with"],
-    "correctIndex": 0,
+    "options": [
+      "from",
+      "with",
+      "of",
+      "to"
+    ],
+    "correctIndex": 2,
     "explanation": "The standard idiom is \"independent of,\" not \"independent from.\" Test-takers often reach for \"from\" here because it's correct in a similar-sounding phrase, \"different from,\" but \"independent\" specifically pairs with \"of.\"",
     "source": "original"
   },
@@ -220,8 +229,13 @@
     "topic": "Analogies",
     "difficulty": "easy",
     "prompt": "Doctor is to Patient as Teacher is to ___?",
-    "options": ["Classroom", "Student", "School", "Lesson"],
-    "correctIndex": 1,
+    "options": [
+      "Student",
+      "Classroom",
+      "School",
+      "Lesson"
+    ],
+    "correctIndex": 0,
     "explanation": "A doctor's professional relationship is with a patient; a teacher's parallel professional relationship is with a student.",
     "source": "original"
   },
@@ -232,12 +246,12 @@
     "difficulty": "medium",
     "prompt": "Choose the best version of the sentence: \"The reason why he failed is because he did not study.\"",
     "options": [
-      "The reason why he failed is because he did not study.",
       "The reason he failed is that he did not study.",
       "The reason why he failed is that because he did not study.",
+      "The reason why he failed is because he did not study.",
       "He failed because the reason is he did not study."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "\"The reason why...is because\" is a redundant construction. The concise, correct form is \"The reason...is that\".",
     "source": "original"
   },
@@ -248,12 +262,12 @@
     "difficulty": "medium",
     "prompt": "Choose the best version of the sentence: \"Each of the players have their own locker.\"",
     "options": [
-      "Each of the players have their own locker.",
       "Each of the players has their own locker.",
-      "Each of the player have their own locker.",
-      "Each of the players has its own locker."
+      "Each of the players have their own locker.",
+      "Each of the players has its own locker.",
+      "Each of the player have their own locker."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "\"Each\" is singular and takes \"has\". \"Their\" is acceptable as a gender-neutral singular possessive referring back to \"each\", while \"its\" in option D wrongly treats the players as non-human.",
     "source": "original"
   },
@@ -264,12 +278,12 @@
     "difficulty": "hard",
     "prompt": "Choose the best version of the sentence: \"Not only he was late, but also he forgot his notes.\"",
     "options": [
-      "Not only he was late, but also he forgot his notes.",
-      "Not only was he late, but he also forgot his notes.",
+      "Not only was he late, but also forgot his notes.",
       "Not only he was late, but he also forgot his notes.",
-      "Not only was he late, but also forgot his notes."
+      "Not only was he late, but he also forgot his notes.",
+      "Not only he was late, but also he forgot his notes."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "\"Not only\" at the start of a clause requires subject-verb inversion (\"was he\"), and the correlative pair \"not only...but also\" must remain structurally parallel.",
     "source": "original"
   },
@@ -280,12 +294,12 @@
     "difficulty": "hard",
     "prompt": "Choose the best version of the sentence: \"A number of employees has requested extended leave this year.\"",
     "options": [
+      "A number of employees have request extended leave this year.",
       "A number of employees has requested extended leave this year.",
-      "A number of employees have requested extended leave this year.",
       "A number of employee have requested extended leave this year.",
-      "A number of employees have request extended leave this year."
+      "A number of employees have requested extended leave this year."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "\"A number of\" (meaning \"several\") functions as a plural subject and takes a plural verb (\"have\"), while \"the number of\" is treated as singular and takes a singular verb. Option A wrongly uses the singular \"has\"; C has a noun-number error (\"employee\"); D has an incorrect verb form (\"have request\").",
     "source": "original"
   },
@@ -296,12 +310,12 @@
     "difficulty": "medium",
     "prompt": "Choose the best version of the sentence: \"Between you and I, this plan will not work.\"",
     "options": [
+      "Between yourself and me, this plan will not work.",
       "Between you and I, this plan will not work.",
       "Between you and me, this plan will not work.",
-      "Between yourself and me, this plan will not work.",
       "Between I and you, this plan will not work."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "\"Between\" is a preposition and must be followed by object pronouns (\"you and me\"), not the subject pronoun \"I\".",
     "source": "original"
   },
@@ -312,12 +326,12 @@
     "difficulty": "hard",
     "prompt": "Choose the best version of the sentence: \"He is one of the students who has finished the assignment.\"",
     "options": [
-      "He is one of the students who has finished the assignment.",
-      "He is one of the students who have finished the assignment.",
+      "He is one of the students who finishes the assignment.",
       "He is one of the student who have finished the assignment.",
-      "He is one of the students who finishes the assignment."
+      "He is one of the students who have finished the assignment.",
+      "He is one of the students who has finished the assignment."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "\"Who\" refers back to \"students\" (plural) in \"one of the students who...\", so the verb must agree with the plural noun: \"have finished\".",
     "source": "original"
   },
@@ -326,10 +340,15 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "hard",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nP: The monsoon arrived nearly a month late this year.\nQ: Farmers scrambled to adjust their planting schedules once it did.\nR: Even so, nearly a third of the region's rice fields missed the optimal window.\nS: Those fields ultimately produced yields far below the five-year average.",
-    "options": ["PQRS", "PRQS", "QPRS", "PQSR"],
-    "correctIndex": 0,
-    "explanation": "P sets up the late monsoon, Q describes the immediate reaction (\"it\" needs the monsoon from P to refer to), R introduces a complication with \"Even so,\" which must follow the adjustment effort described in Q, and S states the final consequence. In QPRS, \"it\" in Q has no antecedent yet. In PRQS, \"Even so\" appears before the adjustment it's supposed to contrast with. In PQSR, the outcome (S) is stated before the detail (R) that explains why it happened.",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nR: Even so, nearly a third of the region's rice fields missed the optimal window.\nS: Those fields produced yields far below the five-year average.\nP: The monsoon arrived nearly a month late this year.\nQ: Farmers scrambled to adjust their planting schedules once it did.",
+    "options": [
+      "PRQS",
+      "PQSR",
+      "QPRS",
+      "PQRS"
+    ],
+    "correctIndex": 3,
+    "explanation": "P sets up the late monsoon, Q describes the immediate reaction (\"it\" needs the monsoon from P to refer to), R introduces a complication with \"Even so,\" which must follow the adjustment effort described in Q, and S states the consequence for the fields R identifies. In QPRS, \"it\" in Q has no antecedent yet. In PRQS, \"Even so\" appears before the adjustment it's supposed to contrast with. In PQSR, the outcome (S) is stated before the detail (R) that identifies which fields it refers to.",
     "source": "original"
   },
   {
@@ -338,8 +357,13 @@
     "topic": "Para Forming",
     "difficulty": "hard",
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nP: However, the results were not as expected.\nQ: The scientists conducted the experiment three times.\nR: They decided to revise their hypothesis.\nS: Each time, they recorded the data carefully.",
-    "options": ["QSPR", "QPSR", "SQPR", "QSRP"],
-    "correctIndex": 0,
+    "options": [
+      "SQPR",
+      "QSPR",
+      "QSRP",
+      "QPSR"
+    ],
+    "correctIndex": 1,
     "explanation": "Q sets up the experiment, S describes the careful process during it (\"each time\" needs the repetition established in Q), P introduces the contrasting outcome, and R gives the resulting decision. In SQPR, \"each time\" comes before any repetition has been mentioned. In QSRP, the decision to revise (R) is stated before the surprising results (P) that motivated it. In QPSR, \"however\" in P appears with no prior expectation on record yet.",
     "source": "original"
   },
@@ -348,9 +372,14 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "hard",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: A new law was passed to regulate online marketplaces.\nR: It required every seller, regardless of size, to pay a flat listing fee.\nP: Small sellers found the fee ate up a much larger share of their thin profit margins than it did for large retailers.\nS: Many of them began shifting their listings to marketplaces outside the law's jurisdiction.",
-    "options": ["QRPS", "RQPS", "QPRS", "QRSP"],
-    "correctIndex": 0,
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nS: Many of them began shifting their listings to marketplaces outside the law's jurisdiction.\nP: Small sellers found the fee ate up a much larger share of their thin profit margins than it did for large retailers.\nQ: A new law was passed to regulate online marketplaces.\nR: It required every seller, regardless of size, to pay a flat listing fee.",
+    "options": [
+      "QRSP",
+      "QPRS",
+      "RQPS",
+      "QRPS"
+    ],
+    "correctIndex": 3,
     "explanation": "Q introduces the law, R explains its specific requirement (\"it\" needs the law from Q), P shows the disproportionate effect on small sellers (\"the fee\" needs R), and S gives the resulting action (\"them\" needs the small sellers named in P). In RQPS, \"it\" in R has no antecedent yet. In QPRS, \"the fee\" in P is mentioned before R introduces it. In QRSP, \"them\" in S is ambiguous because P, which singles out small sellers specifically, hasn't appeared yet.",
     "source": "original"
   },
@@ -359,10 +388,15 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "hard",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: Traffic congestion had become a major problem in the downtown core.\nP: City planners responded by building a network of protected bicycle lanes connecting the main districts.\nR: Ridership on those lanes tripled within the first year, far outpacing the planners' initial projections.\nS: Even so, average commute times downtown had barely changed by the time the network's second year began.",
-    "options": ["QPRS", "QRPS", "PQRS", "QPSR"],
-    "correctIndex": 0,
-    "explanation": "Q states the problem, P describes the response (\"responded\" needs the problem from Q), R reports the early results (\"those lanes\" needs P), and S delivers a twist with \"Even so,\" which must follow the promising ridership numbers in R. In QRPS, \"those lanes\" in R is mentioned before P builds them. In PQRS, \"responded\" opens the paragraph with nothing to respond to. In QPSR, \"Even so\" in S has no contrasting success yet to push back against.",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nR: Ridership on those lanes tripled within the first year, far outpacing the planners' initial projections.\nQ: Traffic congestion had become a major problem in the downtown core.\nS: Average commute times downtown had barely changed by the time the network's second year began.\nP: City planners responded by building a network of protected bicycle lanes connecting the main districts.",
+    "options": [
+      "PQRS",
+      "QRPS",
+      "QPSR",
+      "QPRS"
+    ],
+    "correctIndex": 3,
+    "explanation": "Q states the problem, P describes the planners' response (\"responded\" needs the congestion problem from Q), R reports the early results (\"those lanes\" needs the network built in P), and S gives the longer-term outcome by the start of the network's second year, which must follow the first-year ridership figures in R. In QRPS, \"those lanes\" in R is mentioned before P ever builds them. In PQRS, \"responded\" opens the paragraph with nothing to respond to. In QPSR, the second-year commute data (S) is reported before the first-year ridership surge (R) it's building on.",
     "source": "original"
   },
   {
@@ -372,12 +406,12 @@
     "difficulty": "easy",
     "prompt": "Passage: \"In recent years, several cities have begun encouraging residents to keep beehives on rooftops and in community gardens. Proponents argue that urban beekeeping helps pollinate city gardens and parks, supporting biodiversity in otherwise concrete-heavy environments. Critics, however, point out that a sudden rise in managed honeybee colonies can crowd out native wild bee species, which are often more effective pollinators for local plants but receive far less public attention. Some ecologists now recommend that cities balance beekeeping initiatives with programs that specifically protect native pollinator habitats, rather than treating honeybee introduction alone as a solution to urban biodiversity loss.\" According to the passage, what is one concern critics raise about urban beekeeping?",
     "options": [
-      "It is too expensive for city governments to support.",
       "It may crowd out native wild bee species.",
+      "It is too expensive for city governments to support.",
       "Honeybees cannot survive in urban environments.",
       "It reduces the number of community gardens."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "The passage directly states that critics point out managed honeybee colonies can crowd out native wild bee species.",
     "source": "original"
   },
@@ -388,10 +422,10 @@
     "difficulty": "medium",
     "prompt": "Passage: \"In recent years, several cities have begun encouraging residents to keep beehives on rooftops and in community gardens. Proponents argue that urban beekeeping helps pollinate city gardens and parks, supporting biodiversity in otherwise concrete-heavy environments. Critics, however, point out that a sudden rise in managed honeybee colonies can crowd out native wild bee species, which are often more effective pollinators for local plants but receive far less public attention. Some ecologists now recommend that cities balance beekeeping initiatives with programs that specifically protect native pollinator habitats, rather than treating honeybee introduction alone as a solution to urban biodiversity loss.\" What do some ecologists recommend, according to the passage?",
     "options": [
+      "Moving all beehives to rural areas.",
       "Banning beekeeping in cities entirely.",
-      "Focusing exclusively on honeybee population growth.",
       "Balancing beekeeping with protection of native pollinator habitats.",
-      "Moving all beehives to rural areas."
+      "Focusing exclusively on honeybee population growth."
     ],
     "correctIndex": 2,
     "explanation": "The passage explicitly recommends balancing beekeeping initiatives with programs protecting native pollinator habitats, rather than treating honeybees alone as the fix.",
@@ -403,7 +437,12 @@
     "topic": "Reading Comprehension",
     "difficulty": "medium",
     "prompt": "Passage: \"In recent years, several cities have begun encouraging residents to keep beehives on rooftops and in community gardens. Proponents argue that urban beekeeping helps pollinate city gardens and parks, supporting biodiversity in otherwise concrete-heavy environments. Critics, however, point out that a sudden rise in managed honeybee colonies can crowd out native wild bee species, which are often more effective pollinators for local plants but receive far less public attention. Some ecologists now recommend that cities balance beekeeping initiatives with programs that specifically protect native pollinator habitats, rather than treating honeybee introduction alone as a solution to urban biodiversity loss.\" The word \"proponents\" in the passage most nearly means:",
-    "options": ["Opponents", "Supporters", "Scientists", "Beginners"],
+    "options": [
+      "Scientists",
+      "Supporters",
+      "Opponents",
+      "Beginners"
+    ],
     "correctIndex": 1,
     "explanation": "\"Proponents\" means people who advocate for or support something, in this case urban beekeeping.",
     "source": "original"
@@ -416,11 +455,11 @@
     "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers. The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" What was the main finding of the study regarding productivity?",
     "options": [
       "Remote workers were significantly less productive.",
-      "There was no significant difference in output across the three groups.",
       "In-office workers were the most productive.",
+      "There was no significant difference in output across the three groups.",
       "Hybrid workers were the least productive."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "The passage states directly that the study found no significant difference in output between the three groups.",
     "source": "original"
   },
@@ -431,12 +470,12 @@
     "difficulty": "medium",
     "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers. The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" Which group reported the highest job satisfaction?",
     "options": [
-      "Fully remote employees",
-      "Fully in-office employees",
       "Hybrid employees",
-      "All groups reported equal satisfaction"
+      "All groups reported equal satisfaction",
+      "Fully remote employees",
+      "Fully in-office employees"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "The passage explicitly states hybrid workers reported the highest levels of job satisfaction.",
     "source": "original"
   },
@@ -447,12 +486,12 @@
     "difficulty": "hard",
     "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers. The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" What concern do the study's authors raise at the end of the passage?",
     "options": [
-      "That productivity metrics may not capture long-term effects of isolation.",
       "That hybrid work is too expensive to maintain.",
       "That in-office work will soon become obsolete.",
+      "That productivity metrics may not capture long-term effects of isolation.",
       "That remote workers are less honest about their output."
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "The passage's final sentence states this caution directly: productivity metrics alone may not capture the long-term effects of isolation on retention.",
     "source": "original"
   },
@@ -462,52 +501,14 @@
     "topic": "Reading Comprehension",
     "difficulty": "medium",
     "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers. The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" The word \"isolated\" in the passage is closest in meaning to:",
-    "options": ["Motivated", "Disconnected", "Overworked", "Efficient"],
-    "correctIndex": 1,
+    "options": [
+      "Disconnected",
+      "Overworked",
+      "Motivated",
+      "Efficient"
+    ],
+    "correctIndex": 0,
     "explanation": "\"Isolated\" means cut off or disconnected from others, which matches \"disconnected\".",
-    "source": "original"
-  },
-  {
-    "id": "ls-034",
-    "section": "language-skills",
-    "topic": "Reading Comprehension",
-    "difficulty": "easy",
-    "prompt": "Passage: \"The invention of the printing press in the fifteenth century is often credited with transforming the spread of knowledge across Europe. Before its widespread adoption, books were copied by hand, a slow and costly process that limited literacy to a small elite. Once printed books became more affordable, literacy rates gradually rose, and ideas that had once circulated only among scholars began reaching merchants, craftsmen, and eventually the general public. Some historians argue that this shift did not happen overnight; rather, it took several generations for printed material to fully displace oral tradition and handwritten manuscripts as the dominant means of sharing information.\" According to the passage, what limited literacy before the printing press became widespread?",
-    "options": [
-      "A lack of interest in reading among the general public.",
-      "The slow, costly process of copying books by hand.",
-      "Strict government censorship of written material.",
-      "The absence of a standardized written language."
-    ],
-    "correctIndex": 1,
-    "explanation": "The passage states that hand-copying books was slow and costly, which limited literacy to a small elite.",
-    "source": "original"
-  },
-  {
-    "id": "ls-035",
-    "section": "language-skills",
-    "topic": "Reading Comprehension",
-    "difficulty": "hard",
-    "prompt": "Passage: \"The invention of the printing press in the fifteenth century is often credited with transforming the spread of knowledge across Europe. Before its widespread adoption, books were copied by hand, a slow and costly process that limited literacy to a small elite. Once printed books became more affordable, literacy rates gradually rose, and ideas that had once circulated only among scholars began reaching merchants, craftsmen, and eventually the general public. Some historians argue that this shift did not happen overnight; rather, it took several generations for printed material to fully displace oral tradition and handwritten manuscripts as the dominant means of sharing information.\" What do some historians argue about the shift caused by the printing press?",
-    "options": [
-      "It happened overnight, immediately replacing older traditions.",
-      "It took several generations to fully displace oral and handwritten traditions.",
-      "It had no real effect on literacy rates.",
-      "It was resisted only by scholars."
-    ],
-    "correctIndex": 1,
-    "explanation": "The passage states this directly: some historians argue the shift took several generations, not that it happened overnight.",
-    "source": "original"
-  },
-  {
-    "id": "ls-036",
-    "section": "language-skills",
-    "topic": "Reading Comprehension",
-    "difficulty": "hard",
-    "prompt": "Passage: \"The invention of the printing press in the fifteenth century is often credited with transforming the spread of knowledge across Europe. Before its widespread adoption, books were copied by hand, a slow and costly process that limited literacy to a small elite. Once printed books became more affordable, literacy rates gradually rose, and ideas that had once circulated only among scholars began reaching merchants, craftsmen, and eventually the general public. Some historians argue that this shift did not happen overnight; rather, it took several generations for printed material to fully displace oral tradition and handwritten manuscripts as the dominant means of sharing information.\" The word \"displace\" in the passage most nearly means:",
-    "options": ["Reinforce", "Replace", "Relocate", "Preserve"],
-    "correctIndex": 1,
-    "explanation": "\"Displace\" means to take the place of or supersede something. \"Relocate\" is a tempting near-miss because it also involves movement, but it implies physically moving something to a new place, not one thing overtaking another's role, which is what the passage describes happening to oral tradition and handwritten manuscripts.",
     "source": "original"
   },
   {
@@ -516,8 +517,13 @@
     "topic": "Prepositions",
     "difficulty": "easy",
     "prompt": "Choose the correct preposition to complete the sentence: \"He is allergic ___ peanuts.\"",
-    "options": ["to", "of", "with", "for"],
-    "correctIndex": 0,
+    "options": [
+      "with",
+      "for",
+      "of",
+      "to"
+    ],
+    "correctIndex": 3,
     "explanation": "The standard idiom is \"allergic to\" something.",
     "source": "original"
   },
@@ -527,8 +533,13 @@
     "topic": "Prepositions",
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"The company is known ___ its excellent customer service.\"",
-    "options": ["for", "of", "with", "at"],
-    "correctIndex": 0,
+    "options": [
+      "at",
+      "with",
+      "for",
+      "of"
+    ],
+    "correctIndex": 2,
     "explanation": "The standard idiom is \"known for\" a quality or reputation.",
     "source": "original"
   },
@@ -538,8 +549,13 @@
     "topic": "Prepositions",
     "difficulty": "hard",
     "prompt": "Choose the correct preposition to complete the sentence: \"She apologized to her supervisor ___ being late to the meeting.\"",
-    "options": ["for", "to", "about", "of"],
-    "correctIndex": 0,
+    "options": [
+      "of",
+      "to",
+      "about",
+      "for"
+    ],
+    "correctIndex": 3,
     "explanation": "When both the person and the reason are named, English pairs \"apologize to [someone]\" with \"for [the reason]\"; having already used \"to\" for the supervisor makes \"to\" a tempting repeat choice, but the reason still needs \"for\".",
     "source": "original"
   },
@@ -549,8 +565,13 @@
     "topic": "Prepositions",
     "difficulty": "hard",
     "prompt": "Choose the correct preposition to complete the sentence: \"They arrived ___ the airport two hours early.\"",
-    "options": ["in", "to", "at", "on"],
-    "correctIndex": 2,
+    "options": [
+      "at",
+      "to",
+      "in",
+      "on"
+    ],
+    "correctIndex": 0,
     "explanation": "\"Arrive at\" is used for smaller or specific locations such as an airport, station, or building, while \"arrive in\" is used for cities or countries, a distinction that trips up many learners since both sound equally natural at first glance.",
     "source": "original"
   },
@@ -560,7 +581,12 @@
     "topic": "Prepositions",
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"He is capable ___ solving the problem on his own.\"",
-    "options": ["of", "to", "for", "with"],
+    "options": [
+      "of",
+      "with",
+      "for",
+      "to"
+    ],
     "correctIndex": 0,
     "explanation": "The standard idiom is \"capable of\" doing something.",
     "source": "original"
@@ -571,8 +597,13 @@
     "topic": "Prepositions",
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"The teacher insisted ___ punctuality from every student.\"",
-    "options": ["on", "for", "at", "about"],
-    "correctIndex": 0,
+    "options": [
+      "about",
+      "for",
+      "at",
+      "on"
+    ],
+    "correctIndex": 3,
     "explanation": "The standard idiom is \"insist on\" something.",
     "source": "original"
   },
@@ -582,7 +613,12 @@
     "topic": "Prepositions",
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"She was accused ___ cheating on the exam.\"",
-    "options": ["for", "with", "of", "about"],
+    "options": [
+      "about",
+      "for",
+      "of",
+      "with"
+    ],
     "correctIndex": 2,
     "explanation": "The standard idiom is \"accused of\" a wrongdoing.",
     "source": "original"
@@ -593,8 +629,13 @@
     "topic": "Prepositions",
     "difficulty": "hard",
     "prompt": "Choose the correct preposition to complete the sentence: \"The results are consistent ___ our expectations.\"",
-    "options": ["to", "with", "of", "for"],
-    "correctIndex": 1,
+    "options": [
+      "of",
+      "for",
+      "with",
+      "to"
+    ],
+    "correctIndex": 2,
     "explanation": "The standard idiom is \"consistent with\" something; \"consistent to\" is a common but incorrect substitution that many speakers use without noticing.",
     "source": "original"
   },
@@ -604,8 +645,13 @@
     "topic": "Prepositions",
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"He congratulated her ___ her promotion.\"",
-    "options": ["for", "of", "on", "about"],
-    "correctIndex": 2,
+    "options": [
+      "about",
+      "of",
+      "for",
+      "on"
+    ],
+    "correctIndex": 3,
     "explanation": "The standard idiom is \"congratulate someone on\" an achievement.",
     "source": "original"
   },
@@ -615,7 +661,12 @@
     "topic": "Prepositions",
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"The book consists ___ twelve chapters.\"",
-    "options": ["in", "of", "with", "from"],
+    "options": [
+      "in",
+      "of",
+      "from",
+      "with"
+    ],
     "correctIndex": 1,
     "explanation": "The standard idiom is \"consist of\" parts or components.",
     "source": "original"
@@ -626,8 +677,13 @@
     "topic": "Prepositions",
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"She is interested ___ learning French.\"",
-    "options": ["on", "in", "at", "for"],
-    "correctIndex": 1,
+    "options": [
+      "for",
+      "at",
+      "in",
+      "on"
+    ],
+    "correctIndex": 2,
     "explanation": "The standard idiom is \"interested in\" a subject or activity.",
     "source": "original"
   },
@@ -637,8 +693,13 @@
     "topic": "Prepositions",
     "difficulty": "hard",
     "prompt": "Choose the correct preposition to complete the sentence: \"The proposal was met ___ strong opposition from the board.\"",
-    "options": ["by", "with", "from", "at"],
-    "correctIndex": 1,
+    "options": [
+      "with",
+      "from",
+      "at",
+      "by"
+    ],
+    "correctIndex": 0,
     "explanation": "The idiom is \"met with\" a reaction such as opposition or approval; \"met by\" sounds plausible in a passive-voice sentence but is reserved for a person or group physically greeting someone, not a reaction to a proposal.",
     "source": "original"
   },
@@ -648,8 +709,13 @@
     "topic": "Prepositions",
     "difficulty": "hard",
     "prompt": "Choose the correct preposition to complete the sentence: \"In temperament, he differs greatly ___ his brother.\"",
-    "options": ["with", "from", "to", "of"],
-    "correctIndex": 1,
+    "options": [
+      "from",
+      "of",
+      "to",
+      "with"
+    ],
+    "correctIndex": 0,
     "explanation": "\"Differ from\" is used to compare two unlike things or people. \"Differ with\" looks like the obvious pairing but is reserved for disagreeing with someone's opinion, not for describing a difference in character.",
     "source": "original"
   },
@@ -659,8 +725,13 @@
     "topic": "Prepositions",
     "difficulty": "hard",
     "prompt": "Choose the correct preposition to complete the sentence: \"The manager is responsible ___ the entire department's performance.\"",
-    "options": ["to", "for", "with", "about"],
-    "correctIndex": 1,
+    "options": [
+      "for",
+      "about",
+      "with",
+      "to"
+    ],
+    "correctIndex": 0,
     "explanation": "\"Responsible for\" describes a duty or outcome someone is accountable for, which fits \"the department's performance\" here. \"Responsible to\" is also correct English, but it describes who someone answers to (for example, \"responsible to the board\"), not the task itself, which makes it a close but ultimately wrong fit.",
     "source": "original"
   },
@@ -671,12 +742,12 @@
     "difficulty": "hard",
     "prompt": "Passage: \"In recent years, several cities have begun encouraging residents to keep beehives on rooftops and in community gardens. Proponents argue that urban beekeeping helps pollinate city gardens and parks, supporting biodiversity in otherwise concrete-heavy environments. Critics, however, point out that a sudden rise in managed honeybee colonies can crowd out native wild bee species, which are often more effective pollinators for local plants but receive far less public attention. Some ecologists now recommend that cities balance beekeeping initiatives with programs that specifically protect native pollinator habitats, rather than treating honeybee introduction alone as a solution to urban biodiversity loss.\" Based on the passage, which of the following best describes the relationship between the arguments of proponents and critics of urban beekeeping?",
     "options": [
-      "Proponents and critics agree on every point except the cost of maintaining hives.",
       "Critics reject the ecological value proponents claim, arguing honeybees provide no pollination benefit at all.",
-      "Proponents emphasize honeybees' contribution to pollination, while critics warn that this benefit may come at the expense of native pollinators.",
-      "Proponents and critics both agree that urban beekeeping should be banned until further research is completed."
+      "Proponents and critics agree on every point except the cost of maintaining hives.",
+      "Proponents and critics both agree that urban beekeeping should be banned until further research is completed.",
+      "Proponents emphasize honeybees' contribution to pollination, while critics warn that this benefit may come at the expense of native pollinators."
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "The passage frames a genuine tension rather than flat disagreement: proponents value the pollination and biodiversity support beekeeping provides, while critics do not deny that value outright but warn it may crowd out native bees. Option B mischaracterizes critics as denying any benefit, which the passage never says; A and D both describe agreement that isn't present in the text.",
     "source": "original"
   },
@@ -687,29 +758,13 @@
     "difficulty": "hard",
     "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers. The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" Which of the following, if true, would most directly support the study authors' caution about relying on productivity metrics alone?",
     "options": [
-      "A separate survey found that isolated remote employees were more likely to leave their jobs within a year, despite strong individual performance reviews.",
       "A separate survey found that hybrid employees preferred working from the office three days a week.",
-      "A separate survey found that in-office employees took more sick days than remote employees.",
-      "A separate survey found that productivity software adoption increased across all three groups."
-    ],
-    "correctIndex": 0,
-    "explanation": "The authors' caution is specifically that productivity metrics may miss the effect of isolation on retention. A finding that isolated employees quit despite strong performance reviews illustrates exactly that gap between measured output and retention risk. The other options describe unrelated findings about office preferences, sick days, or software adoption that don't speak to the retention concern at all.",
-    "source": "original"
-  },
-  {
-    "id": "ls-053",
-    "section": "language-skills",
-    "topic": "Reading Comprehension",
-    "difficulty": "medium",
-    "prompt": "Passage: \"The invention of the printing press in the fifteenth century is often credited with transforming the spread of knowledge across Europe. Before its widespread adoption, books were copied by hand, a slow and costly process that limited literacy to a small elite. Once printed books became more affordable, literacy rates gradually rose, and ideas that had once circulated only among scholars began reaching merchants, craftsmen, and eventually the general public. Some historians argue that this shift did not happen overnight; rather, it took several generations for printed material to fully displace oral tradition and handwritten manuscripts as the dominant means of sharing information.\" Based on the passage, which of the following can be most reasonably inferred about literacy before the printing press?",
-    "options": [
-      "Literacy was nonexistent before the printing press.",
-      "Literacy was concentrated among a small elite because hand-copied books were slow and costly to produce.",
-      "Literacy rates were higher before the printing press than after.",
-      "The printing press had no measurable effect on literacy."
+      "A separate survey found that isolated remote employees were more likely to leave their jobs within a year, despite strong individual performance reviews.",
+      "A separate survey found that productivity software adoption increased across all three groups.",
+      "A separate survey found that in-office employees took more sick days than remote employees."
     ],
     "correctIndex": 1,
-    "explanation": "The passage states that hand-copying was slow and costly, which limited literacy to a small elite, so the reasonable inference is that literacy existed but was confined to a privileged few, not absent entirely (A), higher beforehand (C), or unaffected by the press (D).",
+    "explanation": "The authors' caution is specifically that productivity metrics may miss the effect of isolation on retention. A finding that isolated employees quit despite strong performance reviews illustrates exactly that gap between measured output and retention risk. The other options describe unrelated findings about office preferences, sick days, or software adoption that don't speak to the retention concern at all.",
     "source": "original"
   },
   {
@@ -718,8 +773,13 @@
     "topic": "Analogies",
     "difficulty": "hard",
     "prompt": "Thermometer is to Temperature as Scale is to ___?",
-    "options": ["Height", "Weight", "Length", "Volume"],
-    "correctIndex": 1,
+    "options": [
+      "Height",
+      "Length",
+      "Weight",
+      "Volume"
+    ],
+    "correctIndex": 2,
     "explanation": "A thermometer is an instrument used to measure temperature; a scale is the parallel instrument used to measure weight, not the other physical quantities listed, each of which is measured with a different dedicated instrument.",
     "source": "original"
   },
@@ -729,8 +789,13 @@
     "topic": "Analogies",
     "difficulty": "medium",
     "prompt": "Chapter is to Book as Scene is to ___?",
-    "options": ["Actor", "Play", "Stage", "Script"],
-    "correctIndex": 1,
+    "options": [
+      "Stage",
+      "Actor",
+      "Play",
+      "Script"
+    ],
+    "correctIndex": 2,
     "explanation": "A chapter is a structural part of a book; a scene is the parallel structural part of a play. The relationship is part-to-whole.",
     "source": "original"
   },
@@ -740,7 +805,12 @@
     "topic": "Analogies",
     "difficulty": "medium",
     "prompt": "Optimist is to Hopeful as Pessimist is to ___?",
-    "options": ["Gloomy", "Cheerful", "Confident", "Ambitious"],
+    "options": [
+      "Gloomy",
+      "Cheerful",
+      "Confident",
+      "Ambitious"
+    ],
     "correctIndex": 0,
     "explanation": "An optimist is characterized as hopeful; a pessimist is characterized by the parallel negative trait, gloomy. The relationship is person-to-defining trait.",
     "source": "original"
@@ -751,8 +821,13 @@
     "topic": "Analogies",
     "difficulty": "medium",
     "prompt": "Key is to Lock as Password is to ___?",
-    "options": ["Diary", "Safe", "Browser", "Account"],
-    "correctIndex": 3,
+    "options": [
+      "Safe",
+      "Account",
+      "Browser",
+      "Diary"
+    ],
+    "correctIndex": 1,
     "explanation": "A key is the specific mechanism that opens a lock; a password is the parallel specific mechanism that unlocks an account. A \"Safe\" is more often opened with a physical key or combination dial rather than a password, and a \"Browser\" is software, not something a password itself secures, which makes both closer traps than \"Diary.\"",
     "source": "original"
   },
@@ -762,9 +837,14 @@
     "topic": "Sentence Completion",
     "difficulty": "hard",
     "prompt": "Choose the word that best completes the sentence: \"The committee's report was criticized as ____, offering sweeping conclusions without citing a single verifiable source.\"",
-    "options": ["substantiated", "unsubstantiated", "peer-reviewed", "meticulous"],
-    "correctIndex": 1,
-    "explanation": "\"Unsubstantiated\" means not backed up by evidence, which matches a report that offers conclusions \"without citing a single verifiable source.\" The other three options all describe well-supported, carefully checked work, which contradicts the criticism described.",
+    "options": [
+      "biased",
+      "redundant",
+      "unsubstantiated",
+      "authoritative"
+    ],
+    "correctIndex": 2,
+    "explanation": "Unsubstantiated means not backed up by evidence, matching a report that offers conclusions \"without citing a single verifiable source.\" Biased describes a report skewed by favoritism, which is a different flaw from lacking evidence entirely; a report can be well cited and still biased. Authoritative describes a report that speaks with earned confidence and credibility, the opposite of one criticized for weak support. Redundant means needlessly repetitive, a criticism about wordiness rather than about missing evidence.",
     "source": "original"
   },
   {
@@ -773,8 +853,13 @@
     "topic": "Analogies",
     "difficulty": "medium",
     "prompt": "Sculptor is to Marble as Carpenter is to ___?",
-    "options": ["Furniture", "Nail", "Wood", "Hammer"],
-    "correctIndex": 2,
+    "options": [
+      "Furniture",
+      "Hammer",
+      "Nail",
+      "Wood"
+    ],
+    "correctIndex": 3,
     "explanation": "A sculptor shapes marble, a raw material, to create art; a carpenter shapes the parallel raw material, wood. \"Furniture\" is the carpenter's finished product (parallel to \"statue,\" not \"marble\"), while \"Nail\" and \"Hammer\" are tools rather than the material being worked.",
     "source": "original"
   },
@@ -784,8 +869,13 @@
     "topic": "Analogies",
     "difficulty": "hard",
     "prompt": "Drought is to Famine as Negligence is to ___?",
-    "options": ["Punishment", "Accident", "Warning", "Safety"],
-    "correctIndex": 1,
+    "options": [
+      "Warning",
+      "Punishment",
+      "Safety",
+      "Accident"
+    ],
+    "correctIndex": 3,
     "explanation": "A drought is a cause that can lead to the effect of famine; negligence is the parallel cause that can lead to the effect of an accident. The relationship is cause-to-effect.",
     "source": "original"
   },
@@ -795,8 +885,13 @@
     "topic": "Analogies",
     "difficulty": "easy",
     "prompt": "Library is to Books as Museum is to ___?",
-    "options": ["Visitors", "Artifacts", "History", "Paintings"],
-    "correctIndex": 1,
+    "options": [
+      "Artifacts",
+      "History",
+      "Paintings",
+      "Visitors"
+    ],
+    "correctIndex": 0,
     "explanation": "A library is a place that houses and displays books; a museum is the parallel place that houses and displays artifacts. \"Artifacts\" is the general term parallel to \"books,\" while \"paintings\" is too narrow a subset.",
     "source": "original"
   },
@@ -806,9 +901,14 @@
     "topic": "Sentence Completion",
     "difficulty": "hard",
     "prompt": "Choose the word that best completes the sentence: \"Rather than addressing the question directly, the spokesperson gave an ____ response that left reporters with more doubts than answers.\"",
-    "options": ["evasive", "forthright", "transparent", "candid"],
-    "correctIndex": 0,
-    "explanation": "\"Evasive\" means deliberately vague or avoiding a direct answer, which matches a response that \"left reporters with more doubts than answers.\" The other options all describe direct, honest communication, which would contradict the description.",
+    "options": [
+      "forthright",
+      "terse",
+      "evasive",
+      "diplomatic"
+    ],
+    "correctIndex": 2,
+    "explanation": "Evasive means deliberately vague or avoiding a direct answer, matching a response that \"left reporters with more doubts than answers.\" Diplomatic describes a tactful response, which could still answer the question directly rather than dodge it. Terse describes a short, clipped response, a quality about length rather than about avoiding the question. Forthright means direct and open, the opposite of what left the reporters unsatisfied.",
     "source": "original"
   },
   {
@@ -817,8 +917,13 @@
     "topic": "Analogies",
     "difficulty": "medium",
     "prompt": "Tailor is to Clothes as Cobbler is to ___?",
-    "options": ["Leather", "Needle", "Shoes", "Boots"],
-    "correctIndex": 2,
+    "options": [
+      "Needle",
+      "Shoes",
+      "Leather",
+      "Boots"
+    ],
+    "correctIndex": 1,
     "explanation": "A tailor makes clothes, a general category of product; a cobbler makes the parallel general category, shoes. \"Boots\" is too specific a subtype, just as \"shirt\" would be too specific a substitute for \"clothes.\"",
     "source": "original"
   },
@@ -828,8 +933,13 @@
     "topic": "Prepositions",
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"The negotiations broke down ___ a disagreement over pricing.\"",
-    "options": ["over", "of", "to", "at"],
-    "correctIndex": 0,
+    "options": [
+      "at",
+      "of",
+      "over",
+      "to"
+    ],
+    "correctIndex": 2,
     "explanation": "\"Broke down over\" is the standard idiom for naming the specific issue that caused talks to collapse.",
     "source": "original"
   },
@@ -839,9 +949,14 @@
     "topic": "Sentence Completion",
     "difficulty": "medium",
     "prompt": "Choose the word that best completes the sentence: \"Her ____ remarks about her colleague's work created tension in the office.\"",
-    "options": ["disparaging", "flattering", "neutral", "encouraging"],
-    "correctIndex": 0,
-    "explanation": "\"Disparaging\" means expressing a critical or belittling attitude, which fits remarks that \"created tension.\" The other options describe positive or neutral remarks, which would not cause tension.",
+    "options": [
+      "flattering",
+      "offhand",
+      "candid",
+      "disparaging"
+    ],
+    "correctIndex": 3,
+    "explanation": "Disparaging means belittling or critical, which explains why the remarks \"created tension in the office.\" Candid means honest and straightforward, which could describe fair, even positive, feedback that would not necessarily cause conflict. Flattering describes praise, the opposite of remarks that would create tension. Offhand describes a casual, unplanned manner, which speaks to how the remarks were delivered rather than to their critical content.",
     "source": "original"
   },
   {
@@ -850,9 +965,14 @@
     "topic": "Sentence Completion",
     "difficulty": "easy",
     "prompt": "Choose the word that best completes the sentence: \"The witness gave a ____ account of the accident, recalling every detail with precision.\"",
-    "options": ["vague", "vivid", "brief", "careless"],
-    "correctIndex": 1,
-    "explanation": "\"Vivid\" means producing clear, detailed impressions, which fits an account that recalls \"every detail with precision.\"",
+    "options": [
+      "vivid",
+      "measured",
+      "hesitant",
+      "candid"
+    ],
+    "correctIndex": 0,
+    "explanation": "Vivid means producing clear, sharply detailed impressions, matching an account that recalls \"every detail with precision.\" Measured describes a calm, controlled manner of speaking, which says nothing about how much detail was included. Candid means honest, a quality about truthfulness rather than about the richness of detail recalled. Hesitant describes uncertainty or wavering, the opposite of someone who confidently recalls every detail.",
     "source": "original"
   },
   {
@@ -861,9 +981,14 @@
     "topic": "Sentence Completion",
     "difficulty": "hard",
     "prompt": "Choose the word that best completes the sentence: \"Because the evidence was purely ____, the jury could not reach a firm conclusion.\"",
-    "options": ["circumstantial", "conclusive", "irrefutable", "definitive"],
-    "correctIndex": 0,
-    "explanation": "\"Circumstantial\" evidence relies on inference rather than direct proof, which explains why the jury \"could not reach a firm conclusion.\" The other options describe evidence strong enough to settle a case, which would contradict the sentence.",
+    "options": [
+      "irrefutable",
+      "circumstantial",
+      "conclusive",
+      "abundant"
+    ],
+    "correctIndex": 1,
+    "explanation": "Circumstantial evidence is based on inference rather than direct proof, explaining why the jury \"could not reach a firm conclusion.\" Abundant describes a large quantity of evidence, which says nothing about whether that evidence is direct or merely suggestive; a jury could have abundant circumstantial evidence. Conclusive and irrefutable both describe evidence strong enough to settle a matter beyond doubt, the opposite of evidence that left the jury undecided.",
     "source": "original"
   },
   {
@@ -872,9 +997,14 @@
     "topic": "Sentence Completion",
     "difficulty": "hard",
     "prompt": "Choose the word that best completes the sentence: \"The professor's lecture was so ____ that even the most attentive students struggled to follow it.\"",
-    "options": ["convoluted", "straightforward", "simple", "lucid"],
-    "correctIndex": 0,
-    "explanation": "\"Convoluted\" means excessively complicated, which explains why \"even the most attentive students struggled to follow.\" The other options describe clarity, which would contradict the sentence.",
+    "options": [
+      "monotone",
+      "lucid",
+      "lengthy",
+      "convoluted"
+    ],
+    "correctIndex": 3,
+    "explanation": "Convoluted means excessively complicated or tangled, explaining why \"even the most attentive students struggled to follow\" the lecture. Lengthy describes duration, not complexity; a long lecture can still be easy to follow. Lucid means clear and easy to understand, the opposite of what caused students to struggle. Monotone describes a flat, unchanging vocal tone, a delivery issue that does not by itself explain confusion over content.",
     "source": "original"
   },
   {
@@ -883,7 +1013,12 @@
     "topic": "Analogies",
     "difficulty": "hard",
     "prompt": "Verdict is to Trial as Diagnosis is to ___?",
-    "options": ["Hospital", "Physician", "Examination", "Treatment"],
+    "options": [
+      "Treatment",
+      "Hospital",
+      "Examination",
+      "Physician"
+    ],
     "correctIndex": 2,
     "explanation": "A verdict is the concluding determination reached at the end of a trial; a diagnosis is the parallel concluding determination reached at the end of an examination. \"Treatment\" is a tempting trap since it follows a diagnosis, but that reverses the relationship: a verdict doesn't come after a trial in that sense, it concludes the trial itself, just as a diagnosis concludes the examination.",
     "source": "original"
@@ -894,7 +1029,12 @@
     "topic": "Prepositions",
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"The committee's decision was based ___ incomplete data.\"",
-    "options": ["on", "in", "at", "with"],
+    "options": [
+      "on",
+      "with",
+      "at",
+      "in"
+    ],
     "correctIndex": 0,
     "explanation": "The standard idiom is \"based on\" a source of information or reasoning.",
     "source": "original"
@@ -905,9 +1045,14 @@
     "topic": "Sentence Completion",
     "difficulty": "easy",
     "prompt": "Choose the word that best completes the sentence: \"The new policy was met with ____ from employees who feared losing their benefits.\"",
-    "options": ["resistance", "enthusiasm", "indifference", "gratitude"],
-    "correctIndex": 0,
-    "explanation": "\"Resistance\" fits employees who \"feared losing their benefits\" and would therefore oppose the policy. The other options describe positive or neutral reactions, which contradict the fear described.",
+    "options": [
+      "compliance",
+      "ambivalence",
+      "curiosity",
+      "resistance"
+    ],
+    "correctIndex": 3,
+    "explanation": "Resistance means active opposition, matching employees who \"feared losing their benefits\" and would push back against the policy. Curiosity describes mild interest, an emotion too weak to reflect genuine fear over lost benefits. Compliance describes going along with a decision, which is a behavior rather than the fearful reaction the sentence describes, and does not fit a workforce upset about the change. Ambivalence describes having mixed or uncertain feelings, which understates a reaction driven by clear fear.",
     "source": "original"
   },
   {
@@ -916,9 +1061,14 @@
     "topic": "Sentence Completion",
     "difficulty": "hard",
     "prompt": "Choose the word that best completes the sentence: \"Although the twins looked identical, their personalities were completely ____.\"",
-    "options": ["disparate", "complementary", "similar", "matching"],
-    "correctIndex": 0,
-    "explanation": "\"Disparate\" means fundamentally different, which fits the contrast signaled by \"although\" between identical looks and different personalities. \"Complementary\" is a tempting trap because complementary personalities can indeed differ, but the word describes traits that work well together, not traits that are \"completely\" different, so it doesn't match the sentence as precisely. \"Similar\" and \"matching\" both mean the same or alike, which would contradict the contrast.",
+    "options": [
+      "similar",
+      "complementary",
+      "disparate",
+      "harmonious"
+    ],
+    "correctIndex": 2,
+    "explanation": "Disparate means fundamentally different, fitting the contrast the sentence draws between identical appearance and different personalities. Complementary is a tempting choice because complementary traits do differ, but the word specifically describes differences that work well together, not simply being \"completely\" different, so it is a weaker fit. Harmonious describes how well two people get along, which says nothing about how similar or different their personalities actually are. Similar means alike, the opposite of the contrast the sentence sets up.",
     "source": "original"
   },
   {
@@ -928,12 +1078,12 @@
     "difficulty": "easy",
     "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" According to the passage, what do researchers say coral gardening actually addresses?",
     "options": [
-      "Only the symptoms of reef decline, not its root causes.",
+      "Nothing related to reef decline.",
       "Every cause of reef decline, including pollution and warming.",
-      "The problem of overfishing exclusively.",
-      "Nothing related to reef decline."
+      "Only the symptoms of reef decline, not its root causes.",
+      "The problem of overfishing exclusively."
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "The passage states directly that researchers caution coral gardening \"addresses only the symptoms of reef decline, not its root causes.\"",
     "source": "original"
   },
@@ -943,9 +1093,14 @@
     "topic": "Sentence Completion",
     "difficulty": "medium",
     "prompt": "Choose the word that best completes the sentence: \"The manager's ____ leadership style empowered employees to make their own decisions.\"",
-    "options": ["autocratic", "participative", "indifferent", "erratic"],
+    "options": [
+      "autocratic",
+      "participative",
+      "erratic",
+      "reactive"
+    ],
     "correctIndex": 1,
-    "explanation": "\"Participative\" describes a style that involves and empowers others, which fits a manager who \"empowered employees to make their own decisions.\" The other options describe controlling, uninvolved, or inconsistent leadership, which contradict the sentence.",
+    "explanation": "Participative describes a style that involves others in decisions, matching a manager who \"empowered employees to make their own decisions.\" Autocratic describes a controlling style where the leader makes decisions alone, the direct opposite of empowering employees. Reactive describes responding to events as they arise, a quality about timing and responsiveness rather than about how much autonomy employees are given. Erratic describes inconsistent, unpredictable behavior, which would undermine employee confidence rather than empower them.",
     "source": "original"
   },
   {
@@ -954,8 +1109,13 @@
     "topic": "Analogies",
     "difficulty": "hard",
     "prompt": "Antidote is to Poison as Rebuttal is to ___?",
-    "options": ["Debate", "Argument", "Evidence", "Conclusion"],
-    "correctIndex": 1,
+    "options": [
+      "Argument",
+      "Debate",
+      "Conclusion",
+      "Evidence"
+    ],
+    "correctIndex": 0,
     "explanation": "An antidote directly counteracts a specific poison; a rebuttal directly counteracts a specific argument. \"Debate\" is a tempting trap because a rebuttal happens during a debate, but the antidote-poison pair names the exact thing being countered, not the general setting it occurs in, which is what \"Argument\" captures.",
     "source": "original"
   },
@@ -965,7 +1125,12 @@
     "topic": "Prepositions",
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"The new regulation applies ___ all businesses with more than fifty employees.\"",
-    "options": ["to", "for", "on", "with"],
+    "options": [
+      "to",
+      "with",
+      "for",
+      "on"
+    ],
     "correctIndex": 0,
     "explanation": "The standard idiom is \"apply to\" a group or situation a rule covers.",
     "source": "original"
@@ -976,8 +1141,13 @@
     "topic": "Analogies",
     "difficulty": "medium",
     "prompt": "Blueprint is to Building as Recipe is to ___?",
-    "options": ["Kitchen", "Dish", "Chef", "Ingredients"],
-    "correctIndex": 1,
+    "options": [
+      "Dish",
+      "Kitchen",
+      "Ingredients",
+      "Chef"
+    ],
+    "correctIndex": 0,
     "explanation": "A blueprint is a plan that, when followed, results in a building; a recipe is the parallel plan that results in a dish. \"Kitchen,\" \"Chef,\" and \"Ingredients\" are all related to cooking but none of them is the finished product a recipe produces.",
     "source": "original"
   },
@@ -986,9 +1156,14 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "medium",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: A severe storm disrupted shipping routes across the region for nearly a week.\nR: Several ports along the coast suspended operations rather than risk damage to loaded vessels.\nP: Container ships already en route were forced to idle offshore, waiting for clearance to dock.\nS: Medical suppliers reported that shipments of insulin and other temperature-sensitive drugs were delayed by more than ten days.",
-    "options": ["QRPS", "QPRS", "RQPS", "QRSP"],
-    "correctIndex": 0,
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nP: Container ships already en route were forced to idle offshore, waiting for clearance to dock.\nS: Medical suppliers reported that shipments of insulin and other temperature-sensitive drugs were delayed by more than ten days.\nR: Several ports along the coast suspended operations rather than risk damage to loaded vessels.\nQ: A severe storm disrupted shipping routes across the region for nearly a week.",
+    "options": [
+      "QRSP",
+      "QPRS",
+      "QRPS",
+      "RQPS"
+    ],
+    "correctIndex": 2,
     "explanation": "Q introduces the storm, R shows the ports' immediate response (\"risk damage\" needs the storm from Q), P shows the knock-on effect on ships already at sea (\"waiting for clearance to dock\" needs the port closures in R), and S reports the specific, serious consequence. In QPRS, \"clearance to dock\" is mentioned before any port has closed. In RQPS, \"risk damage\" appears with no storm mentioned yet. In QRSP, the general disruption (S) is placed before the idling ships (P) whose situation actually explains part of the delay.",
     "source": "original"
   },
@@ -997,9 +1172,14 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "medium",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: Sales of the product had been steadily declining for two quarters.\nP: The company therefore launched an aggressive marketing campaign.\nR: Within weeks, sales figures began to recover.\nS: Analysts attributed the turnaround to the renewed brand visibility.",
-    "options": ["QPRS", "QRPS", "PQRS", "QPSR"],
-    "correctIndex": 0,
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nR: Within weeks, sales figures began to recover.\nS: Analysts attributed the turnaround to the renewed brand visibility.\nQ: Sales of the product had been steadily declining for two quarters.\nP: The company therefore launched an aggressive marketing campaign.",
+    "options": [
+      "QRPS",
+      "QPRS",
+      "PQRS",
+      "QPSR"
+    ],
+    "correctIndex": 1,
     "explanation": "Q states the problem, P describes the response (\"therefore\" needs the decline in Q), R shows the result, and S explains why (\"the turnaround\" needs the recovery described in R). In QRPS, sales recover before the campaign that supposedly caused it even launches. In PQRS, \"therefore\" opens the paragraph with no problem yet stated. In QPSR, \"the turnaround\" in S is named before R ever describes what turned around.",
     "source": "original"
   },
@@ -1008,9 +1188,14 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "hard",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: The museum announced a new exhibit on ancient trade routes, drawing immediate attention from local press.\nS: Curators had already spent the previous eighteen months quietly acquiring rare pieces from private collectors ahead of that announcement.\nP: Once the announcement went public, volunteers spent several more weeks cataloging the newly acquired artifacts before the exhibit's opening night.\nR: On opening night, the queue outside the museum stretched for two full blocks.",
-    "options": ["QSPR", "SQPR", "QPSR", "QSRP"],
-    "correctIndex": 0,
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nP: Once the announcement went public, volunteers spent several more weeks cataloging the newly acquired artifacts before the exhibit's opening night.\nR: On opening night, the queue outside the museum stretched for two full blocks.\nQ: The museum announced a new exhibit on ancient trade routes, drawing immediate attention from local press.\nS: Curators had already spent the previous eighteen months quietly acquiring rare pieces from private collectors ahead of that announcement.",
+    "options": [
+      "QPSR",
+      "QSPR",
+      "SQPR",
+      "QSRP"
+    ],
+    "correctIndex": 1,
     "explanation": "Q announces the exhibit, S looks back at the quiet preparation before that announcement (\"that announcement\" needs Q), P covers the public cataloging phase that followed (\"newly acquired artifacts\" needs S), and R gives the opening-night payoff. In SQPR, \"that announcement\" is referenced before Q ever makes one. In QPSR, \"newly acquired artifacts\" appears before S has explained any acquisition. In QSRP, the opening-night result (R) is placed before the cataloging (P) that had to happen first.",
     "source": "original"
   },
@@ -1019,9 +1204,14 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "hard",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: The startup failed to secure a second round of funding after its lead investor pulled out unexpectedly.\nR: Cash reserves that were supposed to last another year were gone within four months.\nS: Paychecks started arriving late, and several engineers began quietly interviewing elsewhere.\nP: Within weeks, half of the original founding team had accepted offers from competitors.",
-    "options": ["QRSP", "RQSP", "QSRP", "QRPS"],
-    "correctIndex": 0,
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nS: Paychecks started arriving late, and several engineers began quietly interviewing elsewhere.\nQ: The startup failed to secure a second round of funding after its lead investor pulled out unexpectedly.\nP: Within weeks, half of the original founding team had accepted offers from competitors.\nR: Cash reserves that were supposed to last another year were gone within four months.",
+    "options": [
+      "QSRP",
+      "QRSP",
+      "QRPS",
+      "RQSP"
+    ],
+    "correctIndex": 1,
     "explanation": "Q introduces the funding failure, R shows the immediate financial strain (\"supposed to last another year\" implies a plan disrupted by the funding loss in Q), S shows the next visible effect, and P states the final outcome. In RQSP, the cash-flow strain is described before any cause has been given for it. In QSRP, engineers are shown job-hunting due to late pay before the cash crunch (R) that caused the late pay has been mentioned. In QRPS, the departures (P) are placed before the late paychecks and interviewing (S) that actually explain why people left.",
     "source": "original"
   },
@@ -1030,8 +1220,13 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "hard",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nP: For generations, the village downstream had irrigated its fields using water diverted from the same river during the dry season.\nQ: A new dam was constructed far upstream, and its operators began holding back water to fill the reservoir before releasing it on their own schedule.\nR: Crop yields in the village fell drastically within two seasons, since the water no longer arrived when the fields needed it most.\nS: Residents eventually petitioned the regional government for a formal water-sharing agreement with the dam's operators.",
-    "options": ["PQRS", "QPRS", "PRQS", "PQSR"],
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: A new dam was constructed far upstream, and its operators began holding back water to fill the reservoir before releasing it on their own schedule.\nS: Residents petitioned the regional government for a formal water-sharing agreement with the dam's operators.\nR: Crop yields in the village fell drastically within two seasons, since the water no longer arrived when the fields needed it most.\nP: For generations, the village downstream had irrigated its fields using water diverted from the same river during the dry season.",
+    "options": [
+      "PQRS",
+      "PRQS",
+      "PQSR",
+      "QPRS"
+    ],
     "correctIndex": 0,
     "explanation": "P establishes the village's reliance on the river during the dry season, Q introduces the dam that disrupts that schedule, R explains the consequence in terms that depend on the dry-season detail from P, and S gives the resulting response, referring back to \"the dam's operators\" from Q. In PRQS, the water shortage (R) is explained before the dam (Q) that actually caused it has been introduced. In PQSR, the petition (S) appears before the crop failure (R) that motivated it. In QPRS, P opens with \"the same river,\" a phrase that needs a river already mentioned, but Q never names one specifically.",
     "source": "original"
@@ -1041,9 +1236,14 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "medium",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: A technical malfunction grounded the airline's entire fleet for two days without warning.\nR: Passengers holding same-day tickets found their flights cancelled minutes before scheduled boarding.\nS: The airline's customer service lines stayed jammed for nearly forty-eight hours as travelers tried to rebook.\nP: By the time the fleet resumed flying, the airline had already begun processing refunds for every cancelled route.",
-    "options": ["QRSP", "RQSP", "QSRP", "QRPS"],
-    "correctIndex": 0,
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nS: The airline's customer service lines stayed jammed for nearly forty-eight hours as travelers tried to rebook.\nP: By the time the fleet resumed flying, the airline had already begun processing refunds for every cancelled route.\nQ: A technical malfunction grounded the airline's entire fleet for two days without warning.\nR: Passengers holding same-day tickets found their flights cancelled minutes before scheduled boarding.",
+    "options": [
+      "QSRP",
+      "RQSP",
+      "QRSP",
+      "QRPS"
+    ],
+    "correctIndex": 2,
     "explanation": "Q introduces the malfunction, R shows the immediate consequence for passengers (\"cancelled\" needs the grounding in Q), S shows the resulting strain on customer service (\"as travelers tried to rebook\" needs the cancellations in R), and P gives the eventual resolution. In RQSP, flights are cancelled before any cause has been given. In QSRP, travelers are shown trying to rebook cancelled flights before R has actually mentioned any cancellations. In QRPS, the refund process (P) is placed before the forty-eight-hour customer service crunch (S) it's supposed to follow.",
     "source": "original"
   },
@@ -1054,12 +1254,12 @@
     "difficulty": "easy",
     "prompt": "Which sentence correctly matches \"there is/are\" with the noun that follows it?",
     "options": [
-      "There is many reasons to celebrate today.",
       "There are many reasons to celebrate today.",
-      "There is many reason to celebrate today.",
-      "There are many reason to celebrate today."
+      "There are many reason to celebrate today.",
+      "There is many reasons to celebrate today.",
+      "There is many reason to celebrate today."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "The verb in a \"there is/are\" construction must agree with the noun that follows it. Since \"reasons\" is plural, the correct verb is \"are\".",
     "source": "original"
   },
@@ -1070,12 +1270,12 @@
     "difficulty": "medium",
     "prompt": "Which sentence uses the correct comparative form when comparing two candidates?",
     "options": [
-      "Of the two candidates, she is the most qualified.",
       "Of the two candidates, she is the better qualified.",
-      "Of the two candidates, she is the goodest qualified.",
-      "Of the two candidates, she is more qualified than the both."
+      "Of the two candidates, she is more qualified than the both.",
+      "Of the two candidates, she is the most qualified.",
+      "Of the two candidates, she is the goodest qualified."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Standard usage requires the comparative form (\"better\") when comparing exactly two things, and the superlative form (\"most\") only for three or more.",
     "source": "original"
   },
@@ -1086,12 +1286,12 @@
     "difficulty": "medium",
     "prompt": "Which sentence correctly uses the subjunctive mood in a hypothetical condition?",
     "options": [
-      "If I was rich, I would travel the world.",
-      "If I were rich, I would travel the world.",
       "If I would be rich, I would travel the world.",
-      "If I am rich, I would travel the world."
+      "If I am rich, I would travel the world.",
+      "If I were rich, I would travel the world.",
+      "If I was rich, I would travel the world."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "Hypothetical, contrary-to-fact conditions require the subjunctive mood, which uses \"were\" for all subjects, not \"was\".",
     "source": "original"
   },
@@ -1101,8 +1301,13 @@
     "topic": "Analogies",
     "difficulty": "hard",
     "prompt": "Thermostat is to Temperature as Governor is to ___?",
-    "options": ["Politics", "Engine Speed", "Legislation", "Election"],
-    "correctIndex": 1,
+    "options": [
+      "Election",
+      "Legislation",
+      "Engine Speed",
+      "Politics"
+    ],
+    "correctIndex": 2,
     "explanation": "A thermostat is a device that regulates temperature; a governor here refers to the mechanical device that regulates engine speed, not the political office. \"Politics,\" \"Legislation,\" and \"Election\" are traps that rely on the political sense of \"governor,\" which isn't the sense being tested here.",
     "source": "original"
   },
@@ -1113,12 +1318,12 @@
     "difficulty": "medium",
     "prompt": "Which sentence correctly distinguishes \"fewer\" from \"less\"?",
     "options": [
-      "There were less mistakes in his second essay than in his first.",
       "There were fewer mistakes in his second essay than in his first.",
       "There was fewer mistakes in his second essay than in his first.",
-      "There were fewer mistake in his second essay than in his first."
+      "There were fewer mistake in his second essay than in his first.",
+      "There were less mistakes in his second essay than in his first."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "\"Fewer\" is used for countable nouns like \"mistakes\", while \"less\" is used for uncountable quantities. The verb \"were\" must also agree with the plural noun \"mistakes\".",
     "source": "original"
   },
@@ -1127,15 +1332,15 @@
     "section": "language-skills",
     "topic": "Error Identification",
     "difficulty": "hard",
-    "prompt": "Which sentence places the modifier \"almost\" correctly?",
+    "prompt": "Which sentence best conveys that she drove her kids to school on nearly every day of the week, missing only a few?",
     "options": [
-      "She almost drove her kids to school every day.",
       "She drove her kids to school almost every day.",
-      "She drove almost her kids to school every day.",
-      "She drove her kids almost to school every day."
+      "She almost drove her kids to school every day.",
+      "She drove her kids almost to school every day.",
+      "She drove almost her kids to school every day."
     ],
-    "correctIndex": 1,
-    "explanation": "A modifier like \"almost\" must sit next to the word it modifies. To convey that she drove nearly every day, \"almost\" should modify \"every day\"; placing it before \"drove\" instead implies she nearly drove but did not.",
+    "correctIndex": 0,
+    "explanation": "To convey the intended meaning (nearly every day, i.e. frequency), \"almost\" must sit next to \"every day.\" The other placements are grammatical but shift the meaning: \"almost drove\" implies she nearly didn't drive them at all, \"almost her kids\" is not a coherent modifier target, and \"almost to school\" implies the drive fell short of reaching school.",
     "source": "original"
   },
   {
@@ -1144,8 +1349,13 @@
     "topic": "Analogies",
     "difficulty": "hard",
     "prompt": "Camouflage is to Predator as Alibi is to ___?",
-    "options": ["Crime", "Suspicion", "Lawyer", "Witness"],
-    "correctIndex": 1,
+    "options": [
+      "Witness",
+      "Lawyer",
+      "Suspicion",
+      "Crime"
+    ],
+    "correctIndex": 2,
     "explanation": "Camouflage helps an animal avoid detection by a predator; an alibi helps a person avoid suspicion. \"Crime\" is a tempting trap because an alibi relates to a crime, but the direct parallel to \"predator,\" the thing actually being evaded, is \"suspicion,\" not the crime itself.",
     "source": "original"
   },
@@ -1156,10 +1366,10 @@
     "difficulty": "medium",
     "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" What is the primary purpose of the passage?",
     "options": [
-      "To criticize marine biologists for neglecting coral reefs.",
+      "To describe the history of underwater photography.",
       "To explain coral gardening and the limitations scientists associate with it.",
-      "To argue that pollution has no effect on coral reefs.",
-      "To describe the history of underwater photography."
+      "To criticize marine biologists for neglecting coral reefs.",
+      "To argue that pollution has no effect on coral reefs."
     ],
     "correctIndex": 1,
     "explanation": "The passage explains how coral gardening works and then discusses the limitations and caveats that researchers attach to it, making option B the accurate summary of its purpose.",
@@ -1171,8 +1381,13 @@
     "topic": "Reading Comprehension",
     "difficulty": "medium",
     "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" According to the passage, what survival rate do transplanted corals often show within the first year?",
-    "options": ["Above sixty percent", "Below ten percent", "Exactly fifty percent", "Nearly one hundred percent"],
-    "correctIndex": 0,
+    "options": [
+      "Nearly one hundred percent",
+      "Below ten percent",
+      "Above sixty percent",
+      "Exactly fifty percent"
+    ],
+    "correctIndex": 2,
     "explanation": "The passage states this figure directly: survival rates above sixty percent within the first year.",
     "source": "original"
   },
@@ -1182,8 +1397,13 @@
     "topic": "Reading Comprehension",
     "difficulty": "medium",
     "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" The word \"degraded\" in the passage most nearly means:",
-    "options": ["Improved", "Damaged", "Expanded", "Protected"],
-    "correctIndex": 1,
+    "options": [
+      "Damaged",
+      "Protected",
+      "Improved",
+      "Expanded"
+    ],
+    "correctIndex": 0,
     "explanation": "\"Degraded\" means worn down or damaged in quality, which fits sections of a reef in need of restoration.",
     "source": "original"
   },
@@ -1194,51 +1414,13 @@
     "difficulty": "hard",
     "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" What can be inferred from the passage about the future of coral gardening if ocean temperatures and pollution levels are not addressed?",
     "options": [
-      "Coral gardening alone will fully restore damaged reefs.",
-      "Newly planted corals will remain vulnerable to the same stresses that caused reef decline.",
       "Coral gardening will become unnecessary.",
-      "Ocean temperatures will decrease naturally over time."
+      "Coral gardening alone will fully restore damaged reefs.",
+      "Ocean temperatures will decrease naturally over time.",
+      "Newly planted corals will remain vulnerable to the same stresses that caused reef decline."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "The passage states directly that without addressing temperatures and pollution, newly planted corals \"remain vulnerable to the same stresses that damaged the original reef.\"",
-    "source": "original"
-  },
-  {
-    "id": "ls-095",
-    "section": "language-skills",
-    "topic": "Reading Comprehension",
-    "difficulty": "easy",
-    "prompt": "Passage: \"Long before modern postal services existed, ancient empires relied on relay systems to move messages across vast distances. The Persian Empire, for example, maintained a network of way-stations along its royal road, where messengers could exchange tired horses for fresh ones and continue their journey without pause. This system allowed urgent dispatches to travel hundreds of miles in a matter of days, a remarkable feat for its time. Centuries later, similar relay networks appeared in the Mongol Empire, whose yam system connected distant provinces through a chain of staffed outposts. These early networks were built primarily to serve rulers and military commanders, not ordinary citizens, who had few means of sending private correspondence. It was not until postal services became publicly available, centuries afterward, that everyday people gained routine access to long-distance written communication. Historians note that the efficiency of these ancient relay systems depended heavily on political stability; when empires fragmented or fell into conflict, the networks supporting them quickly deteriorated, and messages that once took days to deliver could take weeks or fail to arrive at all.\" According to the passage, what was the primary purpose of early relay message systems such as the Persian royal road?",
-    "options": [
-      "To entertain traveling merchants",
-      "To serve rulers and military commanders",
-      "To provide postal service to ordinary citizens",
-      "To map new trade routes"
-    ],
-    "correctIndex": 1,
-    "explanation": "The passage states these networks \"were built primarily to serve rulers and military commanders, not ordinary citizens.\"",
-    "source": "original"
-  },
-  {
-    "id": "ls-096",
-    "section": "language-skills",
-    "topic": "Reading Comprehension",
-    "difficulty": "medium",
-    "prompt": "Passage: \"Long before modern postal services existed, ancient empires relied on relay systems to move messages across vast distances. The Persian Empire, for example, maintained a network of way-stations along its royal road, where messengers could exchange tired horses for fresh ones and continue their journey without pause. This system allowed urgent dispatches to travel hundreds of miles in a matter of days, a remarkable feat for its time. Centuries later, similar relay networks appeared in the Mongol Empire, whose yam system connected distant provinces through a chain of staffed outposts. These early networks were built primarily to serve rulers and military commanders, not ordinary citizens, who had few means of sending private correspondence. It was not until postal services became publicly available, centuries afterward, that everyday people gained routine access to long-distance written communication. Historians note that the efficiency of these ancient relay systems depended heavily on political stability; when empires fragmented or fell into conflict, the networks supporting them quickly deteriorated, and messages that once took days to deliver could take weeks or fail to arrive at all.\" The word \"deteriorated\" in the passage most nearly means:",
-    "options": ["Improved", "Expanded", "Worsened", "Remained unchanged"],
-    "correctIndex": 2,
-    "explanation": "\"Deteriorated\" means to become progressively worse, matching \"worsened\".",
-    "source": "original"
-  },
-  {
-    "id": "ls-097",
-    "section": "language-skills",
-    "topic": "Reading Comprehension",
-    "difficulty": "hard",
-    "prompt": "Passage: \"Long before modern postal services existed, ancient empires relied on relay systems to move messages across vast distances. The Persian Empire, for example, maintained a network of way-stations along its royal road, where messengers could exchange tired horses for fresh ones and continue their journey without pause. This system allowed urgent dispatches to travel hundreds of miles in a matter of days, a remarkable feat for its time. Centuries later, similar relay networks appeared in the Mongol Empire, whose yam system connected distant provinces through a chain of staffed outposts. These early networks were built primarily to serve rulers and military commanders, not ordinary citizens, who had few means of sending private correspondence. It was not until postal services became publicly available, centuries afterward, that everyday people gained routine access to long-distance written communication. Historians note that the efficiency of these ancient relay systems depended heavily on political stability; when empires fragmented or fell into conflict, the networks supporting them quickly deteriorated, and messages that once took days to deliver could take weeks or fail to arrive at all.\" What does the passage suggest was necessary for ancient relay systems to function efficiently?",
-    "options": ["Political stability", "A unified postal budget", "A literate population", "Peaceful trade relations with neighboring states"],
-    "correctIndex": 0,
-    "explanation": "The passage states directly that the systems' efficiency \"depended heavily on political stability,\" not on budgets, literacy, or trade relations, none of which the passage mentions at all.",
     "source": "original"
   },
   {
@@ -1250,8 +1432,8 @@
     "options": [
       "The process by which the brain strengthens and reorganizes memories during sleep.",
       "The process of forgetting unimportant information.",
-      "A technique used to memorize facts quickly while awake.",
-      "A type of sleep disorder."
+      "A type of sleep disorder.",
+      "A technique used to memorize facts quickly while awake."
     ],
     "correctIndex": 0,
     "explanation": "The passage defines memory consolidation as sleep's active role in \"strengthening memories\" by replaying and reorganizing recent experiences.",
@@ -1264,12 +1446,12 @@
     "difficulty": "hard",
     "prompt": "Passage: \"Researchers studying sleep have found that it plays an active role in strengthening memories formed during the day, a process known as memory consolidation. Rather than simply resting, the brain appears to replay and reorganize recent experiences during certain sleep stages, particularly during deep, slow-wave sleep. Studies involving both animals and humans have shown that people who sleep shortly after learning new information tend to retain it better than those who stay awake for a comparable period. Interestingly, not all types of memory benefit equally; procedural memory, such as the skill of playing a musical instrument, appears to depend more heavily on later stages of sleep, while factual memory seems to consolidate earlier in the night. This has led some researchers to recommend that students avoid pulling all-nighters before exams, since skipping sleep may undermine the very consolidation process needed to retain studied material. Although much about the relationship between sleep and memory remains under investigation, the existing evidence points clearly toward sleep being an active, necessary participant in learning rather than a passive break from it.\" According to the passage, what distinguishes procedural memory from factual memory in terms of sleep?",
     "options": [
-      "Procedural memory does not require sleep at all.",
       "Procedural memory depends more on later stages of sleep, while factual memory consolidates earlier.",
-      "Factual memory depends more on later stages of sleep, while procedural memory consolidates earlier.",
-      "Both types of memory consolidate at exactly the same time."
+      "Procedural memory does not require sleep at all.",
+      "Both types of memory consolidate at exactly the same time.",
+      "Factual memory depends more on later stages of sleep, while procedural memory consolidates earlier."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "The passage states this distinction directly: procedural memory depends more on later sleep stages, while factual memory consolidates earlier in the night. Option C reverses the two, which is easy to do without reading closely.",
     "source": "original"
   },
@@ -1280,13 +1462,141 @@
     "difficulty": "medium",
     "prompt": "Passage: \"Researchers studying sleep have found that it plays an active role in strengthening memories formed during the day, a process known as memory consolidation. Rather than simply resting, the brain appears to replay and reorganize recent experiences during certain sleep stages, particularly during deep, slow-wave sleep. Studies involving both animals and humans have shown that people who sleep shortly after learning new information tend to retain it better than those who stay awake for a comparable period. Interestingly, not all types of memory benefit equally; procedural memory, such as the skill of playing a musical instrument, appears to depend more heavily on later stages of sleep, while factual memory seems to consolidate earlier in the night. This has led some researchers to recommend that students avoid pulling all-nighters before exams, since skipping sleep may undermine the very consolidation process needed to retain studied material. Although much about the relationship between sleep and memory remains under investigation, the existing evidence points clearly toward sleep being an active, necessary participant in learning rather than a passive break from it.\" Why does the passage suggest students should avoid pulling all-nighters before exams?",
     "options": [
-      "Because staying awake improves memory consolidation.",
       "Because skipping sleep may undermine the consolidation process needed to retain studied material.",
+      "Because staying awake improves memory consolidation.",
       "Because all-nighters cause permanent memory loss.",
       "Because exams are easier after a full night's sleep regardless of studying."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "The passage states this reasoning directly: skipping sleep \"may undermine the very consolidation process needed to retain studied material.\"",
+    "source": "original"
+  },
+  {
+    "id": "ls-101",
+    "section": "language-skills",
+    "topic": "Vocabulary in Context",
+    "difficulty": "easy",
+    "prompt": "In the sentence below, the word \"abundant\" most nearly means:\n\n\"After the rainy season, the region's rivers became abundant with fish, and local fishermen struggled to keep up with the size of their daily catch.\"",
+    "options": [
+      "Unpredictable",
+      "Scarce",
+      "Contaminated",
+      "Plentiful"
+    ],
+    "correctIndex": 3,
+    "explanation": "\"Abundant\" means existing in large quantities, which matches \"plentiful.\" \"Scarce\" is the opposite of abundant and contradicts the fishermen struggling with large catches. \"Contaminated\" refers to water quality, which the sentence never mentions. \"Unpredictable\" refers to variability over time, but the sentence describes quantity, not how consistent the fish supply is.",
+    "source": "original"
+  },
+  {
+    "id": "ls-102",
+    "section": "language-skills",
+    "topic": "Vocabulary in Context",
+    "difficulty": "medium",
+    "prompt": "In the sentence below, the word \"meticulous\" most nearly means:\n\n\"The auditor's meticulous review of the accounts uncovered a discrepancy that had gone unnoticed for three years.\"",
+    "options": [
+      "Careless",
+      "Painstakingly thorough",
+      "Rushed",
+      "Skeptical"
+    ],
+    "correctIndex": 1,
+    "explanation": "\"Meticulous\" means showing great attention to detail, matching \"painstakingly thorough.\" \"Rushed\" and \"careless\" are near opposites of meticulous, since the review is described as catching something others missed. \"Skeptical\" describes an attitude of doubt, but the sentence only describes the thoroughness of the review, not the auditor's trust or suspicion of the accounts.",
+    "source": "original"
+  },
+  {
+    "id": "ls-103",
+    "section": "language-skills",
+    "topic": "Vocabulary in Context",
+    "difficulty": "medium",
+    "prompt": "In the sentence below, the word \"candid\" most nearly means:\n\n\"Unlike previous spokespersons who deflected difficult questions, the new company representative was refreshingly candid about the factory's production delays.\"",
+    "options": [
+      "Indifferent",
+      "Apologetic",
+      "Evasive",
+      "Frank"
+    ],
+    "correctIndex": 3,
+    "explanation": "\"Candid\" means open and honest, matching \"frank.\" \"Evasive\" describes the previous spokespersons the sentence contrasts the new representative against, so it is the opposite meaning. \"Apologetic\" implies expressing regret, which is not stated; the representative spoke honestly about the delays but is not described as apologizing. \"Indifferent\" means unconcerned, which contradicts \"refreshingly,\" a word implying a positive, engaged quality.",
+    "source": "original"
+  },
+  {
+    "id": "ls-104",
+    "section": "language-skills",
+    "topic": "Vocabulary in Context",
+    "difficulty": "medium",
+    "prompt": "In the sentence below, the word \"reluctant\" most nearly means:\n\n\"Despite years of coaxing from his colleagues, the veteran engineer remained reluctant to adopt the new software, preferring his old spreadsheets instead.\"",
+    "options": [
+      "Unable",
+      "Unwilling",
+      "Eager",
+      "Forbidden"
+    ],
+    "correctIndex": 1,
+    "explanation": "\"Reluctant\" means hesitant or unwilling, matching \"unwilling.\" \"Eager\" is the opposite, contradicted by the years of coaxing needed. \"Forbidden\" implies an outside party barred him from using the software, but the sentence shows a personal preference, not a prohibition. \"Unable\" implies he lacked the capacity to use it, but \"preferring his old spreadsheets\" shows a choice, not an inability.",
+    "source": "original"
+  },
+  {
+    "id": "ls-105",
+    "section": "language-skills",
+    "topic": "Vocabulary in Context",
+    "difficulty": "medium",
+    "prompt": "In the sentence below, the word \"ambiguous\" most nearly means:\n\n\"The contract's wording on delivery deadlines was ambiguous, allowing both parties to interpret the same clause differently.\"",
+    "options": [
+      "Lengthy",
+      "Precise",
+      "Unclear",
+      "Intentional"
+    ],
+    "correctIndex": 2,
+    "explanation": "\"Ambiguous\" means open to more than one interpretation, matching \"unclear.\" \"Precise\" is the opposite, since precise wording would not allow differing interpretations. \"Lengthy\" describes length, not clarity, and the sentence gives no indication of how long the clause is. \"Intentional\" would suggest the wording was deliberately written to confuse, but the sentence only describes the outcome (differing interpretations), not the drafter's intent.",
+    "source": "original"
+  },
+  {
+    "id": "ls-106",
+    "section": "language-skills",
+    "topic": "Vocabulary in Context",
+    "difficulty": "hard",
+    "prompt": "In the sentence below, the word \"ephemeral\" most nearly means:\n\n\"Social media trends are often ephemeral, drawing intense attention for a few days before fading into obscurity.\"",
+    "options": [
+      "Enduring",
+      "Unpredictable",
+      "Short-lived",
+      "Harmful"
+    ],
+    "correctIndex": 2,
+    "explanation": "\"Ephemeral\" means lasting for a very short time, matching \"short-lived.\" \"Enduring\" is the opposite, contradicted by the trend fading within days. \"Unpredictable\" describes how hard something is to foresee, but the sentence emphasizes duration, not predictability. \"Harmful\" is unsupported, since nothing in the sentence suggests the trends cause damage.",
+    "source": "original"
+  },
+  {
+    "id": "ls-107",
+    "section": "language-skills",
+    "topic": "Vocabulary in Context",
+    "difficulty": "hard",
+    "prompt": "In the sentence below, the word \"pragmatic\" most nearly means:\n\n\"Rather than pursuing the ideal but costly design, the engineers took a pragmatic approach, choosing the option that balanced cost and function within the deadline.\"",
+    "options": [
+      "Impulsive",
+      "Wasteful",
+      "Practical",
+      "Idealistic"
+    ],
+    "correctIndex": 2,
+    "explanation": "\"Pragmatic\" means dealing with things in a sensible, realistic way, matching \"practical.\" \"Idealistic\" is explicitly what the sentence says the engineers moved away from (\"rather than... the ideal\"), making it the opposite. \"Impulsive\" implies acting without thought, but the sentence describes a deliberate balancing of cost and function, the opposite of impulsive. \"Wasteful\" contradicts the described focus on controlling cost within a deadline.",
+    "source": "original"
+  },
+  {
+    "id": "ls-108",
+    "section": "language-skills",
+    "topic": "Vocabulary in Context",
+    "difficulty": "hard",
+    "prompt": "In the sentence below, the word \"vindicated\" most nearly means:\n\n\"Years after the scientist's theory was dismissed by her peers, new experimental data finally vindicated her original claims.\"",
+    "options": [
+      "Contradicted",
+      "Publicized",
+      "Justified",
+      "Revised"
+    ],
+    "correctIndex": 2,
+    "explanation": "\"Vindicated\" means cleared of blame or shown to be correct with new evidence, matching \"justified.\" \"Contradicted\" is the opposite of what happened, since the new data supported rather than disproved her claims. \"Publicized\" means made widely known, but the sentence emphasizes that the claims were proven correct, not merely spread further. \"Revised\" would mean the claims were changed or updated, but the sentence states her original claims were shown to be correct, not altered.",
     "source": "original"
   }
 ]

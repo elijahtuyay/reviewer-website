@@ -72,6 +72,14 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
   const answeredNumbers = questions
     .map((q, i) => (answers[q.id] !== null && answers[q.id] !== undefined ? i + 1 : null))
     .filter((n): n is number => n !== null);
+  const correctNumbers = questions
+    .map((q, i) => (answers[q.id] === q.correctIndex ? i + 1 : null))
+    .filter((n): n is number => n !== null);
+  const incorrectNumbers = questions
+    .map((q, i) =>
+      answers[q.id] !== null && answers[q.id] !== undefined && answers[q.id] !== q.correctIndex ? i + 1 : null
+    )
+    .filter((n): n is number => n !== null);
 
   function persist(nextAnswers: Record<string, number | null>, submitted: boolean) {
     const cleaned: Record<string, number> = {};
@@ -171,13 +179,14 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
                 locked={phase === "taking"}
                 currentResult={result}
               />
-              {phase === "taking" && (
-                <ProgressTracker
-                  totalQuestions={questions.length}
-                  answeredNumbers={answeredNumbers}
-                  onJump={handleJump}
-                />
-              )}
+              <ProgressTracker
+                totalQuestions={questions.length}
+                answeredNumbers={answeredNumbers}
+                onJump={handleJump}
+                reviewMode={phase === "review"}
+                correctNumbers={correctNumbers}
+                incorrectNumbers={incorrectNumbers}
+              />
             </div>
           </aside>
 
@@ -214,7 +223,7 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
         </div>
       </div>
 
-      {paused && <PauseOverlay onResume={() => setPaused(false)} />}
+      <PauseOverlay paused={paused} onResume={() => setPaused(false)} />
 
       <MobileNavSheet open={mobileNavOpen} onClose={() => setMobileNavOpen(false)}>
         <div className="flex flex-col gap-6">
@@ -225,13 +234,14 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
             locked={phase === "taking"}
             currentResult={result}
           />
-          {phase === "taking" && (
-            <ProgressTracker
-              totalQuestions={questions.length}
-              answeredNumbers={answeredNumbers}
-              onJump={handleJump}
-            />
-          )}
+          <ProgressTracker
+            totalQuestions={questions.length}
+            answeredNumbers={answeredNumbers}
+            onJump={handleJump}
+            reviewMode={phase === "review"}
+            correctNumbers={correctNumbers}
+            incorrectNumbers={incorrectNumbers}
+          />
         </div>
       </MobileNavSheet>
     </div>
