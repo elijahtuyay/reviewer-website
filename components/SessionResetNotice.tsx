@@ -4,7 +4,11 @@ import { useCallback, useEffect, useState } from "react";
 import { getExamConfig } from "@/lib/exam-config";
 import { ExamId } from "@/data/schema";
 import { getSectionBreakdown } from "@/lib/section-result";
-import { clearExamProgress, purgeLegacyPersistedProgress } from "@/lib/session-progress";
+import {
+  clearExamProgress,
+  getStoredProgress,
+  purgeLegacyPersistedProgress,
+} from "@/lib/session-progress";
 
 interface SessionResetNoticeProps {
   examId: ExamId;
@@ -25,11 +29,27 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
 
   const readSaved = useCallback(() => {
     const found: SavedSection[] = [];
+    const now = Date.now();
     for (const section of getExamConfig(examId).sections) {
+      const stored = getStoredProgress(examId, section.id);
+      // A drawn question set is what makes a section "started" — answering none
+      // of it still burns the clock, so it has to be listed either way.
+      if (stored.questionIds.length === 0) continue;
       const breakdown = getSectionBreakdown(examId, section.id, section.questionCount);
+
       if (breakdown.submitted) {
-        found.push({ label: section.label, detail: `Submitted · ${breakdown.correct}/${breakdown.total} correct` });
-      } else if (breakdown.answered > 0) {
+        found.push({
+          label: section.label,
+          detail: `Submitted · ${breakdown.correct}/${breakdown.total} correct`,
+        });
+      } else if (stored.pausedAt === 0 && stored.deadline > 0 && stored.deadline <= now) {
+        // The clock ran out while this section sat unopened. Opening it will
+        // submit it, so don't advertise it as still being in progress.
+        found.push({
+          label: section.label,
+          detail: `Time expired · ${breakdown.answered}/${breakdown.total} answered`,
+        });
+      } else {
         found.push({
           label: section.label,
           detail: `In progress · ${breakdown.answered}/${breakdown.total} answered`,
@@ -54,11 +74,11 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
 
   return (
     <div className="mt-8 rounded-lg border border-line bg-panel px-4 py-3">
-      <p className="text-sm font-medium text-foreground">Progress is not saved after you leave</p>
+      <p className="text-sm font-medium text-foreground">Progress is cleared when you close this tab</p>
       <p className="mt-1 text-sm text-foreground/90">
-        Your answers and timer are kept only while this browser tab stays open. Closing the tab or
-        the browser clears every section and starts you fresh next time. Moving between this page
-        and a section is fine.
+        Your answers and timer are kept only while this browser tab stays open, so you can move
+        between this page and a section freely. Closing the tab or the browser clears all sections.
+        Note that a section&apos;s timer keeps running while you are away from it.
       </p>
 
       {saved.length > 0 && (

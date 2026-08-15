@@ -8,12 +8,19 @@ export interface StoredProgress {
   deadline: number;
   /** True when the section was submitted by the timer running out rather than by the user. */
   expired: boolean;
+  /**
+   * Epoch ms the current pause began, or 0 when not paused. Persisted so that a
+   * reload while paused doesn't charge the user for the time they were away —
+   * the deadline is only shifted forward on resume, so without this the stored
+   * deadline still reflects the pre-pause clock.
+   */
+  pausedAt: number;
 }
 
 const KEY_PREFIX = "progress:";
 
 function emptyProgress(): StoredProgress {
-  return { answers: {}, submitted: false, questionIds: [], deadline: 0, expired: false };
+  return { answers: {}, submitted: false, questionIds: [], deadline: 0, expired: false, pausedAt: 0 };
 }
 
 function storageKey(examId: ExamId, section: SectionId): string {
@@ -47,6 +54,7 @@ export function getStoredProgress(examId: ExamId, section: SectionId): StoredPro
       questionIds: parsed.questionIds ?? [],
       deadline: parsed.deadline ?? 0,
       expired: parsed.expired ?? false,
+      pausedAt: parsed.pausedAt ?? 0,
     };
   } catch {
     return emptyProgress();

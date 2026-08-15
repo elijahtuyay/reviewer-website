@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 interface TimerProps {
   /** Wall-clock epoch ms when time runs out. Owned by the quiz page so it survives a reload. */
@@ -31,8 +31,16 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
     onDeadlineChangeRef.current = onDeadlineChange;
   }, [onExpire, onDeadlineChange]);
 
-  useEffect(() => {
+  // Layout effect, not a passive one: this also seeds the very first value, and
+  // running it before paint avoids a frame of placeholder "--:--" on every mount.
+  useLayoutEffect(() => {
     endAtRef.current = endAt;
+    // A deadline handed down mid-pause is a new attempt (e.g. Retake), not a
+    // resumption of this one — rebase the pause origin so the pending resume
+    // shift doesn't get added on top of the fresh deadline.
+    if (pauseStartRef.current !== null) pauseStartRef.current = Date.now();
+    // Repaint immediately instead of waiting up to a second for the next tick.
+    else setSecondsLeft(Math.max(0, Math.round((endAt - Date.now()) / 1000)));
   }, [endAt]);
 
   useEffect(() => {
