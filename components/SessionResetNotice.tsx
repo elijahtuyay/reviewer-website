@@ -78,7 +78,7 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
       <p className="mt-1 text-sm text-foreground/90">
         Your answers and timer are kept only while this browser tab stays open, so you can move
         between this page and a section freely. Closing the tab or the browser clears all sections.
-        Note that a section&apos;s timer keeps running while you are away from it.
+        A section&apos;s timer keeps running while you are away from it, unless you paused it first.
       </p>
 
       {saved.length > 0 && (

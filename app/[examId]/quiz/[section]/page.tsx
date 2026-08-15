@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useMemo, useState } from "react";
+import { use, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { getExamConfig, getSectionConfig, isValidExamId } from "@/lib/exam-config";
 import { drawRandomQuestionIds, getQuestionsByIds } from "@/lib/data/questions";
@@ -21,6 +21,13 @@ import PauseOverlay from "@/components/PauseOverlay";
 import MobileNavSheet from "@/components/MobileNavSheet";
 
 type Phase = "taking" | "review";
+
+/**
+ * What, if anything, was restored from earlier in the session. Every one of these
+ * is stated out loud rather than silently reinstated. "resumed" = attempt still
+ * running, "completed" = already submitted, "expired" = the timer ran out.
+ */
+type NoticeKind = "resumed" | "completed" | "expired" | null;
 
 /** Phrased in the past tense: these banners are re-shown on every return visit, not just the first. */
 const NOTICE_COPY = {
@@ -60,13 +67,16 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
   const [paused, setPaused] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [deadline, setDeadline] = useState(0);
+  const [notice, setNotice] = useState<NoticeKind>(null);
+  const pendingNoticeRef = useRef<NoticeKind>(null);
   /**
-   * What, if anything, was restored from earlier in the session. Every one of
-   * these is stated out loud rather than silently reinstated.
-   * "resumed" = attempt still running, "completed" = already submitted,
-   * "expired" = the timer ran out.
+   * Which `examId:section` the load effect below has already run for. The effect
+   * both draws a random question set and writes it to storage, so a second
+   * invocation would read its own first-pass write back and mistake a brand-new
+   * attempt for a resumed one. React 19 Strict Mode double-invokes mount effects
+   * in dev, which made exactly that happen.
    */
-  const [notice, setNotice] = useState<"resumed" | "completed" | "expired" | null>(null);
+  const loadedKeyRef = useRef<string | null>(null);
 
   const questions = useMemo(
     () => getQuestionsByIds(examId, section, questionIds),
@@ -77,7 +87,10 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
   // random subset from the full bank if there is none. Anything resumed is
   // announced in the banner below rather than silently reinstated.
   useEffect(() => {
-    /* eslint-disable react-hooks/set-state-in-effect -- reads sessionStorage, which is unavailable during render/SSR */
+    const loadKey = `${examId}:${section}`;
+    if (loadedKeyRef.current === loadKey) return;
+    loadedKeyRef.current = loadKey;
+
     purgeLegacyPersistedProgress();
     const stored = getStoredProgress(examId, section);
     const isResume = stored.questionIds.length > 0;
@@ -110,10 +123,11 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
     setDeadline(endAt);
     // A started section counts as resumed even with zero answers: its clock has
     // been running the whole time, and an unexplained shortened timer is exactly
-    // the kind of surprise this banner exists to prevent.
-    setNotice(expired ? "expired" : !isResume ? null : submitted ? "completed" : "resumed");
+    // the kind of surprise this banner exists to prevent. Held in a ref and
+    // committed by the effect below so that the banner text lands in a separate
+    // DOM mutation from its live region, which is what makes it get announced.
+    pendingNoticeRef.current = expired ? "expired" : !isResume ? null : submitted ? "completed" : "resumed";
     setHydrated(true);
-    /* eslint-enable react-hooks/set-state-in-effect */
 
     if (!isResume || submitted !== stored.submitted || endAt !== stored.deadline || stored.pausedAt > 0) {
       saveStoredProgress(examId, section, {
@@ -127,6 +141,16 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [examId, section]);
+
+  // Runs on the commit after the one that first renders the page, so the empty
+  // role="status" region already exists in the DOM when its text appears.
+  useEffect(() => {
+    if (!hydrated || pendingNoticeRef.current === null) return;
+    setNotice(pendingNoticeRef.current);
+    pendingNoticeRef.current = null;
+    // questionIds is in the deps, not just `hydrated`: switching sections
+    // client-side re-runs the loader without `hydrated` ever flipping again.
+  }, [hydrated, questionIds]);
 
   const answeredCount = Object.values(answers).filter((v) => v !== null && v !== undefined).length;
   const answeredNumbers = questions
