@@ -900,7 +900,7 @@
     "section": "language-skills",
     "topic": "Sentence Completion",
     "difficulty": "hard",
-    "prompt": "Choose the word that best completes the sentence: \"Rather than addressing the question directly, the spokesperson gave an ____ response that left reporters with more doubts than answers.\"",
+    "prompt": "Choose the word that best completes the sentence: \"Rather than addressing the question directly, the spokesperson gave a/an ____ response that left reporters with more doubts than answers.\"",
     "options": [
       "forthright",
       "terse",
@@ -964,7 +964,7 @@
     "section": "language-skills",
     "topic": "Sentence Completion",
     "difficulty": "easy",
-    "prompt": "Choose the word that best completes the sentence: \"The witness gave a ____ account of the accident, recalling every detail with precision.\"",
+    "prompt": "Choose the word that best completes the sentence: \"The witness gave a/an ____ account of the accident, recalling every detail with precision.\"",
     "options": [
       "vivid",
       "measured",
@@ -1351,12 +1351,12 @@
     "prompt": "Camouflage is to Predator as Alibi is to ___?",
     "options": [
       "Witness",
-      "Lawyer",
-      "Suspicion",
-      "Crime"
+      "Investigator",
+      "Crime",
+      "Defendant"
     ],
-    "correctIndex": 2,
-    "explanation": "Camouflage helps an animal avoid detection by a predator; an alibi helps a person avoid suspicion. \"Crime\" is a tempting trap because an alibi relates to a crime, but the direct parallel to \"predator,\" the thing actually being evaded, is \"suspicion,\" not the crime itself.",
+    "correctIndex": 1,
+    "explanation": "The relationship is defense-to-pursuer. Camouflage is the device a hunted animal uses to escape the notice of the predator, the agent actively trying to find it. An alibi is the device a person under scrutiny uses to escape the notice of the investigator, the agent actively trying to build a case. Defendant is wrong because the defendant is the one who uses the alibi, so that role parallels the hunted animal, not the predator. Crime names the event the alibi concerns, not an agent doing any pursuing. Witness supplies evidence but is not the party the alibi is deployed against.",
     "source": "original"
   },
   {

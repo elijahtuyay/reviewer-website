@@ -220,7 +220,7 @@
       "Seat 4"
     ],
     "correctIndex": 2,
-    "explanation": "K=5, so I (immediately left of K) = 4. The remaining seats {1, 2, 3} go to H, J, L with J=H+2. Only H=1, J=3 fits within that set (H=2 would put J=4, already taken). That leaves L=2, which satisfies \"not at either end\" since seats 1 and 5 are the ends. H sits at seat 1.",
+    "explanation": "K=5, so I (immediately left of K) = 4. The remaining seats {1, 2, 3} go to H, J, L with $J = H+2$. Only H=1, J=3 fits within that set (H=2 would put J=4, already taken). That leaves L=2, which satisfies \"not at either end\" since seats 1 and 5 are the ends. H sits at seat 1.",
     "source": "original"
   },
   {
@@ -332,7 +332,7 @@
       "Floor 2"
     ],
     "correctIndex": 1,
-    "explanation": "With O=N+2, the only candidate pairs are (N=1,O=3), (N=2,O=4), (N=3,O=5). Testing N=2,O=4 leaves {1,3,5} for M,P,Q, but P and Q must be consecutive floors (Q=P+1), and no consecutive pair exists in {1,3,5}, so this case fails. Testing N=3,O=5 leaves {1,2,4}, giving P=1,Q=2,M=4, but this violates \"P does not live on floor 1.\" Only N=1,O=3 works: the remaining floors {2,4,5} give P=4,Q=5 (consecutive), leaving M=2, which satisfies \"M is not on floor 1 or 5.\" N lives on floor 1.",
+    "explanation": "With $O = N+2$, the only candidate pairs are (N=1,O=3), (N=2,O=4), (N=3,O=5). Testing N=2,O=4 leaves {1,3,5} for M,P,Q, but P and Q must be consecutive floors ($Q = P+1$), and no consecutive pair exists in {1,3,5}, so this case fails. Testing N=3,O=5 leaves {1,2,4}, giving P=1,Q=2,M=4, but this violates \"P does not live on floor 1.\" Only N=1,O=3 works: the remaining floors {2,4,5} give P=4,Q=5 (consecutive), leaving M=2, which satisfies \"M is not on floor 1 or 5.\" N lives on floor 1.",
     "source": "original"
   },
   {
@@ -348,7 +348,7 @@
       "Third to the right of A"
     ],
     "correctIndex": 0,
-    "explanation": "Numbering seats 1-7 clockwise with A=1: B (three seats clockwise) = 4. C (immediately right of B) = 5. D (immediately left of A) = 7. E (two seats clockwise from D) = 7+2=9, which wraps to 2. F (immediately right of E) = 3. Every seat except 6 is now taken, so G=6. Going counterclockwise from A (1 to 7 to 6) is two steps, so G sits second to the left of A.",
+    "explanation": "Numbering seats 1-7 clockwise with A=1: B (three seats clockwise) = 4. C (immediately right of B) = 5. D (immediately left of A) = 7. E (two seats clockwise from D) = $7+2=9$, which wraps to 2. F (immediately right of E) = 3. Every seat except 6 is now taken, so G=6. Going counterclockwise from A (1 to 7 to 6) is two steps, so G sits second to the left of A.",
     "source": "original"
   },
   {
@@ -364,7 +364,7 @@
       "2nd"
     ],
     "correctIndex": 2,
-    "explanation": "Testing the constraints systematically, the only assignment consistent with all five clues is A=1st, C=2nd, G=3rd, B=4th, D=5th, F=6th, E=7th. This satisfies C=A+1, E=B+3, F=D+1, A before B, and G excluded from 1st and 7th, and no other arrangement of the seven runners satisfies every clue simultaneously. G finishes 3rd.",
+    "explanation": "Testing the constraints systematically, the only assignment consistent with all five clues is A=1st, C=2nd, G=3rd, B=4th, D=5th, F=6th, E=7th. This satisfies $C = A+1$, $E = B+3$, $F = D+1$, A before B, and G excluded from 1st and 7th, and no other arrangement of the seven runners satisfies every clue simultaneously. G finishes 3rd.",
     "source": "original"
   },
   {
@@ -444,7 +444,7 @@
       "8-15-14"
     ],
     "correctIndex": 1,
-    "explanation": "D is the 4th letter (4×2=8), O is the 15th letter (15×2=30), G is the 7th letter (7×2=14). So DOG becomes \"8-30-14\".",
+    "explanation": "D is the 4th letter ($4 \\times 2 = 8$), O is the 15th letter ($15 \\times 2 = 30$), G is the 7th letter ($7 \\times 2 = 14$). So DOG becomes \"8-30-14\".",
     "source": "original"
   },
   {
@@ -508,7 +508,7 @@
       "42"
     ],
     "correctIndex": 3,
-    "explanation": "Each term follows the pattern $n(n+1)$: 1×2=2, 2×3=6, 3×4=12, 4×5=20, 5×6=30, so the next term is 6×7=42.",
+    "explanation": "Each term follows the pattern $n(n+1)$: $1 \\times 2 = 2$, $2 \\times 3 = 6$, $3 \\times 4 = 12$, $4 \\times 5 = 20$, $5 \\times 6 = 30$, so the next term is $6 \\times 7 = 42$.",
     "source": "original"
   },
   {
@@ -540,7 +540,7 @@
       "95"
     ],
     "correctIndex": 3,
-    "explanation": "Each term follows the pattern $a_{n+1} = 2a_n + 1$. 5×2+1=11, 11×2+1=23, 23×2+1=47, 47×2+1=95.",
+    "explanation": "Each term follows the pattern $a_{n+1} = 2a_n + 1$. $5 \\times 2 + 1 = 11$, $11 \\times 2 + 1 = 23$, $23 \\times 2 + 1 = 47$, $47 \\times 2 + 1 = 95$.",
     "source": "original"
   },
   {
@@ -572,7 +572,7 @@
       "Position 4"
     ],
     "correctIndex": 2,
-    "explanation": "E=6 (the top). With B=A+2 and D=C+1, and A below C, testing A=1 gives B=3; the remaining positions {2,4,5} then need C and D consecutive, which only C=4,D=5 satisfies, leaving F=2 (not the bottom, consistent with the clue). No other value of A satisfies every constraint at once. A occupies position 1 (the bottom).",
+    "explanation": "E=6 (the top). With $B = A+2$ and $D = C+1$, and A below C, testing A=1 gives B=3; the remaining positions {2,4,5} then need C and D consecutive, which only C=4,D=5 satisfies, leaving F=2 (not the bottom, consistent with the clue). No other value of A satisfies every constraint at once. A occupies position 1 (the bottom).",
     "source": "original"
   },
   {
@@ -588,7 +588,7 @@
       "Only conclusion I follows"
     ],
     "correctIndex": 3,
-    "explanation": "By the transitive chain, teachers ⊆ educators ⊆ professionals, so all teachers are professionals (I follows). Conclusion II reverses the relationship incorrectly.",
+    "explanation": "By the transitive chain, teachers $\\subseteq$ educators $\\subseteq$ professionals, so all teachers are professionals (I follows). Conclusion II reverses the relationship incorrectly.",
     "source": "original"
   },
   {
@@ -668,7 +668,7 @@
       "Seat 4"
     ],
     "correctIndex": 3,
-    "explanation": "P=1, Q=P+2=3, R=Q-1=2, S=6. The remaining seats {4, 5} go to T and U with T=U+1, so U=4 and T=5 is the only fit (U=5,T=6 is impossible since S already occupies 6). This also satisfies \"T does not sit at seat 1.\" U sits at seat 4.",
+    "explanation": "P=1, $Q = P+2 = 3$, $R = Q-1 = 2$, S=6. The remaining seats {4, 5} go to T and U with $T = U+1$, so U=4 and T=5 is the only fit (U=5,T=6 is impossible since S already occupies 6). This also satisfies \"T does not sit at seat 1.\" U sits at seat 4.",
     "source": "original"
   },
   {
@@ -732,7 +732,7 @@
       "Floor 2"
     ],
     "correctIndex": 2,
-    "explanation": "N=1. With L=J+3 and M=K+1, testing J=3 gives L=6; the remaining floors {2,4,5} then need K and M consecutive, which only K=4,M=5 satisfies, leaving O=2 (not the top floor, consistent with the clue). No other value of J satisfies every constraint at once. J lives on floor 3.",
+    "explanation": "N=1. With $L = J+3$ and $M = K+1$, testing J=3 gives L=6; the remaining floors {2,4,5} then need K and M consecutive, which only K=4,M=5 satisfies, leaving O=2 (not the top floor, consistent with the clue). No other value of J satisfies every constraint at once. J lives on floor 3.",
     "source": "original"
   },
   {
@@ -892,7 +892,7 @@
       "E"
     ],
     "correctIndex": 0,
-    "explanation": "G=4th. With C=A+2 and F=D-1, and A ranked better than D, testing A=3 gives C=5; the remaining ranks {1,2,6,7} then need B and E consecutive with E=B+1, which only B=1,E=2 satisfies, leaving D=7,F=6 (F=D-1 holds, and B=1 is not last, consistent with the clue). No other value of A satisfies every constraint at once. B ranked 1st.",
+    "explanation": "G=4th. With $C = A+2$ and $F = D-1$, and A ranked better than D, testing A=3 gives C=5; the remaining ranks {1,2,6,7} then need B and E consecutive with $E = B+1$, which only B=1,E=2 satisfies, leaving D=7,F=6 ($F = D-1$ holds, and B=1 is not last, consistent with the clue). No other value of A satisfies every constraint at once. B ranked 1st.",
     "source": "original"
   },
   {
@@ -924,7 +924,7 @@
       "Position 4"
     ],
     "correctIndex": 3,
-    "explanation": "S=1. With Q=P+2 and R=Q-1, there are two candidates: P=2 (Q=4,R=3) or P=4 (Q=6,R=5). If P=2, the remaining positions {5,6} force T=6,U=5, but that puts T at the top, violating the clue. So P=4 is correct: the remaining positions {2,3} give U=2,T=3, which is not the top, consistent with the clue. P occupies position 4.",
+    "explanation": "S=1. With $Q = P+2$ and $R = Q-1$, there are two candidates: P=2 (Q=4,R=3) or P=4 (Q=6,R=5). If P=2, the remaining positions {5,6} force T=6,U=5, but that puts T at the top, violating the clue. So P=4 is correct: the remaining positions {2,3} give U=2,T=3, which is not the top, consistent with the clue. P occupies position 4.",
     "source": "original"
   },
   {
@@ -1036,7 +1036,7 @@
       "6th"
     ],
     "correctIndex": 0,
-    "explanation": "Testing each possible rank for A (with C = A+1) against the remaining constraints, only A = 5th works: this forces C = 6th, and among the remaining ranks {1, 3, 4} for B, E, F, only B = 1st, E = 4th (three below B), F = 3rd satisfies both \"E is three below B\" and \"B < F < C\" (1 < 3 < 6). All other values for A lead to a contradiction with at least one clue.",
+    "explanation": "Testing each possible rank for A (with $C = A+1$) against the remaining constraints, only A = 5th works: this forces C = 6th, and among the remaining ranks {1, 3, 4} for B, E, F, only B = 1st, E = 4th (three below B), F = 3rd satisfies both \"E is three below B\" and \"$B < F < C$\" ($1 < 3 < 6$). All other values for A lead to a contradiction with at least one clue.",
     "source": "original"
   },
   {
@@ -1052,7 +1052,7 @@
       "Floor 2"
     ],
     "correctIndex": 3,
-    "explanation": "L=4 and M=3 (immediately below L). N=7 (topmost). The remaining floors {1, 2, 5, 6} must hold J, K=J+3, O=K+1, and P. Testing J=2 gives K=5 and O=6, all within the remaining set with P=1 left over: the only value of J that works without conflict. J lives on floor 2.",
+    "explanation": "L=4 and M=3 (immediately below L). N=7 (topmost). The remaining floors {1, 2, 5, 6} must hold J, $K = J+3$, $O = K+1$, and P. Testing J=2 gives K=5 and O=6, all within the remaining set with P=1 left over: the only value of J that works without conflict. J lives on floor 2.",
     "source": "original"
   },
   {
@@ -1068,7 +1068,7 @@
       "Floor 6"
     ],
     "correctIndex": 0,
-    "explanation": "D=1, C=2 (directly above D), E=3. Remaining floors {4, 5, 6} go to A, B, F with F=B-1 and B even. Testing B=4 gives F=3, which conflicts with E; so B=6, F=5, leaving A=4 as the only remaining floor.",
+    "explanation": "D=1, C=2 (directly above D), E=3. Remaining floors {4, 5, 6} go to A, B, F with $F = B-1$ and B even. Testing B=4 gives F=3, which conflicts with E; so B=6, F=5, leaving A=4 as the only remaining floor.",
     "source": "original"
   },
   {
@@ -1164,7 +1164,7 @@
       "3"
     ],
     "correctIndex": 3,
-    "explanation": "Amy=1. Dev and Ella must be consecutive (Ella=Dev+1) within positions {2,3,4,5}, and Ella≠5, leaving two candidate pairs: (Dev=2,Ella=3) or (Dev=3,Ella=4). Testing (Dev=3,Ella=4) forces Ben=2 and Cleo=5, but then Cleo is adjacent to Ella, violating the \"not adjacent\" clue. So (Dev=2,Ella=3) is the only valid case, with Ben=4 and Cleo=5. Ella sits at position 3.",
+    "explanation": "Amy=1. Dev and Ella must be consecutive (Ella immediately after Dev) within positions {2,3,4,5}, and Ella is not at position 5, leaving two candidate pairs: (Dev=2,Ella=3) or (Dev=3,Ella=4). Testing (Dev=3,Ella=4) forces Ben=2 and Cleo=5, but then Cleo is adjacent to Ella, violating the \"not adjacent\" clue. So (Dev=2,Ella=3) is the only valid case, with Ben=4 and Cleo=5. Ella sits at position 3.",
     "source": "original"
   },
   {
@@ -1276,7 +1276,7 @@
       "Seat 4"
     ],
     "correctIndex": 2,
-    "explanation": "D=7. With B=A+2, C=B-1, and E=F+2, testing A=1 gives B=3, C=2; the remaining seats {4,5,6} then need F and E with E=F+2, which only F=4,E=6 satisfies, leaving G=5 (not seat 1, consistent with the clue, and A=1 is indeed left of F=4). No other value of A satisfies every constraint at once. A sits at seat 1.",
+    "explanation": "D=7. With $B = A+2$, $C = B-1$, and $E = F+2$, testing A=1 gives B=3, C=2; the remaining seats {4,5,6} then need F and E with $E = F+2$, which only F=4,E=6 satisfies, leaving G=5 (not seat 1, consistent with the clue, and A=1 is indeed left of F=4). No other value of A satisfies every constraint at once. A sits at seat 1.",
     "source": "original"
   },
   {
@@ -1356,7 +1356,7 @@
       "5 sons and 2 daughters"
     ],
     "correctIndex": 1,
-    "explanation": "Let b = number of sons, g = number of daughters. Arjun (a son) has b-1 brothers and g sisters; \"equal\" gives b-1=g. Meena (a daughter) has b brothers and g-1 sisters; \"twice as many\" gives b=2(g-1). Substituting b=g+1 into the second equation: g+1=2g-2, so g=3 and b=4. The family has 4 sons and 3 daughters.",
+    "explanation": "Let $b$ be the number of sons and $g$ the number of daughters. Arjun (a son) has $b-1$ brothers and $g$ sisters; \"equal\" gives $b - 1 = g$. Meena (a daughter) has $b$ brothers and $g-1$ sisters; \"twice as many\" gives $b = 2(g-1)$. Substituting $b = g+1$ into the second equation: $g + 1 = 2g - 2$, so $g = 3$ and $b = 4$. The family has 4 sons and 3 daughters.",
     "source": "original"
   },
   {
@@ -1372,7 +1372,7 @@
       "125"
     ],
     "correctIndex": 2,
-    "explanation": "Each term follows the pattern $a_{n+1} = 2a_n + 1$. 63×2+1=127.",
+    "explanation": "Each term follows the pattern $a_{n+1} = 2a_n + 1$. $63 \\times 2 + 1 = 127$.",
     "source": "original"
   },
   {
@@ -1420,7 +1420,7 @@
       "69"
     ],
     "correctIndex": 2,
-    "explanation": "The differences between consecutive terms are 3, 5, 9, 17, and the differences of those differences double each time (2, 4, 8, next 16). So the next difference is 17+16=33, giving the next term as 35+33=68.",
+    "explanation": "The differences between consecutive terms are 3, 5, 9, 17, and the differences of those differences double each time (2, 4, 8, next 16). So the next difference is $17 + 16 = 33$, giving the next term as $35 + 33 = 68$.",
     "source": "original"
   },
   {
@@ -1468,7 +1468,7 @@
       "6 km west"
     ],
     "correctIndex": 1,
-    "explanation": "Using coordinates with A at (0,0): B=(0,8), C=(6,8), D=(6,0). The north (+8) and south (-8) legs cancel, leaving D directly 6 km east of A.",
+    "explanation": "Using coordinates with A at $(0,0)$: $B = (0,8)$, $C = (6,8)$, $D = (6,0)$. The north ($+8$) and south ($-8$) legs cancel, leaving D directly 6 km east of A.",
     "source": "original"
   },
   {
@@ -1484,7 +1484,7 @@
       "4 km"
     ],
     "correctIndex": 2,
-    "explanation": "Turning 90° clockwise from north faces her east; walking 4 km east gives (4,0). Turning 90° clockwise again faces her south; walking 3 km south gives (4,-3). The straight-line distance is $\\sqrt{4^2+3^2} = 5$ km.",
+    "explanation": "Turning 90° clockwise from north faces her east; walking 4 km east gives $(4,0)$. Turning 90° clockwise again faces her south; walking 3 km south gives $(4,-3)$. The straight-line distance is $\\sqrt{4^2+3^2} = 5$ km.",
     "source": "original"
   },
   {
@@ -1500,7 +1500,7 @@
       "4 km, west"
     ],
     "correctIndex": 0,
-    "explanation": "Using coordinates with O at (0,0): P=(0,10), Q=(-6,10), R=(-6,0), S=(-4,0). The north and south legs (10 km each) cancel, leaving S 4 km west of O; equivalently, O is 4 km east of S.",
+    "explanation": "Using coordinates with O at $(0,0)$: $P = (0,10)$, $Q = (-6,10)$, $R = (-6,0)$, $S = (-4,0)$. The north and south legs (10 km each) cancel, leaving S 4 km west of O; equivalently, O is 4 km east of S.",
     "source": "original"
   },
   {
@@ -1516,7 +1516,7 @@
       "10"
     ],
     "correctIndex": 3,
-    "explanation": "Students playing at least one sport = 50 - 6 = 44. Let x = students playing only football, so only cricket = 2x (given). Then x + 2x + 14 = 44, so 3x = 30, giving x = 10 students who play only football.",
+    "explanation": "Students playing at least one sport = $50 - 6 = 44$. Let $x$ = students playing only football, so only cricket = $2x$ (given). Then $x + 2x + 14 = 44$, so $3x = 30$, giving $x = 10$ students who play only football.",
     "source": "original"
   },
   {
@@ -1532,7 +1532,7 @@
       "Floor 4"
     ],
     "correctIndex": 0,
-    "explanation": "D=1. Testing A=2 (satisfying \"above floor 1, below floor 4\"): B=A+3=5, C=B-2=3. The remaining floors {4,6,7} then need E and F consecutive with E=F+1, which only F=6,E=7 satisfies, leaving G=4 (not the top floor, consistent with the clue). Testing A=3 instead forces B=6, C=4, leaving {2,5,7} for E,F,G with no consecutive pair available for E=F+1, so that case fails. A lives on floor 2.",
+    "explanation": "D=1. Testing A=2 (satisfying \"above floor 1, below floor 4\"): $B = A+3 = 5$, $C = B-2 = 3$. The remaining floors {4,6,7} then need E and F consecutive with $E = F+1$, which only F=6,E=7 satisfies, leaving G=4 (not the top floor, consistent with the clue). Testing A=3 instead forces B=6, C=4, leaving {2,5,7} for E,F,G with no consecutive pair available for E=F+1, so that case fails. A lives on floor 2.",
     "source": "original"
   },
   {
@@ -1548,7 +1548,7 @@
       "30"
     ],
     "correctIndex": 2,
-    "explanation": "By inclusion-exclusion: |A∪B∪C| = 90+80+70-30-25-20+10 = 175. People reading none = 200-175 = 25.",
+    "explanation": "By inclusion-exclusion: $|A \\cup B \\cup C| = 90 + 80 + 70 - 30 - 25 - 20 + 10 = 175$. People reading none = $200 - 175 = 25$.",
     "source": "original"
   },
   {
@@ -1580,7 +1580,7 @@
       "C"
     ],
     "correctIndex": 0,
-    "explanation": "E=6th. With B=A+1 and D=C+2, and A better (lower-numbered) than C, testing A=1 gives B=2; the remaining ranks {3,4,5} then need C and D exactly two apart, which only C=3,D=5 satisfies, leaving F=4 (not 1st, consistent with the clue). No other value of A satisfies every constraint at once. A ranked 1st.",
+    "explanation": "E=6th. With $B = A+1$ and $D = C+2$, and A better (lower-numbered) than C, testing A=1 gives B=2; the remaining ranks {3,4,5} then need C and D exactly two apart, which only C=3,D=5 satisfies, leaving F=4 (not 1st, consistent with the clue). No other value of A satisfies every constraint at once. A ranked 1st.",
     "source": "original"
   },
   {
@@ -1593,10 +1593,10 @@
       "45 minutes past 3",
       "50 minutes past 3",
       "49 minutes past 3",
-      "49 1/11 minutes past 3"
+      "$49\\frac{1}{11}$ minutes past 3"
     ],
     "correctIndex": 3,
-    "explanation": "At t minutes past 3:00, the hour hand is at $90 + 0.5t$ degrees and the minute hand is at $6t$ degrees. Setting the minute hand 180° ahead: $6t - (90 + 0.5t) = 180$, so $5.5t = 270$, giving $t = \\frac{270}{5.5} = 49\\frac{1}{11}$ minutes.",
+    "explanation": "At $t$ minutes past 3:00, the hour hand is at $90 + 0.5t$ degrees and the minute hand is at $6t$ degrees. Setting the minute hand 180° ahead: $6t - (90 + 0.5t) = 180$, so $5.5t = 270$, giving $t = \\frac{270}{5.5} = 49\\frac{1}{11}$ minutes.",
     "source": "original"
   }
 ]
