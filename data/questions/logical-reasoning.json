@@ -98,7 +98,7 @@
   {
     "id": "lr-007",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Assumption",
+    "topic": "Critical Reasoning: Assumption",
     "difficulty": "medium",
     "prompt": "Argument: \"The city should build a new highway to reduce traffic congestion downtown, since traffic has increased 30% over the past five years.\" Which of the following is an assumption underlying this argument?",
     "options": [
@@ -114,7 +114,7 @@
   {
     "id": "lr-008",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Assumption",
+    "topic": "Critical Reasoning: Assumption",
     "difficulty": "hard",
     "prompt": "Argument: \"Since employees who take regular breaks report higher job satisfaction, the company should mandate hourly breaks to improve overall satisfaction.\" Which assumption does this argument rely on?",
     "options": [
@@ -130,7 +130,7 @@
   {
     "id": "lr-009",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Assumption",
+    "topic": "Critical Reasoning: Assumption",
     "difficulty": "hard",
     "prompt": "Argument: \"Reading fiction improves empathy, so schools should require students to read more novels to become more empathetic adults.\" What does this argument assume?",
     "options": [
@@ -146,7 +146,7 @@
   {
     "id": "lr-010",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Assumption",
+    "topic": "Critical Reasoning: Assumption",
     "difficulty": "medium",
     "prompt": "Argument: \"Since the new fitness app has 500,000 downloads, it must be effective at helping people get fit.\" What is the flawed assumption here?",
     "options": [
@@ -162,7 +162,7 @@
   {
     "id": "lr-011",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Inference",
+    "topic": "Critical Reasoning: Inference",
     "difficulty": "easy",
     "prompt": "\"All members of the hiking club own hiking boots. Sarah does not own hiking boots.\" What can be validly concluded?",
     "options": [
@@ -178,7 +178,7 @@
   {
     "id": "lr-012",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Inference",
+    "topic": "Critical Reasoning: Inference",
     "difficulty": "medium",
     "prompt": "\"Every time it rains heavily, the river level rises. The river level has not risen today.\" What can be validly concluded?",
     "options": [
@@ -194,7 +194,7 @@
   {
     "id": "lr-013",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Inference",
+    "topic": "Critical Reasoning: Inference",
     "difficulty": "medium",
     "prompt": "\"Sales of umbrellas increase every time it rains in the city. Yesterday, umbrella sales were unusually high.\" What can be reasonably inferred?",
     "options": [
@@ -210,7 +210,7 @@
   {
     "id": "lr-014",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "medium",
     "prompt": "Five colleagues (H, I, J, K, L) sit in a row of five chairs, numbered 1 to 5 from left to right. J sits exactly two seats to the right of H. I sits immediately to the left of K. L does not sit at either end. K sits at seat 5. Where does H sit?",
     "options": [
@@ -226,7 +226,7 @@
   {
     "id": "lr-015",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Strengthen",
+    "topic": "Critical Reasoning: Strengthen",
     "difficulty": "medium",
     "prompt": "Argument: \"The new drug reduces headache duration, since patients who took it recovered faster than those who didn't.\" Which finding would most strengthen this argument?",
     "options": [
@@ -242,7 +242,7 @@
   {
     "id": "lr-016",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Strengthen",
+    "topic": "Critical Reasoning: Strengthen",
     "difficulty": "medium",
     "prompt": "Argument: \"Switching to solar panels will lower the town's electricity costs, based on similar towns that adopted solar and saw savings.\" Which fact would most strengthen this argument?",
     "options": [
@@ -258,7 +258,7 @@
   {
     "id": "lr-017",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Strengthen",
+    "topic": "Critical Reasoning: Strengthen",
     "difficulty": "hard",
     "prompt": "Argument: \"The new teaching method improves test scores, as shown by a pilot classroom that used it and scored higher than average.\" What would most strengthen this claim?",
     "options": [
@@ -274,7 +274,7 @@
   {
     "id": "lr-018",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Weaken",
+    "topic": "Critical Reasoning: Weaken",
     "difficulty": "medium",
     "prompt": "Argument: \"Company X's new marketing campaign caused its sales to double last quarter.\" Which finding would most weaken this argument?",
     "options": [
@@ -290,7 +290,7 @@
   {
     "id": "lr-019",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Weaken",
+    "topic": "Critical Reasoning: Weaken",
     "difficulty": "hard",
     "prompt": "Argument: \"Since students who attend the tutoring program score higher on exams, the tutoring program must be effective at improving scores.\" What would most weaken this argument?",
     "options": [
@@ -306,7 +306,7 @@
   {
     "id": "lr-020",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Weaken",
+    "topic": "Critical Reasoning: Weaken",
     "difficulty": "hard",
     "prompt": "Argument: \"The new traffic light system must have reduced accidents, since accident reports dropped 15% after it was installed.\" Which fact would most weaken this conclusion?",
     "options": [
@@ -322,7 +322,7 @@
   {
     "id": "lr-021",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Floors",
+    "topic": "Analytical Puzzle: Floors",
     "difficulty": "medium",
     "prompt": "A five-story building has floors numbered 1 (bottom) to 5 (top), each occupied by a different tenant: M, N, O, P, Q. O lives exactly two floors above N. P lives immediately below Q. M does not live on floor 1 or floor 5. P does not live on floor 1. Which floor does N live on?",
     "options": [
@@ -338,9 +338,9 @@
   {
     "id": "lr-022",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "hard",
-    "prompt": "Seven friends (A, B, C, D, E, F, G) sit evenly spaced around a circular table, all facing the center. B sits three seats clockwise from A. C sits immediately to the right of B. D sits immediately to the left of A. E sits two seats clockwise from D. F sits immediately to the right of E. Where does G sit relative to A?",
+    "prompt": "Seven friends (A, B, C, D, E, F, G) sit evenly spaced around a circular table, all facing outward, away from the table. B sits three seats clockwise from A. C sits immediately to the right of B. D sits immediately to the left of A. E sits two seats clockwise from D. F sits immediately to the right of E. Where does G sit relative to A?",
     "options": [
       "Second to the left of A",
       "Second to the right of A",
@@ -354,7 +354,7 @@
   {
     "id": "lr-023",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Ranking",
+    "topic": "Analytical Puzzle: Ranking",
     "difficulty": "hard",
     "prompt": "Seven runners (A, B, C, D, E, F, G) finish a race in distinct positions, 1st through 7th, with no ties. C finishes immediately after A. E finishes exactly three positions after B. F finishes immediately after D. A finishes before B. G does not finish 1st or 7th. In which position does G finish?",
     "options": [
@@ -388,7 +388,7 @@
     "section": "logical-reasoning",
     "topic": "Seating Arrangement",
     "difficulty": "hard",
-    "prompt": "Six friends P, Q, R, S, T, U sit evenly spaced around a circular table, facing the center. Q sits second to the right of P. R sits immediately to the left of Q. S sits directly opposite P. T sits immediately to the right of S. Where does U sit?",
+    "prompt": "Six friends P, Q, R, S, T, U sit evenly spaced around a circular table, facing outward, away from the table. Q sits second to the right of P. R sits immediately to the left of Q. S sits directly opposite P. T sits immediately to the right of S. Where does U sit?",
     "options": [
       "Immediately to the right of Q",
       "Immediately to the left of S",
@@ -562,7 +562,7 @@
   {
     "id": "lr-036",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Boxes",
+    "topic": "Analytical Puzzle: Boxes",
     "difficulty": "hard",
     "prompt": "Six boxes (A, B, C, D, E, F) are stacked one on top of another, numbered position 1 (bottom) to 6 (top). B is exactly two positions above A. D is directly above C. E is at the very top. A is below C. F is not at the bottom. Which position does A occupy?",
     "options": [
@@ -594,7 +594,7 @@
   {
     "id": "lr-038",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Grouping",
+    "topic": "Analytical Puzzle: Grouping",
     "difficulty": "hard",
     "prompt": "Eight students are divided into two teams of four for a project: Team X and Team Y. A is on Team X. B is on Team Y. C is on the same team as B. D is on a different team from A. E is on the same team as A. F is on the same team as D. G is on a different team from F. H is on the same team as G. Which team is H on?",
     "options": [
@@ -658,7 +658,7 @@
   {
     "id": "lr-042",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "medium",
     "prompt": "Six colleagues (P, Q, R, S, T, U) sit in a row of six chairs, numbered 1 to 6 from left to right. P sits at seat 1. Q sits two seats to the right of P. R sits immediately to the left of Q. S sits at seat 6. T does not sit at seat 1. T sits immediately to the right of U. Where does U sit?",
     "options": [
@@ -674,9 +674,9 @@
   {
     "id": "lr-043",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "hard",
-    "prompt": "Six people (A, B, C, D, E, F) sit evenly spaced around a circular table, all facing the center. B sits two seats clockwise from A. C sits immediately to the right of B. D sits immediately to the left of A. F sits immediately to the right of C. Where does E sit relative to A?",
+    "prompt": "Six people (A, B, C, D, E, F) sit evenly spaced around a circular table, all facing outward, away from the table. B sits two seats clockwise from A. C sits immediately to the right of B. D sits immediately to the left of A. F sits immediately to the right of C. Where does E sit relative to A?",
     "options": [
       "Third to the right of A",
       "Immediately to the left of A",
@@ -722,7 +722,7 @@
   {
     "id": "lr-046",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Floors",
+    "topic": "Analytical Puzzle: Floors",
     "difficulty": "medium",
     "prompt": "A six-story building has floors numbered 1 (bottom) to 6 (top), each occupied by a different tenant: J, K, L, M, N, O. L is exactly three floors above J. M is exactly one floor above K. N lives on floor 1. O does not live on the top floor. Which floor does J live on?",
     "options": [
@@ -802,7 +802,7 @@
   {
     "id": "lr-051",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Assumption",
+    "topic": "Critical Reasoning: Assumption",
     "difficulty": "medium",
     "prompt": "Argument: \"The company should switch all its delivery trucks to electric vehicles, since electric vehicles have lower fuel costs than gasoline trucks.\" Which of the following is an assumption underlying this argument?",
     "options": [
@@ -818,7 +818,7 @@
   {
     "id": "lr-052",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Assumption",
+    "topic": "Critical Reasoning: Assumption",
     "difficulty": "hard",
     "prompt": "Argument: \"Because the average reading score in District A is higher than in District B, District A's schools must be providing better reading instruction.\" What does this argument assume?",
     "options": [
@@ -834,7 +834,7 @@
   {
     "id": "lr-053",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Inference",
+    "topic": "Critical Reasoning: Inference",
     "difficulty": "easy",
     "prompt": "\"Every certified technician passed a rigorous exam. Jason did not pass the rigorous exam.\" What can be validly concluded?",
     "options": [
@@ -850,7 +850,7 @@
   {
     "id": "lr-054",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Inference",
+    "topic": "Critical Reasoning: Inference",
     "difficulty": "medium",
     "prompt": "\"In a factory, machines serviced monthly break down less often than machines serviced yearly. Machine 12 broke down frequently this year.\" What can be reasonably inferred?",
     "options": [
@@ -866,7 +866,7 @@
   {
     "id": "lr-055",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Strengthen",
+    "topic": "Critical Reasoning: Strengthen",
     "difficulty": "medium",
     "prompt": "Argument: \"The new packaging reduced shipment damage, since damage complaints fell 40% after the switch.\" Which fact would most strengthen this argument?",
     "options": [
@@ -882,7 +882,7 @@
   {
     "id": "lr-056",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Ranking",
+    "topic": "Analytical Puzzle: Ranking",
     "difficulty": "hard",
     "prompt": "Seven students (A, B, C, D, E, F, G) scored differently on a test, ranked 1st (highest) through 7th (lowest), with no ties. C ranked exactly two places below A. E ranked immediately below B. F ranked immediately above D. G ranked 4th. A ranked better than D. B did not rank last. Who ranked 1st?",
     "options": [
@@ -898,7 +898,7 @@
   {
     "id": "lr-057",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Weaken",
+    "topic": "Critical Reasoning: Weaken",
     "difficulty": "medium",
     "prompt": "Argument: \"Employees who work remotely report higher productivity scores, so the company should let all employees work remotely to boost productivity.\" Which finding would most weaken this argument?",
     "options": [
@@ -914,7 +914,7 @@
   {
     "id": "lr-058",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Boxes",
+    "topic": "Analytical Puzzle: Boxes",
     "difficulty": "hard",
     "prompt": "Six boxes (P, Q, R, S, T, U) are stacked one on top of another, numbered position 1 (bottom) to 6 (top). Q is exactly two positions above P. R is directly below Q. S is at the very bottom. T is directly above U. T is not at the top. Which position does P occupy?",
     "options": [
@@ -930,7 +930,7 @@
   {
     "id": "lr-059",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "easy",
     "prompt": "Five students (P, Q, R, S, T) sit in a row of five chairs, numbered 1 to 5 from left to right. Q sits at seat 3. P sits immediately to the left of Q. S sits immediately to the right of Q. T sits immediately to the left of P. R sits at the rightmost end. What is the order from left to right?",
     "options": [
@@ -946,7 +946,7 @@
   {
     "id": "lr-060",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "medium",
     "prompt": "Six colleagues (A, B, C, D, E, F) sit in a row of six chairs, left to right. C sits at the leftmost end. D sits immediately to the right of A. B sits immediately to the right of D. F sits immediately to the right of B. E sits immediately to the right of F. Where does A sit?",
     "options": [
@@ -962,9 +962,9 @@
   {
     "id": "lr-061",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "medium",
-    "prompt": "Six people sit evenly spaced around a circular table, facing the center: J, K, L, M, N, O. K sits second to the right of J. L sits immediately to the left of K. M sits directly opposite J. N sits immediately to the right of M. Where does O sit?",
+    "prompt": "Six people sit evenly spaced around a circular table, facing outward, away from the table: J, K, L, M, N, O. K sits second to the right of J. L sits immediately to the left of K. M sits directly opposite J. N sits immediately to the right of M. Where does O sit?",
     "options": [
       "Immediately to the left of M",
       "Opposite L",
@@ -978,9 +978,9 @@
   {
     "id": "lr-062",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "medium",
-    "prompt": "Six colleagues sit around a circular table facing the center: R, S, T, U, V, W. T sits immediately to the right of R. U sits second to the left of T. V sits directly opposite U. S sits immediately to the right of V. Where does W sit relative to R?",
+    "prompt": "Six colleagues sit around a circular table facing outward, away from the table: R, S, T, U, V, W. T sits immediately to the right of R. U sits second to the left of T. V sits directly opposite U. S sits immediately to the right of V. Where does W sit relative to R?",
     "options": [
       "Second to the left of R",
       "Immediately to the right of R",
@@ -994,7 +994,7 @@
   {
     "id": "lr-063",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Ranking",
+    "topic": "Analytical Puzzle: Ranking",
     "difficulty": "easy",
     "prompt": "In a race, five runners (Ana, Cara, Ben, Dan, and Emma) finish in distinct positions with no ties. Ana finishes before Ben but after Cara. Ben finishes before Emma. Dan finishes last. Who finishes first?",
     "options": [
@@ -1010,7 +1010,7 @@
   {
     "id": "lr-064",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Ranking",
+    "topic": "Analytical Puzzle: Ranking",
     "difficulty": "medium",
     "prompt": "Five students scored differently on a test: Mia, Noah, Olivia, Paul, and Quinn. Noah scored higher than Paul but lower than Mia. Olivia scored the highest of all. Quinn scored lower than Paul. Who scored the lowest?",
     "options": [
@@ -1026,7 +1026,7 @@
   {
     "id": "lr-065",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Ranking",
+    "topic": "Analytical Puzzle: Ranking",
     "difficulty": "hard",
     "prompt": "Six chess players (A, B, C, D, E, F) are ranked 1st (best) through 6th (worst), with no ties. C ranks immediately below A. E ranks exactly three places below B. D ranks 2nd. F ranks better than C but worse than B. What is A's rank?",
     "options": [
@@ -1042,7 +1042,7 @@
   {
     "id": "lr-066",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Floors",
+    "topic": "Analytical Puzzle: Floors",
     "difficulty": "medium",
     "prompt": "A seven-story building has floors numbered 1 (bottom) to 7 (top), each occupied by a different family: J, K, L, M, N, O, and P. L lives on floor 4. M lives immediately below L. N lives on the topmost floor. K lives three floors above J. O lives immediately above K. Which floor does J live on?",
     "options": [
@@ -1058,7 +1058,7 @@
   {
     "id": "lr-067",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Floors",
+    "topic": "Analytical Puzzle: Floors",
     "difficulty": "hard",
     "prompt": "A six-story building has floors numbered 1 (bottom) to 6 (top), each occupied by a different resident: A, B, C, D, E, F. D lives on floor 1. C lives directly above D. E lives on floor 3. F lives directly below B. B lives on an even-numbered floor. Which floor does A live on?",
     "options": [
@@ -1074,7 +1074,7 @@
   {
     "id": "lr-068",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Boxes",
+    "topic": "Analytical Puzzle: Boxes",
     "difficulty": "medium",
     "prompt": "Five boxes (P, Q, R, S, T) are stacked one on top of another. Q is at the very bottom. R is at the very top. R is directly above T. S is directly below P. Which box is directly above Q?",
     "options": [
@@ -1090,7 +1090,7 @@
   {
     "id": "lr-069",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Boxes",
+    "topic": "Analytical Puzzle: Boxes",
     "difficulty": "easy",
     "prompt": "Four boxes (A, B, C, D) are placed in a stack. Box A is at the bottom. Box B is directly on top of Box D. Box C is directly on top of Box B. What is the order from bottom to top?",
     "options": [
@@ -1106,7 +1106,7 @@
   {
     "id": "lr-070",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Grouping",
+    "topic": "Analytical Puzzle: Grouping",
     "difficulty": "medium",
     "prompt": "Eight students are divided into two teams of four for a project: Team X and Team Y. Priya is on Team X. Liam is on Team Y. Noah is on the same team as Liam. Sam is on a different team from Priya. Which team is Sam on?",
     "options": [
@@ -1122,7 +1122,7 @@
   {
     "id": "lr-071",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "medium",
     "prompt": "Six friends (J, K, L, M, N, O) sit in a row of six chairs, numbered 1 to 6 from left to right. L sits third from the left. N sits second from the right. J sits immediately to the left of L. Exactly one person sits between L and O. M sits immediately to the right of N. Who sits at seat 1?",
     "options": [
@@ -1138,9 +1138,9 @@
   {
     "id": "lr-072",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "medium",
-    "prompt": "Five people (A, B, C, D, E) sit evenly spaced around a circular table, all facing the center. B sits second to the right of A. C sits immediately to the left of B. D sits immediately to the right of B. Where does E sit relative to A?",
+    "prompt": "Five people (A, B, C, D, E) sit evenly spaced around a circular table, all facing outward, away from the table. B sits second to the right of A. C sits immediately to the left of B. D sits immediately to the right of B. Where does E sit relative to A?",
     "options": [
       "Opposite A",
       "Immediately to the left of A",
@@ -1154,7 +1154,7 @@
   {
     "id": "lr-073",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "medium",
     "prompt": "Five people (Amy, Ben, Cleo, Dev, and Ella) stand in a line for a photo, numbered position 1 to 5 from left to right. Amy is at position 1. Ben is not at either end. Cleo is somewhere to the right of Ben. Dev is immediately to the left of Ella. Ella is not at position 5. Cleo is not adjacent to Ella. What is Ella's position?",
     "options": [
@@ -1170,9 +1170,9 @@
   {
     "id": "lr-074",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "easy",
-    "prompt": "Four friends (W, X, Y, Z) sit evenly spaced around a square table, facing the center. X sits directly opposite W. Y sits immediately to the right of W. Where does Z sit relative to X?",
+    "prompt": "Four friends (W, X, Y, Z) sit evenly spaced around a square table, facing outward, away from the table. X sits directly opposite W. Y sits immediately to the right of W. Where does Z sit relative to X?",
     "options": [
       "Immediately to the left of X",
       "Immediately to the right of Y",
@@ -1186,7 +1186,7 @@
   {
     "id": "lr-075",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "medium",
     "prompt": "Seven students sit in a row of seven chairs, numbered 1 to 7 left to right. G sits at seat 1. D sits immediately to the right of G. F sits three seats to the right of D. B sits immediately to the left of F. The remaining students, A, C, and E, occupy the remaining seats, with C sitting immediately to the right of E. Which seat does A occupy?",
     "options": [
@@ -1234,7 +1234,7 @@
   {
     "id": "lr-078",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Grouping",
+    "topic": "Analytical Puzzle: Grouping",
     "difficulty": "hard",
     "prompt": "Eight students are divided into two teams of four for a project: Team X and Team Y. M and N are on different teams. O is on the same team as M. P is on the same team as N. M is on Team X. Exactly two of Q, R, and S are on Team X. Q is on Team X. R is on the same team as Q. T is on a different team from M. Which team is T on?",
     "options": [
@@ -1266,7 +1266,7 @@
   {
     "id": "lr-080",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "hard",
     "prompt": "Seven colleagues (A, B, C, D, E, F, G) sit in a row of seven chairs, numbered 1 to 7 from left to right. B sits two seats to the right of A. C sits immediately to the left of B. D sits at seat 7. E sits exactly two seats to the right of F. G does not sit at seat 1. A sits to the left of F. Where does A sit?",
     "options": [
@@ -1426,9 +1426,9 @@
   {
     "id": "lr-090",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "hard",
-    "prompt": "Eight people (A, B, C, D, E, F, G, H) sit evenly spaced around a circular table, all facing the center. B sits directly opposite A. C sits two seats clockwise from B. D sits immediately to the left of C. E sits immediately to the right of A. F sits two seats clockwise from E. G sits immediately to the right of C. Where does H sit relative to A?",
+    "prompt": "Eight people (A, B, C, D, E, F, G, H) sit evenly spaced around a circular table, all facing outward, away from the table. B sits directly opposite A. C sits two seats clockwise from B. D sits immediately to the left of C. E sits immediately to the right of A. F sits two seats clockwise from E. G sits immediately to the right of C. Where does H sit relative to A?",
     "options": [
       "Directly opposite A",
       "Second to the right of A",
@@ -1506,7 +1506,7 @@
   {
     "id": "lr-095",
     "section": "logical-reasoning",
-    "topic": "Venn Diagram — Set Logic",
+    "topic": "Venn Diagram: Set Logic",
     "difficulty": "hard",
     "prompt": "In a class of 50 students, 6 students play neither football nor cricket. The number of students who play only cricket is exactly twice the number who play only football. 14 students play both football and cricket. How many students play only football?",
     "options": [
@@ -1522,7 +1522,7 @@
   {
     "id": "lr-096",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Floors",
+    "topic": "Analytical Puzzle: Floors",
     "difficulty": "hard",
     "prompt": "A seven-story building has floors numbered 1 (bottom) to 7 (top), each occupied by a different tenant: A, B, C, D, E, F, G. B lives exactly three floors above A. C lives exactly two floors below B. D lives on floor 1. E is exactly one floor above F. G does not live on the top floor. A lives above floor 1 but below floor 4. Which floor does A live on?",
     "options": [
@@ -1538,7 +1538,7 @@
   {
     "id": "lr-097",
     "section": "logical-reasoning",
-    "topic": "Venn Diagram — Set Logic",
+    "topic": "Venn Diagram: Set Logic",
     "difficulty": "hard",
     "prompt": "In a group of 200 people, 90 read Newspaper A, 80 read Newspaper B, 70 read Newspaper C, 30 read both A and B, 25 read both B and C, 20 read both A and C, and 10 read all three. How many people read none of the three newspapers?",
     "options": [
@@ -1570,7 +1570,7 @@
   {
     "id": "lr-099",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Ranking",
+    "topic": "Analytical Puzzle: Ranking",
     "difficulty": "hard",
     "prompt": "Six students (A, B, C, D, E, F) scored differently on a test, ranked 1st (highest) through 6th (lowest), with no ties. B ranked immediately below A. D ranked exactly two places below C. E ranked 6th. F did not rank 1st. A ranked better than C. Who ranked 1st?",
     "options": [
@@ -1590,9 +1590,9 @@
     "difficulty": "hard",
     "prompt": "At what time between 3 and 4 o'clock will the minute hand and hour hand of a clock be exactly opposite each other (180° apart)?",
     "options": [
-      "45 minutes past 3",
-      "50 minutes past 3",
-      "49 minutes past 3",
+      "$45$ minutes past 3",
+      "$50$ minutes past 3",
+      "$49$ minutes past 3",
       "$49\\frac{1}{11}$ minutes past 3"
     ],
     "correctIndex": 3,

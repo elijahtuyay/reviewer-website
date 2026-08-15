@@ -2,7 +2,7 @@
   {
     "id": "qs-001",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Percentages",
+    "topic": "Arithmetic: Percentages",
     "difficulty": "medium",
     "prompt": "A shirt is priced at ₱80. The store offers a 25% discount, and then adds 8% sales tax on the discounted price. What is the final price the customer pays?",
     "options": [
@@ -18,7 +18,7 @@
   {
     "id": "qs-002",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Percentages",
+    "topic": "Arithmetic: Percentages",
     "difficulty": "medium",
     "prompt": "The price of an item increases by 20% and then decreases by 20%. What is the net percentage change?",
     "options": [
@@ -34,7 +34,7 @@
   {
     "id": "qs-003",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Ratios",
+    "topic": "Arithmetic: Ratios",
     "difficulty": "easy",
     "prompt": "The ratio of boys to girls in a class is $3:5$. If there are 24 boys, how many girls are there?",
     "options": [
@@ -50,7 +50,7 @@
   {
     "id": "qs-004",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Ratios",
+    "topic": "Arithmetic: Ratios",
     "difficulty": "medium",
     "prompt": "Two numbers are in the ratio $4:7$. If their sum is 121, find the larger number.",
     "options": [
@@ -66,7 +66,7 @@
   {
     "id": "qs-005",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Profit & Loss",
+    "topic": "Arithmetic: Profit & Loss",
     "difficulty": "easy",
     "prompt": "A trader buys an item for ₱200 and sells it for ₱250. What is the profit percentage?",
     "options": [
@@ -82,7 +82,7 @@
   {
     "id": "qs-006",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Profit & Loss",
+    "topic": "Arithmetic: Profit & Loss",
     "difficulty": "medium",
     "prompt": "A man sells a watch for ₱342, incurring a loss of 5%. What was the cost price?",
     "options": [
@@ -98,7 +98,7 @@
   {
     "id": "qs-007",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Discounts",
+    "topic": "Arithmetic: Discounts",
     "difficulty": "hard",
     "prompt": "A shop offers successive discounts of 10%, 20%, and 5% on an item marked ₱500. What single discount percentage would produce the same final price?",
     "options": [
@@ -114,7 +114,7 @@
   {
     "id": "qs-008",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Mixtures & Alligations",
+    "topic": "Arithmetic: Mixtures & Alligations",
     "difficulty": "hard",
     "prompt": "A vessel contains a mixture of milk and water in the ratio $5:3$, totaling 32 liters. If 8 liters of pure water is added to the mixture, what is the new ratio of milk to water?",
     "options": [
@@ -130,7 +130,7 @@
   {
     "id": "qs-009",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Mixtures & Alligations",
+    "topic": "Arithmetic: Mixtures & Alligations",
     "difficulty": "hard",
     "prompt": "How many liters of a 40% acid solution must be mixed with 10 liters of a 10% acid solution to get a 25% acid solution?",
     "options": [
@@ -146,7 +146,7 @@
   {
     "id": "qs-010",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Probability",
+    "topic": "Algebra and Probability: Probability",
     "difficulty": "easy",
     "prompt": "A bag contains 4 red balls and 6 blue balls. What is the probability of drawing a red ball at random?",
     "options": [
@@ -162,7 +162,7 @@
   {
     "id": "qs-011",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Probability",
+    "topic": "Algebra and Probability: Probability",
     "difficulty": "medium",
     "prompt": "A fair coin is tossed twice. What is the probability of getting exactly one head?",
     "options": [
@@ -178,7 +178,7 @@
   {
     "id": "qs-012",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Partnership",
+    "topic": "Arithmetic: Partnership",
     "difficulty": "hard",
     "prompt": "A invests ₱3,000 for the full 12 months. B invests ₱6,000 but joins the business only after 8 months have passed, so B's money is invested for just 4 months. If the total profit at year end is ₱2,000, what is A's share?",
     "options": [
@@ -290,7 +290,7 @@
   {
     "id": "qs-019",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Geometry & Mensuration",
+    "topic": "Arithmetic: Geometry & Mensuration",
     "difficulty": "medium",
     "prompt": "A right triangle has legs of length 6 cm and 8 cm. What is the length of the hypotenuse?",
     "options": [
@@ -306,7 +306,7 @@
   {
     "id": "qs-020",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Geometry & Mensuration",
+    "topic": "Arithmetic: Geometry & Mensuration",
     "difficulty": "medium",
     "prompt": "What is the area of a circle with radius 7 cm? (Use $\\pi = \\frac{22}{7}$)",
     "options": [
@@ -322,7 +322,7 @@
   {
     "id": "qs-021",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Geometry & Mensuration",
+    "topic": "Arithmetic: Geometry & Mensuration",
     "difficulty": "medium",
     "prompt": "The angles of a triangle are in the ratio $2:3:4$. What is the measure of the largest angle?",
     "options": [
@@ -338,7 +338,7 @@
   {
     "id": "qs-022",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Geometry & Mensuration",
+    "topic": "Arithmetic: Geometry & Mensuration",
     "difficulty": "medium",
     "prompt": "A rectangle has a length of 12 cm and a width of 5 cm. If the length is increased by 3 cm and the width is increased by 2 cm, what is the perimeter of the new rectangle?",
     "options": [
@@ -354,7 +354,7 @@
   {
     "id": "qs-023",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Geometry & Mensuration",
+    "topic": "Arithmetic: Geometry & Mensuration",
     "difficulty": "hard",
     "prompt": "Two triangles are similar, with corresponding sides in the ratio $2:5$. If the area of the smaller triangle is 8 cm², what is the area of the larger triangle?",
     "options": [
@@ -370,7 +370,7 @@
   {
     "id": "qs-024",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Coordinate Geometry",
+    "topic": "Arithmetic: Coordinate Geometry",
     "difficulty": "hard",
     "prompt": "Points $A(2, 3)$, $B(6, 6)$, and $C(2, 6)$ are plotted on a coordinate plane. What is the area of triangle ABC?",
     "options": [
@@ -450,7 +450,7 @@
   {
     "id": "qs-029",
     "section": "quantitative-skills",
-    "topic": "DI — Caselets and Tables",
+    "topic": "DI: Caselets and Tables",
     "difficulty": "medium",
     "prompt": "A company's quarterly sales were:\nQ1: ₱40,000\nQ2: ₱55,000\nQ3: ₱35,000\nQ4: ₱70,000\n\nWhat was the total sales for the year?",
     "options": [
@@ -466,7 +466,7 @@
   {
     "id": "qs-030",
     "section": "quantitative-skills",
-    "topic": "DI — Caselets and Tables",
+    "topic": "DI: Caselets and Tables",
     "difficulty": "hard",
     "prompt": "Quarterly sales for the year were:\nQ1: ₱40,000\nQ2: ₱55,000\nQ3: ₱35,000\nQ4: ₱70,000\n\nWhat percentage of the annual total of ₱200,000 was earned in Q4?",
     "options": [
@@ -482,7 +482,7 @@
   {
     "id": "qs-031",
     "section": "quantitative-skills",
-    "topic": "DI — Caselets and Tables",
+    "topic": "DI: Caselets and Tables",
     "difficulty": "hard",
     "prompt": "Quarterly sales for the year were:\nQ1: ₱40,000\nQ2: ₱55,000\nQ3: ₱35,000\nQ4: ₱70,000\n\nBy what percentage did sales increase from Q3 to Q4?",
     "options": [
@@ -498,7 +498,7 @@
   {
     "id": "qs-032",
     "section": "quantitative-skills",
-    "topic": "DI — Caselets and Tables",
+    "topic": "DI: Caselets and Tables",
     "difficulty": "medium",
     "prompt": "Quarterly sales for the year were:\nQ1: ₱40,000\nQ2: ₱55,000\nQ3: ₱35,000\nQ4: ₱70,000\n\nWhat was the average quarterly sales for the year?",
     "options": [
@@ -710,7 +710,7 @@
   {
     "id": "qs-045",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "medium",
     "prompt": "The product of two consecutive positive integers is 210. What is the sum of the two integers?",
     "options": [
@@ -726,7 +726,7 @@
   {
     "id": "qs-046",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "medium",
     "prompt": "If $p$ and $q$ are distinct prime numbers, each greater than 2, which of the following is always even?",
     "options": [
@@ -774,7 +774,7 @@
   {
     "id": "qs-049",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Simple Interest",
+    "topic": "Arithmetic: Simple Interest",
     "difficulty": "easy",
     "prompt": "What is the simple interest on ₱2,000 at 6% per annum for 3 years?",
     "options": [
@@ -790,7 +790,7 @@
   {
     "id": "qs-050",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Averages",
+    "topic": "Arithmetic: Averages",
     "difficulty": "hard",
     "prompt": "The average of 6 numbers is 24. If two numbers, 30 and 22, are removed from the set, what is the average of the remaining 4 numbers?",
     "options": [
@@ -806,7 +806,7 @@
   {
     "id": "qs-051",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Time, Speed & Distance",
+    "topic": "Arithmetic: Time, Speed & Distance",
     "difficulty": "hard",
     "prompt": "A car travels from town A to town B, a distance of 240 km, at a speed of 60 km/h. It then returns from B to A at a speed of 40 km/h. What is the average speed for the entire round trip?",
     "options": [
@@ -822,7 +822,7 @@
   {
     "id": "qs-052",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Work & Time",
+    "topic": "Arithmetic: Work & Time",
     "difficulty": "hard",
     "prompt": "A can complete a job in 12 days, and B can complete the same job in 18 days. Working together, how many days will they take to complete the job?",
     "options": [
@@ -838,7 +838,7 @@
   {
     "id": "qs-053",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "easy",
     "prompt": "Solve for $x$: $5x + 3 = 2x + 18$",
     "options": [
@@ -854,7 +854,7 @@
   {
     "id": "qs-054",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "medium",
     "prompt": "If $3(x - 2) = 2(x + 5)$, what is the value of $x$?",
     "options": [
@@ -870,7 +870,7 @@
   {
     "id": "qs-055",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "medium",
     "prompt": "If $x^2 + x - 12 = 0$, what is the sum of the two roots of the equation?",
     "options": [
@@ -886,7 +886,7 @@
   {
     "id": "qs-056",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "medium",
     "prompt": "If $f(x) = 2x^2 - 3x + 1$, what is $f(3)$?",
     "options": [
@@ -902,7 +902,7 @@
   {
     "id": "qs-057",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "hard",
     "prompt": "If $\\frac{x}{y} = \\frac{3}{4}$ and $x + y = 35$, what is the value of $y$?",
     "options": [
@@ -918,7 +918,7 @@
   {
     "id": "qs-058",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Probability",
+    "topic": "Algebra and Probability: Probability",
     "difficulty": "easy",
     "prompt": "A single fair die is rolled. What is the probability of getting a number greater than 4?",
     "options": [
@@ -934,7 +934,7 @@
   {
     "id": "qs-059",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Probability",
+    "topic": "Algebra and Probability: Probability",
     "difficulty": "medium",
     "prompt": "A bag has 3 red, 2 green, and 5 blue marbles. One marble is drawn at random. What is the probability that it is NOT blue?",
     "options": [
@@ -950,7 +950,7 @@
   {
     "id": "qs-060",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Probability",
+    "topic": "Algebra and Probability: Probability",
     "difficulty": "hard",
     "prompt": "Two fair dice are rolled. What is the probability that the sum of the two numbers is 7?",
     "options": [
@@ -966,7 +966,7 @@
   {
     "id": "qs-061",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "medium",
     "prompt": "If $4x - 3y = 10$ and $x = 2y$, what is the value of $y$?",
     "options": [
@@ -982,7 +982,7 @@
   {
     "id": "qs-062",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Probability",
+    "topic": "Algebra and Probability: Probability",
     "difficulty": "hard",
     "prompt": "A box contains 5 defective and 15 non-defective bulbs. Two bulbs are drawn at random, one after another, without replacement. What is the probability that both are non-defective?",
     "options": [
@@ -998,7 +998,7 @@
   {
     "id": "qs-063",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Averages",
+    "topic": "Arithmetic: Averages",
     "difficulty": "easy",
     "prompt": "A company's monthly expenses are ₱12,000 for rent and ₱28,000 for salaries. If utilities cost half as much as rent, what is the total monthly expense from these three categories?",
     "options": [
@@ -1014,7 +1014,7 @@
   {
     "id": "qs-064",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Percentages",
+    "topic": "Arithmetic: Percentages",
     "difficulty": "medium",
     "prompt": "A company spends ₱28,000 on salaries out of a total monthly expense of ₱50,000. If salaries are cut by 10% next month while the total expense stays at ₱50,000, what percentage of the total expense will salaries represent?",
     "options": [
@@ -1030,7 +1030,7 @@
   {
     "id": "qs-065",
     "section": "quantitative-skills",
-    "topic": "DI — Caselets and Tables",
+    "topic": "DI: Caselets and Tables",
     "difficulty": "hard",
     "prompt": "A company's monthly expenses are:\nRent: ₱12,000\nSalaries: ₱28,000\nUtilities: ₱5,000\nMarketing: ₱5,000\n\nIf Rent and Utilities are combined into one \"Facilities\" category, what is the ratio of Facilities to Salaries, expressed in simplest form?",
     "options": [
@@ -1046,7 +1046,7 @@
   {
     "id": "qs-066",
     "section": "quantitative-skills",
-    "topic": "DI — Caselets and Tables",
+    "topic": "DI: Caselets and Tables",
     "difficulty": "hard",
     "prompt": "A company's monthly expenses are:\nRent: ₱12,000\nSalaries: ₱28,000\nUtilities: ₱5,000\nMarketing: ₱5,000\n\nIf Marketing expense increases by 40% next month while all other expenses stay the same, what will be the new total monthly expense?",
     "options": [
@@ -1062,7 +1062,7 @@
   {
     "id": "qs-067",
     "section": "quantitative-skills",
-    "topic": "DI — Caselets and Tables",
+    "topic": "DI: Caselets and Tables",
     "difficulty": "easy",
     "prompt": "Student scores:\nA: Math 80, Science 70, English 90\nB: Math 75, Science 85, English 60\nC: Math 90, Science 60, English 75\nD: Math 65, Science 95, English 75\n\nWhat is student A's total score across all three subjects?",
     "options": [
@@ -1078,7 +1078,7 @@
   {
     "id": "qs-068",
     "section": "quantitative-skills",
-    "topic": "DI — Caselets and Tables",
+    "topic": "DI: Caselets and Tables",
     "difficulty": "medium",
     "prompt": "Student scores:\nA: Math 80, Science 70, English 90\nB: Math 75, Science 85, English 60\nC: Math 90, Science 60, English 75\nD: Math 65, Science 95, English 75\n\nWhich student has the highest total score across all three subjects?",
     "options": [
@@ -1094,7 +1094,7 @@
   {
     "id": "qs-069",
     "section": "quantitative-skills",
-    "topic": "DI — Caselets and Tables",
+    "topic": "DI: Caselets and Tables",
     "difficulty": "hard",
     "prompt": "Student scores:\nA: Math 80, Science 70, English 90\nB: Math 75, Science 85, English 60\nC: Math 90, Science 60, English 75\nD: Math 65, Science 95, English 75\n\nWhat is the average Math score across all four students, and by how many points does that average differ from the average Science score?",
     "options": [
@@ -1110,7 +1110,7 @@
   {
     "id": "qs-070",
     "section": "quantitative-skills",
-    "topic": "DI — Caselets and Tables",
+    "topic": "DI: Caselets and Tables",
     "difficulty": "hard",
     "prompt": "Student scores:\nA: Math 80, Science 70, English 90\nB: Math 75, Science 85, English 60\nC: Math 90, Science 60, English 75\nD: Math 65, Science 95, English 75\n\nBy how many points does C's Math score exceed the average Math score of all four students?",
     "options": [
@@ -1126,7 +1126,7 @@
   {
     "id": "qs-071",
     "section": "quantitative-skills",
-    "topic": "DI — Caselets and Tables",
+    "topic": "DI: Caselets and Tables",
     "difficulty": "medium",
     "prompt": "Student scores:\nA: Math 80, Science 70, English 90\nB: Math 75, Science 85, English 60\nC: Math 90, Science 60, English 75\nD: Math 65, Science 95, English 75\n\nWhat is the difference between D's Science score and C's Science score?",
     "options": [
@@ -1142,7 +1142,7 @@
   {
     "id": "qs-072",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Probability",
+    "topic": "Algebra and Probability: Probability",
     "difficulty": "medium",
     "prompt": "A box contains 4 red pens and 6 blue pens. Two pens are drawn at random without replacement. What is the probability that both pens are red?",
     "options": [
@@ -1158,7 +1158,7 @@
   {
     "id": "qs-073",
     "section": "quantitative-skills",
-    "topic": "DI — Caselets and Tables",
+    "topic": "DI: Caselets and Tables",
     "difficulty": "medium",
     "prompt": "Student scores:\nA: Math 80, Science 70, English 90\nB: Math 75, Science 85, English 60\nC: Math 90, Science 60, English 75\nD: Math 65, Science 95, English 75\n\nHow many students scored above 80 in Science?",
     "options": [
@@ -1174,7 +1174,7 @@
   {
     "id": "qs-074",
     "section": "quantitative-skills",
-    "topic": "DI — Graphs and Charts",
+    "topic": "DI: Graphs and Charts",
     "difficulty": "easy",
     "prompt": "A bar chart shows monthly rainfall (in mm):\nJan: 45\nFeb: 80\nMar: 55\nApr: 100\nMay: 120\n\nWhat is the total rainfall over these five months?",
     "options": [
@@ -1190,7 +1190,7 @@
   {
     "id": "qs-075",
     "section": "quantitative-skills",
-    "topic": "DI — Graphs and Charts",
+    "topic": "DI: Graphs and Charts",
     "difficulty": "hard",
     "prompt": "A bar chart shows monthly rainfall (in mm):\nJan: 45\nFeb: 80\nMar: 55\nApr: 100\nMay: 120\n\nIf June's rainfall was 50% higher than May's, what would be the new average monthly rainfall across all six months?",
     "options": [
@@ -1206,7 +1206,7 @@
   {
     "id": "qs-076",
     "section": "quantitative-skills",
-    "topic": "DI — Graphs and Charts",
+    "topic": "DI: Graphs and Charts",
     "difficulty": "medium",
     "prompt": "A bar chart shows monthly rainfall (in mm):\nJan: 45\nFeb: 80\nMar: 55\nApr: 100\nMay: 120\n\nWhat percentage of the total rainfall fell in April?",
     "options": [
@@ -1222,7 +1222,7 @@
   {
     "id": "qs-077",
     "section": "quantitative-skills",
-    "topic": "DI — Graphs and Charts",
+    "topic": "DI: Graphs and Charts",
     "difficulty": "hard",
     "prompt": "A bar chart shows monthly rainfall (in mm):\nJan: 45\nFeb: 80\nMar: 55\nApr: 100\nMay: 120\n\nBy approximately what percentage did rainfall increase from March to April?",
     "options": [
@@ -1238,7 +1238,7 @@
   {
     "id": "qs-078",
     "section": "quantitative-skills",
-    "topic": "DI — Graphs and Charts",
+    "topic": "DI: Graphs and Charts",
     "difficulty": "medium",
     "prompt": "A bar chart shows monthly rainfall (in mm):\nJan: 45\nFeb: 80\nMar: 55\nApr: 100\nMay: 120\n\nWhich month had the lowest rainfall, and what was it?",
     "options": [
@@ -1254,7 +1254,7 @@
   {
     "id": "qs-079",
     "section": "quantitative-skills",
-    "topic": "DI — Graphs and Charts",
+    "topic": "DI: Graphs and Charts",
     "difficulty": "easy",
     "prompt": "A line chart shows a company's annual revenue (in ₱ million):\n2019: 2.5\n2020: 3.0\n2021: 2.0\n2022: 4.5\n2023: 5.0\n\nIn which year was revenue lowest?",
     "options": [
@@ -1270,7 +1270,7 @@
   {
     "id": "qs-080",
     "section": "quantitative-skills",
-    "topic": "DI — Graphs and Charts",
+    "topic": "DI: Graphs and Charts",
     "difficulty": "hard",
     "prompt": "A line chart shows a company's annual revenue (in ₱ million):\n2019: 2.5\n2020: 3.0\n2021: 2.0\n2022: 4.5\n2023: 5.0\n\nIf 2024's revenue grows by the same percentage as the growth from 2022 to 2023, what will 2024's revenue be, to the nearest ₱0.1 million?",
     "options": [
@@ -1286,7 +1286,7 @@
   {
     "id": "qs-081",
     "section": "quantitative-skills",
-    "topic": "DI — Graphs and Charts",
+    "topic": "DI: Graphs and Charts",
     "difficulty": "medium",
     "prompt": "A line chart shows a company's annual revenue (in ₱ million):\n2019: 2.5\n2020: 3.0\n2021: 2.0\n2022: 4.5\n2023: 5.0\n\nWhat was the approximate percentage decline in revenue from 2020 to 2021?",
     "options": [
@@ -1302,7 +1302,7 @@
   {
     "id": "qs-082",
     "section": "quantitative-skills",
-    "topic": "DI — Graphs and Charts",
+    "topic": "DI: Graphs and Charts",
     "difficulty": "hard",
     "prompt": "A line chart shows a company's annual revenue (in ₱ million):\n2019: 2.5\n2020: 3.0\n2021: 2.0\n2022: 4.5\n2023: 5.0\n\nWhat was the percentage increase in revenue from 2021 to 2023?",
     "options": [
@@ -1318,7 +1318,7 @@
   {
     "id": "qs-083",
     "section": "quantitative-skills",
-    "topic": "DI — Graphs and Charts",
+    "topic": "DI: Graphs and Charts",
     "difficulty": "medium",
     "prompt": "A line chart shows a company's annual revenue (in ₱ million):\n2019: 2.5\n2020: 3.0\n2021: 2.0\n2022: 4.5\n2023: 5.0\n\nWhat was the average annual revenue over the five years?",
     "options": [
@@ -1334,7 +1334,7 @@
   {
     "id": "qs-084",
     "section": "quantitative-skills",
-    "topic": "Arithmetic — Percentages",
+    "topic": "Arithmetic: Percentages",
     "difficulty": "easy",
     "prompt": "A household's monthly budget is ₱4,000. If 35% goes to Housing and the remaining amount is split equally between Food and Savings, how much is allocated to Food?",
     "options": [
@@ -1350,7 +1350,7 @@
   {
     "id": "qs-085",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "hard",
     "prompt": "A household's monthly budget of ₱4,000 is split among five categories. If the amounts allocated to Housing and Food are in the ratio $7:4$ and together they total ₱2,200, how much is allocated to Housing?",
     "options": [
@@ -1366,7 +1366,7 @@
   {
     "id": "qs-086",
     "section": "quantitative-skills",
-    "topic": "DI — Graphs and Charts",
+    "topic": "DI: Graphs and Charts",
     "difficulty": "medium",
     "prompt": "A pie chart shows a household's monthly budget of ₱4,000 allocated by category:\nHousing: 35%\nFood: 20%\nTransportation: 15%\nSavings: 20%\nOther: 10%\n\nWhat is the combined amount spent on Food and Transportation?",
     "options": [
@@ -1382,7 +1382,7 @@
   {
     "id": "qs-087",
     "section": "quantitative-skills",
-    "topic": "DI — Graphs and Charts",
+    "topic": "DI: Graphs and Charts",
     "difficulty": "medium",
     "prompt": "A pie chart shows a household's monthly budget of ₱4,000 allocated by category:\nHousing: 35%\nFood: 20%\nTransportation: 15%\nSavings: 20%\nOther: 10%\n\nHow much more is spent on Housing than on Other?",
     "options": [
@@ -1398,7 +1398,7 @@
   {
     "id": "qs-088",
     "section": "quantitative-skills",
-    "topic": "DI — Graphs and Charts",
+    "topic": "DI: Graphs and Charts",
     "difficulty": "hard",
     "prompt": "A pie chart shows a household's monthly budget allocated by category:\nHousing: 35%\nFood: 20%\nTransportation: 15%\nSavings: 20%\nOther: 10%\n\nIf the household's total monthly income increases to ₱5,000 while keeping the same percentage allocations, how much would be spent on Savings?",
     "options": [
@@ -1431,7 +1431,7 @@
   {
     "id": "qs-090",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "medium",
     "prompt": "If $2y + 3 = 11$ and $z = 3y - 1$, what is the value of $z$?",
     "options": [
@@ -1464,7 +1464,7 @@
   {
     "id": "qs-092",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "hard",
     "prompt": "The perimeter of a rectangle is 48 cm, and its length is 3 cm more than twice its width. What is the area of the rectangle?",
     "options": [
@@ -1565,9 +1565,9 @@
   {
     "id": "qs-098",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "hard",
-    "prompt": "A number x is increased by 50% and then decreased by 20%, giving 84. A second number y is 15 less than x. What is the value of y?",
+    "prompt": "A number $x$ is increased by 50% and then decreased by 20%, giving 84. A second number $y$ is 15 less than $x$. What is the value of $y$?",
     "options": [
       "50",
       "60",
@@ -1581,7 +1581,7 @@
   {
     "id": "qs-099",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "hard",
     "prompt": "The average of five consecutive even integers is 24. What is the largest of the five integers?",
     "options": [
@@ -1597,7 +1597,7 @@
   {
     "id": "qs-100",
     "section": "quantitative-skills",
-    "topic": "Algebra and Probability — Algebra",
+    "topic": "Algebra and Probability: Algebra",
     "difficulty": "hard",
     "prompt": "For how many integer values of $x$ between $-5$ and 5 (inclusive) is $x^2 > x$ true?",
     "options": [
