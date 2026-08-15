@@ -11,8 +11,8 @@
   /*
    * Border for interactive controls (answer options, buttons). Separate from
    * --line because WCAG 1.4.11 requires a 3:1 boundary only where that boundary
-   * is what identifies a control; --line at 1.21:1 against the background is
-   * fine for dividers and panels, and darkening it globally would repaint every
+   * is what identifies a control; --line (1.21:1 against the light background,
+   * 1.62:1 dark) is fine for dividers and panels, and darkening it would repaint every
    * rule in the app.
    *
    * Chosen against the WORST-CASE surface a control sits on, not just

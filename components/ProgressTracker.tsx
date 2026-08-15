@@ -27,7 +27,11 @@ export default function ProgressTracker({
       </p>
       <div className="mt-3 grid grid-cols-6 gap-1.5">
         {Array.from({ length: totalQuestions }, (_, i) => i + 1).map((num) => {
-          let style = "bg-panel-hover text-muted hover:bg-line";
+          // Every branch sets its own font-weight. The base className must NOT
+          // carry one: Tailwind orders font-weight utilities by stylesheet
+          // position, not by class-attribute order, so a base `font-medium`
+          // silently beat the `font-bold` these branches ask for.
+          let style = "bg-panel-hover font-medium text-muted hover:bg-line";
           let state = "not answered";
           if (reviewMode) {
             // All three review states carry a non-colour cue as well as a fill,
@@ -38,14 +42,15 @@ export default function ProgressTracker({
               style = "bg-green-600 font-bold text-white dark:bg-green-500";
               state = "correct";
             } else if (incorrectSet.has(num)) {
-              style = "bg-red-600 text-white underline decoration-2 underline-offset-2 dark:bg-red-500";
+              style =
+                "bg-red-600 font-medium text-white underline decoration-2 underline-offset-2 dark:bg-red-500";
               state = "incorrect";
             } else {
               style = "bg-panel-hover font-normal text-muted hover:bg-line";
               state = "skipped";
             }
           } else if (answeredSet.has(num)) {
-            style = "bg-accent text-accent-foreground";
+            style = "bg-accent font-medium text-accent-foreground";
             state = "answered";
           }
 
@@ -55,7 +60,7 @@ export default function ProgressTracker({
               type="button"
               onClick={() => onJump(num)}
               aria-label={`Question ${num}, ${state}`}
-              className={`flex h-7 w-7 items-center justify-center rounded text-[11px] font-medium transition-colors ${style}`}
+              className={`flex h-7 w-7 items-center justify-center rounded text-[11px] transition-colors ${style}`}
             >
               {num}
             </button>

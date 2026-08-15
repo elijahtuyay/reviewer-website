@@ -47,7 +47,13 @@ export default function QuestionCard({
     const forward = event.key === "ArrowDown" || event.key === "ArrowRight";
     const count = question.options.length;
     const next = (optionIndex + (forward ? 1 : -1) + count) % count;
-    optionRefs.current[next]?.focus();
+    const target = optionRefs.current[next];
+    target?.focus();
+    // focus() alone doesn't scroll an element the browser already considers
+    // visible, so arrowing upward can land on an option sitting underneath the
+    // h-20 sticky header, hiding both the option and its focus ring. Paired with
+    // scroll-mt-24 on the button, this brings it clear of the header.
+    target?.scrollIntoView({ block: "nearest" });
   }
 
   // Roving tabindex: the selected option is the group's tab stop, or the first
@@ -128,7 +134,7 @@ export default function QuestionCard({
               // min-h-11 is the 44px tap-target minimum, and it doubles as the
               // headroom stacked math (fractions, exponents) needs to sit in a
               // row without the box having to grow around it.
-              className={`flex min-h-11 items-center justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-sm leading-relaxed text-foreground transition-colors ${style} ${reviewMode ? "cursor-default" : "cursor-pointer"}`}
+              className={`flex min-h-11 scroll-mt-24 items-center justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-sm leading-relaxed text-foreground transition-colors ${style} ${reviewMode ? "cursor-default" : "cursor-pointer"}`}
             >
               <span>
                 <MathText text={option} />
