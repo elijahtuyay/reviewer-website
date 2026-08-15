@@ -18,6 +18,7 @@ import ResultSummary from "@/components/ResultSummary";
 import ProgressTracker from "@/components/ProgressTracker";
 import SectionNav from "@/components/SectionNav";
 import PauseOverlay from "@/components/PauseOverlay";
+import ConfirmDialog from "@/components/ConfirmDialog";
 import MobileNavSheet from "@/components/MobileNavSheet";
 
 type Phase = "taking" | "review";
@@ -28,6 +29,17 @@ type Phase = "taking" | "review";
  * running, "completed" = already submitted, "expired" = the timer ran out.
  */
 type NoticeKind = "resumed" | "completed" | "expired" | null;
+
+/**
+ * Both callers now fire from inside a confirmation dialog, which scroll-locks
+ * the body (`overflow: hidden`) until its effect cleanup runs on the next
+ * commit. Deferring a frame lets that unwind first, so the scroll can't be
+ * swallowed by the lock. Restarting is only reachable through the dialog now,
+ * and landing mid-page in a freshly drawn question set would be disorienting.
+ */
+function scrollToTop() {
+  requestAnimationFrame(() => window.scrollTo({ top: 0 }));
+}
 
 /** Phrased in the past tense: these banners are re-shown on every return visit, not just the first. */
 const NOTICE_COPY = {
@@ -68,6 +80,8 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [deadline, setDeadline] = useState(0);
   const [notice, setNotice] = useState<NoticeKind>(null);
+  /** Which destructive action is awaiting confirmation, if any. */
+  const [pendingAction, setPendingAction] = useState<"submit" | "restart" | null>(null);
   const pendingNoticeRef = useRef<NoticeKind>(null);
   /**
    * Which `examId:section` the load effect below has already run for. The effect
@@ -198,6 +212,15 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
    * write a one-render-stale map to storage.
    */
   function closeOut(expired: boolean) {
+    // An attempt can only be closed out once. Without this guard, a submit
+    // confirmation left open while the timer runs out would still be sitting
+    // there afterwards, and confirming it would re-close an already-expired
+    // attempt: persisting `expired: false` over the real record and clearing the
+    // "time ran out" banner, so the user would never learn what happened.
+    if (phase === "review") return;
+    // Also dismisses any confirmation that is still open, so the expiry banner
+    // isn't left hidden behind a dialog describing an action already overtaken.
+    setPendingAction(null);
     setAnswers((prev) => {
       persist(prev, true, { expired });
       return prev;
@@ -209,10 +232,19 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
     // score, the breakdown and the expiry banner all render at the top. Without
     // this the only visible feedback is the submit bar disappearing, which reads
     // as "nothing happened". Matches what handleRestart already does.
-    window.scrollTo({ top: 0 });
+    scrollToTop();
   }
 
+  /**
+   * Submitting ends the attempt irreversibly, so it asks first when there is
+   * something to lose. With everything answered there is nothing to warn about,
+   * and a confirmation would just be a click tax on the normal path.
+   */
   function handleSubmit() {
+    if (answeredCount < questions.length) {
+      setPendingAction("submit");
+      return;
+    }
     closeOut(false);
   }
 
@@ -239,6 +271,7 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
 
   /** Wipes this section's saved attempt and starts over with a freshly drawn question set. */
   function handleRestart() {
+    setPendingAction(null);
     clearSectionProgress(examId, section);
     const ids = drawRandomQuestionIds(examId, section, sectionConfig.questionCount);
     const endAt = Date.now() + sectionConfig.minutes * 60_000;
@@ -257,7 +290,7 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
       expired: false,
       pausedAt: 0,
     });
-    window.scrollTo({ top: 0 });
+    scrollToTop();
   }
 
   function handleJump(questionNumber: number) {
@@ -280,8 +313,8 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
     <div className="flex flex-1 justify-center bg-background">
       <div
         className="w-full max-w-6xl px-6 py-10 sm:py-16"
-        inert={paused || mobileNavOpen || undefined}
-        aria-hidden={paused || mobileNavOpen || undefined}
+        inert={paused || mobileNavOpen || pendingAction !== null || undefined}
+        aria-hidden={paused || mobileNavOpen || pendingAction !== null || undefined}
       >
         <div className="sticky top-0 z-20 flex h-20 items-center justify-between gap-3 border-b border-line bg-background/95 backdrop-blur">
           <div className="min-w-0">
@@ -325,7 +358,7 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  onClick={handleRestart}
+                  onClick={() => setPendingAction("restart")}
                   className="flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm text-foreground hover:bg-panel-hover"
                 >
                   Retake
@@ -363,24 +396,38 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
           </aside>
 
           <main className="min-w-0 flex-1">
+            {phase === "taking" && (
+              // Sits here rather than in the header: the header is a fixed h-20
+              // that the sidebar's top-24 alignment depends on, and a third line
+              // with a 44px target would overflow it.
+              //
+              // Always reachable while a section is in progress, not only when a
+              // resume banner happens to be showing. Note this REDRAWS the
+              // section rather than letting you leave it: the way out of a
+              // section opened by mistake is "← Exam setup", then Clear on that
+              // section's row, which leaves the other sections alone.
+              // Deliberately quiet, since it discards work.
+              <div className="mb-2 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setPendingAction("restart")}
+                  className="inline-flex min-h-11 items-center px-1 text-xs text-muted underline underline-offset-2 hover:text-foreground"
+                >
+                  Restart section
+                </button>
+              </div>
+            )}
+
             {/* The live region is mounted unconditionally so that populating it
                 later counts as a content change a screen reader will announce. */}
             <div role="status" aria-live="polite">
+              {/* No action button in this banner: "Restart section" sits
+                  directly above while taking, and "Retake" is in the header in
+                  review, so repeating it made two controls for one action. */}
               {notice && (
-                <div className="mb-4 flex flex-col gap-3 rounded-lg border border-line bg-panel px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-foreground">{NOTICE_COPY[notice].title}</p>
-                    <p className="mt-0.5 text-xs text-muted">{NOTICE_COPY[notice].detail}</p>
-                  </div>
-                  {phase === "taking" && (
-                    <button
-                      type="button"
-                      onClick={handleRestart}
-                      className="flex h-11 shrink-0 items-center justify-center rounded-md border border-line px-3 text-sm font-medium text-foreground hover:bg-panel-hover"
-                    >
-                      Retake
-                    </button>
-                  )}
+                <div className="mb-4 rounded-lg border border-line bg-panel px-4 py-3">
+                  <p className="text-sm font-medium text-foreground">{NOTICE_COPY[notice].title}</p>
+                  <p className="mt-0.5 text-xs text-muted">{NOTICE_COPY[notice].detail}</p>
                 </div>
               )}
             </div>
@@ -416,6 +463,20 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
           </main>
         </div>
       </div>
+
+      <ConfirmDialog
+        open={pendingAction !== null}
+        title={pendingAction === "submit" ? "Submit with questions unanswered?" : "Start this section over?"}
+        body={
+          pendingAction === "submit"
+            ? `${questions.length - answeredCount} of ${questions.length} questions are still unanswered. Once you submit, you can review your answers but you can't change them.`
+            : "This deletes your answers for this section and draws a new set of questions, with a fresh timer. It can't be undone."
+        }
+        confirmLabel={pendingAction === "submit" ? "Submit section" : "Start over"}
+        cancelLabel={pendingAction === "submit" ? "Keep answering" : "Keep my answers"}
+        onConfirm={pendingAction === "submit" ? () => { setPendingAction(null); closeOut(false); } : handleRestart}
+        onCancel={() => setPendingAction(null)}
+      />
 
       <PauseOverlay paused={paused} onResume={handleResume} />
 

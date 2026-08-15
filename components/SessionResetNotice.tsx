@@ -7,9 +7,11 @@ import { ExamId, SectionId } from "@/data/schema";
 import { getSectionBreakdown } from "@/lib/section-result";
 import {
   clearExamProgress,
+  clearSectionProgress,
   getStoredProgress,
   purgeLegacyPersistedProgress,
 } from "@/lib/session-progress";
+import ConfirmDialog from "@/components/ConfirmDialog";
 
 interface SessionResetNoticeProps {
   examId: ExamId;
@@ -72,9 +74,18 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
     setSaved(readSaved());
   }, [readSaved]);
 
-  function handleClear() {
-    clearExamProgress(examId);
-    setSaved([]);
+  /** null = nothing pending, "all" = clear every section, otherwise the single section to clear. */
+  const [pendingClear, setPendingClear] = useState<"all" | SavedSection | null>(null);
+
+  function handleConfirmClear() {
+    if (pendingClear === "all") {
+      clearExamProgress(examId);
+      setSaved([]);
+    } else if (pendingClear) {
+      clearSectionProgress(examId, pendingClear.id);
+      setSaved((prev) => prev.filter((s) => s.id !== pendingClear.id));
+    }
+    setPendingClear(null);
   }
 
   return (
@@ -93,29 +104,57 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
           </p>
           <ul className="mt-2 flex flex-col gap-1">
             {saved.map((entry) => (
-              <li key={entry.id}>
+              <li key={entry.id} className="flex items-center gap-1">
                 <Link
                   href={`/${examId}/quiz/${entry.id}`}
-                  className="flex min-h-11 flex-wrap items-center justify-between gap-x-3 rounded-md px-2 py-1.5 text-sm hover:bg-panel-hover"
+                  className="flex min-h-11 flex-1 flex-wrap items-center justify-between gap-x-3 rounded-md px-2 py-1.5 text-sm hover:bg-panel-hover"
                 >
                   <span className="font-medium text-foreground underline underline-offset-2">{entry.label}</span>
                   <span className="text-xs text-muted">{entry.detail}</span>
                 </Link>
+                {/* Per-section, so discarding one attempt doesn't take the other
+                    finished sections with it. Bordered rather than bare text:
+                    beside the same-size grey status line, an unstyled button
+                    scanned as prose ("12/36 answered Clear"), not a control. */}
+                <button
+                  type="button"
+                  onClick={() => setPendingClear(entry)}
+                  aria-label={`Clear saved progress for ${entry.label}`}
+                  className="flex h-11 shrink-0 items-center justify-center rounded-md border border-line px-3 text-xs font-medium text-muted hover:bg-panel-hover hover:text-foreground"
+                >
+                  Clear
+                </button>
               </li>
             ))}
           </ul>
           <p className="mt-2 text-xs text-muted">
             Opening one of these picks up that attempt instead of starting a new one.
           </p>
-          <button
-            type="button"
-            onClick={handleClear}
-            className="mt-3 flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm font-medium text-foreground hover:bg-panel-hover"
-          >
-            Clear saved progress
-          </button>
+          {saved.length > 1 && (
+            <button
+              type="button"
+              onClick={() => setPendingClear("all")}
+              className="mt-3 flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm font-medium text-foreground hover:bg-panel-hover"
+            >
+              Clear all saved progress
+            </button>
+          )}
         </div>
       )}
+
+      <ConfirmDialog
+        open={pendingClear !== null}
+        title={pendingClear === "all" ? "Clear all saved progress?" : "Clear this section?"}
+        body={
+          pendingClear === "all"
+            ? `This deletes your saved work for all ${saved.length} sections listed above, including any you have already submitted and scored. It can't be undone.`
+            : `This deletes your saved work for ${pendingClear?.label ?? "this section"}. Your other sections are not affected. It can't be undone.`
+        }
+        confirmLabel={pendingClear === "all" ? "Clear all" : "Clear section"}
+        cancelLabel="Keep it"
+        onConfirm={handleConfirmClear}
+        onCancel={() => setPendingClear(null)}
+      />
     </div>
   );
 }
