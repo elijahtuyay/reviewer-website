@@ -98,7 +98,7 @@
   {
     "id": "lr-007",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Assumption",
+    "topic": "Critical Reasoning: Assumption",
     "difficulty": "medium",
     "prompt": "Argument: \"The city should build a new highway to reduce traffic congestion downtown, since traffic has increased 30% over the past five years.\" Which of the following is an assumption underlying this argument?",
     "options": [
@@ -114,7 +114,7 @@
   {
     "id": "lr-008",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Assumption",
+    "topic": "Critical Reasoning: Assumption",
     "difficulty": "hard",
     "prompt": "Argument: \"Since employees who take regular breaks report higher job satisfaction, the company should mandate hourly breaks to improve overall satisfaction.\" Which assumption does this argument rely on?",
     "options": [
@@ -130,7 +130,7 @@
   {
     "id": "lr-009",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Assumption",
+    "topic": "Critical Reasoning: Assumption",
     "difficulty": "hard",
     "prompt": "Argument: \"Reading fiction improves empathy, so schools should require students to read more novels to become more empathetic adults.\" What does this argument assume?",
     "options": [
@@ -146,7 +146,7 @@
   {
     "id": "lr-010",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Assumption",
+    "topic": "Critical Reasoning: Assumption",
     "difficulty": "medium",
     "prompt": "Argument: \"Since the new fitness app has 500,000 downloads, it must be effective at helping people get fit.\" What is the flawed assumption here?",
     "options": [
@@ -162,7 +162,7 @@
   {
     "id": "lr-011",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Inference",
+    "topic": "Critical Reasoning: Inference",
     "difficulty": "easy",
     "prompt": "\"All members of the hiking club own hiking boots. Sarah does not own hiking boots.\" What can be validly concluded?",
     "options": [
@@ -178,7 +178,7 @@
   {
     "id": "lr-012",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Inference",
+    "topic": "Critical Reasoning: Inference",
     "difficulty": "medium",
     "prompt": "\"Every time it rains heavily, the river level rises. The river level has not risen today.\" What can be validly concluded?",
     "options": [
@@ -194,7 +194,7 @@
   {
     "id": "lr-013",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Inference",
+    "topic": "Critical Reasoning: Inference",
     "difficulty": "medium",
     "prompt": "\"Sales of umbrellas increase every time it rains in the city. Yesterday, umbrella sales were unusually high.\" What can be reasonably inferred?",
     "options": [
@@ -210,7 +210,7 @@
   {
     "id": "lr-014",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "medium",
     "prompt": "Five colleagues (H, I, J, K, L) sit in a row of five chairs, numbered 1 to 5 from left to right. J sits exactly two seats to the right of H. I sits immediately to the left of K. L does not sit at either end. K sits at seat 5. Where does H sit?",
     "options": [
@@ -220,13 +220,13 @@
       "Seat 4"
     ],
     "correctIndex": 2,
-    "explanation": "K=5, so I (immediately left of K) = 4. The remaining seats {1, 2, 3} go to H, J, L with J=H+2. Only H=1, J=3 fits within that set (H=2 would put J=4, already taken). That leaves L=2, which satisfies \"not at either end\" since seats 1 and 5 are the ends. H sits at seat 1.",
+    "explanation": "K=5, so I (immediately left of K) = 4. The remaining seats {1, 2, 3} go to H, J, L with $J = H+2$. Only H=1, J=3 fits within that set (H=2 would put J=4, already taken). That leaves L=2, which satisfies \"not at either end\" since seats 1 and 5 are the ends. H sits at seat 1.",
     "source": "original"
   },
   {
     "id": "lr-015",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Strengthen",
+    "topic": "Critical Reasoning: Strengthen",
     "difficulty": "medium",
     "prompt": "Argument: \"The new drug reduces headache duration, since patients who took it recovered faster than those who didn't.\" Which finding would most strengthen this argument?",
     "options": [
@@ -242,7 +242,7 @@
   {
     "id": "lr-016",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Strengthen",
+    "topic": "Critical Reasoning: Strengthen",
     "difficulty": "medium",
     "prompt": "Argument: \"Switching to solar panels will lower the town's electricity costs, based on similar towns that adopted solar and saw savings.\" Which fact would most strengthen this argument?",
     "options": [
@@ -258,7 +258,7 @@
   {
     "id": "lr-017",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Strengthen",
+    "topic": "Critical Reasoning: Strengthen",
     "difficulty": "hard",
     "prompt": "Argument: \"The new teaching method improves test scores, as shown by a pilot classroom that used it and scored higher than average.\" What would most strengthen this claim?",
     "options": [
@@ -274,7 +274,7 @@
   {
     "id": "lr-018",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Weaken",
+    "topic": "Critical Reasoning: Weaken",
     "difficulty": "medium",
     "prompt": "Argument: \"Company X's new marketing campaign caused its sales to double last quarter.\" Which finding would most weaken this argument?",
     "options": [
@@ -290,7 +290,7 @@
   {
     "id": "lr-019",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Weaken",
+    "topic": "Critical Reasoning: Weaken",
     "difficulty": "hard",
     "prompt": "Argument: \"Since students who attend the tutoring program score higher on exams, the tutoring program must be effective at improving scores.\" What would most weaken this argument?",
     "options": [
@@ -306,7 +306,7 @@
   {
     "id": "lr-020",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Weaken",
+    "topic": "Critical Reasoning: Weaken",
     "difficulty": "hard",
     "prompt": "Argument: \"The new traffic light system must have reduced accidents, since accident reports dropped 15% after it was installed.\" Which fact would most weaken this conclusion?",
     "options": [
@@ -322,7 +322,7 @@
   {
     "id": "lr-021",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Floors",
+    "topic": "Analytical Puzzle: Floors",
     "difficulty": "medium",
     "prompt": "A five-story building has floors numbered 1 (bottom) to 5 (top), each occupied by a different tenant: M, N, O, P, Q. O lives exactly two floors above N. P lives immediately below Q. M does not live on floor 1 or floor 5. P does not live on floor 1. Which floor does N live on?",
     "options": [
@@ -332,15 +332,15 @@
       "Floor 2"
     ],
     "correctIndex": 1,
-    "explanation": "With O=N+2, the only candidate pairs are (N=1,O=3), (N=2,O=4), (N=3,O=5). Testing N=2,O=4 leaves {1,3,5} for M,P,Q, but P and Q must be consecutive floors (Q=P+1), and no consecutive pair exists in {1,3,5}, so this case fails. Testing N=3,O=5 leaves {1,2,4}, giving P=1,Q=2,M=4, but this violates \"P does not live on floor 1.\" Only N=1,O=3 works: the remaining floors {2,4,5} give P=4,Q=5 (consecutive), leaving M=2, which satisfies \"M is not on floor 1 or 5.\" N lives on floor 1.",
+    "explanation": "With $O = N+2$, the only candidate pairs are (N=1,O=3), (N=2,O=4), (N=3,O=5). Testing N=2,O=4 leaves {1,3,5} for M,P,Q, but P and Q must be consecutive floors ($Q = P+1$), and no consecutive pair exists in {1,3,5}, so this case fails. Testing N=3,O=5 leaves {1,2,4}, giving P=1,Q=2,M=4, but this violates \"P does not live on floor 1.\" Only N=1,O=3 works: the remaining floors {2,4,5} give P=4,Q=5 (consecutive), leaving M=2, which satisfies \"M is not on floor 1 or 5.\" N lives on floor 1.",
     "source": "original"
   },
   {
     "id": "lr-022",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "hard",
-    "prompt": "Seven friends (A, B, C, D, E, F, G) sit evenly spaced around a circular table, all facing the center. B sits three seats clockwise from A. C sits immediately to the right of B. D sits immediately to the left of A. E sits two seats clockwise from D. F sits immediately to the right of E. Where does G sit relative to A?",
+    "prompt": "Seven friends (A, B, C, D, E, F, G) sit evenly spaced around a circular table, all facing outward, away from the table. B sits three seats clockwise from A. C sits immediately to the right of B. D sits immediately to the left of A. E sits two seats clockwise from D. F sits immediately to the right of E. Where does G sit relative to A?",
     "options": [
       "Second to the left of A",
       "Second to the right of A",
@@ -348,13 +348,13 @@
       "Third to the right of A"
     ],
     "correctIndex": 0,
-    "explanation": "Numbering seats 1-7 clockwise with A=1: B (three seats clockwise) = 4. C (immediately right of B) = 5. D (immediately left of A) = 7. E (two seats clockwise from D) = 7+2=9, which wraps to 2. F (immediately right of E) = 3. Every seat except 6 is now taken, so G=6. Going counterclockwise from A (1 to 7 to 6) is two steps, so G sits second to the left of A.",
+    "explanation": "Numbering seats 1-7 clockwise with A=1: B (three seats clockwise) = 4. C (immediately right of B) = 5. D (immediately left of A) = 7. E (two seats clockwise from D) = $7+2=9$, which wraps to 2. F (immediately right of E) = 3. Every seat except 6 is now taken, so G=6. Going counterclockwise from A (1 to 7 to 6) is two steps, so G sits second to the left of A.",
     "source": "original"
   },
   {
     "id": "lr-023",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Ranking",
+    "topic": "Analytical Puzzle: Ranking",
     "difficulty": "hard",
     "prompt": "Seven runners (A, B, C, D, E, F, G) finish a race in distinct positions, 1st through 7th, with no ties. C finishes immediately after A. E finishes exactly three positions after B. F finishes immediately after D. A finishes before B. G does not finish 1st or 7th. In which position does G finish?",
     "options": [
@@ -364,7 +364,7 @@
       "2nd"
     ],
     "correctIndex": 2,
-    "explanation": "Testing the constraints systematically, the only assignment consistent with all five clues is A=1st, C=2nd, G=3rd, B=4th, D=5th, F=6th, E=7th. This satisfies C=A+1, E=B+3, F=D+1, A before B, and G excluded from 1st and 7th, and no other arrangement of the seven runners satisfies every clue simultaneously. G finishes 3rd.",
+    "explanation": "Testing the constraints systematically, the only assignment consistent with all five clues is A=1st, C=2nd, G=3rd, B=4th, D=5th, F=6th, E=7th. This satisfies $C = A+1$, $E = B+3$, $F = D+1$, A before B, and G excluded from 1st and 7th, and no other arrangement of the seven runners satisfies every clue simultaneously. G finishes 3rd.",
     "source": "original"
   },
   {
@@ -388,7 +388,7 @@
     "section": "logical-reasoning",
     "topic": "Seating Arrangement",
     "difficulty": "hard",
-    "prompt": "Six friends P, Q, R, S, T, U sit evenly spaced around a circular table, facing the center. Q sits second to the right of P. R sits immediately to the left of Q. S sits directly opposite P. T sits immediately to the right of S. Where does U sit?",
+    "prompt": "Six friends P, Q, R, S, T, U sit evenly spaced around a circular table, facing outward, away from the table. Q sits second to the right of P. R sits immediately to the left of Q. S sits directly opposite P. T sits immediately to the right of S. Where does U sit?",
     "options": [
       "Immediately to the right of Q",
       "Immediately to the left of S",
@@ -444,7 +444,7 @@
       "8-15-14"
     ],
     "correctIndex": 1,
-    "explanation": "D is the 4th letter (4×2=8), O is the 15th letter (15×2=30), G is the 7th letter (7×2=14). So DOG becomes \"8-30-14\".",
+    "explanation": "D is the 4th letter ($4 \\times 2 = 8$), O is the 15th letter ($15 \\times 2 = 30$), G is the 7th letter ($7 \\times 2 = 14$). So DOG becomes \"8-30-14\".",
     "source": "original"
   },
   {
@@ -508,7 +508,7 @@
       "42"
     ],
     "correctIndex": 3,
-    "explanation": "Each term follows the pattern $n(n+1)$: 1×2=2, 2×3=6, 3×4=12, 4×5=20, 5×6=30, so the next term is 6×7=42.",
+    "explanation": "Each term follows the pattern $n(n+1)$: $1 \\times 2 = 2$, $2 \\times 3 = 6$, $3 \\times 4 = 12$, $4 \\times 5 = 20$, $5 \\times 6 = 30$, so the next term is $6 \\times 7 = 42$.",
     "source": "original"
   },
   {
@@ -540,7 +540,7 @@
       "95"
     ],
     "correctIndex": 3,
-    "explanation": "Each term follows the pattern $a_{n+1} = 2a_n + 1$. 5×2+1=11, 11×2+1=23, 23×2+1=47, 47×2+1=95.",
+    "explanation": "Each term follows the pattern $a_{n+1} = 2a_n + 1$. $5 \\times 2 + 1 = 11$, $11 \\times 2 + 1 = 23$, $23 \\times 2 + 1 = 47$, $47 \\times 2 + 1 = 95$.",
     "source": "original"
   },
   {
@@ -562,7 +562,7 @@
   {
     "id": "lr-036",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Boxes",
+    "topic": "Analytical Puzzle: Boxes",
     "difficulty": "hard",
     "prompt": "Six boxes (A, B, C, D, E, F) are stacked one on top of another, numbered position 1 (bottom) to 6 (top). B is exactly two positions above A. D is directly above C. E is at the very top. A is below C. F is not at the bottom. Which position does A occupy?",
     "options": [
@@ -572,7 +572,7 @@
       "Position 4"
     ],
     "correctIndex": 2,
-    "explanation": "E=6 (the top). With B=A+2 and D=C+1, and A below C, testing A=1 gives B=3; the remaining positions {2,4,5} then need C and D consecutive, which only C=4,D=5 satisfies, leaving F=2 (not the bottom, consistent with the clue). No other value of A satisfies every constraint at once. A occupies position 1 (the bottom).",
+    "explanation": "E=6 (the top). With $B = A+2$ and $D = C+1$, and A below C, testing A=1 gives B=3; the remaining positions {2,4,5} then need C and D consecutive, which only C=4,D=5 satisfies, leaving F=2 (not the bottom, consistent with the clue). No other value of A satisfies every constraint at once. A occupies position 1 (the bottom).",
     "source": "original"
   },
   {
@@ -588,13 +588,13 @@
       "Only conclusion I follows"
     ],
     "correctIndex": 3,
-    "explanation": "By the transitive chain, teachers ⊆ educators ⊆ professionals, so all teachers are professionals (I follows). Conclusion II reverses the relationship incorrectly.",
+    "explanation": "By the transitive chain, teachers $\\subseteq$ educators $\\subseteq$ professionals, so all teachers are professionals (I follows). Conclusion II reverses the relationship incorrectly.",
     "source": "original"
   },
   {
     "id": "lr-038",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Grouping",
+    "topic": "Analytical Puzzle: Grouping",
     "difficulty": "hard",
     "prompt": "Eight students are divided into two teams of four for a project: Team X and Team Y. A is on Team X. B is on Team Y. C is on the same team as B. D is on a different team from A. E is on the same team as A. F is on the same team as D. G is on a different team from F. H is on the same team as G. Which team is H on?",
     "options": [
@@ -658,7 +658,7 @@
   {
     "id": "lr-042",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "medium",
     "prompt": "Six colleagues (P, Q, R, S, T, U) sit in a row of six chairs, numbered 1 to 6 from left to right. P sits at seat 1. Q sits two seats to the right of P. R sits immediately to the left of Q. S sits at seat 6. T does not sit at seat 1. T sits immediately to the right of U. Where does U sit?",
     "options": [
@@ -668,15 +668,15 @@
       "Seat 4"
     ],
     "correctIndex": 3,
-    "explanation": "P=1, Q=P+2=3, R=Q-1=2, S=6. The remaining seats {4, 5} go to T and U with T=U+1, so U=4 and T=5 is the only fit (U=5,T=6 is impossible since S already occupies 6). This also satisfies \"T does not sit at seat 1.\" U sits at seat 4.",
+    "explanation": "P=1, $Q = P+2 = 3$, $R = Q-1 = 2$, S=6. The remaining seats {4, 5} go to T and U with $T = U+1$, so U=4 and T=5 is the only fit (U=5,T=6 is impossible since S already occupies 6). This also satisfies \"T does not sit at seat 1.\" U sits at seat 4.",
     "source": "original"
   },
   {
     "id": "lr-043",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "hard",
-    "prompt": "Six people (A, B, C, D, E, F) sit evenly spaced around a circular table, all facing the center. B sits two seats clockwise from A. C sits immediately to the right of B. D sits immediately to the left of A. F sits immediately to the right of C. Where does E sit relative to A?",
+    "prompt": "Six people (A, B, C, D, E, F) sit evenly spaced around a circular table, all facing outward, away from the table. B sits two seats clockwise from A. C sits immediately to the right of B. D sits immediately to the left of A. F sits immediately to the right of C. Where does E sit relative to A?",
     "options": [
       "Third to the right of A",
       "Immediately to the left of A",
@@ -722,7 +722,7 @@
   {
     "id": "lr-046",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Floors",
+    "topic": "Analytical Puzzle: Floors",
     "difficulty": "medium",
     "prompt": "A six-story building has floors numbered 1 (bottom) to 6 (top), each occupied by a different tenant: J, K, L, M, N, O. L is exactly three floors above J. M is exactly one floor above K. N lives on floor 1. O does not live on the top floor. Which floor does J live on?",
     "options": [
@@ -732,7 +732,7 @@
       "Floor 2"
     ],
     "correctIndex": 2,
-    "explanation": "N=1. With L=J+3 and M=K+1, testing J=3 gives L=6; the remaining floors {2,4,5} then need K and M consecutive, which only K=4,M=5 satisfies, leaving O=2 (not the top floor, consistent with the clue). No other value of J satisfies every constraint at once. J lives on floor 3.",
+    "explanation": "N=1. With $L = J+3$ and $M = K+1$, testing J=3 gives L=6; the remaining floors {2,4,5} then need K and M consecutive, which only K=4,M=5 satisfies, leaving O=2 (not the top floor, consistent with the clue). No other value of J satisfies every constraint at once. J lives on floor 3.",
     "source": "original"
   },
   {
@@ -802,7 +802,7 @@
   {
     "id": "lr-051",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Assumption",
+    "topic": "Critical Reasoning: Assumption",
     "difficulty": "medium",
     "prompt": "Argument: \"The company should switch all its delivery trucks to electric vehicles, since electric vehicles have lower fuel costs than gasoline trucks.\" Which of the following is an assumption underlying this argument?",
     "options": [
@@ -818,7 +818,7 @@
   {
     "id": "lr-052",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Assumption",
+    "topic": "Critical Reasoning: Assumption",
     "difficulty": "hard",
     "prompt": "Argument: \"Because the average reading score in District A is higher than in District B, District A's schools must be providing better reading instruction.\" What does this argument assume?",
     "options": [
@@ -834,7 +834,7 @@
   {
     "id": "lr-053",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Inference",
+    "topic": "Critical Reasoning: Inference",
     "difficulty": "easy",
     "prompt": "\"Every certified technician passed a rigorous exam. Jason did not pass the rigorous exam.\" What can be validly concluded?",
     "options": [
@@ -850,7 +850,7 @@
   {
     "id": "lr-054",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Inference",
+    "topic": "Critical Reasoning: Inference",
     "difficulty": "medium",
     "prompt": "\"In a factory, machines serviced monthly break down less often than machines serviced yearly. Machine 12 broke down frequently this year.\" What can be reasonably inferred?",
     "options": [
@@ -866,7 +866,7 @@
   {
     "id": "lr-055",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Strengthen",
+    "topic": "Critical Reasoning: Strengthen",
     "difficulty": "medium",
     "prompt": "Argument: \"The new packaging reduced shipment damage, since damage complaints fell 40% after the switch.\" Which fact would most strengthen this argument?",
     "options": [
@@ -882,7 +882,7 @@
   {
     "id": "lr-056",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Ranking",
+    "topic": "Analytical Puzzle: Ranking",
     "difficulty": "hard",
     "prompt": "Seven students (A, B, C, D, E, F, G) scored differently on a test, ranked 1st (highest) through 7th (lowest), with no ties. C ranked exactly two places below A. E ranked immediately below B. F ranked immediately above D. G ranked 4th. A ranked better than D. B did not rank last. Who ranked 1st?",
     "options": [
@@ -892,13 +892,13 @@
       "E"
     ],
     "correctIndex": 0,
-    "explanation": "G=4th. With C=A+2 and F=D-1, and A ranked better than D, testing A=3 gives C=5; the remaining ranks {1,2,6,7} then need B and E consecutive with E=B+1, which only B=1,E=2 satisfies, leaving D=7,F=6 (F=D-1 holds, and B=1 is not last, consistent with the clue). No other value of A satisfies every constraint at once. B ranked 1st.",
+    "explanation": "G=4th. With $C = A+2$ and $F = D-1$, and A ranked better than D, testing A=3 gives C=5; the remaining ranks {1,2,6,7} then need B and E consecutive with $E = B+1$, which only B=1,E=2 satisfies, leaving D=7,F=6 ($F = D-1$ holds, and B=1 is not last, consistent with the clue). No other value of A satisfies every constraint at once. B ranked 1st.",
     "source": "original"
   },
   {
     "id": "lr-057",
     "section": "logical-reasoning",
-    "topic": "Critical Reasoning — Weaken",
+    "topic": "Critical Reasoning: Weaken",
     "difficulty": "medium",
     "prompt": "Argument: \"Employees who work remotely report higher productivity scores, so the company should let all employees work remotely to boost productivity.\" Which finding would most weaken this argument?",
     "options": [
@@ -914,7 +914,7 @@
   {
     "id": "lr-058",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Boxes",
+    "topic": "Analytical Puzzle: Boxes",
     "difficulty": "hard",
     "prompt": "Six boxes (P, Q, R, S, T, U) are stacked one on top of another, numbered position 1 (bottom) to 6 (top). Q is exactly two positions above P. R is directly below Q. S is at the very bottom. T is directly above U. T is not at the top. Which position does P occupy?",
     "options": [
@@ -924,13 +924,13 @@
       "Position 4"
     ],
     "correctIndex": 3,
-    "explanation": "S=1. With Q=P+2 and R=Q-1, there are two candidates: P=2 (Q=4,R=3) or P=4 (Q=6,R=5). If P=2, the remaining positions {5,6} force T=6,U=5, but that puts T at the top, violating the clue. So P=4 is correct: the remaining positions {2,3} give U=2,T=3, which is not the top, consistent with the clue. P occupies position 4.",
+    "explanation": "S=1. With $Q = P+2$ and $R = Q-1$, there are two candidates: P=2 (Q=4,R=3) or P=4 (Q=6,R=5). If P=2, the remaining positions {5,6} force T=6,U=5, but that puts T at the top, violating the clue. So P=4 is correct: the remaining positions {2,3} give U=2,T=3, which is not the top, consistent with the clue. P occupies position 4.",
     "source": "original"
   },
   {
     "id": "lr-059",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "easy",
     "prompt": "Five students (P, Q, R, S, T) sit in a row of five chairs, numbered 1 to 5 from left to right. Q sits at seat 3. P sits immediately to the left of Q. S sits immediately to the right of Q. T sits immediately to the left of P. R sits at the rightmost end. What is the order from left to right?",
     "options": [
@@ -946,7 +946,7 @@
   {
     "id": "lr-060",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "medium",
     "prompt": "Six colleagues (A, B, C, D, E, F) sit in a row of six chairs, left to right. C sits at the leftmost end. D sits immediately to the right of A. B sits immediately to the right of D. F sits immediately to the right of B. E sits immediately to the right of F. Where does A sit?",
     "options": [
@@ -962,9 +962,9 @@
   {
     "id": "lr-061",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "medium",
-    "prompt": "Six people sit evenly spaced around a circular table, facing the center: J, K, L, M, N, O. K sits second to the right of J. L sits immediately to the left of K. M sits directly opposite J. N sits immediately to the right of M. Where does O sit?",
+    "prompt": "Six people sit evenly spaced around a circular table, facing outward, away from the table: J, K, L, M, N, O. K sits second to the right of J. L sits immediately to the left of K. M sits directly opposite J. N sits immediately to the right of M. Where does O sit?",
     "options": [
       "Immediately to the left of M",
       "Opposite L",
@@ -978,9 +978,9 @@
   {
     "id": "lr-062",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "medium",
-    "prompt": "Six colleagues sit around a circular table facing the center: R, S, T, U, V, W. T sits immediately to the right of R. U sits second to the left of T. V sits directly opposite U. S sits immediately to the right of V. Where does W sit relative to R?",
+    "prompt": "Six colleagues sit around a circular table facing outward, away from the table: R, S, T, U, V, W. T sits immediately to the right of R. U sits second to the left of T. V sits directly opposite U. S sits immediately to the right of V. Where does W sit relative to R?",
     "options": [
       "Second to the left of R",
       "Immediately to the right of R",
@@ -994,7 +994,7 @@
   {
     "id": "lr-063",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Ranking",
+    "topic": "Analytical Puzzle: Ranking",
     "difficulty": "easy",
     "prompt": "In a race, five runners (Ana, Cara, Ben, Dan, and Emma) finish in distinct positions with no ties. Ana finishes before Ben but after Cara. Ben finishes before Emma. Dan finishes last. Who finishes first?",
     "options": [
@@ -1010,7 +1010,7 @@
   {
     "id": "lr-064",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Ranking",
+    "topic": "Analytical Puzzle: Ranking",
     "difficulty": "medium",
     "prompt": "Five students scored differently on a test: Mia, Noah, Olivia, Paul, and Quinn. Noah scored higher than Paul but lower than Mia. Olivia scored the highest of all. Quinn scored lower than Paul. Who scored the lowest?",
     "options": [
@@ -1026,7 +1026,7 @@
   {
     "id": "lr-065",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Ranking",
+    "topic": "Analytical Puzzle: Ranking",
     "difficulty": "hard",
     "prompt": "Six chess players (A, B, C, D, E, F) are ranked 1st (best) through 6th (worst), with no ties. C ranks immediately below A. E ranks exactly three places below B. D ranks 2nd. F ranks better than C but worse than B. What is A's rank?",
     "options": [
@@ -1036,13 +1036,13 @@
       "6th"
     ],
     "correctIndex": 0,
-    "explanation": "Testing each possible rank for A (with C = A+1) against the remaining constraints, only A = 5th works: this forces C = 6th, and among the remaining ranks {1, 3, 4} for B, E, F, only B = 1st, E = 4th (three below B), F = 3rd satisfies both \"E is three below B\" and \"B < F < C\" (1 < 3 < 6). All other values for A lead to a contradiction with at least one clue.",
+    "explanation": "Testing each possible rank for A (with $C = A+1$) against the remaining constraints, only A = 5th works: this forces C = 6th, and among the remaining ranks {1, 3, 4} for B, E, F, only B = 1st, E = 4th (three below B), F = 3rd satisfies both \"E is three below B\" and \"$B < F < C$\" ($1 < 3 < 6$). All other values for A lead to a contradiction with at least one clue.",
     "source": "original"
   },
   {
     "id": "lr-066",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Floors",
+    "topic": "Analytical Puzzle: Floors",
     "difficulty": "medium",
     "prompt": "A seven-story building has floors numbered 1 (bottom) to 7 (top), each occupied by a different family: J, K, L, M, N, O, and P. L lives on floor 4. M lives immediately below L. N lives on the topmost floor. K lives three floors above J. O lives immediately above K. Which floor does J live on?",
     "options": [
@@ -1052,13 +1052,13 @@
       "Floor 2"
     ],
     "correctIndex": 3,
-    "explanation": "L=4 and M=3 (immediately below L). N=7 (topmost). The remaining floors {1, 2, 5, 6} must hold J, K=J+3, O=K+1, and P. Testing J=2 gives K=5 and O=6, all within the remaining set with P=1 left over: the only value of J that works without conflict. J lives on floor 2.",
+    "explanation": "L=4 and M=3 (immediately below L). N=7 (topmost). The remaining floors {1, 2, 5, 6} must hold J, $K = J+3$, $O = K+1$, and P. Testing J=2 gives K=5 and O=6, all within the remaining set with P=1 left over: the only value of J that works without conflict. J lives on floor 2.",
     "source": "original"
   },
   {
     "id": "lr-067",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Floors",
+    "topic": "Analytical Puzzle: Floors",
     "difficulty": "hard",
     "prompt": "A six-story building has floors numbered 1 (bottom) to 6 (top), each occupied by a different resident: A, B, C, D, E, F. D lives on floor 1. C lives directly above D. E lives on floor 3. F lives directly below B. B lives on an even-numbered floor. Which floor does A live on?",
     "options": [
@@ -1068,13 +1068,13 @@
       "Floor 6"
     ],
     "correctIndex": 0,
-    "explanation": "D=1, C=2 (directly above D), E=3. Remaining floors {4, 5, 6} go to A, B, F with F=B-1 and B even. Testing B=4 gives F=3, which conflicts with E; so B=6, F=5, leaving A=4 as the only remaining floor.",
+    "explanation": "D=1, C=2 (directly above D), E=3. Remaining floors {4, 5, 6} go to A, B, F with $F = B-1$ and B even. Testing B=4 gives F=3, which conflicts with E; so B=6, F=5, leaving A=4 as the only remaining floor.",
     "source": "original"
   },
   {
     "id": "lr-068",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Boxes",
+    "topic": "Analytical Puzzle: Boxes",
     "difficulty": "medium",
     "prompt": "Five boxes (P, Q, R, S, T) are stacked one on top of another. Q is at the very bottom. R is at the very top. R is directly above T. S is directly below P. Which box is directly above Q?",
     "options": [
@@ -1090,7 +1090,7 @@
   {
     "id": "lr-069",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Boxes",
+    "topic": "Analytical Puzzle: Boxes",
     "difficulty": "easy",
     "prompt": "Four boxes (A, B, C, D) are placed in a stack. Box A is at the bottom. Box B is directly on top of Box D. Box C is directly on top of Box B. What is the order from bottom to top?",
     "options": [
@@ -1106,7 +1106,7 @@
   {
     "id": "lr-070",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Grouping",
+    "topic": "Analytical Puzzle: Grouping",
     "difficulty": "medium",
     "prompt": "Eight students are divided into two teams of four for a project: Team X and Team Y. Priya is on Team X. Liam is on Team Y. Noah is on the same team as Liam. Sam is on a different team from Priya. Which team is Sam on?",
     "options": [
@@ -1122,7 +1122,7 @@
   {
     "id": "lr-071",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "medium",
     "prompt": "Six friends (J, K, L, M, N, O) sit in a row of six chairs, numbered 1 to 6 from left to right. L sits third from the left. N sits second from the right. J sits immediately to the left of L. Exactly one person sits between L and O. M sits immediately to the right of N. Who sits at seat 1?",
     "options": [
@@ -1138,9 +1138,9 @@
   {
     "id": "lr-072",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "medium",
-    "prompt": "Five people (A, B, C, D, E) sit evenly spaced around a circular table, all facing the center. B sits second to the right of A. C sits immediately to the left of B. D sits immediately to the right of B. Where does E sit relative to A?",
+    "prompt": "Five people (A, B, C, D, E) sit evenly spaced around a circular table, all facing outward, away from the table. B sits second to the right of A. C sits immediately to the left of B. D sits immediately to the right of B. Where does E sit relative to A?",
     "options": [
       "Opposite A",
       "Immediately to the left of A",
@@ -1154,7 +1154,7 @@
   {
     "id": "lr-073",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "medium",
     "prompt": "Five people (Amy, Ben, Cleo, Dev, and Ella) stand in a line for a photo, numbered position 1 to 5 from left to right. Amy is at position 1. Ben is not at either end. Cleo is somewhere to the right of Ben. Dev is immediately to the left of Ella. Ella is not at position 5. Cleo is not adjacent to Ella. What is Ella's position?",
     "options": [
@@ -1164,15 +1164,15 @@
       "3"
     ],
     "correctIndex": 3,
-    "explanation": "Amy=1. Dev and Ella must be consecutive (Ella=Dev+1) within positions {2,3,4,5}, and Ella≠5, leaving two candidate pairs: (Dev=2,Ella=3) or (Dev=3,Ella=4). Testing (Dev=3,Ella=4) forces Ben=2 and Cleo=5, but then Cleo is adjacent to Ella, violating the \"not adjacent\" clue. So (Dev=2,Ella=3) is the only valid case, with Ben=4 and Cleo=5. Ella sits at position 3.",
+    "explanation": "Amy=1. Dev and Ella must be consecutive (Ella immediately after Dev) within positions {2,3,4,5}, and Ella is not at position 5, leaving two candidate pairs: (Dev=2,Ella=3) or (Dev=3,Ella=4). Testing (Dev=3,Ella=4) forces Ben=2 and Cleo=5, but then Cleo is adjacent to Ella, violating the \"not adjacent\" clue. So (Dev=2,Ella=3) is the only valid case, with Ben=4 and Cleo=5. Ella sits at position 3.",
     "source": "original"
   },
   {
     "id": "lr-074",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "easy",
-    "prompt": "Four friends (W, X, Y, Z) sit evenly spaced around a square table, facing the center. X sits directly opposite W. Y sits immediately to the right of W. Where does Z sit relative to X?",
+    "prompt": "Four friends (W, X, Y, Z) sit evenly spaced around a square table, facing outward, away from the table. X sits directly opposite W. Y sits immediately to the right of W. Where does Z sit relative to X?",
     "options": [
       "Immediately to the left of X",
       "Immediately to the right of Y",
@@ -1186,7 +1186,7 @@
   {
     "id": "lr-075",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "medium",
     "prompt": "Seven students sit in a row of seven chairs, numbered 1 to 7 left to right. G sits at seat 1. D sits immediately to the right of G. F sits three seats to the right of D. B sits immediately to the left of F. The remaining students, A, C, and E, occupy the remaining seats, with C sitting immediately to the right of E. Which seat does A occupy?",
     "options": [
@@ -1234,7 +1234,7 @@
   {
     "id": "lr-078",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Grouping",
+    "topic": "Analytical Puzzle: Grouping",
     "difficulty": "hard",
     "prompt": "Eight students are divided into two teams of four for a project: Team X and Team Y. M and N are on different teams. O is on the same team as M. P is on the same team as N. M is on Team X. Exactly two of Q, R, and S are on Team X. Q is on Team X. R is on the same team as Q. T is on a different team from M. Which team is T on?",
     "options": [
@@ -1266,7 +1266,7 @@
   {
     "id": "lr-080",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Linear",
+    "topic": "Seating Arrangement: Linear",
     "difficulty": "hard",
     "prompt": "Seven colleagues (A, B, C, D, E, F, G) sit in a row of seven chairs, numbered 1 to 7 from left to right. B sits two seats to the right of A. C sits immediately to the left of B. D sits at seat 7. E sits exactly two seats to the right of F. G does not sit at seat 1. A sits to the left of F. Where does A sit?",
     "options": [
@@ -1276,7 +1276,7 @@
       "Seat 4"
     ],
     "correctIndex": 2,
-    "explanation": "D=7. With B=A+2, C=B-1, and E=F+2, testing A=1 gives B=3, C=2; the remaining seats {4,5,6} then need F and E with E=F+2, which only F=4,E=6 satisfies, leaving G=5 (not seat 1, consistent with the clue, and A=1 is indeed left of F=4). No other value of A satisfies every constraint at once. A sits at seat 1.",
+    "explanation": "D=7. With $B = A+2$, $C = B-1$, and $E = F+2$, testing A=1 gives B=3, C=2; the remaining seats {4,5,6} then need F and E with $E = F+2$, which only F=4,E=6 satisfies, leaving G=5 (not seat 1, consistent with the clue, and A=1 is indeed left of F=4). No other value of A satisfies every constraint at once. A sits at seat 1.",
     "source": "original"
   },
   {
@@ -1356,7 +1356,7 @@
       "5 sons and 2 daughters"
     ],
     "correctIndex": 1,
-    "explanation": "Let b = number of sons, g = number of daughters. Arjun (a son) has b-1 brothers and g sisters; \"equal\" gives b-1=g. Meena (a daughter) has b brothers and g-1 sisters; \"twice as many\" gives b=2(g-1). Substituting b=g+1 into the second equation: g+1=2g-2, so g=3 and b=4. The family has 4 sons and 3 daughters.",
+    "explanation": "Let $b$ be the number of sons and $g$ the number of daughters. Arjun (a son) has $b-1$ brothers and $g$ sisters; \"equal\" gives $b - 1 = g$. Meena (a daughter) has $b$ brothers and $g-1$ sisters; \"twice as many\" gives $b = 2(g-1)$. Substituting $b = g+1$ into the second equation: $g + 1 = 2g - 2$, so $g = 3$ and $b = 4$. The family has 4 sons and 3 daughters.",
     "source": "original"
   },
   {
@@ -1372,7 +1372,7 @@
       "125"
     ],
     "correctIndex": 2,
-    "explanation": "Each term follows the pattern $a_{n+1} = 2a_n + 1$. 63×2+1=127.",
+    "explanation": "Each term follows the pattern $a_{n+1} = 2a_n + 1$. $63 \\times 2 + 1 = 127$.",
     "source": "original"
   },
   {
@@ -1420,15 +1420,15 @@
       "69"
     ],
     "correctIndex": 2,
-    "explanation": "The differences between consecutive terms are 3, 5, 9, 17, and the differences of those differences double each time (2, 4, 8, next 16). So the next difference is 17+16=33, giving the next term as 35+33=68.",
+    "explanation": "The differences between consecutive terms are 3, 5, 9, 17, and the differences of those differences double each time (2, 4, 8, next 16). So the next difference is $17 + 16 = 33$, giving the next term as $35 + 33 = 68$.",
     "source": "original"
   },
   {
     "id": "lr-090",
     "section": "logical-reasoning",
-    "topic": "Seating Arrangement — Circular",
+    "topic": "Seating Arrangement: Circular",
     "difficulty": "hard",
-    "prompt": "Eight people (A, B, C, D, E, F, G, H) sit evenly spaced around a circular table, all facing the center. B sits directly opposite A. C sits two seats clockwise from B. D sits immediately to the left of C. E sits immediately to the right of A. F sits two seats clockwise from E. G sits immediately to the right of C. Where does H sit relative to A?",
+    "prompt": "Eight people (A, B, C, D, E, F, G, H) sit evenly spaced around a circular table, all facing outward, away from the table. B sits directly opposite A. C sits two seats clockwise from B. D sits immediately to the left of C. E sits immediately to the right of A. F sits two seats clockwise from E. G sits immediately to the right of C. Where does H sit relative to A?",
     "options": [
       "Directly opposite A",
       "Second to the right of A",
@@ -1468,7 +1468,7 @@
       "6 km west"
     ],
     "correctIndex": 1,
-    "explanation": "Using coordinates with A at (0,0): B=(0,8), C=(6,8), D=(6,0). The north (+8) and south (-8) legs cancel, leaving D directly 6 km east of A.",
+    "explanation": "Using coordinates with A at $(0,0)$: $B = (0,8)$, $C = (6,8)$, $D = (6,0)$. The north ($+8$) and south ($-8$) legs cancel, leaving D directly 6 km east of A.",
     "source": "original"
   },
   {
@@ -1484,7 +1484,7 @@
       "4 km"
     ],
     "correctIndex": 2,
-    "explanation": "Turning 90° clockwise from north faces her east; walking 4 km east gives (4,0). Turning 90° clockwise again faces her south; walking 3 km south gives (4,-3). The straight-line distance is $\\sqrt{4^2+3^2} = 5$ km.",
+    "explanation": "Turning 90° clockwise from north faces her east; walking 4 km east gives $(4,0)$. Turning 90° clockwise again faces her south; walking 3 km south gives $(4,-3)$. The straight-line distance is $\\sqrt{4^2+3^2} = 5$ km.",
     "source": "original"
   },
   {
@@ -1500,13 +1500,13 @@
       "4 km, west"
     ],
     "correctIndex": 0,
-    "explanation": "Using coordinates with O at (0,0): P=(0,10), Q=(-6,10), R=(-6,0), S=(-4,0). The north and south legs (10 km each) cancel, leaving S 4 km west of O; equivalently, O is 4 km east of S.",
+    "explanation": "Using coordinates with O at $(0,0)$: $P = (0,10)$, $Q = (-6,10)$, $R = (-6,0)$, $S = (-4,0)$. The north and south legs (10 km each) cancel, leaving S 4 km west of O; equivalently, O is 4 km east of S.",
     "source": "original"
   },
   {
     "id": "lr-095",
     "section": "logical-reasoning",
-    "topic": "Venn Diagram — Set Logic",
+    "topic": "Venn Diagram: Set Logic",
     "difficulty": "hard",
     "prompt": "In a class of 50 students, 6 students play neither football nor cricket. The number of students who play only cricket is exactly twice the number who play only football. 14 students play both football and cricket. How many students play only football?",
     "options": [
@@ -1516,13 +1516,13 @@
       "10"
     ],
     "correctIndex": 3,
-    "explanation": "Students playing at least one sport = 50 - 6 = 44. Let x = students playing only football, so only cricket = 2x (given). Then x + 2x + 14 = 44, so 3x = 30, giving x = 10 students who play only football.",
+    "explanation": "Students playing at least one sport = $50 - 6 = 44$. Let $x$ = students playing only football, so only cricket = $2x$ (given). Then $x + 2x + 14 = 44$, so $3x = 30$, giving $x = 10$ students who play only football.",
     "source": "original"
   },
   {
     "id": "lr-096",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Floors",
+    "topic": "Analytical Puzzle: Floors",
     "difficulty": "hard",
     "prompt": "A seven-story building has floors numbered 1 (bottom) to 7 (top), each occupied by a different tenant: A, B, C, D, E, F, G. B lives exactly three floors above A. C lives exactly two floors below B. D lives on floor 1. E is exactly one floor above F. G does not live on the top floor. A lives above floor 1 but below floor 4. Which floor does A live on?",
     "options": [
@@ -1532,13 +1532,13 @@
       "Floor 4"
     ],
     "correctIndex": 0,
-    "explanation": "D=1. Testing A=2 (satisfying \"above floor 1, below floor 4\"): B=A+3=5, C=B-2=3. The remaining floors {4,6,7} then need E and F consecutive with E=F+1, which only F=6,E=7 satisfies, leaving G=4 (not the top floor, consistent with the clue). Testing A=3 instead forces B=6, C=4, leaving {2,5,7} for E,F,G with no consecutive pair available for E=F+1, so that case fails. A lives on floor 2.",
+    "explanation": "D=1. Testing A=2 (satisfying \"above floor 1, below floor 4\"): $B = A+3 = 5$, $C = B-2 = 3$. The remaining floors {4,6,7} then need E and F consecutive with $E = F+1$, which only F=6,E=7 satisfies, leaving G=4 (not the top floor, consistent with the clue). Testing A=3 instead forces B=6, C=4, leaving {2,5,7} for E,F,G with no consecutive pair available for E=F+1, so that case fails. A lives on floor 2.",
     "source": "original"
   },
   {
     "id": "lr-097",
     "section": "logical-reasoning",
-    "topic": "Venn Diagram — Set Logic",
+    "topic": "Venn Diagram: Set Logic",
     "difficulty": "hard",
     "prompt": "In a group of 200 people, 90 read Newspaper A, 80 read Newspaper B, 70 read Newspaper C, 30 read both A and B, 25 read both B and C, 20 read both A and C, and 10 read all three. How many people read none of the three newspapers?",
     "options": [
@@ -1548,7 +1548,7 @@
       "30"
     ],
     "correctIndex": 2,
-    "explanation": "By inclusion-exclusion: |A∪B∪C| = 90+80+70-30-25-20+10 = 175. People reading none = 200-175 = 25.",
+    "explanation": "By inclusion-exclusion: $|A \\cup B \\cup C| = 90 + 80 + 70 - 30 - 25 - 20 + 10 = 175$. People reading none = $200 - 175 = 25$.",
     "source": "original"
   },
   {
@@ -1570,7 +1570,7 @@
   {
     "id": "lr-099",
     "section": "logical-reasoning",
-    "topic": "Analytical Puzzle — Ranking",
+    "topic": "Analytical Puzzle: Ranking",
     "difficulty": "hard",
     "prompt": "Six students (A, B, C, D, E, F) scored differently on a test, ranked 1st (highest) through 6th (lowest), with no ties. B ranked immediately below A. D ranked exactly two places below C. E ranked 6th. F did not rank 1st. A ranked better than C. Who ranked 1st?",
     "options": [
@@ -1580,7 +1580,7 @@
       "C"
     ],
     "correctIndex": 0,
-    "explanation": "E=6th. With B=A+1 and D=C+2, and A better (lower-numbered) than C, testing A=1 gives B=2; the remaining ranks {3,4,5} then need C and D exactly two apart, which only C=3,D=5 satisfies, leaving F=4 (not 1st, consistent with the clue). No other value of A satisfies every constraint at once. A ranked 1st.",
+    "explanation": "E=6th. With $B = A+1$ and $D = C+2$, and A better (lower-numbered) than C, testing A=1 gives B=2; the remaining ranks {3,4,5} then need C and D exactly two apart, which only C=3,D=5 satisfies, leaving F=4 (not 1st, consistent with the clue). No other value of A satisfies every constraint at once. A ranked 1st.",
     "source": "original"
   },
   {
@@ -1590,13 +1590,13 @@
     "difficulty": "hard",
     "prompt": "At what time between 3 and 4 o'clock will the minute hand and hour hand of a clock be exactly opposite each other (180° apart)?",
     "options": [
-      "45 minutes past 3",
-      "50 minutes past 3",
-      "49 minutes past 3",
-      "49 1/11 minutes past 3"
+      "$45$ minutes past 3",
+      "$50$ minutes past 3",
+      "$49$ minutes past 3",
+      "$49\\frac{1}{11}$ minutes past 3"
     ],
     "correctIndex": 3,
-    "explanation": "At t minutes past 3:00, the hour hand is at $90 + 0.5t$ degrees and the minute hand is at $6t$ degrees. Setting the minute hand 180° ahead: $6t - (90 + 0.5t) = 180$, so $5.5t = 270$, giving $t = \\frac{270}{5.5} = 49\\frac{1}{11}$ minutes.",
+    "explanation": "At $t$ minutes past 3:00, the hour hand is at $90 + 0.5t$ degrees and the minute hand is at $6t$ degrees. Setting the minute hand 180° ahead: $6t - (90 + 0.5t) = 180$, so $5.5t = 270$, giving $t = \\frac{270}{5.5} = 49\\frac{1}{11}$ minutes.",
     "source": "original"
   }
 ]

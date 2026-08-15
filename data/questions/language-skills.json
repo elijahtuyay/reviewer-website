@@ -12,7 +12,7 @@
       "Neither the student has submit the assignment."
     ],
     "correctIndex": 2,
-    "explanation": "\"Neither\" is a singular indefinite pronoun and always takes a singular verb (\"has\"), regardless of the plural noun in the \"of the ___\" phrase. Option A wrongly uses \"have\"; C and D have subject-verb and article errors.",
+    "explanation": "\"Neither\" is a singular indefinite pronoun and always takes a singular verb (\"has\"), regardless of the plural noun in the \"of the ___\" phrase. \"Neither of the students have submitted the assignment\" wrongly uses the plural \"have,\" while \"Neither of the student have submit the assignment\" and \"Neither the student has submit the assignment\" each add a noun-number or verb-form error on top.",
     "source": "original"
   },
   {
@@ -108,7 +108,7 @@
       "The rain, walking to the store, started falling."
     ],
     "correctIndex": 1,
-    "explanation": "An introductory participial phrase (\"Walking to the store\") must modify the subject actually performing the action, which here is \"I.\" Options A and C wrongly imply the rain was walking, a dangling modifier error.",
+    "explanation": "An introductory participial phrase (\"Walking to the store\") must modify the subject actually performing the action, which here is \"I.\" \"Walking to the store, the rain started falling\" and \"The rain, walking to the store, started falling\" both attach the phrase to the rain, a dangling modifier error, and \"I walking to the store, the rain started falling\" is not a grammatical sentence at all.",
     "source": "original"
   },
   {
@@ -156,7 +156,7 @@
       "A study showing that students who stayed awake all night performed just as well on a factual recall test as those who slept."
     ],
     "correctIndex": 3,
-    "explanation": "\"Malevolent\" describes a general wish to do harm, which matches a character whose underlying intentions turn out to be evil despite his charming exterior. \"Vindictive\" is a closer trap than it first appears, since it also carries a negative sense, but it specifically means motivated by revenge, and nothing in the sentence suggests the betrayal was payback for a prior wrong. \"Benevolent\" and \"altruistic\" both describe kindness, which contradicts the betrayal described.",
+    "explanation": "The passage's central claim is that sleep is an active, necessary participant in learning. A result in which students who stayed awake all night still matched sleepers on factual recall would show that the consolidation benefit is not necessary after all, which strikes at that claim directly. The nap study and the eight-hours-versus-four-hours study both report better outcomes for the group that slept, so each supports the claim rather than challenging it. The finding that slow-wave activity rises after intensive learning also supports it, since it suggests the sleeping brain is doing extra work rather than merely resting.",
     "source": "original"
   },
   {
@@ -268,7 +268,7 @@
       "Each of the player have their own locker."
     ],
     "correctIndex": 0,
-    "explanation": "\"Each\" is singular and takes \"has\". \"Their\" is acceptable as a gender-neutral singular possessive referring back to \"each\", while \"its\" in option D wrongly treats the players as non-human.",
+    "explanation": "\"Each\" is singular and takes \"has\". \"Their\" is acceptable as a gender-neutral singular possessive referring back to \"each\", while \"Each of the players has its own locker\" wrongly treats the players as non-human.",
     "source": "original"
   },
   {
@@ -300,7 +300,7 @@
       "A number of employees have requested extended leave this year."
     ],
     "correctIndex": 3,
-    "explanation": "\"A number of\" (meaning \"several\") functions as a plural subject and takes a plural verb (\"have\"), while \"the number of\" is treated as singular and takes a singular verb. Option A wrongly uses the singular \"has\"; C has a noun-number error (\"employee\"); D has an incorrect verb form (\"have request\").",
+    "explanation": "\"A number of\" (meaning \"several\") functions as a plural subject and takes a plural verb (\"have\"), while \"the number of\" is treated as singular and takes a singular verb. \"A number of employees has requested extended leave\" wrongly uses the singular \"has\"; \"A number of employee have requested extended leave\" has a noun-number error; and \"A number of employees have request extended leave\" uses an incorrect verb form.",
     "source": "original"
   },
   {
@@ -748,7 +748,7 @@
       "Proponents emphasize honeybees' contribution to pollination, while critics warn that this benefit may come at the expense of native pollinators."
     ],
     "correctIndex": 3,
-    "explanation": "The passage frames a genuine tension rather than flat disagreement: proponents value the pollination and biodiversity support beekeeping provides, while critics do not deny that value outright but warn it may crowd out native bees. Option B mischaracterizes critics as denying any benefit, which the passage never says; A and D both describe agreement that isn't present in the text.",
+    "explanation": "The passage frames a genuine tension rather than flat disagreement: proponents value the pollination and biodiversity support beekeeping provides, while critics do not deny that value outright but warn it may crowd out native bees. The option claiming critics say honeybees provide no pollination benefit at all mischaracterizes them, since the passage never says that. The two options describing broad agreement, one on everything except cost and one on banning beekeeping outright, both assert a consensus that is not present in the text.",
     "source": "original"
   },
   {
@@ -900,7 +900,7 @@
     "section": "language-skills",
     "topic": "Sentence Completion",
     "difficulty": "hard",
-    "prompt": "Choose the word that best completes the sentence: \"Rather than addressing the question directly, the spokesperson gave an ____ response that left reporters with more doubts than answers.\"",
+    "prompt": "Choose the word that best completes the sentence: \"Rather than addressing the question directly, the spokesperson gave a/an ____ response that left reporters with more doubts than answers.\"",
     "options": [
       "forthright",
       "terse",
@@ -964,7 +964,7 @@
     "section": "language-skills",
     "topic": "Sentence Completion",
     "difficulty": "easy",
-    "prompt": "Choose the word that best completes the sentence: \"The witness gave a ____ account of the accident, recalling every detail with precision.\"",
+    "prompt": "Choose the word that best completes the sentence: \"The witness gave a/an ____ account of the accident, recalling every detail with precision.\"",
     "options": [
       "vivid",
       "measured",
@@ -1351,12 +1351,12 @@
     "prompt": "Camouflage is to Predator as Alibi is to ___?",
     "options": [
       "Witness",
-      "Lawyer",
-      "Suspicion",
-      "Crime"
+      "Investigator",
+      "Crime",
+      "Defendant"
     ],
-    "correctIndex": 2,
-    "explanation": "Camouflage helps an animal avoid detection by a predator; an alibi helps a person avoid suspicion. \"Crime\" is a tempting trap because an alibi relates to a crime, but the direct parallel to \"predator,\" the thing actually being evaded, is \"suspicion,\" not the crime itself.",
+    "correctIndex": 1,
+    "explanation": "The relationship is defense-to-pursuer. Camouflage is the device a hunted animal uses to escape the notice of the predator, the agent actively trying to find it. An alibi is the device a person under scrutiny uses to escape the notice of the investigator, the agent actively trying to build a case. Defendant is wrong because the defendant is the one who uses the alibi, so that role parallels the hunted animal, not the predator. Crime names the event the alibi concerns, not an agent doing any pursuing. Witness supplies evidence but is not the party the alibi is deployed against.",
     "source": "original"
   },
   {
@@ -1372,14 +1372,14 @@
       "To argue that pollution has no effect on coral reefs."
     ],
     "correctIndex": 1,
-    "explanation": "The passage explains how coral gardening works and then discusses the limitations and caveats that researchers attach to it, making option B the accurate summary of its purpose.",
+    "explanation": "The passage explains how coral gardening works and then discusses the limitations and caveats that researchers attach to it, making \"to explain coral gardening and the limitations scientists associate with it\" the accurate summary of its purpose.",
     "source": "original"
   },
   {
     "id": "ls-092",
     "section": "language-skills",
     "topic": "Reading Comprehension",
-    "difficulty": "medium",
+    "difficulty": "easy",
     "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" According to the passage, what survival rate do transplanted corals often show within the first year?",
     "options": [
       "Nearly one hundred percent",
@@ -1452,7 +1452,7 @@
       "Factual memory depends more on later stages of sleep, while procedural memory consolidates earlier."
     ],
     "correctIndex": 0,
-    "explanation": "The passage states this distinction directly: procedural memory depends more on later sleep stages, while factual memory consolidates earlier in the night. Option C reverses the two, which is easy to do without reading closely.",
+    "explanation": "The passage states this distinction directly: procedural memory depends more on later sleep stages, while factual memory consolidates earlier in the night. The option that has factual memory depending on later stages while procedural memory consolidates earlier simply reverses the two, which is easy to miss without reading closely.",
     "source": "original"
   },
   {

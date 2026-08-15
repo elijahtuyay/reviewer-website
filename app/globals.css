@@ -53,6 +53,18 @@ body {
   outline-offset: 2px;
 }
 
+/*
+ * Deliberately NO custom .katex rules here.
+ *
+ * KaTeX positions every part of a fraction with inline styles it computes
+ * itself (`top: -3.23em` inside an inline-table vlist, `border-bottom-width:
+ * 0.04em` on the bar), and katex.css already pins `line-height: 1.2` and
+ * `font-size: 1.21em` on `.katex`. So stylesheet rules for line-height, frac-line
+ * width, or padding on .mfrac are all no-ops or actively harmful — an earlier
+ * attempt here shrank math instead of enlarging it. Cramped fractions are fixed
+ * at the source, in components/MathText.tsx, by rendering them in display style.
+ */
+
 /* Apple-style route transition: a quick, gentle fade + rise on every page mount. */
 @keyframes page-fade-in {
   from {
