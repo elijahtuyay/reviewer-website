@@ -114,11 +114,14 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
                 </Link>
                 {/* Per-section, so discarding one attempt doesn't take the
                     other two finished sections with it. */}
+                {/* Bordered, not bare text: sitting next to the same-size grey
+                    status line, an unstyled button scanned as one run of muted
+                    text ("12/36 answered Clear") rather than as a control. */}
                 <button
                   type="button"
                   onClick={() => setPendingClear(entry)}
                   aria-label={`Clear saved progress for ${entry.label}`}
-                  className="flex h-11 shrink-0 items-center justify-center rounded-md px-2 text-xs text-muted hover:bg-panel-hover hover:text-foreground"
+                  className="flex h-11 shrink-0 items-center justify-center rounded-md border border-line px-3 text-xs font-medium text-muted hover:bg-panel-hover hover:text-foreground"
                 >
                   Clear
                 </button>
@@ -148,7 +151,9 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
             ? `This deletes your saved work for all ${saved.length} sections listed above, including any you have already submitted and scored. It can't be undone.`
             : `This deletes your saved work for ${pendingClear?.label ?? "this section"}. Your other sections are not affected. It can't be undone.`
         }
+        tone="destructive"
         confirmLabel={pendingClear === "all" ? "Clear all" : "Clear section"}
+        cancelLabel="Keep it"
         onConfirm={handleConfirmClear}
         onCancel={() => setPendingClear(null)}
       />

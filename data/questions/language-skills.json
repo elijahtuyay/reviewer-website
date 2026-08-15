@@ -1164,7 +1164,7 @@
       "RQPS"
     ],
     "correctIndex": 2,
-    "explanation": "Q introduces the storm, R shows the ports' immediate response (\"risk damage\" needs the storm from Q), P shows the knock-on effect on ships already at sea (\"waiting for clearance to dock\" needs the port closures in R), and S reports the specific, serious consequence. In QPRS, \"clearance to dock\" is mentioned before any port has closed. In RQPS, \"risk damage\" appears with no storm mentioned yet. In QRSP, the general disruption (S) is placed before the idling ships (P) whose situation actually explains part of the delay.",
+    "explanation": "Q introduces the storm, R shows the ports' immediate response (\"risk damage\" needs the storm from Q), P shows the knock-on effect on ships already at sea (\"waiting for clearance to dock\" needs the port closures in R), and S reports the specific, serious consequence. In QPRS, \"clearance to dock\" is mentioned before any port has closed. In RQPS, \"risk damage\" appears with no storm mentioned yet. In QRSP, the downstream supply delays (S) are placed before the idling ships (P) whose situation actually explains part of the delay.",
     "source": "original"
   },
   {
@@ -1220,7 +1220,7 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "hard",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: A new dam was constructed far upstream, and its operators began holding back water to fill the reservoir before releasing it on their own schedule.\nS: Residents petitioned the regional government for a formal water-sharing agreement with the dam's operators.\nR: Crop yields in the village fell drastically within two seasons, since the water no longer arrived when the fields needed it most.\nP: For generations, the village downstream had irrigated its fields using water diverted from the same river during the dry season.",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: A new dam was constructed far upstream, and its operators began holding back water to fill the reservoir before releasing it on their own schedule.\nS: Residents petitioned the regional government for a formal water-sharing agreement with the dam's operators.\nR: Crop yields in the village fell drastically within two seasons, since the water no longer arrived when the fields needed it most.\nP: For generations, a village had irrigated its fields using water diverted from a river during the dry season.",
     "options": [
       "PQRS",
       "PRQS",
@@ -1228,7 +1228,7 @@
       "QPRS"
     ],
     "correctIndex": 0,
-    "explanation": "P establishes the village's reliance on the river during the dry season, Q introduces the dam that disrupts that schedule, R explains the consequence in terms that depend on the dry-season detail from P, and S gives the resulting response, referring back to \"the dam's operators\" from Q. In PRQS, the water shortage (R) is explained before the dam (Q) that actually caused it has been introduced. In PQSR, the petition (S) appears before the crop failure (R) that motivated it. In QPRS, P opens with \"the same river,\" a phrase that needs a river already mentioned, but Q never names one specifically.",
+    "explanation": "P establishes the village's reliance on the river during the dry season, Q introduces the dam that disrupts that schedule, R explains the consequence in terms that depend on the dry-season detail from P, and S gives the resulting response, referring back to \"the dam's operators\" from Q. In PRQS, the water shortage (R) is explained before the dam (Q) that actually caused it has been introduced. In PQSR, the petition (S) appears before the crop failure (R) that motivated it. In QPRS, Q opens by placing a dam \"far upstream\" before any river or village has been introduced for it to be upstream of.",
     "source": "original"
   },
   {
@@ -1348,7 +1348,7 @@
     "section": "language-skills",
     "topic": "Analogies",
     "difficulty": "hard",
-    "prompt": "Camouflage is to Predator as Alibi is to ___?",
+    "prompt": "A prey animal's camouflage is to a predator as a suspect's alibi is to ___?",
     "options": [
       "Witness",
       "Investigator",
@@ -1356,7 +1356,7 @@
       "Defendant"
     ],
     "correctIndex": 1,
-    "explanation": "The relationship is defense-to-pursuer. Camouflage is the device a hunted animal uses to escape the notice of the predator, the agent actively trying to find it. An alibi is the device a person under scrutiny uses to escape the notice of the investigator, the agent actively trying to build a case. Defendant is wrong because the defendant is the one who uses the alibi, so that role parallels the hunted animal, not the predator. Crime names the event the alibi concerns, not an agent doing any pursuing. Witness supplies evidence but is not the party the alibi is deployed against.",
+    "explanation": "The relationship is defense-to-pursuer. Camouflage is the device a hunted animal uses to escape the notice of the predator, the agent actively trying to find it. An alibi is the device a person under scrutiny uses to escape the notice of the investigator, the agent actively trying to build a case. Defendant is wrong because the defendant is the one who offers the alibi, so that role parallels the hunted animal, not the predator. Crime names the event the alibi concerns, not an agent doing any pursuing. Witness supplies evidence but is not the party the alibi is deployed against.",
     "source": "original"
   },
   {
