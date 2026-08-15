@@ -329,7 +329,7 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
             <button
               type="button"
               onClick={() => setMobileNavOpen(true)}
-              className="flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm text-foreground hover:bg-panel-hover lg:hidden"
+              className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground hover:bg-panel-hover lg:hidden"
             >
               Sections
             </button>
@@ -349,7 +349,7 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
                 <button
                   type="button"
                   onClick={handlePause}
-                  className="flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm text-foreground hover:bg-panel-hover"
+                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground hover:bg-panel-hover"
                 >
                   Pause
                 </button>
@@ -359,13 +359,13 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
                 <button
                   type="button"
                   onClick={() => setPendingAction("restart")}
-                  className="flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm text-foreground hover:bg-panel-hover"
+                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground hover:bg-panel-hover"
                 >
                   Retake
                 </button>
                 <Link
                   href={`/${examId}`}
-                  className="flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm text-foreground hover:bg-panel-hover"
+                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground hover:bg-panel-hover"
                 >
                   Done
                 </Link>

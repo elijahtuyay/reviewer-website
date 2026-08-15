@@ -23,7 +23,7 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
           </p>
           <Link
             href="/"
-            className="mt-8 inline-flex items-center justify-center gap-1.5 rounded-md border border-line px-5 py-2.5 text-sm font-medium text-foreground hover:bg-panel-hover"
+            className="mt-8 inline-flex items-center justify-center gap-1.5 rounded-md border border-line-strong px-5 py-2.5 text-sm font-medium text-foreground hover:bg-panel-hover"
           >
             Back home
           </Link>

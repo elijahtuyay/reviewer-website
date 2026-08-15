@@ -120,7 +120,7 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
                   type="button"
                   onClick={() => setPendingClear(entry)}
                   aria-label={`Clear saved progress for ${entry.label}`}
-                  className="flex h-11 shrink-0 items-center justify-center rounded-md border border-line px-3 text-xs font-medium text-muted hover:bg-panel-hover hover:text-foreground"
+                  className="flex h-11 shrink-0 items-center justify-center rounded-md border border-line-strong px-3 text-xs font-medium text-muted hover:bg-panel-hover hover:text-foreground"
                 >
                   Clear
                 </button>
@@ -134,7 +134,7 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
             <button
               type="button"
               onClick={() => setPendingClear("all")}
-              className="mt-3 flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm font-medium text-foreground hover:bg-panel-hover"
+              className="mt-3 flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm font-medium text-foreground hover:bg-panel-hover"
             >
               Clear all saved progress
             </button>

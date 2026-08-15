@@ -28,14 +28,23 @@ export default function ProgressTracker({
       <div className="mt-3 grid grid-cols-6 gap-1.5">
         {Array.from({ length: totalQuestions }, (_, i) => i + 1).map((num) => {
           let style = "bg-panel-hover text-muted hover:bg-line";
+          let state = "not answered";
           if (reviewMode) {
             if (correctSet.has(num)) {
               style = "bg-green-600 text-white dark:bg-green-500";
+              state = "correct";
             } else if (incorrectSet.has(num)) {
-              style = "bg-red-600 text-white dark:bg-red-500";
+              // Underlined as well as red: green and red fills alone would make
+              // correctness a colour-only signal, which is the WCAG 1.4.1
+              // failure already fixed for the answer options themselves.
+              style = "bg-red-600 text-white underline decoration-2 underline-offset-2 dark:bg-red-500";
+              state = "incorrect";
+            } else {
+              state = "skipped";
             }
           } else if (answeredSet.has(num)) {
             style = "bg-accent text-accent-foreground";
+            state = "answered";
           }
 
           return (
@@ -43,6 +52,7 @@ export default function ProgressTracker({
               key={num}
               type="button"
               onClick={() => onJump(num)}
+              aria-label={`Question ${num}, ${state}`}
               className={`flex h-7 w-7 items-center justify-center rounded text-[11px] font-medium transition-colors ${style}`}
             >
               {num}
@@ -50,6 +60,12 @@ export default function ProgressTracker({
           );
         })}
       </div>
+
+      {/* States named in text, so the grid is readable without relying on the
+          fills at all. */}
+      <p className="mt-2 text-xs text-muted">
+        {reviewMode ? "Underlined numbers are incorrect answers." : "Filled squares are answered."}
+      </p>
     </div>
   );
 }

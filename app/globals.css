@@ -8,6 +8,14 @@
   --panel: #fffdf9;
   --panel-hover: #efe9dc;
   --line: #e3ddcf;
+  /*
+   * Border for interactive controls (answer options, buttons). Separate from
+   * --line because WCAG 1.4.11 requires a 3:1 boundary only where that boundary
+   * is what identifies a control; --line at 1.21:1 against the background is
+   * fine for dividers and panels, and darkening it globally would repaint every
+   * rule in the app. Measured 3.01:1 light / 3.48:1 dark.
+   */
+  --line-strong: #948b7c;
   --muted: #6f6858;
   /* Default accent (NMAT green) — overridden per-exam by app/[examId]/layout.tsx. */
   --accent: #0f7b4d;
@@ -20,6 +28,7 @@
   --panel: #2b2d31;
   --panel-hover: #35373c;
   --line: #3f4147;
+  --line-strong: #6f737a;
   --muted: #949ba4;
 }
 
@@ -29,6 +38,7 @@
   --color-panel: var(--panel);
   --color-panel-hover: var(--panel-hover);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
