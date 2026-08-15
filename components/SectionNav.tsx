@@ -71,8 +71,13 @@ export default function SectionNav({
           : "border-line-strong";
 
         if (!isNavigable) {
+          // Locked entries keep the quieter --line: the 3:1 boundary exists to
+          // mark something as an interactive control, and this one deliberately
+          // isn't. Giving it the control border made a disabled card read as
+          // clickable.
+          const lockedClasses = isCurrent ? activeClasses : "border-line";
           return (
-            <div key={section.id} className={`${baseClasses} ${activeClasses} cursor-not-allowed opacity-60`}>
+            <div key={section.id} className={`${baseClasses} ${lockedClasses} cursor-not-allowed opacity-60`}>
               {content}
               <span className="text-[11px] text-muted">Locked until current section is submitted</span>
             </div>

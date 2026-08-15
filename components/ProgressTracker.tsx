@@ -68,7 +68,10 @@ export default function ProgressTracker({
       <p className="mt-2 text-xs text-muted">
         {reviewMode
           ? "Bold is correct, underlined is incorrect, plain was skipped."
-          : "Filled squares are answered."}
+          : // "Filled" was wrong: every cell has a fill, so the caption read as
+            // "you have answered all of them". The distinction is the accent
+            // highlight, and naming a colour would be wrong per exam theme.
+            "Highlighted squares are answered."}
       </p>
     </div>
   );

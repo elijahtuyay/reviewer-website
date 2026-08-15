@@ -96,7 +96,13 @@ export default function QuestionCard({
               marker = "Your answer";
             }
           } else if (isSelected) {
-            style = "border-accent bg-accent/10 dark:bg-accent/20";
+            // ring-1 on top of the border, not a different colour: raising the
+            // neutral border to --line-strong made it out-contrast the accent in
+            // dark mode (4.82:1 vs 3.11:1), so the unselected options outlined
+            // more strongly than the chosen one. Doubling the selected border's
+            // weight restores the hierarchy, works for any exam's accent, and
+            // adds no layout shift because a ring doesn't affect layout.
+            style = "border-accent ring-1 ring-accent bg-accent/10 dark:bg-accent/20";
           }
 
           return (
