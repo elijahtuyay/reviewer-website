@@ -1,39 +1,56 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 interface TimerProps {
-  minutes: number;
+  /** Wall-clock epoch ms when time runs out. Owned by the quiz page so it survives a reload. */
+  endAt: number;
   onExpire: () => void;
   /** Freezes the countdown without resetting it — used while the pause overlay is showing. */
   paused?: boolean;
+  /** Fired when resuming from a pause shifts the deadline, so the caller can persist the new one. */
+  onDeadlineChange?: (endAt: number) => void;
 }
 
-export default function Timer({ minutes, onExpire, paused = false }: TimerProps) {
-  const [secondsLeft, setSecondsLeft] = useState(minutes * 60);
+export default function Timer({ endAt, onExpire, paused = false, onDeadlineChange }: TimerProps) {
+  // Starts null rather than a computed value: `Date.now()` can't be called in the
+  // render body (react-hooks/purity), so the first real value lands on the first
+  // tick, which the mount effect fires immediately.
+  const [secondsLeft, setSecondsLeft] = useState<number | null>(null);
   const onExpireRef = useRef(onExpire);
+  const onDeadlineChangeRef = useRef(onDeadlineChange);
   // Deadline-based instead of tick-counted: browsers throttle setInterval in
   // backgrounded tabs (sometimes to well under 1/sec), so counting ticks would
   // silently grant extra time. Recomputing remaining time from a wall-clock
   // deadline on every tick self-corrects regardless of how late a tick fires.
-  const endAtRef = useRef(0);
+  const endAtRef = useRef(endAt);
   const pauseStartRef = useRef<number | null>(null);
 
   useEffect(() => {
     onExpireRef.current = onExpire;
-  }, [onExpire]);
+    onDeadlineChangeRef.current = onDeadlineChange;
+  }, [onExpire, onDeadlineChange]);
 
-  useEffect(() => {
-    endAtRef.current = Date.now() + minutes * 60_000;
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- mount-only initialization, matches the original useState(minutes * 60) behavior of ignoring later prop changes
-  }, []);
+  // Layout effect, not a passive one: this also seeds the very first value, and
+  // running it before paint avoids a frame of placeholder "--:--" on every mount.
+  useLayoutEffect(() => {
+    endAtRef.current = endAt;
+    // A deadline handed down mid-pause is a new attempt (e.g. Retake), not a
+    // resumption of this one — rebase the pause origin so the pending resume
+    // shift doesn't get added on top of the fresh deadline.
+    if (pauseStartRef.current !== null) pauseStartRef.current = Date.now();
+    // Repaint immediately instead of waiting up to a second for the next tick.
+    else setSecondsLeft(Math.max(0, Math.round((endAt - Date.now()) / 1000)));
+  }, [endAt]);
 
   useEffect(() => {
     if (paused) {
       pauseStartRef.current = Date.now();
     } else if (pauseStartRef.current !== null) {
-      endAtRef.current += Date.now() - pauseStartRef.current;
+      const shifted = endAtRef.current + (Date.now() - pauseStartRef.current);
+      endAtRef.current = shifted;
       pauseStartRef.current = null;
+      onDeadlineChangeRef.current?.(shifted);
     }
   }, [paused]);
 
@@ -48,6 +65,7 @@ export default function Timer({ minutes, onExpire, paused = false }: TimerProps)
         onExpireRef.current();
       }
     }
+    tick();
     const interval = setInterval(tick, 1000);
     document.addEventListener("visibilitychange", tick);
     return () => {
@@ -56,15 +74,17 @@ export default function Timer({ minutes, onExpire, paused = false }: TimerProps)
     };
   }, []);
 
-  const mins = Math.floor(secondsLeft / 60);
-  const secs = secondsLeft % 60;
-  const isLow = secondsLeft <= 60;
+  const isLow = secondsLeft !== null && secondsLeft <= 60;
+  const label =
+    secondsLeft === null
+      ? "--:--"
+      : `${Math.floor(secondsLeft / 60)}:${(secondsLeft % 60).toString().padStart(2, "0")}`;
 
   return (
     <div
       className={`font-mono text-sm tabular-nums ${isLow ? "font-semibold text-red-600 dark:text-red-400" : "text-muted"}`}
     >
-      {mins}:{secs.toString().padStart(2, "0")}
+      {label}
     </div>
   );
 }

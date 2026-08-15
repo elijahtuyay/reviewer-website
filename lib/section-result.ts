@@ -1,6 +1,6 @@
 import { ExamId, SectionId } from "@/data/schema";
 import { getQuestionsByIds } from "@/lib/data/questions";
-import { getStoredProgress } from "@/lib/local-progress";
+import { getStoredProgress } from "@/lib/session-progress";
 
 export interface SectionBreakdown {
   submitted: boolean;
@@ -11,7 +11,7 @@ export interface SectionBreakdown {
   incorrect: number;
 }
 
-/** Reads a section's saved progress from localStorage and, if it was submitted, scores it against the drawn question set. */
+/** Reads a section's saved progress for this browser session and, if it was submitted, scores it against the drawn question set. */
 export function getSectionBreakdown(examId: ExamId, sectionId: SectionId, fallbackTotal: number): SectionBreakdown {
   const stored = getStoredProgress(examId, sectionId);
   const total = stored.questionIds.length || fallbackTotal;

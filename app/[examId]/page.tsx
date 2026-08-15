@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getExamConfig, isValidExamId } from "@/lib/exam-config";
+import SessionResetNotice from "@/components/SessionResetNotice";
 
 export default async function ExamSetupPage({ params }: { params: Promise<{ examId: string }> }) {
   const { examId } = await params;
@@ -72,6 +73,8 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
             </span>
           </li>
         </ul>
+
+        <SessionResetNotice examId={exam.id} />
 
         <div className="mt-10">
           <p className="text-sm font-medium text-foreground">Choose a section to begin</p>
