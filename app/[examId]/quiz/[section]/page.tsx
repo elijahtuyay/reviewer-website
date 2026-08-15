@@ -204,6 +204,12 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
     });
     setNotice(expired ? "expired" : null);
     setPhase("review");
+    // The submit button is a sticky bar at the bottom of a 36-question page, so
+    // the user is always at the bottom when a section closes out, while the
+    // score, the breakdown and the expiry banner all render at the top. Without
+    // this the only visible feedback is the submit bar disappearing, which reads
+    // as "nothing happened". Matches what handleRestart already does.
+    window.scrollTo({ top: 0 });
   }
 
   function handleSubmit() {

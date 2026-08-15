@@ -54,38 +54,16 @@ body {
 }
 
 /*
- * KaTeX rendering.
+ * Deliberately NO custom .katex rules here.
  *
- * Fixed globally rather than per-component on purpose: math appears in prompts,
- * answer options and explanations, and every one of those sits inside a
- * different Tailwind text/leading utility. Patching the call sites would mean
- * re-tuning the same problem in three places every time a layout changes.
- *
- * KaTeX builds fractions out of stacked line boxes whose heights are computed in
- * em units, so an inherited line-height (Tailwind's `leading-relaxed` on the
- * option buttons and prompt) squashes the stack until the denominator collides
- * with the fraction bar. Pinning line-height inside .katex restores the spacing
- * KaTeX's own metrics assume.
+ * KaTeX positions every part of a fraction with inline styles it computes
+ * itself (`top: -3.23em` inside an inline-table vlist, `border-bottom-width:
+ * 0.04em` on the bar), and katex.css already pins `line-height: 1.2` and
+ * `font-size: 1.21em` on `.katex`. So stylesheet rules for line-height, frac-line
+ * width, or padding on .mfrac are all no-ops or actively harmful — an earlier
+ * attempt here shrank math instead of enlarging it. Cramped fractions are fixed
+ * at the source, in components/MathText.tsx, by rendering them in display style.
  */
-.katex {
-  line-height: 1.2;
-  /* KaTeX's default optical size runs noticeably smaller than surrounding UI
-     text at our sizes; a slight bump keeps numerals legible, which matters most
-     for the small numerals in a fraction. */
-  font-size: 1.08em;
-}
-
-/* Hairline fraction bars disappear against the paper background at small sizes. */
-.katex .mfrac .frac-line {
-  border-bottom-width: 0.06em;
-}
-
-/* Give stacked math (fractions, exponents, roots) room instead of letting it
-   collide with the line above or below when it appears mid-sentence. */
-.katex .mfrac,
-.katex .sqrt {
-  padding-block: 0.08em;
-}
 
 /* Apple-style route transition: a quick, gentle fade + rise on every page mount. */
 @keyframes page-fade-in {
