@@ -112,11 +112,10 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
                   <span className="font-medium text-foreground underline underline-offset-2">{entry.label}</span>
                   <span className="text-xs text-muted">{entry.detail}</span>
                 </Link>
-                {/* Per-section, so discarding one attempt doesn't take the
-                    other two finished sections with it. */}
-                {/* Bordered, not bare text: sitting next to the same-size grey
-                    status line, an unstyled button scanned as one run of muted
-                    text ("12/36 answered Clear") rather than as a control. */}
+                {/* Per-section, so discarding one attempt doesn't take the other
+                    finished sections with it. Bordered rather than bare text:
+                    beside the same-size grey status line, an unstyled button
+                    scanned as prose ("12/36 answered Clear"), not a control. */}
                 <button
                   type="button"
                   onClick={() => setPendingClear(entry)}
@@ -151,7 +150,6 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
             ? `This deletes your saved work for all ${saved.length} sections listed above, including any you have already submitted and scored. It can't be undone.`
             : `This deletes your saved work for ${pendingClear?.label ?? "this section"}. Your other sections are not affected. It can't be undone.`
         }
-        tone="destructive"
         confirmLabel={pendingClear === "all" ? "Clear all" : "Clear section"}
         cancelLabel="Keep it"
         onConfirm={handleConfirmClear}

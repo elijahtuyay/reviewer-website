@@ -472,7 +472,6 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
             ? `${questions.length - answeredCount} of ${questions.length} questions are still unanswered. Once you submit, you can review your answers but you can't change them.`
             : "This deletes your answers for this section and draws a new set of questions, with a fresh timer. It can't be undone."
         }
-        tone={pendingAction === "submit" ? "primary" : "destructive"}
         confirmLabel={pendingAction === "submit" ? "Submit section" : "Start over"}
         cancelLabel={pendingAction === "submit" ? "Keep answering" : "Keep my answers"}
         onConfirm={pendingAction === "submit" ? () => { setPendingAction(null); closeOut(false); } : handleRestart}

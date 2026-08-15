@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useRef } from "react";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -10,12 +10,6 @@ interface ConfirmDialogProps {
   /** Label for the confirming action, phrased as the verb it performs ("Submit section", not "OK"). */
   confirmLabel: string;
   cancelLabel?: string;
-  /**
-   * "destructive" when confirming discards work. It moves the accent (and the
-   * visual weight that goes with it) onto the SAFE button, so the eye-catching
-   * one is the one that keeps your work.
-   */
-  tone?: "primary" | "destructive";
   onConfirm: () => void;
   onCancel: () => void;
 }
@@ -41,12 +35,14 @@ export default function ConfirmDialog({
   body,
   confirmLabel,
   cancelLabel = "Cancel",
-  tone = "primary",
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) {
   const cancelRef = useRef<HTMLButtonElement>(null);
   const confirmRef = useRef<HTMLButtonElement>(null);
+  // Unique per instance, so a second dialog on a page can't collide on ids.
+  const titleId = useId();
+  const bodyId = useId();
   // Callers pass inline arrows, so `onCancel` is a new function every parent
   // render. Depending on it directly would tear down and re-run the effect below
   // on any parent re-render, yanking focus back to Cancel even after the user
@@ -90,19 +86,23 @@ export default function ConfirmDialog({
 
   if (!open) return null;
 
-  const destructive = tone === "destructive";
-  const confirmClasses = destructive
-    ? "border border-red-600 text-red-700 hover:bg-red-50 dark:border-red-500 dark:text-red-400 dark:hover:bg-red-950/40"
-    : "bg-accent text-accent-foreground hover:opacity-90";
-  const cancelClasses = destructive
-    ? "bg-accent text-accent-foreground hover:opacity-90"
-    : "border border-line text-foreground hover:bg-panel-hover";
+  // One colour convention, always: accent green is the button that KEEPS your
+  // work, the red outline is the irreversible one. Deliberately not
+  // configurable. Every action this dialog guards is irreversible, and a
+  // per-call "tone" meant green confirmed one dialog and cancelled another a
+  // single tap apart, which is worse than either convention on its own.
+  const confirmClasses =
+    "border border-red-600 text-red-700 hover:bg-red-50 dark:border-red-500 dark:text-red-400 dark:hover:bg-red-950/40";
+  const cancelClasses = "bg-accent text-accent-foreground hover:opacity-90";
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* aria-label "Close" rather than the cancel label: this is the dismiss
+          backdrop, and naming it "Keep my answers" put a second, invisible
+          button by that name in the accessibility tree. Matches PauseOverlay. */}
       <button
         type="button"
-        aria-label={cancelLabel}
+        aria-label="Close"
         tabIndex={-1}
         onClick={onCancel}
         className="absolute inset-0 bg-black/40"
@@ -110,20 +110,20 @@ export default function ConfirmDialog({
       <div
         role="alertdialog"
         aria-modal="true"
-        aria-labelledby="confirm-dialog-title"
-        aria-describedby="confirm-dialog-body"
-        className="relative w-full max-w-sm rounded-lg border border-line bg-background p-5 shadow-lg"
+        aria-labelledby={titleId}
+        aria-describedby={bodyId}
+        className="relative max-h-[90vh] w-full max-w-sm overflow-y-auto rounded-lg border border-line bg-background p-5 shadow-lg"
       >
-        <h2 id="confirm-dialog-title" className="text-base font-semibold text-foreground">
+        <h2 id={titleId} className="text-base font-semibold text-foreground">
           {title}
         </h2>
-        <p id="confirm-dialog-body" className="mt-2 text-sm leading-relaxed text-foreground/90">
+        <p id={bodyId} className="mt-2 text-sm leading-relaxed text-foreground/90">
           {body}
         </p>
-        {/* DOM order is cancel-then-confirm, which reads as [Cancel] [Confirm]
-            on a wide screen. flex-col-reverse stacks them on narrow screens with
-            the safe choice at the bottom, nearest the thumb. */}
-        <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+        {/* Plain flex-col on narrow screens, not flex-col-reverse: reversing
+            made the visually-last button the first in tab order (WCAG 2.4.3).
+            Visual order now matches DOM order at every width. */}
+        <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:justify-end">
           <button
             ref={cancelRef}
             type="button"
