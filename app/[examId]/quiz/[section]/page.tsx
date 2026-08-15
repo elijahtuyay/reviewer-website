@@ -18,6 +18,7 @@ import ResultSummary from "@/components/ResultSummary";
 import ProgressTracker from "@/components/ProgressTracker";
 import SectionNav from "@/components/SectionNav";
 import PauseOverlay from "@/components/PauseOverlay";
+import ConfirmDialog from "@/components/ConfirmDialog";
 import MobileNavSheet from "@/components/MobileNavSheet";
 
 type Phase = "taking" | "review";
@@ -68,6 +69,8 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [deadline, setDeadline] = useState(0);
   const [notice, setNotice] = useState<NoticeKind>(null);
+  /** Which destructive action is awaiting confirmation, if any. */
+  const [pendingAction, setPendingAction] = useState<"submit" | "restart" | null>(null);
   const pendingNoticeRef = useRef<NoticeKind>(null);
   /**
    * Which `examId:section` the load effect below has already run for. The effect
@@ -212,7 +215,16 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
     window.scrollTo({ top: 0 });
   }
 
+  /**
+   * Submitting ends the attempt irreversibly, so it asks first when there is
+   * something to lose. With everything answered there is nothing to warn about,
+   * and a confirmation would just be a click tax on the normal path.
+   */
   function handleSubmit() {
+    if (answeredCount < questions.length) {
+      setPendingAction("submit");
+      return;
+    }
     closeOut(false);
   }
 
@@ -239,6 +251,7 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
 
   /** Wipes this section's saved attempt and starts over with a freshly drawn question set. */
   function handleRestart() {
+    setPendingAction(null);
     clearSectionProgress(examId, section);
     const ids = drawRandomQuestionIds(examId, section, sectionConfig.questionCount);
     const endAt = Date.now() + sectionConfig.minutes * 60_000;
@@ -280,8 +293,8 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
     <div className="flex flex-1 justify-center bg-background">
       <div
         className="w-full max-w-6xl px-6 py-10 sm:py-16"
-        inert={paused || mobileNavOpen || undefined}
-        aria-hidden={paused || mobileNavOpen || undefined}
+        inert={paused || mobileNavOpen || pendingAction !== null || undefined}
+        aria-hidden={paused || mobileNavOpen || pendingAction !== null || undefined}
       >
         <div className="sticky top-0 z-20 flex h-20 items-center justify-between gap-3 border-b border-line bg-background/95 backdrop-blur">
           <div className="min-w-0">
@@ -291,6 +304,20 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
             <h1 className="mt-1 truncate text-lg font-semibold text-foreground sm:text-xl">
               {sectionConfig.label}
             </h1>
+            {phase === "taking" && (
+              // Always reachable while taking, not just when a resume banner
+              // happens to be showing. Starting the wrong section otherwise
+              // leaves no way out: the other sections lock until this one is
+              // submitted, and the only escape clears every section at once.
+              // Deliberately a quiet text button, since it discards work.
+              <button
+                type="button"
+                onClick={() => setPendingAction("restart")}
+                className="mt-0.5 text-xs text-muted underline underline-offset-2 hover:text-foreground"
+              >
+                Restart section
+              </button>
+            )}
           </div>
           <div className="flex shrink-0 items-center gap-2">
             <button
@@ -325,7 +352,7 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  onClick={handleRestart}
+                  onClick={() => setPendingAction("restart")}
                   className="flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm text-foreground hover:bg-panel-hover"
                 >
                   Retake
@@ -372,15 +399,9 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
                     <p className="text-sm font-medium text-foreground">{NOTICE_COPY[notice].title}</p>
                     <p className="mt-0.5 text-xs text-muted">{NOTICE_COPY[notice].detail}</p>
                   </div>
-                  {phase === "taking" && (
-                    <button
-                      type="button"
-                      onClick={handleRestart}
-                      className="flex h-11 shrink-0 items-center justify-center rounded-md border border-line px-3 text-sm font-medium text-foreground hover:bg-panel-hover"
-                    >
-                      Retake
-                    </button>
-                  )}
+                  {/* No restart button here: the header carries one in both
+                      phases now ("Restart section" while taking, "Retake" in
+                      review), so repeating it made two controls for one action. */}
                 </div>
               )}
             </div>
@@ -416,6 +437,20 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
           </main>
         </div>
       </div>
+
+      <ConfirmDialog
+        open={pendingAction !== null}
+        title={pendingAction === "submit" ? "Submit with questions unanswered?" : "Start this section over?"}
+        body={
+          pendingAction === "submit"
+            ? `${questions.length - answeredCount} of ${questions.length} questions are still unanswered. Submitting ends this attempt, and you can't return to it.`
+            : "This deletes your answers for this section and draws a different set of questions, with a fresh timer. It can't be undone."
+        }
+        confirmLabel={pendingAction === "submit" ? "Submit section" : "Start over"}
+        cancelLabel={pendingAction === "submit" ? "Keep answering" : "Cancel"}
+        onConfirm={pendingAction === "submit" ? () => { setPendingAction(null); closeOut(false); } : handleRestart}
+        onCancel={() => setPendingAction(null)}
+      />
 
       <PauseOverlay paused={paused} onResume={handleResume} />
 
