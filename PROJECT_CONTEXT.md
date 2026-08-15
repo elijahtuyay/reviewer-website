@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-15, at PR #9 / VERSION.txt `1.6.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-15, at PR #10 / VERSION.txt `1.7.0`.
 
 ## What this project is
 
@@ -52,7 +52,7 @@ This Next.js version (16.3.0) has **breaking changes vs. typical training data**
 - Topic ratios were rebalanced against real NMAT Official Guide chapter proportions (counted by hand from the reference book's actual practice chapters, e.g. logical-reasoning: Critical Reasoning 19% / Deductions 16% / Analytical Puzzles 36% / Other 29%, matching the real book's ~18.6/16.3/35.7/29.3 split).
 - Zero em dashes (—) in any user-facing `prompt`/`explanation`/option text (repo-wide "AI slop" removal was explicit user direction).
 - Currency: **use the peso sign (₱), not `$`**, in question text. This is not a style preference — literal `$` collides with the app's KaTeX math-delimiter parser (see Known Issues #3 below). 24 quantitative-skills questions were already fixed; if you add new money-related questions, use `₱` from the start.
-- Math notation: inline LaTeX delimited by single `$...$` (e.g. `"If $x^2 = 9$, what is x?"`), rendered by `components/MathText.tsx` via `react-katex`. Literal `\n` in prompt/explanation text becomes a real line break (used for table/list-style questions).
+- Math notation: inline LaTeX delimited by single `$...$` (e.g. `"If $x^2 = 9$, what is $x$?"`), rendered by `components/MathText.tsx` via `react-katex`. Literal `\n` in prompt/explanation text becomes a real line break (used for table/list-style questions). As of v1.7.0 the whole bank is normalized: **all** math notation is LaTeX (531 spans), every fraction is `\frac`, and no Unicode minus (U+2212) appears inside math. **Do not add custom `.katex` CSS** — KaTeX positions fractions with inline styles it computes itself and `katex.css` already pins `line-height` and `font-size`, so stylesheet overrides are no-ops or harmful (a v1.7.0 attempt silently shrank all math by 11%). `MathText` prefixes every span with `\displaystyle` so fractions typeset at full size instead of script size; that is the supported place to change math rendering.
 - Schema per question (see `data/schema.ts` `Question` type): `id`, `section`, `topic`, `difficulty` (`"easy"|"medium"|"hard"`), `prompt`, `options: string[]`, `correctIndex`, `explanation`, `source` (e.g. `"original"`).
 
 ### UI/UX conventions currently in place
@@ -91,7 +91,10 @@ This Next.js version (16.3.0) has **breaking changes vs. typical training data**
 
 - **PR #9** (v1.6.0) — session lifecycle / error-handling fix. The user reported being confused by an old session that had "timed out". Two stacked defects: progress was written to `localStorage` with no expiry (so a half-finished or already-submitted attempt survived browser restarts forever), while the timer restarted at full length on every mount — pairing an old question set and old answers with a fresh clock, and dropping a resumed submitted attempt straight into review mode with no explanation. Fixed by moving progress to sessionStorage, persisting the timer deadline (plus `pausedAt`), and never resuming without saying so. See the sessionStorage/Timer/`SessionResetNotice` notes above.
 
-**Current state: `main` is clean, builds and lints with zero errors/warnings, at v1.6.0.**
+- **PR #10** (v1.7.0) — LaTeX normalization + rendering/UX batch. Bank-wide conversion of raw-text math to LaTeX; `a/an` before blanks (ls-062 was leaking its answer outright, since only the correct option was vowel-initial after "an ___"); `ls-090` analogy rekeyed to "Investigator". Timer rebuilt around a boundary-aligned self-rescheduling timeout with `Math.ceil` (a drifting `setInterval` plus `Math.round` was visibly skipping seconds). Fractions fixed via `\displaystyle` in `MathText`. Saved-attempt rows made clickable; sections now scroll to the results on submit. Pre-existing bugs fixed: an earlier `$` → `₱` pass had eaten opening math delimiters at 8 sites; 8 circular-seating questions had a self-contradictory facing convention that left 3 of them unsolvable; 6 explanations still referenced pre-shuffle option letters, 2 of which called the correct answer wrong.
+- **Review lanes are now mandatory per PR** (see CLAUDE.md): logic, syntax/display, UX, content correctness. Their first run (PR #10) found the unsolvable seating puzzles, the drifted explanations, and proved a CSS "fix" of mine was a measured 11% regression. Take their findings seriously and verify claims independently.
+
+**Current state: `main` is clean, builds and lints with zero errors/warnings, at v1.7.0.**
 
 ## Lesson learned: never run multiple agents against the same data file concurrently
 
