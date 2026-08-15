@@ -6,7 +6,12 @@ import { getExamConfig, getSectionConfig, isValidExamId } from "@/lib/exam-confi
 import { drawRandomQuestionIds, getQuestionsByIds } from "@/lib/data/questions";
 import { scoreAttempt } from "@/lib/scoring";
 import { ExamId, SectionId } from "@/data/schema";
-import { getStoredProgress, saveStoredProgress } from "@/lib/local-progress";
+import {
+  clearSectionProgress,
+  getStoredProgress,
+  purgeLegacyPersistedProgress,
+  saveStoredProgress,
+} from "@/lib/session-progress";
 import Timer from "@/components/Timer";
 import QuestionCard from "@/components/QuestionCard";
 import ResultSummary from "@/components/ResultSummary";
@@ -38,31 +43,56 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
   const [hydrated, setHydrated] = useState(false);
   const [paused, setPaused] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [deadline, setDeadline] = useState(0);
+  /** "resumed" = picked up mid-attempt, "expired" = the timer ran out. Both need saying out loud. */
+  const [notice, setNotice] = useState<"resumed" | "expired" | null>(null);
 
   const questions = useMemo(
     () => getQuestionsByIds(examId, section, questionIds),
     [examId, section, questionIds]
   );
 
-  // Resume any previously saved question set/progress for this section on mount,
-  // or draw a fresh random subset from the full bank if none exists yet.
+  // Resume any progress saved earlier in this browser session, or draw a fresh
+  // random subset from the full bank if there is none. Anything resumed is
+  // announced in the banner below rather than silently reinstated.
   useEffect(() => {
-    /* eslint-disable react-hooks/set-state-in-effect -- reads localStorage, which is unavailable during render/SSR */
+    /* eslint-disable react-hooks/set-state-in-effect -- reads sessionStorage, which is unavailable during render/SSR */
+    purgeLegacyPersistedProgress();
     const stored = getStoredProgress(examId, section);
-    const ids =
-      stored.questionIds && stored.questionIds.length > 0
-        ? stored.questionIds
-        : drawRandomQuestionIds(examId, section, sectionConfig.questionCount);
+    const isResume = stored.questionIds.length > 0;
+    const ids = isResume
+      ? stored.questionIds
+      : drawRandomQuestionIds(examId, section, sectionConfig.questionCount);
+
+    const now = Date.now();
+    let { submitted, expired, deadline: endAt } = stored;
+    if (!submitted) {
+      if (!endAt) {
+        endAt = now + sectionConfig.minutes * 60_000;
+      } else if (endAt <= now) {
+        // The clock ran out while the tab sat in the background or between
+        // navigations. Close the attempt out honestly instead of handing back a
+        // live-looking timer that is already spent.
+        submitted = true;
+        expired = true;
+      }
+    }
+
     setQuestionIds(ids);
     setAnswers(stored.answers);
-    setPhase(stored.submitted ? "review" : "taking");
+    setPhase(submitted ? "review" : "taking");
+    setDeadline(endAt);
+    setNotice(expired ? "expired" : isResume && (submitted || Object.keys(stored.answers).length > 0) ? "resumed" : null);
     setHydrated(true);
     /* eslint-enable react-hooks/set-state-in-effect */
-    if (!stored.questionIds || stored.questionIds.length === 0) {
+
+    if (!isResume || submitted !== stored.submitted || endAt !== stored.deadline) {
       saveStoredProgress(examId, section, {
         answers: stored.answers,
-        submitted: stored.submitted,
+        submitted,
         questionIds: ids,
+        deadline: endAt,
+        expired,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,12 +111,22 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
     )
     .filter((n): n is number => n !== null);
 
-  function persist(nextAnswers: Record<string, number | null>, submitted: boolean) {
+  function persist(
+    nextAnswers: Record<string, number | null>,
+    submitted: boolean,
+    overrides: { deadline?: number; expired?: boolean } = {}
+  ) {
     const cleaned: Record<string, number> = {};
     for (const [id, value] of Object.entries(nextAnswers)) {
       if (value !== null && value !== undefined) cleaned[id] = value;
     }
-    saveStoredProgress(examId, section, { answers: cleaned, submitted, questionIds });
+    saveStoredProgress(examId, section, {
+      answers: cleaned,
+      submitted,
+      questionIds,
+      deadline: overrides.deadline ?? deadline,
+      expired: overrides.expired ?? false,
+    });
   }
 
   function handleSelect(questionId: string, optionIndex: number) {
@@ -99,7 +139,42 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
 
   function handleSubmit() {
     persist(answers, true);
+    setNotice(null);
     setPhase("review");
+  }
+
+  /** Timer ran out on-screen. Same close-out as a manual submit, but flagged so the banner can explain it. */
+  function handleExpire() {
+    persist(answers, true, { expired: true });
+    setNotice("expired");
+    setPhase("review");
+  }
+
+  function handleDeadlineChange(nextDeadline: number) {
+    setDeadline(nextDeadline);
+    persist(answers, false, { deadline: nextDeadline });
+  }
+
+  /** Wipes this section's saved attempt and starts over with a freshly drawn question set. */
+  function handleRestart() {
+    clearSectionProgress(examId, section);
+    const ids = drawRandomQuestionIds(examId, section, sectionConfig.questionCount);
+    const endAt = Date.now() + sectionConfig.minutes * 60_000;
+    setQuestionIds(ids);
+    setAnswers({});
+    setPhase("taking");
+    setDeadline(endAt);
+    setNotice(null);
+    setPaused(false);
+    setMobileNavOpen(false);
+    saveStoredProgress(examId, section, {
+      answers: {},
+      submitted: false,
+      questionIds: ids,
+      deadline: endAt,
+      expired: false,
+    });
+    window.scrollTo({ top: 0 });
   }
 
   function handleJump(questionNumber: number) {
@@ -145,7 +220,12 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
             {phase === "taking" ? (
               <div className="flex items-center gap-3">
                 <div className="text-right">
-                  <Timer minutes={sectionConfig.minutes} onExpire={handleSubmit} paused={paused} />
+                  <Timer
+                    endAt={deadline}
+                    onExpire={handleExpire}
+                    paused={paused}
+                    onDeadlineChange={handleDeadlineChange}
+                  />
                   <p className="mt-1 text-xs text-muted">
                     {answeredCount}/{questions.length} answered
                   </p>
@@ -159,12 +239,21 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
                 </button>
               </div>
             ) : (
-              <Link
-                href="/"
-                className="flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm text-foreground hover:bg-panel-hover"
-              >
-                Done
-              </Link>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleRestart}
+                  className="flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm text-foreground hover:bg-panel-hover"
+                >
+                  Retake
+                </button>
+                <Link
+                  href={`/${examId}`}
+                  className="flex h-11 items-center justify-center rounded-md border border-line px-3 text-sm text-foreground hover:bg-panel-hover"
+                >
+                  Done
+                </Link>
+              </div>
             )}
           </div>
         </div>
@@ -191,6 +280,33 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
           </aside>
 
           <main className="min-w-0 flex-1">
+            {notice && (
+              <div
+                role="status"
+                className="mb-4 flex flex-col gap-3 rounded-lg border border-line bg-panel px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div>
+                  <p className="text-sm font-medium text-foreground">
+                    {notice === "expired"
+                      ? "Time ran out, so this section was submitted for you."
+                      : "Picked up where you left off."}
+                  </p>
+                  <p className="mt-0.5 text-xs text-muted">
+                    {notice === "expired"
+                      ? "Your answers up to that point were scored. Everything below is the review."
+                      : "This attempt was already in progress earlier in this browser session."}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleRestart}
+                  className="flex h-11 shrink-0 items-center justify-center rounded-md border border-line px-3 text-sm font-medium text-foreground hover:bg-panel-hover"
+                >
+                  Start this section over
+                </button>
+              </div>
+            )}
+
             {phase === "review" && result && (
               <div className="mb-4">
                 <ResultSummary result={result} sectionLabel={sectionConfig.label} />
