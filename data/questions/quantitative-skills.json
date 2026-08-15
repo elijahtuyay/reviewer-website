@@ -468,7 +468,7 @@
     "section": "quantitative-skills",
     "topic": "DI: Caselets and Tables",
     "difficulty": "hard",
-    "prompt": "Quarterly sales for the year were:\nQ1: ₱40,000\nQ2: ₱55,000\nQ3: ₱35,000\nQ4: ₱70,000\n\nWhat percentage of the annual total of ₱200,000 was earned in Q4?",
+    "prompt": "Quarterly sales for the year were:\nQ1: ₱40,000\nQ2: ₱55,000\nQ3: ₱35,000\nQ4: ₱70,000\n\nWhat percentage of the year's total sales was earned in Q4?",
     "options": [
       "35%",
       "40%",
@@ -476,7 +476,7 @@
       "30%"
     ],
     "correctIndex": 0,
-    "explanation": "Q4's share is $\\frac{70{,}000}{200{,}000} \\times 100 = 35\\%$.",
+    "explanation": "The annual total is not given, so compute it first: ₱40,000 + ₱55,000 + ₱35,000 + ₱70,000 = ₱200,000. Q4's share is then $\\frac{70{,}000}{200{,}000} \\times 100 = 35\\%$. The denominator must be the full-year total; dividing Q4 by the other three quarters combined (₱130,000) or by any single quarter answers a different question and is the usual source of the higher percentages offered.",
     "source": "original"
   },
   {
@@ -515,7 +515,7 @@
     "id": "qs-033",
     "section": "quantitative-skills",
     "topic": "Data Sufficiency",
-    "difficulty": "hard",
+    "difficulty": "medium",
     "prompt": "Is $x > 10$?\n(1) $x > 8$\n(2) $x = 12$",
     "options": [
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
@@ -1143,7 +1143,7 @@
     "id": "qs-072",
     "section": "quantitative-skills",
     "topic": "Algebra and Probability: Probability",
-    "difficulty": "medium",
+    "difficulty": "hard",
     "prompt": "A box contains 4 red pens and 6 blue pens. Two pens are drawn at random without replacement. What is the probability that both pens are red?",
     "options": [
       "$\\frac{1}{5}$",
@@ -1152,7 +1152,7 @@
       "$\\frac{2}{15}$"
     ],
     "correctIndex": 3,
-    "explanation": "$P(\\text{first pen red}) = \\frac{4}{10}$. Given that, $P(\\text{second pen red}) = \\frac{3}{9}$. Multiplying: $\\frac{4}{10} \\times \\frac{3}{9} = \\frac{12}{90} = \\frac{2}{15}$.",
+    "explanation": "$P(\\text{first pen red}) = \\frac{4}{10}$. Because the first pen is not replaced, only 3 red pens remain among 9, so $P(\\text{second pen red}) = \\frac{3}{9}$. Multiplying: $\\frac{4}{10} \\times \\frac{3}{9} = \\frac{12}{90} = \\frac{2}{15}$. The tempting wrong answer is $\\frac{4}{25}$, which is $\\frac{4}{10} \\times \\frac{4}{10}$; that treats the two draws as independent and is the answer only if the first pen is put back.",
     "source": "original"
   },
   {

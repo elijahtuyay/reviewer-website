@@ -64,7 +64,11 @@ export default function SectionNav({
         );
 
         const baseClasses = "flex flex-col gap-0.5 rounded-md border px-3 py-2.5 transition-colors";
-        const activeClasses = isCurrent ? "border-accent bg-accent/10 dark:bg-accent/20" : "border-line";
+        // Non-current entries are links whose border is the only thing marking
+        // them as a control, so they need the 3:1 boundary too.
+        const activeClasses = isCurrent
+          ? "border-accent bg-accent/10 dark:bg-accent/20"
+          : "border-line-strong";
 
         if (!isNavigable) {
           return (

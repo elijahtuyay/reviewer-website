@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useRef } from "react";
+import { useRef } from "react";
 import { Question } from "@/data/schema";
 import MathText from "@/components/MathText";
 
@@ -21,29 +21,40 @@ export default function QuestionCard({
 }: QuestionCardProps) {
   const isAnswered = selectedIndex !== null;
   const isCorrect = selectedIndex === question.correctIndex;
-  const promptId = useId();
   const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   /**
    * Arrow-key navigation, per the WAI-ARIA radiogroup pattern: the group is a
-   * single tab stop and arrows move between options, selecting as they go.
-   * Without this the options were 4 separate tab stops each, i.e. 144 stops to
-   * cross a 36-question section.
+   * single tab stop and arrows move between options. Without this the options
+   * were 4 separate tab stops each, i.e. 144 stops to cross a 36-question
+   * section.
+   *
+   * Deliberately the "selection does not follow focus" variant: arrows move
+   * focus only, and Space/Enter selects (routed through onClick by the native
+   * button). Selecting on arrow would mean a user arrowing down merely to READ
+   * the options has silently answered the question, and nothing in this app can
+   * un-answer one. It would also inflate answeredCount, which is what decides
+   * whether submitting warns about unanswered questions.
+   *
+   * Active in review too: arrows still move focus there, they just cannot
+   * select. Disabling them would leave a group that announces itself as a radio
+   * group while the arrows do nothing.
    */
   function handleKeyDown(event: React.KeyboardEvent, optionIndex: number) {
     const keys = ["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft"];
-    if (reviewMode || !keys.includes(event.key)) return;
+    if (!keys.includes(event.key)) return;
     event.preventDefault();
     const forward = event.key === "ArrowDown" || event.key === "ArrowRight";
     const count = question.options.length;
     const next = (optionIndex + (forward ? 1 : -1) + count) % count;
     optionRefs.current[next]?.focus();
-    onSelect?.(next);
   }
 
   // Roving tabindex: the selected option is the group's tab stop, or the first
-  // option when nothing is selected yet.
-  const tabStop = selectedIndex ?? 0;
+  // option when nothing is selected yet. Clamped because a stored answer index
+  // that no longer matches the options array would otherwise leave the group
+  // with no tab stop at all, i.e. unreachable by keyboard.
+  const tabStop = Math.min(Math.max(selectedIndex ?? 0, 0), question.options.length - 1);
 
   return (
     <div
@@ -52,12 +63,21 @@ export default function QuestionCard({
     >
       <div className="flex items-baseline gap-3">
         <span className="text-sm font-medium text-muted">{index + 1}</span>
-        <p id={promptId} className="leading-relaxed text-foreground">
+        <p className="leading-relaxed text-foreground">
           <MathText text={question.prompt} />
         </p>
       </div>
 
-      <div className="mt-4 ml-7 flex flex-col gap-2" role="radiogroup" aria-labelledby={promptId}>
+      {/* A short static name, NOT aria-labelledby the prompt: screen readers
+          re-announce a group's name on entry and on every focus move inside it,
+          and prompts here embed whole reading passages (the longest is ~1330
+          characters), so labelling by the prompt would re-read a passage on
+          every arrow key. */}
+      <div
+        className="mt-4 ml-7 flex flex-col gap-2"
+        role="radiogroup"
+        aria-label={`Answer options for question ${index + 1}`}
+      >
         {question.options.map((option, optionIndex) => {
           const isSelected = selectedIndex === optionIndex;
           const isCorrectOption = optionIndex === question.correctIndex;
@@ -93,7 +113,7 @@ export default function QuestionCard({
               // review unreachable by keyboard. This keeps every option
               // focusable and announced while ignoring clicks.
               aria-disabled={reviewMode || undefined}
-              tabIndex={reviewMode ? 0 : optionIndex === tabStop ? 0 : -1}
+              tabIndex={optionIndex === tabStop ? 0 : -1}
               onClick={() => {
                 if (reviewMode) return;
                 onSelect?.(optionIndex);

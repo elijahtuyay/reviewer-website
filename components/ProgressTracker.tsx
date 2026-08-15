@@ -30,16 +30,18 @@ export default function ProgressTracker({
           let style = "bg-panel-hover text-muted hover:bg-line";
           let state = "not answered";
           if (reviewMode) {
+            // All three review states carry a non-colour cue as well as a fill,
+            // since green/red/grey alone would make correctness colour-only:
+            // the WCAG 1.4.1 failure already fixed for the answer options.
+            // Bold = correct, underlined = incorrect, plain = skipped.
             if (correctSet.has(num)) {
-              style = "bg-green-600 text-white dark:bg-green-500";
+              style = "bg-green-600 font-bold text-white dark:bg-green-500";
               state = "correct";
             } else if (incorrectSet.has(num)) {
-              // Underlined as well as red: green and red fills alone would make
-              // correctness a colour-only signal, which is the WCAG 1.4.1
-              // failure already fixed for the answer options themselves.
               style = "bg-red-600 text-white underline decoration-2 underline-offset-2 dark:bg-red-500";
               state = "incorrect";
             } else {
+              style = "bg-panel-hover font-normal text-muted hover:bg-line";
               state = "skipped";
             }
           } else if (answeredSet.has(num)) {
@@ -64,7 +66,9 @@ export default function ProgressTracker({
       {/* States named in text, so the grid is readable without relying on the
           fills at all. */}
       <p className="mt-2 text-xs text-muted">
-        {reviewMode ? "Underlined numbers are incorrect answers." : "Filled squares are answered."}
+        {reviewMode
+          ? "Bold is correct, underlined is incorrect, plain was skipped."
+          : "Filled squares are answered."}
       </p>
     </div>
   );

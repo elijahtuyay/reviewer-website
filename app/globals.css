@@ -13,9 +13,14 @@
    * --line because WCAG 1.4.11 requires a 3:1 boundary only where that boundary
    * is what identifies a control; --line at 1.21:1 against the background is
    * fine for dividers and panels, and darkening it globally would repaint every
-   * rule in the app. Measured 3.01:1 light / 3.48:1 dark.
+   * rule in the app.
+   *
+   * Chosen against the WORST-CASE surface a control sits on, not just
+   * --background: these controls also appear on --panel (the site header, the
+   * session notice) and on --panel-hover (every button's hover state). Measured
+   * light: 3.40 on background, 3.73 on panel, 3.13 on panel-hover.
    */
-  --line-strong: #948b7c;
+  --line-strong: #8b8273;
   --muted: #6f6858;
   /* Default accent (NMAT green) — overridden per-exam by app/[examId]/layout.tsx. */
   --accent: #0f7b4d;
@@ -28,7 +33,8 @@
   --panel: #2b2d31;
   --panel-hover: #35373c;
   --line: #3f4147;
-  --line-strong: #6f737a;
+  /* Dark: 4.82 on background, 4.04 on panel, 3.49 on panel-hover. */
+  --line-strong: #878b93;
   --muted: #949ba4;
 }
 
