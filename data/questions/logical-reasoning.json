@@ -252,7 +252,7 @@
       "The town has a moderate budget for infrastructure projects."
     ],
     "correctIndex": 1,
-    "explanation": "Establishing that the comparison towns are genuinely similar strengthens the analogy the argument relies on.",
+    "explanation": "The argument reasons by analogy: it takes what happened in other towns as evidence for what will happen here. An analogy is only as strong as the resemblance it rests on, so confirming that the comparison towns match this town on the factors that actually drive solar savings, sunlight and how much electricity is used, closes the biggest gap in the reasoning. The popularity of solar panels nationwide says nothing about whether they save this town money, since something can spread widely without being cost-effective. A slight rise in electricity prices describes the status quo the town wants to escape rather than any evidence that solar will beat it. The town's infrastructure budget bears on whether the switch is affordable to make, which is a separate question from whether it lowers running costs.",
     "source": "original"
   },
   {
@@ -388,7 +388,7 @@
     "section": "logical-reasoning",
     "topic": "Seating Arrangement",
     "difficulty": "hard",
-    "prompt": "Six friends P, Q, R, S, T, U sit evenly spaced around a circular table, facing outward, away from the table. Q sits second to the right of P. R sits immediately to the left of Q. S sits directly opposite P. T sits immediately to the right of S. Where does U sit?",
+    "prompt": "Six friends P, Q, R, S, T, U sit evenly spaced around a circular table, facing outward, away from the table. Q sits directly opposite P. R and S occupy the two seats immediately beside Q, with R on Q's right. T sits immediately to the left of S. Where does U sit?",
     "options": [
       "Immediately to the right of Q",
       "Immediately to the left of S",
@@ -396,7 +396,7 @@
       "Opposite R"
     ],
     "correctIndex": 2,
-    "explanation": "Numbering seats 1-6 clockwise with P at 1: Q is second to the right (clockwise) of P, so Q is at 3. R is immediately left (counterclockwise) of Q, so R is at 2. S is opposite P, so S is at 4. T is immediately right of S, so T is at 5. The only remaining seat is 6, which is immediately to the left (counterclockwise) of P, so U sits there.",
+    "explanation": "Number the seats 1 to 6 clockwise and place P at seat 1. Because everyone faces outward, away from the table, each person's right is the clockwise direction. With six evenly spaced seats, the seat directly opposite P is seat 4, so Q sits there. R and S are Q's two neighbours, seats 3 and 5; R is on Q's right, which is clockwise from seat 4, so R is at 5 and S is at 3. T is immediately to the left (counterclockwise) of S, so T is at 2. Seat 6 is the only one left, and it is the counterclockwise neighbour of P, that is, immediately to P's left, so U sits there. Checking the other choices against this arrangement: the seat immediately to Q's right is 5, which belongs to R; the seat immediately to S's left is 2, which belongs to T; and the seat opposite R is also 2, again T.",
     "source": "original"
   },
   {
@@ -924,7 +924,7 @@
       "Position 4"
     ],
     "correctIndex": 3,
-    "explanation": "S=1. With $Q = P+2$ and $R = Q-1$, there are two candidates: P=2 (Q=4,R=3) or P=4 (Q=6,R=5). If P=2, the remaining positions {5,6} force T=6,U=5, but that puts T at the top, violating the clue. So P=4 is correct: the remaining positions {2,3} give U=2,T=3, which is not the top, consistent with the clue. P occupies position 4.",
+    "explanation": "S=1, so P, Q, R, T and U fill positions 2 to 6. With $Q = P+2$ and $R = Q-1$, the only values of P that keep Q within the stack are 2, 3 and 4. P=3 gives Q=5 and R=4, leaving positions {2,6} for T and U, but those are not adjacent, so $T = U+1$ is impossible. P=2 gives Q=4 and R=3, leaving {5,6}, which forces U=5 and T=6; that puts T at the top, violating the last clue. P=4 gives Q=6 and R=5, leaving {2,3}, so U=2 and T=3, and T is not at the top, so every clue holds. P occupies position 4.",
     "source": "original"
   },
   {
@@ -995,7 +995,7 @@
     "id": "lr-063",
     "section": "logical-reasoning",
     "topic": "Analytical Puzzle: Ranking",
-    "difficulty": "easy",
+    "difficulty": "medium",
     "prompt": "In a race, five runners (Ana, Cara, Ben, Dan, and Emma) finish in distinct positions with no ties. Ana finishes before Ben but after Cara. Ben finishes before Emma. Dan finishes last. Who finishes first?",
     "options": [
       "Cara",
@@ -1020,7 +1020,7 @@
       "Mia"
     ],
     "correctIndex": 2,
-    "explanation": "The clues give the full order from highest to lowest: Olivia, Mia, Noah, Paul, Quinn. Quinn scored the lowest.",
+    "explanation": "Take the clues one at a time. \"Noah higher than Paul but lower than Mia\" gives Mia above Noah above Paul. \"Quinn lower than Paul\" extends the chain to Mia, Noah, Paul, Quinn. \"Olivia highest of all\" puts Olivia above Mia, so the full order from highest to lowest is Olivia, Mia, Noah, Paul, Quinn. Quinn is at the bottom. Paul is the tempting answer because he is named as scoring lower than Noah, but the last clue places Quinn below him, and Mia is second rather than last because only Olivia outscores her.",
     "source": "original"
   },
   {
@@ -1107,7 +1107,7 @@
     "id": "lr-070",
     "section": "logical-reasoning",
     "topic": "Analytical Puzzle: Grouping",
-    "difficulty": "medium",
+    "difficulty": "easy",
     "prompt": "Eight students are divided into two teams of four for a project: Team X and Team Y. Priya is on Team X. Liam is on Team Y. Noah is on the same team as Liam. Sam is on a different team from Priya. Which team is Sam on?",
     "options": [
       "Cannot be determined",
@@ -1116,7 +1116,7 @@
       "Both teams"
     ],
     "correctIndex": 1,
-    "explanation": "Priya is on Team X. Sam is on a different team from Priya, so Sam is on Team Y.",
+    "explanation": "There are only two teams, so \"a different team from Priya\" leaves exactly one possibility. Priya is on Team X, therefore Sam is on Team Y. \"Cannot be determined\" is tempting because the clues about Liam and Noah are never needed and their presence suggests more work is required, but a two-way split means ruling out one team settles the other. \"Both teams\" is impossible, since the eight students are divided into two teams of four and each student occupies one seat in that split.",
     "source": "original"
   },
   {

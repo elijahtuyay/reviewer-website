@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef } from "react";
 import { Question } from "@/data/schema";
 import MathText from "@/components/MathText";
 
@@ -18,6 +21,46 @@ export default function QuestionCard({
 }: QuestionCardProps) {
   const isAnswered = selectedIndex !== null;
   const isCorrect = selectedIndex === question.correctIndex;
+  const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  /**
+   * Arrow-key navigation, per the WAI-ARIA radiogroup pattern: the group is a
+   * single tab stop and arrows move between options. Without this the options
+   * were 4 separate tab stops each, i.e. 144 stops to cross a 36-question
+   * section.
+   *
+   * Deliberately the "selection does not follow focus" variant: arrows move
+   * focus only, and Space/Enter selects (routed through onClick by the native
+   * button). Selecting on arrow would mean a user arrowing down merely to READ
+   * the options has silently answered the question, and nothing in this app can
+   * un-answer one. It would also inflate answeredCount, which is what decides
+   * whether submitting warns about unanswered questions.
+   *
+   * Active in review too: arrows still move focus there, they just cannot
+   * select. Disabling them would leave a group that announces itself as a radio
+   * group while the arrows do nothing.
+   */
+  function handleKeyDown(event: React.KeyboardEvent, optionIndex: number) {
+    const keys = ["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft"];
+    if (!keys.includes(event.key)) return;
+    event.preventDefault();
+    const forward = event.key === "ArrowDown" || event.key === "ArrowRight";
+    const count = question.options.length;
+    const next = (optionIndex + (forward ? 1 : -1) + count) % count;
+    const target = optionRefs.current[next];
+    target?.focus();
+    // focus() alone doesn't scroll an element the browser already considers
+    // visible, so arrowing upward can land on an option sitting underneath the
+    // h-20 sticky header, hiding both the option and its focus ring. Paired with
+    // scroll-mt-24 on the button, this brings it clear of the header.
+    target?.scrollIntoView({ block: "nearest" });
+  }
+
+  // Roving tabindex: the selected option is the group's tab stop, or the first
+  // option when nothing is selected yet. Clamped because a stored answer index
+  // that no longer matches the options array would otherwise leave the group
+  // with no tab stop at all, i.e. unreachable by keyboard.
+  const tabStop = Math.min(Math.max(selectedIndex ?? 0, 0), question.options.length - 1);
 
   return (
     <div
@@ -31,12 +74,24 @@ export default function QuestionCard({
         </p>
       </div>
 
-      <div className="mt-4 ml-7 flex flex-col gap-2">
+      {/* A short static name, NOT aria-labelledby the prompt: screen readers
+          re-announce a group's name on entry and on every focus move inside it,
+          and prompts here embed whole reading passages (the longest is ~1330
+          characters), so labelling by the prompt would re-read a passage on
+          every arrow key. */}
+      <div
+        className="mt-4 ml-7 flex flex-col gap-2"
+        role="radiogroup"
+        aria-label={`Answer options for question ${index + 1}`}
+      >
         {question.options.map((option, optionIndex) => {
           const isSelected = selectedIndex === optionIndex;
           const isCorrectOption = optionIndex === question.correctIndex;
 
-          let style = "border-line hover:border-muted";
+          // border-line-strong, not border-line: an unselected option's border is
+          // the only thing identifying it as a control, so it needs the 3:1
+          // boundary contrast --line doesn't meet.
+          let style = "border-line-strong hover:border-muted";
           let marker: string | null = null;
           if (reviewMode) {
             if (isCorrectOption) {
@@ -47,19 +102,39 @@ export default function QuestionCard({
               marker = "Your answer";
             }
           } else if (isSelected) {
-            style = "border-accent bg-accent/10 dark:bg-accent/20";
+            // ring-1 on top of the border, not a different colour: raising the
+            // neutral border to --line-strong made it out-contrast the accent in
+            // dark mode (4.82:1 vs 3.11:1), so the unselected options outlined
+            // more strongly than the chosen one. Doubling the selected border's
+            // weight restores the hierarchy, works for any exam's accent, and
+            // adds no layout shift because a ring doesn't affect layout.
+            style = "border-accent ring-1 ring-accent bg-accent/10 dark:bg-accent/20";
           }
 
           return (
             <button
               key={optionIndex}
+              ref={(el) => {
+                optionRefs.current[optionIndex] = el;
+              }}
               type="button"
-              disabled={reviewMode}
-              onClick={() => onSelect?.(optionIndex)}
+              role="radio"
+              aria-checked={isSelected}
+              // aria-disabled rather than `disabled` in review mode: a disabled
+              // button is removed from the tab order, which would make the whole
+              // review unreachable by keyboard. This keeps every option
+              // focusable and announced while ignoring clicks.
+              aria-disabled={reviewMode || undefined}
+              tabIndex={optionIndex === tabStop ? 0 : -1}
+              onClick={() => {
+                if (reviewMode) return;
+                onSelect?.(optionIndex);
+              }}
+              onKeyDown={(event) => handleKeyDown(event, optionIndex)}
               // min-h-11 is the 44px tap-target minimum, and it doubles as the
               // headroom stacked math (fractions, exponents) needs to sit in a
               // row without the box having to grow around it.
-              className={`flex min-h-11 items-center justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-sm leading-relaxed text-foreground transition-colors ${style} ${reviewMode ? "cursor-default" : "cursor-pointer"}`}
+              className={`flex min-h-11 scroll-mt-24 items-center justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-sm leading-relaxed text-foreground transition-colors ${style} ${reviewMode ? "cursor-default" : "cursor-pointer"}`}
             >
               <span>
                 <MathText text={option} />

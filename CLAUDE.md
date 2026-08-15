@@ -14,6 +14,8 @@ When there is a choice between a short-term patch and a longer-term solution tha
 
 ## Concurrency rule for agents
 
+**Never stage with `git add -A`, `git add .`, or `git commit -a` while a write-capable agent is running.** Stage explicit paths instead. Even when agents are writing files you are not touching, a blanket stage sweeps their in-progress edits into your commit, which mis-attributes the work and can capture a half-finished file. This has happened: a content agent's question-bank edits landed inside two unrelated accessibility commits. Nothing was lost, but the history lied about what changed and why.
+
 Never dispatch more than one agent with write access to the same file at the same time. Multiple agents doing read-modify-write on one file silently clobber each other (this has bitten the project). Either do the edits yourself sequentially, or dispatch agents one at a time and verify each result against the actual file state before starting the next. Read-only agents may run in parallel freely.
 
 ## Git workflow
