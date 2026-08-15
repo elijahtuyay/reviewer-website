@@ -56,7 +56,10 @@ export default function QuestionCard({
               type="button"
               disabled={reviewMode}
               onClick={() => onSelect?.(optionIndex)}
-              className={`flex items-center justify-between gap-3 rounded-md border px-4 py-2 text-left text-sm leading-relaxed text-foreground transition-colors ${style} ${reviewMode ? "cursor-default" : "cursor-pointer"}`}
+              // min-h-11 is the 44px tap-target minimum, and it doubles as the
+              // headroom stacked math (fractions, exponents) needs to sit in a
+              // row without the box having to grow around it.
+              className={`flex min-h-11 items-center justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-sm leading-relaxed text-foreground transition-colors ${style} ${reviewMode ? "cursor-default" : "cursor-pointer"}`}
             >
               <span>
                 <MathText text={option} />

@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import { getExamConfig } from "@/lib/exam-config";
-import { ExamId } from "@/data/schema";
+import { ExamId, SectionId } from "@/data/schema";
 import { getSectionBreakdown } from "@/lib/section-result";
 import {
   clearExamProgress,
@@ -15,6 +16,7 @@ interface SessionResetNoticeProps {
 }
 
 interface SavedSection {
+  id: SectionId;
   label: string;
   detail: string;
 }
@@ -39,6 +41,7 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
 
       if (breakdown.submitted) {
         found.push({
+          id: section.id,
           label: section.label,
           detail: `Submitted · ${breakdown.correct}/${breakdown.total} correct`,
         });
@@ -46,11 +49,13 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
         // The clock ran out while this section sat unopened. Opening it will
         // submit it, so don't advertise it as still being in progress.
         found.push({
+          id: section.id,
           label: section.label,
           detail: `Time expired · ${breakdown.answered}/${breakdown.total} answered`,
         });
       } else {
         found.push({
+          id: section.id,
           label: section.label,
           detail: `In progress · ${breakdown.answered}/${breakdown.total} answered`,
         });
@@ -88,9 +93,14 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
           </p>
           <ul className="mt-2 flex flex-col gap-1">
             {saved.map((entry) => (
-              <li key={entry.label} className="flex flex-wrap items-baseline justify-between gap-x-3 text-sm">
-                <span className="text-foreground">{entry.label}</span>
-                <span className="text-xs text-muted">{entry.detail}</span>
+              <li key={entry.id}>
+                <Link
+                  href={`/${examId}/quiz/${entry.id}`}
+                  className="flex min-h-11 flex-wrap items-center justify-between gap-x-3 rounded-md px-2 py-1.5 text-sm hover:bg-panel-hover"
+                >
+                  <span className="font-medium text-foreground underline underline-offset-2">{entry.label}</span>
+                  <span className="text-xs text-muted">{entry.detail}</span>
+                </Link>
               </li>
             ))}
           </ul>

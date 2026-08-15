@@ -25,6 +25,8 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
   // deadline on every tick self-corrects regardless of how late a tick fires.
   const endAtRef = useRef(endAt);
   const pauseStartRef = useRef<number | null>(null);
+  /** Guards against firing onExpire twice if the tick loop is restarted at 0. */
+  const expiredRef = useRef(false);
 
   useEffect(() => {
     onExpireRef.current = onExpire;
@@ -38,9 +40,15 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
     // A deadline handed down mid-pause is a new attempt (e.g. Retake), not a
     // resumption of this one — rebase the pause origin so the pending resume
     // shift doesn't get added on top of the fresh deadline.
-    if (pauseStartRef.current !== null) pauseStartRef.current = Date.now();
-    // Repaint immediately instead of waiting up to a second for the next tick.
-    else setSecondsLeft(Math.max(0, Math.round((endAt - Date.now()) / 1000)));
+    if (pauseStartRef.current !== null) {
+      pauseStartRef.current = Date.now();
+    } else {
+      // A deadline in the future means a live attempt, so a previous expiry
+      // (e.g. before a Retake) must not keep the guard latched.
+      if (endAt > Date.now()) expiredRef.current = false;
+      // Repaint immediately instead of waiting for the next scheduled tick.
+      setSecondsLeft(Math.max(0, Math.ceil((endAt - Date.now()) / 1000)));
+    }
   }, [endAt]);
 
   useEffect(() => {
@@ -54,25 +62,58 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
     }
   }, [paused]);
 
+  // Self-rescheduling timeout aligned to the moment the displayed second is due
+  // to change, rather than a fixed 1000ms interval.
+  //
+  // A plain setInterval drifts: each tick fires at 1000ms + however long the
+  // event loop was busy, so the sampled remaining time slides relative to the
+  // real second boundaries. Combined with rounding to the nearest second, a tick
+  // that lands late enough skips a value outright (…0:10, 0:08…). Rounding is
+  // also wrong on its own terms for a countdown: it shows "0:10" when only 9.5s
+  // are left, and reaches 0:00 a half-second before time is actually up.
+  //
+  // Ceiling matches how a countdown should read (any fraction of a second
+  // remaining still displays as that second), and scheduling the next wake for
+  // the exact instant that value is due to decrement keeps the display in step
+  // with the wall clock no matter how late an individual callback runs.
   useEffect(() => {
-    let expired = false;
+    if (paused) return;
+
+    let timeout: ReturnType<typeof setTimeout> | undefined;
+
     function tick() {
-      if (expired || pauseStartRef.current !== null) return;
-      const remaining = Math.max(0, Math.round((endAtRef.current - Date.now()) / 1000));
+      const remainingMs = endAtRef.current - Date.now();
+      const remaining = Math.max(0, Math.ceil(remainingMs / 1000));
       setSecondsLeft(remaining);
+
       if (remaining <= 0) {
-        expired = true;
-        onExpireRef.current();
+        if (!expiredRef.current) {
+          expiredRef.current = true;
+          onExpireRef.current();
+        }
+        return;
       }
+
+      // Time until remainingMs crosses the next lower whole second. Floored at a
+      // small positive value so a mis-measured boundary can't spin the loop.
+      const msUntilNextSecond = remainingMs - (remaining - 1) * 1000;
+      timeout = setTimeout(tick, Math.max(50, msUntilNextSecond));
     }
+
     tick();
-    const interval = setInterval(tick, 1000);
-    document.addEventListener("visibilitychange", tick);
+    // Background tabs get their timers throttled, so re-sync the moment the tab
+    // is looked at again instead of waiting out a stale, long-delayed timeout.
+    function resync() {
+      if (document.visibilityState !== "visible") return;
+      clearTimeout(timeout);
+      tick();
+    }
+    document.addEventListener("visibilitychange", resync);
     return () => {
-      clearInterval(interval);
-      document.removeEventListener("visibilitychange", tick);
+      clearTimeout(timeout);
+      document.removeEventListener("visibilitychange", resync);
     };
-  }, []);
+  }, [paused, endAt]);
 
   const isLow = secondsLeft !== null && secondsLeft <= 60;
   const label =
