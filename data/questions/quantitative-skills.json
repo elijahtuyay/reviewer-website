@@ -1525,7 +1525,7 @@
       "Statements (1) and (2) together are NOT sufficient."
     ],
     "correctIndex": 4,
-    "explanation": "The probability is red divided by the total, so both counts are needed. Statement (1) alone gives the red count but no total, so it is not sufficient. Statement (2) alone gives no counts at all, so it is not sufficient either. Together they still fail: 12 red marbles with more red than blue leaves the blue count anywhere from 1 to 11, so the probability ranges from $\frac{12}{23}$ to $\frac{12}{13}$. A range is not a value, so even combined the statements are not sufficient.",
+    "explanation": "The probability is red divided by the total, so both counts are needed. Statement (1) alone gives the red count but no total, so it is not sufficient. Statement (2) alone gives no counts at all, so it is not sufficient either. Together they still fail: 12 red marbles with more red than blue leaves the blue count anywhere from 1 to 11, so the probability ranges from $\\frac{12}{23}$ to $\\frac{12}{13}$. A range is not a value, so even combined the statements are not sufficient.",
     "source": "original"
   },
   {

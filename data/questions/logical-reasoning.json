@@ -151,7 +151,7 @@
     "prompt": "Argument: \"Since the new fitness app has 500,000 downloads, it must be effective at helping people get fit.\" What is the flawed assumption here?",
     "options": [
       "Every one of the 500,000 people who downloaded the app is still using it on a regular weekly basis.",
-      "The size of the download count reflects how affordable the app was next to its rivals.",
+      "The size of the download count mainly reflects how affordable the app was next to its rivals.",
       "Fitness apps in general produce better physical results for their users than gyms do.",
       "High download numbers indicate effectiveness, rather than just popularity or marketing reach."
     ],
@@ -183,9 +183,9 @@
     "prompt": "\"Every time it rains heavily, the river level rises. The river level has not risen today.\" What can be validly concluded?",
     "options": [
       "The river is at its lowest level ever.",
-      "It rained lightly today.",
+      "It rained only lightly in the city today.",
       "It did not rain heavily today.",
-      "It will rain heavily tomorrow."
+      "It will rain heavily somewhere tomorrow."
     ],
     "correctIndex": 2,
     "explanation": "By the contrapositive of the stated rule, no rise in river level means it did not rain heavily today, a valid inference.",
@@ -198,7 +198,7 @@
     "difficulty": "medium",
     "prompt": "\"Sales of umbrellas increase every time it rains in the city. Yesterday, umbrella sales were unusually high.\" What can be reasonably inferred?",
     "options": [
-      "The umbrella shop lowered its prices yesterday.",
+      "The umbrella shop must have lowered its prices sharply yesterday.",
       "It is possible that it rained in the city yesterday.",
       "It definitely rained in the city at some point yesterday.",
       "It will almost certainly rain again tomorrow."
@@ -262,7 +262,7 @@
     "difficulty": "hard",
     "prompt": "Argument: \"The new teaching method improves test scores, as shown by a pilot classroom that used it and scored higher than average.\" What would most strengthen this claim?",
     "options": [
-      "The pilot classroom's students had starting ability levels similar to the average classroom.",
+      "The pilot classroom had students with similar starting ability levels to the average classroom.",
       "The school introduced new textbooks across several subjects earlier in that same school year.",
       "The pilot classroom held noticeably fewer students than the average classroom in the school.",
       "The teacher who ran the pilot classroom had over a decade of classroom experience."
@@ -295,7 +295,7 @@
     "prompt": "Argument: \"Since students who attend the tutoring program score higher on exams, the tutoring program must be effective at improving scores.\" What would most weaken this argument?",
     "options": [
       "The tutoring program is offered free of charge to every student enrolled at the school.",
-      "Students who choose to attend tutoring are already higher-performing and more motivated.",
+      "Students who choose to attend tutoring tend to already be higher-performing, more motivated students.",
       "The tutoring program has been running continuously for the past three academic years now.",
       "Tutoring sessions are held twice a week in the school library after classes."
     ],
@@ -310,10 +310,10 @@
     "difficulty": "hard",
     "prompt": "Argument: \"The new traffic light system must have reduced accidents, since accident reports dropped 15% after it was installed.\" Which fact would most weaken this conclusion?",
     "options": [
-      "The city has more traffic lights per resident than neighboring cities.",
+      "The city has more traffic lights per resident than any of its neighboring cities.",
       "The city also lowered the speed limit on the same roads at the same time.",
       "The traffic light system was expensive for the city to install and maintain.",
-      "Drivers in the area generally dislike the new traffic light system."
+      "Drivers in the area generally dislike the new traffic light system intensely."
     ],
     "correctIndex": 1,
     "explanation": "An alternative simultaneous change (the lowered speed limit) offers a competing explanation for the drop in accidents, weakening the attribution to the traffic lights alone.",
@@ -808,7 +808,7 @@
     "options": [
       "Company drivers would rather operate electric trucks than the gasoline ones they use now.",
       "Electric delivery trucks have already been adopted by most of the company's direct competitors.",
-      "The savings from lower fuel costs will not be offset by higher purchase or maintenance costs.",
+      "The savings from lower fuel costs will not be offset by higher purchase or maintenance costs of electric vehicles.",
       "The price of gasoline will keep climbing over the next several years in this region."
     ],
     "correctIndex": 2,
@@ -825,7 +825,7 @@
       "Reading scores are the only meaningful measure of the quality of a school district's teaching.",
       "District A operates a greater number of schools and therefore reaches more students than District B.",
       "District B employs fewer reading teachers per student than District A currently employs.",
-      "The score gap is not mainly explained by differences in students' backgrounds or outside resources."
+      "The score gap is not primarily explained by differences in students' socioeconomic backgrounds or outside resources."
     ],
     "correctIndex": 3,
     "explanation": "The argument assumes the score difference reflects instructional quality rather than confounding factors like students' home environment or economic resources.",
@@ -870,7 +870,7 @@
     "difficulty": "medium",
     "prompt": "Argument: \"The new packaging reduced shipment damage, since damage complaints fell 40% after the switch.\" Which fact would most strengthen this argument?",
     "options": [
-      "Customers were surveyed about the appearance of the new packaging design afterward.",
+      "Customers were surveyed about the appearance of the new packaging design shortly afterward.",
       "No other change in shipping method, carrier, or handling occurred during the same period.",
       "The company shipped noticeably fewer packages overall this year than it did in the last one.",
       "The new packaging is manufactured entirely from recycled cardboard material."
@@ -903,7 +903,7 @@
     "prompt": "Argument: \"Employees who work remotely report higher productivity scores, so the company should let all employees work remotely to boost productivity.\" Which finding would most weaken this argument?",
     "options": [
       "The company's lease on its main office building is due to expire at the end of next year.",
-      "Employees who currently choose remote work are more self-disciplined than others.",
+      "Employees who currently choose to work remotely tend to be more self-disciplined and have fewer household distractions than the broader workforce.",
       "The company already provides strong collaboration tools for everyone who works remotely.",
       "Remote work saves employees a considerable amount of commuting time each week."
     ],
