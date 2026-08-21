@@ -106,7 +106,11 @@ python -c "import json,io,collections; c=collections.Counter(); [c.update([q['co
 
 ## Hosting
 
-As of v1.10.0 the build emits no dynamic routes: `npm run build`'s route table should show only `○ (Static)` and `● (SSG)`. There is no database, no runtime secret, and no request-time work, so the app is a pile of static files plus whatever adapter a host wants. Set `NEXT_PUBLIC_SITE_URL` (no trailing slash) in the host's environment before the first production build, or `sitemap.xml`, `robots.txt`, and every canonical/OG URL will point at `http://localhost:3000`.
+**Deployed on Vercel (Hobby), as of v2.0.1.** Chosen over Cloudflare because Next.js is Vercel's own framework, so there is no adapter and no build configuration, and because API routes run natively there when the accounts backend arrives. The Hobby plan never bills (it pauses at the limit) but **forbids commercial use** — ads, payments or a paid plan mean upgrading or migrating to Cloudflare Workers, which is about a day's work since nothing depends on Vercel-specific APIs.
+
+As of v1.10.0 the build emits no dynamic routes: `npm run build`'s route table should show only `○ (Static)` and `● (SSG)`. There is no database, no runtime secret, and no request-time work.
+
+`SITE_URL` (`lib/site.ts`) resolves at build time from `NEXT_PUBLIC_SITE_URL`, then Vercel's automatic `VERCEL_PROJECT_PRODUCTION_URL`, then localhost. The middle step exists specifically so a deploy that forgets the first cannot silently publish a sitemap and a full set of canonicals pointing at `http://localhost:3000`. **Only set `NEXT_PUBLIC_SITE_URL` once a custom domain exists.** Every consumer of `SITE_URL` is a Server Component or metadata route; check that before importing it into anything marked `"use client"`, since the Vercel variable is not `NEXT_PUBLIC_` and would be undefined in a client bundle.
 
 ### Review-lane findings applied in the same PR
 
