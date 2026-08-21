@@ -37,7 +37,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    url: "/",
+    // Deliberately no `url` and no `alternates.canonical` here. Next inherits
+    // any metadata field a child does not override, so setting them on the root
+    // layout made every quiz page declare itself a duplicate of the home page.
+    // app/page.tsx sets both for "/" itself.
     title: `${SITE_NAME} — ${SITE_TAGLINE}`,
     description:
       "Free timed practice exams for NMAT by GMAC, with a written explanation for every answer.",
@@ -48,7 +51,6 @@ export const metadata: Metadata = {
     description:
       "Free timed practice exams for NMAT by GMAC, with a written explanation for every answer.",
   },
-  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

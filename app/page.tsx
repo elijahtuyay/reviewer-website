@@ -6,6 +6,7 @@ import { getQuestionsForSection } from "@/lib/data/questions";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
+  openGraph: { url: "/" },
 };
 
 /**
@@ -36,9 +37,10 @@ export default function Home() {
   /**
    * Structured data, emitted as a plain <script type="application/ld+json">.
    * This is the one place dangerouslySetInnerHTML is warranted: the payload is
-   * built from our own constants, never from user input, and JSON.stringify is
-   * what escapes it. `</script>` can't appear in the output because none of the
-   * source strings contain a "<".
+   * built from our own constants, never from user input. JSON.stringify does
+   * not escape "<", though, so a future exam label or a NEXT_PUBLIC_SITE_URL
+   * containing "</script>" would break out of the tag. Escaping it below costs
+   * nothing and removes the need for anyone to keep that invariant in mind.
    */
   const structuredData = {
     "@context": "https://schema.org",
@@ -79,7 +81,9 @@ export default function Home() {
     <div className="flex flex-1 flex-col bg-background">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\u003c"),
+        }}
       />
       <Hero
         examLabel={featured.label}
@@ -251,8 +255,9 @@ function SectionIcon({ sectionId }: { sectionId: string }) {
 
 function SectionPicker({ exam }: { exam: ExamConfig }) {
   return (
-    // scroll-mt clears the sticky site header, so the "Start a practice
-    // section" anchor doesn't land with the heading tucked underneath it.
+    // A little scroll margin so the "Start a practice section" anchor lands
+    // with breathing room above the heading rather than flush to the viewport
+    // edge. (SiteHeader is not sticky, so there is nothing to clear.)
     <section id="sections" className="scroll-mt-16 border-b border-line">
       <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-20">
         <div className="max-w-2xl">

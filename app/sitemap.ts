@@ -3,9 +3,13 @@ import { EXAMS } from "@/lib/exam-config";
 import { SITE_URL } from "@/lib/site";
 
 /**
- * Only the pages that render real server-side content: the home page and each
- * exam's setup page. Quiz routes are client-rendered and excluded here for the
- * same reason robots.ts disallows them.
+ * Only pages that render real server-side content AND are indexable: the home
+ * page, plus the setup page of each exam that actually has a question bank.
+ *
+ * Quiz routes are excluded because they are client-rendered and marked
+ * noindex. Unavailable exams are excluded for the same reason: their setup page
+ * is noindex too (see app/[examId]/page.tsx), and listing a noindex URL in the
+ * sitemap is what Search Console reports as "Submitted URL marked 'noindex'".
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -14,13 +18,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
-    ...Object.values(EXAMS).map((exam) => ({
-      url: `${SITE_URL}/${exam.id}`,
-      changeFrequency: "monthly" as const,
-      // An exam with no question bank yet is a placeholder page, not a
-      // destination — kept in the sitemap so it is discoverable, ranked low so
-      // it never outranks a real one.
-      priority: exam.available ? 0.8 : 0.3,
-    })),
+    ...Object.values(EXAMS)
+      .filter((exam) => exam.available)
+      .map((exam) => ({
+        url: `${SITE_URL}/${exam.id}`,
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+      })),
   ];
 }
