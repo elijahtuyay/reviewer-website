@@ -107,7 +107,10 @@ export function findActiveAttempt(
       sectionId: section.id,
       label: section.label,
       answered: Object.keys(stored.answers).length,
-      total: stored.questionIds.length || section.questionCount,
+      // The SECTION's length, not the number served so far. On a sequential
+      // exam the served list grows as you go, so four questions into a
+      // twenty-question section the lock screen read "4 of 5 answered".
+      total: section.questionCount,
     };
   }
   return null;

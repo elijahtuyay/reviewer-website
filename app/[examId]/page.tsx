@@ -183,8 +183,11 @@ function expectations(exam: ExamModule): string[] {
   }
 
   if (exam.rules.optionalBreakMinutes) {
+    // Says what the app ACTUALLY does. It used to claim the Pause button
+    // "plays the role" of the exam's timed break, which implied a budget that
+    // nothing enforces: pausing here is unlimited in both count and length.
     lines.push(
-      `The real exam grants one optional ${exam.rules.optionalBreakMinutes}-minute break. Here, the Pause button plays that role and freezes the clock.`
+      `The real exam grants one optional ${exam.rules.optionalBreakMinutes}-minute break. Practising here, the Pause button freezes the clock whenever you need it, with no limit on how often or how long.`
     );
   }
 

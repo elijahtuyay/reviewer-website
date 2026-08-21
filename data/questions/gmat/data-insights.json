@@ -69,15 +69,15 @@
     "section": "data-insights",
     "topic": "Two-Part Analysis",
     "difficulty": "easy",
-    "prompt": "A shop sells notebooks at 4 units of currency each and pens at 3 each. A customer buys 5 notebooks and 4 pens.\n\nWhat is the total cost?",
+    "prompt": "A shop sells notebooks at 4 dollars each and pens at 3 dollars each. A customer buys 5 notebooks and 4 pens.\n\nWhat is the total cost?",
     "options": [
-      "27",
-      "35",
-      "20",
-      "32"
+      "32 dollars",
+      "35 dollars",
+      "27 dollars",
+      "20 dollars"
     ],
     "correctIndex": 3,
-    "explanation": "Notebooks cost 5 times 4, which is 20, and pens cost 4 times 3, which is 12. The total is 32. Swapping the quantities gives 27, which is the intended trap.",
+    "explanation": "Notebooks cost 5 times 4, which is 20, and pens cost 4 times 3, which is 12. The total is 32 dollars. Swapping the quantities gives 27, which is the intended trap.",
     "source": "original"
   },
   {
@@ -183,7 +183,7 @@
     "section": "data-insights",
     "topic": "Multi-Source Reasoning",
     "difficulty": "medium",
-    "prompt": "Memo 1: The project budget is 500 thousand units of currency.\nMemo 2: Labour accounts for 60 percent of the budget, materials for 25 percent, and the rest is contingency.\nMemo 3: Labour costs have overrun by 10 percent.\n\nBy how much has the total project cost exceeded the original budget, assuming other lines are on plan?",
+    "prompt": "Memo 1: The project budget is 500 thousand dollars.\nMemo 2: Labour accounts for 60 percent of the budget, materials for 25 percent, and the rest is contingency.\nMemo 3: Labour costs have overrun by 10 percent.\n\nBy how much has the total project cost exceeded the original budget, assuming other lines are on plan?",
     "options": [
       "50 thousand",
       "60 thousand",
@@ -248,15 +248,15 @@
     "section": "data-insights",
     "topic": "Two-Part Analysis",
     "difficulty": "medium",
-    "prompt": "A company charges a fixed fee plus a per-hour rate. A 3-hour job costs 190 and a 5-hour job costs 290.\n\nWhat is the fixed fee?",
+    "prompt": "A company charges a fixed fee plus a per-hour rate. A 3-hour job costs 190 dollars and a 5-hour job costs 290 dollars.\n\nWhat is the fixed fee?",
     "options": [
-      "60",
-      "40",
-      "50",
-      "30"
+      "40 dollars",
+      "50 dollars",
+      "60 dollars",
+      "30 dollars"
     ],
     "correctIndex": 1,
-    "explanation": "The extra 2 hours add 100, so the hourly rate is 50. Substituting into the 3-hour job: 190 minus 3 times 50 gives a fixed fee of 40.",
+    "explanation": "The extra 2 hours add 100 dollars, so the hourly rate is 50 dollars. Substituting into the 3-hour job: 190 minus 3 times 50 gives a fixed fee of 40 dollars.",
     "source": "original"
   },
   {
@@ -411,7 +411,7 @@
     "section": "data-insights",
     "topic": "Two-Part Analysis",
     "difficulty": "hard",
-    "prompt": "A subscription costs 12 per month or 120 per year paid upfront.\n\nAfter how many full months does the annual plan become cheaper than paying monthly?",
+    "prompt": "A subscription costs 12 dollars per month or 120 dollars per year paid upfront.\n\nAfter how many full months does the annual plan become cheaper than paying monthly?",
     "options": [
       "10 months",
       "9 months",
@@ -419,7 +419,7 @@
       "11 months"
     ],
     "correctIndex": 3,
-    "explanation": "Monthly payments reach 120 after exactly 10 months, so at 10 months the two plans cost the same. The annual plan only becomes strictly cheaper once the eleventh payment is made, at 132, so 11 months is the answer.",
+    "explanation": "Monthly payments reach 120 dollars after exactly 10 months, so at 10 months the two plans cost the same. The annual plan only becomes strictly cheaper once the eleventh payment is made, at 132 dollars, so 11 months is the answer.",
     "source": "original"
   },
   {

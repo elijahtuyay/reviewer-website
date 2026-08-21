@@ -29,8 +29,15 @@
    * The accent as TEXT or as a small icon, which is a different job from the
    * accent as a fill. Measured raw, --accent is 4.75:1 on the light background
    * but only 3.11:1 on the dark one and 2.60:1 on the dark panel, i.e. it fails
-   * WCAG 1.4.3 for body text in dark mode outright. Light nudges toward black
-   * (5.96:1 on background, 6.55:1 on panel), dark toward white (6.59:1, 5.52:1).
+   * WCAG 1.4.3 for body text in dark mode outright. Light nudges toward black,
+   * dark toward white.
+   *
+   * The resulting ratio depends on the exam's accent, so it must be checked per
+   * exam rather than once: NMAT green lands at 5.96:1 on the light background
+   * and 6.59:1 on the dark one, GMAT blue at 10.77:1 and 4.61:1. Both clear
+   * 4.5:1 on --background, which is the only surface accent-text is used on
+   * inside an exam scope. Putting accent-text on --panel would need a fresh
+   * measurement for every exam first.
    *
    * Derived with color-mix rather than hard-coded so each exam still configures
    * only one hex. But note WHERE it is declared: a custom property containing

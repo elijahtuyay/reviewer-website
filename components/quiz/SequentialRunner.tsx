@@ -73,6 +73,13 @@ export default function SequentialRunner({
                     {inReviewPass
                       ? `${answeredCount}/${totalQuestions} answered`
                       : `Question ${Math.min(cursor + 1, totalQuestions)} of ${totalQuestions}`}
+                    {flagged.length > 0 && (
+                      // Without this you cannot tell whether you flagged one
+                      // question or six, which makes the review pass a guess.
+                      <span className="ml-2">
+                        {flagged.length} flagged
+                      </span>
+                    )}
                   </p>
                 </div>
                 <button
@@ -248,9 +255,12 @@ function ReviewPass({
   attempt: Attempt;
   onSubmit: () => void;
 }) {
-  const { questions, answers, flagged, select, reviewChangesLeft } = attempt;
+  const { questions, answers, flagged, select, reviewChangesLeft, canChangeAnswer } = attempt;
   const limit = exam.rules.reviewEdit?.maxChanges ?? 0;
   const exhausted = reviewChangesLeft !== null && reviewChangesLeft <= 0;
+  const flaggedQuestions = questions
+    .map((q, i) => ({ q, number: i + 1 }))
+    .filter(({ q }) => flagged.includes(q.id));
 
   return (
     <div>
@@ -261,27 +271,57 @@ function ReviewPass({
         <p className="mt-1 text-sm text-foreground/90">
           You can change up to {limit} answer{limit === 1 ? "" : "s"} before submitting.{" "}
           {exhausted
-            ? "You have used them all."
-            : `${reviewChangesLeft} left. Answering a question you left blank does not count.`}{" "}
+            ? "You have used them all, so the rest are locked until you undo one."
+            : `${reviewChangesLeft} left. Changing an answer back to what it was costs nothing.`}{" "}
           The clock is still running.
         </p>
       </div>
 
-      <div className="mt-6 flex flex-col gap-8">
-        {questions.map((question, index) => (
-          <div key={question.id}>
-            {flagged.includes(question.id) && (
-              <p className="mb-2 text-xs font-medium text-accent-text">You flagged this one</p>
-            )}
-            <QuestionCard
-              question={question}
-              index={index}
-              selectedIndex={answers[question.id] ?? null}
-              onSelect={(optionIndex) => select(question.id, optionIndex)}
-              reviewMode={false}
-            />
+      {/* The setup page promises the review pass starts with what you flagged.
+          The questions stay in served order (renumbering them mid-attempt would
+          be worse), so this is the part that makes the promise true. */}
+      {flaggedQuestions.length > 0 && (
+        <nav aria-label="Flagged questions" className="mt-6 rounded-lg border border-line bg-panel p-4">
+          <p className="text-sm font-medium text-foreground">
+            You flagged {flaggedQuestions.length} question{flaggedQuestions.length === 1 ? "" : "s"}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {flaggedQuestions.map(({ q, number }) => (
+              <a
+                key={q.id}
+                href={`#question-${number}`}
+                className="flex min-h-11 min-w-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm font-medium text-foreground hover:bg-panel-hover"
+              >
+                {number}
+              </a>
+            ))}
           </div>
-        ))}
+        </nav>
+      )}
+
+      <div className="mt-6 flex flex-col gap-8">
+        {questions.map((question, index) => {
+          const locked = !canChangeAnswer(question.id);
+          return (
+            <div key={question.id}>
+              {flagged.includes(question.id) && (
+                <p className="mb-2 text-xs font-medium text-accent-text">You flagged this one</p>
+              )}
+              <QuestionCard
+                question={question}
+                index={index}
+                selectedIndex={answers[question.id] ?? null}
+                onSelect={(optionIndex) => select(question.id, optionIndex)}
+                reviewMode={false}
+                lockedReason={
+                  locked
+                    ? `You have used all ${limit} changes. Undo one of your changes to free this up.`
+                    : undefined
+                }
+              />
+            </div>
+          );
+        })}
       </div>
 
       <div className="sticky bottom-0 mt-6 border-t border-line bg-background py-4">

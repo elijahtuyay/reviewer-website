@@ -77,6 +77,8 @@ export interface Attempt {
   answeredCount: number;
   result: ScoreResult | null;
   reviewChangesLeft: number | null;
+  /** Whether this question's answer may still be changed during a capped review pass. */
+  canChangeAnswer: (questionId: string) => boolean;
 
   select: (questionId: string, optionIndex: number) => void;
   toggleFlag: (questionId: string) => void;
@@ -116,7 +118,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
   const [paused, setPaused] = useState(false);
   const [frozenTimeLabel, setFrozenTimeLabel] = useState<string | undefined>(undefined);
   const [adaptive, setAdaptive] = useState<AdaptiveState | null>(null);
-  const [reviewChangesUsed, setReviewChangesUsed] = useState(0);
+  const [reviewBaseline, setReviewBaseline] = useState<Record<string, number>>({});
   const [bankVersion, setBankVersion] = useState(0);
 
   const pendingNoticeRef = useRef<NoticeKind>(null);
@@ -153,14 +155,14 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
         pausedAt: 0,
         summary: null,
         flagged,
-        reviewChangesUsed,
+        reviewBaseline,
         adaptive,
         cursor,
         inReview: false,
       };
       saveStoredProgress(examId, sectionId, { ...base, ...patch });
     },
-    [examId, sectionId, questionIds, deadline, flagged, reviewChangesUsed, adaptive, cursor]
+    [examId, sectionId, questionIds, deadline, flagged, reviewBaseline, adaptive, cursor]
   );
 
   /** Answers with nulls stripped, which is the shape storage holds. */
@@ -265,7 +267,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
       setQuestionIds(ids);
       setAnswers(stored.answers);
       setFlagged(stored.flagged);
-      setReviewChangesUsed(stored.reviewChangesUsed);
+      setReviewBaseline(stored.reviewBaseline);
       setAdaptive(adaptiveState);
       setCursor(Math.min(stored.cursor, Math.max(0, ids.length - 1)));
       setDeadline(endAt);
@@ -355,9 +357,28 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     return scoreAttempt(questions, answerList, exam.scoring, section.questionCount);
   }, [phase, questions, answers, exam.scoring, section.questionCount]);
 
+  /**
+   * Spent allowance = answers that currently DIFFER from the snapshot taken when
+   * the review pass opened. Derived rather than counted, so moving away from an
+   * answer and back again costs nothing: a misclick used to burn two of three.
+   */
+  const reviewChangesUsed = Object.entries(reviewBaseline).filter(
+    ([id, original]) => answers[id] !== undefined && answers[id] !== null && answers[id] !== original
+  ).length;
   const reviewChangesLeft = rules.reviewEdit
     ? Math.max(0, rules.reviewEdit.maxChanges - reviewChangesUsed)
     : null;
+  /** True when this question can still be changed: already altered, or allowance left. */
+  const canChangeAnswer = useCallback(
+    (questionId: string) => {
+      if (phase !== "reviewEdit" || !rules.reviewEdit) return true;
+      const original = reviewBaseline[questionId];
+      if (original === undefined) return true;
+      if (answers[questionId] !== original) return true;
+      return reviewChangesUsed < rules.reviewEdit.maxChanges;
+    },
+    [phase, rules.reviewEdit, reviewBaseline, answers, reviewChangesUsed]
+  );
 
   // ---------------------------------------------------------------- actions --
 
@@ -404,24 +425,9 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     (questionId: string, optionIndex: number) => {
       if (phase !== "taking" && phase !== "reviewEdit") return;
 
-      // A capped review pass spends one of its allowance per answer CHANGED,
-      // not per click: re-picking the same option, or answering something left
-      // blank, must not burn an edit.
-      if (phase === "reviewEdit" && rules.reviewEdit) {
-        const previous = answers[questionId];
-        const isChange = previous !== undefined && previous !== null && previous !== optionIndex;
-        if (isChange && reviewChangesUsed >= rules.reviewEdit.maxChanges) return;
-        if (isChange) {
-          const used = reviewChangesUsed + 1;
-          setReviewChangesUsed(used);
-          setAnswers((prev) => {
-            const next = { ...prev, [questionId]: optionIndex };
-            persist({ answers: cleanAnswers(next), reviewChangesUsed: used, inReview: true });
-            return next;
-          });
-          return;
-        }
-      }
+      // The allowance is measured against the baseline, so reverting a question
+      // to what it was when review opened is always free and never blocked.
+      if (phase === "reviewEdit" && !canChangeAnswer(questionId)) return;
 
       setAnswers((prev) => {
         const next = { ...prev, [questionId]: optionIndex };
@@ -429,7 +435,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
         return next;
       });
     },
-    [phase, rules.reviewEdit, answers, reviewChangesUsed, persist, cleanAnswers]
+    [phase, canChangeAnswer, persist, cleanAnswers]
   );
 
   const toggleFlag = useCallback(
@@ -479,9 +485,16 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
         return;
       }
       if (rules.reviewEdit) {
+        const baseline = cleanAnswers(answers);
+        setReviewBaseline(baseline);
         setPhase("reviewEdit");
         setCursor(0);
-        persist({ answers: cleanAnswers(answers), cursor: 0, inReview: true });
+        persist({
+          answers: baseline,
+          cursor: 0,
+          inReview: true,
+          reviewBaseline: baseline,
+        });
         return;
       }
       closeOut(false);
@@ -522,14 +535,14 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
       pausedAt: 0,
       summary: null,
       flagged,
-      reviewChangesUsed,
+      reviewBaseline,
       adaptive: nextAdaptive,
       cursor: nextCursor,
       inReview: false,
     });
   }, [
     phase, questions, cursor, rules, answers, questionIds, section.questionCount,
-    deadline, adaptive, examId, sectionId, flagged, reviewChangesUsed,
+    deadline, adaptive, examId, sectionId, flagged, reviewBaseline,
     persist, cleanAnswers, closeOut,
   ]);
 
@@ -559,7 +572,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     setQuestionIds(ids);
     setAnswers({});
     setFlagged([]);
-    setReviewChangesUsed(0);
+    setReviewBaseline({});
     setAdaptive(adaptiveState);
     setCursor(0);
     setDeadline(endAt);
@@ -621,6 +634,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     answeredCount,
     result,
     reviewChangesLeft,
+    canChangeAnswer,
     select,
     toggleFlag,
     goToCursor,

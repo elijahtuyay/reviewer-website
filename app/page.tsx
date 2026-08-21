@@ -146,7 +146,7 @@ function Hero({ examCount, totalBank }: { examCount: number; totalBank: number }
           <li aria-hidden>&middot;</li>
           <li>Every answer explained</li>
           <li aria-hidden>&middot;</li>
-          <li>A different set every attempt</li>
+          <li>One section at a time, on the clock</li>
         </ul>
       </div>
     </section>
@@ -290,6 +290,13 @@ function examHighlights(exam: ExamModule, bank: number): string[] {
       ? "Questions get harder as you get them right, and easier when you slip"
       : "A fresh random set drawn from the bank on every attempt"
   );
+  // Stated rather than implied: a section that draws most of its bank repeats
+  // itself on a retake, and claiming "a different set every time" for such an
+  // exam would be false.
+  const perSitting = Math.max(...exam.sections.map((s) => s.questionCount));
+  if (bank > 0 && perSitting / (bank / exam.sections.length) > 0.5) {
+    lines.push("Bank is still small, so retakes repeat a fair share of the questions");
+  }
 
   if (!exam.rules.allowSkip) {
     lines.push("No skipping: answer each question before the next one appears");
@@ -477,7 +484,7 @@ function buildFaqs(totalBank: number, examCount: number): FaqEntry[] {
     },
     {
       q: "Can I retake a section?",
-      a: "As many times as you like. Every attempt draws a different set, so a retake is a genuinely new paper rather than the same one again.",
+      a: "As many times as you like. How different the retake is depends on the exam and how large its bank is: a section drawing 36 questions from a bank of 100 is close to a new paper every time, while a smaller bank will repeat more of itself. Each exam's card above says how many questions its bank currently holds.",
     },
     {
       q: "What happens if I run out of time?",
@@ -485,7 +492,7 @@ function buildFaqs(totalBank: number, examCount: number): FaqEntry[] {
     },
     {
       q: "Does it work on a phone?",
-      a: "Yes. The question navigator moves into a bottom sheet on small screens and everything stays tappable. A long reading passage is still easier on a bigger screen, but nothing is out of reach.",
+      a: "Yes. On exams that show a whole section at once, the question navigator moves into a bottom sheet on small screens; on one-question-at-a-time exams there is nothing to navigate. Everything stays tappable either way. A long reading passage is still easier on a bigger screen, but nothing is out of reach.",
     },
   ];
 }

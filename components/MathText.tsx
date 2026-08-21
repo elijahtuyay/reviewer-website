@@ -42,9 +42,17 @@ function renderLineWithMath(line: string) {
       // Applied here, once, instead of in the question bank: it is a rendering
       // decision, so it belongs in the renderer. Putting `\displaystyle` in the
       // JSON would mean repeating it across hundreds of questions and relying on
-      // every future author to remember it. It is a no-op for math without
-      // stacked parts (`$x^2$`, `$5:6$`), so applying it uniformly is safe.
-      return <InlineMath key={i} math={`\\displaystyle ${part.slice(1, -1)}`} />;
+      // every future author to remember it.
+      //
+      // It was applied to EVERY span originally, on the assumption that it is a
+      // no-op for math without stacked parts. It is not: display style also
+      // typesets a superscript nearly as large as its base, so `$x^2$` rendered
+      // with the exponent swollen and riding up into the line above. Only spans
+      // that actually stack something get it now.
+      const body = part.slice(1, -1);
+      const stacks =
+        body.includes("\\frac") || body.includes("\\dfrac") || body.includes("\\binom");
+      return <InlineMath key={i} math={stacks ? `\\displaystyle ${body}` : body} />;
     }
     return part ? <Fragment key={i}>{part}</Fragment> : null;
   });

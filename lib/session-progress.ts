@@ -42,8 +42,15 @@ export interface StoredProgress {
   summary: StoredSummary | null;
   /** Question ids the candidate marked to come back to. Only used by exams that allow flagging. */
   flagged: string[];
-  /** Answers already changed during a capped review phase, against `reviewEdit.maxChanges`. */
-  reviewChangesUsed: number;
+  /**
+   * The answers as they stood when the capped review phase opened.
+   *
+   * The allowance is spent per answer that DIFFERS from this, not per click.
+   * Counting clicks meant a misclick cost two of three changes: one to move
+   * away from the original answer and another to move back, with the attempt
+   * ending up exactly where it started.
+   */
+  reviewBaseline: Record<string, number>;
   /** Difficulty ladder position, for adaptive sections. Null for fixed-form ones. */
   adaptive: AdaptiveState | null;
   /** Sequential sections track which question is on screen; free-navigation ones ignore it. */
@@ -64,7 +71,7 @@ export function emptyProgress(): StoredProgress {
     pausedAt: 0,
     summary: null,
     flagged: [],
-    reviewChangesUsed: 0,
+    reviewBaseline: {},
     adaptive: null,
     cursor: 0,
     inReview: false,
@@ -109,7 +116,7 @@ export function getStoredProgress(examId: ExamId, section: SectionId): StoredPro
       pausedAt: parsed.pausedAt ?? 0,
       summary: parsed.summary ?? null,
       flagged: parsed.flagged ?? [],
-      reviewChangesUsed: parsed.reviewChangesUsed ?? 0,
+      reviewBaseline: parsed.reviewBaseline ?? {},
       adaptive: parsed.adaptive ?? null,
       cursor: parsed.cursor ?? 0,
       inReview: parsed.inReview ?? false,

@@ -24,7 +24,15 @@ const gmat: ExamModule = {
   shortLabel: "GMAT",
   description:
     "Practice for the GMAT Focus Edition: three 45-minute sections, adaptive difficulty, and a written explanation for every answer.",
-  theme: { accent: "#1e3a8a", accentForeground: "#ffffff" },
+  /**
+   * Measured, not picked by eye. The first choice (#1e3a8a) was only 1.59:1
+   * against the dark background, half of NMAT green's 3.11:1, which left the
+   * selected-option ring and the progress bar fainter than the neutral borders
+   * beside them. This sits at 3.19:1 dark / 4.63:1 light with 5.17:1 for white
+   * text on it, which is the profile the rest of the design system was tuned
+   * against.
+   */
+  theme: { accent: "#2563eb", accentForeground: "#ffffff" },
   available: true,
 
   /**
