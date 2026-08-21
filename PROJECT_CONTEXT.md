@@ -151,7 +151,22 @@ Files: `lib/exams/{types,registry}.ts`, `lib/exams/{nmat,gmat}/index.ts`, `lib/q
 
 GMAT Focus: Data Insights 20q, Quantitative 21q, Verbal 23q, 45 minutes each, 64 questions, 205-805. Verbal has NO sentence correction; Quantitative has NO geometry; Data Sufficiency belongs to **Data Insights**, not Quantitative. Bank is a **90-question seed** (30 per section, 10 per difficulty), not a finished bank: a perfect run exhausts the ten hard questions and falls back to medium.
 
-`npm run verify:engine` exercises the adaptive ladder and both scoring models. It has already caught a perfect attempt scoring 810 on a band whose maximum is 805.
+`npm run verify:engine` asserts (and exits non-zero) on the adaptive ladder and both scoring models. It has already caught three real bugs: a perfect attempt scoring 810 on a band whose maximum is 805, difficulty weighting being a no-op, and timing out scoring higher than finishing. **Run it after touching `lib/adaptive.ts` or `lib/scoring.ts`.**
+
+### Scoring traps that were live and are now asserted against
+
+1. **The scaled denominator must be a FIXED reference**, not the weight of what was served. Normalising by served weight made `difficultyWeight` do nothing: any all-correct run scored 805, so sweeping easy questions beat a strong partial run on hard ones.
+2. **`scoreAttempt` takes the section's real length.** Scoring only what was served made timing out after four questions score 675/805 while a genuine 50% run scored 505. Unreached questions count as unanswered.
+3. **An expiry discovered on load must write a `summary`.** Writing `submitted: true` with `summary: null` made every screen outside the quiz report a real result as 0 correct. A submitted record without a summary is now treated as an unknown score and shown as a bare "Submitted".
+
+### Other traps this architecture has already sprung
+
+- **The review pass allowance is derived from a baseline snapshot, not counted per click.** Counting clicks made a misclick cost two of three changes.
+- **`findActiveAttempt` and section totals must use `section.questionCount`,** never `stored.questionIds.length`: on a sequential exam the served list grows as you go, so a 20-question section read "4 of 5 answered".
+- **`restart()` needs the same section-lock check the load path has.** Without it, Retake was a way to get two clocks running.
+- **`MathText` applies `\displaystyle` only to spans containing a fraction.** Applying it to everything swelled superscripts so `$x^2$` rode into the line above.
+- **Per-exam accents must be measured, not picked.** GMAT's first blue was 1.59:1 on the dark background, half of NMAT green's 3.11:1, which made the selected-option ring fainter than the neutral borders around it. `#2563eb` matches NMAT's profile.
+- **Generated copy has to match the rules.** The break bullet claimed Pause implements the exam's timed break budget; nothing enforces one. If a rule has no engine behind it, say what the app actually does.
 
 ### Answer-key statistics (re-measure before trusting any claim about these)
 
