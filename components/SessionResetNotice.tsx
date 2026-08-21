@@ -45,7 +45,9 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
         found.push({
           id: section.id,
           label: section.label,
-          detail: `Submitted · ${breakdown.correct}/${breakdown.total} correct`,
+          detail: breakdown.scoreKnown
+            ? `Submitted · ${breakdown.correct}/${breakdown.total} correct`
+            : "Submitted",
         });
       } else if (stored.pausedAt === 0 && stored.deadline > 0 && stored.deadline <= now) {
         // The clock ran out while this section sat unopened. Opening it will

@@ -48,11 +48,16 @@ export function loadSection(examId: ExamId, sectionId: SectionId): Promise<Quest
       inflight.delete(k);
       return questions;
     })
-    .catch(() => {
+    .catch((error) => {
       // A failed chunk fetch (offline, deploy mid-session) must not poison the
       // cache: dropping the in-flight entry lets a retry actually retry.
+      //
+      // It also must not resolve to an empty array. Doing that handed the quiz
+      // a section with no questions AND a live deadline, so the user got a
+      // running timer above a blank page with no error and no way to retry.
+      // Rethrowing lets the caller show an error state instead.
       inflight.delete(k);
-      return [];
+      throw error;
     });
 
   inflight.set(k, promise);

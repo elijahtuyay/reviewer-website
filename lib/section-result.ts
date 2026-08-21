@@ -12,6 +12,13 @@ export interface SectionBreakdown {
   /** Present only for a submitted attempt. */
   score: number | null;
   maxScore: number | null;
+  /**
+   * False when the attempt is submitted but no stored summary exists, which
+   * happens for a record written by a build older than the summary field.
+   * Callers must render "submitted" WITHOUT a tally in that case: falling back
+   * to zeros reported a real result as 0 correct everywhere outside the quiz.
+   */
+  scoreKnown: boolean;
 }
 
 /**
@@ -42,6 +49,7 @@ export function getSectionBreakdown(
       incorrect: s.incorrect,
       score: s.score,
       maxScore: s.maxScore,
+      scoreKnown: true,
     };
   }
 
@@ -55,6 +63,7 @@ export function getSectionBreakdown(
     incorrect: 0,
     score: null,
     maxScore: null,
+    scoreKnown: false,
   };
 }
 

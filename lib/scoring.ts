@@ -46,7 +46,19 @@ export interface ScoreResult {
 export function scoreAttempt(
   questions: Question[],
   answers: Answer[],
-  model: ScoringModel
+  model: ScoringModel,
+  /**
+   * How long the section is SUPPOSED to be. Defaults to the number of questions
+   * served, which is the same thing for a fixed-form exam.
+   *
+   * It is not the same thing on an adaptive section, where questions are served
+   * one at a time and running out of time means the rest were never seen. Left
+   * to default, a candidate who answered 4 questions and stalled was scored out
+   * of 4 and walked away with a high band score, which made timing out the
+   * cheapest route to a good result: the exact opposite of the lesson the
+   * unanswered penalty exists to teach.
+   */
+  sectionQuestionCount?: number
 ): ScoreResult {
   const answerByQuestionId = new Map(answers.map((a) => [a.questionId, a.selectedIndex]));
   const topicMap = new Map<string, TopicBreakdown>();
@@ -88,16 +100,19 @@ export function scoreAttempt(
   }
 
   const byTopic = Array.from(topicMap.values());
+  const totalQuestions = Math.max(sectionQuestionCount ?? questions.length, questions.length);
+  // Questions never served are unanswered too, not absent.
+  const unanswered = unansweredCount + (totalQuestions - questions.length);
 
   if (model.kind === "points") {
     return {
       score: correctCount * model.pointsPerCorrectAnswer,
-      maxScore: questions.length * model.pointsPerCorrectAnswer,
+      maxScore: totalQuestions * model.pointsPerCorrectAnswer,
       minScore: 0,
       correctCount,
       incorrectCount,
-      unansweredCount,
-      totalQuestions: questions.length,
+      unansweredCount: unanswered,
+      totalQuestions,
       byTopic,
       served,
       correctByDifficulty,
@@ -105,8 +120,27 @@ export function scoreAttempt(
     };
   }
 
-  const ratio = availableWeight > 0 ? earnedWeight / availableWeight : 0;
-  const penalty = Math.min(1, unansweredCount * model.unansweredPenaltyPerQuestion);
+  /**
+   * The denominator is a FIXED reference, not the weight of what happened to be
+   * served.
+   *
+   * Normalising by the served weight made `difficultyWeight` a no-op: any
+   * all-correct run scored the maximum, so sweeping twenty easy questions beat
+   * getting seven of ten hard ones right. That is the opposite of what an
+   * adaptive exam measures, and the opposite of what this file and the results
+   * screen both claim. Measuring against a full section of the hardest
+   * available material means climbing the ladder is what earns the top of the
+   * band, which is the whole point of the mechanic.
+   */
+  const hardestWeight = Math.max(
+    model.difficultyWeight.easy,
+    model.difficultyWeight.medium,
+    model.difficultyWeight.hard
+  );
+  availableWeight = totalQuestions * hardestWeight;
+
+  const ratio = availableWeight > 0 ? Math.min(1, earnedWeight / availableWeight) : 0;
+  const penalty = Math.min(1, unanswered * model.unansweredPenaltyPerQuestion);
   // The penalty scales what was earned rather than subtracting from the floor,
   // so it can never push a score below the band's minimum.
   const adjusted = Math.max(0, ratio * (1 - penalty));
@@ -128,8 +162,8 @@ export function scoreAttempt(
     minScore: model.min,
     correctCount,
     incorrectCount,
-    unansweredCount,
-    totalQuestions: questions.length,
+    unansweredCount: unanswered,
+    totalQuestions,
     byTopic,
     served,
     correctByDifficulty,

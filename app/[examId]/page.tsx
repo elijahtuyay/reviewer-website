@@ -109,6 +109,7 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
                   sectionId={section.id}
                   sectionLabel={section.label}
                   minutes={section.minutes}
+                  questionCount={section.questionCount}
                 />
               </div>
             ))}

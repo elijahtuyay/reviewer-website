@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { use } from "react";
 import { findExam, findSection } from "@/lib/exams/registry";
 import { useAttempt } from "@/components/quiz/useAttempt";
@@ -41,6 +42,40 @@ export default function QuizPage({
 
   if (!exam || !section || !exam.available) return null;
   if (attempt.phase === "loading") return null;
+
+  if (attempt.phase === "error") {
+    return (
+      <div className="flex flex-1 justify-center bg-background">
+        <main className="w-full max-w-lg px-6 py-16 text-center sm:py-24">
+          <p className="text-sm font-medium tracking-wide text-muted uppercase">
+            Couldn&apos;t load this section
+          </p>
+          <h1 className="mt-2 text-2xl font-semibold text-foreground sm:text-3xl">
+            The questions didn&apos;t arrive
+          </h1>
+          <p className="mt-4 leading-relaxed text-foreground/90">
+            {section.label} could not be fetched, most likely a connection drop. Nothing was
+            started and no time has been used, so reloading costs you nothing.
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => window.location.reload()}
+              className="flex min-h-11 items-center justify-center rounded-md bg-accent px-5 text-sm font-medium text-accent-foreground hover:opacity-90"
+            >
+              Try again
+            </button>
+            <Link
+              href={`/${exam.id}`}
+              className="flex min-h-11 items-center justify-center rounded-md border border-line-strong px-5 text-sm font-medium text-foreground hover:bg-panel-hover"
+            >
+              Back to sections
+            </Link>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   if (attempt.phase === "locked" && attempt.blockedBy) {
     return (

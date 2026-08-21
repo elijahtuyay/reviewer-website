@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ExamId, Question, SectionId } from "@/data/schema";
+import type { ExamId, Question, SectionId } from "@/data/schema";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import {
   AdaptiveState,
@@ -44,7 +44,9 @@ export type Phase =
   /** Reached the end with time left, on an exam that grants a capped review pass. */
   | "reviewEdit"
   /** Submitted; showing the scored review. */
-  | "done";
+  | "done"
+  /** The question bank could not be fetched. Nothing was started, nothing was charged. */
+  | "error";
 
 /**
  * What, if anything, was restored from earlier in the session. Every one of
@@ -190,7 +192,21 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
      */
     (async () => {
       purgeLegacyPersistedProgress();
-      const pool = await loadSection(examId, sectionId);
+
+      let pool: Question[];
+      try {
+        pool = await loadSection(examId, sectionId);
+      } catch {
+        // Nothing is drawn, no deadline is written, and no clock starts. The
+        // previous behaviour resolved to an empty array and produced a running
+        // timer above a blank page with no way to retry.
+        setPhase("error");
+        return;
+      }
+      if (pool.length === 0) {
+        setPhase("error");
+        return;
+      }
       setBankVersion((v) => v + 1);
 
       const stored = getStoredProgress(examId, sectionId);
@@ -212,6 +228,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
 
       const now = Date.now();
       let { submitted, expired, deadline: endAt } = stored;
+      let closedOutOnLoad = false;
       if (!submitted) {
         if (!endAt) {
           endAt = now + section.minutes * 60_000;
@@ -226,6 +243,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
           // that is already spent.
           submitted = true;
           expired = true;
+          closedOutOnLoad = true;
         }
       }
 
@@ -272,6 +290,32 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
         endAt !== stored.deadline ||
         stored.pausedAt > 0
       ) {
+        /**
+         * An attempt that expires while the tab is elsewhere is submitted right
+         * here, and it must be scored here too. Writing `submitted: true` with
+         * `summary: null` left every screen OUTSIDE the quiz page reporting the
+         * attempt as zero correct, because that is what getSectionBreakdown
+         * falls back to. The pool is loaded at this point, so there is no
+         * reason not to score it properly.
+         */
+        let summary = stored.summary;
+        if (closedOutOnLoad) {
+          const served = getQuestionsByIds(pool, ids);
+          const scored = scoreAttempt(
+            served,
+            served.map((q) => ({ questionId: q.id, selectedIndex: stored.answers[q.id] ?? null })),
+            exam.scoring,
+            section.questionCount
+          );
+          summary = {
+            score: scored.score,
+            maxScore: scored.maxScore,
+            correct: scored.correctCount,
+            incorrect: scored.incorrectCount,
+            unanswered: scored.unansweredCount,
+            total: scored.totalQuestions,
+          };
+        }
         saveStoredProgress(examId, sectionId, {
           ...stored,
           answers: stored.answers,
@@ -281,6 +325,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
           expired,
           pausedAt: 0,
           adaptive: adaptiveState,
+          summary,
         });
       }
     })();
@@ -304,8 +349,11 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
       questionId: q.id,
       selectedIndex: answers[q.id] ?? null,
     }));
-    return scoreAttempt(questions, answerList, exam.scoring);
-  }, [phase, questions, answers, exam.scoring]);
+    // section.questionCount, not questions.length: on an adaptive section the
+    // served list stops where the clock did, and scoring out of what you
+    // happened to reach made timing out early the cheapest route to a high band.
+    return scoreAttempt(questions, answerList, exam.scoring, section.questionCount);
+  }, [phase, questions, answers, exam.scoring, section.questionCount]);
 
   const reviewChangesLeft = rules.reviewEdit
     ? Math.max(0, rules.reviewEdit.maxChanges - reviewChangesUsed)
@@ -327,7 +375,8 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
         const scored = scoreAttempt(
           served,
           served.map((q) => ({ questionId: q.id, selectedIndex: prev[q.id] ?? null })),
-          exam.scoring
+          exam.scoring,
+          section.questionCount
         );
         persist({
           answers: cleanAnswers(prev),
@@ -348,7 +397,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
       setNotice(expired ? "expired" : null);
       setPhase("done");
     },
-    [phase, persist, cleanAnswers, examId, sectionId, questionIds, exam.scoring]
+    [phase, persist, cleanAnswers, examId, sectionId, questionIds, exam.scoring, section.questionCount]
   );
 
   const select = useCallback(
@@ -422,7 +471,14 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     if (questionIds.length >= section.questionCount) {
       // A capped review pass is only offered if there is still time to use it,
       // which is what makes finishing early worth something.
-      if (rules.reviewEdit && Date.now() < deadline) {
+      // If the clock died before onExpire fired, this is an expiry, not a
+      // voluntary submit: closing out with expired=false would clear the
+      // "time ran out" banner and never tell the user what happened.
+      if (Date.now() >= deadline) {
+        closeOut(true);
+        return;
+      }
+      if (rules.reviewEdit) {
         setPhase("reviewEdit");
         setCursor(0);
         persist({ answers: cleanAnswers(answers), cursor: 0, inReview: true });
@@ -478,6 +534,15 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
   ]);
 
   const restart = useCallback(() => {
+    // The lock was only ever checked on load, and only for a brand-new draw, so
+    // Retake was a way around it: submit section A, start section B, go back to
+    // A and retake it, and two clocks are running at once.
+    const active = findActiveAttempt(examId, sectionId);
+    if (active) {
+      setBlockedBy(active);
+      setPhase("locked");
+      return;
+    }
     clearSectionProgress(examId, sectionId);
     const pool = getLoadedSection(examId, sectionId);
     let ids: string[];

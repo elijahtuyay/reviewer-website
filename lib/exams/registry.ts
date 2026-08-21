@@ -62,10 +62,3 @@ export function totalQuestions(exam: ExamModule): number {
 export function totalMinutes(exam: ExamModule): number {
   return exam.sections.reduce((sum, s) => sum + s.minutes, 0);
 }
-
-/** The highest score obtainable on one section, for showing a score against its ceiling. */
-export function maxSectionScore(exam: ExamModule, section: SectionConfig): number {
-  return exam.scoring.kind === "points"
-    ? section.questionCount * exam.scoring.pointsPerCorrectAnswer
-    : exam.scoring.max;
-}

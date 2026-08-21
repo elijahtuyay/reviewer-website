@@ -43,6 +43,7 @@ export default function SectionNav({
                 incorrect: currentResult.incorrectCount,
                 score: currentResult.score,
                 maxScore: currentResult.maxScore,
+                scoreKnown: true,
               }
             : isCurrent
               ? {
@@ -54,13 +55,16 @@ export default function SectionNav({
                   incorrect: 0,
                   score: null,
                   maxScore: null,
+                  scoreKnown: false,
                 }
               : getSectionBreakdown(examId, section.id, section.questionCount);
 
         const content = (
           <>
             <span className="text-sm font-medium">{section.label}</span>
-            {breakdown.submitted ? (
+            {breakdown.submitted && !breakdown.scoreKnown ? (
+              <span className="text-xs text-muted">Submitted</span>
+            ) : breakdown.submitted ? (
               <span className="flex gap-2 text-xs">
                 <span className="text-green-700 dark:text-green-400">{breakdown.correct} correct</span>
                 <span className="text-red-700 dark:text-red-400">{breakdown.incorrect} wrong</span>

@@ -78,9 +78,15 @@ export default function ResultSummary({ result, sectionLabel, exam }: ResultSumm
               );
             })}
           </div>
+          {/* Two messages, because the honest one depends on what happened. A
+              seed-sized bank can be exhausted at the hard rung by a strong
+              candidate, who is then served easier questions because nothing
+              harder is left. Telling that person the ladder reflects the exam's
+              estimate of them would be a lie about their own result. */}
           <p className="mt-3 text-xs text-muted">
-            The section opened at medium and moved with your streak. Reaching more hard questions
-            means the exam kept raising its estimate of you.
+            {result.served.hard > 0 && result.correctByDifficulty.hard === result.served.hard
+              ? "The section opened at medium and moved with your streak. You cleared every hard question it had to offer, so any easier ones later were the bank running out of harder material, not the exam lowering its estimate of you."
+              : "The section opened at medium and moved with your streak. Reaching more hard questions means the exam kept raising its estimate of you."}
           </p>
         </div>
       )}
