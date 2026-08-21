@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { EXAMS, ExamConfig, getExamConfig } from "@/lib/exam-config";
 import { AFFILIATION_DISCLAIMER, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 import { getQuestionsForSection } from "@/lib/data/questions";
+import SectionStartButton from "@/components/SectionStartButton";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -142,7 +143,12 @@ function Hero({
         className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/0 via-black/10 to-black/30"
       />
       <div className="relative mx-auto w-full max-w-5xl px-6 py-20 text-center sm:py-28">
-        <p className="text-xs font-semibold tracking-widest uppercase opacity-80">
+        {/* opacity-90, not 80: this sits at the top of the hero where the
+            darkening gradient has barely engaged, and 80 measured 4.22:1
+            against the accent there. At 12px semibold the bar is 4.5:1. The
+            list at the foot of the hero keeps 80 because the gradient has
+            darkened the ground under it to ~5.0:1. */}
+        <p className="text-xs font-semibold tracking-widest uppercase opacity-90">
           {examLabel} practice
         </p>
         <h1 className="mx-auto mt-4 max-w-3xl text-3xl leading-tight font-bold sm:text-4xl md:text-5xl">
@@ -186,7 +192,7 @@ function Hero({
 function StatBand({ stats }: { stats: { value: string; label: string }[] }) {
   return (
     <section className="border-b border-line bg-panel">
-      <dl className="mx-auto grid w-full max-w-5xl grid-cols-2 gap-y-8 px-6 py-10 sm:grid-cols-4">
+      <dl className="mx-auto grid w-full max-w-5xl grid-cols-2 gap-x-6 gap-y-8 px-6 py-10 sm:grid-cols-4">
         {/* The number reads first, but a definition list requires the term
             before its description, so the label stays the term and flex
             `order` flips the visual sequence without reordering the DOM. */}
@@ -268,7 +274,8 @@ function SectionPicker({ exam }: { exam: ExamConfig }) {
             Three sections, each timed on its own
           </h2>
           <p className="mt-3 leading-relaxed text-muted">
-            Sections do not share a clock, and you can only be inside one at a time. Take them one
+            Sections do not share a clock, and you can only be inside one at a time: opening one
+            locks the other two until you submit it, the same way the real exam does. Take them one
             evening at a stretch, or all three back to back as a full mock.
           </p>
         </div>
@@ -287,12 +294,12 @@ function SectionPicker({ exam }: { exam: ExamConfig }) {
               <p className="mt-4 text-xs font-medium text-muted">
                 {section.questionCount} questions, {section.minutes} minutes
               </p>
-              <Link
-                href={`/${exam.id}/quiz/${section.id}`}
-                className="mt-5 flex min-h-11 items-center justify-center rounded-lg bg-accent px-4 text-sm font-semibold text-accent-foreground transition hover:opacity-90"
-              >
-                Start {section.label}
-              </Link>
+              <SectionStartButton
+                examId={exam.id}
+                sectionId={section.id}
+                sectionLabel={section.label}
+                minutes={section.minutes}
+              />
             </article>
           ))}
         </div>

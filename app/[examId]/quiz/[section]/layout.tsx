@@ -23,11 +23,6 @@ export function generateStaticParams({ params }: { params: { examId: string } })
 export const dynamicParams = false;
 
 /**
- * Quiz pages render nothing until the client has hydrated and drawn a question
- * set, so there is no content here worth indexing — and a search result landing
- * a stranger mid-attempt is worse than no result at all.
- */
-/**
  * Each section gets its own browser-tab title: all three used to inherit the
  * home page's, so a user with Language Skills, Quantitative Skills, and
  * Logical Reasoning open in three tabs could not tell them apart.
@@ -48,7 +43,7 @@ export async function generateMetadata({
   const sectionConfig = exam.sections.find((s) => s.id === section);
 
   return {
-    title: sectionConfig ? `${sectionConfig.label} — ${exam.shortLabel}` : exam.label,
+    title: sectionConfig ? `${sectionConfig.label} (${exam.shortLabel})` : exam.label,
     robots: { index: false, follow: true },
   };
 }

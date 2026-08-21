@@ -35,7 +35,10 @@ export default async function ExamLayout({
 
   return (
     <div
-      className="contents"
+      // `exam-theme` is not cosmetic: globals.css uses it to re-derive
+      // --accent-text from the --accent set inline below. Without the class the
+      // text variant stays bound to :root's accent. See globals.css.
+      className="exam-theme contents"
       style={
         {
           "--accent": exam.theme.accent,

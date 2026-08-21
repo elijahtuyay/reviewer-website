@@ -5,12 +5,14 @@ import { useEffect, useId, useRef, useState } from "react";
 interface PauseOverlayProps {
   paused: boolean;
   onResume: () => void;
+  /** Time left at the moment of pausing, pre-formatted. Undefined renders the overlay without a clock. */
+  frozenTimeLabel?: string;
 }
 
 const EXIT_DURATION_MS = 200;
 
 /** Covers the full viewport so paused questions can't be read/screenshotted, and freezes the timer while shown. Stays mounted briefly after `paused` goes false so the fade-out can play instead of popping instantly. */
-export default function PauseOverlay({ paused, onResume }: PauseOverlayProps) {
+export default function PauseOverlay({ paused, onResume, frozenTimeLabel }: PauseOverlayProps) {
   const [stillExiting, setStillExiting] = useState(false);
   const resumeRef = useRef<HTMLButtonElement>(null);
   const titleId = useId();
@@ -96,8 +98,13 @@ export default function PauseOverlay({ paused, onResume }: PauseOverlayProps) {
       <p id={titleId} className="text-lg font-medium text-foreground">
         Paused
       </p>
+      {/* The remaining time is the thing you paused in order to look at, and
+          the overlay covers the header clock that would otherwise show it. */}
+      {frozenTimeLabel && (
+        <p className="font-mono text-3xl tabular-nums text-foreground">{frozenTimeLabel}</p>
+      )}
       <p id={bodyId} className="max-w-xs text-center text-sm text-muted">
-        Your timer is paused. Click the button below to resume.
+        {frozenTimeLabel ? "left when you paused. " : ""}Your timer is stopped until you resume.
       </p>
       <button
         ref={resumeRef}

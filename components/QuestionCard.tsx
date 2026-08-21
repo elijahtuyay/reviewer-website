@@ -4,6 +4,45 @@ import { useRef } from "react";
 import { Question } from "@/data/schema";
 import MathText from "@/components/MathText";
 
+/**
+ * Reading-comprehension prompts embed their whole passage, because a random
+ * 36-of-100 draw means a question can never point at a passage that lives on
+ * another question. They are all shaped `Passage: "..." <the actual question>`.
+ *
+ * Rendered as one paragraph, the stem was welded to the end of ten lines of
+ * quoted passage with no break, on the one question type where reading speed
+ * is what is being tested.
+ *
+ * Splitting on the last quote does NOT work: "vocabulary in context" stems
+ * quote the word being tested (`... retention." The word "isolated" in the
+ * passage is closest in meaning to:`), so the last quote sits inside the stem
+ * and the passage swallows most of the question. Splitting on the first quote
+ * fails too, since passages contain quoted speech. The reliable boundary is
+ * sentence-ending punctuation immediately before a closing quote, followed by
+ * a capital letter: passages end on a full sentence, and the quoted fragments
+ * inside a stem do not.
+ *
+ * Guarded rather than trusted: a stem that does not end in "?" or ":" means
+ * the boundary was misidentified, and the prompt is then rendered whole. That
+ * check passes for all 18 passage questions in the bank today, and a future
+ * one that breaks the pattern degrades to the old single-paragraph rendering
+ * instead of showing a mangled question.
+ */
+const PASSAGE_BOUNDARY = /[.!?]"\s+(?=[A-Z])/;
+
+function splitPassage(prompt: string): { passage: string; stem: string } | null {
+  if (!prompt.startsWith("Passage:")) return null;
+  const body = prompt.slice("Passage:".length).trim().replace(/^"/, "");
+  const match = PASSAGE_BOUNDARY.exec(body);
+  if (!match) return null;
+
+  const passage = body.slice(0, match.index + 1).trim();
+  const stem = body.slice(match.index + match[0].length).trim();
+  if (!passage || !stem) return null;
+  if (!stem.endsWith("?") && !stem.endsWith(":")) return null;
+  return { passage, stem };
+}
+
 interface QuestionCardProps {
   question: Question;
   index: number;
@@ -19,6 +58,7 @@ export default function QuestionCard({
   onSelect,
   reviewMode = false,
 }: QuestionCardProps) {
+  const passageParts = splitPassage(question.prompt);
   const isAnswered = selectedIndex !== null;
   const isCorrect = selectedIndex === question.correctIndex;
   const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -69,9 +109,23 @@ export default function QuestionCard({
     >
       <div className="flex items-baseline gap-3">
         <span className="text-sm font-medium text-muted">{index + 1}</span>
-        <p className="leading-relaxed text-foreground">
-          <MathText text={question.prompt} />
-        </p>
+        {passageParts ? (
+          <div className="min-w-0 flex-1">
+            <div className="rounded-md border-l-2 border-line-strong bg-panel py-3 pr-4 pl-4">
+              <p className="text-xs font-medium tracking-wide text-muted uppercase">Passage</p>
+              <p className="mt-2 text-sm leading-relaxed text-foreground/90">
+                <MathText text={passageParts.passage} />
+              </p>
+            </div>
+            <p className="mt-4 leading-relaxed text-foreground">
+              <MathText text={passageParts.stem} />
+            </p>
+          </div>
+        ) : (
+          <p className="leading-relaxed text-foreground">
+            <MathText text={question.prompt} />
+          </p>
+        )}
       </div>
 
       {/* A short static name, NOT aria-labelledby the prompt: screen readers

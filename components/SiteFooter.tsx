@@ -22,7 +22,8 @@ export default function SiteFooter() {
             </p>
           </div>
 
-          <nav aria-label="Footer" className="flex flex-col gap-2">
+          {/* No gap: each link already carries min-h-11 for the tap target, and adding gap on top of that spaced one-word links ~52px apart. */}
+          <nav aria-label="Footer" className="flex flex-col">
             <p className="text-xs font-medium tracking-wide text-muted uppercase">Exams</p>
             {exams.map((exam) => (
               <Link
@@ -44,6 +45,9 @@ export default function SiteFooter() {
         <div className="mt-8 border-t border-line pt-6">
           <p className="text-xs font-medium tracking-wide text-muted uppercase">Disclaimer</p>
           <p className="mt-2 text-xs leading-relaxed text-muted">{AFFILIATION_DISCLAIMER}</p>
+          {/* Stamped at build time, not per request: every route is
+              statically prerendered, so this year advances on deploy rather
+              than on New Year's Day. */}
           <p className="mt-4 text-xs text-muted">
             &copy; {new Date().getFullYear()} {SITE_NAME}. Made in the Philippines.
           </p>

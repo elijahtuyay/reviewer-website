@@ -24,9 +24,9 @@ export default function SiteHeader() {
         >
           <span
             aria-hidden
-            className="flex h-6 w-6 items-center justify-center rounded bg-accent text-[11px] font-bold text-accent-foreground"
+            className="flex h-6 w-6 items-center justify-center rounded bg-accent text-[10px] font-bold text-accent-foreground"
           >
-            R
+            ER
           </span>
           {SITE_NAME}
         </Link>

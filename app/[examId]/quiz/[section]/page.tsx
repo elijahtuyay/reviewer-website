@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getExamConfig, getSectionConfig, isValidExamId } from "@/lib/exam-config";
 import { drawRandomQuestionIds, getQuestionsByIds } from "@/lib/data/questions";
 import { scoreAttempt } from "@/lib/scoring";
+import { ActiveAttempt, findActiveAttempt } from "@/lib/section-result";
 import { ExamId, SectionId } from "@/data/schema";
 import {
   clearSectionProgress,
@@ -77,9 +78,17 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
   const [phase, setPhase] = useState<Phase>("taking");
   const [hydrated, setHydrated] = useState(false);
   const [paused, setPaused] = useState(false);
+  /** Remaining time captured at the instant of pausing, so the overlay can show the clock it covers. */
+  const [frozenTimeLabel, setFrozenTimeLabel] = useState<string | undefined>(undefined);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [deadline, setDeadline] = useState(0);
   const [notice, setNotice] = useState<NoticeKind>(null);
+  /**
+   * Set when another section holds a live attempt and this one has none, i.e.
+   * the user is trying to open a second section while the first is running.
+   * Renders the lock screen instead of drawing a question set.
+   */
+  const [blockedBy, setBlockedBy] = useState<ActiveAttempt | null>(null);
   /** Which destructive action is awaiting confirmation, if any. */
   const [pendingAction, setPendingAction] = useState<"submit" | "restart" | null>(null);
   const pendingNoticeRef = useRef<NoticeKind>(null);
@@ -108,6 +117,24 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
     purgeLegacyPersistedProgress();
     const stored = getStoredProgress(examId, section);
     const isResume = stored.questionIds.length > 0;
+
+    // Only a BRAND-NEW attempt is blocked. Resuming a section that already has
+    // a drawn set is always allowed, both because its clock is already running
+    // and because a pre-existing double attempt (from a build before this
+    // guard, or from two tabs) must stay reachable rather than becoming a pair
+    // of sections that each refuse to open.
+    if (!isResume) {
+      const active = findActiveAttempt(examId, section);
+      if (active) {
+        // Nothing is drawn and nothing is written: the whole point is that
+        // opening this URL must not start a second clock.
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- the other sections' attempts live in sessionStorage, which is unreadable during render/SSR, so this decision can only be made after mount
+        setBlockedBy(active);
+        setHydrated(true);
+        return;
+      }
+    }
+
     const ids = isResume
       ? stored.questionIds
       : drawRandomQuestionIds(examId, section, sectionConfig.questionCount);
@@ -255,6 +282,10 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
 
   function handlePause() {
     setPaused(true);
+    const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+    setFrozenTimeLabel(
+      `${Math.floor(remaining / 60)}:${(remaining % 60).toString().padStart(2, "0")}`
+    );
     // Read through the updater, not the render closure, for the same reason
     // closeOut does: an answer click and a pause in the same frame would
     // otherwise write a one-render-stale answer map over the fresh one.
@@ -321,6 +352,46 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
 
   if (!examIdValid || !sectionValid || !hydrated) return null;
 
+  if (blockedBy) {
+    return (
+      <div className="flex flex-1 justify-center bg-background">
+        <main className="w-full max-w-lg px-6 py-16 text-center sm:py-24">
+          <p className="text-sm font-medium tracking-wide text-muted uppercase">Section locked</p>
+          <h1 className="mt-2 text-2xl font-semibold text-foreground sm:text-3xl">
+            Finish {blockedBy.label} first
+          </h1>
+          <p className="mt-4 leading-relaxed text-foreground/90">
+            {blockedBy.label} is still in progress ({blockedBy.answered} of {blockedBy.total}{" "}
+            answered) and its timer is running. Sections are taken one at a time here, the same way
+            they are in the real exam, so {sectionConfig.label} stays closed until that one is
+            submitted.
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <Link
+              href={`/${examId}/quiz/${blockedBy.sectionId}`}
+              className="flex min-h-11 items-center justify-center rounded-md bg-accent px-5 text-sm font-medium text-accent-foreground hover:opacity-90"
+            >
+              Back to {blockedBy.label}
+            </Link>
+            <Link
+              href={`/${examId}`}
+              className="flex min-h-11 items-center justify-center rounded-md border border-line-strong px-5 text-sm font-medium text-foreground hover:bg-panel-hover"
+            >
+              Exam setup
+            </Link>
+          </div>
+          {/* The way out for someone who opened a section by mistake and does
+              not want to sit through it. Named rather than hidden, because the
+              alternative is a user who feels trapped. */}
+          <p className="mt-6 text-xs text-muted">
+            Don&apos;t want to finish it? Clear that section from the exam setup page and this one
+            will open.
+          </p>
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-1 justify-center bg-background">
       <div
@@ -330,8 +401,13 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
       >
         <div className="sticky top-0 z-20 flex h-20 items-center justify-between gap-3 border-b border-line bg-background/95 backdrop-blur">
           <div className="min-w-0">
+            {/* The label collapses to a bare arrow below `sm`: at 390px the
+                full text wrapped onto two lines and squeezed the section title
+                down to "Langua...", which is the h1 of the page you are on. */}
             <Link href={`/${examId}`} className="text-sm text-muted hover:text-foreground">
-              ← Exam setup
+              <span aria-hidden>←</span>
+              <span className="ml-1 hidden sm:inline">Exam setup</span>
+              <span className="sr-only">Back to exam setup</span>
             </Link>
             <h1 className="mt-1 truncate text-lg font-semibold text-foreground sm:text-xl">
               {sectionConfig.label}
@@ -379,7 +455,7 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
                   href={`/${examId}`}
                   className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground hover:bg-panel-hover"
                 >
-                  Done
+                  Back to sections
                 </Link>
               </div>
             )}
@@ -490,7 +566,7 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
         onCancel={() => setPendingAction(null)}
       />
 
-      <PauseOverlay paused={paused} onResume={handleResume} />
+      <PauseOverlay paused={paused} onResume={handleResume} frozenTimeLabel={frozenTimeLabel} />
 
       <MobileNavSheet open={mobileNavOpen} onClose={() => setMobileNavOpen(false)}>
         <div className="flex flex-col gap-6">

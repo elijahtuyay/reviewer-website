@@ -28,14 +28,17 @@
   /*
    * The accent as TEXT or as a small icon, which is a different job from the
    * accent as a fill. Measured raw, --accent is 4.75:1 on the light background
-   * but only 3.11:1 on the dark one and 2.60:1 on the dark panel — i.e. it
-   * fails WCAG 1.4.3 for body text in dark mode outright.
+   * but only 3.11:1 on the dark one and 2.60:1 on the dark panel, i.e. it fails
+   * WCAG 1.4.3 for body text in dark mode outright. Light nudges toward black
+   * (5.96:1 on background, 6.55:1 on panel), dark toward white (6.59:1, 5.52:1).
    *
-   * Derived with color-mix rather than hard-coded so it tracks whatever accent
-   * the current exam sets: each exam only configures one hex, and every exam's
-   * text variant is computed from it instead of being a second value someone
-   * has to remember to add. Light nudges toward black (5.96:1 on background,
-   * 6.55:1 on panel), dark toward white (6.59:1 and 5.52:1).
+   * Derived with color-mix rather than hard-coded so each exam still configures
+   * only one hex. But note WHERE it is declared: a custom property containing
+   * var() is substituted at the element that DECLARES it, not at the element
+   * that uses it, and descendants inherit the already-resolved value. So this
+   * declaration is permanently bound to :root's --accent. An exam overriding
+   * --accent further down cannot change it, which is why .exam-theme below
+   * re-declares it on the wrapper that carries the override.
    */
   --accent-text: color-mix(in oklab, var(--accent), black 10%);
 }
@@ -49,6 +52,25 @@
   /* Dark: 4.82 on background, 4.04 on panel, 3.49 on panel-hover. */
   --line-strong: #878b93;
   --muted: #949ba4;
+  --accent-text: color-mix(in oklab, var(--accent), white 40%);
+}
+
+/*
+ * Re-declares --accent-text on the per-exam theme wrapper (see
+ * app/[examId]/layout.tsx), which is the element that sets --accent inline.
+ * Declaring it here means the var(--accent) inside color-mix resolves against
+ * THAT element's accent rather than :root's, so a GMAT page gets a blue accent
+ * text colour instead of silently inheriting the NMAT green.
+ *
+ * The two rules have to mirror the :root/.dark pair above rather than reusing
+ * them, because the value is a function of --accent and --accent is what
+ * changed. Kept adjacent to the originals so they are edited together.
+ */
+.exam-theme {
+  --accent-text: color-mix(in oklab, var(--accent), black 10%);
+}
+
+.dark .exam-theme {
   --accent-text: color-mix(in oklab, var(--accent), white 40%);
 }
 
