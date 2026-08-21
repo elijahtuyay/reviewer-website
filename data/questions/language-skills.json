@@ -151,8 +151,8 @@
     "prompt": "Passage: \"Researchers studying sleep have found that it plays an active role in strengthening memories formed during the day, a process known as memory consolidation. Rather than simply resting, the brain appears to replay and reorganize recent experiences during certain sleep stages, particularly during deep, slow-wave sleep. Studies involving both animals and humans have shown that people who sleep shortly after learning new information tend to retain it better than those who stay awake for a comparable period. Interestingly, not all types of memory benefit equally; procedural memory, such as the skill of playing a musical instrument, appears to depend more heavily on later stages of sleep, while factual memory seems to consolidate earlier in the night. This has led some researchers to recommend that students avoid pulling all-nighters before exams, since skipping sleep may undermine the very consolidation process needed to retain studied material. Although much about the relationship between sleep and memory remains under investigation, the existing evidence points clearly toward sleep being an active, necessary participant in learning rather than a passive break from it.\" Based on the passage, which finding would most directly challenge the claim that sleep is an active, necessary participant in learning?",
     "options": [
       "A study showing that students who napped briefly after studying outperformed those who did not nap.",
-      "A study showing that musicians who slept eight hours improved faster at a new piece than those who slept four.",
-      "A study showing that slow-wave sleep activity increases after intensive learning sessions.",
+      "A study showing that musicians who slept a full eight hours improved faster at learning a new piece than those who slept only four.",
+      "A study showing that slow-wave sleep activity increases in the hours after intensive learning sessions end.",
       "A study showing that students who stayed awake all night performed just as well on a factual recall test as those who slept."
     ],
     "correctIndex": 3,
@@ -340,15 +340,15 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "hard",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nR: Even so, nearly a third of the region's rice fields missed the optimal window.\nS: Those fields produced yields far below the five-year average.\nP: The monsoon arrived nearly a month late this year.\nQ: Farmers scrambled to adjust their planting schedules once it did.",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: Even so, nearly a third of the region's rice fields missed the optimal window.\nS: Those fields produced yields far below the five-year average.\nR: The monsoon arrived nearly a month late this year.\nP: Farmers scrambled to adjust their planting schedules once it did.",
     "options": [
       "PRQS",
-      "PQSR",
-      "QPRS",
-      "PQRS"
+      "PQRS",
+      "QRPS",
+      "RPQS"
     ],
     "correctIndex": 3,
-    "explanation": "P sets up the late monsoon, Q describes the immediate reaction (\"it\" needs the monsoon from P to refer to), R introduces a complication with \"Even so,\" which must follow the adjustment effort described in Q, and S states the consequence for the fields R identifies. In QPRS, \"it\" in Q has no antecedent yet. In PRQS, \"Even so\" appears before the adjustment it's supposed to contrast with. In PQSR, the outcome (S) is stated before the detail (R) that identifies which fields it refers to.",
+    "explanation": "R sets up the late monsoon, P describes the immediate reaction (\"it\" needs the monsoon from R to refer to), Q introduces a complication with \"Even so,\" which must follow the adjustment effort described in P, and S states the consequence for the fields Q identifies. In PRQS, \"it\" in P has no antecedent yet. In PQRS, the paragraph opens with farmers reacting to a monsoon that has not been mentioned, and \"Even so\" follows before there is anything to concede. In QRPS, \"Even so\" opens the paragraph with nothing before it to contrast against.",
     "source": "original"
   },
   {
@@ -356,15 +356,15 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "hard",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nP: However, the results were not as expected.\nQ: The scientists conducted the experiment three times.\nR: They decided to revise their hypothesis.\nS: Each time, they recorded the data carefully.",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: However, the results were not as expected.\nP: The scientists conducted the experiment three times.\nR: They decided to revise their hypothesis.\nS: Each time, they recorded the data carefully.",
     "options": [
-      "SQPR",
-      "QSPR",
-      "QSRP",
-      "QPSR"
+      "SPQR",
+      "PSQR",
+      "PSRQ",
+      "PQSR"
     ],
     "correctIndex": 1,
-    "explanation": "Q sets up the experiment, S describes the careful process during it (\"each time\" needs the repetition established in Q), P introduces the contrasting outcome, and R gives the resulting decision. In SQPR, \"each time\" comes before any repetition has been mentioned. In QSRP, the decision to revise (R) is stated before the surprising results (P) that motivated it. In QPSR, \"however\" in P appears with no prior expectation on record yet.",
+    "explanation": "P sets up the experiment, S describes the careful process during it (\"each time\" needs the repetition established in P), Q introduces the contrasting outcome, and R gives the resulting decision. In SPQR, \"each time\" comes before any repetition has been mentioned. In PSRQ, the decision to revise (R) is stated before the surprising results (Q) that motivated it. In PQSR, \"however\" in Q appears with no prior expectation on record yet.",
     "source": "original"
   },
   {
@@ -372,15 +372,15 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "hard",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nS: Many of them began shifting their listings to marketplaces outside the law's jurisdiction.\nP: Small sellers found the fee ate up a much larger share of their thin profit margins than it did for large retailers.\nQ: A new law was passed to regulate online marketplaces.\nR: It required every seller, regardless of size, to pay a flat listing fee.",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nR: Many of them began shifting their listings to marketplaces outside the law's jurisdiction.\nP: Small sellers found the fee ate up a much larger share of their thin profit margins than it did for large retailers.\nS: A new law was passed to regulate online marketplaces.\nQ: It required every seller, regardless of size, to pay a flat listing fee.",
     "options": [
-      "QRSP",
-      "QPRS",
-      "RQPS",
-      "QRPS"
+      "QSPR",
+      "QSRP",
+      "PSQR",
+      "SQPR"
     ],
     "correctIndex": 3,
-    "explanation": "Q introduces the law, R explains its specific requirement (\"it\" needs the law from Q), P shows the disproportionate effect on small sellers (\"the fee\" needs R), and S gives the resulting action (\"them\" needs the small sellers named in P). In RQPS, \"it\" in R has no antecedent yet. In QPRS, \"the fee\" in P is mentioned before R introduces it. In QRSP, \"them\" in S is ambiguous because P, which singles out small sellers specifically, hasn't appeared yet.",
+    "explanation": "S introduces the law, Q explains its specific requirement (\"it\" needs the law from S), P shows the disproportionate effect on small sellers (\"the fee\" needs Q), and R gives the resulting action (\"them\" needs the small sellers named in P). In QSPR, \"it\" in Q has no antecedent yet. In QSRP, \"it\" again opens with no law introduced, and \"them\" in R arrives before P has singled out small sellers. In PSQR, \"the fee\" is mentioned in P before Q has introduced any fee.",
     "source": "original"
   },
   {
@@ -422,10 +422,10 @@
     "difficulty": "medium",
     "prompt": "Passage: \"In recent years, several cities have begun encouraging residents to keep beehives on rooftops and in community gardens. Proponents argue that urban beekeeping helps pollinate city gardens and parks, supporting biodiversity in otherwise concrete-heavy environments. Critics, however, point out that a sudden rise in managed honeybee colonies can crowd out native wild bee species, which are often more effective pollinators for local plants but receive far less public attention. Some ecologists now recommend that cities balance beekeeping initiatives with programs that specifically protect native pollinator habitats, rather than treating honeybee introduction alone as a solution to urban biodiversity loss.\" What do some ecologists recommend, according to the passage?",
     "options": [
-      "Moving all beehives to rural areas.",
-      "Banning beekeeping in cities entirely.",
+      "Moving all beehives out of the city and into the surrounding rural areas.",
+      "Banning urban beekeeping entirely until more research is done.",
       "Balancing beekeeping with protection of native pollinator habitats.",
-      "Focusing exclusively on honeybee population growth."
+      "Focusing exclusively on growing the honeybee population."
     ],
     "correctIndex": 2,
     "explanation": "The passage explicitly recommends balancing beekeeping initiatives with programs protecting native pollinator habitats, rather than treating honeybees alone as the fix.",
@@ -454,10 +454,10 @@
     "difficulty": "easy",
     "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers. The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" What was the main finding of the study regarding productivity?",
     "options": [
-      "Remote workers were significantly less productive.",
-      "In-office workers were the most productive.",
+      "Remote workers were significantly less productive than the other groups.",
+      "In-office workers were clearly the most productive of the three.",
       "There was no significant difference in output across the three groups.",
-      "Hybrid workers were the least productive."
+      "Hybrid workers were the least productive of the three groups."
     ],
     "correctIndex": 2,
     "explanation": "The passage states directly that the study found no significant difference in output between the three groups.",
@@ -486,10 +486,10 @@
     "difficulty": "hard",
     "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers. The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" What concern do the study's authors raise at the end of the passage?",
     "options": [
-      "That hybrid work is too expensive to maintain.",
-      "That in-office work will soon become obsolete.",
+      "That hybrid working arrangements are too expensive for most firms to maintain.",
+      "That in-office work will become obsolete within a few years.",
       "That productivity metrics may not capture long-term effects of isolation.",
-      "That remote workers are less honest about their output."
+      "That remote workers are less honest when reporting their own output."
     ],
     "correctIndex": 2,
     "explanation": "The passage's final sentence states this caution directly: productivity metrics alone may not capture the long-term effects of isolation on retention.",
@@ -648,7 +648,7 @@
     "options": [
       "about",
       "of",
-      "for",
+      "at",
       "on"
     ],
     "correctIndex": 3,
@@ -742,10 +742,10 @@
     "difficulty": "hard",
     "prompt": "Passage: \"In recent years, several cities have begun encouraging residents to keep beehives on rooftops and in community gardens. Proponents argue that urban beekeeping helps pollinate city gardens and parks, supporting biodiversity in otherwise concrete-heavy environments. Critics, however, point out that a sudden rise in managed honeybee colonies can crowd out native wild bee species, which are often more effective pollinators for local plants but receive far less public attention. Some ecologists now recommend that cities balance beekeeping initiatives with programs that specifically protect native pollinator habitats, rather than treating honeybee introduction alone as a solution to urban biodiversity loss.\" Based on the passage, which of the following best describes the relationship between the arguments of proponents and critics of urban beekeeping?",
     "options": [
-      "Critics reject the ecological value proponents claim, arguing honeybees provide no pollination benefit at all.",
-      "Proponents and critics agree on every point except the cost of maintaining hives.",
-      "Proponents and critics both agree that urban beekeeping should be banned until further research is completed.",
-      "Proponents emphasize honeybees' contribution to pollination, while critics warn that this benefit may come at the expense of native pollinators."
+      "Critics reject the ecological value proponents claim, arguing that honeybees provide no pollination benefit at all.",
+      "Proponents and critics agree on every point except the cost of maintaining hives in the city.",
+      "Proponents and critics both agree that urban beekeeping should be banned entirely until further research is completed.",
+      "Proponents stress honeybees' pollination role, while critics warn it may come at the expense of native pollinators."
     ],
     "correctIndex": 3,
     "explanation": "The passage frames a genuine tension rather than flat disagreement: proponents value the pollination and biodiversity support beekeeping provides, while critics do not deny that value outright but warn it may crowd out native bees. The option claiming critics say honeybees provide no pollination benefit at all mischaracterizes them, since the passage never says that. The two options describing broad agreement, one on everything except cost and one on banning beekeeping outright, both assert a consensus that is not present in the text.",
@@ -758,13 +758,13 @@
     "difficulty": "hard",
     "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers. The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" Which of the following, if true, would most directly support the study authors' caution about relying on productivity metrics alone?",
     "options": [
-      "A separate survey found that hybrid employees preferred working from the office three days a week.",
-      "A separate survey found that isolated remote employees were more likely to leave their jobs within a year, despite strong individual performance reviews.",
-      "A separate survey found that productivity software adoption increased across all three groups.",
-      "A separate survey found that in-office employees took more sick days than remote employees."
+      "A separate survey found that hybrid employees preferred working from the office about three days a week.",
+      "A separate survey found that isolated remote employees were more likely to leave their jobs within a year.",
+      "A separate survey found that adoption of productivity software increased across all three of the groups studied.",
+      "A separate survey found that in-office employees took considerably more sick days than remote employees."
     ],
     "correctIndex": 1,
-    "explanation": "The authors' caution is specifically that productivity metrics may miss the effect of isolation on retention. A finding that isolated employees quit despite strong performance reviews illustrates exactly that gap between measured output and retention risk. The other options describe unrelated findings about office preferences, sick days, or software adoption that don't speak to the retention concern at all.",
+    "explanation": "The authors' caution is specifically that productivity metrics may miss the effect of isolation on retention. A finding that isolated remote employees are more likely to leave within a year illustrates exactly that gap between measured output and retention risk. The other options describe unrelated findings about office preferences, sick days, or software adoption that don't speak to the retention concern at all.",
     "source": "original"
   },
   {
@@ -793,7 +793,7 @@
       "Stage",
       "Actor",
       "Play",
-      "Script"
+      "Curtain"
     ],
     "correctIndex": 2,
     "explanation": "A chapter is a structural part of a book; a scene is the parallel structural part of a play. The relationship is part-to-whole.",
@@ -924,7 +924,7 @@
       "Boots"
     ],
     "correctIndex": 1,
-    "explanation": "A tailor makes clothes, a general category of product; a cobbler makes the parallel general category, shoes. \"Boots\" is too specific a subtype, just as \"shirt\" would be too specific a substitute for \"clothes.\"",
+    "explanation": "A tailor works on clothes, a general category of product; a cobbler works on the parallel general category, shoes. \"Boots\" is too specific a subtype, just as \"shirt\" would be too specific a substitute for \"clothes.\"",
     "source": "original"
   },
   {
@@ -1156,15 +1156,15 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "medium",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nP: Container ships already en route were forced to idle offshore, waiting for clearance to dock.\nS: Medical suppliers reported that shipments of insulin and other temperature-sensitive drugs were delayed by more than ten days.\nR: Several ports along the coast suspended operations rather than risk damage to loaded vessels.\nQ: A severe storm disrupted shipping routes across the region for nearly a week.",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nP: Container ships already en route were forced to idle offshore, waiting for clearance to dock.\nS: Medical suppliers reported that shipments of insulin and other temperature-sensitive drugs were delayed by more than ten days.\nQ: Several ports along the coast suspended operations rather than risk damage to loaded vessels.\nR: A severe storm disrupted shipping routes across the region for nearly a week.",
     "options": [
-      "QRSP",
-      "QPRS",
-      "QRPS",
-      "RQPS"
+      "RQSP",
+      "RPQS",
+      "RQPS",
+      "QRPS"
     ],
     "correctIndex": 2,
-    "explanation": "Q introduces the storm, R shows the ports' immediate response (\"risk damage\" needs the storm from Q), P shows the knock-on effect on ships already at sea (\"waiting for clearance to dock\" needs the port closures in R), and S reports the specific, serious consequence. In QPRS, \"clearance to dock\" is mentioned before any port has closed. In RQPS, \"risk damage\" appears with no storm mentioned yet. In QRSP, the downstream supply delays (S) are placed before the idling ships (P) whose situation actually explains part of the delay.",
+    "explanation": "R introduces the storm, Q shows the ports' immediate response (\"risk damage\" needs the storm from R), P shows the knock-on effect on ships already at sea (\"waiting for clearance to dock\" needs the port closures in Q), and S reports the specific, serious consequence. In RPQS, \"clearance to dock\" is mentioned before any port has closed. In QRPS, \"risk damage\" appears with no storm mentioned yet. In RQSP, the downstream supply delays (S) are placed before the idling ships (P) whose situation actually explains part of the delay.",
     "source": "original"
   },
   {
@@ -1172,15 +1172,15 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "medium",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nR: Within weeks, sales figures began to recover.\nS: Analysts attributed the turnaround to the renewed brand visibility.\nQ: Sales of the product had been steadily declining for two quarters.\nP: The company therefore launched an aggressive marketing campaign.",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nR: Within weeks, sales figures began to recover.\nS: Analysts attributed the turnaround to the renewed brand visibility.\nP: Sales of the product had been steadily declining for two quarters.\nQ: The company therefore launched an aggressive marketing campaign.",
     "options": [
-      "QRPS",
       "QPRS",
-      "PQRS",
-      "QPSR"
+      "QPSR",
+      "RQPS",
+      "PQRS"
     ],
-    "correctIndex": 1,
-    "explanation": "Q states the problem, P describes the response (\"therefore\" needs the decline in Q), R shows the result, and S explains why (\"the turnaround\" needs the recovery described in R). In QRPS, sales recover before the campaign that supposedly caused it even launches. In PQRS, \"therefore\" opens the paragraph with no problem yet stated. In QPSR, \"the turnaround\" in S is named before R ever describes what turned around.",
+    "correctIndex": 3,
+    "explanation": "P states the problem, Q describes the response (\"therefore\" needs the decline in P), R shows the result, and S explains why (\"the turnaround\" needs the recovery described in R). In QPRS, \"therefore\" opens the paragraph with no problem yet stated. In QPSR, \"therefore\" again opens with no decline stated, and \"the turnaround\" in S precedes the recovery in R. In RQPS, sales recover in the opening sentence, before any decline or campaign has been described.",
     "source": "original"
   },
   {
@@ -1188,15 +1188,15 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "hard",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nP: Once the announcement went public, volunteers spent several more weeks cataloging the newly acquired artifacts before the exhibit's opening night.\nR: On opening night, the queue outside the museum stretched for two full blocks.\nQ: The museum announced a new exhibit on ancient trade routes, drawing immediate attention from local press.\nS: Curators had already spent the previous eighteen months quietly acquiring rare pieces from private collectors ahead of that announcement.",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nP: Once the announcement went public, volunteers spent several more weeks cataloging the newly acquired artifacts before the exhibit's opening night.\nQ: On opening night, the queue outside the museum stretched for two full blocks.\nS: The museum announced a new exhibit on ancient trade routes, drawing immediate attention from local press.\nR: Curators had already spent the previous eighteen months quietly acquiring rare pieces from private collectors ahead of that announcement.",
     "options": [
-      "QPSR",
-      "QSPR",
-      "SQPR",
-      "QSRP"
+      "SPRQ",
+      "SRPQ",
+      "RSPQ",
+      "SRQP"
     ],
     "correctIndex": 1,
-    "explanation": "Q announces the exhibit, S looks back at the quiet preparation before that announcement (\"that announcement\" needs Q), P covers the public cataloging phase that followed (\"newly acquired artifacts\" needs S), and R gives the opening-night payoff. In SQPR, \"that announcement\" is referenced before Q ever makes one. In QPSR, \"newly acquired artifacts\" appears before S has explained any acquisition. In QSRP, the opening-night result (R) is placed before the cataloging (P) that had to happen first.",
+    "explanation": "S announces the exhibit, R looks back at the quiet preparation before that announcement (\"that announcement\" needs S), P covers the public cataloging phase that followed (\"newly acquired artifacts\" needs R), and Q gives the opening-night payoff. In RSPQ, \"that announcement\" is referenced before S ever makes one. In SPRQ, \"newly acquired artifacts\" appears before R has explained any acquisition. In SRQP, the opening-night result (Q) is placed before the cataloging (P) that had to happen first.",
     "source": "original"
   },
   {
@@ -1238,13 +1238,13 @@
     "difficulty": "medium",
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nS: The airline's customer service lines stayed jammed for nearly forty-eight hours as travelers tried to rebook.\nP: By the time the fleet resumed flying, the airline had already begun processing refunds for every cancelled route.\nQ: A technical malfunction grounded the airline's entire fleet for two days without warning.\nR: Passengers holding same-day tickets found their flights cancelled minutes before scheduled boarding.",
     "options": [
-      "QSRP",
       "RQSP",
-      "QRSP",
-      "QRPS"
+      "RQPS",
+      "SQRP",
+      "QRSP"
     ],
-    "correctIndex": 2,
-    "explanation": "Q introduces the malfunction, R shows the immediate consequence for passengers (\"cancelled\" needs the grounding in Q), S shows the resulting strain on customer service (\"as travelers tried to rebook\" needs the cancellations in R), and P gives the eventual resolution. In RQSP, flights are cancelled before any cause has been given. In QSRP, travelers are shown trying to rebook cancelled flights before R has actually mentioned any cancellations. In QRPS, the refund process (P) is placed before the forty-eight-hour customer service crunch (S) it's supposed to follow.",
+    "correctIndex": 3,
+    "explanation": "Q introduces the malfunction, R shows the immediate consequence for passengers (\"cancelled\" needs the grounding in Q), S shows the resulting strain on customer service (\"as travelers tried to rebook\" needs the cancellations in R), and P gives the eventual resolution. In RQSP, flights are cancelled before any cause has been given. In RQPS, cancellations again precede their cause, and the refund process in P comes before the customer service crunch in S. In SQRP, travelers are rebooking cancelled flights before Q or R has mentioned a grounding or any cancellations.",
     "source": "original"
   },
   {
@@ -1366,10 +1366,10 @@
     "difficulty": "medium",
     "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" What is the primary purpose of the passage?",
     "options": [
-      "To describe the history of underwater photography.",
+      "To describe the history of underwater photography and its role in marine research.",
       "To explain coral gardening and the limitations scientists associate with it.",
-      "To criticize marine biologists for neglecting coral reefs.",
-      "To argue that pollution has no effect on coral reefs."
+      "To criticize marine biologists for neglecting the study of coral reefs.",
+      "To argue that pollution has had no real effect on coral reef health."
     ],
     "correctIndex": 1,
     "explanation": "The passage explains how coral gardening works and then discusses the limitations and caveats that researchers attach to it, making \"to explain coral gardening and the limitations scientists associate with it\" the accurate summary of its purpose.",
@@ -1414,9 +1414,9 @@
     "difficulty": "hard",
     "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" What can be inferred from the passage about the future of coral gardening if ocean temperatures and pollution levels are not addressed?",
     "options": [
-      "Coral gardening will become unnecessary.",
-      "Coral gardening alone will fully restore damaged reefs.",
-      "Ocean temperatures will decrease naturally over time.",
+      "Coral gardening will soon become unnecessary as reefs recover naturally.",
+      "Coral gardening on its own will fully restore the damaged reefs given enough time and funding.",
+      "Ocean temperatures will decrease naturally over the next several decades.",
       "Newly planted corals will remain vulnerable to the same stresses that caused reef decline."
     ],
     "correctIndex": 3,
@@ -1431,9 +1431,9 @@
     "prompt": "Passage: \"Researchers studying sleep have found that it plays an active role in strengthening memories formed during the day, a process known as memory consolidation. Rather than simply resting, the brain appears to replay and reorganize recent experiences during certain sleep stages, particularly during deep, slow-wave sleep. Studies involving both animals and humans have shown that people who sleep shortly after learning new information tend to retain it better than those who stay awake for a comparable period. Interestingly, not all types of memory benefit equally; procedural memory, such as the skill of playing a musical instrument, appears to depend more heavily on later stages of sleep, while factual memory seems to consolidate earlier in the night. This has led some researchers to recommend that students avoid pulling all-nighters before exams, since skipping sleep may undermine the very consolidation process needed to retain studied material. Although much about the relationship between sleep and memory remains under investigation, the existing evidence points clearly toward sleep being an active, necessary participant in learning rather than a passive break from it.\" What is memory consolidation, as described in the passage?",
     "options": [
       "The process by which the brain strengthens and reorganizes memories during sleep.",
-      "The process of forgetting unimportant information.",
-      "A type of sleep disorder.",
-      "A technique used to memorize facts quickly while awake."
+      "The process by which the brain gradually discards information that is not important.",
+      "A type of sleep disorder that interferes with normal memory formation.",
+      "A study technique used to memorize large numbers of facts quickly while awake."
     ],
     "correctIndex": 0,
     "explanation": "The passage defines memory consolidation as sleep's active role in \"strengthening memories\" by replaying and reorganizing recent experiences.",
@@ -1447,8 +1447,8 @@
     "prompt": "Passage: \"Researchers studying sleep have found that it plays an active role in strengthening memories formed during the day, a process known as memory consolidation. Rather than simply resting, the brain appears to replay and reorganize recent experiences during certain sleep stages, particularly during deep, slow-wave sleep. Studies involving both animals and humans have shown that people who sleep shortly after learning new information tend to retain it better than those who stay awake for a comparable period. Interestingly, not all types of memory benefit equally; procedural memory, such as the skill of playing a musical instrument, appears to depend more heavily on later stages of sleep, while factual memory seems to consolidate earlier in the night. This has led some researchers to recommend that students avoid pulling all-nighters before exams, since skipping sleep may undermine the very consolidation process needed to retain studied material. Although much about the relationship between sleep and memory remains under investigation, the existing evidence points clearly toward sleep being an active, necessary participant in learning rather than a passive break from it.\" According to the passage, what distinguishes procedural memory from factual memory in terms of sleep?",
     "options": [
       "Procedural memory depends more on later stages of sleep, while factual memory consolidates earlier.",
-      "Procedural memory does not require sleep at all.",
-      "Both types of memory consolidate at exactly the same time.",
+      "Procedural memory does not appear to require sleep at all.",
+      "Both types of memory consolidate at exactly the same point in the night.",
       "Factual memory depends more on later stages of sleep, while procedural memory consolidates earlier."
     ],
     "correctIndex": 0,
@@ -1463,9 +1463,9 @@
     "prompt": "Passage: \"Researchers studying sleep have found that it plays an active role in strengthening memories formed during the day, a process known as memory consolidation. Rather than simply resting, the brain appears to replay and reorganize recent experiences during certain sleep stages, particularly during deep, slow-wave sleep. Studies involving both animals and humans have shown that people who sleep shortly after learning new information tend to retain it better than those who stay awake for a comparable period. Interestingly, not all types of memory benefit equally; procedural memory, such as the skill of playing a musical instrument, appears to depend more heavily on later stages of sleep, while factual memory seems to consolidate earlier in the night. This has led some researchers to recommend that students avoid pulling all-nighters before exams, since skipping sleep may undermine the very consolidation process needed to retain studied material. Although much about the relationship between sleep and memory remains under investigation, the existing evidence points clearly toward sleep being an active, necessary participant in learning rather than a passive break from it.\" Why does the passage suggest students should avoid pulling all-nighters before exams?",
     "options": [
       "Because skipping sleep may undermine the consolidation process needed to retain studied material.",
-      "Because staying awake improves memory consolidation.",
-      "Because all-nighters cause permanent memory loss.",
-      "Because exams are easier after a full night's sleep regardless of studying."
+      "Because staying awake for longer actually improves memory consolidation.",
+      "Because pulling all-nighters causes permanent and irreversible memory loss.",
+      "Because exams always feel easier after a full night's sleep regardless of how much studying was done."
     ],
     "correctIndex": 0,
     "explanation": "The passage states this reasoning directly: skipping sleep \"may undermine the very consolidation process needed to retain studied material.\"",
@@ -1476,7 +1476,7 @@
     "section": "language-skills",
     "topic": "Vocabulary in Context",
     "difficulty": "easy",
-    "prompt": "In the sentence below, the word \"abundant\" most nearly means:\n\n\"After the rainy season, the region's rivers became abundant with fish, and local fishermen struggled to keep up with the size of their daily catch.\"",
+    "prompt": "In the sentence below, the word \"abundant\" most nearly means:\n\n\"After the rainy season, fish became abundant in the region's rivers, and local fishermen struggled to keep up with the size of their daily catch.\"",
     "options": [
       "Unpredictable",
       "Scarce",

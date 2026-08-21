@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-21, at PR #13 / VERSION.txt `1.11.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-21, at PR #14 / VERSION.txt `1.12.0`.
 
 ## What this project is
 
@@ -121,6 +121,23 @@ All four lanes ran. Beyond the items above they surfaced, and this PR fixes:
 - `interleaveByTopic` now prefers no two adjacent questions to share a topic (was: no more than two in a row). The old greedy largest-first pick meant every attempt opened with a matched pair. Measured over 400 draws per section: zero adjacent same-topic pairs.
 - Scores now show `21 / 108` plus a percentage and an explicit "this is not an NMAT scaled score" note; progress-grid legend leads with colour; `/gmat` shows its mapped-out format instead of being a dead end; quiz header no longer truncates the h1 to "Langua…" at 390px; pause overlay shows the frozen clock.
 
+- **PR #14** (v1.12.0) — question-bank statistical + correctness pass, closing the length-bias hole PR #7 left open. No app code changed. Details in "Answer-key statistics" below.
+
+### Answer-key statistics (re-measure before trusting any claim about these)
+
+The bank has now been hardened against three different "answer without reading" strategies. All three were measured, fixed, and re-measured:
+
+| Strategy | Before | After | Chance |
+| --- | --- | --- | --- |
+| Always pick slot 1 | 25.0% (already fine since PR #7) | 25.3% | 25% |
+| Pick the longest option (prose questions) | 47% overall; **94.7% on Critical Reasoning**, 75% on Reading Comprehension | **14.7%** overall, 0% on CR, 3.6% on RC | 25% |
+| Para Forming: assume the answer starts with Q | 8 of 10 keys opened with Q, 0 with R or S | P3 / Q3 / R2 / S2 | even |
+| Para Forming: pick the majority opening letter | never eliminated the key (10/10) | key is in the plurality 6/10 | mixed |
+
+Data Sufficiency was also restored to **canonical A-E statement order** (PR #7's bank-wide option shuffle had scrambled all 11, which trains the wrong habit since real DS uses a fixed memorised order), and rebalanced from "both together" being correct 5 of 11 times to 2/2/3/2/2 across A-E. Two questions were rewritten to achieve that: `qs-036` now hinges on the $(l+w)^2$ identity so statement (1) alone suffices, and `qs-095` is now genuinely insufficient even combined.
+
+**If you add Critical Reasoning, Reading Comprehension, or Para Forming questions, check these numbers again.** The natural way to write a CR question is a long, carefully-hedged correct answer next to three short dismissive distractors, which is exactly how the 94.7% happened.
+
 ### Open, deliberately not done in PR #13
 
 1. **The whole 300-question bank ships to the client on every page** (~220 KB), on `/[examId]` as well as every quiz section. Fix means making the bank load per-section, which means `lib/section-result.ts` and its render-time callers go async, or the per-section score is persisted at submit so the breakdown never needs the bank. Own PR.
@@ -129,7 +146,7 @@ All four lanes ran. Beyond the items above they surfaced, and this PR fixes:
 4. `ProgressTracker` cells are 28px, under the 44px minimum the rest of the app holds to.
 5. `ConfirmDialog` styles the confirming action as a red outline and the cancel as solid green. A reviewer called this inverted; it is a **documented deliberate choice** from an earlier PR (green = keeps your work). Left alone pending a decision.
 
-**Current state: `main` is clean, builds and lints with zero errors/warnings, at v1.11.0.**
+**Current state: `main` is clean, builds and lints with zero errors/warnings, at v1.12.0.**
 
 ## Lesson learned: never run multiple agents against the same data file concurrently
 
