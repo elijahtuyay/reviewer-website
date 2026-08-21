@@ -255,7 +255,14 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
 
   function handlePause() {
     setPaused(true);
-    persist(answers, false, { pausedAt: Date.now() });
+    // Read through the updater, not the render closure, for the same reason
+    // closeOut does: an answer click and a pause in the same frame would
+    // otherwise write a one-render-stale answer map over the fresh one.
+    const pausedAt = Date.now();
+    setAnswers((prev) => {
+      persist(prev, false, { pausedAt });
+      return prev;
+    });
   }
 
   function handleResume() {
@@ -266,7 +273,12 @@ export default function QuizPage({ params }: { params: Promise<{ examId: string;
 
   function handleDeadlineChange(nextDeadline: number) {
     setDeadline(nextDeadline);
-    persist(answers, false, { deadline: nextDeadline });
+    // Same updater-read as handlePause/closeOut: this fires from the Timer's
+    // resume effect, so the answer map it writes must be the committed one.
+    setAnswers((prev) => {
+      persist(prev, false, { deadline: nextDeadline });
+      return prev;
+    });
   }
 
   /** Wipes this section's saved attempt and starts over with a freshly drawn question set. */

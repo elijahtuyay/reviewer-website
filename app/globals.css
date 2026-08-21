@@ -25,6 +25,19 @@
   /* Default accent (NMAT green) — overridden per-exam by app/[examId]/layout.tsx. */
   --accent: #0f7b4d;
   --accent-foreground: #ffffff;
+  /*
+   * The accent as TEXT or as a small icon, which is a different job from the
+   * accent as a fill. Measured raw, --accent is 4.75:1 on the light background
+   * but only 3.11:1 on the dark one and 2.60:1 on the dark panel — i.e. it
+   * fails WCAG 1.4.3 for body text in dark mode outright.
+   *
+   * Derived with color-mix rather than hard-coded so it tracks whatever accent
+   * the current exam sets: each exam only configures one hex, and every exam's
+   * text variant is computed from it instead of being a second value someone
+   * has to remember to add. Light nudges toward black (5.96:1 on background,
+   * 6.55:1 on panel), dark toward white (6.59:1 and 5.52:1).
+   */
+  --accent-text: color-mix(in oklab, var(--accent), black 10%);
 }
 
 .dark {
@@ -36,6 +49,7 @@
   /* Dark: 4.82 on background, 4.04 on panel, 3.49 on panel-hover. */
   --line-strong: #878b93;
   --muted: #949ba4;
+  --accent-text: color-mix(in oklab, var(--accent), white 40%);
 }
 
 @theme inline {
@@ -48,14 +62,22 @@
   --color-muted: var(--muted);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-text: var(--accent-text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+/*
+ * The font stack names --font-geist-sans explicitly rather than leaning on
+ * Tailwind's preflight default. Preflight sets the family on `html`, and a
+ * `body` rule of its own overrides it for every descendant — which is what a
+ * leftover `font-family: Arial` here was doing: next/font downloaded Geist on
+ * every page load and nothing ever rendered in it.
+ */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
 /*
