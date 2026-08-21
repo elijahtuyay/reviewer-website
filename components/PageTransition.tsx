@@ -11,7 +11,16 @@ import { usePathname } from "next/navigation";
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   return (
-    <div key={pathname} className="page-transition flex flex-1 flex-col">
+    // tabIndex={-1} so the "Skip to content" link in the root layout can move
+    // focus here, not just scroll to it. -1 keeps it out of the normal tab
+    // order; without it the browser would scroll but leave focus in the header,
+    // so the next Tab would drop back into the nav the user just skipped.
+    <div
+      key={pathname}
+      id="main-content"
+      tabIndex={-1}
+      className="page-transition flex flex-1 flex-col outline-none"
+    >
       {children}
     </div>
   );

@@ -1,7 +1,39 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getExamConfig, isValidExamId } from "@/lib/exam-config";
 import SessionResetNotice from "@/components/SessionResetNotice";
+
+/**
+ * Per-exam title/description. The root layout supplies the `%s | Exam Reviewer`
+ * template, so this sets only the exam's own name. An exam with no bank yet is
+ * explicitly noindex — a "coming soon" page in search results is a dead end.
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ examId: string }>;
+}): Promise<Metadata> {
+  const { examId } = await params;
+  if (!isValidExamId(examId)) return {};
+  const exam = getExamConfig(examId);
+  const totalQuestions = exam.sections.reduce((sum, s) => sum + s.questionCount, 0);
+
+  return {
+    title: exam.available ? `${exam.label} practice exam` : `${exam.label} (coming soon)`,
+    description: exam.available
+      ? `Free ${exam.shortLabel} practice: ${totalQuestions} questions across ${exam.sections.length} independently-timed sections, with a written explanation for every answer.`
+      : exam.description,
+    alternates: { canonical: `/${exam.id}` },
+    robots: exam.available ? undefined : { index: false, follow: true },
+    openGraph: {
+      type: "website",
+      url: `/${exam.id}`,
+      title: exam.available ? `${exam.label} practice exam` : `${exam.label} (coming soon)`,
+      description: exam.description,
+    },
+  };
+}
 
 export default async function ExamSetupPage({ params }: { params: Promise<{ examId: string }> }) {
   const { examId } = await params;
