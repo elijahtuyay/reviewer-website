@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { EXAM_LIST } from "@/lib/exams/registry";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL } from "@/lib/site-url";
 
 /**
  * Only pages that render real server-side content AND are indexable: the home
