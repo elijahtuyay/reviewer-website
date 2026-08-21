@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-21, at PR #15 / VERSION.txt `2.0.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-21, at PR #16 / VERSION.txt `2.0.1`.
 
 ## What this project is
 
@@ -110,7 +110,7 @@ python -c "import json,io,collections; c=collections.Counter(); [c.update([q['co
 
 As of v1.10.0 the build emits no dynamic routes: `npm run build`'s route table should show only `○ (Static)` and `● (SSG)`. There is no database, no runtime secret, and no request-time work.
 
-`SITE_URL` (`lib/site.ts`) resolves at build time from `NEXT_PUBLIC_SITE_URL`, then Vercel's automatic `VERCEL_PROJECT_PRODUCTION_URL`, then localhost. The middle step exists specifically so a deploy that forgets the first cannot silently publish a sitemap and a full set of canonicals pointing at `http://localhost:3000`. **Only set `NEXT_PUBLIC_SITE_URL` once a custom domain exists.** Every consumer of `SITE_URL` is a Server Component or metadata route; check that before importing it into anything marked `"use client"`, since the Vercel variable is not `NEXT_PUBLIC_` and would be undefined in a client bundle.
+`SITE_URL` lives in **`lib/site-url.ts`**, not `lib/site.ts`, and that split is load-bearing: it reads a non-`NEXT_PUBLIC_` variable, so if it were ever bundled for the browser it would silently resolve to localhost. `lib/site.ts` keeps only client-safe constants. The URL module also carries `import "server-only"`, which turns importing it from a Client Component into a build error rather than a silent one (verified by deliberately doing it). It resolves at build time from `NEXT_PUBLIC_SITE_URL`, then Vercel's automatic `VERCEL_PROJECT_PRODUCTION_URL`, then localhost. The middle step exists specifically so a deploy that forgets the first cannot silently publish a sitemap and a full set of canonicals pointing at `http://localhost:3000`. **Only set `NEXT_PUBLIC_SITE_URL` once a custom domain exists.** Every consumer of `SITE_URL` is a Server Component or metadata route; check that before importing it into anything marked `"use client"`, since the Vercel variable is not `NEXT_PUBLIC_` and would be undefined in a client bundle.
 
 ### Review-lane findings applied in the same PR
 

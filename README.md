@@ -56,8 +56,8 @@ The site runs on Vercel's Hobby plan. Next.js is Vercel's own framework, so ther
 
 Two things to know about the Hobby plan:
 
-- **It never bills you.** Exceeding a limit pauses the project rather than charging. No card is required.
-- **It is for non-commercial use only.** Ads, payments, or a paid plan put the project in breach of Vercel's terms. At that point the choice is Vercel Pro or a migration to Cloudflare Workers, which permits commercial use on its free tier. That migration is roughly a day of work, not a rewrite, because nothing in the app depends on Vercel-specific APIs.
+- **It never bills you.** Exceeding a limit pauses the affected feature (for 30 days) rather than charging you. No card is required.
+- **It is for non-commercial use only.** Ads, payments, a paid plan, *or a donations link* all count as commercial use under Vercel's fair-use policy, as does being paid to build or host the site. A "buy me a coffee" button is the most likely way a free study tool trips this. At that point the choice is Vercel Pro or a migration to Cloudflare Workers, which permits commercial use on its free tier. That migration is roughly a day of work, not a rewrite, because nothing in the app depends on Vercel-specific APIs.
 
 If you ever do move: the caveat to remember is that prerendered 404s (e.g. `/gmat/quiz/quant`) carry their status in `.meta` sidecars that only a Next-aware runtime reads. A plain static file server would serve those "Page not found" pages with HTTP 200, a soft 404. Use a real adapter, or run `output: "export"` and accept its constraints, rather than uploading `.next` to a bucket.
 
@@ -65,15 +65,15 @@ If you ever do move: the caveat to remember is that prerendered 404s (e.g. `/gma
 
 | Variable               | Purpose                                                            |
 | ---------------------- | ------------------------------------------------------------------ |
-| `NEXT_PUBLIC_SITE_URL` | Canonical **origin** — scheme and host only, no path, no trailing slash (`https://example.com`). Feeds `metadataBase`, `sitemap.xml`, and `robots.txt`. Defaults to `http://localhost:3000` when unset, so a deploy without it emits localhost URLs in the sitemap. A subpath value (`https://example.com/app`) is not supported: `metadataBase` would resolve canonicals against the origin while the sitemap kept the subpath, and the two would disagree. |
+| `NEXT_PUBLIC_SITE_URL` | Canonical **origin** — scheme and host only, no path, no trailing slash (`https://example.com`). Feeds `metadataBase`, `sitemap.xml`, and `robots.txt`. Optional on Vercel (see the resolution order below). A subpath value (`https://example.com/app`) is not supported: `metadataBase` would resolve canonicals against the origin while the sitemap kept the subpath, and the two would disagree. |
 
-`SITE_URL` resolves at build time in three steps, so a Vercel deploy is correct even if you set nothing:
+`SITE_URL` resolves at build time in three steps, so a Vercel deploy is correct without setting anything, provided *Settings → Environment Variables → Automatically expose System Environment Variables* stays enabled (it is on by default):
 
 1. `NEXT_PUBLIC_SITE_URL` if present — an explicit override, and what a custom domain sets.
 2. `VERCEL_PROJECT_PRODUCTION_URL` — injected by Vercel automatically, so the first deploy emits real absolute URLs rather than a sitemap full of `http://localhost:3000`.
 3. `http://localhost:3000` for local development.
 
-You therefore only need to set `NEXT_PUBLIC_SITE_URL` once you own a custom domain. Set it in Settings → Environment Variables and redeploy; it is baked in at build time, not read at runtime.
+`VERCEL_PROJECT_PRODUCTION_URL` already resolves to the shortest production custom domain once one is attached, so adding a domain does not by itself force you to set the override. Two things do: pinning the canonical when several domains are attached (Vercel picks the shortest, which may not be the one you want), and the fact that attaching a domain does not trigger a rebuild — so the sitemap keeps the old host until the next push. Set it in Settings → Environment Variables and redeploy; it is baked in at build time, not read at runtime.
 
 Verify after any deploy that changes the origin:
 

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL } from "@/lib/site-url";
 
 /**
  * Nothing is disallowed here on purpose. Quiz routes must stay out of the

@@ -4,7 +4,8 @@ import ThemeInitScript from "@/components/ThemeInitScript";
 import SiteHeader from "@/components/SiteHeader";
 import PageTransition from "@/components/PageTransition";
 import SiteFooter from "@/components/SiteFooter";
-import { SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
+import { SITE_NAME, SITE_TAGLINE } from "@/lib/site";
+import { SITE_URL } from "@/lib/site-url";
 import "katex/dist/katex.min.css";
 import "./globals.css";
 

@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { AVAILABLE_EXAMS, EXAM_LIST, totalMinutes, totalQuestions } from "@/lib/exams/registry";
 import { ExamModule } from "@/lib/exams/types";
 import { loadSection } from "@/lib/question-bank";
-import { AFFILIATION_DISCLAIMER, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
+import { AFFILIATION_DISCLAIMER, SITE_NAME, SITE_TAGLINE } from "@/lib/site";
+import { SITE_URL } from "@/lib/site-url";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
