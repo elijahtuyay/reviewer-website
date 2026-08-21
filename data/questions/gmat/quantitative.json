@@ -1,0 +1,482 @@
+[
+  {
+    "id": "gq-001",
+    "section": "quantitative",
+    "topic": "Arithmetic: Percents",
+    "difficulty": "easy",
+    "prompt": "A jacket priced at 240 dollars is discounted by 15 percent. What is the sale price?",
+    "options": [
+      "225 dollars",
+      "216 dollars",
+      "196 dollars",
+      "204 dollars"
+    ],
+    "correctIndex": 3,
+    "explanation": "A 15 percent discount leaves 85 percent of the original price. $240 \\times 0.85 = 204$. A common slip is subtracting 15 rather than 15 percent, which would give 225.",
+    "source": "original"
+  },
+  {
+    "id": "gq-002",
+    "section": "quantitative",
+    "topic": "Arithmetic: Ratios",
+    "difficulty": "easy",
+    "prompt": "The ratio of pens to pencils in a drawer is $3:5$. If there are 25 pencils, how many pens are there?",
+    "options": [
+      "15",
+      "12",
+      "14",
+      "18"
+    ],
+    "correctIndex": 0,
+    "explanation": "The 5 parts of the ratio correspond to 25 pencils, so one part is 25 divided by 5, which is 5. Pens are 3 parts, so there are 15. Subtracting the ratio difference from 25, or applying the ratio the wrong way round, produces the other options.",
+    "source": "original"
+  },
+  {
+    "id": "gq-003",
+    "section": "quantitative",
+    "topic": "Algebra: Linear Equations",
+    "difficulty": "easy",
+    "prompt": "If $5x - 8 = 3x + 10$, what is the value of $x$?",
+    "options": [
+      "18",
+      "6",
+      "1",
+      "9"
+    ],
+    "correctIndex": 3,
+    "explanation": "Collect the variable terms: $5x - 3x = 10 + 8$, so $2x = 18$ and $x = 9$. Substituting back, both sides equal 37.",
+    "source": "original"
+  },
+  {
+    "id": "gq-004",
+    "section": "quantitative",
+    "topic": "Statistics: Averages",
+    "difficulty": "easy",
+    "prompt": "The average of five numbers is 14. What is their sum?",
+    "options": [
+      "70",
+      "64",
+      "19",
+      "56"
+    ],
+    "correctIndex": 0,
+    "explanation": "An average is the sum divided by the count, so the sum is the average times the count: $14 \\times 5 = 70$.",
+    "source": "original"
+  },
+  {
+    "id": "gq-005",
+    "section": "quantitative",
+    "topic": "Number Properties",
+    "difficulty": "easy",
+    "prompt": "Which of the following is a prime number?",
+    "options": [
+      "57",
+      "55",
+      "51",
+      "53"
+    ],
+    "correctIndex": 3,
+    "explanation": "53 has no divisor other than 1 and itself. The others all factor: $51 = 3 \\times 17$, $55 = 5 \\times 11$, and $57 = 3 \\times 19$.",
+    "source": "original"
+  },
+  {
+    "id": "gq-006",
+    "section": "quantitative",
+    "topic": "Arithmetic: Percents",
+    "difficulty": "easy",
+    "prompt": "A number increased from 80 to 92. What was the percentage increase?",
+    "options": [
+      "15 percent",
+      "20 percent",
+      "13 percent",
+      "12 percent"
+    ],
+    "correctIndex": 0,
+    "explanation": "The increase is 12, and percentage change is measured against the ORIGINAL value: $12/80 = 0.15$, so 15 percent. Dividing by the new value instead gives about 13 percent, which is the usual trap here.",
+    "source": "original"
+  },
+  {
+    "id": "gq-007",
+    "section": "quantitative",
+    "topic": "Word Problems: Rates",
+    "difficulty": "easy",
+    "prompt": "A car travels 180 kilometres in 3 hours. At the same speed, how far does it travel in 5 hours?",
+    "options": [
+      "270 kilometres",
+      "240 kilometres",
+      "360 kilometres",
+      "300 kilometres"
+    ],
+    "correctIndex": 3,
+    "explanation": "The speed is $180 \\div 3 = 60$ kilometres per hour, so in 5 hours it covers $60 \\times 5 = 300$ kilometres.",
+    "source": "original"
+  },
+  {
+    "id": "gq-008",
+    "section": "quantitative",
+    "topic": "Algebra: Exponents",
+    "difficulty": "easy",
+    "prompt": "What is the value of $2^5 \\times 2^3$?",
+    "options": [
+      "256",
+      "128",
+      "1024",
+      "64"
+    ],
+    "correctIndex": 0,
+    "explanation": "Multiplying powers of the same base adds the exponents: $2^{5+3} = 2^8 = 256$. Multiplying the exponents instead would give $2^{15}$, and adding the values would give 40.",
+    "source": "original"
+  },
+  {
+    "id": "gq-009",
+    "section": "quantitative",
+    "topic": "Sets and Counting",
+    "difficulty": "easy",
+    "prompt": "In a class of 30 students, 18 study French and 15 study German. If every student studies at least one of the two, how many study both?",
+    "options": [
+      "5",
+      "3",
+      "12",
+      "2"
+    ],
+    "correctIndex": 1,
+    "explanation": "By the inclusion-exclusion principle, $18 + 15 - \\text{both} = 30$, so both $= 33 - 30 = 3$.",
+    "source": "original"
+  },
+  {
+    "id": "gq-010",
+    "section": "quantitative",
+    "topic": "Arithmetic: Fractions",
+    "difficulty": "easy",
+    "prompt": "What is $2/3$ of $3/8$?",
+    "options": [
+      "6/11",
+      "5/11",
+      "1/4",
+      "3/16"
+    ],
+    "correctIndex": 2,
+    "explanation": "Multiply the fractions: $(2 \\times 3)/(3 \\times 8) = 6/24 = 1/4$. Adding the numerators and denominators instead produces the 5/11 style of wrong answer.",
+    "source": "original"
+  },
+  {
+    "id": "gq-011",
+    "section": "quantitative",
+    "topic": "Word Problems: Work",
+    "difficulty": "medium",
+    "prompt": "Machine A completes a job in 6 hours and machine B completes the same job in 12 hours. Working together, how long do they take?",
+    "options": [
+      "9 hours",
+      "4 hours",
+      "18 hours",
+      "3 hours"
+    ],
+    "correctIndex": 1,
+    "explanation": "Add the rates, not the times. A does $1/6$ of the job per hour and B does $1/12$, so together they do $1/6 + 1/12 = 3/12 = 1/4$ per hour, finishing in 4 hours. Averaging the two times would give 9 hours, which is the classic error.",
+    "source": "original"
+  },
+  {
+    "id": "gq-012",
+    "section": "quantitative",
+    "topic": "Algebra: Quadratics",
+    "difficulty": "medium",
+    "prompt": "If $x^2 - 7x + 12 = 0$, what are the possible values of $x$?",
+    "options": [
+      "2 and 6",
+      "1 and 12",
+      "3 and 4",
+      "-3 and -4"
+    ],
+    "correctIndex": 2,
+    "explanation": "Factor into $(x-3)(x-4) = 0$, giving $x = 3$ or $x = 4$. Both signs are positive because the constant term is positive while the linear coefficient is negative.",
+    "source": "original"
+  },
+  {
+    "id": "gq-013",
+    "section": "quantitative",
+    "topic": "Statistics: Averages",
+    "difficulty": "medium",
+    "prompt": "The average of six numbers is 20. When one number is removed, the average of the remaining five is 22. What number was removed?",
+    "options": [
+      "10",
+      "18",
+      "2",
+      "12"
+    ],
+    "correctIndex": 0,
+    "explanation": "The original sum is $6 \\times 20 = 120$ and the remaining sum is $5 \\times 22 = 110$, so the removed number is $120 - 110 = 10$. Note the average ROSE when it was removed, so the removed value must be below the original average.",
+    "source": "original"
+  },
+  {
+    "id": "gq-014",
+    "section": "quantitative",
+    "topic": "Number Properties",
+    "difficulty": "medium",
+    "prompt": "If $n$ is a positive integer and $n^2$ is divisible by 12, what is the smallest possible value of $n$?",
+    "options": [
+      "4",
+      "12",
+      "3",
+      "6"
+    ],
+    "correctIndex": 3,
+    "explanation": "$12 = 2^2 \\times 3$. For $n^2$ to contain $3^1$ it must contain $3^2$, since every prime in a perfect square appears an even number of times, so $n$ must contain a 3. It must also contain a 2. The smallest such $n$ is $2 \\times 3 = 6$, and indeed $36$ is divisible by 12. With $n = 4$, $n^2 = 16$ is not.",
+    "source": "original"
+  },
+  {
+    "id": "gq-015",
+    "section": "quantitative",
+    "topic": "Arithmetic: Percents",
+    "difficulty": "medium",
+    "prompt": "A price rises by 20 percent and then falls by 20 percent. Compared with the original price, the final price is:",
+    "options": [
+      "4 percent lower",
+      "4 percent higher",
+      "the same",
+      "2 percent lower"
+    ],
+    "correctIndex": 0,
+    "explanation": "Successive percentage changes multiply rather than cancel: $1.20 \\times 0.80 = 0.96$, which is 4 percent below the original. The second change is applied to the larger intermediate price, so the fall outweighs the rise.",
+    "source": "original"
+  },
+  {
+    "id": "gq-016",
+    "section": "quantitative",
+    "topic": "Word Problems: Mixtures",
+    "difficulty": "medium",
+    "prompt": "A 40-litre solution is 25 percent acid. How many litres of pure acid must be added to make it 40 percent acid?",
+    "options": [
+      "8",
+      "6",
+      "12",
+      "10"
+    ],
+    "correctIndex": 3,
+    "explanation": "Start with $0.25 \\times 40 = 10$ litres of acid. Adding $x$ litres of pure acid gives $(10 + x)$ acid in $(40 + x)$ total, and setting $(10+x)/(40+x) = 0.40$ yields $10 + x = 16 + 0.4x$, so $0.6x = 6$ and $x = 10$. The trap is forgetting that added acid raises the total volume too.",
+    "source": "original"
+  },
+  {
+    "id": "gq-017",
+    "section": "quantitative",
+    "topic": "Sets and Counting",
+    "difficulty": "medium",
+    "prompt": "How many different three-letter arrangements can be formed from the letters of the word LAMP, using no letter more than once?",
+    "options": [
+      "24",
+      "4",
+      "12",
+      "64"
+    ],
+    "correctIndex": 0,
+    "explanation": "Order matters, so this is a permutation: $4 \\times 3 \\times 2 = 24$. Treating it as a combination instead gives 4, and allowing repeats gives $4^3 = 64$.",
+    "source": "original"
+  },
+  {
+    "id": "gq-018",
+    "section": "quantitative",
+    "topic": "Algebra: Inequalities",
+    "difficulty": "medium",
+    "prompt": "If $-3x + 7 > 1$, which of the following describes $x$?",
+    "options": [
+      "$x > 2$",
+      "$x < -2$",
+      "$x < 2$",
+      "$x > -2$"
+    ],
+    "correctIndex": 2,
+    "explanation": "Subtract 7 to get $-3x > -6$, then divide by $-3$. Dividing an inequality by a negative number reverses its direction, so $x < 2$. Forgetting to flip is the single most common error on inequality questions.",
+    "source": "original"
+  },
+  {
+    "id": "gq-019",
+    "section": "quantitative",
+    "topic": "Statistics: Median",
+    "difficulty": "medium",
+    "prompt": "What is the median of the list 3, 11, 7, 2, 9, 5?",
+    "options": [
+      "7",
+      "6",
+      "5",
+      "6.5"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sort first: 2, 3, 5, 7, 9, 11. With an even count the median is the average of the two middle values, $(5 + 7)/2 = 6$. Taking the middle of the unsorted list is the usual mistake.",
+    "source": "original"
+  },
+  {
+    "id": "gq-020",
+    "section": "quantitative",
+    "topic": "Word Problems: Rates",
+    "difficulty": "medium",
+    "prompt": "A cyclist rides out at 15 kilometres per hour and returns along the same route at 10 kilometres per hour. What is the average speed for the whole trip?",
+    "options": [
+      "13 kilometres per hour",
+      "11 kilometres per hour",
+      "12 kilometres per hour",
+      "12.5 kilometres per hour"
+    ],
+    "correctIndex": 2,
+    "explanation": "Average speed is total distance over total time, not the average of the two speeds. For a distance $d$ each way, the time is $d/15 + d/10 = d/6$, and the total distance is $2d$, giving $2d \\div (d/6) = 12$. The 12.5 option is the tempting arithmetic mean.",
+    "source": "original"
+  },
+  {
+    "id": "gq-021",
+    "section": "quantitative",
+    "topic": "Number Properties",
+    "difficulty": "hard",
+    "prompt": "If $n$ is a positive even integer, what is the remainder when $7^n$ is divided by 4?",
+    "options": [
+      "2",
+      "1",
+      "3",
+      "0"
+    ],
+    "correctIndex": 1,
+    "explanation": "Since 7 is 4 plus 3, the remainder of $7^n$ matches that of $3^n$. Powers of 3 modulo 4 cycle 3, 1, 3, 1 for $n = 1, 2, 3, 4$, so every even power leaves remainder 1. Check it directly: $7^2 = 49$, and 49 is 12 fours plus 1.",
+    "source": "original"
+  },
+  {
+    "id": "gq-022",
+    "section": "quantitative",
+    "topic": "Algebra: Systems",
+    "difficulty": "hard",
+    "prompt": "If $x + y = 10$ and $x^2 - y^2 = 40$, what is the value of $x$?",
+    "options": [
+      "6",
+      "7",
+      "5",
+      "8"
+    ],
+    "correctIndex": 1,
+    "explanation": "Factor the difference of squares: $x^2 - y^2 = (x+y)(x-y)$. With $x + y = 10$, this gives $10(x - y) = 40$, so $x - y = 4$. Adding that to $x + y = 10$ gives $2x = 14$ and $x = 7$. Solving the quadratic directly works too but wastes time.",
+    "source": "original"
+  },
+  {
+    "id": "gq-023",
+    "section": "quantitative",
+    "topic": "Sets and Counting",
+    "difficulty": "hard",
+    "prompt": "A committee of 3 is chosen from 5 men and 4 women. How many committees contain at least one woman?",
+    "options": [
+      "60",
+      "84",
+      "74",
+      "40"
+    ],
+    "correctIndex": 2,
+    "explanation": "Count the complement. The total number of committees is $\\binom{9}{3} = 84$, and those with no women are $\\binom{5}{3} = 10$, so at least one woman gives $84 - 10 = 74$. Counting the cases directly also works but risks double counting.",
+    "source": "original"
+  },
+  {
+    "id": "gq-024",
+    "section": "quantitative",
+    "topic": "Statistics: Standard Deviation",
+    "difficulty": "hard",
+    "prompt": "Each number in a data set is increased by 5. Which of the following is true?",
+    "options": [
+      "The mean is unchanged and the standard deviation increases by 5.",
+      "The mean increases by 5 and the standard deviation is unchanged.",
+      "Both the mean and the standard deviation are unchanged.",
+      "Both the mean and the standard deviation increase by 5."
+    ],
+    "correctIndex": 1,
+    "explanation": "Adding a constant shifts every value equally, so the centre moves by 5 while the spread around it does not change at all. Standard deviation measures dispersion, and dispersion is untouched by a translation. It would change if every value were MULTIPLIED by a constant.",
+    "source": "original"
+  },
+  {
+    "id": "gq-025",
+    "section": "quantitative",
+    "topic": "Word Problems: Work",
+    "difficulty": "hard",
+    "prompt": "Three workers together finish a task in 4 hours. Working alone, the first would take 12 hours and the second 18 hours. How long would the third take alone?",
+    "options": [
+      "6 hours",
+      "9 hours",
+      "10 hours",
+      "8 hours"
+    ],
+    "correctIndex": 1,
+    "explanation": "Rates add. Together they do $1/4$ per hour, and the first two contribute $1/12 + 1/18 = 5/36$. The third therefore contributes $1/4 - 5/36 = 9/36 - 5/36 = 4/36 = 1/9$ per hour, so alone it would take 9 hours.",
+    "source": "original"
+  },
+  {
+    "id": "gq-026",
+    "section": "quantitative",
+    "topic": "Arithmetic: Percents",
+    "difficulty": "hard",
+    "prompt": "A shopkeeper marks an item up by 40 percent and then offers a 25 percent discount on the marked price. What is the overall effect on the original price?",
+    "options": [
+      "5 percent loss",
+      "no change",
+      "15 percent profit",
+      "5 percent profit"
+    ],
+    "correctIndex": 3,
+    "explanation": "Apply the factors in sequence: $1.40 \\times 0.75 = 1.05$, a 5 percent gain over the original. Subtracting the percentages to get 15 percent ignores that the discount applies to the larger marked price, not to the original.",
+    "source": "original"
+  },
+  {
+    "id": "gq-027",
+    "section": "quantitative",
+    "topic": "Algebra: Functions",
+    "difficulty": "hard",
+    "prompt": "If $f(x) = 2x - 3$, what is the value of $f(f(4))$?",
+    "options": [
+      "7",
+      "5",
+      "11",
+      "13"
+    ],
+    "correctIndex": 0,
+    "explanation": "Work outward from the inside. $f(4) = 2(4) - 3 = 5$, then $f(5) = 2(5) - 3 = 7$. Applying the rule only once gives 5, which is the intended trap.",
+    "source": "original"
+  },
+  {
+    "id": "gq-028",
+    "section": "quantitative",
+    "topic": "Number Properties",
+    "difficulty": "hard",
+    "prompt": "How many positive divisors does 360 have?",
+    "options": [
+      "20",
+      "36",
+      "24",
+      "18"
+    ],
+    "correctIndex": 2,
+    "explanation": "Factor into primes: $360 = 2^3 \\times 3^2 \\times 5^1$. The divisor count is the product of one more than each exponent: $(3+1)(2+1)(1+1) = 4 \\times 3 \\times 2 = 24$.",
+    "source": "original"
+  },
+  {
+    "id": "gq-029",
+    "section": "quantitative",
+    "topic": "Sets and Counting",
+    "difficulty": "hard",
+    "prompt": "Two fair six-sided dice are rolled. What is the probability that the sum is 8?",
+    "options": [
+      "6/36",
+      "1/9",
+      "5/36",
+      "1/6"
+    ],
+    "correctIndex": 2,
+    "explanation": "There are 36 equally likely outcomes. A sum of 8 arises from (2,6), (3,5), (4,4), (5,3) and (6,2), which is 5 outcomes, giving 5/36. Counting (4,4) twice would wrongly give 6/36.",
+    "source": "original"
+  },
+  {
+    "id": "gq-030",
+    "section": "quantitative",
+    "topic": "Word Problems: Rates",
+    "difficulty": "hard",
+    "prompt": "Two trains 300 kilometres apart travel toward each other, one at 70 kilometres per hour and the other at 80 kilometres per hour. How long until they meet?",
+    "options": [
+      "4 hours",
+      "2 hours",
+      "3 hours",
+      "2.5 hours"
+    ],
+    "correctIndex": 1,
+    "explanation": "When objects approach each other their speeds add, so the gap closes at $70 + 80 = 150$ kilometres per hour. The 300-kilometre gap therefore closes in $300 \\div 150 = 2$ hours. Using one train's speed alone gives the 4-hour style of wrong answer.",
+    "source": "original"
+  }
+]

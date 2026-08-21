@@ -1,0 +1,482 @@
+[
+  {
+    "id": "gv-001",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Inference",
+    "difficulty": "easy",
+    "prompt": "Every employee who completed the safety course received a certificate. Marcus did not receive a certificate. Which conclusion follows?",
+    "options": [
+      "The safety course is harder than most employees had expected.",
+      "Marcus did not complete the safety course.",
+      "Marcus was never told about the safety course by his supervisor.",
+      "Marcus is planning to take the safety course later this year."
+    ],
+    "correctIndex": 1,
+    "explanation": "This is the contrapositive: if completing the course guarantees a certificate, then no certificate means the course was not completed. The other options add facts the statements never supply.",
+    "source": "original"
+  },
+  {
+    "id": "gv-002",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Weaken",
+    "difficulty": "easy",
+    "prompt": "A cafe owner says: \"We introduced free wireless internet last month, and sales rose 20 percent, so the internet caused the increase.\" Which finding would most weaken this?",
+    "options": [
+      "The cafe also began opening two hours earlier on the same day the internet was installed.",
+      "The wireless internet cost considerably less to install than the owner had expected it to.",
+      "Some customers said they liked having the internet available.",
+      "A few regular customers do not own laptops or tablets."
+    ],
+    "correctIndex": 0,
+    "explanation": "A second change made at the same time offers a rival explanation for the same rise, which is what undercuts a causal claim. The other options are about cost or opinion and leave the causal link untouched.",
+    "source": "original"
+  },
+  {
+    "id": "gv-003",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Assumption",
+    "difficulty": "easy",
+    "prompt": "Argument: \"The library should extend its opening hours, because a survey found that most students want to study later in the evening.\" What does this argument assume?",
+    "options": [
+      "Students would actually use the library during the extended hours.",
+      "The library has never extended its hours at any point in the past.",
+      "No other study space in the town stays open later than the library does.",
+      "Every student who answered the survey studies in the library regularly."
+    ],
+    "correctIndex": 0,
+    "explanation": "Wanting to study later is not the same as turning up, and the recommendation only works if stated preference becomes actual attendance. The other options are either irrelevant history or far stronger claims than the argument needs.",
+    "source": "original"
+  },
+  {
+    "id": "gv-004",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Strengthen",
+    "difficulty": "easy",
+    "prompt": "Argument: \"Switching to the new supplier reduced our defect rate, since defects fell by a third after the switch.\" Which fact would most strengthen this?",
+    "options": [
+      "No change was made to the production process during the same period.",
+      "The new supplier charges slightly more per unit than the old one.",
+      "The old supplier had served the company for more than a decade.",
+      "The new supplier is located considerably closer to the factory."
+    ],
+    "correctIndex": 0,
+    "explanation": "Ruling out other changes in the same window is what turns a coincidence into evidence of cause. Location, tenure, and price say nothing about whether the supplier explains the fall in defects.",
+    "source": "original"
+  },
+  {
+    "id": "gv-005",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Inference",
+    "difficulty": "easy",
+    "prompt": "All the paintings in the north gallery were produced after 1900. The museum's oldest painting hangs in the south gallery. Which statement must be true?",
+    "options": [
+      "The museum's oldest painting was produced before 1900.",
+      "The south gallery holds more paintings than the north gallery does.",
+      "Every painting in the south gallery predates every painting in the north.",
+      "The museum's oldest painting is not in the north gallery."
+    ],
+    "correctIndex": 3,
+    "explanation": "The second sentence states directly where the oldest painting hangs, so it is not in the north gallery. It does NOT follow that it predates 1900: the oldest painting could still be from 1950 if the whole collection is modern.",
+    "source": "original"
+  },
+  {
+    "id": "gv-006",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage: \"Urban planners have long debated whether adding road capacity relieves congestion. The phenomenon known as induced demand suggests it often does not: when a route becomes faster, journeys that were previously not worth making become worthwhile, and drivers who had shifted to other routes or times return. Within a few years, traffic frequently returns to something close to its former level. Some planners argue that this makes road widening futile. Others respond that the extra journeys represent real economic activity that was previously being suppressed, and that the appropriate measure of success is total trips served rather than travel speed.\" According to the passage, what does induced demand describe?",
+    "options": [
+      "New journeys appearing once a route becomes faster.",
+      "Drivers choosing public transport when roads become congested.",
+      "A permanent reduction in the total number of car journeys made.",
+      "The tendency of construction costs to rise during a road project."
+    ],
+    "correctIndex": 0,
+    "explanation": "The passage defines it as journeys that were not worth making becoming worthwhile once the route speeds up, together with the return of drivers who had diverted. The other options describe effects the passage never attributes to induced demand.",
+    "source": "original"
+  },
+  {
+    "id": "gv-007",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage: \"Urban planners have long debated whether adding road capacity relieves congestion. The phenomenon known as induced demand suggests it often does not: when a route becomes faster, journeys that were previously not worth making become worthwhile, and drivers who had shifted to other routes or times return. Within a few years, traffic frequently returns to something close to its former level. Some planners argue that this makes road widening futile. Others respond that the extra journeys represent real economic activity that was previously being suppressed, and that the appropriate measure of success is total trips served rather than travel speed.\" How do the two groups of planners in the passage differ?",
+    "options": [
+      "They disagree about which measure should count as success.",
+      "They disagree about whether drivers respond to changes in journey times.",
+      "They disagree about how expensive road widening projects usually are.",
+      "They disagree about whether induced demand exists at all in modern cities."
+    ],
+    "correctIndex": 0,
+    "explanation": "Both groups accept that traffic returns; they part company over whether to judge a road by travel speed or by total trips served. Neither disputes the existence of induced demand or the responsiveness of drivers, and cost is never mentioned.",
+    "source": "original"
+  },
+  {
+    "id": "gv-008",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Weaken",
+    "difficulty": "easy",
+    "prompt": "Argument: \"Our new training programme works, because employees who took it were promoted more often than those who did not.\" Which finding would most weaken this?",
+    "options": [
+      "The training programme was delivered online rather than in person at the company offices.",
+      "The programme lasted three days rather than the planned five.",
+      "Managers selected their strongest performers to attend the training.",
+      "A few employees found parts of the training repetitive."
+    ],
+    "correctIndex": 2,
+    "explanation": "If the strongest performers were chosen to attend, they would likely have been promoted anyway, so the promotion gap reflects who was selected rather than what the training did. Format, length, and opinion do not disturb the causal claim.",
+    "source": "original"
+  },
+  {
+    "id": "gv-009",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Assumption",
+    "difficulty": "easy",
+    "prompt": "Argument: \"The city should install more streetlights, since brighter streets will reduce night-time accidents.\" Which assumption is required?",
+    "options": [
+      "Night-time accidents outnumber daytime accidents in the city.",
+      "Streetlights are the cheapest available road safety measure.",
+      "Residents living near the streets have asked for better lighting.",
+      "Poor visibility contributes to at least some night-time accidents."
+    ],
+    "correctIndex": 3,
+    "explanation": "The argument only works if darkness is part of the problem; if visibility played no role, more light would change nothing. Cost, popularity, and the daytime comparison are not needed for the conclusion to follow.",
+    "source": "original"
+  },
+  {
+    "id": "gv-010",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Inference",
+    "difficulty": "easy",
+    "prompt": "Whenever the bakery runs a discount, it sells out before noon. Today the bakery did not sell out before noon. Which conclusion follows?",
+    "options": [
+      "Customers were less interested in the bakery's products today.",
+      "The bakery will run a discount tomorrow to clear its stock.",
+      "The bakery baked more items today than it usually does.",
+      "The bakery did not run a discount today."
+    ],
+    "correctIndex": 3,
+    "explanation": "Again the contrapositive: a discount guarantees selling out, so not selling out means there was no discount. The remaining options speculate about causes and future behaviour that the statements do not license.",
+    "source": "original"
+  },
+  {
+    "id": "gv-011",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Assumption",
+    "difficulty": "medium",
+    "prompt": "Argument: \"Because employees at the branch that adopted flexible hours reported higher satisfaction, the company should adopt flexible hours everywhere to raise satisfaction overall.\" Which assumption does the argument depend on?",
+    "options": [
+      "Satisfaction is the single most important measure of a company's health.",
+      "The branch that adopted flexible hours is not unusual in ways that explain its higher satisfaction.",
+      "Every single employee at the branch preferred the flexible arrangement to the old fixed one.",
+      "Flexible hours are administratively simpler to manage than fixed hours."
+    ],
+    "correctIndex": 1,
+    "explanation": "Generalising from one branch requires that the branch be representative; if it differed in some relevant way, the result may not transfer. The unanimity and single-measure options are far stronger than the argument needs, and administrative simplicity is beside the point.",
+    "source": "original"
+  },
+  {
+    "id": "gv-012",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Evaluate",
+    "difficulty": "medium",
+    "prompt": "A city claims its new recycling campaign worked because the tonnage sent to landfill fell last year. Which question would be most useful in evaluating that claim?",
+    "options": [
+      "Which neighbourhoods received the campaign materials first?",
+      "How much did the city spend designing the recycling campaign?",
+      "Did the total amount of waste generated in the city also fall last year?",
+      "How many residents recall having seen the recycling campaign's advertisements last year?"
+    ],
+    "correctIndex": 2,
+    "explanation": "If total waste fell, landfill tonnage would drop whether or not anyone recycled more, so this question separates the two explanations. Spending, rollout order, and recall do not distinguish them.",
+    "source": "original"
+  },
+  {
+    "id": "gv-013",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"For much of the twentieth century, economists treated firms as rational actors that minimise costs. Behavioural research has complicated that picture. Studies of managerial decision-making find that executives often persist with failing projects, committing further resources to justify what has already been spent. This pattern, sometimes called escalation of commitment, is difficult to reconcile with pure cost minimisation, since the money already spent cannot be recovered and should not influence a forward-looking decision. Defenders of the traditional model respond that persistence may be rational in a different sense: abandoning a project publicly signals failure, and a manager's career prospects, rather than the firm's balance sheet, may be what is being optimised.\" What is the primary purpose of the passage?",
+    "options": [
+      "To argue that the traditional economic model of the firm should be abandoned entirely.",
+      "To present a challenge to a traditional model and a response to that challenge.",
+      "To recommend specific practices that managers should adopt when projects fail.",
+      "To describe a series of experiments conducted on executives at large firms."
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage lays out the traditional view, presents behavioural evidence against it, and then gives the traditional side's reply. It stops short of endorsing either position or recommending anything.",
+    "source": "original"
+  },
+  {
+    "id": "gv-014",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"For much of the twentieth century, economists treated firms as rational actors that minimise costs. Behavioural research has complicated that picture. Studies of managerial decision-making find that executives often persist with failing projects, committing further resources to justify what has already been spent. This pattern, sometimes called escalation of commitment, is difficult to reconcile with pure cost minimisation, since the money already spent cannot be recovered and should not influence a forward-looking decision. Defenders of the traditional model respond that persistence may be rational in a different sense: abandoning a project publicly signals failure, and a manager's career prospects, rather than the firm's balance sheet, may be what is being optimised.\" The defenders' response suggests that escalation of commitment is:",
+    "options": [
+      "less common among executives than the behavioural research claims.",
+      "irrational from any point of view that could reasonably be adopted.",
+      "rational once the manager's own interests are the thing being optimised.",
+      "a phenomenon that appears only in firms already facing serious financial difficulty."
+    ],
+    "correctIndex": 2,
+    "explanation": "Their reply relocates the objective rather than denying the behaviour: it is rational, but with respect to the manager's career rather than the firm's costs. They do not dispute how often it occurs or restrict it to struggling firms.",
+    "source": "original"
+  },
+  {
+    "id": "gv-015",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Weaken",
+    "difficulty": "medium",
+    "prompt": "Argument: \"Cities with more parks report higher resident wellbeing, so building parks raises wellbeing.\" Which finding would most weaken this argument?",
+    "options": [
+      "Wellbeing surveys are conducted at different times of year in different cities in the study.",
+      "Some residents visit their local parks only a handful of times each year.",
+      "Wealthier cities tend both to build more parks and to score higher on wellbeing for unrelated reasons.",
+      "Park maintenance budgets vary considerably between the cities studied."
+    ],
+    "correctIndex": 2,
+    "explanation": "A common cause behind both variables explains the correlation without any causal arrow from parks to wellbeing, which is the strongest form of attack here. Infrequent visits, budget variation, and survey timing weaken the evidence only marginally.",
+    "source": "original"
+  },
+  {
+    "id": "gv-016",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Flaw",
+    "difficulty": "medium",
+    "prompt": "Argument: \"No member of the research team has published on marine biology, so the team is unqualified to review the marine survey.\" Which best describes the flaw?",
+    "options": [
+      "It confuses the order in which two related events actually occurred.",
+      "It draws a conclusion about a group from evidence about one member of it.",
+      "It treats publication in a field as the only possible source of competence in it.",
+      "It relies on a survey whose sample was far too small to support any general conclusion."
+    ],
+    "correctIndex": 2,
+    "explanation": "The argument equates \"has not published\" with \"is unqualified\", ignoring that expertise can come from practice, training, or related fields. No sample or ordering is involved, and the evidence concerns every member rather than one.",
+    "source": "original"
+  },
+  {
+    "id": "gv-017",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Strengthen",
+    "difficulty": "medium",
+    "prompt": "Argument: \"The redesigned checkout page caused the rise in completed purchases, since completions rose 18 percent in the month after launch.\" Which fact would most strengthen this?",
+    "options": [
+      "The redesign was praised by several user experience specialists.",
+      "The redesigned page loads marginally faster than the previous version.",
+      "The company's total advertising spend was unchanged throughout that same month.",
+      "Visitors randomly shown the old page in the same month completed far fewer purchases."
+    ],
+    "correctIndex": 3,
+    "explanation": "A randomised comparison run in the same period removes essentially every rival explanation at once, which is stronger than merely holding one other factor constant. Praise and load time say nothing about causation, and constant advertising rules out only a single alternative.",
+    "source": "original"
+  },
+  {
+    "id": "gv-018",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Inference",
+    "difficulty": "medium",
+    "prompt": "A factory's records show that whenever the night shift is understaffed, output falls below target. Last Tuesday output met its target. Which statement must be true about last Tuesday?",
+    "options": [
+      "The night shift produced more units than the day shift did that day.",
+      "The night shift was not understaffed.",
+      "Output exceeded the target by a substantial margin.",
+      "The factory hired additional workers for the night shift."
+    ],
+    "correctIndex": 1,
+    "explanation": "Understaffing guarantees missing the target, so meeting it rules out understaffing. Nothing follows about relative shift output, hiring, or the size of the margin.",
+    "source": "original"
+  },
+  {
+    "id": "gv-019",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Assumption",
+    "difficulty": "medium",
+    "prompt": "Argument: \"Since the region's farms produce more food than its population consumes, no one in the region should go hungry.\" Which assumption is required?",
+    "options": [
+      "The food produced is actually distributed to those who need it.",
+      "The region imports no food at all from neighbouring areas.",
+      "Every farm in the region grows the same variety of crops.",
+      "The region's farms will maintain their current output in future years."
+    ],
+    "correctIndex": 0,
+    "explanation": "Aggregate sufficiency says nothing about who gets what; the conclusion needs distribution to reach the people who need food. Future output, imports, and crop variety are not required for the inference as stated.",
+    "source": "original"
+  },
+  {
+    "id": "gv-020",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"Antibiotic resistance is often described as a future crisis, but the mechanism is old. Bacteria have exchanged resistance genes for as long as antibiotics have existed in nature, which is far longer than they have existed in medicine. What has changed is the intensity of selection. Widespread clinical and agricultural use kills susceptible bacteria efficiently, leaving resistant ones to multiply without competition. Reducing total antibiotic use is therefore the primary lever available, though it is politically difficult: the benefit of restraint is diffuse and delayed, while the cost falls immediately on the patient or farmer asked to go without.\" According to the passage, what has changed in recent times?",
+    "options": [
+      "The willingness of farmers to reduce their use of antibiotics.",
+      "Bacteria have only recently developed the ability to exchange genes.",
+      "The intensity of selection favouring resistant bacteria.",
+      "The speed at which new antibiotics can be brought to market."
+    ],
+    "correctIndex": 2,
+    "explanation": "The passage says the mechanism is old and identifies intensity of selection as what has changed. It explicitly denies that gene exchange is new, and never discusses development speed or a change in willingness.",
+    "source": "original"
+  },
+  {
+    "id": "gv-021",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"Antibiotic resistance is often described as a future crisis, but the mechanism is old. Bacteria have exchanged resistance genes for as long as antibiotics have existed in nature, which is far longer than they have existed in medicine. What has changed is the intensity of selection. Widespread clinical and agricultural use kills susceptible bacteria efficiently, leaving resistant ones to multiply without competition. Reducing total antibiotic use is therefore the primary lever available, though it is politically difficult: the benefit of restraint is diffuse and delayed, while the cost falls immediately on the patient or farmer asked to go without.\" The final sentence suggests that the main obstacle to reducing antibiotic use is:",
+    "options": [
+      "the difficulty of measuring how much antibiotic is used in agriculture.",
+      "a lack of scientific agreement about how resistance actually spreads.",
+      "the absence of any effective alternative treatment for common infections.",
+      "an asymmetry between who bears the cost and who receives the benefit."
+    ],
+    "correctIndex": 3,
+    "explanation": "The passage contrasts a diffuse, delayed benefit with an immediate, concentrated cost, which is precisely a cost-benefit asymmetry. It reports no scientific disagreement, and neither alternatives nor measurement are mentioned.",
+    "source": "original"
+  },
+  {
+    "id": "gv-022",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Weaken",
+    "difficulty": "hard",
+    "prompt": "Argument: \"Our premium subscribers report far higher satisfaction than free users, so upgrading users to premium would raise satisfaction across the base.\" Which finding would most weaken this?",
+    "options": [
+      "The satisfaction survey was sent to premium subscribers slightly more often.",
+      "Some premium features are also available to free users on a trial basis.",
+      "Users who were already most satisfied are the ones who chose to upgrade.",
+      "Premium subscribers pay a fee that free users have chosen not to pay."
+    ],
+    "correctIndex": 2,
+    "explanation": "Self-selection reverses the causal direction: satisfaction produced the upgrade rather than the upgrade producing satisfaction, so moving people up would not carry the effect with it. The fee is already implied, survey frequency is a minor bias, and trials would if anything narrow the gap.",
+    "source": "original"
+  },
+  {
+    "id": "gv-023",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Assumption",
+    "difficulty": "hard",
+    "prompt": "Argument: \"A tax on sugary drinks will reduce obesity, because consumption of those drinks falls sharply when their price rises.\" Which assumption is required?",
+    "options": [
+      "Consumers do not replace the forgone drinks with other equally caloric products.",
+      "The revenue raised by the tax will be spent on public health programmes.",
+      "Sugary drinks are by a clear margin the single largest source of calories in the average diet.",
+      "Producers will pass the entire cost of the tax on to consumers immediately."
+    ],
+    "correctIndex": 0,
+    "explanation": "If people substitute other high-calorie items, consumption of the taxed drinks falls without obesity changing, breaking the chain from price to outcome. The argument does not need sugary drinks to be the largest source, nor any particular use of the revenue.",
+    "source": "original"
+  },
+  {
+    "id": "gv-024",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Paradox",
+    "difficulty": "hard",
+    "prompt": "A hospital introduced a checklist that measurably reduced surgical errors, yet its reported complication rate rose in the following year. Which of the following, if true, best explains this?",
+    "options": [
+      "The checklist also introduced systematic reporting of complications that had previously gone unrecorded.",
+      "The checklist added several minutes to the preparation time before each and every operation.",
+      "The hospital performed slightly fewer operations than it had the previous year.",
+      "Surgeons at the hospital were initially sceptical about adopting the checklist."
+    ],
+    "correctIndex": 0,
+    "explanation": "If more complications are now being recorded, the reported rate can rise while the true rate falls; the paradox dissolves once measurement changes. Preparation time, scepticism, and volume do not reconcile fewer errors with more reported complications.",
+    "source": "original"
+  },
+  {
+    "id": "gv-025",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Flaw",
+    "difficulty": "hard",
+    "prompt": "Argument: \"Either we cut the research budget or we will not survive the downturn. We must therefore cut the research budget.\" Which best describes the reasoning flaw?",
+    "options": [
+      "It mistakes a necessary condition for a sufficient one.",
+      "It assumes the two stated options are the only ones available.",
+      "It generalises from a sample that is unlikely to be representative.",
+      "It appeals to the authority of people who are not experts on the question."
+    ],
+    "correctIndex": 1,
+    "explanation": "The argument presents a false dilemma: other responses to a downturn exist, and the conclusion only follows if the two alternatives really are exhaustive. No authority is cited and no sample is involved.",
+    "source": "original"
+  },
+  {
+    "id": "gv-026",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Inference",
+    "difficulty": "hard",
+    "prompt": "Every applicant who was interviewed had passed the written test. Some applicants who passed the written test were not offered a position. Which statement must be true?",
+    "options": [
+      "No applicant was offered a position without first being interviewed.",
+      "Some applicants who were interviewed were not offered a position.",
+      "Every applicant who passed the written test was interviewed at some stage.",
+      "Some applicants who passed the written test may not have been interviewed."
+    ],
+    "correctIndex": 3,
+    "explanation": "The first statement says interviewees are a subset of test-passers, not the reverse, so some passers might never have been interviewed. The option asserting that interviewees were rejected does not follow, because the rejected passers could all be people who were never interviewed.",
+    "source": "original"
+  },
+  {
+    "id": "gv-027",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Strengthen",
+    "difficulty": "hard",
+    "prompt": "Argument: \"The decline in the songbird population is caused by pesticide use, since the decline began in the same decade that pesticide application became widespread.\" Which fact would most strengthen this?",
+    "options": [
+      "Pesticide manufacturers expanded their production capacity considerably during that same decade.",
+      "Songbird numbers held steady in an otherwise similar region where pesticides were never adopted.",
+      "Several other bird species also declined somewhat over the same period.",
+      "Farmers in the region reported higher crop yields after adopting pesticides."
+    ],
+    "correctIndex": 1,
+    "explanation": "A comparable region without the suspected cause and without the effect is the closest thing to a control, which is what turns coincident timing into evidence. Production capacity and yields concern pesticides but not birds, and other species declining is consistent with many causes.",
+    "source": "original"
+  },
+  {
+    "id": "gv-028",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"The standard account of the industrial revolution credits technological invention. Recent economic history has emphasised something less visible: the cost of labour. In regions where wages were high relative to the price of fuel, replacing workers with machines paid for itself quickly, and inventions that were technically feasible elsewhere were adopted first where they were commercially worthwhile. On this account the machines were not the cause so much as the response. Critics of the wage explanation note that it struggles with cases where adoption preceded any clear wage advantage, and argue that it understates the role of scientific institutions in making the inventions possible at all.\" Which of the following best expresses the wage explanation described in the passage?",
+    "options": [
+      "Workers in high-wage regions actively resisted the introduction of machinery.",
+      "High wages relative to fuel costs made mechanisation commercially worthwhile.",
+      "Machines were invented in regions where scientific institutions were strongest.",
+      "Technological invention was the primary driver of industrial change."
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage states that where wages were high relative to fuel prices, replacing labour with machines paid for itself, which is the wage explanation in a sentence. The institutions option belongs to the critics, and the invention-first option is the standard account the passage is contrasting with.",
+    "source": "original"
+  },
+  {
+    "id": "gv-029",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"The standard account of the industrial revolution credits technological invention. Recent economic history has emphasised something less visible: the cost of labour. In regions where wages were high relative to the price of fuel, replacing workers with machines paid for itself quickly, and inventions that were technically feasible elsewhere were adopted first where they were commercially worthwhile. On this account the machines were not the cause so much as the response. Critics of the wage explanation note that it struggles with cases where adoption preceded any clear wage advantage, and argue that it understates the role of scientific institutions in making the inventions possible at all.\" Which finding would most undermine the wage explanation?",
+    "options": [
+      "A region with high wages that also happened to have unusually strong scientific institutions.",
+      "A region with low wages and cheap fuel that mechanised earlier than high-wage regions did.",
+      "Evidence that some inventors were motivated by curiosity rather than profit.",
+      "Evidence that fuel prices varied considerably between neighbouring regions."
+    ],
+    "correctIndex": 1,
+    "explanation": "The explanation predicts that mechanisation follows high wages, so a low-wage region mechanising first is a direct counterexample, and the passage itself flags adoption preceding wage advantage as the critics' line of attack. The other options are compatible with the wage account.",
+    "source": "original"
+  },
+  {
+    "id": "gv-030",
+    "section": "verbal",
+    "topic": "Critical Reasoning: Evaluate",
+    "difficulty": "hard",
+    "prompt": "A publisher concludes that its new cover design increased sales, because titles with the new design outsold those with the old one last quarter. Which question would be most useful in evaluating that conclusion?",
+    "options": [
+      "Which printing house produced the covers for the new titles?",
+      "Do readers actually say they notice cover designs when browsing shelves in a shop?",
+      "How much did the publisher pay the designer for the new covers?",
+      "Were the titles given the new design already expected to sell better?"
+    ],
+    "correctIndex": 3,
+    "explanation": "If stronger titles were the ones chosen for the redesign, the sales gap reflects the books rather than the covers, so this question targets the assignment mechanism that the conclusion depends on. Cost, stated attention, and printer identity leave the comparison untouched.",
+    "source": "original"
+  }
+]
