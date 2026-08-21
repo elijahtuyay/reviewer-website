@@ -40,7 +40,7 @@ export interface ScoreResult {
  * the result onto the exam's band. That is what makes an adaptive section
  * behave the way candidates are told it behaves: missing a few of the hardest
  * questions can still leave a strong score, while sweeping only easy ones
- * cannot. Unreached questions are then penalised on top, because on the real
+ * cannot. Unreached questions are then penalized on top, because on the real
  * thing running out of time costs far more than guessing wrong.
  */
 export function scoreAttempt(
@@ -124,7 +124,7 @@ export function scoreAttempt(
    * The denominator is a FIXED reference, not the weight of what happened to be
    * served.
    *
-   * Normalising by the served weight made `difficultyWeight` a no-op: any
+   * Normalizing by the served weight made `difficultyWeight` a no-op: any
    * all-correct run scored the maximum, so sweeping twenty easy questions beat
    * getting seven of ten hard ones right. That is the opposite of what an
    * adaptive exam measures, and the opposite of what this file and the results

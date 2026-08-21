@@ -1236,7 +1236,7 @@
     "section": "language-skills",
     "topic": "Para Forming",
     "difficulty": "medium",
-    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nS: The airline's customer service lines stayed jammed for nearly forty-eight hours as travelers tried to rebook.\nP: By the time the fleet resumed flying, the airline had already begun processing refunds for every cancelled route.\nQ: A technical malfunction grounded the airline's entire fleet for two days without warning.\nR: Passengers holding same-day tickets found their flights cancelled minutes before scheduled boarding.",
+    "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nS: The airline's customer service lines stayed jammed for nearly forty-eight hours as travelers tried to rebook.\nP: By the time the fleet resumed flying, the airline had already begun processing refunds for every canceled route.\nQ: A technical malfunction grounded the airline's entire fleet for two days without warning.\nR: Passengers holding same-day tickets found their flights canceled minutes before scheduled boarding.",
     "options": [
       "RQSP",
       "RQPS",
@@ -1244,7 +1244,7 @@
       "QRSP"
     ],
     "correctIndex": 3,
-    "explanation": "Q introduces the malfunction, R shows the immediate consequence for passengers (\"cancelled\" needs the grounding in Q), S shows the resulting strain on customer service (\"as travelers tried to rebook\" needs the cancellations in R), and P gives the eventual resolution. In RQSP, flights are cancelled before any cause has been given. In RQPS, cancellations again precede their cause, and the refund process in P comes before the customer service crunch in S. In SQRP, travelers are rebooking cancelled flights before Q or R has mentioned a grounding or any cancellations.",
+    "explanation": "Q introduces the malfunction, R shows the immediate consequence for passengers (\"canceled\" needs the grounding in Q), S shows the resulting strain on customer service (\"as travelers tried to rebook\" needs the cancellations in R), and P gives the eventual resolution. In RQSP, flights are canceled before any cause has been given. In RQPS, cancellations again precede their cause, and the refund process in P comes before the customer service crunch in S. In SQRP, travelers are rebooking canceled flights before Q or R has mentioned a grounding or any cancellations.",
     "source": "original"
   },
   {

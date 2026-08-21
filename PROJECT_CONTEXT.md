@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-21, at PR #16 / VERSION.txt `2.0.1`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-22, at PR #17 / VERSION.txt `2.0.2`.
 
 ## What this project is
 
@@ -20,6 +20,21 @@ The user (Elijah) is a solo developer treating this like a real engineering team
 4. **Never give the version bump its own commit.** Fold it into the last substantive commit of the PR, or `git commit --amend` it in before pushing (this is one of the few cases amending/force-pushing your own unshared feature branch is pre-authorized).
 5. **Autonomous review is mandatory and automatic** — dispatch review subagents (Agent tool, `general-purpose` type, senior/lead-engineer framing) before every merge without asking permission first. They should check for bugs AND design fidelity to intent, not just local correctness. Apply their fixes before merging.
 6. **Merge commit must visibly show the version** (e.g. squash-merge title `"... (v1.4.0)"`) so version history is legible at a glance in `git log`.
+
+## Language: American English, everywhere
+
+**All written output uses American English**, user-facing copy and code comments alike: UI strings, question prompts, options, explanations, commit messages, and these docs. The audience sits NMAT and GMAT, both written in American English, and a British spelling in a Language Skills stem is a distraction at best.
+
+Watch the usual families: `-ise`/`-isation` to `-ize`/`-ization`, `-our` to `-or`, `-re` to `-er`, doubled `l` before a suffix (`labelled` to `labeled`), `practise` (verb) to `practice`, `program` to `program`, `whilst` to `while`. Metric units in question text too: `kilometres` to `kilometers`, `litres` to `liters`.
+
+**Three traps, all hit during the v2.0.2 sweep.**
+
+**Never run the sweep over raw JSON text.** Operate on the PARSED values. A literal `
+` inside a JSON string glues the escape's `n` to the next word, so `"...by programme:
+Programme P:"` has no word boundary before the second `Programme` and `programme` silently skips it. That left one question reading "acceptances by program" above a table labeled "Programme P", which is exactly the mixed usage the sweep exists to remove. Parsing the file first makes the whole bug class impossible.
+
+**Prefer stems to word lists for the `-our` family.** An enumerated list missed `labour` entirely and matched `neighbour` but not `neighbourhoods`. A stem pattern (`lab|col|fav|neighb|behavi|...` + `our` + any suffix) covers every inflection at once, and the words that genuinely end `-our` in American English (four, hour, tour, pour, flour, contour, devour) are simply absent from the stem list.
+ A blanket `-ise` to `-ize` rule breaks words that are legitimately `-ise` in American English: it turned `advertise` into `advertize` and, worse, `counterclockwise` into `counterclockwize` inside the circular-seating puzzles. Keep an exception list (advise, comprise, compromise, exercise, improvise, revise, supervise, surprise, promise, and every `-wise` compound). And never rewrite an identifier: `cancelLabel` is a prop, `color` is a CSS property, and `Content-Security-Policy` is a header name. Word-boundary patterns plus a grep for identifiers afterwards is the check that caught this.
 
 ## Copyright rule (critical, applies to ALL future content work)
 
@@ -94,7 +109,7 @@ This Next.js version (16.3.0) has **breaking changes vs. typical training data**
 - **PR #10** (v1.7.0) — LaTeX normalization + rendering/UX batch. Bank-wide conversion of raw-text math to LaTeX; `a/an` before blanks (ls-062 was leaking its answer outright, since only the correct option was vowel-initial after "an ___"); `ls-090` analogy rekeyed to "Investigator". Timer rebuilt around a boundary-aligned self-rescheduling timeout with `Math.ceil` (a drifting `setInterval` plus `Math.round` was visibly skipping seconds). Fractions fixed via `\displaystyle` in `MathText`. Saved-attempt rows made clickable; sections now scroll to the results on submit. Pre-existing bugs fixed: an earlier `$` → `₱` pass had eaten opening math delimiters at 8 sites; 8 circular-seating questions had a self-contradictory facing convention that left 3 of them unsolvable; 6 explanations still referenced pre-shuffle option letters, 2 of which called the correct answer wrong.
 - **Review lanes are now mandatory per PR** (see CLAUDE.md): logic, syntax/display, UX, content correctness. Their first run (PR #10) found the unsolvable seating puzzles, the drifted explanations, and proved a CSS "fix" of mine was a measured 11% regression. Take their findings seriously and verify claims independently.
 
-- **PR #13** (v1.11.0) — home landing page + audit fixes + hosting readiness. The home page was a bare gateway (hero, exam list, two placeholder cards); it is now a real landing page modelled on the structure of cseexamreviewer.com at the user's request: accent hero band, stat row, per-section cards, how-it-works, three alternating feature bands, a "more exams" block, a native `<details>` FAQ, a closing CTA, plus a new `SiteFooter` carrying the GMAC non-affiliation disclaimer. `SiteHeader`'s three inert "soon" chips became real exam links. Audit fixes shipped alongside: `body { font-family: Arial }` had been silently overriding the Geist webfont app-wide since the starter template; `--accent` failed WCAG as text in dark mode (3.11:1) so `--accent-text` was added, derived via `color-mix` so it tracks each exam's accent; PauseOverlay opened with focus on `<body>`; `handlePause`/`handleDeadlineChange` wrote render-closure `answers` to storage and could lose an answer to a same-frame race. Hosting groundwork: `generateStaticParams` + `dynamicParams = false` on both dynamic segments (every route is now build-time prerendered, zero on-demand server rendering), `metadataBase` + title template + per-exam `generateMetadata`, `robots.ts`, `sitemap.ts`, `not-found.tsx`, `error.tsx`, JSON-LD on the home page, and `lib/site.ts` holding `NEXT_PUBLIC_SITE_URL` and the disclaimer.
+- **PR #13** (v1.11.0) — home landing page + audit fixes + hosting readiness. The home page was a bare gateway (hero, exam list, two placeholder cards); it is now a real landing page modeled on the structure of cseexamreviewer.com at the user's request: accent hero band, stat row, per-section cards, how-it-works, three alternating feature bands, a "more exams" block, a native `<details>` FAQ, a closing CTA, plus a new `SiteFooter` carrying the GMAC non-affiliation disclaimer. `SiteHeader`'s three inert "soon" chips became real exam links. Audit fixes shipped alongside: `body { font-family: Arial }` had been silently overriding the Geist webfont app-wide since the starter template; `--accent` failed WCAG as text in dark mode (3.11:1) so `--accent-text` was added, derived via `color-mix` so it tracks each exam's accent; PauseOverlay opened with focus on `<body>`; `handlePause`/`handleDeadlineChange` wrote render-closure `answers` to storage and could lose an answer to a same-frame race. Hosting groundwork: `generateStaticParams` + `dynamicParams = false` on both dynamic segments (every route is now build-time prerendered, zero on-demand server rendering), `metadataBase` + title template + per-exam `generateMetadata`, `robots.ts`, `sitemap.ts`, `not-found.tsx`, `error.tsx`, JSON-LD on the home page, and `lib/site.ts` holding `NEXT_PUBLIC_SITE_URL` and the disclaimer.
 
 ## Known non-issue: the answer-key distribution
 
@@ -116,14 +131,14 @@ As of v1.10.0 the build emits no dynamic routes: `npm run build`'s route table s
 
 All four lanes ran. Beyond the items above they surfaced, and this PR fixes:
 
-- **The section lock was never enforced.** The app has always told users a section locks you in until you submit ("just like the real exam") and SectionNav has always greyed out the other two, but the greying was cosmetic and every page linked straight to every quiz URL. Starting a second section left two clocks burning, the first silently bleeding out. `findActiveAttempt()` in `lib/section-result.ts` is now the real check: the quiz page renders a lock screen instead of drawing a set, and the home page's per-section CTA (`components/SectionStartButton.tsx`) reflects start/resume/review/blocked instead of always saying "Start". An expired-but-unsubmitted attempt deliberately does NOT block, or the user would be stranded; a paused one does.
+- **The section lock was never enforced.** The app has always told users a section locks you in until you submit ("just like the real exam") and SectionNav has always grayed out the other two, but the graying was cosmetic and every page linked straight to every quiz URL. Starting a second section left two clocks burning, the first silently bleeding out. `findActiveAttempt()` in `lib/section-result.ts` is now the real check: the quiz page renders a lock screen instead of drawing a set, and the home page's per-section CTA (`components/SectionStartButton.tsx`) reflects start/resume/review/blocked instead of always saying "Start". An expired-but-unsubmitted attempt deliberately does NOT block, or the user would be stranded; a paused one does.
 - **`--accent-text` did not track the per-exam accent, and its comment claimed it did.** A custom property containing `var()` is substituted at the element that DECLARES it; declared on `:root` it is permanently bound to `:root`'s `--accent`. Fixed with a `.exam-theme` class carried by the per-exam wrapper that re-declares it. **If you add another accent-derived token, put it in both places.**
 - **PauseOverlay rendered for 200ms on every quiz mount** (no first-mount guard on the exit effect), which the newly-added `aria-modal` turned into a phantom modal. Also now restores focus on resume and traps Tab.
 - **Root-layout metadata was inherited by every child**: `canonical: "/"` and `og:url: "/"` on the root layout made every quiz page a declared duplicate of the home page, sharing one tab title.
 - **`robots.txt` Disallow fought the `noindex`** — a blocked crawler never reads the tag. Disallow removed; `noindex` alone is stronger.
 - RC prompts embed their passage; it is now split from the stem and rendered as a distinct block. The split boundary is `[.!?]"\s+(?=[A-Z])`, NOT the last quote (vocabulary stems quote the tested word) and NOT the first (passages contain quoted speech). Self-guarding: a stem not ending in `?`/`:` falls back to unsplit. 18/18 split, 282 non-passage prompts untouched.
 - `interleaveByTopic` now prefers no two adjacent questions to share a topic (was: no more than two in a row). The old greedy largest-first pick meant every attempt opened with a matched pair. Measured over 400 draws per section: zero adjacent same-topic pairs.
-- Scores now show `21 / 108` plus a percentage and an explicit "this is not an NMAT scaled score" note; progress-grid legend leads with colour; `/gmat` shows its mapped-out format instead of being a dead end; quiz header no longer truncates the h1 to "Langua…" at 390px; pause overlay shows the frozen clock.
+- Scores now show `21 / 108` plus a percentage and an explicit "this is not an NMAT scaled score" note; progress-grid legend leads with color; `/gmat` shows its mapped-out format instead of being a dead end; quiz header no longer truncates the h1 to "Langua…" at 390px; pause overlay shows the frozen clock.
 
 - **PR #14** (v1.12.0) — question-bank statistical + correctness pass, closing the length-bias hole PR #7 left open. No app code changed. Details in "Answer-key statistics" below.
 
@@ -149,7 +164,7 @@ Files: `lib/exams/{types,registry}.ts`, `lib/exams/{nmat,gmat}/index.ts`, `lib/q
 
 **The sync/async split matters.** `loadSection()` is async and must be awaited once (the quiz page does it in an effect); `getLoadedSection()` is the synchronous cache read used during render.
 
-**Strict Mode trap, already hit once:** the loader effect is deduped by a ref, so it must NOT cancel its own in-flight promise on cleanup. React double-invokes mount effects in dev as mount-cleanup-mount; cancelling killed the only run that was allowed to proceed and the quiz hung on a blank screen.
+**Strict Mode trap, already hit once:** the loader effect is deduped by a ref, so it must NOT cancel its own in-flight promise on cleanup. React double-invokes mount effects in dev as mount-cleanup-mount; canceling killed the only run that was allowed to proceed and the quiz hung on a blank screen.
 
 ### GMAT specifics
 
@@ -159,7 +174,7 @@ GMAT Focus: Data Insights 20q, Quantitative 21q, Verbal 23q, 45 minutes each, 64
 
 ### Scoring traps that were live and are now asserted against
 
-1. **The scaled denominator must be a FIXED reference**, not the weight of what was served. Normalising by served weight made `difficultyWeight` do nothing: any all-correct run scored 805, so sweeping easy questions beat a strong partial run on hard ones.
+1. **The scaled denominator must be a FIXED reference**, not the weight of what was served. Normalizing by served weight made `difficultyWeight` do nothing: any all-correct run scored 805, so sweeping easy questions beat a strong partial run on hard ones.
 2. **`scoreAttempt` takes the section's real length.** Scoring only what was served made timing out after four questions score 675/805 while a genuine 50% run scored 505. Unreached questions count as unanswered.
 3. **An expiry discovered on load must write a `summary`.** Writing `submitted: true` with `summary: null` made every screen outside the quiz report a real result as 0 correct. A submitted record without a summary is now treated as an unknown score and shown as a bare "Submitted".
 
@@ -183,7 +198,7 @@ The bank has now been hardened against three different "answer without reading" 
 | Para Forming: assume the answer starts with Q | 8 of 10 keys opened with Q, 0 with R or S | P3 / Q3 / R2 / S2 | even |
 | Para Forming: pick the majority opening letter | never eliminated the key (10/10) | key is in the plurality 6/10 | mixed |
 
-Data Sufficiency was also restored to **canonical A-E statement order** (PR #7's bank-wide option shuffle had scrambled all 11, which trains the wrong habit since real DS uses a fixed memorised order), and rebalanced from "both together" being correct 5 of 11 times to 2/2/3/2/2 across A-E. Two questions were rewritten to achieve that: `qs-036` now hinges on the $(l+w)^2$ identity so statement (1) alone suffices, and `qs-095` is now genuinely insufficient even combined.
+Data Sufficiency was also restored to **canonical A-E statement order** (PR #7's bank-wide option shuffle had scrambled all 11, which trains the wrong habit since real DS uses a fixed memorized order), and rebalanced from "both together" being correct 5 of 11 times to 2/2/3/2/2 across A-E. Two questions were rewritten to achieve that: `qs-036` now hinges on the $(l+w)^2$ identity so statement (1) alone suffices, and `qs-095` is now genuinely insufficient even combined.
 
 **If you add Critical Reasoning, Reading Comprehension, or Para Forming questions, check these numbers again.** The natural way to write a CR question is a long, carefully-hedged correct answer next to three short dismissive distractors, which is exactly how the 94.7% happened.
 

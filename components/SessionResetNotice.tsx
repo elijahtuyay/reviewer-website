@@ -116,7 +116,7 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
                 </Link>
                 {/* Per-section, so discarding one attempt doesn't take the other
                     finished sections with it. Bordered rather than bare text:
-                    beside the same-size grey status line, an unstyled button
+                    beside the same-size gray status line, an unstyled button
                     scanned as prose ("12/36 answered Clear"), not a control. */}
                 <button
                   type="button"

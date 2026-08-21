@@ -182,11 +182,11 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     loadedKeyRef.current = loadKey;
 
     /**
-     * Deliberately NOT cancelled on cleanup.
+     * Deliberately NOT canceled on cleanup.
      *
      * React Strict Mode double-invokes mount effects in development as
      * mount -> cleanup -> mount. `loadedKeyRef` makes the second invocation
-     * return early, so if the cleanup of the FIRST invocation cancelled its own
+     * return early, so if the cleanup of the FIRST invocation canceled its own
      * in-flight load, nothing would ever finish and the page would hang on a
      * blank screen forever. It did exactly that. The ref guard already
      * guarantees a single run per section, and a late setState after a real
@@ -200,7 +200,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
         pool = await loadSection(examId, sectionId);
       } catch {
         // Nothing is drawn, no deadline is written, and no clock starts. The
-        // previous behaviour resolved to an empty array and produced a running
+        // previous behavior resolved to an empty array and produced a running
         // timer above a blank page with no way to retry.
         setPhase("error");
         return;

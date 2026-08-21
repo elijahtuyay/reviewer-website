@@ -6,7 +6,7 @@ import type { AdaptiveRules } from "@/lib/exams/types";
  *
  * The real thing is an item-response-theory model that re-estimates ability
  * after every answer and picks the item that most reduces uncertainty. This is
- * the behaviour that model produces, implemented over the three difficulty
+ * the behavior that model produces, implemented over the three difficulty
  * rungs the question bank actually has: answer correctly and the questions get
  * harder, miss and they get easier, and the ladder is what the score is
  * weighted by.

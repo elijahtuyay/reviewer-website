@@ -139,7 +139,7 @@ export default function QuestionCard({
       {/* A short static name, NOT aria-labelledby the prompt: screen readers
           re-announce a group's name on entry and on every focus move inside it,
           and prompts here embed whole reading passages (the longest is ~1330
-          characters), so labelling by the prompt would re-read a passage on
+          characters), so labeling by the prompt would re-read a passage on
           every arrow key. */}
       <div
         className="mt-4 ml-7 flex flex-col gap-2"
@@ -164,7 +164,7 @@ export default function QuestionCard({
               marker = "Your answer";
             }
           } else if (isSelected) {
-            // ring-1 on top of the border, not a different colour: raising the
+            // ring-1 on top of the border, not a different color: raising the
             // neutral border to --line-strong made it out-contrast the accent in
             // dark mode (4.82:1 vs 3.11:1), so the unselected options outlined
             // more strongly than the chosen one. Doubling the selected border's

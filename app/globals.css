@@ -67,7 +67,7 @@
  * app/[examId]/layout.tsx), which is the element that sets --accent inline.
  * Declaring it here means the var(--accent) inside color-mix resolves against
  * THAT element's accent rather than :root's, so a GMAT page gets a blue accent
- * text colour instead of silently inheriting the NMAT green.
+ * text color instead of silently inheriting the NMAT green.
  *
  * The two rules have to mirror the :root/.dark pair above rather than reusing
  * them, because the value is a function of --accent and --accent is what

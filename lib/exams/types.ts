@@ -32,7 +32,7 @@ export interface ExamTheme {
 /**
  * How the section behaves while you are inside it. This is the part that
  * differs most between exams, and the part that used to be hard-coded into the
- * quiz page as NMAT's behaviour.
+ * quiz page as NMAT's behavior.
  */
 export interface ExamRules {
   /**
@@ -105,7 +105,7 @@ export type ScoringModel =
       difficultyWeight: Record<Difficulty, number>;
       /**
        * Fraction of the earned scaled range removed per unanswered question.
-       * Real adaptive exams penalise an incomplete section heavily, which is
+       * Real adaptive exams penalize an incomplete section heavily, which is
        * why finishing with guesses beats running out of time.
        */
       unansweredPenaltyPerQuestion: number;
