@@ -38,8 +38,8 @@ export default function ProgressTracker({
           let style = "bg-panel-hover font-medium text-muted hover:bg-line";
           let state = "not answered";
           if (reviewMode) {
-            // All three review states carry a non-colour cue as well as a fill,
-            // since green/red/grey alone would make correctness colour-only:
+            // All three review states carry a non-color cue as well as a fill,
+            // since green/red/gray alone would make correctness color-only:
             // the WCAG 1.4.1 failure already fixed for the answer options.
             // Bold = correct, underlined = incorrect, plain = skipped.
             if (correctSet.has(num)) {
@@ -76,14 +76,14 @@ export default function ProgressTracker({
           fills at all. */}
       <p className="mt-2 text-xs text-muted">
         {reviewMode
-          ? // Colour first, because colour is what is actually perceptible at
+          ? // Color first, because color is what is actually perceptible at
             // this cell size: the bold/underline redundancy is real and is kept
-            // for colourblind users, but leading with it described a signal
+            // for colorblind users, but leading with it described a signal
             // nobody can see on a 28px square.
-            "Green is correct (bold), red is incorrect (underlined), grey was skipped."
+            "Green is correct (bold), red is incorrect (underlined), gray was skipped."
           : // "Filled" was wrong: every cell has a fill, so the caption read as
             // "you have answered all of them". The distinction is the accent
-            // highlight, and naming a colour would be wrong per exam theme.
+            // highlight, and naming a color would be wrong per exam theme.
             "Highlighted squares are answered."}
       </p>
     </div>

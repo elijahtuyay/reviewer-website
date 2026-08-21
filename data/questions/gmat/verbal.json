@@ -116,10 +116,10 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Weaken",
     "difficulty": "easy",
-    "prompt": "Argument: \"Our new training programme works, because employees who took it were promoted more often than those who did not.\" Which finding would most weaken this?",
+    "prompt": "Argument: \"Our new training program works, because employees who took it were promoted more often than those who did not.\" Which finding would most weaken this?",
     "options": [
-      "The training programme was delivered online rather than in person at the company offices.",
-      "The programme lasted three days rather than the planned five.",
+      "The training program was delivered online rather than in person at the company offices.",
+      "The program lasted three days rather than the planned five.",
       "Managers selected their strongest performers to attend the training.",
       "A few employees found parts of the training repetitive."
     ],
@@ -156,7 +156,7 @@
       "The bakery did not run a discount today."
     ],
     "correctIndex": 3,
-    "explanation": "Again the contrapositive: a discount guarantees selling out, so not selling out means there was no discount. The remaining options speculate about causes and future behaviour that the statements do not license.",
+    "explanation": "Again the contrapositive: a discount guarantees selling out, so not selling out means there was no discount. The remaining options speculate about causes and future behavior that the statements do not license.",
     "source": "original"
   },
   {
@@ -172,7 +172,7 @@
       "Flexible hours are administratively simpler to manage than fixed hours."
     ],
     "correctIndex": 1,
-    "explanation": "Generalising from one branch requires that the branch be representative; if it differed in some relevant way, the result may not transfer. The unanimity and single-measure options are far stronger than the argument needs, and administrative simplicity is beside the point.",
+    "explanation": "Generalizing from one branch requires that the branch be representative; if it differed in some relevant way, the result may not transfer. The unanimity and single-measure options are far stronger than the argument needs, and administrative simplicity is beside the point.",
     "source": "original"
   },
   {
@@ -196,7 +196,7 @@
     "section": "verbal",
     "topic": "Reading Comprehension",
     "difficulty": "medium",
-    "prompt": "Passage: \"For much of the twentieth century, economists treated firms as rational actors that minimise costs. Behavioural research has complicated that picture. Studies of managerial decision-making find that executives often persist with failing projects, committing further resources to justify what has already been spent. This pattern, sometimes called escalation of commitment, is difficult to reconcile with pure cost minimisation, since the money already spent cannot be recovered and should not influence a forward-looking decision. Defenders of the traditional model respond that persistence may be rational in a different sense: abandoning a project publicly signals failure, and a manager's career prospects, rather than the firm's balance sheet, may be what is being optimised.\" What is the primary purpose of the passage?",
+    "prompt": "Passage: \"For much of the twentieth century, economists treated firms as rational actors that minimize costs. Behavioral research has complicated that picture. Studies of managerial decision-making find that executives often persist with failing projects, committing further resources to justify what has already been spent. This pattern, sometimes called escalation of commitment, is difficult to reconcile with pure cost minimization, since the money already spent cannot be recovered and should not influence a forward-looking decision. Defenders of the traditional model respond that persistence may be rational in a different sense: abandoning a project publicly signals failure, and a manager's career prospects, rather than the firm's balance sheet, may be what is being optimized.\" What is the primary purpose of the passage?",
     "options": [
       "To argue that the traditional economic model of the firm should be abandoned entirely.",
       "To present a challenge to a traditional model and a response to that challenge.",
@@ -204,7 +204,7 @@
       "To describe a series of experiments conducted on executives at large firms."
     ],
     "correctIndex": 1,
-    "explanation": "The passage lays out the traditional view, presents behavioural evidence against it, and then gives the traditional side's reply. It stops short of endorsing either position or recommending anything.",
+    "explanation": "The passage lays out the traditional view, presents behavioral evidence against it, and then gives the traditional side's reply. It stops short of endorsing either position or recommending anything.",
     "source": "original"
   },
   {
@@ -212,15 +212,15 @@
     "section": "verbal",
     "topic": "Reading Comprehension",
     "difficulty": "medium",
-    "prompt": "Passage: \"For much of the twentieth century, economists treated firms as rational actors that minimise costs. Behavioural research has complicated that picture. Studies of managerial decision-making find that executives often persist with failing projects, committing further resources to justify what has already been spent. This pattern, sometimes called escalation of commitment, is difficult to reconcile with pure cost minimisation, since the money already spent cannot be recovered and should not influence a forward-looking decision. Defenders of the traditional model respond that persistence may be rational in a different sense: abandoning a project publicly signals failure, and a manager's career prospects, rather than the firm's balance sheet, may be what is being optimised.\" The defenders' response suggests that escalation of commitment is:",
+    "prompt": "Passage: \"For much of the twentieth century, economists treated firms as rational actors that minimize costs. Behavioral research has complicated that picture. Studies of managerial decision-making find that executives often persist with failing projects, committing further resources to justify what has already been spent. This pattern, sometimes called escalation of commitment, is difficult to reconcile with pure cost minimization, since the money already spent cannot be recovered and should not influence a forward-looking decision. Defenders of the traditional model respond that persistence may be rational in a different sense: abandoning a project publicly signals failure, and a manager's career prospects, rather than the firm's balance sheet, may be what is being optimized.\" The defenders' response suggests that escalation of commitment is:",
     "options": [
-      "less common among executives than the behavioural research claims.",
+      "less common among executives than the behavioral research claims.",
       "irrational from any point of view that could reasonably be adopted.",
-      "rational once the manager's own interests are the thing being optimised.",
+      "rational once the manager's own interests are the thing being optimized.",
       "a phenomenon that appears only in firms already facing serious financial difficulty."
     ],
     "correctIndex": 2,
-    "explanation": "Their reply relocates the objective rather than denying the behaviour: it is rational, but with respect to the manager's career rather than the firm's costs. They do not dispute how often it occurs or restrict it to struggling firms.",
+    "explanation": "Their reply relocates the objective rather than denying the behavior: it is rational, but with respect to the manager's career rather than the firm's costs. They do not dispute how often it occurs or restrict it to struggling firms.",
     "source": "original"
   },
   {
@@ -268,7 +268,7 @@
       "Visitors randomly shown the old page in the same month completed far fewer purchases."
     ],
     "correctIndex": 3,
-    "explanation": "A randomised comparison run in the same period removes essentially every rival explanation at once, which is stronger than merely holding one other factor constant. Praise and load time say nothing about causation, and constant advertising rules out only a single alternative.",
+    "explanation": "A randomized comparison run in the same period removes essentially every rival explanation at once, which is stronger than merely holding one other factor constant. Praise and load time say nothing about causation, and constant advertising rules out only a single alternative.",
     "source": "original"
   },
   {
@@ -295,7 +295,7 @@
     "prompt": "Argument: \"Since the region's farms produce more food than its population consumes, no one in the region should go hungry.\" Which assumption is required?",
     "options": [
       "The food produced is actually distributed to those who need it.",
-      "The region imports no food at all from neighbouring areas.",
+      "The region imports no food at all from neighboring areas.",
       "Every farm in the region grows the same variety of crops.",
       "The region's farms will maintain their current output in future years."
     ],
@@ -312,7 +312,7 @@
     "options": [
       "The willingness of farmers to reduce their use of antibiotics.",
       "Bacteria have only recently developed the ability to exchange genes.",
-      "The intensity of selection favouring resistant bacteria.",
+      "The intensity of selection favoring resistant bacteria.",
       "The speed at which new antibiotics can be brought to market."
     ],
     "correctIndex": 2,
@@ -359,7 +359,7 @@
     "prompt": "Argument: \"A tax on sugary drinks will reduce obesity, because consumption of those drinks falls sharply when their price rises.\" Which assumption is required?",
     "options": [
       "Consumers do not replace the forgone drinks with other equally caloric products.",
-      "The revenue raised by the tax will be spent on public health programmes.",
+      "The revenue raised by the tax will be spent on public health programs.",
       "Sugary drinks are by a clear margin the single largest source of calories in the average diet.",
       "Producers will pass the entire cost of the tax on to consumers immediately."
     ],
@@ -377,10 +377,10 @@
       "The checklist also introduced systematic reporting of complications that had previously gone unrecorded.",
       "The checklist added several minutes to the preparation time before each and every operation.",
       "The hospital performed slightly fewer operations than it had the previous year.",
-      "Surgeons at the hospital were initially sceptical about adopting the checklist."
+      "Surgeons at the hospital were initially skeptical about adopting the checklist."
     ],
     "correctIndex": 0,
-    "explanation": "If more complications are now being recorded, the reported rate can rise while the true rate falls; the paradox dissolves once measurement changes. Preparation time, scepticism, and volume do not reconcile fewer errors with more reported complications.",
+    "explanation": "If more complications are now being recorded, the reported rate can rise while the true rate falls; the paradox dissolves once measurement changes. Preparation time, skepticism, and volume do not reconcile fewer errors with more reported complications.",
     "source": "original"
   },
   {
@@ -392,7 +392,7 @@
     "options": [
       "It mistakes a necessary condition for a sufficient one.",
       "It assumes the two stated options are the only ones available.",
-      "It generalises from a sample that is unlikely to be representative.",
+      "It generalizes from a sample that is unlikely to be representative.",
       "It appeals to the authority of people who are not experts on the question."
     ],
     "correctIndex": 1,
@@ -436,10 +436,10 @@
     "section": "verbal",
     "topic": "Reading Comprehension",
     "difficulty": "hard",
-    "prompt": "Passage: \"The standard account of the industrial revolution credits technological invention. Recent economic history has emphasised something less visible: the cost of labour. In regions where wages were high relative to the price of fuel, replacing workers with machines paid for itself quickly, and inventions that were technically feasible elsewhere were adopted first where they were commercially worthwhile. On this account the machines were not the cause so much as the response. Critics of the wage explanation note that it struggles with cases where adoption preceded any clear wage advantage, and argue that it understates the role of scientific institutions in making the inventions possible at all.\" Which of the following best expresses the wage explanation described in the passage?",
+    "prompt": "Passage: \"The standard account of the industrial revolution credits technological invention. Recent economic history has emphasized something less visible: the cost of labour. In regions where wages were high relative to the price of fuel, replacing workers with machines paid for itself quickly, and inventions that were technically feasible elsewhere were adopted first where they were commercially worthwhile. On this account the machines were not the cause so much as the response. Critics of the wage explanation note that it struggles with cases where adoption preceded any clear wage advantage, and argue that it understates the role of scientific institutions in making the inventions possible at all.\" Which of the following best expresses the wage explanation described in the passage?",
     "options": [
       "Workers in high-wage regions actively resisted the introduction of machinery.",
-      "High wages relative to fuel costs made mechanisation commercially worthwhile.",
+      "High wages relative to fuel costs made mechanization commercially worthwhile.",
       "Machines were invented in regions where scientific institutions were strongest.",
       "Technological invention was the primary driver of industrial change."
     ],
@@ -452,15 +452,15 @@
     "section": "verbal",
     "topic": "Reading Comprehension",
     "difficulty": "hard",
-    "prompt": "Passage: \"The standard account of the industrial revolution credits technological invention. Recent economic history has emphasised something less visible: the cost of labour. In regions where wages were high relative to the price of fuel, replacing workers with machines paid for itself quickly, and inventions that were technically feasible elsewhere were adopted first where they were commercially worthwhile. On this account the machines were not the cause so much as the response. Critics of the wage explanation note that it struggles with cases where adoption preceded any clear wage advantage, and argue that it understates the role of scientific institutions in making the inventions possible at all.\" Which finding would most undermine the wage explanation?",
+    "prompt": "Passage: \"The standard account of the industrial revolution credits technological invention. Recent economic history has emphasized something less visible: the cost of labour. In regions where wages were high relative to the price of fuel, replacing workers with machines paid for itself quickly, and inventions that were technically feasible elsewhere were adopted first where they were commercially worthwhile. On this account the machines were not the cause so much as the response. Critics of the wage explanation note that it struggles with cases where adoption preceded any clear wage advantage, and argue that it understates the role of scientific institutions in making the inventions possible at all.\" Which finding would most undermine the wage explanation?",
     "options": [
       "A region with high wages that also happened to have unusually strong scientific institutions.",
-      "A region with low wages and cheap fuel that mechanised earlier than high-wage regions did.",
+      "A region with low wages and cheap fuel that mechanized earlier than high-wage regions did.",
       "Evidence that some inventors were motivated by curiosity rather than profit.",
-      "Evidence that fuel prices varied considerably between neighbouring regions."
+      "Evidence that fuel prices varied considerably between neighboring regions."
     ],
     "correctIndex": 1,
-    "explanation": "The explanation predicts that mechanisation follows high wages, so a low-wage region mechanising first is a direct counterexample, and the passage itself flags adoption preceding wage advantage as the critics' line of attack. The other options are compatible with the wage account.",
+    "explanation": "The explanation predicts that mechanization follows high wages, so a low-wage region mechanizing first is a direct counterexample, and the passage itself flags adoption preceding wage advantage as the critics' line of attack. The other options are compatible with the wage account.",
     "source": "original"
   },
   {

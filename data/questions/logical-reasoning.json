@@ -396,7 +396,7 @@
       "Opposite R"
     ],
     "correctIndex": 2,
-    "explanation": "Number the seats 1 to 6 clockwise and place P at seat 1. Because everyone faces outward, away from the table, each person's right is the clockwise direction. With six evenly spaced seats, the seat directly opposite P is seat 4, so Q sits there. R and S are Q's two neighbours, seats 3 and 5; R is on Q's right, which is clockwise from seat 4, so R is at 5 and S is at 3. T is immediately to the left (counterclockwise) of S, so T is at 2. Seat 6 is the only one left, and it is the counterclockwise neighbour of P, that is, immediately to P's left, so U sits there. Checking the other choices against this arrangement: the seat immediately to Q's right is 5, which belongs to R; the seat immediately to S's left is 2, which belongs to T; and the seat opposite R is also 2, again T.",
+    "explanation": "Number the seats 1 to 6 clockwise and place P at seat 1. Because everyone faces outward, away from the table, each person's right is the clockwise direction. With six evenly spaced seats, the seat directly opposite P is seat 4, so Q sits there. R and S are Q's two neighbors, seats 3 and 5; R is on Q's right, which is clockwise from seat 4, so R is at 5 and S is at 3. T is immediately to the left (counterclockwise) of S, so T is at 2. Seat 6 is the only one left, and it is the counterclockwise neighbor of P, that is, immediately to P's left, so U sits there. Checking the other choices against this arrangement: the seat immediately to Q's right is 5, which belongs to R; the seat immediately to S's left is 2, which belongs to T; and the seat opposite R is also 2, again T.",
     "source": "original"
   },
   {

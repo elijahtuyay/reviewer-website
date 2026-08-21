@@ -100,15 +100,15 @@
     "section": "quantitative",
     "topic": "Word Problems: Rates",
     "difficulty": "easy",
-    "prompt": "A car travels 180 kilometres in 3 hours. At the same speed, how far does it travel in 5 hours?",
+    "prompt": "A car travels 180 kilometers in 3 hours. At the same speed, how far does it travel in 5 hours?",
     "options": [
-      "270 kilometres",
-      "240 kilometres",
-      "360 kilometres",
-      "300 kilometres"
+      "270 kilometers",
+      "240 kilometers",
+      "360 kilometers",
+      "300 kilometers"
     ],
     "correctIndex": 3,
-    "explanation": "The speed is $180 \\div 3 = 60$ kilometres per hour, so in 5 hours it covers $60 \\times 5 = 300$ kilometres.",
+    "explanation": "The speed is $180 \\div 3 = 60$ kilometers per hour, so in 5 hours it covers $60 \\times 5 = 300$ kilometers.",
     "source": "original"
   },
   {
@@ -244,7 +244,7 @@
     "section": "quantitative",
     "topic": "Word Problems: Mixtures",
     "difficulty": "medium",
-    "prompt": "A 40-litre solution is 25 percent acid. How many litres of pure acid must be added to make it 40 percent acid?",
+    "prompt": "A 40-liter solution is 25 percent acid. How many liters of pure acid must be added to make it 40 percent acid?",
     "options": [
       "8",
       "6",
@@ -252,7 +252,7 @@
       "10"
     ],
     "correctIndex": 3,
-    "explanation": "Start with $0.25 \\times 40 = 10$ litres of acid. Adding $x$ litres of pure acid gives $(10 + x)$ acid in $(40 + x)$ total, and setting $(10+x)/(40+x) = 0.40$ yields $10 + x = 16 + 0.4x$, so $0.6x = 6$ and $x = 10$. The trap is forgetting that added acid raises the total volume too.",
+    "explanation": "Start with $0.25 \\times 40 = 10$ liters of acid. Adding $x$ liters of pure acid gives $(10 + x)$ acid in $(40 + x)$ total, and setting $(10+x)/(40+x) = 0.40$ yields $10 + x = 16 + 0.4x$, so $0.6x = 6$ and $x = 10$. The trap is forgetting that added acid raises the total volume too.",
     "source": "original"
   },
   {
@@ -308,12 +308,12 @@
     "section": "quantitative",
     "topic": "Word Problems: Rates",
     "difficulty": "medium",
-    "prompt": "A cyclist rides out at 15 kilometres per hour and returns along the same route at 10 kilometres per hour. What is the average speed for the whole trip?",
+    "prompt": "A cyclist rides out at 15 kilometers per hour and returns along the same route at 10 kilometers per hour. What is the average speed for the whole trip?",
     "options": [
-      "13 kilometres per hour",
-      "11 kilometres per hour",
-      "12 kilometres per hour",
-      "12.5 kilometres per hour"
+      "13 kilometers per hour",
+      "11 kilometers per hour",
+      "12 kilometers per hour",
+      "12.5 kilometers per hour"
     ],
     "correctIndex": 2,
     "explanation": "Average speed is total distance over total time, not the average of the two speeds. For a distance $d$ each way, the time is $d/15 + d/10 = d/6$, and the total distance is $2d$, giving $2d \\div (d/6) = 12$. The 12.5 option is the tempting arithmetic mean.",
@@ -380,7 +380,7 @@
       "Both the mean and the standard deviation increase by 5."
     ],
     "correctIndex": 1,
-    "explanation": "Adding a constant shifts every value equally, so the centre moves by 5 while the spread around it does not change at all. Standard deviation measures dispersion, and dispersion is untouched by a translation. It would change if every value were MULTIPLIED by a constant.",
+    "explanation": "Adding a constant shifts every value equally, so the center moves by 5 while the spread around it does not change at all. Standard deviation measures dispersion, and dispersion is untouched by a translation. It would change if every value were MULTIPLIED by a constant.",
     "source": "original"
   },
   {
@@ -468,7 +468,7 @@
     "section": "quantitative",
     "topic": "Word Problems: Rates",
     "difficulty": "hard",
-    "prompt": "Two trains 300 kilometres apart travel toward each other, one at 70 kilometres per hour and the other at 80 kilometres per hour. How long until they meet?",
+    "prompt": "Two trains 300 kilometers apart travel toward each other, one at 70 kilometers per hour and the other at 80 kilometers per hour. How long until they meet?",
     "options": [
       "4 hours",
       "2 hours",
@@ -476,7 +476,7 @@
       "2.5 hours"
     ],
     "correctIndex": 1,
-    "explanation": "When objects approach each other their speeds add, so the gap closes at $70 + 80 = 150$ kilometres per hour. The 300-kilometre gap therefore closes in $300 \\div 150 = 2$ hours. Using one train's speed alone gives the 4-hour style of wrong answer.",
+    "explanation": "When objects approach each other their speeds add, so the gap closes at $70 + 80 = 150$ kilometers per hour. The 300-kilometer gap therefore closes in $300 \\div 150 = 2$ hours. Using one train's speed alone gives the 4-hour style of wrong answer.",
     "source": "original"
   }
 ]

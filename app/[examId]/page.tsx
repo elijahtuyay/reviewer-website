@@ -187,7 +187,7 @@ function expectations(exam: ExamModule): string[] {
     // "plays the role" of the exam's timed break, which implied a budget that
     // nothing enforces: pausing here is unlimited in both count and length.
     lines.push(
-      `The real exam grants one optional ${exam.rules.optionalBreakMinutes}-minute break. Practising here, the Pause button freezes the clock whenever you need it, with no limit on how often or how long.`
+      `The real exam grants one optional ${exam.rules.optionalBreakMinutes}-minute break. Practicing here, the Pause button freezes the clock whenever you need it, with no limit on how often or how long.`
     );
   }
 

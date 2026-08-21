@@ -14,7 +14,7 @@ import { ExamModule, jsonBank } from "@/lib/exams/types";
  *    Quantitative no longer covers geometry. (NMAT's quant section keeps its
  *    own data sufficiency questions; that is correct for NMAT and unrelated.)
  *
- * The behavioural rules below are what actually make this exam different from
+ * The behavioral rules below are what actually make this exam different from
  * NMAT, and they are the reason the quiz engine was made rule-driven rather
  * than being NMAT's flow with switches bolted on.
  */
@@ -70,7 +70,7 @@ const gmat: ExamModule = {
     // served one at a time and cannot page back through the section.
     navigation: "sequential",
     // The real exam refuses to advance without an answer. Guessing and moving
-    // on is the intended behaviour, which is why the unanswered penalty below
+    // on is the intended behavior, which is why the unanswered penalty below
     // is deliberately harsh.
     allowSkip: false,
     adaptive: {
@@ -97,7 +97,7 @@ const gmat: ExamModule = {
    * the hardest questions can still leave a high score, while sweeping the easy
    * ones does not.
    *
-   * The weights and the penalty are a faithful *model* of that behaviour, not
+   * The weights and the penalty are a faithful *model* of that behavior, not
    * GMAC's actual undisclosed IRT scoring. The app says so on the results
    * screen rather than implying the number is an official prediction.
    */

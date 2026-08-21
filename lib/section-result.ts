@@ -78,8 +78,8 @@ export interface ActiveAttempt {
  * The section that currently holds a live, unfinished attempt, or null.
  *
  * Both exams tell the candidate that a section locks you in until you submit
- * it, and the section nav greys out the others. Nothing enforced it until this
- * function existed: the greying was cosmetic and every page linked straight to
+ * it, and the section nav grays out the others. Nothing enforced it until this
+ * function existed: the graying was cosmetic and every page linked straight to
  * every quiz URL, so starting a second section left two clocks burning with the
  * first silently bleeding out.
  *

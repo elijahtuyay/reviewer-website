@@ -107,7 +107,7 @@ function Hero({ examCount, totalBank }: { examCount: number; totalBank: number }
   return (
     // The one saturated surface on the site, and deliberately the ROOT accent
     // rather than an exam's: this page sits above every exam, so borrowing one
-    // exam's colour here would make the platform look like it belongs to it.
+    // exam's color here would make the platform look like it belongs to it.
     <section className="relative overflow-hidden bg-accent text-accent-foreground">
       <div
         aria-hidden
@@ -178,7 +178,7 @@ function StatBand({ stats }: { stats: { value: string; label: string }[] }) {
 
 function ExamMark({ exam }: { exam: ExamModule }) {
   return (
-    // Inline style, not a Tailwind class: the colour comes from the exam module
+    // Inline style, not a Tailwind class: the color comes from the exam module
     // at runtime, and this card sits outside that exam's theme scope.
     <span
       aria-hidden
@@ -204,7 +204,7 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
           <p className="mt-3 leading-relaxed text-muted">
             These are different exams, not one quiz with the names swapped. Section lengths,
             timings, whether you can skip, and whether the questions adapt to you all follow the
-            exam being practised.
+            exam being practiced.
           </p>
         </div>
 
@@ -261,7 +261,7 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
                 style={{ backgroundColor: exam.theme.accent, color: exam.theme.accentForeground }}
               >
                 {exam.available
-                  ? `Practise the ${exam.shortLabel}`
+                  ? `Practice the ${exam.shortLabel}`
                   : `See the ${exam.shortLabel} format`}
               </Link>
             </article>
@@ -377,7 +377,7 @@ const FEATURES = [
   {
     eyebrow: "Built to the real format",
     title: "The pressure is the point",
-    body: "Question counts and time limits are taken from each exam's published structure, not rounded off for convenience. Sections lock while you are inside one, the countdown keeps running if you wander off to another tab, and pausing is a deliberate act you can see on screen. Practising without the clock teaches you the material but not the exam.",
+    body: "Question counts and time limits are taken from each exam's published structure, not rounded off for convenience. Sections lock while you are inside one, the countdown keeps running if you wander off to another tab, and pausing is a deliberate act you can see on screen. Practicing without the clock teaches you the material but not the exam.",
     points: [
       "A per-section countdown that survives a reload",
       "Pause blurs the questions, so a break is a real break",
@@ -465,7 +465,7 @@ function buildFaqs(totalBank: number, examCount: number): FaqEntry[] {
   return [
     {
       q: "Is it really free?",
-      a: "Yes, and there is nothing to sign up for. Open a section and start. Accounts and saved attempt history are on the roadmap, but practising here is not what you would ever be paying for.",
+      a: "Yes, and there is nothing to sign up for. Open a section and start. Accounts and saved attempt history are on the roadmap, but practicing here is not what you would ever be paying for.",
     },
     {
       q: "Are these real exam questions?",
@@ -474,7 +474,7 @@ function buildFaqs(totalBank: number, examCount: number): FaqEntry[] {
       )} questions are written originally for this site and calibrated against each exam's published structure, so the topic mix, difficulty spread, and phrasing match what you will sit. Anyone selling you leaked questions is selling you a problem.`,
     },
     {
-      q: "Which exams can I practise?",
+      q: "Which exams can I practice?",
       a: `${
         examCount === 1 ? "One exam is" : `${examCount} exams are`
       } live right now, each built to its own published format rather than sharing one generic quiz. More can be added without changing how the existing ones behave.`,

@@ -18,7 +18,7 @@ interface ConfirmDialogProps {
  * Shared confirmation step for the actions that can destroy a user's work:
  * submitting with unanswered questions, restarting a section, and clearing saved
  * progress. Built rather than using window.confirm() so it matches the rest of
- * the UI and can be made accessible; centralised so a fourth destructive action
+ * the UI and can be made accessible; centralized so a fourth destructive action
  * gets the same treatment for free.
  *
  * Containment lives HERE rather than in each caller: Escape to dismiss, body
@@ -86,10 +86,10 @@ export default function ConfirmDialog({
 
   if (!open) return null;
 
-  // One colour convention, always: accent green is the button that KEEPS your
+  // One color convention, always: accent green is the button that KEEPS your
   // work, the red outline is the irreversible one. Deliberately not
   // configurable. Every action this dialog guards is irreversible, and a
-  // per-call "tone" meant green confirmed one dialog and cancelled another a
+  // per-call "tone" meant green confirmed one dialog and canceled another a
   // single tap apart, which is worse than either convention on its own.
   const confirmClasses =
     "border border-red-600 text-red-700 hover:bg-red-50 dark:border-red-500 dark:text-red-400 dark:hover:bg-red-950/40";

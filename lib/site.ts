@@ -19,4 +19,4 @@ export const SITE_TAGLINE = "Free, timed practice exams with every answer explai
  * decoration.
  */
 export const AFFILIATION_DISCLAIMER =
-  "This site is an independent study tool. It is not affiliated with, endorsed by, or connected to the Graduate Management Admission Council (GMAC) or any testing body. Every question here is originally written for practice and does not reproduce actual examination content. Practising here does not guarantee any particular exam result.";
+  "This site is an independent study tool. It is not affiliated with, endorsed by, or connected to the Graduate Management Admission Council (GMAC) or any testing body. Every question here is originally written for practice and does not reproduce actual examination content. Practicing here does not guarantee any particular exam result.";

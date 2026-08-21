@@ -118,7 +118,7 @@
     "section": "data-insights",
     "topic": "Graphics Interpretation",
     "difficulty": "easy",
-    "prompt": "Monthly rainfall in millimetres:\nJanuary: 30\nFebruary: 45\nMarch: 60\nApril: 45\n\nWhat was the mean monthly rainfall over these four months?",
+    "prompt": "Monthly rainfall in millimeters:\nJanuary: 30\nFebruary: 45\nMarch: 60\nApril: 45\n\nWhat was the mean monthly rainfall over these four months?",
     "options": [
       "45",
       "48",
@@ -126,7 +126,7 @@
       "50"
     ],
     "correctIndex": 0,
-    "explanation": "The total is 180 millimetres over four months, so the mean is 45. Here the mean and the median happen to coincide, which is not generally true.",
+    "explanation": "The total is 180 millimeters over four months, so the mean is 45. Here the mean and the median happen to coincide, which is not generally true.",
     "source": "original"
   },
   {
@@ -150,15 +150,15 @@
     "section": "data-insights",
     "topic": "Two-Part Analysis",
     "difficulty": "easy",
-    "prompt": "A train travels at 90 kilometres per hour for 2 hours, then at 60 kilometres per hour for 1 hour.\n\nWhat is the total distance travelled?",
+    "prompt": "A train travels at 90 kilometers per hour for 2 hours, then at 60 kilometers per hour for 1 hour.\n\nWhat is the total distance traveled?",
     "options": [
-      "240 kilometres",
-      "150 kilometres",
-      "225 kilometres",
-      "270 kilometres"
+      "240 kilometers",
+      "150 kilometers",
+      "225 kilometers",
+      "270 kilometers"
     ],
     "correctIndex": 0,
-    "explanation": "The two legs cover 180 and 60 kilometres respectively, giving 240 in total. Averaging the speeds first and multiplying by 3 hours gives 225, which is wrong because the legs are of unequal duration.",
+    "explanation": "The two legs cover 180 and 60 kilometers respectively, giving 240 in total. Averaging the speeds first and multiplying by 3 hours gives 225, which is wrong because the legs are of unequal duration.",
     "source": "original"
   },
   {
@@ -460,15 +460,15 @@
     "section": "data-insights",
     "topic": "Table Analysis",
     "difficulty": "hard",
-    "prompt": "Applications and acceptances by programme:\nProgramme P: 400 applications, 80 accepted\nProgramme Q: 250 applications, 75 accepted\nProgramme R: 350 applications, 42 accepted\n\nWhich programme is the most selective, and what is its acceptance rate?",
+    "prompt": "Applications and acceptances by program:\nProgramme P: 400 applications, 80 accepted\nProgramme Q: 250 applications, 75 accepted\nProgramme R: 350 applications, 42 accepted\n\nWhich program is the most selective, and what is its acceptance rate?",
     "options": [
-      "Programme Q, at 30 percent.",
-      "Programme P, at 20 percent.",
-      "Programme R, at 42 percent.",
-      "Programme R, at 12 percent."
+      "Program Q, at 30 percent.",
+      "Program P, at 20 percent.",
+      "Program R, at 42 percent.",
+      "Program R, at 12 percent."
     ],
     "correctIndex": 3,
-    "explanation": "Acceptance rates are 20 percent for P, 30 percent for Q and 12 percent for R. The most selective programme is the one accepting the smallest proportion, which is R. Reading the raw acceptance count as a percentage produces the 42 percent option.",
+    "explanation": "Acceptance rates are 20 percent for P, 30 percent for Q and 12 percent for R. The most selective program is the one accepting the smallest proportion, which is R. Reading the raw acceptance count as a percentage produces the 42 percent option.",
     "source": "original"
   },
   {
