@@ -25,9 +25,16 @@ The user (Elijah) is a solo developer treating this like a real engineering team
 
 **All written output uses American English**, user-facing copy and code comments alike: UI strings, question prompts, options, explanations, commit messages, and these docs. The audience sits NMAT and GMAT, both written in American English, and a British spelling in a Language Skills stem is a distraction at best.
 
-Watch the usual families: `-ise`/`-isation` to `-ize`/`-ization`, `-our` to `-or`, `-re` to `-er`, doubled `l` before a suffix (`labelled` to `labeled`), `practise` (verb) to `practice`, `programme` to `program`, `whilst` to `while`. Metric units in question text too: `kilometres` to `kilometers`, `litres` to `liters`.
+Watch the usual families: `-ise`/`-isation` to `-ize`/`-ization`, `-our` to `-or`, `-re` to `-er`, doubled `l` before a suffix (`labelled` to `labeled`), `practise` (verb) to `practice`, `program` to `program`, `whilst` to `while`. Metric units in question text too: `kilometres` to `kilometers`, `litres` to `liters`.
 
-**Two traps, both hit during the v2.0.2 sweep.** A blanket `-ise` to `-ize` rule breaks words that are legitimately `-ise` in American English: it turned `advertise` into `advertize` and, worse, `counterclockwise` into `counterclockwize` inside the circular-seating puzzles. Keep an exception list (advise, comprise, compromise, exercise, improvise, revise, supervise, surprise, promise, and every `-wise` compound). And never rewrite an identifier: `cancelLabel` is a prop, `color` is a CSS property, and `Content-Security-Policy` is a header name. Word-boundary patterns plus a grep for identifiers afterwards is the check that caught this.
+**Three traps, all hit during the v2.0.2 sweep.**
+
+**Never run the sweep over raw JSON text.** Operate on the PARSED values. A literal `
+` inside a JSON string glues the escape's `n` to the next word, so `"...by programme:
+Programme P:"` has no word boundary before the second `Programme` and `programme` silently skips it. That left one question reading "acceptances by program" above a table labeled "Programme P", which is exactly the mixed usage the sweep exists to remove. Parsing the file first makes the whole bug class impossible.
+
+**Prefer stems to word lists for the `-our` family.** An enumerated list missed `labour` entirely and matched `neighbour` but not `neighbourhoods`. A stem pattern (`lab|col|fav|neighb|behavi|...` + `our` + any suffix) covers every inflection at once, and the words that genuinely end `-our` in American English (four, hour, tour, pour, flour, contour, devour) are simply absent from the stem list.
+ A blanket `-ise` to `-ize` rule breaks words that are legitimately `-ise` in American English: it turned `advertise` into `advertize` and, worse, `counterclockwise` into `counterclockwize` inside the circular-seating puzzles. Keep an exception list (advise, comprise, compromise, exercise, improvise, revise, supervise, surprise, promise, and every `-wise` compound). And never rewrite an identifier: `cancelLabel` is a prop, `color` is a CSS property, and `Content-Security-Policy` is a header name. Word-boundary patterns plus a grep for identifiers afterwards is the check that caught this.
 
 ## Copyright rule (critical, applies to ALL future content work)
 

@@ -183,7 +183,7 @@
     "section": "data-insights",
     "topic": "Multi-Source Reasoning",
     "difficulty": "medium",
-    "prompt": "Memo 1: The project budget is 500 thousand dollars.\nMemo 2: Labour accounts for 60 percent of the budget, materials for 25 percent, and the rest is contingency.\nMemo 3: Labour costs have overrun by 10 percent.\n\nBy how much has the total project cost exceeded the original budget, assuming other lines are on plan?",
+    "prompt": "Memo 1: The project budget is 500 thousand dollars.\nMemo 2: Labor accounts for 60 percent of the budget, materials for 25 percent, and the rest is contingency.\nMemo 3: Labor costs have overrun by 10 percent.\n\nBy how much has the total project cost exceeded the original budget, assuming other lines are on plan?",
     "options": [
       "50 thousand",
       "60 thousand",
@@ -191,7 +191,7 @@
       "10 thousand"
     ],
     "correctIndex": 2,
-    "explanation": "Labour was budgeted at 60 percent of 500 thousand, which is 300 thousand. A 10 percent overrun on that line is 30 thousand. The overrun applies to the labour line only, not to the whole budget, which is what makes 50 thousand tempting.",
+    "explanation": "Labor was budgeted at 60 percent of 500 thousand, which is 300 thousand. A 10 percent overrun on that line is 30 thousand. The overrun applies to the labor line only, not to the whole budget, which is what makes 50 thousand tempting.",
     "source": "original"
   },
   {
@@ -460,7 +460,7 @@
     "section": "data-insights",
     "topic": "Table Analysis",
     "difficulty": "hard",
-    "prompt": "Applications and acceptances by program:\nProgramme P: 400 applications, 80 accepted\nProgramme Q: 250 applications, 75 accepted\nProgramme R: 350 applications, 42 accepted\n\nWhich program is the most selective, and what is its acceptance rate?",
+    "prompt": "Applications and acceptances by program:\nProgram P: 400 applications, 80 accepted\nProgram Q: 250 applications, 75 accepted\nProgram R: 350 applications, 42 accepted\n\nWhich program is the most selective, and what is its acceptance rate?",
     "options": [
       "Program Q, at 30 percent.",
       "Program P, at 20 percent.",

@@ -182,7 +182,7 @@
     "difficulty": "medium",
     "prompt": "A city claims its new recycling campaign worked because the tonnage sent to landfill fell last year. Which question would be most useful in evaluating that claim?",
     "options": [
-      "Which neighbourhoods received the campaign materials first?",
+      "Which neighborhoods received the campaign materials first?",
       "How much did the city spend designing the recycling campaign?",
       "Did the total amount of waste generated in the city also fall last year?",
       "How many residents recall having seen the recycling campaign's advertisements last year?"
@@ -436,7 +436,7 @@
     "section": "verbal",
     "topic": "Reading Comprehension",
     "difficulty": "hard",
-    "prompt": "Passage: \"The standard account of the industrial revolution credits technological invention. Recent economic history has emphasized something less visible: the cost of labour. In regions where wages were high relative to the price of fuel, replacing workers with machines paid for itself quickly, and inventions that were technically feasible elsewhere were adopted first where they were commercially worthwhile. On this account the machines were not the cause so much as the response. Critics of the wage explanation note that it struggles with cases where adoption preceded any clear wage advantage, and argue that it understates the role of scientific institutions in making the inventions possible at all.\" Which of the following best expresses the wage explanation described in the passage?",
+    "prompt": "Passage: \"The standard account of the industrial revolution credits technological invention. Recent economic history has emphasized something less visible: the cost of labor. In regions where wages were high relative to the price of fuel, replacing workers with machines paid for itself quickly, and inventions that were technically feasible elsewhere were adopted first where they were commercially worthwhile. On this account the machines were not the cause so much as the response. Critics of the wage explanation note that it struggles with cases where adoption preceded any clear wage advantage, and argue that it understates the role of scientific institutions in making the inventions possible at all.\" Which of the following best expresses the wage explanation described in the passage?",
     "options": [
       "Workers in high-wage regions actively resisted the introduction of machinery.",
       "High wages relative to fuel costs made mechanization commercially worthwhile.",
@@ -444,7 +444,7 @@
       "Technological invention was the primary driver of industrial change."
     ],
     "correctIndex": 1,
-    "explanation": "The passage states that where wages were high relative to fuel prices, replacing labour with machines paid for itself, which is the wage explanation in a sentence. The institutions option belongs to the critics, and the invention-first option is the standard account the passage is contrasting with.",
+    "explanation": "The passage states that where wages were high relative to fuel prices, replacing labor with machines paid for itself, which is the wage explanation in a sentence. The institutions option belongs to the critics, and the invention-first option is the standard account the passage is contrasting with.",
     "source": "original"
   },
   {
@@ -452,7 +452,7 @@
     "section": "verbal",
     "topic": "Reading Comprehension",
     "difficulty": "hard",
-    "prompt": "Passage: \"The standard account of the industrial revolution credits technological invention. Recent economic history has emphasized something less visible: the cost of labour. In regions where wages were high relative to the price of fuel, replacing workers with machines paid for itself quickly, and inventions that were technically feasible elsewhere were adopted first where they were commercially worthwhile. On this account the machines were not the cause so much as the response. Critics of the wage explanation note that it struggles with cases where adoption preceded any clear wage advantage, and argue that it understates the role of scientific institutions in making the inventions possible at all.\" Which finding would most undermine the wage explanation?",
+    "prompt": "Passage: \"The standard account of the industrial revolution credits technological invention. Recent economic history has emphasized something less visible: the cost of labor. In regions where wages were high relative to the price of fuel, replacing workers with machines paid for itself quickly, and inventions that were technically feasible elsewhere were adopted first where they were commercially worthwhile. On this account the machines were not the cause so much as the response. Critics of the wage explanation note that it struggles with cases where adoption preceded any clear wage advantage, and argue that it understates the role of scientific institutions in making the inventions possible at all.\" Which finding would most undermine the wage explanation?",
     "options": [
       "A region with high wages that also happened to have unusually strong scientific institutions.",
       "A region with low wages and cheap fuel that mechanized earlier than high-wage regions did.",
