@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-15, at PR #10 / VERSION.txt `1.7.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-21, at PR #13 / VERSION.txt `1.11.0`.
 
 ## What this project is
 
@@ -94,7 +94,42 @@ This Next.js version (16.3.0) has **breaking changes vs. typical training data**
 - **PR #10** (v1.7.0) — LaTeX normalization + rendering/UX batch. Bank-wide conversion of raw-text math to LaTeX; `a/an` before blanks (ls-062 was leaking its answer outright, since only the correct option was vowel-initial after "an ___"); `ls-090` analogy rekeyed to "Investigator". Timer rebuilt around a boundary-aligned self-rescheduling timeout with `Math.ceil` (a drifting `setInterval` plus `Math.round` was visibly skipping seconds). Fractions fixed via `\displaystyle` in `MathText`. Saved-attempt rows made clickable; sections now scroll to the results on submit. Pre-existing bugs fixed: an earlier `$` → `₱` pass had eaten opening math delimiters at 8 sites; 8 circular-seating questions had a self-contradictory facing convention that left 3 of them unsolvable; 6 explanations still referenced pre-shuffle option letters, 2 of which called the correct answer wrong.
 - **Review lanes are now mandatory per PR** (see CLAUDE.md): logic, syntax/display, UX, content correctness. Their first run (PR #10) found the unsolvable seating puzzles, the drifted explanations, and proved a CSS "fix" of mine was a measured 11% regression. Take their findings seriously and verify claims independently.
 
-**Current state: `main` is clean, builds and lints with zero errors/warnings, at v1.7.0.**
+- **PR #13** (v1.11.0) — home landing page + audit fixes + hosting readiness. The home page was a bare gateway (hero, exam list, two placeholder cards); it is now a real landing page modelled on the structure of cseexamreviewer.com at the user's request: accent hero band, stat row, per-section cards, how-it-works, three alternating feature bands, a "more exams" block, a native `<details>` FAQ, a closing CTA, plus a new `SiteFooter` carrying the GMAC non-affiliation disclaimer. `SiteHeader`'s three inert "soon" chips became real exam links. Audit fixes shipped alongside: `body { font-family: Arial }` had been silently overriding the Geist webfont app-wide since the starter template; `--accent` failed WCAG as text in dark mode (3.11:1) so `--accent-text` was added, derived via `color-mix` so it tracks each exam's accent; PauseOverlay opened with focus on `<body>`; `handlePause`/`handleDeadlineChange` wrote render-closure `answers` to storage and could lose an answer to a same-frame race. Hosting groundwork: `generateStaticParams` + `dynamicParams = false` on both dynamic segments (every route is now build-time prerendered, zero on-demand server rendering), `metadataBase` + title template + per-exam `generateMetadata`, `robots.ts`, `sitemap.ts`, `not-found.tsx`, `error.tsx`, JSON-LD on the home page, and `lib/site.ts` holding `NEXT_PUBLIC_SITE_URL` and the disclaimer.
+
+## Known non-issue: the answer-key distribution
+
+A separate Claude session reported (2026-08-21) that the correct answer sits in slot 1 for 86% of Logical Reasoning questions and 49% overall, and that `ls-010`'s explanation was a copy-paste slip about "malevolent/vindictive/benevolent/altruistic". **Both were checked against the files on disk and both are false.** The measured distribution is 25.0 / 22.0 / 27.7 / 24.3 / 1.0 percent across indices 0-4 of all 300 questions (the 1% at index 4 is the 11 quantitative questions with five options), and `ls-010` carries a correct, on-topic explanation about sleep and memory consolidation. The word "malevolent" appears nowhere in the bank. The reported 86% figure is verbatim the pre-v1.5.0 bug that PR #7 already fixed, so that session was almost certainly reading a stale snapshot. Re-measure before acting on a claim like this:
+
+```bash
+python -c "import json,io,collections; c=collections.Counter(); [c.update([q['correctIndex']]) for n in ['language-skills','quantitative-skills','logical-reasoning'] for q in json.load(io.open(f'data/questions/{n}.json',encoding='utf-8'))]; print(c)"
+```
+
+## Hosting
+
+As of v1.10.0 the build emits no dynamic routes: `npm run build`'s route table should show only `○ (Static)` and `● (SSG)`. There is no database, no runtime secret, and no request-time work, so the app is a pile of static files plus whatever adapter a host wants. Set `NEXT_PUBLIC_SITE_URL` (no trailing slash) in the host's environment before the first production build, or `sitemap.xml`, `robots.txt`, and every canonical/OG URL will point at `http://localhost:3000`.
+
+### Review-lane findings applied in the same PR
+
+All four lanes ran. Beyond the items above they surfaced, and this PR fixes:
+
+- **The section lock was never enforced.** The app has always told users a section locks you in until you submit ("just like the real exam") and SectionNav has always greyed out the other two, but the greying was cosmetic and every page linked straight to every quiz URL. Starting a second section left two clocks burning, the first silently bleeding out. `findActiveAttempt()` in `lib/section-result.ts` is now the real check: the quiz page renders a lock screen instead of drawing a set, and the home page's per-section CTA (`components/SectionStartButton.tsx`) reflects start/resume/review/blocked instead of always saying "Start". An expired-but-unsubmitted attempt deliberately does NOT block, or the user would be stranded; a paused one does.
+- **`--accent-text` did not track the per-exam accent, and its comment claimed it did.** A custom property containing `var()` is substituted at the element that DECLARES it; declared on `:root` it is permanently bound to `:root`'s `--accent`. Fixed with a `.exam-theme` class carried by the per-exam wrapper that re-declares it. **If you add another accent-derived token, put it in both places.**
+- **PauseOverlay rendered for 200ms on every quiz mount** (no first-mount guard on the exit effect), which the newly-added `aria-modal` turned into a phantom modal. Also now restores focus on resume and traps Tab.
+- **Root-layout metadata was inherited by every child**: `canonical: "/"` and `og:url: "/"` on the root layout made every quiz page a declared duplicate of the home page, sharing one tab title.
+- **`robots.txt` Disallow fought the `noindex`** — a blocked crawler never reads the tag. Disallow removed; `noindex` alone is stronger.
+- RC prompts embed their passage; it is now split from the stem and rendered as a distinct block. The split boundary is `[.!?]"\s+(?=[A-Z])`, NOT the last quote (vocabulary stems quote the tested word) and NOT the first (passages contain quoted speech). Self-guarding: a stem not ending in `?`/`:` falls back to unsplit. 18/18 split, 282 non-passage prompts untouched.
+- `interleaveByTopic` now prefers no two adjacent questions to share a topic (was: no more than two in a row). The old greedy largest-first pick meant every attempt opened with a matched pair. Measured over 400 draws per section: zero adjacent same-topic pairs.
+- Scores now show `21 / 108` plus a percentage and an explicit "this is not an NMAT scaled score" note; progress-grid legend leads with colour; `/gmat` shows its mapped-out format instead of being a dead end; quiz header no longer truncates the h1 to "Langua…" at 390px; pause overlay shows the frozen clock.
+
+### Open, deliberately not done in PR #13
+
+1. **The whole 300-question bank ships to the client on every page** (~220 KB), on `/[examId]` as well as every quiz section. Fix means making the bank load per-section, which means `lib/section-result.ts` and its render-time callers go async, or the per-section score is persisted at submit so the breakdown never needs the bank. Own PR.
+2. **Content: the correct option is systematically the longest.** Pick-longest scores **56.9%** on prose-option Logical Reasoning and **50.3%** on Language Skills, against a 25% baseline — a bigger hole than the positional skew PR #7 closed. Also: the 11 Data Sufficiency items were shuffled out of canonical statement order by that same pass (real DS uses a fixed memorized order), "both statements together" is correct 5 of 11 times, and all 10 Para Forming items open with Q or P, never R or S.
+3. **Six specific question defects**: `ls-055` (two defensible answers), `lr-072` (offers "opposite A" in a five-seat circle), `ls-063` (explanation says a cobbler *makes* shoes), `ls-101` ("abundant with" is not idiomatic), `ls-045`, `qs-030`. Zero wrong keyed answers across all 300.
+4. `ProgressTracker` cells are 28px, under the 44px minimum the rest of the app holds to.
+5. `ConfirmDialog` styles the confirming action as a red outline and the cancel as solid green. A reviewer called this inverted; it is a **documented deliberate choice** from an earlier PR (green = keeps your work). Left alone pending a decision.
+
+**Current state: `main` is clean, builds and lints with zero errors/warnings, at v1.11.0.**
 
 ## Lesson learned: never run multiple agents against the same data file concurrently
 

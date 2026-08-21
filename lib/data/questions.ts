@@ -35,8 +35,8 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 /**
- * Reorders an already-random subset so topics are spread out, aiming for no
- * more than 2 consecutive questions sharing a topic. Without this, questions
+ * Reorders an already-random subset so topics are spread out, preferring no
+ * two consecutive questions to share a topic and never allowing three. Without this, questions
  * display in bank order (see getQuestionsByIds below), and since the bank is
  * authored topic-by-topic, a random subset drawn from it still lands in
  * visible topic clusters. Greedily picks from whichever remaining topic has
@@ -62,9 +62,19 @@ function interleaveByTopic(items: Question[]): Question[] {
       .filter(([, group]) => group.length > 0)
       .sort((a, b) => b[1].length - a[1].length);
 
+    // Two passes, strictest first. Preferring a topic different from the
+    // immediately preceding one is what stops every attempt opening with a
+    // matched pair: the greedy largest-first pick means the biggest topic in
+    // the draw always won positions 1 and 2, so the first thing a user saw was
+    // two near-identical questions. Falling back to the old
+    // "no more than 2 in a row" rule keeps this a best-effort spread rather
+    // than a hard constraint that could fail to place the tail of a
+    // topic-imbalanced draw.
+    const differsFromLast = ([topic]: [string, Question[]]) => topic !== lastTopic;
     const wouldRepeat = ([topic]: [string, Question[]]) =>
       topic === lastTopic && topic === secondLastTopic;
-    const [topic, group] = candidates.find((c) => !wouldRepeat(c)) ?? candidates[0];
+    const [topic, group] =
+      candidates.find(differsFromLast) ?? candidates.find((c) => !wouldRepeat(c)) ?? candidates[0];
 
     const next = group.shift() as Question;
     result.push(next);
@@ -75,7 +85,7 @@ function interleaveByTopic(items: Question[]): Question[] {
   return result;
 }
 
-/** Draws a fresh random subset of `count` questions from the section's full bank, arranged so no topic repeats more than twice in a row. */
+/** Draws a fresh random subset of `count` questions from the section's full bank, arranged so consecutive questions avoid sharing a topic. */
 export function drawRandomQuestionIds(examId: ExamId, section: SectionId, count: number): string[] {
   const drawn = shuffle(getQuestionsForSection(examId, section)).slice(0, count);
   return interleaveByTopic(drawn).map((q) => q.id);

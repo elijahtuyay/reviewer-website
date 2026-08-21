@@ -8,6 +8,8 @@ export interface TopicBreakdown {
 
 export interface ScoreResult {
   score: number;
+  /** Points available on this attempt. A bare "21 points" told the user nothing about whether 21 was good. */
+  maxScore: number;
   correctCount: number;
   incorrectCount: number;
   unansweredCount: number;
@@ -45,6 +47,7 @@ export function scoreAttempt(questions: Question[], answers: Answer[], pointsPer
 
   return {
     score: correctCount * pointsPerCorrectAnswer,
+    maxScore: questions.length * pointsPerCorrectAnswer,
     correctCount,
     incorrectCount,
     unansweredCount,

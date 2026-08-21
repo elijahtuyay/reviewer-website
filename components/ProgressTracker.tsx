@@ -23,7 +23,11 @@ export default function ProgressTracker({
   return (
     <div className="rounded-lg border border-line p-4">
       <p className="text-xs font-medium tracking-wide text-muted uppercase">
-        {reviewMode ? "Results" : "Progress"} ({answeredNumbers.length}/{totalQuestions})
+        {/* In review this counter is answered-out-of-total, which sitting
+            under the heading "Results" next to "0 correct" read as a score. */}
+        {reviewMode
+          ? `Results (${answeredNumbers.length}/${totalQuestions} answered)`
+          : `Progress (${answeredNumbers.length}/${totalQuestions})`}
       </p>
       <div className="mt-3 grid grid-cols-6 gap-1.5">
         {Array.from({ length: totalQuestions }, (_, i) => i + 1).map((num) => {
@@ -72,7 +76,11 @@ export default function ProgressTracker({
           fills at all. */}
       <p className="mt-2 text-xs text-muted">
         {reviewMode
-          ? "Bold is correct, underlined is incorrect, plain was skipped."
+          ? // Colour first, because colour is what is actually perceptible at
+            // this cell size: the bold/underline redundancy is real and is kept
+            // for colourblind users, but leading with it described a signal
+            // nobody can see on a 28px square.
+            "Green is correct (bold), red is incorrect (underlined), grey was skipped."
           : // "Filled" was wrong: every cell has a fill, so the caption read as
             // "you have answered all of them". The distinction is the accent
             // highlight, and naming a colour would be wrong per exam theme.

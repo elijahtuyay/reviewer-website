@@ -1,7 +1,39 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getExamConfig, isValidExamId } from "@/lib/exam-config";
 import SessionResetNotice from "@/components/SessionResetNotice";
+
+/**
+ * Per-exam title/description. The root layout supplies the `%s | Exam Reviewer`
+ * template, so this sets only the exam's own name. An exam with no bank yet is
+ * explicitly noindex — a "coming soon" page in search results is a dead end.
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ examId: string }>;
+}): Promise<Metadata> {
+  const { examId } = await params;
+  if (!isValidExamId(examId)) return {};
+  const exam = getExamConfig(examId);
+  const totalQuestions = exam.sections.reduce((sum, s) => sum + s.questionCount, 0);
+
+  return {
+    title: exam.available ? `${exam.label} practice exam` : `${exam.label} (coming soon)`,
+    description: exam.available
+      ? `Free ${exam.shortLabel} practice: ${totalQuestions} questions across ${exam.sections.length} independently-timed sections, with a written explanation for every answer.`
+      : exam.description,
+    alternates: { canonical: `/${exam.id}` },
+    robots: exam.available ? undefined : { index: false, follow: true },
+    openGraph: {
+      type: "website",
+      url: `/${exam.id}`,
+      title: exam.available ? `${exam.label} practice exam` : `${exam.label} (coming soon)`,
+      description: exam.description,
+    },
+  };
+}
 
 export default async function ExamSetupPage({ params }: { params: Promise<{ examId: string }> }) {
   const { examId } = await params;
@@ -14,19 +46,48 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
   if (!exam.available) {
     return (
       <div className="flex flex-1 justify-center bg-background">
-        <main className="w-full max-w-2xl px-6 py-16 sm:py-24 text-center">
-          <p className="text-sm font-medium tracking-wide text-muted uppercase">Exam Format</p>
-          <h1 className="mt-2 text-3xl font-semibold text-foreground">{exam.label}</h1>
-          <p className="mx-auto mt-4 max-w-md text-foreground/90">
-            {exam.shortLabel} practice is being built. The question bank isn&apos;t ready yet, so
-            there&apos;s nothing to start here for now.
-          </p>
-          <Link
-            href="/"
-            className="mt-8 inline-flex items-center justify-center gap-1.5 rounded-md border border-line-strong px-5 py-2.5 text-sm font-medium text-foreground hover:bg-panel-hover"
-          >
-            Back home
-          </Link>
+        <main className="w-full max-w-2xl px-6 py-16 sm:py-24">
+          <div className="text-center">
+            <p className="text-sm font-medium tracking-wide text-muted uppercase">Exam Format</p>
+            <h1 className="mt-2 text-3xl font-semibold text-foreground">{exam.label}</h1>
+            <p className="mx-auto mt-4 max-w-md text-foreground/90">
+              {exam.shortLabel} practice is being built. The structure below is already mapped out;
+              what is missing is the question bank.
+            </p>
+          </div>
+
+          {/* The format is shown rather than merely promised. The home page
+              tells visitors these exams "already have their format mapped
+              out", and this page used to answer that with one sentence and a
+              Back button, which made the claim look empty. */}
+          <div className="mt-8 flex flex-col divide-y divide-line rounded-lg border border-line">
+            {exam.sections.map((section) => (
+              <div key={section.id} className="flex items-center justify-between gap-4 px-5 py-4">
+                <div>
+                  <h2 className="text-sm font-medium text-foreground">{section.label}</h2>
+                  <p className="mt-0.5 text-xs text-muted">{section.description}</p>
+                </div>
+                <div className="shrink-0 text-right text-xs text-muted">{section.minutes} min</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            {/* An exam with no questions is a dead end without this: the whole
+                reason someone is on this page is that they want to practise. */}
+            <Link
+              href="/nmat"
+              className="flex min-h-11 items-center justify-center rounded-md bg-accent px-5 text-sm font-medium text-accent-foreground hover:opacity-90"
+            >
+              Try NMAT practice instead
+            </Link>
+            <Link
+              href="/"
+              className="flex min-h-11 items-center justify-center rounded-md border border-line-strong px-5 text-sm font-medium text-foreground hover:bg-panel-hover"
+            >
+              Back home
+            </Link>
+          </div>
         </main>
       </div>
     );
