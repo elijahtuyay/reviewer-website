@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { getExamConfig } from "@/lib/exam-config";
+import { getExam } from "@/lib/exams/registry";
 import { ExamId, SectionId } from "@/data/schema";
 import { getSectionBreakdown } from "@/lib/section-result";
 import { ScoreResult } from "@/lib/scoring";
@@ -23,7 +23,7 @@ export default function SectionNav({
   locked,
   currentResult,
 }: SectionNavProps) {
-  const sections = getExamConfig(examId).sections;
+  const sections = getExam(examId).sections;
 
   return (
     <nav className="flex flex-col gap-1.5">
@@ -41,15 +41,30 @@ export default function SectionNav({
                 skipped: currentResult.unansweredCount,
                 correct: currentResult.correctCount,
                 incorrect: currentResult.incorrectCount,
+                score: currentResult.score,
+                maxScore: currentResult.maxScore,
+                scoreKnown: true,
               }
             : isCurrent
-              ? { submitted: false, total: section.questionCount, answered: currentAnsweredCount, skipped: 0, correct: 0, incorrect: 0 }
+              ? {
+                  submitted: false,
+                  total: section.questionCount,
+                  answered: currentAnsweredCount,
+                  skipped: 0,
+                  correct: 0,
+                  incorrect: 0,
+                  score: null,
+                  maxScore: null,
+                  scoreKnown: false,
+                }
               : getSectionBreakdown(examId, section.id, section.questionCount);
 
         const content = (
           <>
             <span className="text-sm font-medium">{section.label}</span>
-            {breakdown.submitted ? (
+            {breakdown.submitted && !breakdown.scoreKnown ? (
+              <span className="text-xs text-muted">Submitted</span>
+            ) : breakdown.submitted ? (
               <span className="flex gap-2 text-xs">
                 <span className="text-green-700 dark:text-green-400">{breakdown.correct} correct</span>
                 <span className="text-red-700 dark:text-red-400">{breakdown.incorrect} wrong</span>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getExamConfig, isValidExamId } from "@/lib/exam-config";
+import { getExam, isValidExamId } from "@/lib/exams/registry";
 
 /**
  * Runs once per `examId` the parent layout generated, so every real quiz URL is
@@ -17,7 +17,7 @@ import { getExamConfig, isValidExamId } from "@/lib/exam-config";
  */
 export function generateStaticParams({ params }: { params: { examId: string } }) {
   if (!isValidExamId(params.examId)) return [];
-  return getExamConfig(params.examId).sections.map((s) => ({ section: s.id }));
+  return getExam(params.examId).sections.map((s) => ({ section: s.id }));
 }
 
 export const dynamicParams = false;
@@ -39,7 +39,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { examId, section } = await params;
   if (!isValidExamId(examId)) return { robots: { index: false, follow: true } };
-  const exam = getExamConfig(examId);
+  const exam = getExam(examId);
   const sectionConfig = exam.sections.find((s) => s.id === section);
 
   return {
@@ -65,7 +65,7 @@ export default async function QuizSectionLayout({
   if (!isValidExamId(examId)) {
     notFound();
   }
-  const exam = getExamConfig(examId);
+  const exam = getExam(examId);
   if (!exam.available || !exam.sections.some((s) => s.id === section)) {
     notFound();
   }

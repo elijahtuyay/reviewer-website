@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { EXAMS } from "@/lib/exam-config";
+import { EXAM_LIST } from "@/lib/exams/registry";
 import { SITE_URL } from "@/lib/site";
 
 /**
@@ -18,8 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
-    ...Object.values(EXAMS)
-      .filter((exam) => exam.available)
+    ...EXAM_LIST.filter((exam) => exam.available)
       .map((exam) => ({
         url: `${SITE_URL}/${exam.id}`,
         changeFrequency: "monthly" as const,

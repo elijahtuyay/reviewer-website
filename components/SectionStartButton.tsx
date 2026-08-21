@@ -11,6 +11,8 @@ interface SectionStartButtonProps {
   sectionId: SectionId;
   sectionLabel: string;
   minutes: number;
+  /** The section's full length. Needed because an adaptive attempt's stored id list only holds what has been SERVED so far. */
+  questionCount: number;
 }
 
 /** What this section's button should actually do right now. */
@@ -39,6 +41,7 @@ export default function SectionStartButton({
   sectionId,
   sectionLabel,
   minutes,
+  questionCount,
 }: SectionStartButtonProps) {
   const [state, setState] = useState<State>({ kind: "start" });
 
@@ -51,7 +54,10 @@ export default function SectionStartButton({
         setState({ kind: "review" });
         return;
       }
-      const breakdown = getSectionBreakdown(examId, sectionId, stored.questionIds.length);
+      // section length, NOT stored.questionIds.length: on an adaptive section
+      // the served list grows as you go, so three questions in it would have
+      // read "3/3 answered", implying the section was finished.
+      const breakdown = getSectionBreakdown(examId, sectionId, questionCount);
       setState({ kind: "resume", answered: breakdown.answered, total: breakdown.total });
       return;
     }
@@ -60,7 +66,7 @@ export default function SectionStartButton({
     if (active) {
       setState({ kind: "blocked", by: active });
     }
-  }, [examId, sectionId]);
+  }, [examId, sectionId, questionCount]);
 
   const href = `/${examId}/quiz/${sectionId}`;
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { AVAILABLE_EXAMS } from "@/lib/exams/registry";
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -13,6 +14,8 @@ export const metadata: Metadata = {
  * a real visitor lands here.
  */
 export default function NotFound() {
+  const featured = AVAILABLE_EXAMS[0];
+
   return (
     <div className="flex flex-1 justify-center bg-background">
       <main className="w-full max-w-lg px-6 py-24 text-center">
@@ -30,12 +33,16 @@ export default function NotFound() {
           >
             Back to home
           </Link>
-          <Link
-            href="/nmat"
-            className="flex min-h-11 items-center justify-center rounded-md border border-line-strong px-5 text-sm font-medium text-foreground hover:bg-panel-hover"
-          >
-            Go to NMAT practice
-          </Link>
+          {/* Read from the registry, not hard-coded: this was the last place in
+              the app that named a specific exam. */}
+          {featured && (
+            <Link
+              href={`/${featured.id}`}
+              className="flex min-h-11 items-center justify-center rounded-md border border-line-strong px-5 text-sm font-medium text-foreground hover:bg-panel-hover"
+            >
+              Go to {featured.shortLabel} practice
+            </Link>
+          )}
         </div>
       </main>
     </div>

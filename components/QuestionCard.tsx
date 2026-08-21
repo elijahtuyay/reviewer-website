@@ -49,6 +49,13 @@ interface QuestionCardProps {
   selectedIndex: number | null;
   onSelect?: (optionIndex: number) => void;
   reviewMode?: boolean;
+  /**
+   * Set while a capped review pass has run out of changes and this question is
+   * still on its original answer. The options stay readable and focusable but
+   * announce that they cannot be changed, rather than silently ignoring clicks:
+   * a live-looking control that does nothing reads as a bug.
+   */
+  lockedReason?: string;
 }
 
 export default function QuestionCard({
@@ -57,6 +64,7 @@ export default function QuestionCard({
   selectedIndex,
   onSelect,
   reviewMode = false,
+  lockedReason,
 }: QuestionCardProps) {
   const passageParts = splitPassage(question.prompt);
   const isAnswered = selectedIndex !== null;
@@ -178,17 +186,17 @@ export default function QuestionCard({
               // button is removed from the tab order, which would make the whole
               // review unreachable by keyboard. This keeps every option
               // focusable and announced while ignoring clicks.
-              aria-disabled={reviewMode || undefined}
+              aria-disabled={reviewMode || Boolean(lockedReason) || undefined}
               tabIndex={optionIndex === tabStop ? 0 : -1}
               onClick={() => {
-                if (reviewMode) return;
+                if (reviewMode || lockedReason) return;
                 onSelect?.(optionIndex);
               }}
               onKeyDown={(event) => handleKeyDown(event, optionIndex)}
               // min-h-11 is the 44px tap-target minimum, and it doubles as the
               // headroom stacked math (fractions, exponents) needs to sit in a
               // row without the box having to grow around it.
-              className={`flex min-h-11 scroll-mt-24 items-center justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-sm leading-relaxed text-foreground transition-colors ${style} ${reviewMode ? "cursor-default" : "cursor-pointer"}`}
+              className={`flex min-h-11 scroll-mt-24 items-center justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-sm leading-relaxed text-foreground transition-colors ${style} ${reviewMode || lockedReason ? "cursor-default" : "cursor-pointer"} ${lockedReason ? "opacity-60" : ""}`}
             >
               <span>
                 <MathText text={option} />
@@ -206,6 +214,10 @@ export default function QuestionCard({
           );
         })}
       </div>
+
+      {lockedReason && !reviewMode && (
+        <p className="mt-3 ml-7 text-xs text-muted">{lockedReason}</p>
+      )}
 
       {reviewMode && (
         <div className="mt-4 ml-7 rounded-md bg-panel-hover p-4 text-sm">

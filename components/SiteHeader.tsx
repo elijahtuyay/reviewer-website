@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
-import { EXAMS } from "@/lib/exam-config";
+import { EXAM_LIST } from "@/lib/exams/registry";
 import { SITE_NAME } from "@/lib/site";
 
 /**
@@ -13,7 +13,7 @@ import { SITE_NAME } from "@/lib/site";
  * the only genuinely unbuilt thing left, and it says so.
  */
 export default function SiteHeader() {
-  const exams = Object.values(EXAMS);
+  const exams = EXAM_LIST;
 
   return (
     <header className="border-b border-line bg-panel">

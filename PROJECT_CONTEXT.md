@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-21, at PR #14 / VERSION.txt `1.12.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-21, at PR #15 / VERSION.txt `2.0.0`.
 
 ## What this project is
 
@@ -23,7 +23,7 @@ The user (Elijah) is a solo developer treating this like a real engineering team
 
 ## Copyright rule (critical, applies to ALL future content work)
 
-Three reference books exist at `C:\Users\elija\Downloads\test\`:
+Three reference books exist at `C:\Users\elija\Downloads\nmat test files\` (with markdown conversions in its `md/` subfolder, plus the user's own GMAT notes as .txt files):
 - NMAT Official Guide 2021
 - Princeton Review GMAT Premium Prep
 - GMAT for Dummies
@@ -52,7 +52,7 @@ This Next.js version (16.3.0) has **breaking changes vs. typical training data**
 - Topic ratios were rebalanced against real NMAT Official Guide chapter proportions (counted by hand from the reference book's actual practice chapters, e.g. logical-reasoning: Critical Reasoning 19% / Deductions 16% / Analytical Puzzles 36% / Other 29%, matching the real book's ~18.6/16.3/35.7/29.3 split).
 - Zero em dashes (—) in any user-facing `prompt`/`explanation`/option text (repo-wide "AI slop" removal was explicit user direction).
 - Currency: **use the peso sign (₱), not `$`**, in question text. This is not a style preference — literal `$` collides with the app's KaTeX math-delimiter parser (see Known Issues #3 below). 24 quantitative-skills questions were already fixed; if you add new money-related questions, use `₱` from the start.
-- Math notation: inline LaTeX delimited by single `$...$` (e.g. `"If $x^2 = 9$, what is $x$?"`), rendered by `components/MathText.tsx` via `react-katex`. Literal `\n` in prompt/explanation text becomes a real line break (used for table/list-style questions). As of v1.7.0 the whole bank is normalized: **all** math notation is LaTeX (531 spans), every fraction is `\frac`, and no Unicode minus (U+2212) appears inside math. **Do not add custom `.katex` CSS** — KaTeX positions fractions with inline styles it computes itself and `katex.css` already pins `line-height` and `font-size`, so stylesheet overrides are no-ops or harmful (a v1.7.0 attempt silently shrank all math by 11%). `MathText` prefixes every span with `\displaystyle` so fractions typeset at full size instead of script size; that is the supported place to change math rendering.
+- Math notation: inline LaTeX delimited by single `$...$` (e.g. `"If $x^2 = 9$, what is $x$?"`), rendered by `components/MathText.tsx` via `react-katex`. Literal `\n` in prompt/explanation text becomes a real line break (used for table/list-style questions). As of v1.7.0 the whole bank is normalized: **all** math notation is LaTeX (531 spans), every fraction is `\frac`, and no Unicode minus (U+2212) appears inside math. **Do not add custom `.katex` CSS** — KaTeX positions fractions with inline styles it computes itself and `katex.css` already pins `line-height` and `font-size`, so stylesheet overrides are no-ops or harmful (a v1.7.0 attempt silently shrank all math by 11%). `MathText` prefixes spans **containing a fraction** with `\displaystyle` so they typeset at full size instead of script size; that is the supported place to change math rendering. It deliberately does NOT apply to every span (as it did until v2.0.0), because display style also swells superscripts and made `$x^2$` ride up into the line above.
 - Schema per question (see `data/schema.ts` `Question` type): `id`, `section`, `topic`, `difficulty` (`"easy"|"medium"|"hard"`), `prompt`, `options: string[]`, `correctIndex`, `explanation`, `source` (e.g. `"original"`).
 
 ### UI/UX conventions currently in place
@@ -123,6 +123,51 @@ All four lanes ran. Beyond the items above they surfaced, and this PR fixes:
 
 - **PR #14** (v1.12.0) — question-bank statistical + correctness pass, closing the length-bias hole PR #7 left open. No app code changed. Details in "Answer-key statistics" below.
 
+## THE MODULAR EXAM ARCHITECTURE (read this before adding anything)
+
+As of v2.0.0 exams are drop-in modules. **`lib/exams/registry.ts` is the only file that lists exams.** To add one: write `lib/exams/<id>/index.ts` default-exporting an `ExamModule`, put its JSON under `data/questions/<id>/`, and add one line to that registry. Routes, home page, setup page, section lock, sitemap, footer and the quiz engine all read from it.
+
+The contract is `lib/exams/types.ts`. The crucial idea is that an exam declares how it BEHAVES as data, so the engine never branches on an exam id:
+
+- `rules.navigation` -- `"free"` (NMAT: whole section on a page, skip and revisit) or `"sequential"` (GMAT: one at a time, no going back). This picks the runner.
+- `rules.allowSkip`, `rules.adaptive`, `rules.reviewEdit`, `rules.sectionOrder`, `rules.lockToOneSection`, `rules.optionalBreakMinutes`
+- `scoring` -- `points` (NMAT, marks per correct) or `scaled` (GMAT, 205-805 weighted by difficulty with an unanswered penalty)
+
+**If you are about to write `if (examId === "...")` outside `lib/exams/`, add a rule instead.** The exam setup page's "what to expect" bullets and the home page's per-exam highlights are both GENERATED from `rules`, which is deliberate: the old hand-written copy claimed a section lock that did not exist for months.
+
+Files: `lib/exams/{types,registry}.ts`, `lib/exams/{nmat,gmat}/index.ts`, `lib/question-bank.ts` (lazy per-section loading), `lib/adaptive.ts`, `lib/scoring.ts`, `components/quiz/{useAttempt.ts,FreeFormRunner.tsx,SequentialRunner.tsx,shared.tsx}`, `app/[examId]/quiz/[section]/page.tsx` (a shell that picks a runner).
+
+`useAttempt` holds ALL attempt state for every exam: storage, timing, pause, expiry, the section lock, adaptive serving, scoring, the review pass. Runners are presentation only.
+
+### Question banks are now lazily loaded per section
+
+`lib/question-bank.ts` dynamic-imports one section at a time and caches it. Previously every bank was statically imported into one module, so ~220 KB of questions sat on the critical path of the exam setup page and of every quiz section including the two you were not taking. `getSectionBreakdown` no longer touches the bank at all: the score is written into sessionStorage at submit time as `StoredProgress.summary`. Verified after the change: each section's bank is its own chunk and none is referenced by any route's client manifest.
+
+**The sync/async split matters.** `loadSection()` is async and must be awaited once (the quiz page does it in an effect); `getLoadedSection()` is the synchronous cache read used during render.
+
+**Strict Mode trap, already hit once:** the loader effect is deduped by a ref, so it must NOT cancel its own in-flight promise on cleanup. React double-invokes mount effects in dev as mount-cleanup-mount; cancelling killed the only run that was allowed to proceed and the quiz hung on a blank screen.
+
+### GMAT specifics
+
+GMAT Focus: Data Insights 20q, Quantitative 21q, Verbal 23q, 45 minutes each, 64 questions, 205-805. Verbal has NO sentence correction; Quantitative has NO geometry; Data Sufficiency belongs to **Data Insights**, not Quantitative. Bank is a **90-question seed** (30 per section, 10 per difficulty), not a finished bank: a perfect run exhausts the ten hard questions and falls back to medium.
+
+`npm run verify:engine` asserts (and exits non-zero) on the adaptive ladder and both scoring models. It has already caught three real bugs: a perfect attempt scoring 810 on a band whose maximum is 805, difficulty weighting being a no-op, and timing out scoring higher than finishing. **Run it after touching `lib/adaptive.ts` or `lib/scoring.ts`.**
+
+### Scoring traps that were live and are now asserted against
+
+1. **The scaled denominator must be a FIXED reference**, not the weight of what was served. Normalising by served weight made `difficultyWeight` do nothing: any all-correct run scored 805, so sweeping easy questions beat a strong partial run on hard ones.
+2. **`scoreAttempt` takes the section's real length.** Scoring only what was served made timing out after four questions score 675/805 while a genuine 50% run scored 505. Unreached questions count as unanswered.
+3. **An expiry discovered on load must write a `summary`.** Writing `submitted: true` with `summary: null` made every screen outside the quiz report a real result as 0 correct. A submitted record without a summary is now treated as an unknown score and shown as a bare "Submitted".
+
+### Other traps this architecture has already sprung
+
+- **The review pass allowance is derived from a baseline snapshot, not counted per click.** Counting clicks made a misclick cost two of three changes.
+- **`findActiveAttempt` and section totals must use `section.questionCount`,** never `stored.questionIds.length`: on a sequential exam the served list grows as you go, so a 20-question section read "4 of 5 answered".
+- **`restart()` needs the same section-lock check the load path has.** Without it, Retake was a way to get two clocks running.
+- **`MathText` applies `\displaystyle` only to spans containing a fraction.** Applying it to everything swelled superscripts so `$x^2$` rode into the line above.
+- **Per-exam accents must be measured, not picked.** GMAT's first blue was 1.59:1 on the dark background, half of NMAT green's 3.11:1, which made the selected-option ring fainter than the neutral borders around it. `#2563eb` matches NMAT's profile.
+- **Generated copy has to match the rules.** The break bullet claimed Pause implements the exam's timed break budget; nothing enforces one. If a rule has no engine behind it, say what the app actually does.
+
 ### Answer-key statistics (re-measure before trusting any claim about these)
 
 The bank has now been hardened against three different "answer without reading" strategies. All three were measured, fixed, and re-measured:
@@ -146,7 +191,7 @@ Data Sufficiency was also restored to **canonical A-E statement order** (PR #7's
 4. `ProgressTracker` cells are 28px, under the 44px minimum the rest of the app holds to.
 5. `ConfirmDialog` styles the confirming action as a red outline and the cancel as solid green. A reviewer called this inverted; it is a **documented deliberate choice** from an earlier PR (green = keeps your work). Left alone pending a decision.
 
-**Current state: `main` is clean, builds and lints with zero errors/warnings, at v1.12.0.**
+**Current state: `main` is clean, builds and lints with zero errors/warnings, at v2.0.0.**
 
 ## Lesson learned: never run multiple agents against the same data file concurrently
 

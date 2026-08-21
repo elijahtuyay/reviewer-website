@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { EXAMS } from "@/lib/exam-config";
+import { EXAM_LIST } from "@/lib/exams/registry";
 import { AFFILIATION_DISCLAIMER, SITE_NAME } from "@/lib/site";
 
 /**
@@ -8,7 +8,7 @@ import { AFFILIATION_DISCLAIMER, SITE_NAME } from "@/lib/site";
  * a real exam has to say plainly that it isn't the exam board.
  */
 export default function SiteFooter() {
-  const exams = Object.values(EXAMS);
+  const exams = EXAM_LIST;
 
   return (
     <footer className="mt-auto border-t border-line bg-panel">

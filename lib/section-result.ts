@@ -1,6 +1,5 @@
 import { ExamId, SectionId } from "@/data/schema";
-import { getExamConfig } from "@/lib/exam-config";
-import { getQuestionsByIds } from "@/lib/data/questions";
+import { getExam } from "@/lib/exams/registry";
 import { getStoredProgress } from "@/lib/session-progress";
 
 export interface SectionBreakdown {
@@ -10,29 +9,62 @@ export interface SectionBreakdown {
   skipped: number;
   correct: number;
   incorrect: number;
+  /** Present only for a submitted attempt. */
+  score: number | null;
+  maxScore: number | null;
+  /**
+   * False when the attempt is submitted but no stored summary exists, which
+   * happens for a record written by a build older than the summary field.
+   * Callers must render "submitted" WITHOUT a tally in that case: falling back
+   * to zeros reported a real result as 0 correct everywhere outside the quiz.
+   */
+  scoreKnown: boolean;
 }
 
-/** Reads a section's saved progress for this browser session and, if it was submitted, scores it against the drawn question set. */
-export function getSectionBreakdown(examId: ExamId, sectionId: SectionId, fallbackTotal: number): SectionBreakdown {
+/**
+ * A section's state for this browser session, read purely from storage.
+ *
+ * Deliberately does NOT touch the question bank. It used to re-score the
+ * attempt by loading the section's questions and comparing answers, which meant
+ * every "24/36 correct" label on the setup page dragged a whole bank into the
+ * bundle. The score is now written once at submit time, so this is a cheap
+ * storage read and the setup page ships no questions at all.
+ */
+export function getSectionBreakdown(
+  examId: ExamId,
+  sectionId: SectionId,
+  fallbackTotal: number
+): SectionBreakdown {
   const stored = getStoredProgress(examId, sectionId);
-  const total = stored.questionIds.length || fallbackTotal;
   const answered = Object.keys(stored.answers).length;
-  const skipped = Math.max(total - answered, 0);
 
-  if (!stored.submitted) {
-    return { submitted: false, total, answered, skipped, correct: 0, incorrect: 0 };
+  if (stored.submitted && stored.summary) {
+    const s = stored.summary;
+    return {
+      submitted: true,
+      total: s.total,
+      answered: s.correct + s.incorrect,
+      skipped: s.unanswered,
+      correct: s.correct,
+      incorrect: s.incorrect,
+      score: s.score,
+      maxScore: s.maxScore,
+      scoreKnown: true,
+    };
   }
 
-  const questions = getQuestionsByIds(examId, sectionId, stored.questionIds);
-  let correct = 0;
-  let incorrect = 0;
-  for (const question of questions) {
-    const selected = stored.answers[question.id];
-    if (selected === undefined) continue;
-    if (selected === question.correctIndex) correct++;
-    else incorrect++;
-  }
-  return { submitted: true, total, answered, skipped, correct, incorrect };
+  const total = stored.questionIds.length || fallbackTotal;
+  return {
+    submitted: stored.submitted,
+    total,
+    answered,
+    skipped: Math.max(total - answered, 0),
+    correct: 0,
+    incorrect: 0,
+    score: null,
+    maxScore: null,
+    scoreKnown: false,
+  };
 }
 
 export interface ActiveAttempt {
@@ -45,27 +77,27 @@ export interface ActiveAttempt {
 /**
  * The section that currently holds a live, unfinished attempt, or null.
  *
- * The app has always TOLD users that a section locks you in until you submit
- * it ("just like the real exam"), and SectionNav has always greyed out the
- * other sections while one is running. Nothing enforced it: the greying is
- * cosmetic, and /nmat plus the home page both link straight to every quiz URL.
- * Starting a second section therefore left two clocks burning at once, with
- * the first one silently bleeding out. This is the check that makes the claim
- * true.
+ * Both exams tell the candidate that a section locks you in until you submit
+ * it, and the section nav greys out the others. Nothing enforced it until this
+ * function existed: the greying was cosmetic and every page linked straight to
+ * every quiz URL, so starting a second section left two clocks burning with the
+ * first silently bleeding out.
  *
- * "Live" deliberately excludes an attempt whose deadline has already passed
- * and which is not paused. That attempt is over in every sense but the
- * bookkeeping (opening it submits it), so letting it block the other sections
- * would strand the user until they went and cleared it by hand. A paused
- * attempt does count: its stored deadline is stale by design, and pausing is
- * an explicit statement that you intend to come back.
+ * "Live" deliberately excludes an attempt whose deadline has passed and which
+ * is not paused. That attempt is over in every sense but the bookkeeping
+ * (opening it submits it), so letting it block the other sections would strand
+ * the candidate until they cleared it by hand. A paused attempt does count:
+ * its stored deadline is stale by design, and pausing says you are coming back.
  */
 export function findActiveAttempt(
   examId: ExamId,
   excludeSection?: SectionId
 ): ActiveAttempt | null {
+  const exam = getExam(examId);
+  if (!exam.rules.lockToOneSection) return null;
+
   const now = Date.now();
-  for (const section of getExamConfig(examId).sections) {
+  for (const section of exam.sections) {
     if (section.id === excludeSection) continue;
     const stored = getStoredProgress(examId, section.id);
     if (stored.questionIds.length === 0 || stored.submitted) continue;
@@ -75,7 +107,10 @@ export function findActiveAttempt(
       sectionId: section.id,
       label: section.label,
       answered: Object.keys(stored.answers).length,
-      total: stored.questionIds.length,
+      // The SECTION's length, not the number served so far. On a sequential
+      // exam the served list grows as you go, so four questions into a
+      // twenty-question section the lock screen read "4 of 5 answered".
+      total: section.questionCount,
     };
   }
   return null;
