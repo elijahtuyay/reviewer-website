@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-15, at PR #10 / VERSION.txt `1.7.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-21, at PR #11 / VERSION.txt `1.10.0`.
 
 ## What this project is
 
@@ -94,7 +94,21 @@ This Next.js version (16.3.0) has **breaking changes vs. typical training data**
 - **PR #10** (v1.7.0) — LaTeX normalization + rendering/UX batch. Bank-wide conversion of raw-text math to LaTeX; `a/an` before blanks (ls-062 was leaking its answer outright, since only the correct option was vowel-initial after "an ___"); `ls-090` analogy rekeyed to "Investigator". Timer rebuilt around a boundary-aligned self-rescheduling timeout with `Math.ceil` (a drifting `setInterval` plus `Math.round` was visibly skipping seconds). Fractions fixed via `\displaystyle` in `MathText`. Saved-attempt rows made clickable; sections now scroll to the results on submit. Pre-existing bugs fixed: an earlier `$` → `₱` pass had eaten opening math delimiters at 8 sites; 8 circular-seating questions had a self-contradictory facing convention that left 3 of them unsolvable; 6 explanations still referenced pre-shuffle option letters, 2 of which called the correct answer wrong.
 - **Review lanes are now mandatory per PR** (see CLAUDE.md): logic, syntax/display, UX, content correctness. Their first run (PR #10) found the unsolvable seating puzzles, the drifted explanations, and proved a CSS "fix" of mine was a measured 11% regression. Take their findings seriously and verify claims independently.
 
-**Current state: `main` is clean, builds and lints with zero errors/warnings, at v1.7.0.**
+- **PR #11** (v1.10.0) — home landing page + audit fixes + hosting readiness. The home page was a bare gateway (hero, exam list, two placeholder cards); it is now a real landing page modelled on the structure of cseexamreviewer.com at the user's request: accent hero band, stat row, per-section cards, how-it-works, three alternating feature bands, a "more exams" block, a native `<details>` FAQ, a closing CTA, plus a new `SiteFooter` carrying the GMAC non-affiliation disclaimer. `SiteHeader`'s three inert "soon" chips became real exam links. Audit fixes shipped alongside: `body { font-family: Arial }` had been silently overriding the Geist webfont app-wide since the starter template; `--accent` failed WCAG as text in dark mode (3.11:1) so `--accent-text` was added, derived via `color-mix` so it tracks each exam's accent; PauseOverlay opened with focus on `<body>`; `handlePause`/`handleDeadlineChange` wrote render-closure `answers` to storage and could lose an answer to a same-frame race. Hosting groundwork: `generateStaticParams` + `dynamicParams = false` on both dynamic segments (every route is now build-time prerendered, zero on-demand server rendering), `metadataBase` + title template + per-exam `generateMetadata`, `robots.ts`, `sitemap.ts`, `not-found.tsx`, `error.tsx`, JSON-LD on the home page, and `lib/site.ts` holding `NEXT_PUBLIC_SITE_URL` and the disclaimer.
+
+## Known non-issue: the answer-key distribution
+
+A separate Claude session reported (2026-08-21) that the correct answer sits in slot 1 for 86% of Logical Reasoning questions and 49% overall, and that `ls-010`'s explanation was a copy-paste slip about "malevolent/vindictive/benevolent/altruistic". **Both were checked against the files on disk and both are false.** The measured distribution is 25.0 / 22.0 / 27.7 / 24.3 / 1.0 percent across indices 0-4 of all 300 questions (the 1% at index 4 is the 11 quantitative questions with five options), and `ls-010` carries a correct, on-topic explanation about sleep and memory consolidation. The word "malevolent" appears nowhere in the bank. The reported 86% figure is verbatim the pre-v1.5.0 bug that PR #7 already fixed, so that session was almost certainly reading a stale snapshot. Re-measure before acting on a claim like this:
+
+```bash
+python -c "import json,io,collections; c=collections.Counter(); [c.update([q['correctIndex']]) for n in ['language-skills','quantitative-skills','logical-reasoning'] for q in json.load(io.open(f'data/questions/{n}.json',encoding='utf-8'))]; print(c)"
+```
+
+## Hosting
+
+As of v1.10.0 the build emits no dynamic routes: `npm run build`'s route table should show only `○ (Static)` and `● (SSG)`. There is no database, no runtime secret, and no request-time work, so the app is a pile of static files plus whatever adapter a host wants. Set `NEXT_PUBLIC_SITE_URL` (no trailing slash) in the host's environment before the first production build, or `sitemap.xml`, `robots.txt`, and every canonical/OG URL will point at `http://localhost:3000`.
+
+**Current state: `main` is clean, builds and lints with zero errors/warnings, at v1.10.0.**
 
 ## Lesson learned: never run multiple agents against the same data file concurrently
 
