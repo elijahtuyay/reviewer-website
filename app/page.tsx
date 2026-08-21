@@ -1,9 +1,9 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { EXAMS, ExamConfig, getExamConfig } from "@/lib/exam-config";
+import { AVAILABLE_EXAMS, EXAM_LIST, totalMinutes, totalQuestions } from "@/lib/exams/registry";
+import { ExamModule } from "@/lib/exams/types";
+import { loadSection } from "@/lib/question-bank";
 import { AFFILIATION_DISCLAIMER, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
-import { getQuestionsForSection } from "@/lib/data/questions";
-import SectionStartButton from "@/components/SectionStartButton";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -11,38 +11,30 @@ export const metadata: Metadata = {
 };
 
 /**
- * The home page is the product's front door, not a router. It has to answer
- * "what is this, is it any good, and why would I trust it" before it offers a
- * link anywhere, which is why the section list now sits below a pitch rather
- * than being the whole page as it used to be.
+ * The home page is the product's front door, and with more than one exam in the
+ * registry its job is to route you to the right one rather than to sell a
+ * single exam. Per-section start buttons live on each exam's own page, where
+ * they can respect that exam's rules.
  *
- * The featured exam is the one with a real question bank. Every number on this
- * page is derived from EXAMS and from the bank itself rather than typed in, so
- * adding GMAT content later fills these in instead of dating them.
+ * Everything here iterates the registry. Adding an exam module puts a card in
+ * the picker, a row in the stats, and an entry in the footer without this file
+ * changing at all.
  */
-const FEATURED_EXAM_ID = "nmat" as const;
 
-export default function Home() {
-  const featured = getExamConfig(FEATURED_EXAM_ID);
-  const otherExams = Object.values(EXAMS).filter((exam) => exam.id !== featured.id);
+/** Server-side only: this page is statically prerendered, so the banks never reach the browser. */
+async function bankSize(exam: ExamModule): Promise<number> {
+  const banks = await Promise.all(exam.sections.map((s) => loadSection(exam.id, s.id)));
+  return banks.reduce((sum, b) => sum + b.length, 0);
+}
 
-  const perAttemptQuestions = featured.sections.reduce((sum, s) => sum + s.questionCount, 0);
-  const bankSize = featured.sections.reduce(
-    (sum, s) => sum + getQuestionsForSection(featured.id, s.id).length,
-    0
+export default async function Home() {
+  const exams = await Promise.all(
+    EXAM_LIST.map(async (exam) => ({ exam, bank: exam.available ? await bankSize(exam) : 0 }))
   );
-  const totalMinutes = featured.sections.reduce((sum, s) => sum + s.minutes, 0);
-  const shortestSectionMinutes = Math.min(...featured.sections.map((s) => s.minutes));
-  const faqs = buildFaqs(featured.shortLabel, bankSize);
+  const totalBank = exams.reduce((sum, e) => sum + e.bank, 0);
+  const availableCount = AVAILABLE_EXAMS.length;
+  const faqs = buildFaqs(totalBank, availableCount);
 
-  /**
-   * Structured data, emitted as a plain <script type="application/ld+json">.
-   * This is the one place dangerouslySetInnerHTML is warranted: the payload is
-   * built from our own constants, never from user input. JSON.stringify does
-   * not escape "<", though, so a future exam label or a NEXT_PUBLIC_SITE_URL
-   * containing "</script>" would break out of the tag. Escaping it below costs
-   * nothing and removes the need for anyone to keep that invariant in mind.
-   */
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -54,18 +46,16 @@ export default function Home() {
         description: SITE_TAGLINE,
         inLanguage: "en",
       },
-      {
+      ...AVAILABLE_EXAMS.map((exam) => ({
         "@type": "Course",
-        "@id": `${SITE_URL}/${featured.id}#course`,
-        name: `${featured.label} practice exam`,
-        description: `Free timed ${featured.shortLabel} practice covering ${featured.sections
-          .map((s) => s.label)
-          .join(", ")}, with a written explanation for every answer.`,
-        url: `${SITE_URL}/${featured.id}`,
+        "@id": `${SITE_URL}/${exam.id}#course`,
+        name: `${exam.label} practice exam`,
+        description: exam.description,
+        url: `${SITE_URL}/${exam.id}`,
         isAccessibleForFree: true,
         provider: { "@type": "Organization", name: SITE_NAME, url: `${SITE_URL}/` },
         disclaimer: AFFILIATION_DISCLAIMER,
-      },
+      })),
       {
         "@type": "FAQPage",
         "@id": `${SITE_URL}/#faq`,
@@ -80,92 +70,68 @@ export default function Home() {
 
   return (
     <div className="flex flex-1 flex-col bg-background">
+      {/* Built from our own constants, never user input. JSON.stringify does not
+          escape "<", so it is escaped explicitly rather than relying on nobody
+          ever putting markup in an exam label. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData).replace(/</g, "\u003c"),
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
         }}
       />
-      <Hero
-        examLabel={featured.label}
-        examShortLabel={featured.shortLabel}
-        bankSize={bankSize}
-        perAttemptQuestions={perAttemptQuestions}
-        sectionCount={featured.sections.length}
-      />
+
+      <Hero examCount={availableCount} totalBank={totalBank} />
 
       <StatBand
         stats={[
-          { value: bankSize.toLocaleString("en-US"), label: "questions written by hand" },
-          { value: String(perAttemptQuestions), label: "drawn fresh per full attempt" },
-          { value: `${totalMinutes} min`, label: "of timed practice" },
+          { value: String(availableCount), label: availableCount === 1 ? "exam" : "exams, fully timed" },
+          { value: totalBank.toLocaleString("en-US"), label: "questions written by hand" },
+          { value: "Every one", label: "explained after you submit" },
           { value: "Free", label: "no account, no card" },
         ]}
       />
 
-      <SectionPicker exam={featured} />
-
+      <ExamPicker exams={exams} />
       <HowItWorks />
-
       <FeatureBands />
-
-      <OtherExams exams={otherExams} />
-
       <Faq faqs={faqs} />
-
-      <ClosingCta minutes={shortestSectionMinutes} />
+      <ClosingCta />
     </div>
   );
 }
 
 /* ------------------------------------------------------------------ hero -- */
 
-function Hero({
-  examLabel,
-  examShortLabel,
-  bankSize,
-  perAttemptQuestions,
-  sectionCount,
-}: {
-  examLabel: string;
-  examShortLabel: string;
-  bankSize: number;
-  perAttemptQuestions: number;
-  sectionCount: number;
-}) {
+function Hero({ examCount, totalBank }: { examCount: number; totalBank: number }) {
   return (
-    // The one saturated surface on the site. Accent on accent-foreground rather
-    // than a light/dark pair, so it reads identically in both themes instead of
-    // needing a second palette maintained alongside the first.
+    // The one saturated surface on the site, and deliberately the ROOT accent
+    // rather than an exam's: this page sits above every exam, so borrowing one
+    // exam's colour here would make the platform look like it belongs to it.
     <section className="relative overflow-hidden bg-accent text-accent-foreground">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/0 via-black/10 to-black/30"
       />
       <div className="relative mx-auto w-full max-w-5xl px-6 py-20 text-center sm:py-28">
-        {/* opacity-90, not 80: this sits at the top of the hero where the
-            darkening gradient has barely engaged, and 80 measured 4.22:1
-            against the accent there. At 12px semibold the bar is 4.5:1. The
-            list at the foot of the hero keeps 80 because the gradient has
-            darkened the ground under it to ~5.0:1. */}
         <p className="text-xs font-semibold tracking-widest uppercase opacity-90">
-          {examLabel} practice
+          Graduate admissions practice
         </p>
         <h1 className="mx-auto mt-4 max-w-3xl text-3xl leading-tight font-bold sm:text-4xl md:text-5xl">
-          Walk into the {examShortLabel} already knowing what it feels like.
+          Sit the real thing before you sit the real thing.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed opacity-90 sm:text-lg">
-          {sectionCount} independently-timed sections, {perAttemptQuestions} questions drawn fresh
-          from a bank of {bankSize}, and a written explanation waiting behind every single answer.
-          No sign-up, no paywall, no model guessing at the answer key.
+          {examCount === 1 ? "One exam" : `${examCount} exams`}, each built to its own published
+          format: real section timings, {totalBank.toLocaleString("en-US")} questions written by
+          hand, and a written explanation waiting behind every single answer. No sign-up, no
+          paywall.
         </p>
 
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
-            href="#sections"
+            href="#exams"
             className="flex min-h-12 w-full items-center justify-center rounded-lg bg-accent-foreground px-7 text-sm font-semibold text-accent transition hover:opacity-90 sm:w-auto"
           >
-            Start a practice section
+            Choose your exam
           </Link>
           <Link
             href="#how-it-works"
@@ -207,128 +173,157 @@ function StatBand({ stats }: { stats: { value: string; label: string }[] }) {
   );
 }
 
-/* -------------------------------------------------------------- sections -- */
+/* ----------------------------------------------------------- exam picker -- */
 
-/** Keyed by section id, with a neutral fallback so a newly added section never renders a blank tile. */
-function SectionIcon({ sectionId }: { sectionId: string }) {
-  const common = {
-    className: "h-6 w-6",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.75,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    "aria-hidden": true,
-  };
-
-  if (sectionId === "language-skills") {
-    // An open book: two facing pages.
-    return (
-      <svg {...common}>
-        <path d="M12 6.5C10.5 5 8.5 4.5 4.5 4.5v13c4 0 6 .5 7.5 2 1.5-1.5 3.5-2 7.5-2v-13c-4 0-6 .5-7.5 2Z" />
-        <path d="M12 6.5v13" />
-      </svg>
-    );
-  }
-  if (sectionId === "quantitative-skills") {
-    // A calculator keypad.
-    return (
-      <svg {...common}>
-        <rect x="4" y="3" width="16" height="18" rx="2.5" />
-        <path d="M7.5 7h9M8 11.5h.01M12 11.5h.01M16 11.5h.01M8 15.5h.01M12 15.5h.01M16 15.5h.01M8 18.5h.01M12 18.5h.01M16 18.5h.01" />
-      </svg>
-    );
-  }
-  if (sectionId === "logical-reasoning") {
-    // A branching decision tree.
-    return (
-      <svg {...common}>
-        <circle cx="12" cy="5" r="2.25" />
-        <circle cx="6" cy="19" r="2.25" />
-        <circle cx="18" cy="19" r="2.25" />
-        <path d="M12 7.25v3.25a2 2 0 0 1-.6 1.45L7.4 15.6M12 7.25v3.25a2 2 0 0 0 .6 1.45l4 3.65" />
-      </svg>
-    );
-  }
+function ExamMark({ exam }: { exam: ExamModule }) {
   return (
-    <svg {...common}>
-      <circle cx="12" cy="12" r="8.5" />
-      <path d="M12 7.5V12l3 2.5" />
-    </svg>
+    // Inline style, not a Tailwind class: the colour comes from the exam module
+    // at runtime, and this card sits outside that exam's theme scope.
+    <span
+      aria-hidden
+      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-sm font-bold"
+      style={{ backgroundColor: exam.theme.accent, color: exam.theme.accentForeground }}
+    >
+      {exam.shortLabel.slice(0, 4)}
+    </span>
   );
 }
 
-function SectionPicker({ exam }: { exam: ExamConfig }) {
+function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) {
   return (
-    // A little scroll margin so the "Start a practice section" anchor lands
-    // with breathing room above the heading rather than flush to the viewport
-    // edge. (SiteHeader is not sticky, so there is nothing to clear.)
-    <section id="sections" className="scroll-mt-16 border-b border-line">
+    <section id="exams" className="scroll-mt-16 border-b border-line">
       <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-20">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold tracking-widest text-accent-text uppercase">
-            Pick where to start
+            Pick your exam
           </p>
           <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
-            Three sections, each timed on its own
+            Each one built to its own format
           </h2>
           <p className="mt-3 leading-relaxed text-muted">
-            Sections do not share a clock, and you can only be inside one at a time: opening one
-            locks the other two until you submit it, the same way the real exam does. Take them one
-            evening at a stretch, or all three back to back as a full mock.
+            These are different exams, not one quiz with the names swapped. Section lengths,
+            timings, whether you can skip, and whether the questions adapt to you all follow the
+            exam being practised.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {exam.sections.map((section) => (
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+          {exams.map(({ exam, bank }) => (
             <article
-              key={section.id}
-              className="flex flex-col rounded-xl border border-line bg-panel p-6 transition-colors hover:border-line-strong"
+              key={exam.id}
+              className="flex flex-col rounded-xl border border-line bg-panel p-6"
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-accent/10 text-accent-text dark:bg-accent/20">
-                <SectionIcon sectionId={section.id} />
-              </span>
-              <h3 className="mt-4 text-lg font-semibold text-foreground">{section.label}</h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{section.description}</p>
-              <p className="mt-4 text-xs font-medium text-muted">
-                {section.questionCount} questions, {section.minutes} minutes
-              </p>
-              <SectionStartButton
-                examId={exam.id}
-                sectionId={section.id}
-                sectionLabel={section.label}
-                minutes={section.minutes}
-              />
+              <div className="flex items-start gap-4">
+                <ExamMark exam={exam} />
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="text-lg font-semibold text-foreground">{exam.label}</h3>
+                    {!exam.available && (
+                      <span className="rounded-full bg-panel-hover px-2 py-0.5 text-[11px] font-medium text-muted">
+                        Coming soon
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-1 text-sm leading-relaxed text-muted">{exam.description}</p>
+                </div>
+              </div>
+
+              <dl className="mt-5 grid grid-cols-3 gap-3 border-y border-line py-4 text-center">
+                <div>
+                  <dd className="text-lg font-semibold text-foreground">{exam.sections.length}</dd>
+                  <dt className="text-xs text-muted">sections</dt>
+                </div>
+                <div>
+                  <dd className="text-lg font-semibold text-foreground">{totalQuestions(exam)}</dd>
+                  <dt className="text-xs text-muted">questions</dt>
+                </div>
+                <div>
+                  <dd className="text-lg font-semibold text-foreground">{totalMinutes(exam)} min</dd>
+                  <dt className="text-xs text-muted">of testing</dt>
+                </div>
+              </dl>
+
+              <ul className="mt-4 flex flex-1 flex-col gap-1.5 text-sm text-muted">
+                {examHighlights(exam, bank).map((line) => (
+                  <li key={line} className="flex gap-2">
+                    <span aria-hidden className="text-accent-text">
+                      &bull;
+                    </span>
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href={`/${exam.id}`}
+                className="mt-6 flex min-h-11 items-center justify-center rounded-lg px-4 text-sm font-semibold transition hover:opacity-90"
+                style={{ backgroundColor: exam.theme.accent, color: exam.theme.accentForeground }}
+              >
+                {exam.available
+                  ? `Practise the ${exam.shortLabel}`
+                  : `See the ${exam.shortLabel} format`}
+              </Link>
             </article>
           ))}
         </div>
-
-        <p className="mt-8 text-sm text-muted">
-          Want the scoring rules and the full format first?{" "}
-          <Link
-            href={`/${exam.id}`}
-            className="font-medium text-foreground underline underline-offset-2"
-          >
-            Read the {exam.shortLabel} exam format page
-          </Link>
-          .
-        </p>
       </div>
     </section>
   );
+}
+
+/**
+ * Derived from the exam's declared rules rather than written per exam, so a new
+ * module gets an accurate summary for free and an existing one cannot drift
+ * out of sync with how it actually behaves.
+ */
+function examHighlights(exam: ExamModule, bank: number): string[] {
+  const lines: string[] = [];
+  const sectionMinutes = new Set(exam.sections.map((s) => s.minutes));
+  lines.push(
+    sectionMinutes.size === 1
+      ? `Every section is ${[...sectionMinutes][0]} minutes on its own clock`
+      : "Each section runs its own independent clock"
+  );
+
+  lines.push(
+    exam.rules.adaptive
+      ? "Questions get harder as you get them right, and easier when you slip"
+      : "A fresh random set drawn from the bank on every attempt"
+  );
+
+  if (!exam.rules.allowSkip) {
+    lines.push("No skipping: answer each question before the next one appears");
+  }
+  if (exam.rules.reviewEdit) {
+    lines.push(
+      `Flag as you go, then change up to ${exam.rules.reviewEdit.maxChanges} answers if time is left`
+    );
+  }
+  if (exam.rules.sectionOrder === "chooseable") {
+    lines.push("Take the sections in whatever order you like");
+  }
+  if (exam.scoring.kind === "scaled") {
+    lines.push(`Scored ${exam.scoring.min} to ${exam.scoring.max}, weighted by difficulty`);
+  }
+
+  lines.push(
+    bank > 0
+      ? `${bank.toLocaleString("en-US")} questions in the bank so far`
+      : "Question bank still being written"
+  );
+  return lines;
 }
 
 /* ---------------------------------------------------------- how it works -- */
 
 const STEPS = [
   {
-    title: "Pick a section",
-    body: "Language Skills, Quantitative Skills, or Logical Reasoning. Each one starts its own clock the moment you open it, exactly like the real sitting.",
+    title: "Pick an exam, then a section",
+    body: "Each section starts its own clock the moment you open it and locks the others until you submit, exactly like the real sitting.",
   },
   {
     title: "Answer under time",
-    body: "A live countdown, a jump-to-question grid, and a pause button for when life interrupts. Run out of time and the section closes itself out and scores what you had.",
+    body: "A live countdown and a pause button for when life interrupts. Run out of time and the section closes itself out and scores what you had.",
   },
   {
     title: "Read why you were wrong",
@@ -341,7 +336,9 @@ function HowItWorks() {
     <section id="how-it-works" className="scroll-mt-16 border-b border-line bg-panel">
       <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-20">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold tracking-widest text-accent-text uppercase">How it works</p>
+          <p className="text-xs font-semibold tracking-widest text-accent-text uppercase">
+            How it works
+          </p>
           <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
             Three steps, and none of them is creating an account
           </h2>
@@ -372,7 +369,7 @@ const FEATURES = [
   {
     eyebrow: "Built to the real format",
     title: "The pressure is the point",
-    body: "Question counts and time limits are taken from the exam's published structure, not rounded off for convenience. Sections lock while you are inside one, the countdown keeps running if you wander off to another tab, and pausing is a deliberate act you can see on screen. Practising without the clock teaches you the material but not the exam.",
+    body: "Question counts and time limits are taken from each exam's published structure, not rounded off for convenience. Sections lock while you are inside one, the countdown keeps running if you wander off to another tab, and pausing is a deliberate act you can see on screen. Practising without the clock teaches you the material but not the exam.",
     points: [
       "A per-section countdown that survives a reload",
       "Pause blurs the questions, so a break is a real break",
@@ -382,21 +379,21 @@ const FEATURES = [
   {
     eyebrow: "Written, not generated",
     title: "Every answer comes with its reasoning",
-    body: "The bank is composed by hand and kept under version control, so an explanation is the author's reasoning rather than a language model improvising at request time. Wrong options are written to be genuinely tempting: the job of a distractor is to catch a real misunderstanding, not to be obviously silly.",
+    body: "The banks are composed by hand and kept under version control, so an explanation is the author's reasoning rather than a language model improvising at request time. Wrong options are written to be genuinely tempting: the job of a distractor is to catch a real misunderstanding, not to be obviously silly.",
     points: [
       "A full written explanation on every question",
-      "Correct-answer position shuffled, so pattern-guessing fails",
+      "Answer position and answer length both balanced, so pattern-guessing fails",
       "A per-topic breakdown showing where you actually lost points",
     ],
   },
   {
-    eyebrow: "Different every time",
-    title: "You cannot memorise your way through it",
-    body: "Each attempt draws a random subset from the full bank and spreads the topics out, so you never get six of the same kind in a row. Retake a section tomorrow and it is a different paper, which is what makes a second score mean something.",
+    eyebrow: "One engine, honest to each exam",
+    title: "An adaptive exam actually adapts",
+    body: "Where an exam is computer-adaptive, the practice is too: questions come one at a time, they get harder while you are getting them right, and the score weighs how hard the ones you answered actually were. Where an exam is a fixed paper, you get the whole section at once and can skip and come back. Neither is a reskin of the other.",
     points: [
-      "A randomised draw from the full bank on every attempt",
-      "Topics interleaved instead of arriving in blocks",
-      "Retake any section as many times as you want",
+      "Difficulty that responds to your streak, not a fixed shuffle",
+      "Scoring that reflects question difficulty, not just the count",
+      "Exam-specific rules on skipping, flagging, and revisiting answers",
     ],
   },
 ];
@@ -449,54 +446,6 @@ function FeatureBands() {
   );
 }
 
-/* ---------------------------------------------------------- other exams -- */
-
-function OtherExams({ exams }: { exams: ExamConfig[] }) {
-  if (exams.length === 0) return null;
-
-  return (
-    <section className="border-b border-line bg-panel">
-      <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-20">
-        <div className="max-w-2xl">
-          <p className="text-xs font-semibold tracking-widest text-accent-text uppercase">More exams</p>
-          <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
-            What is being built next
-          </h2>
-          <p className="mt-3 leading-relaxed text-muted">
-            The engine is exam-agnostic, so a new exam is a question bank away. These already have
-            their format mapped out and are waiting on content.
-          </p>
-        </div>
-
-        <div className="mt-8 grid gap-5 sm:grid-cols-2">
-          {exams.map((exam) => (
-            <article
-              key={exam.id}
-              className="rounded-xl border border-dashed border-line-strong p-6"
-            >
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="text-lg font-semibold text-foreground">{exam.label}</h3>
-                <span className="shrink-0 rounded-full bg-panel-hover px-2.5 py-1 text-[11px] font-medium text-muted">
-                  {exam.available ? "Available" : "Coming soon"}
-                </span>
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                {exam.sections.map((s) => s.label).join(", ")}
-              </p>
-              <Link
-                href={`/${exam.id}`}
-                className="mt-4 inline-flex min-h-11 items-center text-sm font-medium text-foreground underline underline-offset-2"
-              >
-                See the {exam.shortLabel} format
-              </Link>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ------------------------------------------------------------------- faq -- */
 
 interface FaqEntry {
@@ -504,22 +453,23 @@ interface FaqEntry {
   a: string;
 }
 
-/**
- * Built once and used twice: for the rendered accordion and for the FAQPage
- * structured data in the same page. Keeping one source means a search result
- * can never quote an answer the page no longer gives.
- */
-function buildFaqs(examShortLabel: string, bankSize: number): FaqEntry[] {
+function buildFaqs(totalBank: number, examCount: number): FaqEntry[] {
   return [
     {
       q: "Is it really free?",
-      a: `Yes, and there is nothing to sign up for. Open a section and start. Accounts and saved attempt history are on the roadmap, but practising the ${examShortLabel} here is not what you would ever be paying for.`,
+      a: "Yes, and there is nothing to sign up for. Open a section and start. Accounts and saved attempt history are on the roadmap, but practising here is not what you would ever be paying for.",
     },
     {
       q: "Are these real exam questions?",
-      a: `No, and they legally could not be. All ${bankSize.toLocaleString(
+      a: `No, and they legally could not be. All ${totalBank.toLocaleString(
         "en-US"
-      )} questions are written originally for this site and calibrated against the published exam structure, so the topic mix, difficulty spread, and phrasing match what you will sit. Anyone selling you leaked questions is selling you a problem.`,
+      )} questions are written originally for this site and calibrated against each exam's published structure, so the topic mix, difficulty spread, and phrasing match what you will sit. Anyone selling you leaked questions is selling you a problem.`,
+    },
+    {
+      q: "Which exams can I practise?",
+      a: `${
+        examCount === 1 ? "One exam is" : `${examCount} exams are`
+      } live right now, each built to its own published format rather than sharing one generic quiz. More can be added without changing how the existing ones behave.`,
     },
     {
       q: "Does my progress save?",
@@ -527,11 +477,11 @@ function buildFaqs(examShortLabel: string, bankSize: number): FaqEntry[] {
     },
     {
       q: "Can I retake a section?",
-      a: "As many times as you like. Every attempt draws a different random set from the bank, so a retake is a genuinely new paper rather than the same one again.",
+      a: "As many times as you like. Every attempt draws a different set, so a retake is a genuinely new paper rather than the same one again.",
     },
     {
       q: "What happens if I run out of time?",
-      a: "The section submits itself, scores what you had answered, and tells you plainly that time ran out. You still get the full review with explanations for every question, including the ones you never reached.",
+      a: "The section submits itself, scores what you had answered, and tells you plainly that time ran out. You still get the full review with explanations for every question, including the ones you never reached. On an adaptive exam the unanswered ones cost more than wrong ones would, which is exactly how the real test behaves.",
     },
     {
       q: "Does it work on a phone?",
@@ -584,7 +534,7 @@ function Faq({ faqs }: { faqs: FaqEntry[] }) {
 
 /* ----------------------------------------------------------- closing cta -- */
 
-function ClosingCta({ minutes }: { minutes: number }) {
+function ClosingCta() {
   return (
     // A faint accent wash rather than --panel: the site footer directly below
     // is already --panel, and two adjacent panels merged into one slab with no
@@ -595,14 +545,14 @@ function ClosingCta({ minutes }: { minutes: number }) {
           The first timed section is the one that tells you the truth
         </h2>
         <p className="mx-auto mt-4 max-w-xl leading-relaxed text-muted">
-          Give it {minutes} minutes now, find out where you actually stand, and let the explanations
-          do the rest.
+          Give it one sitting now, find out where you actually stand, and let the explanations do
+          the rest.
         </p>
         <Link
-          href="#sections"
+          href="#exams"
           className="mt-8 inline-flex min-h-12 items-center justify-center rounded-lg bg-accent px-8 text-sm font-semibold text-accent-foreground transition hover:opacity-90"
         >
-          Choose a section
+          Choose your exam
         </Link>
         <p className="mt-4 text-xs text-muted">
           Free, and no account needed. {SITE_NAME} is an independent study tool.

@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-21, at PR #14 / VERSION.txt `1.12.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-21, at PR #15 / VERSION.txt `2.0.0`.
 
 ## What this project is
 
@@ -23,7 +23,7 @@ The user (Elijah) is a solo developer treating this like a real engineering team
 
 ## Copyright rule (critical, applies to ALL future content work)
 
-Three reference books exist at `C:\Users\elija\Downloads\test\`:
+Three reference books exist at `C:\Users\elija\Downloads\nmat test files\` (with markdown conversions in its `md/` subfolder, plus the user's own GMAT notes as .txt files):
 - NMAT Official Guide 2021
 - Princeton Review GMAT Premium Prep
 - GMAT for Dummies
@@ -123,6 +123,36 @@ All four lanes ran. Beyond the items above they surfaced, and this PR fixes:
 
 - **PR #14** (v1.12.0) — question-bank statistical + correctness pass, closing the length-bias hole PR #7 left open. No app code changed. Details in "Answer-key statistics" below.
 
+## THE MODULAR EXAM ARCHITECTURE (read this before adding anything)
+
+As of v2.0.0 exams are drop-in modules. **`lib/exams/registry.ts` is the only file that lists exams.** To add one: write `lib/exams/<id>/index.ts` default-exporting an `ExamModule`, put its JSON under `data/questions/<id>/`, and add one line to that registry. Routes, home page, setup page, section lock, sitemap, footer and the quiz engine all read from it.
+
+The contract is `lib/exams/types.ts`. The crucial idea is that an exam declares how it BEHAVES as data, so the engine never branches on an exam id:
+
+- `rules.navigation` -- `"free"` (NMAT: whole section on a page, skip and revisit) or `"sequential"` (GMAT: one at a time, no going back). This picks the runner.
+- `rules.allowSkip`, `rules.adaptive`, `rules.reviewEdit`, `rules.sectionOrder`, `rules.lockToOneSection`, `rules.optionalBreakMinutes`
+- `scoring` -- `points` (NMAT, marks per correct) or `scaled` (GMAT, 205-805 weighted by difficulty with an unanswered penalty)
+
+**If you are about to write `if (examId === "...")` outside `lib/exams/`, add a rule instead.** The exam setup page's "what to expect" bullets and the home page's per-exam highlights are both GENERATED from `rules`, which is deliberate: the old hand-written copy claimed a section lock that did not exist for months.
+
+Files: `lib/exams/{types,registry}.ts`, `lib/exams/{nmat,gmat}/index.ts`, `lib/question-bank.ts` (lazy per-section loading), `lib/adaptive.ts`, `lib/scoring.ts`, `components/quiz/{useAttempt.ts,FreeFormRunner.tsx,SequentialRunner.tsx,shared.tsx}`, `app/[examId]/quiz/[section]/page.tsx` (a shell that picks a runner).
+
+`useAttempt` holds ALL attempt state for every exam: storage, timing, pause, expiry, the section lock, adaptive serving, scoring, the review pass. Runners are presentation only.
+
+### Question banks are now lazily loaded per section
+
+`lib/question-bank.ts` dynamic-imports one section at a time and caches it. Previously every bank was statically imported into one module, so ~220 KB of questions sat on the critical path of the exam setup page and of every quiz section including the two you were not taking. `getSectionBreakdown` no longer touches the bank at all: the score is written into sessionStorage at submit time as `StoredProgress.summary`. Verified after the change: each section's bank is its own chunk and none is referenced by any route's client manifest.
+
+**The sync/async split matters.** `loadSection()` is async and must be awaited once (the quiz page does it in an effect); `getLoadedSection()` is the synchronous cache read used during render.
+
+**Strict Mode trap, already hit once:** the loader effect is deduped by a ref, so it must NOT cancel its own in-flight promise on cleanup. React double-invokes mount effects in dev as mount-cleanup-mount; cancelling killed the only run that was allowed to proceed and the quiz hung on a blank screen.
+
+### GMAT specifics
+
+GMAT Focus: Data Insights 20q, Quantitative 21q, Verbal 23q, 45 minutes each, 64 questions, 205-805. Verbal has NO sentence correction; Quantitative has NO geometry; Data Sufficiency belongs to **Data Insights**, not Quantitative. Bank is a **90-question seed** (30 per section, 10 per difficulty), not a finished bank: a perfect run exhausts the ten hard questions and falls back to medium.
+
+`npm run verify:engine` exercises the adaptive ladder and both scoring models. It has already caught a perfect attempt scoring 810 on a band whose maximum is 805.
+
 ### Answer-key statistics (re-measure before trusting any claim about these)
 
 The bank has now been hardened against three different "answer without reading" strategies. All three were measured, fixed, and re-measured:
@@ -146,7 +176,7 @@ Data Sufficiency was also restored to **canonical A-E statement order** (PR #7's
 4. `ProgressTracker` cells are 28px, under the 44px minimum the rest of the app holds to.
 5. `ConfirmDialog` styles the confirming action as a red outline and the cancel as solid green. A reviewer called this inverted; it is a **documented deliberate choice** from an earlier PR (green = keeps your work). Left alone pending a decision.
 
-**Current state: `main` is clean, builds and lints with zero errors/warnings, at v1.12.0.**
+**Current state: `main` is clean, builds and lints with zero errors/warnings, at v2.0.0.**
 
 ## Lesson learned: never run multiple agents against the same data file concurrently
 

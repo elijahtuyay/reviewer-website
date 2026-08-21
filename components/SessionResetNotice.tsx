@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { getExamConfig } from "@/lib/exam-config";
+import { getExam } from "@/lib/exams/registry";
 import { ExamId, SectionId } from "@/data/schema";
 import { getSectionBreakdown } from "@/lib/section-result";
 import {
@@ -34,7 +34,7 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
   const readSaved = useCallback(() => {
     const found: SavedSection[] = [];
     const now = Date.now();
-    for (const section of getExamConfig(examId).sections) {
+    for (const section of getExam(examId).sections) {
       const stored = getStoredProgress(examId, section.id);
       // A drawn question set is what makes a section "started" — answering none
       // of it still burns the clock, so it has to be listed either way.

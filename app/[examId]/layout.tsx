@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { EXAMS, getExamConfig, isValidExamId } from "@/lib/exam-config";
+import { EXAM_LIST, getExam, isValidExamId } from "@/lib/exams/registry";
 
 /**
  * The exam registry is a compile-time constant, so every exam route can be
@@ -9,7 +9,7 @@ import { EXAMS, getExamConfig, isValidExamId } from "@/lib/exam-config";
  * as static files (see README, "Hosting").
  */
 export function generateStaticParams() {
-  return Object.keys(EXAMS).map((examId) => ({ examId }));
+  return EXAM_LIST.map((exam) => ({ examId: exam.id }));
 }
 
 export const dynamicParams = false;
@@ -31,7 +31,7 @@ export default async function ExamLayout({
   if (!isValidExamId(examId)) {
     notFound();
   }
-  const exam = getExamConfig(examId);
+  const exam = getExam(examId);
 
   return (
     <div
