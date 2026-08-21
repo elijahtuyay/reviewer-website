@@ -102,10 +102,10 @@
     "difficulty": "medium",
     "prompt": "Argument: \"The city should build a new highway to reduce traffic congestion downtown, since traffic has increased 30% over the past five years.\" Which of the following is an assumption underlying this argument?",
     "options": [
-      "Downtown businesses support the highway project.",
-      "The city has sufficient funds to build the highway.",
+      "Downtown business owners support the project and expect it to bring in more customers.",
+      "The city can finance the highway without cutting other transportation projects.",
       "A new highway will not simply attract more cars and eventually recreate congestion.",
-      "Traffic congestion is the city's most important problem."
+      "Reducing traffic congestion downtown matters more than any other problem the city faces."
     ],
     "correctIndex": 2,
     "explanation": "The argument assumes the highway will genuinely reduce congestion rather than just redistribute or eventually recreate it through induced demand, a common gap in this type of infrastructure argument.",
@@ -118,10 +118,10 @@
     "difficulty": "hard",
     "prompt": "Argument: \"Since employees who take regular breaks report higher job satisfaction, the company should mandate hourly breaks to improve overall satisfaction.\" Which assumption does this argument rely on?",
     "options": [
-      "All employees currently take breaks at different times.",
-      "The company has enough staff to cover during breaks.",
+      "Employees currently take their breaks at staggered times rather than all at the same hour of the day.",
+      "The company has enough staff on hand to cover for everyone who steps away each hour.",
       "Mandating breaks will produce the same effect as employees voluntarily choosing to take them.",
-      "Job satisfaction is influenced only by break frequency."
+      "How often employees take breaks is the only real influence on their overall job satisfaction."
     ],
     "correctIndex": 2,
     "explanation": "The argument assumes a mandated break has the same positive effect as a self-chosen one: the observed correlation between voluntary breaks and satisfaction doesn't guarantee the same result if breaks are imposed.",
@@ -134,9 +134,9 @@
     "difficulty": "hard",
     "prompt": "Argument: \"Reading fiction improves empathy, so schools should require students to read more novels to become more empathetic adults.\" What does this argument assume?",
     "options": [
-      "Empathy cannot be taught through any other method.",
-      "Students currently dislike reading fiction.",
-      "All novels are equally effective at building empathy.",
+      "There is no other classroom activity that develops empathy as effectively as reading fiction does.",
+      "Students at these schools currently read far fewer novels than students at comparable schools.",
+      "Every novel a school might choose to assign builds empathy to roughly the same degree.",
       "The observed link between reading fiction and empathy reflects causation, not just correlation."
     ],
     "correctIndex": 3,
@@ -150,9 +150,9 @@
     "difficulty": "medium",
     "prompt": "Argument: \"Since the new fitness app has 500,000 downloads, it must be effective at helping people get fit.\" What is the flawed assumption here?",
     "options": [
-      "All 500,000 users are still actively using the app.",
-      "Downloads indicate the app was affordable.",
-      "Fitness apps are more effective than gyms.",
+      "Every one of the 500,000 people who downloaded the app is still using it on a regular weekly basis.",
+      "The size of the download count mainly reflects how affordable the app was next to its rivals.",
+      "Fitness apps in general produce better physical results for their users than gyms do.",
       "High download numbers indicate effectiveness, rather than just popularity or marketing reach."
     ],
     "correctIndex": 3,
@@ -167,8 +167,8 @@
     "prompt": "\"All members of the hiking club own hiking boots. Sarah does not own hiking boots.\" What can be validly concluded?",
     "options": [
       "Sarah will buy hiking boots soon.",
-      "All hiking club members go hiking often.",
-      "Sarah dislikes hiking.",
+      "All hiking club members go hiking very often.",
+      "Sarah strongly dislikes hiking.",
       "Sarah is not a member of the hiking club."
     ],
     "correctIndex": 3,
@@ -183,9 +183,9 @@
     "prompt": "\"Every time it rains heavily, the river level rises. The river level has not risen today.\" What can be validly concluded?",
     "options": [
       "The river is at its lowest level ever.",
-      "It rained lightly today.",
+      "It rained only lightly in the city today.",
       "It did not rain heavily today.",
-      "It will rain heavily tomorrow."
+      "It will rain heavily somewhere tomorrow."
     ],
     "correctIndex": 2,
     "explanation": "By the contrapositive of the stated rule, no rise in river level means it did not rain heavily today, a valid inference.",
@@ -198,10 +198,10 @@
     "difficulty": "medium",
     "prompt": "\"Sales of umbrellas increase every time it rains in the city. Yesterday, umbrella sales were unusually high.\" What can be reasonably inferred?",
     "options": [
-      "The umbrella shop lowered its prices.",
+      "The umbrella shop must have lowered its prices sharply yesterday.",
       "It is possible that it rained in the city yesterday.",
-      "It definitely rained in the city yesterday.",
-      "It will rain again tomorrow."
+      "It definitely rained in the city at some point yesterday.",
+      "It will almost certainly rain again tomorrow."
     ],
     "correctIndex": 1,
     "explanation": "Concluding it \"definitely\" rained would be affirming the consequent, a logical fallacy: other factors could also raise sales. Only \"possible\" is validly supported.",
@@ -230,9 +230,9 @@
     "difficulty": "medium",
     "prompt": "Argument: \"The new drug reduces headache duration, since patients who took it recovered faster than those who didn't.\" Which finding would most strengthen this argument?",
     "options": [
-      "Some patients reported mild side effects.",
-      "The study included both men and women.",
-      "The drug is more expensive than existing headache medications.",
+      "A few patients in the study reported mild, temporary side effects.",
+      "The study group included roughly equal numbers of men and women throughout.",
+      "The drug costs more than the headache medications already on the market.",
       "The study was conducted using a randomized, placebo-controlled design."
     ],
     "correctIndex": 3,
@@ -246,10 +246,10 @@
     "difficulty": "medium",
     "prompt": "Argument: \"Switching to solar panels will lower the town's electricity costs, based on similar towns that adopted solar and saw savings.\" Which fact would most strengthen this argument?",
     "options": [
-      "Solar panels have become more popular nationwide.",
+      "Solar panel installations have grown steadily across the country over the past decade.",
       "The comparison towns have a similar climate and energy usage pattern to this town.",
-      "Electricity prices have risen slightly this year.",
-      "The town has a moderate budget for infrastructure projects."
+      "Electricity prices in the region have risen slightly over the course of this year.",
+      "The town has set aside a moderate budget for infrastructure projects this year."
     ],
     "correctIndex": 1,
     "explanation": "The argument reasons by analogy: it takes what happened in other towns as evidence for what will happen here. An analogy is only as strong as the resemblance it rests on, so confirming that the comparison towns match this town on the factors that actually drive solar savings, sunlight and how much electricity is used, closes the biggest gap in the reasoning. The popularity of solar panels nationwide says nothing about whether they save this town money, since something can spread widely without being cost-effective. A slight rise in electricity prices describes the status quo the town wants to escape rather than any evidence that solar will beat it. The town's infrastructure budget bears on whether the switch is affordable to make, which is a separate question from whether it lowers running costs.",
@@ -263,9 +263,9 @@
     "prompt": "Argument: \"The new teaching method improves test scores, as shown by a pilot classroom that used it and scored higher than average.\" What would most strengthen this claim?",
     "options": [
       "The pilot classroom had students with similar starting ability levels to the average classroom.",
-      "The school has adopted new textbooks recently.",
-      "The pilot classroom had fewer students than average.",
-      "The teacher in the pilot classroom was experienced."
+      "The school introduced new textbooks across several subjects earlier in that same school year.",
+      "The pilot classroom held noticeably fewer students than the average classroom in the school.",
+      "The teacher who ran the pilot classroom had over a decade of classroom experience."
     ],
     "correctIndex": 0,
     "explanation": "Ruling out that the pilot group simply started out stronger strengthens the claim that the teaching method itself caused the improvement.",
@@ -278,10 +278,10 @@
     "difficulty": "medium",
     "prompt": "Argument: \"Company X's new marketing campaign caused its sales to double last quarter.\" Which finding would most weaken this argument?",
     "options": [
-      "The marketing campaign used social media advertising.",
+      "The marketing campaign relied mainly on social media advertising.",
       "A major competitor went out of business during the same quarter.",
-      "The campaign cost less than previous campaigns.",
-      "Company X has been in business for ten years."
+      "The campaign cost noticeably less than the company's previous ones.",
+      "Company X has been operating in this market for over ten years."
     ],
     "correctIndex": 1,
     "explanation": "An alternative explanation (the competitor's exit) undermines the claim that the campaign alone caused the sales increase.",
@@ -294,10 +294,10 @@
     "difficulty": "hard",
     "prompt": "Argument: \"Since students who attend the tutoring program score higher on exams, the tutoring program must be effective at improving scores.\" What would most weaken this argument?",
     "options": [
-      "The program is offered for free to all students.",
+      "The tutoring program is offered free of charge to every student enrolled at the school.",
       "Students who choose to attend tutoring tend to already be higher-performing, more motivated students.",
-      "The tutoring program has been running for three years.",
-      "Tutoring sessions are held twice a week."
+      "The tutoring program has been running continuously for the past three academic years now.",
+      "Tutoring sessions are held twice a week in the school library after classes."
     ],
     "correctIndex": 1,
     "explanation": "This points to self-selection bias (already high-performing, motivated students opting in) which undermines the causal claim that tutoring itself raised scores.",
@@ -310,10 +310,10 @@
     "difficulty": "hard",
     "prompt": "Argument: \"The new traffic light system must have reduced accidents, since accident reports dropped 15% after it was installed.\" Which fact would most weaken this conclusion?",
     "options": [
-      "The city has more traffic lights than neighboring cities.",
+      "The city has more traffic lights per resident than any of its neighboring cities.",
       "The city also lowered the speed limit on the same roads at the same time.",
-      "The traffic light system was expensive to install.",
-      "Drivers generally dislike new traffic light systems."
+      "The traffic light system was expensive for the city to install and maintain.",
+      "Drivers in the area generally dislike the new traffic light system intensely."
     ],
     "correctIndex": 1,
     "explanation": "An alternative simultaneous change (the lowered speed limit) offers a competing explanation for the drop in accidents, weakening the attribution to the traffic lights alone.",
@@ -806,10 +806,10 @@
     "difficulty": "medium",
     "prompt": "Argument: \"The company should switch all its delivery trucks to electric vehicles, since electric vehicles have lower fuel costs than gasoline trucks.\" Which of the following is an assumption underlying this argument?",
     "options": [
-      "Employees prefer driving electric vehicles.",
-      "The company delivers only within city limits.",
+      "Company drivers would rather operate electric trucks than the gasoline ones they use now.",
+      "Electric delivery trucks have already been adopted by most of the company's direct competitors.",
       "The savings from lower fuel costs will not be offset by higher purchase or maintenance costs of electric vehicles.",
-      "Gasoline prices will continue to rise."
+      "The price of gasoline will keep climbing over the next several years in this region."
     ],
     "correctIndex": 2,
     "explanation": "The argument assumes the fuel savings actually translate into net savings, ignoring the possibility that higher upfront or maintenance costs could offset the benefit.",
@@ -822,9 +822,9 @@
     "difficulty": "hard",
     "prompt": "Argument: \"Because the average reading score in District A is higher than in District B, District A's schools must be providing better reading instruction.\" What does this argument assume?",
     "options": [
-      "Reading scores are the only measure of school quality.",
-      "District A has more schools than District B.",
-      "District B has fewer teachers than District A.",
+      "Reading scores are the only meaningful measure of the quality of a school district's teaching.",
+      "District A operates a greater number of schools and therefore reaches more students than District B.",
+      "District B employs fewer reading teachers per student than District A currently employs.",
       "The score gap is not primarily explained by differences in students' socioeconomic backgrounds or outside resources."
     ],
     "correctIndex": 3,
@@ -838,9 +838,9 @@
     "difficulty": "easy",
     "prompt": "\"Every certified technician passed a rigorous exam. Jason did not pass the rigorous exam.\" What can be validly concluded?",
     "options": [
-      "All technicians must retake exams.",
-      "Jason will retake the exam.",
-      "Jason failed his job.",
+      "All technicians must eventually retake the exam.",
+      "Jason will retake the exam next term.",
+      "Jason has failed at his job.",
       "Jason is not a certified technician."
     ],
     "correctIndex": 3,
@@ -854,10 +854,10 @@
     "difficulty": "medium",
     "prompt": "\"In a factory, machines serviced monthly break down less often than machines serviced yearly. Machine 12 broke down frequently this year.\" What can be reasonably inferred?",
     "options": [
-      "Machine 12 was definitely serviced yearly.",
-      "All machines will break down eventually.",
+      "Machine 12 was definitely serviced yearly rather than monthly.",
+      "All machines in the factory will break down eventually.",
       "It is possible that Machine 12 was not serviced monthly.",
-      "Machine 12 is beyond repair."
+      "Machine 12 is now beyond repair."
     ],
     "correctIndex": 2,
     "explanation": "Concluding Machine 12 was \"definitely\" serviced yearly would be affirming the consequent: other causes could also explain frequent breakdowns. Only \"possible\" is validly supported.",
@@ -870,10 +870,10 @@
     "difficulty": "medium",
     "prompt": "Argument: \"The new packaging reduced shipment damage, since damage complaints fell 40% after the switch.\" Which fact would most strengthen this argument?",
     "options": [
-      "Customers were surveyed about the packaging's appearance.",
+      "Customers were surveyed about the appearance of the new packaging design shortly afterward.",
       "No other change in shipping method, carrier, or handling occurred during the same period.",
-      "The company shipped fewer packages overall this year.",
-      "The new packaging is made of recycled material."
+      "The company shipped noticeably fewer packages overall this year than it did in the last one.",
+      "The new packaging is manufactured entirely from recycled cardboard material."
     ],
     "correctIndex": 1,
     "explanation": "Ruling out other simultaneous changes strengthens the claim that the packaging itself (not some other factor) caused the drop in damage complaints.",
@@ -902,10 +902,10 @@
     "difficulty": "medium",
     "prompt": "Argument: \"Employees who work remotely report higher productivity scores, so the company should let all employees work remotely to boost productivity.\" Which finding would most weaken this argument?",
     "options": [
-      "The company's office lease expires next year.",
+      "The company's lease on its main office building is due to expire at the end of next year.",
       "Employees who currently choose to work remotely tend to be more self-disciplined and have fewer household distractions than the broader workforce.",
-      "The company has good remote collaboration tools.",
-      "Remote work saves employees commuting time."
+      "The company already provides strong collaboration tools for everyone who works remotely.",
+      "Remote work saves employees a considerable amount of commuting time each week."
     ],
     "correctIndex": 1,
     "explanation": "This points to self-selection bias (the employees who already opt for remote work may be unrepresentative) undermining the claim that remote work itself would boost productivity for everyone.",
@@ -1142,7 +1142,7 @@
     "difficulty": "medium",
     "prompt": "Five people (A, B, C, D, E) sit evenly spaced around a circular table, all facing outward, away from the table. B sits second to the right of A. C sits immediately to the left of B. D sits immediately to the right of B. Where does E sit relative to A?",
     "options": [
-      "Opposite A",
+      "Second to the left of A",
       "Immediately to the left of A",
       "Immediately to the right of A",
       "Second to the right of A"

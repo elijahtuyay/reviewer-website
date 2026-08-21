@@ -476,7 +476,7 @@
       "30%"
     ],
     "correctIndex": 0,
-    "explanation": "The annual total is not given, so compute it first: ₱40,000 + ₱55,000 + ₱35,000 + ₱70,000 = ₱200,000. Q4's share is then $\\frac{70{,}000}{200{,}000} \\times 100 = 35\\%$. The denominator must be the full-year total; dividing Q4 by the other three quarters combined (₱130,000) or by any single quarter answers a different question and is the usual source of the higher percentages offered.",
+    "explanation": "The annual total is not given, so compute it first: ₱40,000 + ₱55,000 + ₱35,000 + ₱70,000 = ₱200,000. Q4's share is then $\\frac{70{,}000}{200{,}000} \\times 100 = 35\\%$. The denominator must be the full-year total; dividing Q4 by the other three quarters combined (₱130,000) answers a different question entirely.",
     "source": "original"
   },
   {
@@ -518,13 +518,13 @@
     "difficulty": "medium",
     "prompt": "Is $x > 10$?\n(1) $x > 8$\n(2) $x = 12$",
     "options": [
+      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
       "EACH statement alone is sufficient.",
-      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
-      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
       "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Statement (1) alone: $x > 8$ does not guarantee $x > 10$, since $x = 9$ fails while $x = 11$ works, so it is not sufficient. Statement (2) alone: $x = 12$ directly confirms $x > 10$, so it is sufficient by itself.",
     "source": "original"
   },
@@ -537,11 +537,11 @@
     "options": [
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
       "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
-      "EACH statement alone is sufficient.",
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
+      "EACH statement alone is sufficient.",
       "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "Statement (1) alone: divisibility by 2 doesn't guarantee divisibility by 6, for example $n = 4$. Statement (2) alone: divisibility by 3 doesn't guarantee divisibility by 6, for example $n = 9$. Together, since 2 and 3 are coprime, divisibility by both means $n$ is divisible by their product, 6, so the statements are sufficient only in combination.",
     "source": "original"
   },
@@ -552,13 +552,13 @@
     "difficulty": "hard",
     "prompt": "What is the value of $x$?\n(1) $x^2 = 9$\n(2) $x > 0$",
     "options": [
-      "Statements (1) and (2) together are NOT sufficient.",
-      "EACH statement alone is sufficient.",
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
       "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
-      "BOTH statements together are sufficient, but neither statement alone is sufficient."
+      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
+      "EACH statement alone is sufficient.",
+      "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 4,
+    "correctIndex": 2,
     "explanation": "Statement (1) alone gives $x = 3$ or $x = -3$, two possible values, so it is not sufficient. Statement (2) alone only says $x$ is positive, with no specific value, so it is also not sufficient. Together, $x^2 = 9$ and $x > 0$ pin down $x = 3$ uniquely.",
     "source": "original"
   },
@@ -567,16 +567,16 @@
     "section": "quantitative-skills",
     "topic": "Data Sufficiency",
     "difficulty": "hard",
-    "prompt": "What is the area of rectangle R?\n(1) The length of R is 8.\n(2) The perimeter of R is 26.",
+    "prompt": "What is the area of rectangle R?\n(1) The diagonal of R is 10 and the perimeter of R is 28.\n(2) The length of R is 8.",
     "options": [
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
       "EACH statement alone is sufficient.",
-      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
       "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 1,
-    "explanation": "Statement (1) alone gives only the length, not the width, so it is not sufficient. Statement (2) alone gives length + width = 13, but not either value individually, so it is also not sufficient. Together, length = 8 means width = $13 - 8 = 5$, and area = $8 \\times 5 = 40$, so the statements are sufficient only in combination.",
+    "correctIndex": 0,
+    "explanation": "Statement (1) alone: let the sides be $l$ and $w$. The perimeter gives $l + w = 14$ and the diagonal gives $l^2 + w^2 = 100$. Squaring the first, $(l + w)^2 = l^2 + 2lw + w^2 = 196$, so $100 + 2lw = 196$ and $lw = 48$. The area is $lw$, so it is pinned down at 48 without ever needing $l$ and $w$ separately, and the statement is sufficient. Statement (2) alone gives the length but nothing about the width, so the area could be anything, and it is not sufficient.",
     "source": "original"
   },
   {
@@ -1419,12 +1419,12 @@
     "prompt": "Is $x$ positive?\n(1) $x^2 = 16$\n(2) $x^3 = -64$",
     "options": [
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
-      "Statements (1) and (2) together are NOT sufficient.",
       "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
-      "EACH statement alone is sufficient."
+      "EACH statement alone is sufficient.",
+      "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Statement (1) alone: $x^2 = 16$ gives $x = 4$ or $x = -4$, so whether $x$ is positive is undetermined, meaning it is not sufficient. Statement (2) alone: a real number has only one real cube root, and $(-4)^3 = -64$, so $x = -4$ uniquely. This definitively answers 'No, $x$ is not positive,' which counts as sufficient.",
     "source": "original"
   },
@@ -1451,13 +1451,13 @@
     "difficulty": "medium",
     "prompt": "Is $m$ a multiple of 5?\n(1) $m$ is a multiple of 15.\n(2) $m$ is a multiple of 10.",
     "options": [
-      "EACH statement alone is sufficient.",
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
-      "Statements (1) and (2) together are NOT sufficient.",
       "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
-      "BOTH statements together are sufficient, but neither statement alone is sufficient."
+      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
+      "EACH statement alone is sufficient.",
+      "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Statement (1) alone: $15 = 3 \\times 5$, so any multiple of 15 is automatically a multiple of 5, giving a definite 'Yes,' which is sufficient. Statement (2) alone: $10 = 2 \\times 5$, so any multiple of 10 is automatically a multiple of 5, also a definite 'Yes' and sufficient. Each statement alone answers the question.",
     "source": "original"
   },
@@ -1484,13 +1484,13 @@
     "difficulty": "medium",
     "prompt": "If $a$ and $b$ are integers, is $a \\cdot b$ even?\n(1) $a$ is even.\n(2) $b$ is odd.",
     "options": [
-      "Statements (1) and (2) together are NOT sufficient.",
-      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
+      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
       "EACH statement alone is sufficient.",
-      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient."
+      "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "Statement (1) alone: if $a$ is even, then $a \\times b$ is even regardless of $b$'s parity, since even times anything is even, giving a definite 'Yes,' which is sufficient. Statement (2) alone: knowing only that $b$ is odd tells us nothing about $a$, so $a \\cdot b$ could be even (if $a$ is even) or odd (if $a$ is odd), so it is not sufficient.",
     "source": "original"
   },
@@ -1501,13 +1501,13 @@
     "difficulty": "hard",
     "prompt": "Is $\\frac{x}{y} > 1$?\n(1) $x > y$\n(2) $x$ and $y$ are positive.",
     "options": [
-      "EACH statement alone is sufficient.",
-      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
-      "Statements (1) and (2) together are NOT sufficient.",
-      "BOTH statements together are sufficient, but neither statement alone is sufficient."
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
+      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
+      "EACH statement alone is sufficient.",
+      "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 4,
+    "correctIndex": 2,
     "explanation": "Statement (1) alone: $x > y$ doesn't fix the signs of $x$ and $y$. For example, $x = 2$, $y = -5$ gives $\\frac{x}{y} = -0.4$, which is not greater than 1, but $x = 5$, $y = 2$ gives $\\frac{x}{y} = 2.5$, which is, so it is not sufficient. Statement (2) alone: both being positive doesn't establish which is larger. For example, $x = 1$, $y = 2$ gives $\\frac{x}{y} = 0.5$, but $x = 3$, $y = 2$ gives $\\frac{x}{y} = 1.5$, so it is also not sufficient. Together, since $y > 0$, dividing both sides of $x > y$ by $y$ preserves the inequality direction, giving $\\frac{x}{y} > 1$ always, so the statements are sufficient only in combination.",
     "source": "original"
   },
@@ -1516,16 +1516,16 @@
     "section": "quantitative-skills",
     "topic": "Data Sufficiency",
     "difficulty": "medium",
-    "prompt": "A jar contains only red and blue marbles. What is the probability of randomly selecting a red marble?\n(1) The jar contains 12 red marbles.\n(2) The jar contains 8 blue marbles.",
+    "prompt": "A jar contains only red and blue marbles. What is the probability of randomly selecting a red marble?\n(1) The jar contains 12 red marbles.\n(2) There are more red marbles than blue marbles.",
     "options": [
+      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
       "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
-      "Statements (1) and (2) together are NOT sufficient.",
-      "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
-      "EACH statement alone is sufficient."
+      "EACH statement alone is sufficient.",
+      "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 1,
-    "explanation": "Statement (1) alone gives the red count but not the total, so it is not sufficient. Statement (2) alone gives the blue count but not the red count, so it is also not sufficient. Together, total = $12 + 8 = 20$, so $P(\\text{red}) = \\frac{12}{20} = \\frac{3}{5}$, meaning the statements are sufficient only in combination.",
+    "correctIndex": 4,
+    "explanation": "The probability is red divided by the total, so both counts are needed. Statement (1) alone gives the red count but no total, so it is not sufficient. Statement (2) alone gives no counts at all, so it is not sufficient either. Together they still fail: 12 red marbles with more red than blue leaves the blue count anywhere from 1 to 11, so the probability ranges from $\\frac{12}{23}$ to $\\frac{12}{13}$. A range is not a value, so even combined the statements are not sufficient.",
     "source": "original"
   },
   {
@@ -1535,13 +1535,13 @@
     "difficulty": "hard",
     "prompt": "Is $n$ an even integer?\n(1) $\\frac{n}{2}$ is an integer.\n(2) $n^2$ is even.",
     "options": [
-      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
-      "Statements (1) and (2) together are NOT sufficient.",
-      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
-      "EACH statement alone is sufficient."
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
+      "BOTH statements together are sufficient, but neither statement alone is sufficient.",
+      "EACH statement alone is sufficient.",
+      "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 4,
+    "correctIndex": 3,
     "explanation": "Statement (1) alone: if $\\frac{n}{2}$ is an integer, $n$ is divisible by 2, meaning it is even, giving a definite 'Yes,' which is sufficient. Statement (2) alone: if $n$ were odd, $n^2$ would be odd, since odd times odd is odd, so $n^2$ being even forces $n$ to be even, also a definite 'Yes' and sufficient on its own.",
     "source": "original"
   },
@@ -1552,13 +1552,13 @@
     "difficulty": "hard",
     "prompt": "What is the value of $x + y$?\n(1) $x - y = 6$\n(2) $2x - 2y = 12$",
     "options": [
-      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
-      "Statements (1) and (2) together are NOT sufficient.",
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
+      "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
       "BOTH statements together are sufficient, but neither statement alone is sufficient.",
-      "EACH statement alone is sufficient."
+      "EACH statement alone is sufficient.",
+      "Statements (1) and (2) together are NOT sufficient."
     ],
-    "correctIndex": 1,
+    "correctIndex": 4,
     "explanation": "Statement (1) alone: $x - y = 6$ has infinitely many $(x, y)$ pairs with different sums. For example, $x = 6$, $y = 0$ gives sum 6, while $x = 7$, $y = 1$ gives sum 8, so it is not sufficient. Statement (2) alone: $2x - 2y = 12$ simplifies to $x - y = 6$, the exact same equation, so it is not sufficient for the same reason. Together, statement (2) provides no new information beyond statement (1) since it is just twice the same equation, so $x + y$ still cannot be pinned down, meaning the statements are NOT sufficient even combined.",
     "source": "original"
   },
