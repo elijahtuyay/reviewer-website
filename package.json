@@ -10,6 +10,9 @@
     "verify:engine": "node --experimental-strip-types --no-warnings scripts/verify-engine.mts"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
+    "better-auth": "^1.7.1",
+    "drizzle-orm": "^0.45.2",
     "katex": "^0.18.4",
     "next": "16.3.0",
     "react": "19.2.8",
@@ -24,6 +27,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-katex": "^3.0.4",
+    "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.3.0",
     "tailwindcss": "^4",
