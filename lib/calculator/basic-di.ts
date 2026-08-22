@@ -7,15 +7,32 @@
  * `SectionConfig.calculator` in `lib/exams/types.ts`.
  *
  * No React, no DOM, no imports. That is what lets `npm run verify:engine`
- * assert its behavior directly, which matters more here than usual: the
- * headline behavior below looks exactly like a bug, so the thing that stops a
- * future reader from "fixing" it is an assertion that fails when they do.
+ * assert its behavior directly, which matters more here than usual: several of
+ * the behaviors below look exactly like bugs, so the thing that stops a future
+ * reader from "fixing" them is an assertion that fails when they do.
+ *
+ * ── What it actually is ──────────────────────────────────────────────────
+ *
+ * An emulated TEXAS INSTRUMENTS TI-108, the classroom four-function
+ * calculator. That identification is what makes the rest of this file
+ * checkable rather than guessed: the TI-108 is documented, so every quirk
+ * below has a source instead of a plausible-sounding invention.
+ *
+ * The key set is exactly: 0-9, `.`, the four operators, `=`, `ON/C`, `+/-`,
+ * `√`, `%`, and `M+` / `M-` / `MRC`. Nothing else. In particular there is NO
+ * backspace, no parentheses, no exponent key, and no `1/x`.
+ *
+ * A caution for anyone re-researching this: a lot of prep material still
+ * describes the PRE-FOCUS Integrated Reasoning calculator, which had
+ * `MS`/`MR`/`MC`, separate `BS`/`CE`/`CA` clear keys, and a `1/x` key. If a
+ * source lists `1/x`, it is describing the old device and its other details
+ * should not be trusted for Focus either.
  *
  * ── The headline behavior ────────────────────────────────────────────────
  *
  * IT EVALUATES STRICTLY LEFT TO RIGHT AND IGNORES ORDER OF OPERATIONS.
  *
- *     2 + 3 * 4 =   →   20     (not 14)
+ *     2 + 3 * 4 =   ->   20     (not 14)
  *
  * There are no parentheses and no way to override it. This is not a
  * simplification we chose; it is what the real calculator does, and it is the
@@ -27,27 +44,39 @@
  * clear, compute the second, M+, then MRC. `verify-engine.mts` asserts both the
  * naive path and the memory path, so the quirk cannot silently regress.
  *
- * ── Two behaviors sources disagree on ────────────────────────────────────
+ * ── Three more quirks, all real, all asserted ────────────────────────────
  *
- * Flagged rather than asserted as fidelity, because they could not be verified
- * against the official software:
+ *  1. `%` IS CONTEXTUAL, not a plain divide-by-100. With a pending `+` or `-`
+ *     it computes the percentage OF THE ACCUMULATOR and leaves it on the
+ *     display: `12 + 10 %` shows 1.2, and `=` then gives 13.2. With `*`, `/`,
+ *     or nothing pending it divides by 100: `10 %` shows 0.1.
  *
- *  1. `%` is documented only as "converts to percent equivalent". Basic
- *     calculators split between plain divide-by-100 and a contextual reading
- *     where `200 + 10 %` yields 220. We implement divide-by-100: it matches the
- *     wording, and it can never silently return a number the user did not ask
- *     for. If someone confirms the contextual behavior against the real tool,
- *     that is a deliberate change here plus a new assertion, not a bug fix.
+ *  2. REPEATED `=` REPEATS THE LAST OPERATION (the TI-108's "automatic
+ *     constant"). `3 + 2 * 5 = = =` gives 625, because the first `=` yields 25
+ *     and each further `=` multiplies by 5 again.
  *
- *  2. Repeated `=` does NOT repeat the last operation. Many four-function
- *     calculators do. No source describes what this one does, so it does the
- *     inert thing rather than inventing a behavior a user might come to rely on.
+ *  3. THE DISPLAY IS EIGHT DIGITS. Anything outside -99,999,999 to 99,999,999
+ *     is an overflow: the display errors and only `ON/C` recovers. This is
+ *     tighter than it sounds and is reachable in real Data Insights arithmetic,
+ *     which is exactly why modeling it matters. A product that errors on test
+ *     day must not quietly succeed here.
  *
- * The memory key set (M+ / M- / MRC, with no store key) follows the GMAT Focus
- * rendering. Older write-ups describe MS/MR/M+/MC and separate BS/CE/CA clear
- * keys; those describe a pre-Focus calculator. Note there is genuinely no store
- * key, so "put this number in memory" means AC-ing memory and then M+. That is
- * awkward on the real exam, and reproducing the awkwardness is the point.
+ * An earlier revision of this file implemented divide-by-100, made repeated `=`
+ * inert, allowed 15 digits, and had a backspace key, each with a comment saying
+ * the real behavior was unverifiable. It was verifiable; the comments were
+ * wrong and were stopping exactly the fix they should have prompted. If you
+ * find yourself writing "could not be verified" here, look harder first.
+ *
+ * ── The one thing still uncertain ────────────────────────────────────────
+ *
+ * What a REPEATED OPERATOR does. The TI-108's automatic constant suggests
+ * `3 + +` applies the operation to the display and yields 6. Our behavior is
+ * that a second operator simply replaces the pending one, so `9 + * 3` is
+ * 9 * 3. The only sources describing this do so through a third-party
+ * simulator's own MDAS toggle, which is a simulator feature rather than an
+ * exam one, so this is left as the simpler behavior and flagged rather than
+ * guessed at. Correcting a mistyped operator is also the far more common
+ * reason a student presses two in a row.
  */
 
 export type Operator = "+" | "-" | "*" | "/";
@@ -62,9 +91,8 @@ export type CalculatorKey =
   | "+/-"
   | "sqrt"
   | "%"
-  | "back"
-  | "clear"
-  | "allClear"
+  /** The single clear key. One press clears the entry, a second clears everything. */
+  | "onC"
   | "mrc"
   | "m+"
   | "m-";
@@ -81,26 +109,57 @@ export interface CalculatorState {
    * next digit REPLACES it rather than appending to it.
    */
   entryMode: "typing" | "result";
+  /**
+   * Whether the display holds a right-hand operand the pending operation should
+   * consume.
+   *
+   * SEPARATE FROM `entryMode`, and the separation is load-bearing. An earlier
+   * revision used `entryMode === "typing"` as the fold condition, which
+   * conflated "the next digit replaces the display" with "an operand has been
+   * supplied since the operator". Those come apart for every key that produces
+   * a value without typing one: `√`, `%`, `MRC` and a cleared entry all leave a
+   * real operand on screen in "result" mode. The operator branch then failed
+   * its guard and overwrote the accumulator, silently discarding the left-hand
+   * side, so `2 + 9 √ * 4 =` gave 12 instead of 20.
+   *
+   * The tell that this was a bug rather than a quirk of the real device: `=`
+   * and the operator branch disagreed about identical state. `2 + 9 √ =` gave
+   * 5 while `2 + 9 √ + 0 =` gave 3. A calculator may be strange, but it may not
+   * contradict itself.
+   */
+  operandReady: boolean;
+  /**
+   * The operation and right-hand operand a further `=` should repeat. This is
+   * the TI-108's automatic constant; see quirk 2 in the header.
+   */
+  repeat: { op: Operator; operand: number } | null;
   memory: number;
   /** Drives MRC's second-consecutive-press-clears behavior. Reset by every other key. */
   lastKeyWasMrc: boolean;
-  /** Latched by divide-by-zero and by the square root of a negative. Only AC clears it. */
+  /** Drives ON/C's second-consecutive-press-clears-everything behavior. Reset by every other key. */
+  lastKeyWasClear: boolean;
+  /** Latched by overflow, divide-by-zero, and the root of a negative. Only ON/C clears it. */
   error: boolean;
 }
 
-/** Digits the display will accept. Past this, further digit presses are ignored rather than silently truncating. */
-const MAX_ENTRY_DIGITS = 15;
+/**
+ * Eight digits, because the real display is eight digits.
+ *
+ * This is deliberately far tighter than a JavaScript number needs, and the
+ * tightness IS the fidelity: a Data Insights product that overflows on test day
+ * has to overflow here too, or the practice teaches a calculation the exam will
+ * refuse to perform.
+ */
+const MAX_ENTRY_DIGITS = 8;
+const OVERFLOW_LIMIT = 99999999;
 
 /**
- * Significant digits kept when formatting a computed result.
- *
- * Twelve, not fifteen, and the gap is doing real work: binary floating point
- * makes 0.1 + 0.2 come out as 0.30000000000000004, which at fifteen digits
- * reaches the display and reads as a broken calculator. Rounding to twelve
- * absorbs the representation error while leaving far more precision than any
- * Data Insights question needs.
+ * Below this the display shows zero. Eight digits leaves seven decimal places
+ * once the leading "0." is spent, so anything smaller cannot be rendered and
+ * the device shows 0 rather than switching to exponent notation, which it has
+ * no way to display.
  */
-const DISPLAY_SIGNIFICANT_DIGITS = 12;
+const UNDERFLOW_LIMIT = 1e-7;
 
 export const ERROR_DISPLAY = "Error";
 
@@ -110,28 +169,40 @@ export function initialCalculatorState(): CalculatorState {
     accumulator: null,
     pendingOp: null,
     entryMode: "result",
+    operandReady: true,
+    repeat: null,
     memory: 0,
     lastKeyWasMrc: false,
+    lastKeyWasClear: false,
     error: false,
   };
 }
 
 /**
- * Formats a computed number the way the screen shows it.
+ * Formats a computed number for an eight-digit display, or returns null when it
+ * cannot be shown at all and the caller should error instead.
  *
- * No thousands separators: real calculators do not group digits, and adding
- * them here would make the display disagree with the device being modeled.
- * Trailing zeros from the rounding are stripped, so 0.30000000000000004 becomes
- * "0.3" rather than "0.300000000000".
+ * Never emits exponent notation. An earlier revision used `String()` on the
+ * rounded value and claimed in a comment that the plain form "covers every
+ * realistic result"; it does not, because `String()` switches to exponent form
+ * below 1e-6 and at 1e21. `1 / 10000000 =` is nine keystrokes and displayed
+ * "1e-7", which no four-function calculator has ever shown.
+ *
+ * No thousands separators either: real calculators do not group digits.
  */
-function formatResult(value: number): string {
-  if (!Number.isFinite(value)) return ERROR_DISPLAY;
-  if (value === 0) return "0";
-  const rounded = Number(value.toPrecision(DISPLAY_SIGNIFICANT_DIGITS));
-  // toPrecision would hand back exponent notation for very large or very small
-  // magnitudes; String() on the already-rounded number keeps the plain form
-  // wherever JavaScript is willing to, which covers every realistic result.
-  return String(rounded);
+function formatResult(value: number): string | null {
+  if (!Number.isFinite(value)) return null;
+  if (Math.abs(value) > OVERFLOW_LIMIT) return null;
+  if (value === 0 || Math.abs(value) < UNDERFLOW_LIMIT) return "0";
+
+  // Spend the eight digits on the integer part first, then give whatever is
+  // left to the decimals, which is how a fixed-width display behaves.
+  const integerDigits = Math.max(1, Math.floor(Math.log10(Math.abs(value))) + 1);
+  const decimals = Math.max(0, MAX_ENTRY_DIGITS - integerDigits);
+  const fixed = value.toFixed(decimals);
+  // Trailing zeros are an artifact of toFixed, not something the device shows.
+  const trimmed = decimals > 0 ? fixed.replace(/\.?0+$/, "") : fixed;
+  return trimmed === "" || trimmed === "-" || trimmed === "-0" ? "0" : trimmed;
 }
 
 function parseDisplay(state: CalculatorState): number {
@@ -139,6 +210,7 @@ function parseDisplay(state: CalculatorState): number {
   return Number.isFinite(value) ? value : 0;
 }
 
+/** Null means "this cannot be shown": a division by zero, or a result past the display's range. */
 function apply(left: number, op: Operator, right: number): number | null {
   switch (op) {
     case "+":
@@ -148,15 +220,23 @@ function apply(left: number, op: Operator, right: number): number | null {
     case "*":
       return left * right;
     case "/":
-      // Null is the error signal. Returning Infinity and letting the formatter
-      // catch it would work, but it would also mean 1/0 and an overflow reach
-      // the same branch by accident rather than by decision.
       return right === 0 ? null : left / right;
   }
 }
 
 function errored(state: CalculatorState): CalculatorState {
-  return { ...state, display: ERROR_DISPLAY, accumulator: null, pendingOp: null, entryMode: "result", error: true, lastKeyWasMrc: false };
+  return {
+    ...state,
+    display: ERROR_DISPLAY,
+    accumulator: null,
+    pendingOp: null,
+    repeat: null,
+    entryMode: "result",
+    operandReady: false,
+    error: true,
+    lastKeyWasMrc: false,
+    lastKeyWasClear: false,
+  };
 }
 
 const DIGITS = new Set<string>(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]);
@@ -164,11 +244,9 @@ const DIGITS = new Set<string>(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
 /**
  * A type predicate rather than a bare `DIGITS.has(key)`, so that the switch
  * below narrows to the non-digit keys and TypeScript can prove it exhaustive.
- * With a plain boolean check the digit branch stays in the union, the switch
- * has no matching case for it, and the compiler correctly reports that the
- * function can fall through without returning. Adding a `default` would silence
- * that at the cost of the exhaustiveness check, which is the part worth having:
- * a new key added to `CalculatorKey` should fail the build here.
+ * A `default` case would silence the fall-through warning at the cost of that
+ * check, which is the part worth having: a new key added to `CalculatorKey`
+ * should fail the build here.
  */
 function isDigit(key: CalculatorKey): key is Digit {
   return DIGITS.has(key);
@@ -177,20 +255,21 @@ function isDigit(key: CalculatorKey): key is Digit {
 /**
  * The whole calculator. One key press in, the next state out.
  *
- * Every branch clears `lastKeyWasMrc` except the MRC branch itself, which is
- * what makes "MRC twice" mean clear-memory while "MRC, 5, MRC" does not.
+ * Every branch derives from `next`, which clears both consecutive-press flags,
+ * except the MRC and ON/C branches themselves. That is what makes "MRC twice"
+ * mean clear-memory while "MRC, 5, MRC" does not.
  */
 export function press(state: CalculatorState, key: CalculatorKey): CalculatorState {
-  // AC is the only way out of an error, deliberately. A calculator that
-  // silently recovered on the next digit would let a student carry on from a
-  // number that was never computed.
-  if (state.error && key !== "allClear") return state;
+  // ON/C is the only way out of an error, deliberately, and it is what the real
+  // device requires too. A calculator that silently recovered on the next digit
+  // would let a student carry on from a number that was never computed.
+  if (state.error && key !== "onC") return state;
 
-  const next = { ...state, lastKeyWasMrc: false };
+  const next = { ...state, lastKeyWasMrc: false, lastKeyWasClear: false };
 
   if (isDigit(key)) {
     if (state.entryMode === "result") {
-      return { ...next, display: key, entryMode: "typing" };
+      return { ...next, display: key, entryMode: "typing", operandReady: true };
     }
     // Count significant entry positions, not string length: "-12.5" is three
     // digits typed, and charging the user for the sign and the point would cut
@@ -199,14 +278,16 @@ export function press(state: CalculatorState, key: CalculatorKey): CalculatorSta
     if (typed >= MAX_ENTRY_DIGITS) return next;
     // A bare leading zero is a placeholder, not a digit the user typed.
     const base = state.display === "0" ? "" : state.display === "-0" ? "-" : state.display;
-    return { ...next, display: base + key, entryMode: "typing" };
+    return { ...next, display: base + key, entryMode: "typing", operandReady: true };
   }
 
   switch (key) {
     case ".": {
-      if (state.entryMode === "result") return { ...next, display: "0.", entryMode: "typing" };
+      if (state.entryMode === "result") {
+        return { ...next, display: "0.", entryMode: "typing", operandReady: true };
+      }
       if (state.display.includes(".")) return next;
-      return { ...next, display: state.display + ".", entryMode: "typing" };
+      return { ...next, display: state.display + ".", entryMode: "typing", operandReady: true };
     }
 
     case "+":
@@ -220,90 +301,160 @@ export function press(state: CalculatorState, key: CalculatorKey): CalculatorSta
        * than holding it to compare precedence. `2 + 3 *` computes 5 the instant
        * `*` is pressed, so the 4 that follows multiplies 5, not 3.
        *
-       * The `entryMode === "typing"` guard is what makes a corrected operator
-       * free: pressing `+` then `*` with nothing typed between them just
-       * replaces the pending operator instead of folding the accumulator into
-       * itself.
+       * `operandReady` is what makes a corrected operator free: pressing `+`
+       * then `*` with nothing supplied between them replaces the pending
+       * operator instead of folding the accumulator into itself. See the field's
+       * own comment for why this is not `entryMode`.
        */
-      if (state.pendingOp !== null && state.entryMode === "typing" && state.accumulator !== null) {
+      if (state.pendingOp !== null && state.operandReady && state.accumulator !== null) {
         const folded = apply(state.accumulator, state.pendingOp, parseDisplay(state));
-        if (folded === null) return errored(next);
-        return { ...next, display: formatResult(folded), accumulator: folded, pendingOp: key, entryMode: "result" };
+        const shown = folded === null ? null : formatResult(folded);
+        if (folded === null || shown === null) return errored(next);
+        return {
+          ...next,
+          display: shown,
+          accumulator: folded,
+          pendingOp: key,
+          entryMode: "result",
+          operandReady: false,
+          repeat: null,
+        };
       }
-      return { ...next, accumulator: parseDisplay(state), pendingOp: key, entryMode: "result" };
+      return {
+        ...next,
+        accumulator: parseDisplay(state),
+        pendingOp: key,
+        entryMode: "result",
+        operandReady: false,
+        repeat: null,
+      };
     }
 
     case "=": {
-      // No pending operation means no repeat of the previous one; see the
-      // header note. The display simply stands.
-      if (state.pendingOp === null || state.accumulator === null) {
-        return { ...next, entryMode: "result" };
+      /**
+       * Two paths. A pending operation resolves and is REMEMBERED; with nothing
+       * pending, a remembered one repeats. That is the automatic constant, and
+       * it is why `3 + 2 * 5 = = =` is 625 rather than 25: the first `=` gives
+       * 25 and each further one multiplies by 5 again.
+       */
+      if (state.pendingOp !== null && state.accumulator !== null) {
+        const operand = parseDisplay(state);
+        const result = apply(state.accumulator, state.pendingOp, operand);
+        const shown = result === null ? null : formatResult(result);
+        if (result === null || shown === null) return errored(next);
+        return {
+          ...next,
+          display: shown,
+          accumulator: null,
+          pendingOp: null,
+          entryMode: "result",
+          operandReady: true,
+          repeat: { op: state.pendingOp, operand },
+        };
       }
-      const result = apply(state.accumulator, state.pendingOp, parseDisplay(state));
-      if (result === null) return errored(next);
-      return { ...next, display: formatResult(result), accumulator: null, pendingOp: null, entryMode: "result" };
+      if (state.repeat !== null) {
+        const result = apply(parseDisplay(state), state.repeat.op, state.repeat.operand);
+        const shown = result === null ? null : formatResult(result);
+        if (result === null || shown === null) return errored(next);
+        return { ...next, display: shown, entryMode: "result", operandReady: true };
+      }
+      return { ...next, entryMode: "result", operandReady: true };
     }
 
     case "+/-": {
       // Works mid-entry as well as on a result, so a negative can be typed as
       // digits-then-sign the way it is on a physical calculator.
-      if (state.display === "0" || state.display === ERROR_DISPLAY) return next;
+      if (state.display === "0") return { ...next, operandReady: true };
       const flipped = state.display.startsWith("-") ? state.display.slice(1) : "-" + state.display;
-      return { ...next, display: flipped };
+      return { ...next, display: flipped, operandReady: true };
     }
 
     case "sqrt": {
       const value = parseDisplay(state);
       if (value < 0) return errored(next);
-      return { ...next, display: formatResult(Math.sqrt(value)), entryMode: "result" };
+      const shown = formatResult(Math.sqrt(value));
+      if (shown === null) return errored(next);
+      return { ...next, display: shown, entryMode: "result", operandReady: true };
     }
 
     case "%": {
-      // Divide by 100. See the header note on why this reading was chosen over
-      // the contextual one.
-      return { ...next, display: formatResult(parseDisplay(state) / 100), entryMode: "result" };
+      /**
+       * Contextual, not a plain divide-by-100, and this is the behavior an
+       * earlier revision got backwards while claiming it was unverifiable.
+       *
+       * With a pending `+` or `-` it means "this percent OF the running total":
+       * `12 + 10 %` shows 1.2, and `=` then gives 13.2. With `*`, `/`, or
+       * nothing pending there is no base to take a percentage of, so it simply
+       * divides by 100 and `10 %` shows 0.1.
+       */
+      const value = parseDisplay(state);
+      const base =
+        (state.pendingOp === "+" || state.pendingOp === "-") && state.accumulator !== null
+          ? state.accumulator * (value / 100)
+          : value / 100;
+      const shown = formatResult(base);
+      if (shown === null) return errored(next);
+      return { ...next, display: shown, entryMode: "result", operandReady: true };
     }
 
-    case "back": {
-      // Only meaningful while typing. Backspacing a computed result would let
-      // the user edit a number the calculator produced into one it never did.
-      if (state.entryMode !== "typing") return next;
-      const trimmed = state.display.slice(0, -1);
-      if (trimmed === "" || trimmed === "-") return { ...next, display: "0", entryMode: "result" };
-      return { ...next, display: trimmed };
-    }
-
-    case "clear": {
-      // Clears the entry only: the pending operation and its left operand
-      // survive, so a mistyped right-hand number costs one key, not the sum.
-      return { ...next, display: "0", entryMode: "result" };
-    }
-
-    case "allClear": {
-      // Everything except memory, which is the convention on every calculator
-      // that has both keys, and which is what makes the memory workaround for
-      // the left-to-right quirk usable at all: AC between the two products has
-      // to preserve what M+ just stored.
-      return { ...initialCalculatorState(), memory: state.memory };
+    case "onC": {
+      /**
+       * One key, two behaviors, exactly as on the device: the first press
+       * clears the entry and keeps the pending operation, so a mistyped
+       * right-hand number costs one key rather than the whole sum; a second
+       * consecutive press clears the calculation as well.
+       *
+       * Memory survives both. It is cleared with MRC twice, which is what makes
+       * the memory workaround for the left-to-right quirk usable at all: the
+       * clear between the two products has to preserve what M+ just stored.
+       */
+      if (state.lastKeyWasClear && !state.error) {
+        return { ...initialCalculatorState(), memory: state.memory };
+      }
+      return {
+        ...next,
+        display: "0",
+        entryMode: "result",
+        operandReady: true,
+        error: false,
+        lastKeyWasClear: true,
+      };
     }
 
     case "mrc": {
       /**
        * First press recalls, a second CONSECUTIVE press clears. That is the
-       * Focus rendering, and it is why this is the one branch that sets
-       * `lastKeyWasMrc` instead of clearing it.
+       * Focus key set, and it is why this is one of the two branches that sets
+       * its own consecutive-press flag rather than clearing it.
        */
       if (state.lastKeyWasMrc) {
         return { ...next, memory: 0, lastKeyWasMrc: false };
       }
-      return { ...next, display: formatResult(state.memory), entryMode: "result", lastKeyWasMrc: true };
+      const shown = formatResult(state.memory);
+      if (shown === null) return errored(next);
+      return {
+        ...next,
+        display: shown,
+        entryMode: "result",
+        operandReady: true,
+        lastKeyWasMrc: true,
+      };
     }
 
     case "m+":
-      return { ...next, memory: state.memory + parseDisplay(state), entryMode: "result" };
-
-    case "m-":
-      return { ...next, memory: state.memory - parseDisplay(state), entryMode: "result" };
+    case "m-": {
+      /**
+       * Memory has the same eight-digit ceiling as the display, and pushing it
+       * past that errors rather than storing a number the device could never
+       * show. The existing memory is left intact when that happens.
+       *
+       * Neither key touches the display, so `operandReady` is deliberately left
+       * alone: `2 + 3 M+ * 4` still has 3 sitting there as a live operand.
+       */
+      const updated = key === "m+" ? state.memory + parseDisplay(state) : state.memory - parseDisplay(state);
+      if (!Number.isFinite(updated) || Math.abs(updated) > OVERFLOW_LIMIT) return errored(next);
+      return { ...next, memory: updated, entryMode: "result" };
+    }
   }
 }
 

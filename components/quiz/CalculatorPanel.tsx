@@ -39,41 +39,48 @@ interface CalculatorPanelProps {
 /** Label, key, and an optional accessible name where the glyph does not read well aloud. */
 type KeySpec = { label: string; key: CalculatorKey; srLabel?: string; variant?: "op" | "fn" | "mem" };
 
+/**
+ * The TI-108's key set, and ONLY its key set.
+ *
+ * An earlier revision had a backspace key and split clear into `C` and `AC`.
+ * Both were imports from the pre-Focus Integrated Reasoning calculator, which
+ * is the exact device this component's own module header warns against copying
+ * from. The real one has no backspace at all and a single `ON/C`: one press
+ * clears the entry, a second clears the calculation.
+ *
+ * Do not add a convenience key here. Every key that exists on screen and not on
+ * the exam is a habit a student builds and then loses on test day, which is the
+ * same failure this whole feature exists to prevent.
+ */
 const ROWS: KeySpec[][] = [
   [
-    { label: "MRC", key: "mrc", srLabel: "Memory recall, press twice to clear", variant: "mem" },
+    { label: "MRC", key: "mrc", srLabel: "Memory recall, press twice to clear memory", variant: "mem" },
     { label: "M+", key: "m+", srLabel: "Memory add", variant: "mem" },
     { label: "M−", key: "m-", srLabel: "Memory subtract", variant: "mem" },
-    { label: "AC", key: "allClear", srLabel: "All clear", variant: "fn" },
+    { label: "ON/C", key: "onC", srLabel: "Clear entry, press twice to clear everything", variant: "fn" },
   ],
   [
     { label: "√", key: "sqrt", srLabel: "Square root", variant: "fn" },
     { label: "%", key: "%", srLabel: "Percent", variant: "fn" },
-    { label: "←", key: "back", srLabel: "Backspace", variant: "fn" },
-    { label: "C", key: "clear", srLabel: "Clear entry", variant: "fn" },
+    { label: "+/−", key: "+/-", srLabel: "Change sign", variant: "fn" },
+    { label: "÷", key: "/", srLabel: "Divide", variant: "op" },
   ],
   [
     { label: "7", key: "7" },
     { label: "8", key: "8" },
     { label: "9", key: "9" },
-    { label: "÷", key: "/", srLabel: "Divide", variant: "op" },
+    { label: "×", key: "*", srLabel: "Multiply", variant: "op" },
   ],
   [
     { label: "4", key: "4" },
     { label: "5", key: "5" },
     { label: "6", key: "6" },
-    { label: "×", key: "*", srLabel: "Multiply", variant: "op" },
+    { label: "−", key: "-", srLabel: "Minus", variant: "op" },
   ],
   [
     { label: "1", key: "1" },
     { label: "2", key: "2" },
     { label: "3", key: "3" },
-    { label: "−", key: "-", srLabel: "Minus", variant: "op" },
-  ],
-  [
-    { label: "0", key: "0" },
-    { label: ".", key: ".", srLabel: "Decimal point" },
-    { label: "+/−", key: "+/-", srLabel: "Change sign" },
     { label: "+", key: "+", srLabel: "Plus", variant: "op" },
   ],
 ];
@@ -81,17 +88,15 @@ const ROWS: KeySpec[][] = [
 export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelProps) {
   const [state, setState] = useState(initialCalculatorState);
   /**
-   * Shown until dismissed, once per attempt.
-   *
-   * The left-to-right rule is the single most useful thing this calculator
-   * teaches and the one thing nobody discovers on their own: without being told,
-   * a student simply gets a wrong answer and never learns why. Deliberately not
-   * persisted, so it reappears on a fresh attempt rather than being read once
-   * months ago and forgotten.
+   * The expanded explainer under the keypad. Collapsed by default and NOT
+   * persisted, so it comes back on a fresh attempt rather than having been read
+   * once, months ago, and silently withheld from someone who needs it now.
    */
-  const [noteDismissed, setNoteDismissed] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
   const panelId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
+  /** Wraps toggle + panel, so click-outside can ask "did this land on either of us?". */
+  const rootRef = useRef<HTMLDivElement>(null);
 
   /**
    * Escape closes and hands focus back to the toggle. Without the focus return,
@@ -106,8 +111,28 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
       onOpenChange(false);
       toggleRef.current?.focus();
     }
+    /**
+     * Click-outside closes, but WITHOUT returning focus the way Escape does.
+     * Escape is a deliberate dismissal by someone using the keyboard, so
+     * handing focus back to the toggle is the courteous thing; a click has
+     * already put focus wherever the user aimed it, and yanking it away would
+     * fight them.
+     *
+     * Bound to `mousedown` rather than `click` so that pressing down on a
+     * question option closes the panel before that option's own click lands,
+     * rather than leaving the panel open over the thing just selected.
+     */
+    function handlePointerDown(event: MouseEvent) {
+      const target = event.target as Node;
+      if (rootRef.current?.contains(target)) return;
+      onOpenChange(false);
+    }
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handlePointerDown);
+    };
   }, [open, onOpenChange]);
 
   function handleKey(key: CalculatorKey) {
@@ -119,13 +144,14 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
     // page scrolls, so the calculator stays reachable through a long
     // multi-source question instead of scrolling away with the first screen.
     <div className="sticky top-20 z-30 -mx-1 mb-4 px-1">
-      <div className="relative">
+      <div ref={rootRef} className="relative">
         <button
           ref={toggleRef}
           type="button"
           onClick={() => onOpenChange(!open)}
           aria-expanded={open}
           aria-controls={panelId}
+          aria-haspopup="dialog"
           className="flex h-11 items-center gap-2 rounded-md border border-line-strong bg-background px-3 text-sm font-medium text-foreground hover:bg-panel-hover"
         >
           {/* An inline SVG, not the 🖩 emoji, which renders as a tofu box on
@@ -161,17 +187,27 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
              * instead, so it reads alongside the question rather than on top of
              * a table someone is mid-way through.
              *
-             * The 1360px threshold is arithmetic, not a guess, and `xl` (1280)
-             * is specifically WRONG here. The content column is max-w-3xl, so
-             * the gutter is (viewport - 768) / 2; the panel needs its own 17rem
-             * plus a 1.5rem gap, or 296px. At 1280 the gutter is only 256px and
-             * the panel hangs 40px off the left edge of the screen. Breaking at
-             * 1360 leaves the shifted panel a small positive margin. If the
-             * panel width or the column width changes, redo this sum.
+             * THE WIDTH AND THE BREAKPOINT ARE ONE DECISION, so do not change
+             * either alone. The content column is max-w-3xl with px-6, so the
+             * button's left edge sits at (viewport - 768) / 2 + 24, and the
+             * shifted panel's left edge is that minus the gap minus the width.
+             * At 15rem + 1rem the sum comes out positive at exactly 1280, which
+             * is why `xl` is the right breakpoint now and was the WRONG one at
+             * the previous 17rem + 1.5rem, where the panel hung 40px off the
+             * left edge of the screen between 1280 and 1360. Widening the panel
+             * without raising the breakpoint reintroduces that bug.
+             *
+             * `max-h` + `overflow-y-auto` is not cosmetic. The wrapper is
+             * `sticky` and this is `absolute` inside it, so once the header
+             * pins, the panel's position stops responding to page scroll
+             * entirely: anything below the fold is unreachable at ANY scroll
+             * position, not merely awkward. On a 1366x768 laptop that silently
+             * swallowed the bottom of the panel, and the explanatory note used
+             * to live there.
              */
-            className="absolute top-full left-0 z-30 mt-2 w-[17rem] rounded-lg border border-line-strong bg-panel p-3 shadow-lg min-[1360px]:-translate-x-[calc(100%+1.5rem)]"
+            className="absolute top-full left-0 z-30 mt-2 flex max-h-[calc(100vh-7rem)] w-60 flex-col overflow-y-auto rounded-lg border border-line-strong bg-panel p-3 shadow-lg xl:-translate-x-[calc(100%+1rem)]"
           >
-            <div className="rounded-md border border-line bg-background px-3 py-2 text-right">
+            <div className="shrink-0 rounded-md border border-line bg-background px-3 py-2 text-right">
               <div className="flex items-center justify-between gap-2">
                 <span
                   className={`text-xs font-semibold ${hasMemory(state) ? "text-accent-text" : "text-transparent"}`}
@@ -190,39 +226,74 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
               </div>
             </div>
 
-            <div className="mt-3 grid grid-cols-4 gap-1.5">
+            {/* The one line that has to survive every layout, so it is short,
+                permanent, and ABOVE the keypad.
+
+                The full explainer used to live here in three bullets. On a
+                1366x768 laptop that pushed the digits below the fold, and
+                because the wrapper is sticky the panel does not respond to page
+                scroll, so the keypad became unreachable. Before that it sat at
+                the BOTTOM of the panel, where the same mechanism made the note
+                itself unreachable. One line up here plus detail on demand is
+                what fits both constraints: the message that stops someone
+                concluding "this calculator is broken" is never more than a
+                glance away, and it costs no keypad space. */}
+            <p className="mt-2 shrink-0 rounded bg-panel-hover px-2 py-1.5 text-[0.7rem] leading-snug text-foreground/90">
+              <strong className="font-semibold">Not a bug:</strong> runs left to right, so{" "}
+              <span className="font-mono whitespace-nowrap">2 + 3 × 4</span> is 20.
+            </p>
+
+            <div className="mt-3 grid shrink-0 grid-cols-4 gap-1.5">
               {ROWS.flatMap((row) =>
                 row.map((spec) => (
                   <CalcButton key={spec.key + spec.label} spec={spec} onPress={handleKey} />
                 ))
               )}
+              <CalcButton spec={{ label: "0", key: "0" }} onPress={handleKey} />
+              <CalcButton spec={{ label: ".", key: ".", srLabel: "Decimal point" }} onPress={handleKey} />
               <button
                 type="button"
                 onClick={() => handleKey("=")}
-                className="col-span-4 flex h-11 items-center justify-center rounded-md bg-accent text-base font-semibold text-accent-foreground hover:opacity-90"
+                className="col-span-2 flex h-11 items-center justify-center rounded-md bg-accent text-base font-semibold text-accent-foreground hover:opacity-90"
               >
-                =
+                <span aria-hidden>=</span>
+                <span className="sr-only">Equals</span>
               </button>
             </div>
 
-            {!noteDismissed && (
-              <div className="mt-3 rounded-md border border-line bg-background px-3 py-2">
-                <p className="text-xs leading-relaxed text-foreground/90">
-                  Like the real one, this works <strong>left to right</strong> and ignores order of
-                  operations: <span className="font-mono">2 + 3 × 4</span> gives 20, not 14. For
-                  something like <span className="font-mono">a×b + c×d</span>, use{" "}
-                  <span className="font-mono">M+</span> to bank each product, then{" "}
-                  <span className="font-mono">MRC</span>.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setNoteDismissed(true)}
-                  className="mt-2 flex h-11 items-center text-xs font-medium text-accent-text hover:underline"
-                >
-                  Got it
-                </button>
-              </div>
-            )}
+            {/* Detail on demand, below the keypad, collapsed by default. The
+                banner carries the urgent half; these are the surprises someone
+                meets a few minutes in, when they have somewhere to look. */}
+            <div className="mt-2 shrink-0">
+              <button
+                type="button"
+                onClick={() => setDetailsOpen(!detailsOpen)}
+                aria-expanded={detailsOpen}
+                className="flex h-11 items-center text-[0.7rem] font-medium text-accent-text hover:underline"
+              >
+                {detailsOpen ? "Hide" : "Why does it do that?"}
+              </button>
+              {detailsOpen && (
+                <ul className="flex flex-col gap-1.5 pb-1 text-[0.7rem] leading-relaxed text-foreground/90">
+                  <li>
+                    It copies the exam&apos;s calculator exactly. There is no order of operations,
+                    so for <span className="font-mono whitespace-nowrap">a×b + c×d</span> bank each
+                    product with <span className="font-mono">M+</span>, then press{" "}
+                    <span className="font-mono">MRC</span>.
+                  </li>
+                  <li>
+                    <span className="font-mono">%</span> is taken from what you&apos;re adding it
+                    to: <span className="font-mono whitespace-nowrap">12 + 10 %</span> shows 1.2,
+                    and <span className="font-mono">=</span> gives 13.2.
+                  </li>
+                  <li>
+                    The display holds <strong>8 digits</strong>. Past 99,999,999 it errors until you
+                    press <span className="font-mono">ON/C</span>, exactly as on test day.
+                  </li>
+                </ul>
+              )}
+            </div>
+
           </div>
         )}
       </div>
@@ -257,7 +328,10 @@ function CalcButton({ spec, onPress }: { spec: KeySpec; onPress: (key: Calculato
     spec.variant === "op"
       ? "border-line-strong bg-panel-hover font-semibold"
       : spec.variant === "mem" || spec.variant === "fn"
-        ? "border-line-strong bg-background text-muted hover:text-foreground"
+        // Was `text-muted`, which read as disabled next to the digits and put
+        // the memory keys, the ones the left-to-right workaround depends on,
+        // at the lowest contrast on the pad.
+        ? "border-line-strong bg-background text-foreground/80 hover:text-foreground"
         : "border-line-strong bg-background font-medium";
 
   return (

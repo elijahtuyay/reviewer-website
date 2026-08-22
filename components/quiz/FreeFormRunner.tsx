@@ -41,7 +41,19 @@ export default function FreeFormRunner({
     answeredCount, result, select, submit, restart, pause, resume, onDeadlineChange,
   } = attempt;
 
-  const calcVisible = calcOpen && !paused;
+  /**
+   * Whether the calculator is actually on screen. DERIVED rather than an effect
+   * that closes it, which is both purer (no `set-state-in-effect`) and better
+   * behaved: the panel comes back as you left it, memory included, instead of
+   * silently closing itself while you were away.
+   *
+   * The condition deliberately MATCHES the `inert` condition below rather than
+   * only tracking `paused`. The panel's Escape handler is on `document`, and
+   * `inert` blocks pointer and focus but NOT a document-level keydown listener,
+   * so with only `!paused` here a single Escape aimed at the confirmation
+   * dialog dismissed the dialog and collapsed the calculator with it.
+   */
+  const calcVisible = calcOpen && !paused && !mobileNavOpen && pendingAction === null;
 
   const reviewMode = phase === "done";
 
@@ -196,7 +208,7 @@ export default function FreeFormRunner({
               (section.calculator === "basic-di" ? (
                 <CalculatorPanel open={calcVisible} onOpenChange={setCalcOpen} />
               ) : (
-                <NoCalculatorNote examLabel={exam.label} />
+                <NoCalculatorNote exam={exam} />
               ))}
 
             {reviewMode && result && (

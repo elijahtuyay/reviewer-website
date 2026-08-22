@@ -120,18 +120,18 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
   );
 }
 
+/** "A", "A and B", "A, B and C" — so the generated calculator line reads as a sentence at any section count. */
+function listSections(labels: string[]): string {
+  if (labels.length <= 1) return labels[0] ?? "";
+  return `${labels.slice(0, -1).join(", ")} and ${labels[labels.length - 1]}`;
+}
+
 /**
  * The "what to expect" list, assembled from the exam's declared rules. Reading
  * these off `rules` rather than writing them per exam is what stops the copy
  * drifting away from what the engine actually does, which is exactly how the
  * old "you can't switch sections" claim ended up being false for months.
  */
-/** "A", "A and B", "A, B and C" — so the generated line above reads as a sentence at any section count. */
-function listSections(labels: string[]): string {
-  if (labels.length <= 1) return labels[0] ?? "";
-  return `${labels.slice(0, -1).join(", ")} and ${labels[labels.length - 1]}`;
-}
-
 function expectations(exam: ExamModule): string[] {
   const lines: string[] = [];
 
@@ -205,7 +205,7 @@ function expectations(exam: ExamModule): string[] {
   const withCalculator = exam.sections.filter((s) => s.calculator !== null);
   if (withCalculator.length > 0 && withCalculator.length < exam.sections.length) {
     lines.push(
-      `An on-screen calculator is provided in ${listSections(withCalculator.map((s) => s.label))} and nowhere else. The other sections give you none, exactly as the real exam does, and it works left to right without order of operations just like the real one.`
+      `An on-screen calculator is provided in ${listSections(withCalculator.map((s) => s.label))} and nowhere else, exactly as the real exam does. It is the exam's own calculator, quirks included: an eight-digit display, and strictly left to right with no order of operations.`
     );
   } else if (withCalculator.length === 0) {
     lines.push("No calculator in any section, on screen or otherwise, the same as the real exam.");

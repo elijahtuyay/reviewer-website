@@ -134,12 +134,12 @@ check("points model totals marks per correct answer", [pts.score, pts.maxScore],
 
 // ------------------------------------------------------------- calculator --
 /**
- * The Data Insights calculator.
+ * The Data Insights calculator, an emulated TI-108.
  *
- * Its defining behavior looks exactly like a bug, so these assertions exist as
- * much to stop a future reader "fixing" it as to catch a regression. If the
- * left-to-right checks below ever start failing because someone taught the
- * calculator precedence, the calculator is now wrong and the test is right.
+ * Several of these assert behavior that looks like a bug, so they exist as much
+ * to stop a future reader "fixing" the device as to catch a regression. If the
+ * left-to-right checks start failing because someone taught it precedence, the
+ * calculator is now wrong and the test is right.
  */
 function type(keys: string): CalculatorState {
   return keys
@@ -148,11 +148,8 @@ function type(keys: string): CalculatorState {
     .reduce((st, k) => press(st, k as CalculatorKey), initialCalculatorState());
 }
 
-check(
-  "ignores order of operations and evaluates left to right",
-  type("2 + 3 * 4 =").display,
-  "20"
-);
+// -- the headline quirk, and the workaround for it
+check("ignores order of operations and evaluates left to right", type("2 + 3 * 4 =").display, "20");
 check(
   "1350x8 + 1050x18 typed straight through gives the LEFT-TO-RIGHT answer",
   type("1 3 5 0 * 8 + 1 0 5 0 * 1 8 =").display,
@@ -160,27 +157,62 @@ check(
 );
 check(
   "the same sum via the memory keys gives the mathematically correct answer",
-  type("1 3 5 0 * 8 = m+ allClear 1 0 5 0 * 1 8 = m+ mrc").display,
+  type("1 3 5 0 * 8 = m+ onC 1 0 5 0 * 1 8 = m+ mrc").display,
   "29700"
 );
-check("a second consecutive MRC clears memory", type("5 m+ mrc mrc").memory, 0);
-check("an MRC broken by another key does not clear memory", type("5 m+ mrc 9 mrc").memory, 5);
-check("divide by zero errors", type("9 / 0 =").display, "Error");
-expect("nothing but AC clears an error", type("9 / 0 = 5 + 1 =").display === "Error");
-check("AC recovers from an error", type("9 / 0 = allClear 7").display, "7");
-check("the square root of a negative errors", type("9 +/- sqrt").display, "Error");
-check("float noise never reaches the display", type(". 1 + . 2 =").display, "0.3");
-check("percent divides by one hundred", type("2 5 %").display, "0.25");
+
+// -- the fold guard. Every one of these was WRONG before `operandReady`
+// existed: a value-producing key left the display in "result" mode, the
+// operator branch failed its guard, and the pending operation was discarded.
+check("a square root mid-chain does not drop the pending operation", type("2 + 9 sqrt * 4 =").display, "20");
+check("a percent mid-chain does not drop the pending operation", type("1 2 0 + 1 5 % + 0 =").display, "138");
+check("M+ mid-chain does not drop the pending operation", type("2 + 3 m+ * 4 =").display, "20");
+check("a recall mid-chain does not drop the pending operation", type("5 m+ onC onC 2 + mrc * 4 =").display, "28");
 check(
-  "clear keeps the pending operation, AC does not",
-  [type("8 + 5 clear 2 =").display, type("8 + 5 allClear 2 =").display],
+  "= and the operator branch agree about identical state",
+  [type("2 + 9 sqrt =").display, type("2 + 9 sqrt + 0 =").display],
+  ["5", "5"]
+);
+check("a corrected operator replaces the pending one without folding", type("9 + * 3 =").display, "27");
+
+// -- percent is contextual, not divide-by-100
+check("percent of a pending sum takes it from the accumulator", type("1 2 + 1 0 %").display, "1.2");
+check("that percent then resolves with equals", type("1 2 + 1 0 % =").display, "13.2");
+check("percent with nothing pending divides by one hundred", type("1 0 %").display, "0.1");
+check("percent under multiplication divides by one hundred", type("8 * 5 0 % =").display, "4");
+
+// -- the automatic constant
+check("repeated equals repeats the last operation", type("3 + 2 * 5 = = =").display, "625");
+check("equals with nothing pending and nothing remembered stands still", type("7 =").display, "7");
+
+// -- the eight-digit display
+check("entry stops at eight digits", type("1 2 3 4 5 6 7 8 9").display, "12345678");
+check("a result past the display range overflows", type("9 9 9 9 9 9 9 9 * 9 =").display, "Error");
+check("only ON/C clears an overflow", type("9 9 9 9 9 9 9 9 * 9 = 5 + 1 =").display, "Error");
+check("results never use exponent notation", type("1 / 1 0 0 0 0 0 0 0 =").display, "0.0000001");
+check("a result too small to show reads as zero", type("1 / 1 0 0 0 0 0 0 0 = / 1 0 0 =").display, "0");
+
+// -- errors
+check("divide by zero errors", type("9 / 0 =").display, "Error");
+check("the square root of a negative errors", type("9 +/- sqrt").display, "Error");
+check("ON/C recovers from an error", type("9 / 0 = onC 7").display, "7");
+check("memory overflow errors and leaves memory intact", type("9 9 9 9 9 9 9 9 m+ m+").display, "Error");
+
+// -- clear semantics: one key, two behaviors
+check(
+  "one ON/C clears the entry, two clear the calculation",
+  [type("8 + 5 onC 2 =").display, type("8 + 5 onC onC 2 =").display],
   ["10", "2"]
 );
-check("AC preserves memory, which is what makes the workaround usable", type("7 m+ allClear").memory, 7);
-check("repeated equals does not repeat the operation", type("2 + 3 = = =").display, "5");
-check("a corrected operator replaces the pending one without folding", type("9 + * 3 =").display, "27");
-check("backspace only edits a number being typed", type("1 2 3 back").display, "12");
-check("backspace leaves a computed result alone", type("2 + 3 = back").display, "5");
+check("ON/C preserves memory, which is what makes the workaround usable", type("7 m+ onC onC").memory, 7);
+
+// -- memory recall
+check("a second consecutive MRC clears memory", type("5 m+ mrc mrc").memory, 0);
+check("an MRC broken by another key does not clear memory", type("5 m+ mrc 9 mrc").memory, 5);
+
+// -- formatting
+check("float noise never reaches the display", type(". 1 + . 2 =").display, "0.3");
+check("a sign flip after an operator is treated as a supplied operand", type("2 + +/- * 4 =").display, "0");
 
 console.log(failures === 0 ? "\nall checks passed" : `\n${failures} CHECK(S) FAILED`);
 process.exit(failures === 0 ? 0 : 1);
