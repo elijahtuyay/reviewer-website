@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { boolean, index, integer, pgTable, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
+import { boolean, check, index, integer, pgTable, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
 
 /**
  * THE DATABASE SCHEMA.
@@ -33,8 +33,8 @@ export const user = pgTable(
      */
     emailVerified: boolean("emailVerified").notNull().default(false),
     image: text("image"),
-    createdAt: timestamp("createdAt").notNull().defaultNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+    createdAt: timestamp("createdAt", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updatedAt", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
     /**
@@ -50,6 +50,15 @@ export const user = pgTable(
      * column is case-SENSITIVE and would happily accept both spellings.
      */
     uniqueIndex("user_email_lower_unique").on(sql`lower(${t.email})`),
+    /**
+     * Serves the lookup, which the expression index above cannot.
+     *
+     * Sign-in and sign-up both query `where email = $1` against the bare column.
+     * A `lower(email)` index does not satisfy that predicate, so every
+     * authentication attempt was a sequential scan over the whole table.
+     * Irrelevant at six rows and not something to discover at sixty thousand.
+     */
+    index("user_email_idx").on(t.email),
   ]
 );
 
@@ -64,7 +73,7 @@ export const session = pgTable(
      * "sign out everywhere" a single DELETE.
      */
     token: text("token").notNull(),
-    expiresAt: timestamp("expiresAt").notNull(),
+    expiresAt: timestamp("expiresAt", { withTimezone: true }).notNull(),
     ipAddress: text("ipAddress"),
     userAgent: text("userAgent"),
     userId: text("userId")
@@ -72,13 +81,25 @@ export const session = pgTable(
       // Cascade, so deleting a user cannot leave a live session behind that
       // still authenticates as them.
       .references(() => user.id, { onDelete: "cascade" }),
-    createdAt: timestamp("createdAt").notNull().defaultNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+    createdAt: timestamp("createdAt", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updatedAt", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
     uniqueIndex("session_token_unique").on(t.token),
     // Every request looks a session up by user, and revocation deletes by user.
     index("session_userId_idx").on(t.userId),
+    /**
+     * The no-raw-IP rule, enforced structurally rather than behaviorally.
+     *
+     * `lib/auth/server.ts` strips the address in a create hook, which is where
+     * the stripping has to happen. But a hook is a behavior: delete it, add a
+     * plugin that writes its own session, or switch the rate limiter to database
+     * storage, and the guarantee lapses with no error and no sign that anything
+     * changed. This constraint makes that a loud failure instead of a silent
+     * privacy regression, the same argument already made twice above for
+     * `user_email_lower_unique` and `account_issuer_accountId_unique`.
+     */
+    check("session_no_raw_ip", sql`${t.ipAddress} is null`),
   ]
 );
 
@@ -109,8 +130,8 @@ export const account = pgTable(
     accessToken: text("accessToken"),
     refreshToken: text("refreshToken"),
     idToken: text("idToken"),
-    accessTokenExpiresAt: timestamp("accessTokenExpiresAt"),
-    refreshTokenExpiresAt: timestamp("refreshTokenExpiresAt"),
+    accessTokenExpiresAt: timestamp("accessTokenExpiresAt", { withTimezone: true }),
+    refreshTokenExpiresAt: timestamp("refreshTokenExpiresAt", { withTimezone: true }),
     scope: text("scope"),
     /**
      * The password hash, and the reason passwords live here rather than on
@@ -121,8 +142,8 @@ export const account = pgTable(
      * logged, returned by an API, or included in a SELECT that reaches a client.
      */
     password: text("password"),
-    createdAt: timestamp("createdAt").notNull().defaultNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+    createdAt: timestamp("createdAt", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updatedAt", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
     index("account_userId_idx").on(t.userId),
@@ -143,9 +164,9 @@ export const verification = pgTable(
     identifier: text("identifier").notNull(),
     /** The token. Single-use: consumed rows are deleted, never marked. */
     value: text("value").notNull(),
-    expiresAt: timestamp("expiresAt").notNull(),
-    createdAt: timestamp("createdAt").notNull().defaultNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+    expiresAt: timestamp("expiresAt", { withTimezone: true }).notNull(),
+    createdAt: timestamp("createdAt", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updatedAt", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
     index("verification_identifier_idx").on(t.identifier),
@@ -181,7 +202,7 @@ export const securityEvent = pgTable(
     /** Keyed hash of the client IP, never the address itself. */
     ipHash: text("ipHash"),
     userAgent: text("userAgent"),
-    createdAt: timestamp("createdAt").notNull().defaultNow(),
+    createdAt: timestamp("createdAt", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
     index("security_event_userId_idx").on(t.userId),
@@ -200,11 +221,20 @@ export const securityEvent = pgTable(
  * `key` is scope-prefixed and the subject is hashed, e.g. `login:acct:<id>` or
  * `reset:email:<hmac>` — never a bare email address, for the same reason as
  * `ipHash` above.
+ *
+ * This is OUR table, for a limiter this project has not written yet. It is NOT
+ * better-auth's `rateLimit` model, whose shape is `{ key, count, lastRequest }`,
+ * and it is deliberately not registered with the Drizzle adapter. Setting
+ * `rateLimit.storage: "database"` will therefore NOT start using this table; it
+ * would look for the library's own shape and fail. Until our limiter exists,
+ * better-auth's default applies: enabled in production only, stored in memory,
+ * which on Vercel means per-instance counters that die with every cold start.
+ * Treat cross-instance rate limiting as absent, not merely weak.
  */
 export const rateLimit = pgTable("rate_limit", {
   key: text("key").primaryKey(),
   count: integer("count").notNull().default(0),
-  windowStart: timestamp("windowStart").notNull().defaultNow(),
+  windowStart: timestamp("windowStart", { withTimezone: true }).notNull().defaultNow(),
   /** Set when a limit is tripped, so a breach can back off rather than reset instantly. */
-  blockedUntil: timestamp("blockedUntil"),
+  blockedUntil: timestamp("blockedUntil", { withTimezone: true }),
 });

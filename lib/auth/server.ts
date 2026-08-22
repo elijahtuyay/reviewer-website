@@ -1,6 +1,6 @@
 import "server-only";
 
-import { betterAuth } from "better-auth";
+import { betterAuth, type BetterAuthOptions } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/lib/db";
 import * as schema from "@/lib/db/schema";
@@ -23,20 +23,59 @@ function authSecret(): string {
   const secret = process.env.BETTER_AUTH_SECRET;
   if (!secret) {
     throw new Error(
-      "BETTER_AUTH_SECRET is not set. Generate one with " +
-        "`node -e \"console.log(require('crypto').randomBytes(32).toString('base64url'))\"` " +
-        "and add it to .env.local and to the Vercel project's environment variables."
+      "BETTER_AUTH_SECRET is not set. Generate one from 32 random bytes " +
+        "encoded base64url, and add it to .env.local and to the Vercel " +
+        "project's environment variables."
     );
   }
+  // Characters, not bytes, and the message now says so. A base64url encoding of
+  // 32 random bytes is 43 characters, so anything shorter than 32 is either
+  // hand-typed or truncated. better-auth runs its own entropy estimate on top
+  // of this; treat that as the real check and this as a typo guard.
   if (secret.length < 32) {
-    throw new Error("BETTER_AUTH_SECRET is too short; use at least 32 bytes of randomness.");
+    throw new Error("BETTER_AUTH_SECRET is too short; use at least 32 characters.");
   }
   return secret;
 }
 
-export const auth = betterAuth({
+/**
+ * The origin this server considers its own.
+ *
+ * NOT simply `SITE_URL`, and the difference is load-bearing. `SITE_URL` is the
+ * canonical marketing URL: it deliberately resolves to the PRODUCTION host even
+ * on a preview deployment, because a preview's sitemap and canonical tags must
+ * not claim to be the real site. Auth needs the opposite. Trusted origins are
+ * derived from `baseURL`, so pinning a preview to the production origin makes
+ * every state-changing request on that preview fail its origin check, with a
+ * config that looks entirely correct while doing it.
+ */
+function authBaseURL(): string {
+  if (process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  return SITE_URL;
+}
+
+/**
+ * Assigned to a typed constant BEFORE it reaches `betterAuth`, and that is not
+ * a stylistic choice.
+ *
+ * `betterAuth` is declared `<Options extends BetterAuthOptions>(options: Options
+ * & {})`. Inferring the generic from the object literal, plus the `& {}`, makes
+ * excess-property checking UNRELIABLE at that call site rather than absent, and
+ * unreliable is the worse of the two. Measured on this file: a small options
+ * literal does get flagged, but once the object grew to its real shape, with the
+ * adapter and a hook function in it, TypeScript went quiet and two invented
+ * options compiled clean. Both were silently ignored at runtime, and both
+ * carried a confident comment claiming a protection that was never configured.
+ *
+ * `satisfies` checks the literal against the type before inference is involved,
+ * so it does not have that failure mode. If you add an option and the build
+ * fails here, the option is wrong. Do not reach for a cast to make it pass.
+ */
+const options = {
   secret: authSecret(),
-  baseURL: SITE_URL,
+  baseURL: authBaseURL(),
 
   database: drizzleAdapter(db, {
     provider: "pg",
@@ -47,6 +86,17 @@ export const auth = betterAuth({
       verification: schema.verification,
     },
   }),
+
+  /**
+   * Warn and above. At `info`, better-auth logs the submitted address on every
+   * duplicate sign-up ("Sign-up attempt for existing email: ..."), which would
+   * put raw email addresses into platform logs. An email tied to an account is
+   * personal information under the Data Privacy Act on exactly the same footing
+   * as the IP addresses stripped below, and platform logs are a retained record
+   * just as the database is. Applying the privacy argument to one store and not
+   * the other was an inconsistency, not a decision.
+   */
+  logger: { level: "warn" },
 
   emailAndPassword: {
     enabled: true,
@@ -66,6 +116,26 @@ export const auth = betterAuth({
     requireEmailVerification: false,
 
     /**
+     * Off, and this is what closes user enumeration on sign-up.
+     *
+     * better-auth returns a synthetic success for an already-registered address,
+     * hashing the password anyway so the timing matches, but only when
+     * `requireEmailVerification` is on OR `autoSignIn` is off. With both at
+     * their defaults an existing address returns 422 USER_ALREADY_EXISTS while a
+     * new one returns 200, which tells an attacker exactly who has an account.
+     * Verification cannot be turned on without email, so this is the lever that
+     * is actually available.
+     *
+     * The cost, which the sign-up UI must absorb: sign-up no longer returns a
+     * session, and a returning user gets the same success response as a new one.
+     * The copy has to be non-committal to match, along the lines of "Account
+     * created. If this address was already registered, sign in with your
+     * existing password." Claiming a new account was created would be a lie half
+     * the time.
+     */
+    autoSignIn: false,
+
+    /**
      * Eight is the floor, not the recommendation. Composition rules (a digit, a
      * symbol, a capital) are deliberately absent: they push people toward
      * predictable substitutions like "Password1!" while blocking genuinely
@@ -77,11 +147,33 @@ export const auth = betterAuth({
     maxPasswordLength: 256,
 
     /**
-     * Changing a password ends every other session. The whole point of changing
-     * it is usually to evict someone, and leaving their session alive defeats
-     * that entirely.
+     * End every session when a password is reset through the recovery flow.
+     *
+     * Note what this does NOT cover, because an earlier revision of this file
+     * got it wrong: it does not apply to a signed-in user CHANGING their
+     * password. There is no option for that at all. `/change-password` takes a
+     * `revokeOtherSessions` boolean in the REQUEST BODY, defaulting to false, so
+     * the sign-in UI must pass it explicitly. If it does not, changing a
+     * password will not evict an attacker holding a stolen session, which is the
+     * single thing users believe it does.
      */
-    revokeOtherSessionsOnPasswordChange: true,
+    revokeSessionsOnPasswordReset: true,
+  },
+
+  session: {
+    expiresIn: 60 * 60 * 24 * 30,
+    /**
+     * Slide the expiry when a session is used but older than a day. Without
+     * this every session is a hard 30-day cliff; with a shorter update age it
+     * writes to the database on nearly every request.
+     *
+     * Sliding also means an actively used session has no hard ceiling, so 30
+     * days is only defensible once a user can see and revoke their own sessions.
+     * Those endpoints already exist behind the catch-all route; only the UI is
+     * missing. Ship that list with the first auth UI, or shorten this to 7 days
+     * until it exists.
+     */
+    updateAge: 60 * 60 * 24,
   },
 
   /**
@@ -101,6 +193,13 @@ export const auth = betterAuth({
    * limiting needs it, and drops it on the way to disk, which is the only place
    * it would become a retained record.
    *
+   * `create` is the only hook needed: `ipAddress` is written in exactly one
+   * place in the library, inside `createSession`. The `updateAge` refresh path
+   * updates `expiresAt` and `updatedAt` only, so a refreshed session keeps the
+   * null this wrote. A CHECK constraint in the schema backs this up
+   * structurally, because a behavioral guarantee lapses silently the day
+   * someone edits this file.
+   *
    * If a "recent sign-in activity" surface is ever built, the value to store is
    * a keyed hash, never the address, matching `security_event.ipHash`.
    */
@@ -112,15 +211,23 @@ export const auth = betterAuth({
     },
   },
 
-  session: {
-    expiresIn: 60 * 60 * 24 * 30,
-    /**
-     * Slide the expiry when a session is used but older than a day. Without
-     * this every session is a hard 30-day cliff; with a shorter update age it
-     * writes to the database on nearly every request.
-     */
-    updateAge: 60 * 60 * 24,
-  },
+  /**
+   * Only these origins may make state-changing requests.
+   *
+   * TOP LEVEL, not inside `advanced`. It reads as though it belongs with the
+   * other hardening below, and it was written there originally, where it was
+   * silently discarded: `advanced` has no such key, so the effective list
+   * quietly fell back to the `baseURL` origin alone.
+   *
+   * Localhost is added only in development. Adding it unconditionally would
+   * mean a production deployment trusts whatever the visitor happens to be
+   * running on port 3000, which turns the callback-URL validation that shares
+   * this list into an open redirect.
+   */
+  trustedOrigins: [
+    SITE_URL,
+    ...(process.env.NODE_ENV === "development" ? ["http://localhost:3000"] : []),
+  ],
 
   advanced: {
     /**
@@ -128,11 +235,18 @@ export const auth = betterAuth({
      *
      *  - `httpOnly` keeps the session token out of reach of JavaScript, so an
      *    XSS cannot read it and send it somewhere.
-     *  - `secure` refuses to send it over plain HTTP.
+     *  - `secure` refuses to send it over plain HTTP. Chrome and Firefox treat
+     *    localhost as a secure context so development works; Safari has not
+     *    always, which is the first thing to suspect if a dev sign-in appears
+     *    not to persist there.
      *  - `sameSite: "lax"` and NOT "strict". Strict would drop the cookie on any
      *    inbound link, which users experience as being logged out whenever they
      *    arrive from an email or another site. Lax blocks the cross-site POSTs
      *    that matter for CSRF while leaving normal navigation working.
+     *
+     * SameSite is the second layer here, not the first. The real CSRF defense is
+     * better-auth's own origin check, which requires a matching Origin or
+     * Referer on every cookie-bearing mutation and rejects a missing one.
      */
     defaultCookieAttributes: {
       httpOnly: true,
@@ -140,15 +254,9 @@ export const auth = betterAuth({
       sameSite: "lax",
       path: "/",
     },
-    /**
-     * Only origins on this list may make state-changing requests. Left
-     * unrestricted, any site could POST to the sign-in endpoint with a victim's
-     * cookies attached. Localhost is included so development works; it is
-     * harmless in production because an attacker cannot make a browser treat
-     * their page as localhost.
-     */
-    trustedOrigins: [SITE_URL, "http://localhost:3000"],
   },
-});
+} satisfies BetterAuthOptions;
+
+export const auth = betterAuth(options);
 
 export type Auth = typeof auth;
