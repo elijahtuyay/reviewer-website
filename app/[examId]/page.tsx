@@ -126,6 +126,12 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
  * drifting away from what the engine actually does, which is exactly how the
  * old "you can't switch sections" claim ended up being false for months.
  */
+/** "A", "A and B", "A, B and C" — so the generated line above reads as a sentence at any section count. */
+function listSections(labels: string[]): string {
+  if (labels.length <= 1) return labels[0] ?? "";
+  return `${labels.slice(0, -1).join(", ")} and ${labels[labels.length - 1]}`;
+}
+
 function expectations(exam: ExamModule): string[] {
   const lines: string[] = [];
 
@@ -180,6 +186,29 @@ function expectations(exam: ExamModule): string[] {
     lines.push(
       "Questions you never reach cost you more than questions you get wrong, which is why finishing matters more than perfecting any one item."
     );
+  }
+
+  /**
+   * Where a calculator is and is not provided.
+   *
+   * Derived from the sections rather than written per exam, for the same reason
+   * as everything else in this function: on GMAT Focus the calculator is a
+   * Data-Insights-only tool, and a hand-written sentence naming it would be one
+   * more claim to keep in sync with `SectionConfig.calculator`. This phrasing
+   * survives a section being added, renamed, or having its calculator changed.
+   *
+   * The "and none in the others" half is the part that earns its place. Someone
+   * who assumes a calculator is available throughout will practice Quantitative
+   * with one open in another tab, which is precisely the habit that section is
+   * built to punish.
+   */
+  const withCalculator = exam.sections.filter((s) => s.calculator !== null);
+  if (withCalculator.length > 0 && withCalculator.length < exam.sections.length) {
+    lines.push(
+      `An on-screen calculator is provided in ${listSections(withCalculator.map((s) => s.label))} and nowhere else. The other sections give you none, exactly as the real exam does, and it works left to right without order of operations just like the real one.`
+    );
+  } else if (withCalculator.length === 0) {
+    lines.push("No calculator in any section, on screen or otherwise, the same as the real exam.");
   }
 
   if (exam.rules.optionalBreakMinutes) {
