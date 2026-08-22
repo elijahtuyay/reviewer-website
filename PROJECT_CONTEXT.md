@@ -1,10 +1,10 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-22, at PR #17 / VERSION.txt `2.0.2`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-22, at PR #18 / VERSION.txt `2.1.0`.
 
 ## What this project is
 
-An exam-prep web app for **NMAT by GMAC** (a Philippine business-school admission test), built with Next.js 16.3.0 (Turbopack), React 19, TypeScript, and Tailwind v4. A second exam, **GMAT**, is architecturally scaffolded but has zero question content yet (deliberate — see "Multi-exam architecture" below). The repo lives at:
+An exam-prep web app for **NMAT by GMAC** (a Philippine business-school admission test), built with Next.js 16.3.0 (Turbopack), React 19, TypeScript, and Tailwind v4, with a Neon Postgres database behind Drizzle and better-auth as of v2.1.0 (backend only, no sign-in UI yet). A second exam, **GMAT**, is architecturally scaffolded but has zero question content yet (deliberate — see "Multi-exam architecture" below). The repo lives at:
 
 ```
 C:\Users\elija\Documents\Personal Files\AI_ML\Codes\reviewer-website
@@ -111,6 +111,8 @@ This Next.js version (16.3.0) has **breaking changes vs. typical training data**
 
 - **PR #13** (v1.11.0) — home landing page + audit fixes + hosting readiness. The home page was a bare gateway (hero, exam list, two placeholder cards); it is now a real landing page modeled on the structure of cseexamreviewer.com at the user's request: accent hero band, stat row, per-section cards, how-it-works, three alternating feature bands, a "more exams" block, a native `<details>` FAQ, a closing CTA, plus a new `SiteFooter` carrying the GMAC non-affiliation disclaimer. `SiteHeader`'s three inert "soon" chips became real exam links. Audit fixes shipped alongside: `body { font-family: Arial }` had been silently overriding the Geist webfont app-wide since the starter template; `--accent` failed WCAG as text in dark mode (3.11:1) so `--accent-text` was added, derived via `color-mix` so it tracks each exam's accent; PauseOverlay opened with focus on `<body>`; `handlePause`/`handleDeadlineChange` wrote render-closure `answers` to storage and could lose an answer to a same-frame race. Hosting groundwork: `generateStaticParams` + `dynamicParams = false` on both dynamic segments (every route is now build-time prerendered, zero on-demand server rendering), `metadataBase` + title template + per-exam `generateMetadata`, `robots.ts`, `sitemap.ts`, `not-found.tsx`, `error.tsx`, JSON-LD on the home page, and `lib/site.ts` holding `NEXT_PUBLIC_SITE_URL` and the disclaimer.
 
+- **PR #18** (v2.1.0) — the accounts backend: Neon Postgres, Drizzle with committed migrations, better-auth email/password, one dynamic API route. No user-facing change; there is still no sign-in UI and no route requires a session. Full detail in "THE ACCOUNTS BACKEND" below, including two config options that better-auth silently ignored.
+
 ## Known non-issue: the answer-key distribution
 
 A separate Claude session reported (2026-08-21) that the correct answer sits in slot 1 for 86% of Logical Reasoning questions and 49% overall, and that `ls-010`'s explanation was a copy-paste slip about "malevolent/vindictive/benevolent/altruistic". **Both were checked against the files on disk and both are false.** The measured distribution is 25.0 / 22.0 / 27.7 / 24.3 / 1.0 percent across indices 0-4 of all 300 questions (the 1% at index 4 is the 11 quantitative questions with five options), and `ls-010` carries a correct, on-topic explanation about sleep and memory consolidation. The word "malevolent" appears nowhere in the bank. The reported 86% figure is verbatim the pre-v1.5.0 bug that PR #7 already fixed, so that session was almost certainly reading a stale snapshot. Re-measure before acting on a claim like this:
@@ -123,7 +125,7 @@ python -c "import json,io,collections; c=collections.Counter(); [c.update([q['co
 
 **Deployed on Vercel (Hobby), as of v2.0.1.** Chosen over Cloudflare because Next.js is Vercel's own framework, so there is no adapter and no build configuration, and because API routes run natively there when the accounts backend arrives. The Hobby plan never bills (it pauses at the limit) but **forbids commercial use** — ads, payments or a paid plan mean upgrading or migrating to Cloudflare Workers, which is about a day's work since nothing depends on Vercel-specific APIs.
 
-As of v1.10.0 the build emits no dynamic routes: `npm run build`'s route table should show only `○ (Static)` and `● (SSG)`. There is no database, no runtime secret, and no request-time work.
+**This changed at v2.1.0 and the old claim is worth stating so it is not re-copied: there used to be "no database, no runtime secret, and no request-time work." All three are now false.** The build emits exactly ONE dynamic route, `ƒ /api/auth/[...all]`; every page is still `○ (Static)` or `● (SSG)`, and that invariant is worth checking in the route table after any change. See "THE ACCOUNTS BACKEND" below for the database, the secret, and the traps.
 
 `SITE_URL` lives in **`lib/site-url.ts`**, not `lib/site.ts`, and that split is load-bearing: it reads a non-`NEXT_PUBLIC_` variable, so if it were ever bundled for the browser it would silently resolve to localhost. `lib/site.ts` keeps only client-safe constants. The URL module also carries `import "server-only"`, which turns importing it from a Client Component into a build error rather than a silent one (verified by deliberately doing it). It resolves at build time from `NEXT_PUBLIC_SITE_URL`, then Vercel's automatic `VERCEL_PROJECT_PRODUCTION_URL`, then localhost. The middle step exists specifically so a deploy that forgets the first cannot silently publish a sitemap and a full set of canonicals pointing at `http://localhost:3000`. **Only set `NEXT_PUBLIC_SITE_URL` once a custom domain exists.** Every consumer of `SITE_URL` is a Server Component or metadata route; check that before importing it into anything marked `"use client"`, since the Vercel variable is not `NEXT_PUBLIC_` and would be undefined in a client bundle.
 
@@ -210,7 +212,157 @@ Data Sufficiency was also restored to **canonical A-E statement order** (PR #7's
 4. `ProgressTracker` cells are 28px, under the 44px minimum the rest of the app holds to.
 5. `ConfirmDialog` styles the confirming action as a red outline and the cancel as solid green. A reviewer called this inverted; it is a **documented deliberate choice** from an earlier PR (green = keeps your work). Left alone pending a decision.
 
-**Current state: `main` is clean, builds and lints with zero errors/warnings, at v2.0.0.**
+**Current state: `main` is clean, builds and lints with zero errors/warnings, at v2.1.0.**
+
+## THE ACCOUNTS BACKEND (v2.1.0, PR #18)
+
+There is a database now. Accounts are **backend-only**: no sign-in UI exists, no
+route requires a session, and anonymous practice is untouched. That is deliberate,
+and it is the invariant to protect. `app/page.tsx` promises "no account needed" in
+several places, so **the site must stay fully usable logged out** and no route may
+redirect to sign-in.
+
+### The files
+
+| Path | What it is |
+| --- | --- |
+| `lib/db/index.ts` | Drizzle handle, `import "server-only"`. Uses the POOLED `DATABASE_URL`. |
+| `lib/db/schema.ts` | better-auth's four tables (`user`, `session`, `account`, `verification`) plus two of ours (`security_event`, `rate_limit`). |
+| `lib/auth/server.ts` | The better-auth config. Read the `satisfies` note below before editing it. |
+| `drizzle/` | Generated migrations, **committed on purpose** so schema changes are reviewable in a PR. |
+| `drizzle.config.ts` | Migration tooling. Uses the UNPOOLED URL. |
+| `app/api/auth/[...all]/route.ts` | `force-dynamic`. The only dynamic route in the build. |
+
+Scripts: `npm run db:generate` (write a migration from the schema), `db:migrate`
+(apply it), `db:studio`.
+
+### THE TRAP THAT WILL BITE YOU: dead config options
+
+`betterAuth` is declared `<Options extends BetterAuthOptions>(options: Options & {})`.
+That inference plus the `& {}` makes excess-property checking **unreliable**, not
+absent, which is worse. Measured: a small options literal DOES get flagged, but once
+the object grew to its real shape (adapter plus a hook function) TypeScript went
+silent and **two invented options compiled clean, shipped, and did nothing**, each
+with a confident comment claiming a protection that was never configured:
+
+- `emailAndPassword.revokeOtherSessionsOnPasswordChange` — **zero occurrences in
+  better-auth 1.7.1.** Made up. The real option is `revokeSessionsOnPasswordReset`,
+  and it covers the RESET flow only. A signed-in user changing their password has no
+  option at all: `/change-password` takes `revokeOtherSessions` in the request body,
+  defaulting to false, so the UI must pass it explicitly or a password change will
+  not evict an attacker holding a stolen session.
+- `trustedOrigins` nested under `advanced` — `advanced` has no such key, so it was
+  discarded and the effective list silently fell back to the `baseURL` origin.
+
+**The options object is therefore assigned with `satisfies BetterAuthOptions` before
+it reaches `betterAuth`. Keep it that way.** If you add an option and the build
+fails there, the option is wrong; do not cast to make it pass. This is the same
+failure this repo already recorded once, where UI copy "claimed a section lock that
+did not exist for months."
+
+### Other traps, each one already hit
+
+- **`account.issuer` is required by better-auth 1.7.** It scopes account identity
+  (`local:credential`, `local:oauth:<provider>`) and carries a unique index on
+  `(issuer, accountId)`. A schema written from a pre-1.7 example 500s on sign-up with
+  an empty response body. **Do not hand-write these tables from memory.** Print the
+  authoritative shape instead:
+
+  ```bash
+  node --input-type=module -e "import {getAuthTables} from 'better-auth/db'; console.log(JSON.stringify(getAuthTables({emailAndPassword:{enabled:true}}),null,1))"
+  ```
+
+- **`neon-http` cannot open a transaction** (it throws `No transactions support in
+  neon-http driver`). better-auth never attempts one, since all three
+  `db.transaction()` call sites in the adapter are MySQL-gated and `transaction`
+  defaults to false, so nothing crashes today. **But setting `transaction: true` on
+  `drizzleAdapter` would turn every sign-up into an unhandled 500.**
+- **Sign-up is therefore not atomic.** `createUser` and `linkAccount` are separate
+  writes. A failure between them leaves a `user` row with no credential account that
+  can neither sign in, nor re-register (the address is already claimed), nor reset
+  (no email). Narrow trigger, unrecoverable outcome. The fix belongs with the sign-up
+  route: either a self-healing path, or the WebSocket `Pool` driver, which conflicts
+  with the pooled-connection rationale in `lib/db/index.ts`. It is a design decision,
+  not a chore.
+- **`baseURL` is NOT `SITE_URL`.** `SITE_URL` deliberately resolves to the production
+  host even on a preview, which is correct for canonical tags and wrong for auth,
+  because trusted origins derive from `baseURL`. `authBaseURL()` prefers `VERCEL_URL`
+  on preview. Keep the two concepts separate.
+- **`rate_limit` is OURS and is wired to nothing.** It is NOT better-auth's
+  `rateLimit` model (`{ key, count, lastRequest }`) and is not registered with the
+  adapter, so setting `rateLimit.storage: "database"` will NOT pick it up. The
+  library's default is in-memory, which on Vercel is per-instance and dies with every
+  cold start. **Treat cross-instance rate limiting as absent, not merely weak.**
+- **The module-scope throw on a missing env var is deliberate.** It fails
+  `next build`. That looks like a flaw and is not: Vercel deploys are atomic, so a
+  failed build blocks the deploy while the previous deployment keeps serving. This
+  happened for real — the first preview deploy died on a missing
+  `BETTER_AUTH_SECRET` and production never noticed.
+
+### Database-enforced invariants (three, each verified by direct INSERT)
+
+The schema's philosophy is that anything the application must never do should be
+impossible rather than merely unwritten. Each of these was tested by inserting a
+violating row straight into Postgres, bypassing the app entirely:
+
+1. `user_email_lower_unique` indexes `lower(email)`, not `email`. A plain unique index
+   is case-SENSITIVE and would hold `Elijah@example.com` and `elijah@example.com` as
+   two separate accounts.
+2. `account_issuer_accountId_unique` covers the pair, because `accountId` is only
+   unique within the issuer that minted it.
+3. `session_no_raw_ip` is a CHECK that `ipAddress IS NULL`. `lib/auth/server.ts`
+   strips the value in a create hook, but a hook is a behavior that lapses silently
+   the day someone edits the file. **Raw IPs are never stored**: under the Data
+   Privacy Act an address tied to an account is personal information. `logger.level`
+   is `warn` for the same reason, because at `info` better-auth writes submitted email
+   addresses into platform logs.
+
+Also note `user_email_idx`: sign-in queries `where email = $1` on the bare column,
+which the `lower(email)` expression index cannot serve, so without it every
+authentication attempt is a sequential scan.
+
+### Secrets and environments
+
+- `BETTER_AUTH_SECRET` is set in Vercel for **Production and Preview only**, as
+  Sensitive, with **different values per environment** so a preview leak cannot forge
+  production sessions. Development is intentionally absent (Vercel rejects
+  `--sensitive` there); local dev reads `.env.local`.
+- `DATABASE_URL` (pooled, for the app) and `DATABASE_URL_UNPOOLED` (migrations only)
+  come from the Neon integration. **Never paste a connection string into chat.**
+- **`vercel env pull` gives you the PRODUCTION database.** v2.1.0 was developed and
+  tested against it because that is what existed; it was empty throughout and cleaned
+  up afterward. **Create a Neon development branch before the next database PR** so
+  migrations stop landing on production.
+
+### Known-open security items
+
+Documented rather than fixed, in rough priority order:
+
+1. **No rate limiting that survives a cold start.** `/api/auth/sign-up/email` is
+   publicly reachable and effectively unmetered across instances.
+2. The orphaned-user window described above.
+3. **No CSP or security headers yet.** `frame-ancestors` must ship in the same PR as
+   the first sign-in form, not in a later "headers phase," or the form is
+   clickjackable the day it appears.
+4. 30-day sliding sessions with no UI to revoke them. The endpoints already exist
+   behind the catch-all route; only the interface is missing. Ship the session list
+   with the first auth UI, or shorten `expiresIn` to 7 days until it exists.
+5. A residual ~40ms timing difference on sign-in between a known and unknown address.
+   This is the extra Neon round trip, **not** a missing dummy hash — better-auth
+   already equalizes the scrypt cost. No config setting fixes it.
+
+### If you build the sign-up UI next
+
+`autoSignIn` is **off**, which is what closes user enumeration: better-auth returns a
+synthetic success for an already-registered address, but only when
+`requireEmailVerification` is on or `autoSignIn` is off, and verification needs email
+this project does not have. Two consequences for the UI:
+
+- Sign-up does **not** return a session. Sign in explicitly afterward.
+- A returning user gets the same response as a new one, so the copy must be
+  non-committal: "Account created. If this address was already registered, sign in
+  with your existing password." Claiming a new account was created would be a lie
+  half the time.
 
 ## Lesson learned: never run multiple agents against the same data file concurrently
 
@@ -233,6 +385,9 @@ If asked to regenerate the answer-key PDF in the future: one-off Node script (`d
 - Chrome and Edge are both installed at their standard paths (`C:\Program Files\Google\Chrome\Application\chrome.exe`, `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`) — useful for headless PDF generation or other browser-CLI needs; no `pandoc`/`wkhtmltopdf` installed.
 - `pdftoppm`/poppler-utils are NOT installed, so the `Read` tool cannot render PDF pages to images in this environment — can't visually self-check generated PDFs that way; verify via the source HTML in a real browser (chrome-devtools MCP) instead, since the PDF is a print of that HTML.
 - A `chrome-devtools` MCP integration is available and was used throughout for live browser verification (screenshots, DOM/script evaluation, viewport resizing) — use it to actually verify UI changes rather than assuming from code alone, per the project's "test the golden path in a browser" expectation.
+- **`vercel` CLI** is available via `npx vercel` and the project is linked (`elijahtuyays-projects/reviewer-website`). Useful read-only commands: `npx vercel ls` (deployment status, which is how a failed build gets caught), `npx vercel inspect --logs <url>` (build logs), `npx vercel env ls` (names only, never values). Adding a secret without it ever touching disk or the transcript: pipe it, e.g. `node -e "..." | npx vercel env add NAME production --sensitive`. Note `--sensitive` is rejected for the Development environment.
+- **The permission classifier blocks some outward-facing commands**, including `npx vercel redeploy` and certain shell patterns that assign a secret to a variable. Do not work around it; push a commit and let the deploy happen naturally, or ask the user.
+- **Long heredocs containing mixed quotes fail in this Bash tool.** Writing a file with the Write tool and splicing it in with a short Python step is the reliable pattern.
 - Dev server: `npm run dev` (Turbopack), typically on `http://localhost:3000`. Build: `npm run build`. Lint: `npm run lint` (must pass with zero errors before every merge, per team-workflow discipline even though it's not written as an explicit CLAUDE.md rule).
 
 ## User preferences (persisted in this agent's cross-session memory, but restated here in case a fresh agent has no memory access)
