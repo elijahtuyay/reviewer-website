@@ -13,6 +13,15 @@ import { Difficulty, ExamId, Question, SectionId } from "@/data/schema";
  * instead and let the exam declare it.
  */
 
+/**
+ * The on-screen calculator a section grants, or null for none.
+ *
+ * "basic-di" is the GMAT Focus Data Insights calculator: four functions, a
+ * square root, a percent key, three memory keys, and strictly left-to-right
+ * evaluation with no order of operations. Modeled in `lib/calculator/basic-di.ts`.
+ */
+export type CalculatorKind = "basic-di" | null;
+
 export interface SectionConfig {
   id: SectionId;
   label: string;
@@ -21,6 +30,22 @@ export interface SectionConfig {
   /** Questions presented in one attempt at this section. */
   questionCount: number;
   minutes: number;
+  /**
+   * Which calculator, if any, this section provides.
+   *
+   * On `SectionConfig` rather than `ExamRules` because it varies BETWEEN
+   * SECTIONS OF ONE EXAM, which nothing in `ExamRules` does: GMAT Focus grants
+   * a calculator in Data Insights and withholds it in Quantitative Reasoning,
+   * on purpose, because that section is built so every question yields to
+   * reasoning and estimation.
+   *
+   * Required rather than optional, so that every section has to say `null` out
+   * loud. "No calculator" is a rule this app should be stating, not a field
+   * somebody forgot; the UI prints it, and an optional field would let a new
+   * section silently default into having nothing said about it. This repo has
+   * already shipped UI that implied a constraint the engine did not have.
+   */
+  calculator: CalculatorKind;
 }
 
 /** Per-exam accent color. One hex; the app derives its text-safe variant via `--accent-text`. */

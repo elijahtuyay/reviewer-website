@@ -18,6 +18,8 @@ import { initialAdaptiveState, advanceAdaptiveState, pickNextQuestionId } from "
 import { scoreAttempt } from "../lib/scoring.ts";
 import type { Question } from "../data/schema.ts";
 import type { ScoringModel } from "../lib/exams/types.ts";
+import { press, initialCalculatorState } from "../lib/calculator/basic-di.ts";
+import type { CalculatorKey, CalculatorState } from "../lib/calculator/basic-di.ts";
 import { readFileSync } from "node:fs";
 
 let failures = 0;
@@ -129,6 +131,56 @@ const pts = scoreAttempt(
   SECTION
 );
 check("points model totals marks per correct answer", [pts.score, pts.maxScore], [60, 60]);
+
+// ------------------------------------------------------------- calculator --
+/**
+ * The Data Insights calculator.
+ *
+ * Its defining behavior looks exactly like a bug, so these assertions exist as
+ * much to stop a future reader "fixing" it as to catch a regression. If the
+ * left-to-right checks below ever start failing because someone taught the
+ * calculator precedence, the calculator is now wrong and the test is right.
+ */
+function type(keys: string): CalculatorState {
+  return keys
+    .trim()
+    .split(/\s+/)
+    .reduce((st, k) => press(st, k as CalculatorKey), initialCalculatorState());
+}
+
+check(
+  "ignores order of operations and evaluates left to right",
+  type("2 + 3 * 4 =").display,
+  "20"
+);
+check(
+  "1350x8 + 1050x18 typed straight through gives the LEFT-TO-RIGHT answer",
+  type("1 3 5 0 * 8 + 1 0 5 0 * 1 8 =").display,
+  "213300"
+);
+check(
+  "the same sum via the memory keys gives the mathematically correct answer",
+  type("1 3 5 0 * 8 = m+ allClear 1 0 5 0 * 1 8 = m+ mrc").display,
+  "29700"
+);
+check("a second consecutive MRC clears memory", type("5 m+ mrc mrc").memory, 0);
+check("an MRC broken by another key does not clear memory", type("5 m+ mrc 9 mrc").memory, 5);
+check("divide by zero errors", type("9 / 0 =").display, "Error");
+expect("nothing but AC clears an error", type("9 / 0 = 5 + 1 =").display === "Error");
+check("AC recovers from an error", type("9 / 0 = allClear 7").display, "7");
+check("the square root of a negative errors", type("9 +/- sqrt").display, "Error");
+check("float noise never reaches the display", type(". 1 + . 2 =").display, "0.3");
+check("percent divides by one hundred", type("2 5 %").display, "0.25");
+check(
+  "clear keeps the pending operation, AC does not",
+  [type("8 + 5 clear 2 =").display, type("8 + 5 allClear 2 =").display],
+  ["10", "2"]
+);
+check("AC preserves memory, which is what makes the workaround usable", type("7 m+ allClear").memory, 7);
+check("repeated equals does not repeat the operation", type("2 + 3 = = =").display, "5");
+check("a corrected operator replaces the pending one without folding", type("9 + * 3 =").display, "27");
+check("backspace only edits a number being typed", type("1 2 3 back").display, "12");
+check("backspace leaves a computed result alone", type("2 + 3 = back").display, "5");
 
 console.log(failures === 0 ? "\nall checks passed" : `\n${failures} CHECK(S) FAILED`);
 process.exit(failures === 0 ? 0 : 1);
