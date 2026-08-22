@@ -1,10 +1,10 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-22, at PR #18 / VERSION.txt `2.1.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-22, at PR #19 / VERSION.txt `2.1.1`.
 
 ## What this project is
 
-An exam-prep web app for **NMAT by GMAC** (a Philippine business-school admission test), built with Next.js 16.3.0 (Turbopack), React 19, TypeScript, and Tailwind v4, with a Neon Postgres database behind Drizzle and better-auth as of v2.1.0 (backend only, no sign-in UI yet). A second exam, **GMAT**, is architecturally scaffolded but has zero question content yet (deliberate — see "Multi-exam architecture" below). The repo lives at:
+An exam-prep web app for **NMAT by GMAC** (a Philippine business-school admission test), built with Next.js 16.3.0 (Turbopack), React 19, TypeScript, and Tailwind v4, with a Neon Postgres database behind Drizzle and better-auth as of v2.1.0 (backend only, no sign-in UI yet). A second exam, **GMAT Focus**, is fully playable on a deliberate 90-question seed bank (30 per section, 10 per difficulty) — enough to exercise the adaptive engine, not a finished bank. See "THE MODULAR EXAM ARCHITECTURE" below. The repo lives at:
 
 ```
 C:\Users\elija\Documents\Personal Files\AI_ML\Codes\reviewer-website
@@ -34,7 +34,8 @@ Watch the usual families: `-ise`/`-isation` to `-ize`/`-ization`, `-our` to `-or
 Programme P:"` has no word boundary before the second `Programme` and `programme` silently skips it. That left one question reading "acceptances by program" above a table labeled "Programme P", which is exactly the mixed usage the sweep exists to remove. Parsing the file first makes the whole bug class impossible.
 
 **Prefer stems to word lists for the `-our` family.** An enumerated list missed `labour` entirely and matched `neighbour` but not `neighbourhoods`. A stem pattern (`lab|col|fav|neighb|behavi|...` + `our` + any suffix) covers every inflection at once, and the words that genuinely end `-our` in American English (four, hour, tour, pour, flour, contour, devour) are simply absent from the stem list.
- A blanket `-ise` to `-ize` rule breaks words that are legitimately `-ise` in American English: it turned `advertise` into `advertize` and, worse, `counterclockwise` into `counterclockwize` inside the circular-seating puzzles. Keep an exception list (advise, comprise, compromise, exercise, improvise, revise, supervise, surprise, promise, and every `-wise` compound). And never rewrite an identifier: `cancelLabel` is a prop, `color` is a CSS property, and `Content-Security-Policy` is a header name. Word-boundary patterns plus a grep for identifiers afterwards is the check that caught this.
+
+**Keep an `-ise` exception list.** A blanket `-ise` to `-ize` rule breaks words that are legitimately `-ise` in American English: it turned `advertise` into `advertize` and, worse, `counterclockwise` into `counterclockwize` inside the circular-seating puzzles. Keep an exception list (advise, comprise, compromise, exercise, improvise, revise, supervise, surprise, promise, and every `-wise` compound). And never rewrite an identifier: `cancelLabel` is a prop, `color` is a CSS property, and `Content-Security-Policy` is a header name. Word-boundary patterns plus a grep for identifiers afterwards is the check that caught this.
 
 ## Copyright rule (critical, applies to ALL future content work)
 
@@ -51,14 +52,21 @@ This Next.js version (16.3.0) has **breaking changes vs. typical training data**
 
 ## Architecture
 
-### Multi-exam design
+### Shared plumbing (see "THE MODULAR EXAM ARCHITECTURE" below for how exams are registered)
+
+This subsection used to describe a `lib/exam-config.ts` and a `lib/data/questions.ts`.
+**Both were deleted in v2.0.0 and neither exists.** The registry is
+`lib/exams/registry.ts` and the bank loader is `lib/question-bank.ts`. The note is
+left here rather than silently removed because those two filenames survived in this
+document for two releases and sent readers looking for files that were gone.
+
 - `data/schema.ts`: `ExamId = "nmat" | "gmat"`. `SectionId` is a loose `string` (not a fixed union) since each exam has different sections.
-- `lib/exam-config.ts`: single source of truth. `EXAMS: Record<ExamId, ExamConfig>` registry with per-exam `theme` (accent color), `sections[]` (id/label/description/questionCount/minutes), `pointsPerCorrectAnswer`, and `available: boolean`. **`gmat.available === false`** — it has section configs but `questionCount: 0` for all of them, and the route layer 404s it (see below). NMAT accent green `#0f7b4d` is an *approximated* brand color (mba.com/exams/nmat was bot-protected during scraping attempts, so it's not pixel-verified — swap it if you ever get the exact hex).
-- Routes: `app/[examId]/page.tsx` (exam setup/landing), `app/[examId]/quiz/[section]/page.tsx` (the actual quiz, client component). `app/[examId]/layout.tsx` (server) validates `examId` and applies the exam's theme via CSS custom properties on a `display: contents` wrapper (zero layout impact, properties still inherit). `app/[examId]/quiz/[section]/layout.tsx` (server, added later — see bug fix history) validates `examId` + `section` + `exam.available`, 404ing before the client page ever renders.
-- Question banks: `lib/data/questions.ts` exports `QUESTIONS_BY_EXAM: Record<ExamId, Record<string, Question[]>>`. **The underlying JSON files stay at their original flat path** `data/questions/{language-skills,quantitative-skills,logical-reasoning}.json` — NOT moved into a `data/questions/nmat/` subfolder. This was a deliberate decision after a near-miss: an attempted `git mv` into a subfolder was caught and reverted while background content-fix agents were actively editing those exact files at the old path. There IS an empty, untracked `data/questions/gmat/` directory sitting on disk (harmless leftover, safe to ignore or delete).
-- `lib/session-progress.ts` (was `lib/local-progress.ts` until v1.6.0): **sessionStorage**, keyed `progress:${examId}:${section}`. Every read/write path is wrapped in try/catch. The record holds `answers`, `submitted`, `questionIds`, `deadline` (epoch ms), `expired`, and `pausedAt`. sessionStorage is deliberate: an attempt survives reloads and moving between the setup page and a quiz, but dies with the tab/browser. `purgeLegacyPersistedProgress()` clears the old, permanently-lingering localStorage `progress:*` keys from pre-1.6.0 builds. Also exports `clearSectionProgress` / `clearExamProgress` for explicit restarts.
-- `lib/scoring.ts`: `scoreAttempt(questions, answers, pointsPerCorrectAnswer)`.
-- `lib/section-result.ts`: `getSectionBreakdown(examId, sectionId, fallbackTotal)` — powers the post-submit sidebar correct/wrong/skipped breakdown.
+- **Accent colors.** NMAT green `#0f7b4d` is an *approximated* brand color (mba.com/exams/nmat was bot-protected during scraping attempts, so it is not pixel-verified — swap it if you ever get the exact hex). GMAT blue is `#2563eb`, chosen by measuring contrast rather than taste; see the accent trap below.
+- Routes: `app/[examId]/page.tsx` (exam setup/landing), `app/[examId]/quiz/[section]/page.tsx` (a shell that picks a runner, client component). `app/[examId]/layout.tsx` (server) validates `examId` and applies the exam's theme via CSS custom properties on a `display: contents` wrapper (zero layout impact, properties still inherit). `app/[examId]/quiz/[section]/layout.tsx` (server) validates `examId` + `section` + availability before the client page renders.
+- **Question bank file layout, and a warning attached to it.** NMAT's three JSON files sit at the flat path `data/questions/{language-skills,quantitative-skills,logical-reasoning}.json`, NOT in a `data/questions/nmat/` subfolder. That is deliberate: an attempted `git mv` into a subfolder was caught and reverted while background content-fix agents were actively editing those exact files at the old path. GMAT's three files DO live in `data/questions/gmat/` (`data-insights.json`, `quantitative.json`, `verbal.json`), they are tracked, and they hold the entire GMAT bank. **An earlier version of this document described that directory as "an empty, untracked leftover, safe to ignore or delete." Do not do that; it would delete the GMAT question bank.**
+- `lib/session-progress.ts` (was `lib/local-progress.ts` until v1.6.0): **sessionStorage**, keyed `progress:${examId}:${section}`. Every read/write path is wrapped in try/catch. The record holds `answers`, `submitted`, `questionIds`, `deadline` (epoch ms), `expired`, `pausedAt`, and `summary`. sessionStorage is deliberate: an attempt survives reloads and moving between the setup page and a quiz, but dies with the tab/browser. `purgeLegacyPersistedProgress()` clears the old, permanently-lingering localStorage `progress:*` keys from pre-1.6.0 builds. Also exports `clearSectionProgress` / `clearExamProgress` for explicit restarts.
+- `lib/scoring.ts`: both scoring models. See "Scoring traps" below before touching it.
+- `lib/section-result.ts`: `getSectionBreakdown(examId, sectionId, fallbackTotal)` powers the post-submit correct/wrong/skipped breakdown, and `findActiveAttempt()` is the real section-lock check. **It does not read the question bank** — the score is written into sessionStorage as `StoredProgress.summary` at submit time, which is what keeps the bank off the critical path.
 
 ### Question bank content
 - **300 questions total**, 100 per section (`language-skills`, `quantitative-skills`, `logical-reasoning`), stored in `data/questions/*.json`.
@@ -102,7 +110,7 @@ This Next.js version (16.3.0) has **breaking changes vs. typical training data**
 - **PR #4**, `305160c` (v1.3.0) — the big `reminders.txt` batch: multi-exam architecture, KaTeX math rendering, sticky header, pause overlay, page transitions, brand accent color, full content overhaul (topic ratios, difficulty, em-dash removal) across all 300 questions.
 - **PR #5**, `2b26e9a` (v1.4.0) — post-merge autonomous audit (5 background agents: 3 design-system research, 2 bug hunts) + fixes: timer drift, localStorage write crash, mobile nav, tap targets, focus rings, lint cleanup.
 - **PR #6**, `f0e6707` (v1.4.1) — follow-up fix: color-only correctness indicator.
-- **PR #7**, `d3479a6` (v1.5.0) — response to user's post-PDF-review feedback batch. Fixed a severe pre-existing bug found while investigating (not explicitly reported): the correct answer's option slot was heavily skewed toward A bank-wide (logical-reasoning was 86/119 correctIndex 0, several topics literally 100% "always A") — fixed with a mechanical options-array shuffle across all 300 questions. Also: Para Forming (10 questions) had the printed P/Q/R/S line order always exactly matching the correct sequence, plus telltale concluding adverbs marking the last sentence — both fixed. Sentence Completion (12 questions) had distractor sets that were 3 near-synonyms vs. 1 obvious answer — rewritten to be individually plausible. Reading Comprehension trimmed 26→18 (two whole passages retired), replaced with 8 new "Vocabulary in Context" questions. Topic-bunching fixed via a display-order interleave (`interleaveByTopic` in `lib/data/questions.ts`, best-effort not a hard guarantee for topic-imbalanced draws). PauseOverlay copy simplified + crossfade transition added. ProgressTracker now stays visible after submission and color-codes cells green/red.
+- **PR #7**, `d3479a6` (v1.5.0) — response to user's post-PDF-review feedback batch. Fixed a severe pre-existing bug found while investigating (not explicitly reported): the correct answer's option slot was heavily skewed toward A bank-wide (logical-reasoning was 86/119 correctIndex 0, several topics literally 100% "always A") — fixed with a mechanical options-array shuffle across all 300 questions. Also: Para Forming (10 questions) had the printed P/Q/R/S line order always exactly matching the correct sequence, plus telltale concluding adverbs marking the last sentence — both fixed. Sentence Completion (12 questions) had distractor sets that were 3 near-synonyms vs. 1 obvious answer — rewritten to be individually plausible. Reading Comprehension trimmed 26→18 (two whole passages retired), replaced with 8 new "Vocabulary in Context" questions. Topic-bunching fixed via a display-order interleave (`interleaveByTopic`, which lived in `lib/data/questions.ts` then and is in `lib/question-bank.ts` now; best-effort, not a hard guarantee for topic-imbalanced draws). PauseOverlay copy simplified + crossfade transition added. ProgressTracker now stays visible after submission and color-codes cells green/red.
 
 - **PR #9** (v1.6.0) — session lifecycle / error-handling fix. The user reported being confused by an old session that had "timed out". Two stacked defects: progress was written to `localStorage` with no expiry (so a half-finished or already-submitted attempt survived browser restarts forever), while the timer restarted at full length on every mount — pairing an old question set and old answers with a fresh clock, and dropping a resumed submitted attempt straight into review mode with no explanation. Fixed by moving progress to sessionStorage, persisting the timer deadline (plus `pausedAt`), and never resuming without saying so. See the sessionStorage/Timer/`SessionResetNotice` notes above.
 
@@ -204,15 +212,14 @@ Data Sufficiency was also restored to **canonical A-E statement order** (PR #7's
 
 **If you add Critical Reasoning, Reading Comprehension, or Para Forming questions, check these numbers again.** The natural way to write a CR question is a long, carefully-hedged correct answer next to three short dismissive distractors, which is exactly how the 94.7% happened.
 
-### Open, deliberately not done in PR #13
+### Open items (originally logged in PR #13; struck-through ones are since closed)
 
-1. **The whole 300-question bank ships to the client on every page** (~220 KB), on `/[examId]` as well as every quiz section. Fix means making the bank load per-section, which means `lib/section-result.ts` and its render-time callers go async, or the per-section score is persisted at submit so the breakdown never needs the bank. Own PR.
-2. **Content: the correct option is systematically the longest.** Pick-longest scores **56.9%** on prose-option Logical Reasoning and **50.3%** on Language Skills, against a 25% baseline — a bigger hole than the positional skew PR #7 closed. Also: the 11 Data Sufficiency items were shuffled out of canonical statement order by that same pass (real DS uses a fixed memorized order), "both statements together" is correct 5 of 11 times, and all 10 Para Forming items open with Q or P, never R or S.
+1. ~~The whole 300-question bank ships to the client on every page.~~ **CLOSED in v2.0.0** by per-section dynamic imports in `lib/question-bank.ts`, plus persisting the score as `StoredProgress.summary` so the breakdown never needs the bank.
+2. ~~The correct option is systematically the longest; Data Sufficiency lost canonical order; Para Forming always opens with P or Q.~~ **CLOSED in PR #14 (v1.12.0)** — see the Answer-key statistics table above for the before/after numbers.
 3. **Six specific question defects**: `ls-055` (two defensible answers), `lr-072` (offers "opposite A" in a five-seat circle), `ls-063` (explanation says a cobbler *makes* shoes), `ls-101` ("abundant with" is not idiomatic), `ls-045`, `qs-030`. Zero wrong keyed answers across all 300.
 4. `ProgressTracker` cells are 28px, under the 44px minimum the rest of the app holds to.
 5. `ConfirmDialog` styles the confirming action as a red outline and the cancel as solid green. A reviewer called this inverted; it is a **documented deliberate choice** from an earlier PR (green = keeps your work). Left alone pending a decision.
 
-**Current state: `main` is clean, builds and lints with zero errors/warnings, at v2.1.0.**
 
 ## THE ACCOUNTS BACKEND (v2.1.0, PR #18)
 
@@ -227,14 +234,22 @@ redirect to sign-in.
 | Path | What it is |
 | --- | --- |
 | `lib/db/index.ts` | Drizzle handle, `import "server-only"`. Uses the POOLED `DATABASE_URL`. |
-| `lib/db/schema.ts` | better-auth's four tables (`user`, `session`, `account`, `verification`) plus two of ours (`security_event`, `rate_limit`). |
+| `lib/db/schema.ts` | better-auth's four tables (`user`, `session`, `account`, `verification`) plus two of ours (`security_event`, `rate_limit`). **Both of ours are created but wired to nothing yet** — nothing writes a security event and nothing reads a rate-limit row. Do not assume the audit trail is recording anything. |
 | `lib/auth/server.ts` | The better-auth config. Read the `satisfies` note below before editing it. |
 | `drizzle/` | Generated migrations, **committed on purpose** so schema changes are reviewable in a PR. |
-| `drizzle.config.ts` | Migration tooling. Uses the UNPOOLED URL. |
+| `drizzle.config.ts` | Migration tooling. Prefers the UNPOOLED URL but **falls back to the pooled one if it is unset**, which produces exactly the intermittent failures the comment in that file warns about. It also loads `.env.local` explicitly, because drizzle-kit runs as a plain Node process and does not inherit Next's env loading. |
 | `app/api/auth/[...all]/route.ts` | `force-dynamic`. The only dynamic route in the build. |
 
 Scripts: `npm run db:generate` (write a migration from the schema), `db:migrate`
 (apply it), `db:studio`.
+
+**Migrations are applied BY HAND, from a developer machine.** `build` is a bare
+`next build` and there is no `vercel.json`, so nothing runs them on deploy. Do not
+assume Vercel does it: merging a PR that adds a migration changes the schema in the
+repo and NOTHING in the database, and the two silently diverge until someone runs
+`db:migrate`. There is currently exactly one database and it is production; there is
+no staging copy and no backup story written down. Read the generated SQL before
+applying it.
 
 ### THE TRAP THAT WILL BITE YOU: dead config options
 
@@ -273,9 +288,11 @@ did not exist for months."
   ```
 
 - **`neon-http` cannot open a transaction** (it throws `No transactions support in
-  neon-http driver`). better-auth never attempts one, since all three
-  `db.transaction()` call sites in the adapter are MySQL-gated and `transaction`
-  defaults to false, so nothing crashes today. **But setting `transaction: true` on
+  neon-http driver`). better-auth never attempts one: in **`@better-auth/drizzle-adapter`**
+  (a separate package that `better-auth/adapters/drizzle` merely re-exports, so
+  grepping inside `better-auth` for this finds nothing) every `db.transaction()`
+  call site is MySQL-gated, and the adapter-level one is behind
+  `config.transaction ?? false`. **But setting `transaction: true` on
   `drizzleAdapter` would turn every sign-up into an unhandled 500.**
 - **Sign-up is therefore not atomic.** `createUser` and `linkAccount` are separate
   writes. A failure between them leaves a `user` row with no credential account that
@@ -395,3 +412,7 @@ If asked to regenerate the answer-key PDF in the future: one-off Node script (`d
 - **Always post the live `http://localhost:3000` link when returning to chat after finishing a task** — the user wants a one-click way to check results without asking. Make sure the dev server is actually running before posting the link.
 - The user has, in past sessions, granted broad time-boxed autonomy ("auto-approve everything until 6AM," later extended to 12 noon) — but that authorization is time-boxed and conversation-specific, not a standing grant. A new session should NOT assume blanket autonomy; check current conversation context for explicit authorization before taking risky/irreversible actions.
 - The user reacts well to autonomous, thorough work (multi-agent research/review dispatches, self-caught bugs, live browser verification) but has corrected scope creep before (e.g. "one PR per batch, not one per item"; "don't go for anything too fancy" on design). Default to disciplined, scoped execution over speculative expansion.
+
+---
+
+**Current state: `main` is clean, builds and lints with zero errors/warnings, at v2.1.1.**
