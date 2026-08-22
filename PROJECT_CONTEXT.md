@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-22, at PR #19 / VERSION.txt `2.1.1`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-23, at PR #20 / VERSION.txt `2.2.0`.
 
 ## What this project is
 
@@ -119,6 +119,7 @@ document for two releases and sent readers looking for files that were gone.
 
 - **PR #13** (v1.11.0) — home landing page + audit fixes + hosting readiness. The home page was a bare gateway (hero, exam list, two placeholder cards); it is now a real landing page modeled on the structure of cseexamreviewer.com at the user's request: accent hero band, stat row, per-section cards, how-it-works, three alternating feature bands, a "more exams" block, a native `<details>` FAQ, a closing CTA, plus a new `SiteFooter` carrying the GMAC non-affiliation disclaimer. `SiteHeader`'s three inert "soon" chips became real exam links. Audit fixes shipped alongside: `body { font-family: Arial }` had been silently overriding the Geist webfont app-wide since the starter template; `--accent` failed WCAG as text in dark mode (3.11:1) so `--accent-text` was added, derived via `color-mix` so it tracks each exam's accent; PauseOverlay opened with focus on `<body>`; `handlePause`/`handleDeadlineChange` wrote render-closure `answers` to storage and could lose an answer to a same-frame race. Hosting groundwork: `generateStaticParams` + `dynamicParams = false` on both dynamic segments (every route is now build-time prerendered, zero on-demand server rendering), `metadataBase` + title template + per-exam `generateMetadata`, `robots.ts`, `sitemap.ts`, `not-found.tsx`, `error.tsx`, JSON-LD on the home page, and `lib/site.ts` holding `NEXT_PUBLIC_SITE_URL` and the disclaimer.
 
+- **PR #20** (v2.2.0) — the on-screen calculator for GMAT Data Insights, plus explicit "no calculator here" copy on the sections that grant none. The engine is a pure reducer asserted by `verify:engine`. Review established that the real device is an emulated TI-108, which invalidated four details the first implementation had guessed at or imported from the pre-Focus calculator. Full detail in "The on-screen calculator" below; read it before touching either file.
 - **PR #18** (v2.1.0) — the accounts backend: Neon Postgres, Drizzle with committed migrations, better-auth email/password, one dynamic API route. No user-facing change; there is still no sign-in UI and no route requires a session. Full detail in "THE ACCOUNTS BACKEND" below, including two config options that better-auth silently ignored.
 
 ## Known non-issue: the answer-key distribution
@@ -181,6 +182,87 @@ Files: `lib/exams/{types,registry}.ts`, `lib/exams/{nmat,gmat}/index.ts`, `lib/q
 GMAT Focus: Data Insights 20q, Quantitative 21q, Verbal 23q, 45 minutes each, 64 questions, 205-805. Verbal has NO sentence correction; Quantitative has NO geometry; Data Sufficiency belongs to **Data Insights**, not Quantitative. Bank is a **90-question seed** (30 per section, 10 per difficulty), not a finished bank: a perfect run exhausts the ten hard questions and falls back to medium.
 
 `npm run verify:engine` asserts (and exits non-zero) on the adaptive ladder and both scoring models. It has already caught three real bugs: a perfect attempt scoring 810 on a band whose maximum is 805, difficulty weighting being a no-op, and timing out scoring higher than finishing. **Run it after touching `lib/adaptive.ts` or `lib/scoring.ts`.**
+
+### The on-screen calculator (v2.2.0, PR #20)
+
+`lib/calculator/basic-di.ts` models the calculator GMAT Focus provides in **Data
+Insights and nowhere else**. It is a pure reducer with no React, no DOM and no
+imports, which is what lets `npm run verify:engine` assert it directly; 40 of the
+script's assertions are now calculator behavior. `components/quiz/CalculatorPanel.tsx`
+is the keypad and nothing else.
+
+**Availability is declared per section**, on `SectionConfig.calculator`, NOT on
+`ExamRules` — it is the one thing that varies between sections of a single exam.
+The field is **required, not optional**, so all six sections say `null` out loud.
+That is deliberate: "no calculator" is a rule the UI states, and an optional field
+would let a new section default into silence.
+
+**The device is an emulated Texas Instruments TI-108.** Write that down before
+researching anything about it, because the TI-108 is documented and most GMAT prep
+material is not describing it. A source that mentions a `1/x` key, `MS`/`MR`/`MC`,
+or separate `BS`/`CE`/`CA` keys is describing the **pre-Focus Integrated Reasoning**
+calculator and its other details should not be trusted either. The first
+implementation of this feature copied three separate details from that older device.
+
+Behaviors that look like bugs and are not. Each is asserted, and the assertions
+exist as much to stop someone "fixing" them as to catch a regression:
+
+- **No order of operations.** Strictly left to right, so `2 + 3 × 4` is 20. There
+  are no parentheses. The workaround is the memory keys, and both the naive and the
+  `M+` path are asserted.
+- **`%` is contextual.** With a pending `+`/`-` it takes the percentage OF the
+  accumulator (`12 + 10 %` shows 1.2, `=` gives 13.2). Only under `*`/`/` or with
+  nothing pending does it divide by 100.
+- **Repeated `=` repeats the last operation** (the automatic constant):
+  `3 + 2 * 5 = = =` is 625.
+- **The display is 8 digits.** Past 99,999,999 it errors and only `ON/C` recovers.
+  Memory has the same ceiling. This is tighter than it looks and is reachable in
+  real DI arithmetic — which is the point, since a calculation that fails on test
+  day must not quietly succeed here.
+- **One `ON/C`, no backspace.** First press clears the entry, second clears the
+  calculation; memory survives both and is cleared with `MRC` twice.
+
+One thing is genuinely still unknown: what a **repeated operator** does. The
+automatic constant suggests `3 + +` yields 6; we treat a second operator as
+replacing the pending one, since correcting a mistype is the commoner intent. The
+only sources describe this through a third-party simulator's own MDAS toggle.
+
+**Traps this feature has already sprung:**
+
+- **Do not overload `entryMode` as the fold condition.** It means "the next digit
+  replaces the display", NOT "an operand has been supplied since the operator".
+  Those come apart for `√`, `%`, `MRC` and a cleared entry, and the operator branch
+  then overwrote the accumulator: `2 + 9 √ × 4 =` gave 12 instead of 20. There is a
+  separate `operandReady` flag for this. The tell was that `=` and the operator
+  branch disagreed about identical state.
+- **The panel is `absolute` inside a `sticky` wrapper, so page scroll does not move
+  it.** Anything past the fold is unreachable at *every* scroll position, not merely
+  awkward. It is capped with `max-height` and scrolls internally. The explanatory
+  note has been in three places for this reason: at the bottom it could not be
+  reached on a 1366x768 laptop, and in full above the keypad it pushed the digits
+  off screen. It is now a one-line banner above plus a collapsed disclosure below.
+- **The panel width and its breakpoint are ONE decision.** The column is `max-w-3xl`
+  with `px-6`, so the shifted panel's left edge is `(viewport - 768) / 2 + 24` minus
+  gap minus width. At 15rem + 1rem that is positive at exactly 1280, which is why
+  `xl` is right; at the original 17rem + 1.5rem the panel hung 40px off the left of
+  the screen between 1280 and 1360. Widening it without raising the breakpoint
+  reintroduces that.
+- **`calcVisible` must match the `inert` condition, not just `paused`.** The panel's
+  Escape handler is on `document`, and `inert` blocks pointer and focus but not a
+  document-level keydown, so one Escape aimed at the confirm dialog also collapsed
+  the calculator.
+- **The no-calculator note renders only where the same exam grants one elsewhere.**
+  Unconditional, it told NMAT Language Skills readers that a preposition question
+  was "meant to come out through reasoning and estimation" and implied some other
+  NMAT section had a calculator. NMAT has none anywhere.
+- **There is deliberately no keyboard entry.** Every key is a focusable `<button>`
+  so Tab-and-Enter works, but no keydown handler maps number keys: the real one is
+  mouse-driven, and type-to-enter would hand a practicing student a speed advantage
+  that evaporates on test day. It will read as a missing feature; it is not.
+
+Not done, and known: the real calculator is **draggable** around the screen and ours
+is a fixed popover. Calculator state is also not persisted, so a reload mid-section
+keeps the attempt but wipes a banked memory value.
 
 ### Scoring traps that were live and are now asserted against
 
@@ -415,4 +497,4 @@ If asked to regenerate the answer-key PDF in the future: one-off Node script (`d
 
 ---
 
-**Current state: `main` is clean, builds and lints with zero errors/warnings, at v2.1.1.**
+**Current state: `main` is clean, builds and lints with zero errors/warnings, at v2.2.0.**
