@@ -196,7 +196,11 @@ check("a result too small to show reads as zero", type("1 / 1 0 0 0 0 0 0 0 = / 
 check("divide by zero errors", type("9 / 0 =").display, "Error");
 check("the square root of a negative errors", type("9 +/- sqrt").display, "Error");
 check("ON/C recovers from an error", type("9 / 0 = onC 7").display, "7");
-check("memory overflow errors and leaves memory intact", type("9 9 9 9 9 9 9 9 m+ m+").display, "Error");
+check(
+  "memory overflow errors and leaves memory intact",
+  [type("9 9 9 9 9 9 9 9 m+ m+").display, type("9 9 9 9 9 9 9 9 m+ m+").memory],
+  ["Error", 99999999]
+);
 
 // -- clear semantics: one key, two behaviors
 check(
@@ -212,6 +216,26 @@ check("an MRC broken by another key does not clear memory", type("5 m+ mrc 9 mrc
 
 // -- formatting
 check("float noise never reaches the display", type(". 1 + . 2 =").display, "0.3");
+/**
+ * The chained accumulator must carry the DISPLAYED value, not full double
+ * precision, or the calculator gives two answers for the same arithmetic
+ * depending on whether `=` was pressed in the middle. There was no assertion
+ * covering this and the bug shipped: `1 / 3 * 3 =` returned exactly 1 while
+ * `1 / 3 = * 3 =` returned 0.9999999.
+ */
+check(
+  "a chained fold and an explicit equals agree on a repeating decimal",
+  [type("1 / 3 * 3 =").display, type("1 / 3 = * 3 =").display],
+  ["0.9999999", "0.9999999"]
+);
+check(
+  "the same holds for an ordinary percent-of-total calculation",
+  [type("1 4 7 / 3 6 0 * 1 0 0 =").display, type("1 4 7 / 3 6 0 = * 1 0 0 =").display],
+  ["40.83333", "40.83333"]
+);
+check("a value that rounds into range is shown, not errored", type("9 9 9 9 9 9 9 9 + . 4 =").display, "99999999");
+check("a value that rounds out of range still errors", type("9 9 9 9 9 9 9 9 + . 5 =").display, "Error");
+check("equals with no second operand reuses the first", type("2 + =").display, "4");
 check("a sign flip after an operator is treated as a supplied operand", type("2 + +/- * 4 =").display, "0");
 
 console.log(failures === 0 ? "\nall checks passed" : `\n${failures} CHECK(S) FAILED`);

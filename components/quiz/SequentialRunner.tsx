@@ -44,17 +44,6 @@ export default function SequentialRunner({
 
   /**
    * Whether the calculator is actually on screen. DERIVED rather than an effect
-   * that closes it on pause, which is both purer (no `set-state-in-effect`) and
-   * better behaved: the panel comes back as you left it when you resume,
-   * instead of silently closing itself while you were away.
-   *
-   * The panel also renders inside the `inert` wrapper, so pause already blocks
-   * pointer and keyboard access to it. This is the visual half of the same
-   * rule: a calculator left on screen behind the anti-cheat overlay would
-   * advertise the frozen clock as a good moment to work something out.
-   */
-  /**
-   * Whether the calculator is actually on screen. DERIVED rather than an effect
    * that closes it, which is both purer (no `set-state-in-effect`) and better
    * behaved: the panel comes back as you left it, memory included, instead of
    * silently closing itself while you were away.

@@ -192,7 +192,6 @@ export function initialCalculatorState(): CalculatorState {
  */
 function formatResult(value: number): string | null {
   if (!Number.isFinite(value)) return null;
-  if (Math.abs(value) > OVERFLOW_LIMIT) return null;
   if (value === 0 || Math.abs(value) < UNDERFLOW_LIMIT) return "0";
 
   // Spend the eight digits on the integer part first, then give whatever is
@@ -200,6 +199,16 @@ function formatResult(value: number): string | null {
   const integerDigits = Math.max(1, Math.floor(Math.log10(Math.abs(value))) + 1);
   const decimals = Math.max(0, MAX_ENTRY_DIGITS - integerDigits);
   const fixed = value.toFixed(decimals);
+
+  /**
+   * Overflow is judged AFTER rounding, not before, because the display's limit
+   * is about what it can show rather than what was computed. `99999999 + 0.4`
+   * is 99999999.4, which rounds to eight digits perfectly well; erroring on the
+   * raw value refused a number the device displays without complaint.
+   * `99999999.5` still errors, because it rounds up to nine digits.
+   */
+  if (Math.abs(Number.parseFloat(fixed)) > OVERFLOW_LIMIT) return null;
+
   // Trailing zeros are an artifact of toFixed, not something the device shows.
   const trimmed = decimals > 0 ? fixed.replace(/\.?0+$/, "") : fixed;
   return trimmed === "" || trimmed === "-" || trimmed === "-0" ? "0" : trimmed;
@@ -313,7 +322,22 @@ export function press(state: CalculatorState, key: CalculatorKey): CalculatorSta
         return {
           ...next,
           display: shown,
-          accumulator: folded,
+          /**
+           * The DISPLAYED value, not the full-precision `folded`.
+           *
+           * An eight-digit device has eight digits of state; carrying a double
+           * forward here made the calculator contradict itself, which this
+           * file's own `operandReady` comment names as the signature of a bug.
+           * `1 / 3 * 3 =` returned exactly 1 while `1 / 3 = * 3 =` returned
+           * 0.9999999, so the same arithmetic had two answers depending on
+           * whether the user pressed `=` in the middle. `147 / 360 * 100 =` is
+           * an ordinary "what percent of the total" question and hit it.
+           *
+           * Reading it back through `parseFloat(shown)` is what makes the two
+           * forms agree. Whatever rounding convention this file adopts, both
+           * paths have to adopt the same one.
+           */
+          accumulator: Number.parseFloat(shown),
           pendingOp: key,
           entryMode: "result",
           operandReady: false,
@@ -336,6 +360,13 @@ export function press(state: CalculatorState, key: CalculatorKey): CalculatorSta
        * pending, a remembered one repeats. That is the automatic constant, and
        * it is why `3 + 2 * 5 = = =` is 625 rather than 25: the first `=` gives
        * 25 and each further one multiplies by 5 again.
+       */
+      /**
+       * Note this does NOT consult `operandReady`, and the asymmetry with the
+       * operator branch is intentional rather than an oversight. `2 + =` giving
+       * 4 is what every four-function calculator does: with no second operand
+       * supplied it reuses the first. Applying the operator branch's guard
+       * uniformly here would make it 2, which no device does. Same for `%`.
        */
       if (state.pendingOp !== null && state.accumulator !== null) {
         const operand = parseDisplay(state);
@@ -408,7 +439,11 @@ export function press(state: CalculatorState, key: CalculatorKey): CalculatorSta
        * the memory workaround for the left-to-right quirk usable at all: the
        * clear between the two products has to preserve what M+ just stored.
        */
-      if (state.lastKeyWasClear && !state.error) {
+      // No `!state.error` guard: it would be dead. `errored()` always resets
+      // `lastKeyWasClear`, and the guard at the top of this function returns
+      // early for every other key while errored, so a double-press cannot be
+      // reached from an error state. The first press clears the error.
+      if (state.lastKeyWasClear) {
         return { ...initialCalculatorState(), memory: state.memory };
       }
       return {

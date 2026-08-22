@@ -145,13 +145,17 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
     // multi-source question instead of scrolling away with the first screen.
     <div className="sticky top-20 z-30 -mx-1 mb-4 px-1">
       <div ref={rootRef} className="relative">
+        {/* The disclosure pattern: aria-expanded plus aria-controls, and
+            deliberately NO aria-haspopup. An earlier revision declared
+            haspopup="dialog" while the panel below is role="group", so a
+            screen reader announced a dialog popup and then landed the
+            reader on a group. */}
         <button
           ref={toggleRef}
           type="button"
           onClick={() => onOpenChange(!open)}
           aria-expanded={open}
           aria-controls={panelId}
-          aria-haspopup="dialog"
           className="flex h-11 items-center gap-2 rounded-md border border-line-strong bg-background px-3 text-sm font-medium text-foreground hover:bg-panel-hover"
         >
           {/* An inline SVG, not the 🖩 emoji, which renders as a tofu box on
