@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import { Attempt } from "@/components/quiz/useAttempt";
-import { AttemptNotice, BackToSetup } from "@/components/quiz/shared";
+import { AttemptNotice, BackToSetup, NoCalculatorNote } from "@/components/quiz/shared";
+import CalculatorPanel from "@/components/quiz/CalculatorPanel";
 import Timer from "@/components/Timer";
 import QuestionCard from "@/components/QuestionCard";
 import ResultSummary from "@/components/ResultSummary";
@@ -32,12 +33,27 @@ export default function SequentialRunner({
   attempt: Attempt;
 }) {
   const [pendingAction, setPendingAction] = useState<"submit" | "restart" | null>(null);
+  const [calcOpen, setCalcOpen] = useState(false);
+
 
   const {
     phase, notice, questions, answers, flagged, cursor, totalQuestions, deadline,
     paused, frozenTimeLabel, answeredCount, result, reviewChangesLeft,
     select, toggleFlag, advance, submit, restart, pause, resume, onDeadlineChange,
   } = attempt;
+
+  /**
+   * Whether the calculator is actually on screen. DERIVED rather than an effect
+   * that closes it on pause, which is both purer (no `set-state-in-effect`) and
+   * better behaved: the panel comes back as you left it when you resume,
+   * instead of silently closing itself while you were away.
+   *
+   * The panel also renders inside the `inert` wrapper, so pause already blocks
+   * pointer and keyboard access to it. This is the visual half of the same
+   * rule: a calculator left on screen behind the anti-cheat overlay would
+   * advertise the frozen clock as a good moment to work something out.
+   */
+  const calcVisible = calcOpen && !paused;
 
   const reviewMode = phase === "done";
   const inReviewPass = phase === "reviewEdit";
@@ -112,6 +128,17 @@ export default function SequentialRunner({
 
         <main className="mt-6">
           <AttemptNotice notice={notice} />
+
+          {/* Top left of the section, and inside the `inert` wrapper on purpose
+              so pausing takes the calculator away with everything else. Still
+              shown during the review pass: the clock is running and answers can
+              still change there, so the tool the exam grants is still granted. */}
+          {!reviewMode &&
+            (section.calculator === "basic-di" ? (
+              <CalculatorPanel open={calcVisible} onOpenChange={setCalcOpen} />
+            ) : (
+              <NoCalculatorNote examLabel={exam.label} />
+            ))}
 
           {/* Progress is a bar, not a jump grid: on a sequential section the
               other questions are not reachable, so a grid of clickable cells

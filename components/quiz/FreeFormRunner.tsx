@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import { Attempt } from "@/components/quiz/useAttempt";
-import { AttemptNotice, BackToSetup } from "@/components/quiz/shared";
+import { AttemptNotice, BackToSetup, NoCalculatorNote } from "@/components/quiz/shared";
+import CalculatorPanel from "@/components/quiz/CalculatorPanel";
 import Timer from "@/components/Timer";
 import QuestionCard from "@/components/QuestionCard";
 import ResultSummary from "@/components/ResultSummary";
@@ -33,11 +34,14 @@ export default function FreeFormRunner({
 }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [pendingAction, setPendingAction] = useState<"submit" | "restart" | null>(null);
+  const [calcOpen, setCalcOpen] = useState(false);
 
   const {
     phase, notice, questions, answers, deadline, paused, frozenTimeLabel,
     answeredCount, result, select, submit, restart, pause, resume, onDeadlineChange,
   } = attempt;
+
+  const calcVisible = calcOpen && !paused;
 
   const reviewMode = phase === "done";
 
@@ -183,6 +187,17 @@ export default function FreeFormRunner({
             )}
 
             <AttemptNotice notice={notice} />
+
+            {/* No free-form section grants a calculator today, so this renders
+                the "none here" note for all six. It is wired anyway so a future
+                free-form exam that does grant one needs no special case, which
+                is the whole point of declaring it on SectionConfig. */}
+            {!reviewMode &&
+              (section.calculator === "basic-di" ? (
+                <CalculatorPanel open={calcVisible} onOpenChange={setCalcOpen} />
+              ) : (
+                <NoCalculatorNote examLabel={exam.label} />
+              ))}
 
             {reviewMode && result && (
               <div className="mb-4">

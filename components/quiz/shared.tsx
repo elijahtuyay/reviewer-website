@@ -93,6 +93,30 @@ export function SectionLockScreen({
 }
 
 /**
+ * Says out loud that a section gives you no calculator.
+ *
+ * An absence reads as an unbuilt feature; a sentence reads as a rule. GMAT
+ * Quantitative withholds a calculator on purpose, because the section is built
+ * so every question yields to reasoning and estimation, and someone practicing
+ * it with a calculator open in another tab is building pacing that collapses on
+ * test day. Saying nothing lets them do exactly that.
+ *
+ * This repo has shipped the inverse mistake before: UI copy claiming a section
+ * lock the engine did not enforce. This is the same class of defect read the
+ * other way round, a real rule the UI stayed silent about.
+ */
+export function NoCalculatorNote({ examLabel }: { examLabel: string }) {
+  return (
+    <p className="mb-4 text-xs leading-relaxed text-muted">
+      <span className="font-medium text-foreground">No calculator in this section.</span> The{" "}
+      {examLabel} doesn&apos;t provide one here, so every question is meant to come out through
+      reasoning and estimation. Practicing with one open is a habit that won&apos;t survive test
+      day.
+    </p>
+  );
+}
+
+/**
  * The back link that collapses to a bare arrow below `sm`. At 390px the full
  * text wrapped onto two lines and squeezed the section title down to
  * "Langua...", which is the h1 of the page you are on.
