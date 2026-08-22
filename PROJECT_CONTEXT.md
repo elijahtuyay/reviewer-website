@@ -1,10 +1,10 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-22, at PR #17 / VERSION.txt `2.0.2`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-22, at PR #19 / VERSION.txt `2.1.1`.
 
 ## What this project is
 
-An exam-prep web app for **NMAT by GMAC** (a Philippine business-school admission test), built with Next.js 16.3.0 (Turbopack), React 19, TypeScript, and Tailwind v4. A second exam, **GMAT**, is architecturally scaffolded but has zero question content yet (deliberate — see "Multi-exam architecture" below). The repo lives at:
+An exam-prep web app for **NMAT by GMAC** (a Philippine business-school admission test), built with Next.js 16.3.0 (Turbopack), React 19, TypeScript, and Tailwind v4, with a Neon Postgres database behind Drizzle and better-auth as of v2.1.0 (backend only, no sign-in UI yet). A second exam, **GMAT Focus**, is fully playable on a deliberate 90-question seed bank (30 per section, 10 per difficulty) — enough to exercise the adaptive engine, not a finished bank. See "THE MODULAR EXAM ARCHITECTURE" below. The repo lives at:
 
 ```
 C:\Users\elija\Documents\Personal Files\AI_ML\Codes\reviewer-website
@@ -34,7 +34,8 @@ Watch the usual families: `-ise`/`-isation` to `-ize`/`-ization`, `-our` to `-or
 Programme P:"` has no word boundary before the second `Programme` and `programme` silently skips it. That left one question reading "acceptances by program" above a table labeled "Programme P", which is exactly the mixed usage the sweep exists to remove. Parsing the file first makes the whole bug class impossible.
 
 **Prefer stems to word lists for the `-our` family.** An enumerated list missed `labour` entirely and matched `neighbour` but not `neighbourhoods`. A stem pattern (`lab|col|fav|neighb|behavi|...` + `our` + any suffix) covers every inflection at once, and the words that genuinely end `-our` in American English (four, hour, tour, pour, flour, contour, devour) are simply absent from the stem list.
- A blanket `-ise` to `-ize` rule breaks words that are legitimately `-ise` in American English: it turned `advertise` into `advertize` and, worse, `counterclockwise` into `counterclockwize` inside the circular-seating puzzles. Keep an exception list (advise, comprise, compromise, exercise, improvise, revise, supervise, surprise, promise, and every `-wise` compound). And never rewrite an identifier: `cancelLabel` is a prop, `color` is a CSS property, and `Content-Security-Policy` is a header name. Word-boundary patterns plus a grep for identifiers afterwards is the check that caught this.
+
+**Keep an `-ise` exception list.** A blanket `-ise` to `-ize` rule breaks words that are legitimately `-ise` in American English: it turned `advertise` into `advertize` and, worse, `counterclockwise` into `counterclockwize` inside the circular-seating puzzles. Keep an exception list (advise, comprise, compromise, exercise, improvise, revise, supervise, surprise, promise, and every `-wise` compound). And never rewrite an identifier: `cancelLabel` is a prop, `color` is a CSS property, and `Content-Security-Policy` is a header name. Word-boundary patterns plus a grep for identifiers afterwards is the check that caught this.
 
 ## Copyright rule (critical, applies to ALL future content work)
 
@@ -51,14 +52,21 @@ This Next.js version (16.3.0) has **breaking changes vs. typical training data**
 
 ## Architecture
 
-### Multi-exam design
+### Shared plumbing (see "THE MODULAR EXAM ARCHITECTURE" below for how exams are registered)
+
+This subsection used to describe a `lib/exam-config.ts` and a `lib/data/questions.ts`.
+**Both were deleted in v2.0.0 and neither exists.** The registry is
+`lib/exams/registry.ts` and the bank loader is `lib/question-bank.ts`. The note is
+left here rather than silently removed because those two filenames survived in this
+document for two releases and sent readers looking for files that were gone.
+
 - `data/schema.ts`: `ExamId = "nmat" | "gmat"`. `SectionId` is a loose `string` (not a fixed union) since each exam has different sections.
-- `lib/exam-config.ts`: single source of truth. `EXAMS: Record<ExamId, ExamConfig>` registry with per-exam `theme` (accent color), `sections[]` (id/label/description/questionCount/minutes), `pointsPerCorrectAnswer`, and `available: boolean`. **`gmat.available === false`** — it has section configs but `questionCount: 0` for all of them, and the route layer 404s it (see below). NMAT accent green `#0f7b4d` is an *approximated* brand color (mba.com/exams/nmat was bot-protected during scraping attempts, so it's not pixel-verified — swap it if you ever get the exact hex).
-- Routes: `app/[examId]/page.tsx` (exam setup/landing), `app/[examId]/quiz/[section]/page.tsx` (the actual quiz, client component). `app/[examId]/layout.tsx` (server) validates `examId` and applies the exam's theme via CSS custom properties on a `display: contents` wrapper (zero layout impact, properties still inherit). `app/[examId]/quiz/[section]/layout.tsx` (server, added later — see bug fix history) validates `examId` + `section` + `exam.available`, 404ing before the client page ever renders.
-- Question banks: `lib/data/questions.ts` exports `QUESTIONS_BY_EXAM: Record<ExamId, Record<string, Question[]>>`. **The underlying JSON files stay at their original flat path** `data/questions/{language-skills,quantitative-skills,logical-reasoning}.json` — NOT moved into a `data/questions/nmat/` subfolder. This was a deliberate decision after a near-miss: an attempted `git mv` into a subfolder was caught and reverted while background content-fix agents were actively editing those exact files at the old path. There IS an empty, untracked `data/questions/gmat/` directory sitting on disk (harmless leftover, safe to ignore or delete).
-- `lib/session-progress.ts` (was `lib/local-progress.ts` until v1.6.0): **sessionStorage**, keyed `progress:${examId}:${section}`. Every read/write path is wrapped in try/catch. The record holds `answers`, `submitted`, `questionIds`, `deadline` (epoch ms), `expired`, and `pausedAt`. sessionStorage is deliberate: an attempt survives reloads and moving between the setup page and a quiz, but dies with the tab/browser. `purgeLegacyPersistedProgress()` clears the old, permanently-lingering localStorage `progress:*` keys from pre-1.6.0 builds. Also exports `clearSectionProgress` / `clearExamProgress` for explicit restarts.
-- `lib/scoring.ts`: `scoreAttempt(questions, answers, pointsPerCorrectAnswer)`.
-- `lib/section-result.ts`: `getSectionBreakdown(examId, sectionId, fallbackTotal)` — powers the post-submit sidebar correct/wrong/skipped breakdown.
+- **Accent colors.** NMAT green `#0f7b4d` is an *approximated* brand color (mba.com/exams/nmat was bot-protected during scraping attempts, so it is not pixel-verified — swap it if you ever get the exact hex). GMAT blue is `#2563eb`, chosen by measuring contrast rather than taste; see the accent trap below.
+- Routes: `app/[examId]/page.tsx` (exam setup/landing), `app/[examId]/quiz/[section]/page.tsx` (a shell that picks a runner, client component). `app/[examId]/layout.tsx` (server) validates `examId` and applies the exam's theme via CSS custom properties on a `display: contents` wrapper (zero layout impact, properties still inherit). `app/[examId]/quiz/[section]/layout.tsx` (server) validates `examId` + `section` + availability before the client page renders.
+- **Question bank file layout, and a warning attached to it.** NMAT's three JSON files sit at the flat path `data/questions/{language-skills,quantitative-skills,logical-reasoning}.json`, NOT in a `data/questions/nmat/` subfolder. That is deliberate: an attempted `git mv` into a subfolder was caught and reverted while background content-fix agents were actively editing those exact files at the old path. GMAT's three files DO live in `data/questions/gmat/` (`data-insights.json`, `quantitative.json`, `verbal.json`), they are tracked, and they hold the entire GMAT bank. **An earlier version of this document described that directory as "an empty, untracked leftover, safe to ignore or delete." Do not do that; it would delete the GMAT question bank.**
+- `lib/session-progress.ts` (was `lib/local-progress.ts` until v1.6.0): **sessionStorage**, keyed `progress:${examId}:${section}`. Every read/write path is wrapped in try/catch. The record holds `answers`, `submitted`, `questionIds`, `deadline` (epoch ms), `expired`, `pausedAt`, and `summary`. sessionStorage is deliberate: an attempt survives reloads and moving between the setup page and a quiz, but dies with the tab/browser. `purgeLegacyPersistedProgress()` clears the old, permanently-lingering localStorage `progress:*` keys from pre-1.6.0 builds. Also exports `clearSectionProgress` / `clearExamProgress` for explicit restarts.
+- `lib/scoring.ts`: both scoring models. See "Scoring traps" below before touching it.
+- `lib/section-result.ts`: `getSectionBreakdown(examId, sectionId, fallbackTotal)` powers the post-submit correct/wrong/skipped breakdown, and `findActiveAttempt()` is the real section-lock check. **It does not read the question bank** — the score is written into sessionStorage as `StoredProgress.summary` at submit time, which is what keeps the bank off the critical path.
 
 ### Question bank content
 - **300 questions total**, 100 per section (`language-skills`, `quantitative-skills`, `logical-reasoning`), stored in `data/questions/*.json`.
@@ -102,7 +110,7 @@ This Next.js version (16.3.0) has **breaking changes vs. typical training data**
 - **PR #4**, `305160c` (v1.3.0) — the big `reminders.txt` batch: multi-exam architecture, KaTeX math rendering, sticky header, pause overlay, page transitions, brand accent color, full content overhaul (topic ratios, difficulty, em-dash removal) across all 300 questions.
 - **PR #5**, `2b26e9a` (v1.4.0) — post-merge autonomous audit (5 background agents: 3 design-system research, 2 bug hunts) + fixes: timer drift, localStorage write crash, mobile nav, tap targets, focus rings, lint cleanup.
 - **PR #6**, `f0e6707` (v1.4.1) — follow-up fix: color-only correctness indicator.
-- **PR #7**, `d3479a6` (v1.5.0) — response to user's post-PDF-review feedback batch. Fixed a severe pre-existing bug found while investigating (not explicitly reported): the correct answer's option slot was heavily skewed toward A bank-wide (logical-reasoning was 86/119 correctIndex 0, several topics literally 100% "always A") — fixed with a mechanical options-array shuffle across all 300 questions. Also: Para Forming (10 questions) had the printed P/Q/R/S line order always exactly matching the correct sequence, plus telltale concluding adverbs marking the last sentence — both fixed. Sentence Completion (12 questions) had distractor sets that were 3 near-synonyms vs. 1 obvious answer — rewritten to be individually plausible. Reading Comprehension trimmed 26→18 (two whole passages retired), replaced with 8 new "Vocabulary in Context" questions. Topic-bunching fixed via a display-order interleave (`interleaveByTopic` in `lib/data/questions.ts`, best-effort not a hard guarantee for topic-imbalanced draws). PauseOverlay copy simplified + crossfade transition added. ProgressTracker now stays visible after submission and color-codes cells green/red.
+- **PR #7**, `d3479a6` (v1.5.0) — response to user's post-PDF-review feedback batch. Fixed a severe pre-existing bug found while investigating (not explicitly reported): the correct answer's option slot was heavily skewed toward A bank-wide (logical-reasoning was 86/119 correctIndex 0, several topics literally 100% "always A") — fixed with a mechanical options-array shuffle across all 300 questions. Also: Para Forming (10 questions) had the printed P/Q/R/S line order always exactly matching the correct sequence, plus telltale concluding adverbs marking the last sentence — both fixed. Sentence Completion (12 questions) had distractor sets that were 3 near-synonyms vs. 1 obvious answer — rewritten to be individually plausible. Reading Comprehension trimmed 26→18 (two whole passages retired), replaced with 8 new "Vocabulary in Context" questions. Topic-bunching fixed via a display-order interleave (`interleaveByTopic`, which lived in `lib/data/questions.ts` then and is in `lib/question-bank.ts` now; best-effort, not a hard guarantee for topic-imbalanced draws). PauseOverlay copy simplified + crossfade transition added. ProgressTracker now stays visible after submission and color-codes cells green/red.
 
 - **PR #9** (v1.6.0) — session lifecycle / error-handling fix. The user reported being confused by an old session that had "timed out". Two stacked defects: progress was written to `localStorage` with no expiry (so a half-finished or already-submitted attempt survived browser restarts forever), while the timer restarted at full length on every mount — pairing an old question set and old answers with a fresh clock, and dropping a resumed submitted attempt straight into review mode with no explanation. Fixed by moving progress to sessionStorage, persisting the timer deadline (plus `pausedAt`), and never resuming without saying so. See the sessionStorage/Timer/`SessionResetNotice` notes above.
 
@@ -110,6 +118,8 @@ This Next.js version (16.3.0) has **breaking changes vs. typical training data**
 - **Review lanes are now mandatory per PR** (see CLAUDE.md): logic, syntax/display, UX, content correctness. Their first run (PR #10) found the unsolvable seating puzzles, the drifted explanations, and proved a CSS "fix" of mine was a measured 11% regression. Take their findings seriously and verify claims independently.
 
 - **PR #13** (v1.11.0) — home landing page + audit fixes + hosting readiness. The home page was a bare gateway (hero, exam list, two placeholder cards); it is now a real landing page modeled on the structure of cseexamreviewer.com at the user's request: accent hero band, stat row, per-section cards, how-it-works, three alternating feature bands, a "more exams" block, a native `<details>` FAQ, a closing CTA, plus a new `SiteFooter` carrying the GMAC non-affiliation disclaimer. `SiteHeader`'s three inert "soon" chips became real exam links. Audit fixes shipped alongside: `body { font-family: Arial }` had been silently overriding the Geist webfont app-wide since the starter template; `--accent` failed WCAG as text in dark mode (3.11:1) so `--accent-text` was added, derived via `color-mix` so it tracks each exam's accent; PauseOverlay opened with focus on `<body>`; `handlePause`/`handleDeadlineChange` wrote render-closure `answers` to storage and could lose an answer to a same-frame race. Hosting groundwork: `generateStaticParams` + `dynamicParams = false` on both dynamic segments (every route is now build-time prerendered, zero on-demand server rendering), `metadataBase` + title template + per-exam `generateMetadata`, `robots.ts`, `sitemap.ts`, `not-found.tsx`, `error.tsx`, JSON-LD on the home page, and `lib/site.ts` holding `NEXT_PUBLIC_SITE_URL` and the disclaimer.
+
+- **PR #18** (v2.1.0) — the accounts backend: Neon Postgres, Drizzle with committed migrations, better-auth email/password, one dynamic API route. No user-facing change; there is still no sign-in UI and no route requires a session. Full detail in "THE ACCOUNTS BACKEND" below, including two config options that better-auth silently ignored.
 
 ## Known non-issue: the answer-key distribution
 
@@ -123,7 +133,7 @@ python -c "import json,io,collections; c=collections.Counter(); [c.update([q['co
 
 **Deployed on Vercel (Hobby), as of v2.0.1.** Chosen over Cloudflare because Next.js is Vercel's own framework, so there is no adapter and no build configuration, and because API routes run natively there when the accounts backend arrives. The Hobby plan never bills (it pauses at the limit) but **forbids commercial use** — ads, payments or a paid plan mean upgrading or migrating to Cloudflare Workers, which is about a day's work since nothing depends on Vercel-specific APIs.
 
-As of v1.10.0 the build emits no dynamic routes: `npm run build`'s route table should show only `○ (Static)` and `● (SSG)`. There is no database, no runtime secret, and no request-time work.
+**This changed at v2.1.0 and the old claim is worth stating so it is not re-copied: there used to be "no database, no runtime secret, and no request-time work." All three are now false.** The build emits exactly ONE dynamic route, `ƒ /api/auth/[...all]`; every page is still `○ (Static)` or `● (SSG)`, and that invariant is worth checking in the route table after any change. See "THE ACCOUNTS BACKEND" below for the database, the secret, and the traps.
 
 `SITE_URL` lives in **`lib/site-url.ts`**, not `lib/site.ts`, and that split is load-bearing: it reads a non-`NEXT_PUBLIC_` variable, so if it were ever bundled for the browser it would silently resolve to localhost. `lib/site.ts` keeps only client-safe constants. The URL module also carries `import "server-only"`, which turns importing it from a Client Component into a build error rather than a silent one (verified by deliberately doing it). It resolves at build time from `NEXT_PUBLIC_SITE_URL`, then Vercel's automatic `VERCEL_PROJECT_PRODUCTION_URL`, then localhost. The middle step exists specifically so a deploy that forgets the first cannot silently publish a sitemap and a full set of canonicals pointing at `http://localhost:3000`. **Only set `NEXT_PUBLIC_SITE_URL` once a custom domain exists.** Every consumer of `SITE_URL` is a Server Component or metadata route; check that before importing it into anything marked `"use client"`, since the Vercel variable is not `NEXT_PUBLIC_` and would be undefined in a client bundle.
 
@@ -202,15 +212,174 @@ Data Sufficiency was also restored to **canonical A-E statement order** (PR #7's
 
 **If you add Critical Reasoning, Reading Comprehension, or Para Forming questions, check these numbers again.** The natural way to write a CR question is a long, carefully-hedged correct answer next to three short dismissive distractors, which is exactly how the 94.7% happened.
 
-### Open, deliberately not done in PR #13
+### Open items (originally logged in PR #13; struck-through ones are since closed)
 
-1. **The whole 300-question bank ships to the client on every page** (~220 KB), on `/[examId]` as well as every quiz section. Fix means making the bank load per-section, which means `lib/section-result.ts` and its render-time callers go async, or the per-section score is persisted at submit so the breakdown never needs the bank. Own PR.
-2. **Content: the correct option is systematically the longest.** Pick-longest scores **56.9%** on prose-option Logical Reasoning and **50.3%** on Language Skills, against a 25% baseline — a bigger hole than the positional skew PR #7 closed. Also: the 11 Data Sufficiency items were shuffled out of canonical statement order by that same pass (real DS uses a fixed memorized order), "both statements together" is correct 5 of 11 times, and all 10 Para Forming items open with Q or P, never R or S.
+1. ~~The whole 300-question bank ships to the client on every page.~~ **CLOSED in v2.0.0** by per-section dynamic imports in `lib/question-bank.ts`, plus persisting the score as `StoredProgress.summary` so the breakdown never needs the bank.
+2. ~~The correct option is systematically the longest; Data Sufficiency lost canonical order; Para Forming always opens with P or Q.~~ **CLOSED in PR #14 (v1.12.0)** — see the Answer-key statistics table above for the before/after numbers.
 3. **Six specific question defects**: `ls-055` (two defensible answers), `lr-072` (offers "opposite A" in a five-seat circle), `ls-063` (explanation says a cobbler *makes* shoes), `ls-101` ("abundant with" is not idiomatic), `ls-045`, `qs-030`. Zero wrong keyed answers across all 300.
 4. `ProgressTracker` cells are 28px, under the 44px minimum the rest of the app holds to.
 5. `ConfirmDialog` styles the confirming action as a red outline and the cancel as solid green. A reviewer called this inverted; it is a **documented deliberate choice** from an earlier PR (green = keeps your work). Left alone pending a decision.
 
-**Current state: `main` is clean, builds and lints with zero errors/warnings, at v2.0.0.**
+
+## THE ACCOUNTS BACKEND (v2.1.0, PR #18)
+
+There is a database now. Accounts are **backend-only**: no sign-in UI exists, no
+route requires a session, and anonymous practice is untouched. That is deliberate,
+and it is the invariant to protect. `app/page.tsx` promises "no account needed" in
+several places, so **the site must stay fully usable logged out** and no route may
+redirect to sign-in.
+
+### The files
+
+| Path | What it is |
+| --- | --- |
+| `lib/db/index.ts` | Drizzle handle, `import "server-only"`. Uses the POOLED `DATABASE_URL`. |
+| `lib/db/schema.ts` | better-auth's four tables (`user`, `session`, `account`, `verification`) plus two of ours (`security_event`, `rate_limit`). **Both of ours are created but wired to nothing yet** — nothing writes a security event and nothing reads a rate-limit row. Do not assume the audit trail is recording anything. |
+| `lib/auth/server.ts` | The better-auth config. Read the `satisfies` note below before editing it. |
+| `drizzle/` | Generated migrations, **committed on purpose** so schema changes are reviewable in a PR. |
+| `drizzle.config.ts` | Migration tooling. Prefers the UNPOOLED URL but **falls back to the pooled one if it is unset**, which produces exactly the intermittent failures the comment in that file warns about. It also loads `.env.local` explicitly, because drizzle-kit runs as a plain Node process and does not inherit Next's env loading. |
+| `app/api/auth/[...all]/route.ts` | `force-dynamic`. The only dynamic route in the build. |
+
+Scripts: `npm run db:generate` (write a migration from the schema), `db:migrate`
+(apply it), `db:studio`.
+
+**Migrations are applied BY HAND, from a developer machine.** `build` is a bare
+`next build` and there is no `vercel.json`, so nothing runs them on deploy. Do not
+assume Vercel does it: merging a PR that adds a migration changes the schema in the
+repo and NOTHING in the database, and the two silently diverge until someone runs
+`db:migrate`. There is currently exactly one database and it is production; there is
+no staging copy and no backup story written down. Read the generated SQL before
+applying it.
+
+### THE TRAP THAT WILL BITE YOU: dead config options
+
+`betterAuth` is declared `<Options extends BetterAuthOptions>(options: Options & {})`.
+That inference plus the `& {}` makes excess-property checking **unreliable**, not
+absent, which is worse. Measured: a small options literal DOES get flagged, but once
+the object grew to its real shape (adapter plus a hook function) TypeScript went
+silent and **two invented options compiled clean, shipped, and did nothing**, each
+with a confident comment claiming a protection that was never configured:
+
+- `emailAndPassword.revokeOtherSessionsOnPasswordChange` — **zero occurrences in
+  better-auth 1.7.1.** Made up. The real option is `revokeSessionsOnPasswordReset`,
+  and it covers the RESET flow only. A signed-in user changing their password has no
+  option at all: `/change-password` takes `revokeOtherSessions` in the request body,
+  defaulting to false, so the UI must pass it explicitly or a password change will
+  not evict an attacker holding a stolen session.
+- `trustedOrigins` nested under `advanced` — `advanced` has no such key, so it was
+  discarded and the effective list silently fell back to the `baseURL` origin.
+
+**The options object is therefore assigned with `satisfies BetterAuthOptions` before
+it reaches `betterAuth`. Keep it that way.** If you add an option and the build
+fails there, the option is wrong; do not cast to make it pass. This is the same
+failure this repo already recorded once, where UI copy "claimed a section lock that
+did not exist for months."
+
+### Other traps, each one already hit
+
+- **`account.issuer` is required by better-auth 1.7.** It scopes account identity
+  (`local:credential`, `local:oauth:<provider>`) and carries a unique index on
+  `(issuer, accountId)`. A schema written from a pre-1.7 example 500s on sign-up with
+  an empty response body. **Do not hand-write these tables from memory.** Print the
+  authoritative shape instead:
+
+  ```bash
+  node --input-type=module -e "import {getAuthTables} from 'better-auth/db'; console.log(JSON.stringify(getAuthTables({emailAndPassword:{enabled:true}}),null,1))"
+  ```
+
+- **`neon-http` cannot open a transaction** (it throws `No transactions support in
+  neon-http driver`). better-auth never attempts one: in **`@better-auth/drizzle-adapter`**
+  (a separate package that `better-auth/adapters/drizzle` merely re-exports, so
+  grepping inside `better-auth` for this finds nothing) every `db.transaction()`
+  call site is MySQL-gated, and the adapter-level one is behind
+  `config.transaction ?? false`. **But setting `transaction: true` on
+  `drizzleAdapter` would turn every sign-up into an unhandled 500.**
+- **Sign-up is therefore not atomic.** `createUser` and `linkAccount` are separate
+  writes. A failure between them leaves a `user` row with no credential account that
+  can neither sign in, nor re-register (the address is already claimed), nor reset
+  (no email). Narrow trigger, unrecoverable outcome. The fix belongs with the sign-up
+  route: either a self-healing path, or the WebSocket `Pool` driver, which conflicts
+  with the pooled-connection rationale in `lib/db/index.ts`. It is a design decision,
+  not a chore.
+- **`baseURL` is NOT `SITE_URL`.** `SITE_URL` deliberately resolves to the production
+  host even on a preview, which is correct for canonical tags and wrong for auth,
+  because trusted origins derive from `baseURL`. `authBaseURL()` prefers `VERCEL_URL`
+  on preview. Keep the two concepts separate.
+- **`rate_limit` is OURS and is wired to nothing.** It is NOT better-auth's
+  `rateLimit` model (`{ key, count, lastRequest }`) and is not registered with the
+  adapter, so setting `rateLimit.storage: "database"` will NOT pick it up. The
+  library's default is in-memory, which on Vercel is per-instance and dies with every
+  cold start. **Treat cross-instance rate limiting as absent, not merely weak.**
+- **The module-scope throw on a missing env var is deliberate.** It fails
+  `next build`. That looks like a flaw and is not: Vercel deploys are atomic, so a
+  failed build blocks the deploy while the previous deployment keeps serving. This
+  happened for real — the first preview deploy died on a missing
+  `BETTER_AUTH_SECRET` and production never noticed.
+
+### Database-enforced invariants (three, each verified by direct INSERT)
+
+The schema's philosophy is that anything the application must never do should be
+impossible rather than merely unwritten. Each of these was tested by inserting a
+violating row straight into Postgres, bypassing the app entirely:
+
+1. `user_email_lower_unique` indexes `lower(email)`, not `email`. A plain unique index
+   is case-SENSITIVE and would hold `Elijah@example.com` and `elijah@example.com` as
+   two separate accounts.
+2. `account_issuer_accountId_unique` covers the pair, because `accountId` is only
+   unique within the issuer that minted it.
+3. `session_no_raw_ip` is a CHECK that `ipAddress IS NULL`. `lib/auth/server.ts`
+   strips the value in a create hook, but a hook is a behavior that lapses silently
+   the day someone edits the file. **Raw IPs are never stored**: under the Data
+   Privacy Act an address tied to an account is personal information. `logger.level`
+   is `warn` for the same reason, because at `info` better-auth writes submitted email
+   addresses into platform logs.
+
+Also note `user_email_idx`: sign-in queries `where email = $1` on the bare column,
+which the `lower(email)` expression index cannot serve, so without it every
+authentication attempt is a sequential scan.
+
+### Secrets and environments
+
+- `BETTER_AUTH_SECRET` is set in Vercel for **Production and Preview only**, as
+  Sensitive, with **different values per environment** so a preview leak cannot forge
+  production sessions. Development is intentionally absent (Vercel rejects
+  `--sensitive` there); local dev reads `.env.local`.
+- `DATABASE_URL` (pooled, for the app) and `DATABASE_URL_UNPOOLED` (migrations only)
+  come from the Neon integration. **Never paste a connection string into chat.**
+- **`vercel env pull` gives you the PRODUCTION database.** v2.1.0 was developed and
+  tested against it because that is what existed; it was empty throughout and cleaned
+  up afterward. **Create a Neon development branch before the next database PR** so
+  migrations stop landing on production.
+
+### Known-open security items
+
+Documented rather than fixed, in rough priority order:
+
+1. **No rate limiting that survives a cold start.** `/api/auth/sign-up/email` is
+   publicly reachable and effectively unmetered across instances.
+2. The orphaned-user window described above.
+3. **No CSP or security headers yet.** `frame-ancestors` must ship in the same PR as
+   the first sign-in form, not in a later "headers phase," or the form is
+   clickjackable the day it appears.
+4. 30-day sliding sessions with no UI to revoke them. The endpoints already exist
+   behind the catch-all route; only the interface is missing. Ship the session list
+   with the first auth UI, or shorten `expiresIn` to 7 days until it exists.
+5. A residual ~40ms timing difference on sign-in between a known and unknown address.
+   This is the extra Neon round trip, **not** a missing dummy hash — better-auth
+   already equalizes the scrypt cost. No config setting fixes it.
+
+### If you build the sign-up UI next
+
+`autoSignIn` is **off**, which is what closes user enumeration: better-auth returns a
+synthetic success for an already-registered address, but only when
+`requireEmailVerification` is on or `autoSignIn` is off, and verification needs email
+this project does not have. Two consequences for the UI:
+
+- Sign-up does **not** return a session. Sign in explicitly afterward.
+- A returning user gets the same response as a new one, so the copy must be
+  non-committal: "Account created. If this address was already registered, sign in
+  with your existing password." Claiming a new account was created would be a lie
+  half the time.
 
 ## Lesson learned: never run multiple agents against the same data file concurrently
 
@@ -233,6 +402,9 @@ If asked to regenerate the answer-key PDF in the future: one-off Node script (`d
 - Chrome and Edge are both installed at their standard paths (`C:\Program Files\Google\Chrome\Application\chrome.exe`, `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`) — useful for headless PDF generation or other browser-CLI needs; no `pandoc`/`wkhtmltopdf` installed.
 - `pdftoppm`/poppler-utils are NOT installed, so the `Read` tool cannot render PDF pages to images in this environment — can't visually self-check generated PDFs that way; verify via the source HTML in a real browser (chrome-devtools MCP) instead, since the PDF is a print of that HTML.
 - A `chrome-devtools` MCP integration is available and was used throughout for live browser verification (screenshots, DOM/script evaluation, viewport resizing) — use it to actually verify UI changes rather than assuming from code alone, per the project's "test the golden path in a browser" expectation.
+- **`vercel` CLI** is available via `npx vercel` and the project is linked (`elijahtuyays-projects/reviewer-website`). Useful read-only commands: `npx vercel ls` (deployment status, which is how a failed build gets caught), `npx vercel inspect --logs <url>` (build logs), `npx vercel env ls` (names only, never values). Adding a secret without it ever touching disk or the transcript: pipe it, e.g. `node -e "..." | npx vercel env add NAME production --sensitive`. Note `--sensitive` is rejected for the Development environment.
+- **The permission classifier blocks some outward-facing commands**, including `npx vercel redeploy` and certain shell patterns that assign a secret to a variable. Do not work around it; push a commit and let the deploy happen naturally, or ask the user.
+- **Long heredocs containing mixed quotes fail in this Bash tool.** Writing a file with the Write tool and splicing it in with a short Python step is the reliable pattern.
 - Dev server: `npm run dev` (Turbopack), typically on `http://localhost:3000`. Build: `npm run build`. Lint: `npm run lint` (must pass with zero errors before every merge, per team-workflow discipline even though it's not written as an explicit CLAUDE.md rule).
 
 ## User preferences (persisted in this agent's cross-session memory, but restated here in case a fresh agent has no memory access)
@@ -240,3 +412,7 @@ If asked to regenerate the answer-key PDF in the future: one-off Node script (`d
 - **Always post the live `http://localhost:3000` link when returning to chat after finishing a task** — the user wants a one-click way to check results without asking. Make sure the dev server is actually running before posting the link.
 - The user has, in past sessions, granted broad time-boxed autonomy ("auto-approve everything until 6AM," later extended to 12 noon) — but that authorization is time-boxed and conversation-specific, not a standing grant. A new session should NOT assume blanket autonomy; check current conversation context for explicit authorization before taking risky/irreversible actions.
 - The user reacts well to autonomous, thorough work (multi-agent research/review dispatches, self-caught bugs, live browser verification) but has corrected scope creep before (e.g. "one PR per batch, not one per item"; "don't go for anything too fancy" on design). Default to disciplined, scoped execution over speculative expansion.
+
+---
+
+**Current state: `main` is clean, builds and lints with zero errors/warnings, at v2.1.1.**
