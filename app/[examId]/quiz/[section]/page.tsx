@@ -98,6 +98,7 @@ const PLACEHOLDER_SECTION = {
   description: "",
   questionCount: 0,
   minutes: 0,
+  calculator: null,
 };
 
 const PLACEHOLDER_EXAM = {

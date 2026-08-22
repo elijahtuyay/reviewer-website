@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ExamId } from "@/data/schema";
 import { ActiveAttempt } from "@/lib/section-result";
 import { NoticeKind } from "@/components/quiz/useAttempt";
+import { ExamModule } from "@/lib/exams/types";
 
 /**
  * Chrome shared by every runner. Anything here is exam-agnostic on purpose: if
@@ -89,6 +90,49 @@ export function SectionLockScreen({
         </p>
       </main>
     </div>
+  );
+}
+
+/**
+ * Says out loud that a section gives you no calculator.
+ *
+ * An absence reads as an unbuilt feature; a sentence reads as a rule. GMAT
+ * Quantitative withholds a calculator on purpose, and someone who assumes the
+ * tool is available throughout will practice it with one open in another tab,
+ * which is pacing that collapses on test day. Saying nothing lets them.
+ *
+ * This repo has shipped the inverse mistake before: UI copy claiming a section
+ * lock the engine did not enforce. This is the same class of defect read the
+ * other way round, a real rule the UI stayed silent about.
+ *
+ * The copy states the rule and stops. An earlier draft went on to tell the
+ * reader that practicing with a calculator open "won't survive test day",
+ * which is a lecture delivered to someone who has done nothing wrong, on all
+ * 21 questions of a sequential section, with no way to dismiss it.
+ */
+export function NoCalculatorNote({ exam }: { exam: ExamModule }) {
+  /**
+   * Only worth saying where the SAME exam hands you a calculator somewhere
+   * else. That condition is the whole point of the note: on GMAT Focus the
+   * tool exists and this section is the exception, which is a genuine rule
+   * someone can be caught out by.
+   *
+   * On an exam that grants none anywhere, this rendered on NMAT Language
+   * Skills and told the reader that a preposition question was "meant to come
+   * out through reasoning and estimation", and that the exam "doesn't provide
+   * one HERE" — implying some other NMAT section does. Both false, on top of
+   * being redundant with the setup page, which already says NMAT gives you
+   * none in any section.
+   */
+  const elsewhere = exam.sections.filter((s) => s.calculator !== null);
+  if (elsewhere.length === 0) return null;
+
+  return (
+    <p className="mb-4 text-xs leading-relaxed text-muted">
+      <span className="font-medium text-foreground">No calculator in this section.</span> The{" "}
+      {exam.label} provides one only in{" "}
+      {elsewhere.map((s) => s.label).join(", ")}.
+    </p>
   );
 }
 

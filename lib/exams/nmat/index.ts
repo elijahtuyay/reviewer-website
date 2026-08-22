@@ -29,6 +29,7 @@ const nmat: ExamModule = {
       description: "Reading comprehension, grammar, vocabulary, and sentence correction.",
       questionCount: 36,
       minutes: 28,
+      calculator: null,
     },
     {
       id: "quantitative-skills",
@@ -37,6 +38,7 @@ const nmat: ExamModule = {
         "Arithmetic, algebra, geometry, number properties, data interpretation, and data sufficiency.",
       questionCount: 36,
       minutes: 52,
+      calculator: null,
     },
     {
       id: "logical-reasoning",
@@ -45,6 +47,7 @@ const nmat: ExamModule = {
         "Verbal reasoning (critical reasoning, syllogisms) and analytical/puzzle-based reasoning.",
       questionCount: 36,
       minutes: 40,
+      calculator: null,
     },
   ],
 

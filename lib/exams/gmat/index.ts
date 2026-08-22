@@ -48,6 +48,13 @@ const gmat: ExamModule = {
         "Data sufficiency, table analysis, two-part analysis, graphics interpretation, and multi-source reasoning.",
       questionCount: 20,
       minutes: 45,
+      /**
+       * The only section on either exam that gets a calculator, and the real
+       * exam is equally strict about it: it is provided on screen here and
+       * nowhere else. See `lib/calculator/basic-di.ts` for what it does, which
+       * notably includes ignoring order of operations.
+       */
+      calculator: "basic-di",
     },
     {
       id: "quantitative",
@@ -55,6 +62,14 @@ const gmat: ExamModule = {
       description: "Problem solving across arithmetic, algebra, statistics, and sets. No geometry.",
       questionCount: 21,
       minutes: 45,
+      /**
+       * Deliberately none, and worth stating rather than leaving as an absence.
+       * Quantitative Reasoning is designed so that every question yields to
+       * reasoning and estimation, and reaching for a calculator is the habit it
+       * tests for. Practicing this section with one open in another tab builds
+       * pacing that collapses on test day, so the UI says so out loud.
+       */
+      calculator: null,
     },
     {
       id: "verbal",
@@ -62,6 +77,7 @@ const gmat: ExamModule = {
       description: "Reading comprehension and critical reasoning. No sentence correction.",
       questionCount: 23,
       minutes: 45,
+      calculator: null,
     },
   ],
 
