@@ -6,12 +6,12 @@
     "difficulty": "easy",
     "prompt": "A jacket priced at 240 dollars is discounted by 15 percent. What is the sale price?",
     "options": [
-      "204 dollars",
+      "276 dollars",
       "225 dollars",
       "216 dollars",
-      "276 dollars"
+      "204 dollars"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A 15 percent discount leaves 85 percent of the original price, so $240 \\times 0.85 = 204$ dollars. Applying a habitual 10 percent instead of 15 percent gives 216. Subtracting 15 dollars rather than 15 percent gives 225. Adding the 15 percent instead of subtracting it gives 276.",
     "source": "original"
   },
@@ -22,12 +22,12 @@
     "difficulty": "easy",
     "prompt": "The ratio of pens to pencils in a drawer is $3:5$. If there are 25 pencils, how many pens are there?",
     "options": [
-      "15",
+      "40",
       "5",
       "8",
-      "40"
+      "15"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "The 5 parts of the ratio correspond to 25 pencils, so one part is 25 divided by 5, which is 5. Pens are 3 parts, so there are 15. Answering 5 stops at the value of a single part; 8 answers with the total number of parts in the ratio, 3 plus 5; and 40 gives the total number of items in the drawer, 15 pens plus 25 pencils, rather than the pens alone.",
     "source": "original"
   },
@@ -38,12 +38,12 @@
     "difficulty": "easy",
     "prompt": "If $5x - 8 = 3x + 10$, what is the value of $x$?",
     "options": [
-      "9",
+      "-9",
       "1",
       "-1",
-      "-9"
+      "9"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Collect the variable terms: $5x - 3x = 10 + 8$, so $2x = 18$ and $x = 9$. Substituting back, both sides equal 37. Moving the 8 across without changing its sign gives $2x = 10 - 8 = 2$ and $x = 1$. Flipping the sign on both constants gives $2x = -2$ and $x = -1$. Reversing the direction of both moves, so that each constant changes sides without changing sign, gives $2x = -18$ and $x = -9$.",
     "source": "original"
   },
@@ -86,12 +86,12 @@
     "difficulty": "easy",
     "prompt": "A number increased from 80 to 92. What was the percentage increase?",
     "options": [
-      "7 percent",
       "15 percent",
+      "7 percent",
       "13 percent",
       "12 percent"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "The increase is 12, and percentage change is measured against the ORIGINAL value: $12/80 = 0.15$, so 15 percent. Dividing the change by the NEW value, $12/92$, gives about 13 percent, which is the usual trap. Reporting the raw difference of 12 as though it were already a percentage gives 12 percent. Dividing the change by the two values added together, $12/172$, gives about 7 percent.",
     "source": "original"
   },
@@ -102,12 +102,12 @@
     "difficulty": "easy",
     "prompt": "A car travels 180 kilometers in 3 hours. At the same speed, how far does it travel in 5 hours?",
     "options": [
-      "300 kilometers",
       "240 kilometers",
+      "300 kilometers",
       "360 kilometers",
       "270 kilometers"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "The speed is $180 \\div 3 = 60$ kilometers per hour, so in 5 hours it covers $60 \\times 5 = 300$ kilometers.",
     "source": "original"
   },
@@ -124,7 +124,7 @@
       "64"
     ],
     "correctIndex": 0,
-    "explanation": "Multiplying powers of the same base adds the exponents: $2^{5+3} = 2^8 = 256$. Multiplying the exponents instead would give $2^{15}$, and adding the values would give 40.",
+    "explanation": "Multiplying powers of the same base adds the exponents: $2^{5+3} = 2^8 = 256$. Each distractor is a different slip in that exponent: 128 is $2^7$, from adding 5 and 3 to 7; 1024 is $2^{10}$, from using the larger exponent twice; and 64 is $2^6$, from using the smaller one twice.",
     "source": "original"
   },
   {
@@ -150,12 +150,12 @@
     "difficulty": "easy",
     "prompt": "What is $2/3$ of $3/8$?",
     "options": [
-      "1/4",
-      "1/12",
       "1/8",
+      "1/12",
+      "1/4",
       "1/24"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Multiply straight across: $(2 \\times 3)/(3 \\times 8) = 6/24 = 1/4$. Losing the 3 in the numerator and computing $2/24$ gives $1/12$. Canceling the threes and then dropping the 2 that is left on top gives $1/8$. Multiplying only the denominators and keeping a bare 1 on top gives $1/24$.",
     "source": "original"
   },
@@ -231,11 +231,11 @@
     "prompt": "A price rises by 20 percent and then falls by 20 percent. Compared with the original price, the final price is:",
     "options": [
       "the same",
-      "4 percent higher",
       "4 percent lower",
+      "4 percent higher",
       "2 percent lower"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Successive percentage changes multiply rather than cancel: $1.20 \\times 0.80 = 0.96$, which is 4 percent below the original. The second change is applied to the larger intermediate price, so the fall outweighs the rise.",
     "source": "original"
   },
@@ -278,12 +278,12 @@
     "difficulty": "medium",
     "prompt": "If $-3x + 7 > 1$, which of the following describes $x$?",
     "options": [
-      "$x < 2$",
-      "$x < -2$",
       "$x > 2$",
+      "$x < -2$",
+      "$x < 2$",
       "$x > -2$"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Subtract 7 to get $-3x > -6$, then divide by $-3$. Dividing an inequality by a negative number reverses its direction, so $x < 2$. Forgetting to flip is the single most common error on inequality questions.",
     "source": "original"
   },
@@ -294,12 +294,12 @@
     "difficulty": "medium",
     "prompt": "What is the median of the list 3, 11, 7, 2, 9, 5?",
     "options": [
-      "6",
-      "7",
       "5",
+      "7",
+      "6",
       "6.5"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Sort first: 2, 3, 5, 7, 9, 11. With an even count the median is the average of the two middle values, $(5 + 7)/2 = 6$. Taking the middle of the unsorted list is the usual mistake.",
     "source": "original"
   },
@@ -311,11 +311,11 @@
     "prompt": "A cyclist rides out at 15 kilometers per hour and returns along the same route at 10 kilometers per hour. What is the average speed for the whole trip?",
     "options": [
       "13 kilometers per hour",
-      "12 kilometers per hour",
       "11 kilometers per hour",
+      "12 kilometers per hour",
       "12.5 kilometers per hour"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "Average speed is total distance over total time, not the average of the two speeds. For a distance $d$ each way, the time is $d/15 + d/10 = d/6$, and the total distance is $2d$, giving $2d \\div (d/6) = 12$. The 12.5 option is the tempting arithmetic mean.",
     "source": "original"
   },
@@ -342,12 +342,12 @@
     "difficulty": "hard",
     "prompt": "If $x + y = 10$ and $x^2 - y^2 = 40$, what is the value of $x$?",
     "options": [
-      "7",
       "20",
+      "7",
       "10",
       "14"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Factor the difference of squares: $x^2 - y^2 = (x+y)(x-y)$. With $x + y = 10$, this gives $10(x - y) = 40$, so $x - y = 4$. Adding that to $x + y = 10$ gives $2x = 14$ and $x = 7$. Halving the 40, as though $x^2 - y^2$ simplified to $2x$, gives 20. Mistaking the given sum for the answer gives 10. Stopping at $2x = 14$ without dividing gives 14.",
     "source": "original"
   },
@@ -374,12 +374,12 @@
     "difficulty": "hard",
     "prompt": "Each number in a data set is increased by 5. Which of the following is true?",
     "options": [
-      "The mean increases by 5 and the standard deviation is unchanged.",
+      "Both the mean and the standard deviation increase by 5.",
       "The mean is unchanged and the standard deviation increases by 5.",
       "Both the mean and the standard deviation are unchanged.",
-      "Both the mean and the standard deviation increase by 5."
+      "The mean increases by 5 and the standard deviation is unchanged."
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Adding a constant shifts every value equally, so the center moves by 5 while the spread around it does not change at all. Standard deviation measures dispersion, and dispersion is untouched by a translation. It would change if every value were MULTIPLIED by a constant.",
     "source": "original"
   },
@@ -408,10 +408,10 @@
     "options": [
       "5 percent loss",
       "no change",
-      "15 percent profit",
-      "5 percent profit"
+      "5 percent profit",
+      "15 percent profit"
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "Apply the factors in sequence: $1.40 \\times 0.75 = 1.05$, a 5 percent gain over the original. Subtracting the percentages to get 15 percent ignores that the discount applies to the larger marked price, not to the original.",
     "source": "original"
   },
@@ -422,12 +422,12 @@
     "difficulty": "hard",
     "prompt": "If $f(x) = 2x - 3$, what is the value of $f(f(4))$?",
     "options": [
-      "7",
       "-2",
+      "7",
       "2",
       "5"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Work outward from the inside. $f(4) = 2(4) - 3 = 5$, then $f(5) = 2(5) - 3 = 7$. Reading the rule as $2(x - 3)$ gives $f(4) = 2$ and then $f(2) = -2$. Applying the rule twice but forgetting to double on the second pass gives $5 - 3 = 2$. Applying the rule only once gives 5, which is the intended trap.",
     "source": "original"
   },
@@ -472,10 +472,10 @@
     "options": [
       "4 hours",
       "3 hours",
-      "2 hours",
-      "2.5 hours"
+      "2.5 hours",
+      "2 hours"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "When objects approach each other their speeds add, so the gap closes at $70 + 80 = 150$ kilometers per hour. The 300-kilometer gap therefore closes in $300 \\div 150 = 2$ hours. Using one train's speed alone gives the 4-hour style of wrong answer.",
     "source": "original"
   }

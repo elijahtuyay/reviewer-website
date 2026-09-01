@@ -6,12 +6,12 @@
     "difficulty": "easy",
     "prompt": "Which sentence correctly applies subject-verb agreement with the pronoun \"neither\"?",
     "options": [
-      "Neither of the students has submitted the assignment.",
+      "Neither the student has submit the assignment.",
       "Neither of the students have submitted the assignment.",
       "Neither of the student have submit the assignment.",
-      "Neither the student has submit the assignment."
+      "Neither of the students has submitted the assignment."
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "\"Neither\" is a singular indefinite pronoun and always takes a singular verb (\"has\"), regardless of the plural noun in the \"of the ___\" phrase. \"Neither of the students have submitted the assignment\" wrongly uses the plural \"have,\" while \"Neither of the student have submit the assignment\" and \"Neither the student has submit the assignment\" each add a noun-number or verb-form error on top.",
     "source": "original"
   },
@@ -22,12 +22,12 @@
     "difficulty": "easy",
     "prompt": "Which sentence pairs \"good\" with the correct preposition?",
     "options": [
-      "He is good at mathematics.",
+      "He is good in mathematics.",
       "He is good for mathematics.",
       "He is good on mathematics.",
-      "He is good in mathematics."
+      "He is good at mathematics."
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "\"Good at\" is the standard idiomatic preposition pairing used for skills and subjects in English.",
     "source": "original"
   },
@@ -38,12 +38,12 @@
     "difficulty": "hard",
     "prompt": "Which sentence correctly sequences the past and past perfect tenses?",
     "options": [
-      "By the time we reach the station, the train had left.",
       "By the time we reached the station, the train had left.",
+      "By the time we reach the station, the train had left.",
       "By the time we reached the station, the train left.",
       "By the time we reached the station, the train has left."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "The past perfect tense (\"had left\") is required for an action completed before another past action (\"reached\"). This is called sequencing of tenses, and the other three options each break that sequence by mixing in a present or simple past form where the earlier action needs to be marked as further back in time.",
     "source": "original"
   },
@@ -55,11 +55,11 @@
     "prompt": "Which sentence uses the correct article before \"European\"?",
     "options": [
       "She is European citizen.",
-      "She is an European citizen.",
       "She is a European citizen.",
+      "She is an European citizen.",
       "She is the European citizen."
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "\"European\" begins with a consonant sound (/j/, as in \"yu-ro-pee-an\"), so the correct article is \"a,\" not \"an,\" since the choice between a/an depends on sound rather than spelling.",
     "source": "original"
   },
@@ -72,10 +72,10 @@
     "options": [
       "This is more tallest building in the city.",
       "This is the most tallest building in the city.",
-      "This is tallest building in the city.",
-      "This is the tallest building in the city."
+      "This is the tallest building in the city.",
+      "This is tallest building in the city."
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "Double superlatives like \"most tallest\" are incorrect; \"tallest\" alone is the correct superlative form, and it requires the definite article \"the\" before it.",
     "source": "original"
   },
@@ -86,12 +86,12 @@
     "difficulty": "hard",
     "prompt": "Which sentence keeps parallel structure across a series of activities?",
     "options": [
-      "She likes reading, writing, and swimming.",
+      "She likes to read, writing, and swim.",
       "She likes read, write, and swim.",
       "She likes reading, writing, and to swim.",
-      "She likes to read, writing, and swim."
+      "She likes reading, writing, and swimming."
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Items in a list or series must share the same grammatical form (parallelism). Here, all three activities must be in gerund form: reading, writing, swimming. Each wrong option mixes a gerund with an infinitive or bare verb somewhere in the series, which is easy to miss on a quick read.",
     "source": "original"
   },
@@ -102,12 +102,12 @@
     "difficulty": "medium",
     "prompt": "Which sentence avoids a dangling modifier?",
     "options": [
-      "I walking to the store, the rain started falling.",
       "Walking to the store, I got caught in the rain.",
+      "I walking to the store, the rain started falling.",
       "Walking to the store, the rain started falling.",
       "The rain, walking to the store, started falling."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "An introductory participial phrase (\"Walking to the store\") must modify the subject actually performing the action, which here is \"I.\" \"Walking to the store, the rain started falling\" and \"The rain, walking to the store, started falling\" both attach the phrase to the rain, a dangling modifier error, and \"I walking to the store, the rain started falling\" is not a grammatical sentence at all.",
     "source": "original"
   },
@@ -119,11 +119,11 @@
     "prompt": "Which sentence correctly treats \"information\" as an uncountable noun?",
     "options": [
       "She gave me some useful informations pieces.",
-      "She gave me an useful information.",
       "She gave me some useful information.",
+      "She gave me an useful information.",
       "She gave me some useful informations."
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "\"Information\" is an uncountable noun in English and has no plural form, so \"informations\" is incorrect in every option that uses it.",
     "source": "original"
   },
@@ -150,12 +150,12 @@
     "difficulty": "hard",
     "prompt": "Passage: \"Researchers studying sleep have found that it plays an active role in strengthening memories formed during the day, a process known as memory consolidation. Rather than simply resting, the brain appears to replay and reorganize recent experiences during certain sleep stages, particularly during deep, slow-wave sleep. Studies involving both animals and humans have shown that people who sleep shortly after learning new information tend to retain it better than those who stay awake for a comparable period. Interestingly, not all types of memory benefit equally; procedural memory, such as the skill of playing a musical instrument, appears to depend more heavily on later stages of sleep, while factual memory seems to consolidate earlier in the night. This has led some researchers to recommend that students avoid pulling all-nighters before exams, since skipping sleep may undermine the very consolidation process needed to retain studied material. Although much about the relationship between sleep and memory remains under investigation, the existing evidence points clearly toward sleep being an active, necessary participant in learning rather than a passive break from it.\" Based on the passage, which finding would most directly challenge the claim that sleep is an active, necessary participant in learning?",
     "options": [
-      "A study showing that students who stayed awake all night performed just as well on a factual recall test as those who slept.",
-      "A study showing that musicians who slept a full eight hours improved faster at learning a new piece than those who slept only four.",
       "A study showing that slow-wave sleep activity increases in the hours after intensive learning sessions end.",
+      "A study showing that musicians who slept a full eight hours improved faster at learning a new piece than those who slept only four.",
+      "A study showing that students who stayed awake all night performed just as well on a factual recall test as those who slept.",
       "A study showing that students who napped briefly after studying outperformed those who did not nap."
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "The passage's central claim is that sleep is an active, necessary participant in learning. A result in which students who stayed awake all night still matched sleepers on factual recall would show that the consolidation benefit is not necessary after all, which strikes at that claim directly. The nap study and the eight-hours-versus-four-hours study both report better outcomes for the group that slept, so each supports the claim rather than challenging it. The finding that slow-wave activity rises after intensive learning also supports it, since it suggests the sleeping brain is doing extra work rather than merely resting.",
     "source": "original"
   },
@@ -214,12 +214,12 @@
     "difficulty": "hard",
     "prompt": "Choose the correct preposition to complete the sentence: \"The board's decision was independent ___ any pressure from shareholders.\"",
     "options": [
-      "from",
       "of",
+      "from",
       "with",
       "to"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "The standard idiom is \"independent of,\" not \"independent from.\" Test-takers often reach for \"from\" here because it's correct in a similar-sounding phrase, \"different from,\" but \"independent\" specifically pairs with \"of.\"",
     "source": "original"
   },
@@ -248,10 +248,10 @@
     "options": [
       "He failed because the reason is he did not study.",
       "The reason why he failed is that because he did not study.",
-      "The reason why he failed is because he did not study.",
-      "The reason he failed is that he did not study."
+      "The reason he failed is that he did not study.",
+      "The reason why he failed is because he did not study."
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "\"The reason why...is because\" is a redundant construction. The concise, correct form is \"The reason...is that\".",
     "source": "original"
   },
@@ -262,12 +262,12 @@
     "difficulty": "medium",
     "prompt": "Choose the best version of the sentence: \"Each of the players have their own locker.\"",
     "options": [
-      "Each of the players has their own locker.",
+      "Each of the player have their own locker.",
       "Each of the players have their own locker.",
       "Each of the players has its own locker.",
-      "Each of the player have their own locker."
+      "Each of the players has their own locker."
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "\"Each\" is singular and takes \"has\". \"Their\" is acceptable as a gender-neutral singular possessive referring back to \"each\", while \"Each of the players has its own locker\" wrongly treats the players as non-human.",
     "source": "original"
   },
@@ -278,12 +278,12 @@
     "difficulty": "hard",
     "prompt": "Choose the best version of the sentence: \"Not only he was late, but also he forgot his notes.\"",
     "options": [
-      "Not only was he late, but also forgot his notes.",
       "Not only was he late, but he also forgot his notes.",
+      "Not only was he late, but also forgot his notes.",
       "Not only he was late, but he also forgot his notes.",
       "Not only he was late, but also he forgot his notes."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "\"Not only\" at the start of a clause requires subject-verb inversion (\"was he\"), and the correlative pair \"not only...but also\" must remain structurally parallel.",
     "source": "original"
   },
@@ -295,11 +295,11 @@
     "prompt": "Choose the best version of the sentence: \"A number of employees has requested extended leave this year.\"",
     "options": [
       "A number of employees have request extended leave this year.",
-      "A number of employees has requested extended leave this year.",
       "A number of employees have requested extended leave this year.",
+      "A number of employees has requested extended leave this year.",
       "A number of employee have requested extended leave this year."
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "\"A number of\" (meaning \"several\") functions as a plural subject and takes a plural verb (\"have\"), while \"the number of\" is treated as singular and takes a singular verb. \"A number of employees has requested extended leave\" wrongly uses the singular \"has\"; \"A number of employee have requested extended leave\" has a noun-number error; and \"A number of employees have request extended leave\" uses an incorrect verb form.",
     "source": "original"
   },
@@ -312,10 +312,10 @@
     "options": [
       "Between yourself and me, this plan will not work.",
       "Between you and I, this plan will not work.",
-      "Between I and you, this plan will not work.",
-      "Between you and me, this plan will not work."
+      "Between you and me, this plan will not work.",
+      "Between I and you, this plan will not work."
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "\"Between\" is a preposition and must be followed by object pronouns (\"you and me\"), not the subject pronoun \"I\".",
     "source": "original"
   },
@@ -326,12 +326,12 @@
     "difficulty": "hard",
     "prompt": "Choose the best version of the sentence: \"He is one of the students who has finished the assignment.\"",
     "options": [
-      "He is one of the students who have finished the assignment.",
+      "He is one of the students who has finished the assignment.",
       "He is one of the student who have finished the assignment.",
       "He is one of the students who finishes the assignment.",
-      "He is one of the students who has finished the assignment."
+      "He is one of the students who have finished the assignment."
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "\"Who\" refers back to \"students\" (plural) in \"one of the students who...\", so the verb must agree with the plural noun: \"have finished\".",
     "source": "original"
   },
@@ -342,12 +342,12 @@
     "difficulty": "hard",
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: Even so, nearly a third of the region's rice fields missed the optimal window.\nS: Those fields produced yields far below the five-year average.\nR: The monsoon arrived nearly a month late this year.\nP: Farmers scrambled to adjust their planting schedules once it did.",
     "options": [
-      "RPQS",
       "PQRS",
+      "RPQS",
       "QRPS",
       "PRQS"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "R sets up the late monsoon, P describes the immediate reaction (\"it\" needs the monsoon from R to refer to), Q introduces a complication with \"Even so,\" which must follow the adjustment effort described in P, and S states the consequence for the fields Q identifies. In PRQS, \"it\" in P has no antecedent yet. In PQRS, the paragraph opens with farmers reacting to a monsoon that has not been mentioned, and \"Even so\" follows before there is anything to concede. In QRPS, \"Even so\" opens the paragraph with nothing before it to contrast against.",
     "source": "original"
   },
@@ -359,11 +359,11 @@
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: However, the results were not as expected.\nP: The scientists conducted the experiment three times.\nR: They decided to revise their hypothesis.\nS: Each time, they recorded the data carefully.",
     "options": [
       "SPQR",
-      "PSQR",
       "PSRQ",
+      "PSQR",
       "QPSR"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "P sets up the experiment, S describes the careful process during it (\"each time\" needs the repetition established in P), Q introduces the contrasting outcome, and R gives the resulting decision. In SPQR, \"each time\" comes before any repetition has been mentioned. In QPSR, \"however\" opens the paragraph with no expectation on record to contradict. In PSRQ, the decision to revise (R) is stated before the surprising results (Q) that motivated it.",
     "source": "original"
   },
@@ -376,10 +376,10 @@
     "options": [
       "QSPR",
       "QSRP",
-      "SQPR",
-      "PSQR"
+      "PSQR",
+      "SQPR"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "S introduces the law, Q explains its specific requirement (\"it\" needs the law from S), P shows the disproportionate effect on small sellers (\"the fee\" needs Q), and R gives the resulting action (\"them\" needs the small sellers named in P). In QSPR, \"it\" in Q has no antecedent yet. In QSRP, \"it\" again opens with no law introduced, and \"them\" in R arrives before P has singled out small sellers. In PSQR, \"the fee\" is mentioned in P before Q has introduced any fee.",
     "source": "original"
   },
@@ -390,12 +390,12 @@
     "difficulty": "hard",
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nR: Ridership on those lanes tripled within the first year, far outpacing the planners' initial projections.\nQ: Traffic congestion had become a major problem in the downtown core.\nS: Average commute times downtown had barely changed by the time the network's second year began.\nP: City planners responded by building a network of protected bicycle lanes connecting the main districts.",
     "options": [
-      "PQRS",
+      "QPRS",
       "QRPS",
       "QPSR",
-      "QPRS"
+      "PQRS"
     ],
-    "correctIndex": 3,
+    "correctIndex": 0,
     "explanation": "Q states the problem, P describes the planners' response (\"responded\" needs the congestion problem from Q), R reports the early results (\"those lanes\" needs the network built in P), and S gives the longer-term outcome by the start of the network's second year, which must follow the first-year ridership figures in R. In QRPS, \"those lanes\" in R is mentioned before P ever builds them. In PQRS, \"responded\" opens the paragraph with nothing to respond to. In QPSR, the second-year commute data (S) is reported before the first-year ridership surge (R) it's building on.",
     "source": "original"
   },
@@ -407,11 +407,11 @@
     "prompt": "Passage: \"In recent years, several cities have begun encouraging residents to keep beehives on rooftops and in community gardens. Proponents argue that urban beekeeping helps pollinate city gardens and parks, supporting biodiversity in otherwise concrete-heavy environments. Critics, however, point out that a sudden rise in managed honeybee colonies can crowd out native wild bee species, which are often more effective pollinators for local plants but receive far less public attention. Some ecologists now recommend that cities balance beekeeping initiatives with programs that specifically protect native pollinator habitats, rather than treating honeybee introduction alone as a solution to urban biodiversity loss.\" According to the passage, what is one concern critics raise about urban beekeeping?",
     "options": [
       "It is too expensive for city governments to support.",
-      "It may crowd out native wild bee species.",
+      "It reduces the number of community gardens.",
       "Honeybees cannot survive in urban environments.",
-      "It reduces the number of community gardens."
+      "It may crowd out native wild bee species."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "The passage directly states that critics point out managed honeybee colonies can crowd out native wild bee species.",
     "source": "original"
   },
@@ -422,12 +422,12 @@
     "difficulty": "medium",
     "prompt": "Passage: \"In recent years, several cities have begun encouraging residents to keep beehives on rooftops and in community gardens. Proponents argue that urban beekeeping helps pollinate city gardens and parks, supporting biodiversity in otherwise concrete-heavy environments. Critics, however, point out that a sudden rise in managed honeybee colonies can crowd out native wild bee species, which are often more effective pollinators for local plants but receive far less public attention. Some ecologists now recommend that cities balance beekeeping initiatives with programs that specifically protect native pollinator habitats, rather than treating honeybee introduction alone as a solution to urban biodiversity loss.\" What do some ecologists recommend, according to the passage?",
     "options": [
-      "Moving all beehives out of the city and into the surrounding rural areas.",
-      "Banning urban beekeeping entirely until a great deal more research is done.",
       "Balancing beekeeping with protection of native pollinator habitats.",
+      "Banning urban beekeeping entirely until a great deal more research is done.",
+      "Moving all beehives out of the city and into the surrounding rural areas.",
       "Focusing exclusively on growing the honeybee population."
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "The passage explicitly recommends balancing beekeeping initiatives with programs protecting native pollinator habitats, rather than treating honeybees alone as the fix.",
     "source": "original"
   },
@@ -439,11 +439,11 @@
     "prompt": "Passage: \"In recent years, several cities have begun encouraging residents to keep beehives on rooftops and in community gardens. Proponents argue that urban beekeeping helps pollinate city gardens and parks, supporting biodiversity in otherwise concrete-heavy environments. Critics, however, point out that a sudden rise in managed honeybee colonies can crowd out native wild bee species, which are often more effective pollinators for local plants but receive far less public attention. Some ecologists now recommend that cities balance beekeeping initiatives with programs that specifically protect native pollinator habitats, rather than treating honeybee introduction alone as a solution to urban biodiversity loss.\" The word \"proponents\" in the passage most nearly means:",
     "options": [
       "Scientists",
-      "Beginners",
+      "Supporters",
       "Opponents",
-      "Supporters"
+      "Beginners"
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "\"Proponents\" means people who advocate for or support something, in this case urban beekeeping.",
     "source": "original"
   },
@@ -454,12 +454,12 @@
     "difficulty": "easy",
     "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers. The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" What was the main finding of the study regarding productivity?",
     "options": [
-      "There was no significant difference in output across the three groups.",
-      "In-office workers were clearly the most productive of the three groups studied.",
       "Remote workers were significantly less productive than the other groups.",
+      "In-office workers were clearly the most productive of the three groups studied.",
+      "There was no significant difference in output across the three groups.",
       "Hybrid workers were the least productive of the three groups by a wide margin."
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "The passage states directly that the study found no significant difference in output between the three groups.",
     "source": "original"
   },
@@ -471,11 +471,11 @@
     "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers. The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" Which group reported the highest job satisfaction?",
     "options": [
       "All groups reported equal satisfaction",
-      "Hybrid employees",
+      "Fully in-office employees",
       "Fully remote employees",
-      "Fully in-office employees"
+      "Hybrid employees"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "The passage explicitly states hybrid workers reported the highest levels of job satisfaction.",
     "source": "original"
   },
@@ -486,12 +486,12 @@
     "difficulty": "hard",
     "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers. The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" What concern do the study's authors raise at the end of the passage?",
     "options": [
-      "That hybrid working arrangements are too expensive for most firms to maintain.",
-      "That in-office work will become obsolete within a few years.",
       "That productivity metrics may not capture long-term effects of isolation.",
+      "That in-office work will become obsolete within a few years.",
+      "That hybrid working arrangements are too expensive for most firms to maintain.",
       "That remote workers are less honest when reporting their own output."
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "The passage's final sentence states this caution directly: productivity metrics alone may not capture the long-term effects of isolation on retention.",
     "source": "original"
   },
@@ -503,11 +503,11 @@
     "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers. The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" The word \"isolated\" in the passage is closest in meaning to:",
     "options": [
       "Efficient",
-      "Overworked",
+      "Disconnected",
       "Motivated",
-      "Disconnected"
+      "Overworked"
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "\"Isolated\" means cut off from contact with others, so \"disconnected\" is the closest match. The context confirms it: the sentence contrasts remote workers' feelings with those of hybrid workers who value collaborative days in the office, and the passage goes on to link isolation to retention, a social rather than a workload concern. \"Overworked\" describes having too much to do, but the passage says remote workers' output was comparable, not heavier. \"Efficient\" and \"motivated\" are both positive traits, and the sentence uses \"despite maintaining comparable productivity\" to mark isolation as the drawback that offsets their normal output, so the word must be negative.",
     "source": "original"
   },
@@ -519,11 +519,11 @@
     "prompt": "Choose the correct preposition to complete the sentence: \"He is allergic ___ peanuts.\"",
     "options": [
       "with",
-      "for",
       "to",
+      "for",
       "of"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "The standard idiom is \"allergic to\" something.",
     "source": "original"
   },
@@ -536,10 +536,10 @@
     "options": [
       "at",
       "with",
-      "of",
-      "for"
+      "for",
+      "of"
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "The standard idiom is \"known for\" a quality or reputation.",
     "source": "original"
   },
@@ -550,12 +550,12 @@
     "difficulty": "hard",
     "prompt": "Choose the correct preposition to complete the sentence: \"She apologized to her supervisor ___ being late to the meeting.\"",
     "options": [
-      "for",
+      "of",
       "to",
       "about",
-      "of"
+      "for"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "When both the person and the reason are named, English pairs \"apologize to [someone]\" with \"for [the reason]\"; having already used \"to\" for the supervisor makes \"to\" a tempting repeat choice, but the reason still needs \"for\".",
     "source": "original"
   },
@@ -566,12 +566,12 @@
     "difficulty": "hard",
     "prompt": "Choose the correct preposition to complete the sentence: \"They arrived ___ the airport two hours early.\"",
     "options": [
-      "to",
       "at",
+      "to",
       "in",
       "on"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "\"Arrive at\" is used for smaller or specific locations such as an airport, station, or building, while \"arrive in\" is used for cities or countries, a distinction that trips up many learners since both sound equally natural at first glance.",
     "source": "original"
   },
@@ -583,11 +583,11 @@
     "prompt": "Choose the correct preposition to complete the sentence: \"He is capable ___ solving the problem on his own.\"",
     "options": [
       "for",
-      "with",
       "of",
+      "with",
       "to"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "The standard idiom is \"capable of\" doing something.",
     "source": "original"
   },
@@ -600,10 +600,10 @@
     "options": [
       "about",
       "for",
-      "at",
-      "on"
+      "on",
+      "at"
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "The standard idiom is \"insist on\" something.",
     "source": "original"
   },
@@ -614,12 +614,12 @@
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"She was accused ___ cheating on the exam.\"",
     "options": [
-      "of",
+      "with",
       "for",
       "about",
-      "with"
+      "of"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "The standard idiom is \"accused of\" a wrongdoing.",
     "source": "original"
   },
@@ -630,12 +630,12 @@
     "difficulty": "hard",
     "prompt": "Choose the correct preposition to complete the sentence: \"The results are consistent ___ our expectations.\"",
     "options": [
-      "of",
       "with",
+      "of",
       "for",
       "to"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "The standard idiom is \"consistent with\" something; \"consistent to\" is a common but incorrect substitution that many speakers use without noticing.",
     "source": "original"
   },
@@ -647,11 +647,11 @@
     "prompt": "Choose the correct preposition to complete the sentence: \"He congratulated her ___ her promotion.\"",
     "options": [
       "about",
-      "of",
       "on",
+      "of",
       "at"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "The standard idiom is \"congratulate someone on\" an achievement.",
     "source": "original"
   },
@@ -664,10 +664,10 @@
     "options": [
       "in",
       "with",
-      "from",
-      "of"
+      "of",
+      "from"
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "The standard idiom is \"consist of\" parts or components.",
     "source": "original"
   },
@@ -678,12 +678,12 @@
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"She is interested ___ learning French.\"",
     "options": [
-      "in",
+      "on",
       "at",
       "for",
-      "on"
+      "in"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "The standard idiom is \"interested in\" a subject or activity.",
     "source": "original"
   },
@@ -694,12 +694,12 @@
     "difficulty": "hard",
     "prompt": "Choose the correct preposition to complete the sentence: \"The proposal was met ___ strong opposition from the board.\"",
     "options": [
-      "from",
       "with",
+      "from",
       "at",
       "by"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "The idiom is \"met with\" a reaction such as opposition or approval; \"met by\" sounds plausible in a passive-voice sentence but is reserved for a person or group physically greeting someone, not a reaction to a proposal.",
     "source": "original"
   },
@@ -711,11 +711,11 @@
     "prompt": "Choose the correct preposition to complete the sentence: \"In temperament, he differs greatly ___ his brother.\"",
     "options": [
       "to",
-      "of",
       "from",
+      "of",
       "with"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "\"Differ from\" is used to compare two unlike things or people. \"Differ with\" looks like the obvious pairing but is reserved for disagreeing with someone's opinion, not for describing a difference in character.",
     "source": "original"
   },
@@ -728,10 +728,10 @@
     "options": [
       "to",
       "about",
-      "with",
-      "for"
+      "for",
+      "with"
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "\"Responsible for\" describes a duty or outcome someone is accountable for, which fits \"the department's performance\" here. \"Responsible to\" is also correct English, but it describes who someone answers to (for example, \"responsible to the board\"), not the task itself, which makes it a close but ultimately wrong fit.",
     "source": "original"
   },
@@ -742,12 +742,12 @@
     "difficulty": "hard",
     "prompt": "Passage: \"In recent years, several cities have begun encouraging residents to keep beehives on rooftops and in community gardens. Proponents argue that urban beekeeping helps pollinate city gardens and parks, supporting biodiversity in otherwise concrete-heavy environments. Critics, however, point out that a sudden rise in managed honeybee colonies can crowd out native wild bee species, which are often more effective pollinators for local plants but receive far less public attention. Some ecologists now recommend that cities balance beekeeping initiatives with programs that specifically protect native pollinator habitats, rather than treating honeybee introduction alone as a solution to urban biodiversity loss.\" Based on the passage, which of the following best describes the relationship between the arguments of proponents and critics of urban beekeeping?",
     "options": [
-      "Proponents emphasize honeybees' contribution to pollination, while critics warn that this benefit may come at the expense of native pollinators.",
-      "Proponents and critics agree on every point except the cost of maintaining hives in the city.",
       "Proponents and critics both agree that urban beekeeping should be banned entirely until further research is completed.",
+      "Proponents and critics agree on every point except the cost of maintaining hives in the city.",
+      "Proponents emphasize honeybees' contribution to pollination, while critics warn that this benefit may come at the expense of native pollinators.",
       "Critics reject the ecological value proponents claim, arguing that honeybees provide no pollination benefit at all."
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "The passage frames a genuine tension rather than flat disagreement: proponents value the pollination and biodiversity support beekeeping provides, while critics do not deny that value outright but warn it may crowd out native bees. The option claiming critics say honeybees provide no pollination benefit at all mischaracterizes them, since the passage never says that. The two options describing broad agreement, one on everything except cost and one on banning beekeeping outright, both assert a consensus that is not present in the text.",
     "source": "original"
   },
@@ -759,11 +759,11 @@
     "prompt": "Passage: \"A recent workplace study compared productivity levels among employees who worked remotely full-time, those who worked in a hybrid arrangement, and those who worked entirely in the office. Contrary to popular assumptions, the study found no significant difference in output between the three groups when measured by completed tasks per week. However, hybrid workers reported the highest levels of job satisfaction, citing the flexibility to choose focused work days at home and collaborative days in the office. Fully remote employees, meanwhile, reported feeling more isolated over time, despite maintaining comparable productivity to their in-office peers. The study's authors caution that productivity metrics alone may not capture the long-term effects of isolation on employee retention.\" Which of the following, if true, would most directly support the study authors' caution about relying on productivity metrics alone?",
     "options": [
       "A separate survey found that hybrid employees preferred working from the office about three days a week.",
-      "A separate survey found that isolated remote employees were more likely to leave their jobs within a year, despite strong individual performance reviews.",
+      "A separate survey found that in-office employees took considerably more sick days than remote employees.",
       "A separate survey found that adoption of productivity software increased across all three of the groups studied.",
-      "A separate survey found that in-office employees took considerably more sick days than remote employees."
+      "A separate survey found that isolated remote employees were more likely to leave their jobs within a year, despite strong individual performance reviews."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "The authors' caution is specifically that productivity metrics may miss the effect of isolation on retention. A finding that isolated employees quit despite strong performance reviews illustrates exactly that gap between measured output and retention risk. The other options describe unrelated findings about office preferences, sick days, or software adoption that don't speak to the retention concern at all.",
     "source": "original"
   },
@@ -934,12 +934,12 @@
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"The negotiations broke down ___ a disagreement over pricing.\"",
     "options": [
-      "over",
+      "to",
       "of",
       "at",
-      "to"
+      "over"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "\"Broke down over\" is the standard idiom for naming the specific issue that caused talks to collapse.",
     "source": "original"
   },
@@ -1030,12 +1030,12 @@
     "difficulty": "medium",
     "prompt": "Choose the correct preposition to complete the sentence: \"The committee's decision was based ___ incomplete data.\"",
     "options": [
-      "with",
       "on",
+      "with",
       "at",
       "in"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "The standard idiom is \"based on\" a source of information or reasoning.",
     "source": "original"
   },
@@ -1078,12 +1078,12 @@
     "difficulty": "easy",
     "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" According to the passage, what do researchers say coral gardening actually addresses?",
     "options": [
-      "Nothing related to reef decline.",
-      "Every cause of reef decline, including pollution and warming.",
       "Only the symptoms of reef decline, not its root causes.",
+      "Every cause of reef decline, including pollution and warming.",
+      "Nothing related to reef decline.",
       "The problem of overfishing exclusively."
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "The passage states directly that researchers caution coral gardening \"addresses only the symptoms of reef decline, not its root causes.\"",
     "source": "original"
   },
@@ -1127,11 +1127,11 @@
     "prompt": "Choose the correct preposition to complete the sentence: \"The new regulation applies ___ all businesses with more than fifty employees.\"",
     "options": [
       "for",
-      "with",
       "to",
+      "with",
       "on"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "The standard idiom is \"apply to\" a group or situation a rule covers.",
     "source": "original"
   },
@@ -1158,12 +1158,12 @@
     "difficulty": "medium",
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nP: Container ships already en route were forced to idle offshore, waiting for clearance to dock.\nS: Medical suppliers reported that shipments of insulin and other temperature-sensitive drugs were delayed by more than ten days.\nQ: Several ports along the coast suspended operations rather than risk damage to loaded vessels.\nR: A severe storm disrupted shipping routes across the region for nearly a week.",
     "options": [
-      "RQPS",
       "QRSP",
+      "RQPS",
       "SQRP",
       "QRPS"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "R introduces the storm, Q shows the ports' immediate response (\"risk damage\" needs the storm from R), P shows the knock-on effect on ships already at sea (\"waiting for clearance to dock\" needs the port closures in Q), and S reports the specific, serious consequence. In QRPS, \"risk damage\" appears with no storm mentioned yet. In QRSP, the ports close before the storm is introduced and the supply delays precede the idling ships that help explain them. In SQRP, the drug shortage is reported before anything has happened to cause it.",
     "source": "original"
   },
@@ -1175,11 +1175,11 @@
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nR: Within weeks, sales figures began to recover.\nS: Analysts attributed the turnaround to the renewed brand visibility.\nP: Sales of the product had been steadily declining for two quarters.\nQ: The company therefore launched an aggressive marketing campaign.",
     "options": [
       "QPRS",
-      "PQRS",
       "RQPS",
+      "PQRS",
       "QPSR"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "P states the problem, Q describes the response (\"therefore\" needs the decline in P), R shows the result, and S explains why (\"the turnaround\" needs the recovery described in R). In QPRS, \"therefore\" opens the paragraph with no problem yet stated. In QPSR, \"therefore\" again opens with no decline stated, and \"the turnaround\" in S precedes the recovery in R. In RQPS, sales recover in the opening sentence, before any decline or campaign has been described.",
     "source": "original"
   },
@@ -1192,10 +1192,10 @@
     "options": [
       "RSPQ",
       "RSQP",
-      "SRPQ",
-      "QSRP"
+      "QSRP",
+      "SRPQ"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "S announces the exhibit, R looks back at the quiet preparation before that announcement (\"that announcement\" needs S), P covers the public cataloging phase that followed (\"newly acquired artifacts\" needs R), and Q gives the opening-night payoff. In RSPQ, \"that announcement\" is referenced before S ever makes one. In RSQP, the same problem occurs and the opening night (Q) also precedes the cataloging (P) that had to happen first. In QSRP, the paragraph opens on opening night, before the exhibit has even been announced.",
     "source": "original"
   },
@@ -1206,12 +1206,12 @@
     "difficulty": "hard",
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nS: Paychecks started arriving late, and several engineers began quietly interviewing elsewhere.\nQ: The startup failed to secure a second round of funding after its lead investor pulled out unexpectedly.\nP: Within weeks, half of the original founding team had accepted offers from competitors.\nR: Cash reserves that were supposed to last another year were gone within four months.",
     "options": [
-      "QSRP",
+      "QRSP",
       "RQSP",
       "QRPS",
-      "QRSP"
+      "QSRP"
     ],
-    "correctIndex": 3,
+    "correctIndex": 0,
     "explanation": "Q introduces the funding failure, R shows the immediate financial strain (\"supposed to last another year\" implies a plan disrupted by the funding loss in Q), S shows the next visible effect, and P states the final outcome. In RQSP, the cash-flow strain is described before any cause has been given for it. In QSRP, engineers are shown job-hunting due to late pay before the cash crunch (R) that caused the late pay has been mentioned. In QRPS, the departures (P) are placed before the late paychecks and interviewing (S) that actually explain why people left.",
     "source": "original"
   },
@@ -1222,12 +1222,12 @@
     "difficulty": "hard",
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nQ: A new dam was constructed far upstream, and its operators began holding back water to fill the reservoir before releasing it on their own schedule.\nS: Residents petitioned the regional government for a formal water-sharing agreement with the dam's operators.\nR: Crop yields in the village fell drastically within two seasons, since the water no longer arrived when the fields needed it most.\nP: For generations, a village had irrigated its fields using water diverted from a river during the dry season.",
     "options": [
-      "PQRS",
       "PRQS",
+      "PQRS",
       "PQSR",
       "QPRS"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "P establishes the village's reliance on the river during the dry season, Q introduces the dam that disrupts that schedule, R explains the consequence in terms that depend on the dry-season detail from P, and S gives the resulting response, referring back to \"the dam's operators\" from Q. In PRQS, the water shortage (R) is explained before the dam (Q) that actually caused it has been introduced. In PQSR, the petition (S) appears before the crop failure (R) that motivated it. In QPRS, Q opens by placing a dam \"far upstream\" before any river or village has been introduced for it to be upstream of.",
     "source": "original"
   },
@@ -1239,11 +1239,11 @@
     "prompt": "Arrange P, Q, R, S into a logically coherent paragraph.\nS: The airline's customer service lines stayed jammed for nearly forty-eight hours as travelers tried to rebook.\nP: By the time the fleet resumed flying, the airline had already begun processing refunds for every canceled route.\nQ: A technical malfunction grounded the airline's entire fleet for two days without warning.\nR: Passengers holding same-day tickets found their flights canceled minutes before scheduled boarding.",
     "options": [
       "RQSP",
-      "QRSP",
       "SQRP",
+      "QRSP",
       "RQPS"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "Q introduces the malfunction, R shows the immediate consequence for passengers (\"canceled\" needs the grounding in Q), S shows the resulting strain on customer service (\"as travelers tried to rebook\" needs the cancellations in R), and P gives the eventual resolution. In RQSP, flights are canceled before any cause has been given. In RQPS, cancellations again precede their cause, and the refund process in P comes before the customer service crunch in S. In SQRP, travelers are rebooking canceled flights before Q or R has mentioned a grounding or any cancellations.",
     "source": "original"
   },
@@ -1254,12 +1254,12 @@
     "difficulty": "easy",
     "prompt": "Which sentence correctly matches \"there is/are\" with the noun that follows it?",
     "options": [
-      "There are many reason to celebrate today.",
       "There are many reasons to celebrate today.",
+      "There are many reason to celebrate today.",
       "There is many reasons to celebrate today.",
       "There is many reason to celebrate today."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "The verb in a \"there is/are\" construction must agree with the noun that follows it. Since \"reasons\" is plural, the correct verb is \"are\".",
     "source": "original"
   },
@@ -1271,11 +1271,11 @@
     "prompt": "Which sentence uses the correct comparative form when comparing two candidates?",
     "options": [
       "Of the two candidates, she is the most qualified.",
-      "Of the two candidates, she is more qualified than the both.",
       "Of the two candidates, she is the better qualified.",
+      "Of the two candidates, she is more qualified than the both.",
       "Of the two candidates, she is the goodest qualified."
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Standard usage requires the comparative form (\"better\") when comparing exactly two things, and the superlative form (\"most\") only for three or more.",
     "source": "original"
   },
@@ -1288,10 +1288,10 @@
     "options": [
       "If I would be rich, I would travel the world.",
       "If I am rich, I would travel the world.",
-      "If I was rich, I would travel the world.",
-      "If I were rich, I would travel the world."
+      "If I were rich, I would travel the world.",
+      "If I was rich, I would travel the world."
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "Hypothetical, contrary-to-fact conditions require the subjunctive mood, which uses \"were\" for all subjects, not \"was\".",
     "source": "original"
   },
@@ -1318,12 +1318,12 @@
     "difficulty": "medium",
     "prompt": "Which sentence correctly distinguishes \"fewer\" from \"less\"?",
     "options": [
-      "There were fewer mistakes in his second essay than in his first.",
+      "There were less mistakes in his second essay than in his first.",
       "There was fewer mistakes in his second essay than in his first.",
       "There were fewer mistake in his second essay than in his first.",
-      "There were less mistakes in his second essay than in his first."
+      "There were fewer mistakes in his second essay than in his first."
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "\"Fewer\" is used for countable nouns like \"mistakes\", while \"less\" is used for uncountable quantities. The verb \"were\" must also agree with the plural noun \"mistakes\".",
     "source": "original"
   },
@@ -1334,12 +1334,12 @@
     "difficulty": "hard",
     "prompt": "Which sentence best conveys that she drove her kids to school on nearly every day of the week, missing only a few?",
     "options": [
-      "She almost drove her kids to school every day.",
       "She drove her kids to school almost every day.",
+      "She almost drove her kids to school every day.",
       "She drove her kids almost to school every day.",
       "She drove almost her kids to school every day."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "To convey the intended meaning (nearly every day, i.e. frequency), \"almost\" must sit next to \"every day.\" The other placements are grammatical but shift the meaning: \"almost drove\" implies she nearly didn't drive them at all, \"almost her kids\" is not a coherent modifier target, and \"almost to school\" implies the drive fell short of reaching school.",
     "source": "original"
   },
@@ -1367,11 +1367,11 @@
     "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" What is the primary purpose of the passage?",
     "options": [
       "To describe the history of underwater photography and its role in marine research.",
-      "To argue that pollution has had no real effect on the health of coral reefs.",
+      "To explain coral gardening and the limitations scientists associate with it.",
       "To criticize marine biologists for neglecting the study of damaged coral reefs.",
-      "To explain coral gardening and the limitations scientists associate with it."
+      "To argue that pollution has had no real effect on the health of coral reefs."
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "The passage explains how coral gardening works and then discusses the limitations and caveats that researchers attach to it, making \"to explain coral gardening and the limitations scientists associate with it\" the accurate summary of its purpose.",
     "source": "original"
   },
@@ -1382,12 +1382,12 @@
     "difficulty": "easy",
     "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" According to the passage, what survival rate do transplanted corals often show within the first year?",
     "options": [
-      "Above sixty percent",
-      "Below ten percent",
       "Nearly one hundred percent",
+      "Below ten percent",
+      "Above sixty percent",
       "Exactly fifty percent"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "The passage states this figure directly: survival rates above sixty percent within the first year.",
     "source": "original"
   },
@@ -1399,11 +1399,11 @@
     "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" The word \"degraded\" in the passage most nearly means:",
     "options": [
       "Protected",
-      "Damaged",
+      "Expanded",
       "Improved",
-      "Expanded"
+      "Damaged"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "\"Degraded\" means worn down or damaged in quality, which fits sections of a reef in need of restoration.",
     "source": "original"
   },
@@ -1414,12 +1414,12 @@
     "difficulty": "hard",
     "prompt": "Passage: \"Marine biologists have increasingly turned to coral gardening as a way to restore reefs damaged by rising ocean temperatures and pollution. The process begins with collecting small fragments from healthy coral colonies, which are then attached to underwater frames resembling trees or tables. Over months, these fragments grow into larger colonies before being transplanted onto degraded sections of a reef. Early results from several pilot projects have been encouraging: transplanted corals often show survival rates above sixty percent within the first year. Still, researchers caution that coral gardening addresses only the symptoms of reef decline, not its root causes. Unless ocean temperatures stabilize and pollution is reduced, newly planted coral colonies remain vulnerable to the same stresses that damaged the original reef. For this reason, many scientists argue that restoration efforts must be paired with stronger environmental policies, such as limits on coastal development and stricter controls on agricultural runoff. Without such measures, they warn, coral gardening risks becoming a costly and temporary fix rather than a lasting solution to reef degradation.\" What can be inferred from the passage about the future of coral gardening if ocean temperatures and pollution levels are not addressed?",
     "options": [
-      "Coral gardening will soon become unnecessary as the reefs recover naturally on their own.",
-      "Coral gardening on its own will fully restore the damaged reefs given enough time and funding.",
       "Newly planted corals will remain vulnerable to the same stresses that caused reef decline.",
+      "Coral gardening on its own will fully restore the damaged reefs given enough time and funding.",
+      "Coral gardening will soon become unnecessary as the reefs recover naturally on their own.",
       "Ocean temperatures will decrease naturally over the next several decades."
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "The passage states directly that without addressing temperatures and pollution, newly planted corals \"remain vulnerable to the same stresses that damaged the original reef.\"",
     "source": "original"
   },
@@ -1431,11 +1431,11 @@
     "prompt": "Passage: \"Researchers studying sleep have found that it plays an active role in strengthening memories formed during the day, a process known as memory consolidation. Rather than simply resting, the brain appears to replay and reorganize recent experiences during certain sleep stages, particularly during deep, slow-wave sleep. Studies involving both animals and humans have shown that people who sleep shortly after learning new information tend to retain it better than those who stay awake for a comparable period. Interestingly, not all types of memory benefit equally; procedural memory, such as the skill of playing a musical instrument, appears to depend more heavily on later stages of sleep, while factual memory seems to consolidate earlier in the night. This has led some researchers to recommend that students avoid pulling all-nighters before exams, since skipping sleep may undermine the very consolidation process needed to retain studied material. Although much about the relationship between sleep and memory remains under investigation, the existing evidence points clearly toward sleep being an active, necessary participant in learning rather than a passive break from it.\" What is memory consolidation, as described in the passage?",
     "options": [
       "A study technique used to memorize large numbers of facts quickly while still awake.",
-      "The process by which the brain gradually discards information that is not important.",
+      "The process by which the brain strengthens and reorganizes memories during sleep.",
       "A type of sleep disorder that interferes with normal memory formation at night.",
-      "The process by which the brain strengthens and reorganizes memories during sleep."
+      "The process by which the brain gradually discards information that is not important."
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "The passage defines memory consolidation as sleep's active role in \"strengthening memories\" by replaying and reorganizing recent experiences.",
     "source": "original"
   },
@@ -1446,12 +1446,12 @@
     "difficulty": "hard",
     "prompt": "Passage: \"Researchers studying sleep have found that it plays an active role in strengthening memories formed during the day, a process known as memory consolidation. Rather than simply resting, the brain appears to replay and reorganize recent experiences during certain sleep stages, particularly during deep, slow-wave sleep. Studies involving both animals and humans have shown that people who sleep shortly after learning new information tend to retain it better than those who stay awake for a comparable period. Interestingly, not all types of memory benefit equally; procedural memory, such as the skill of playing a musical instrument, appears to depend more heavily on later stages of sleep, while factual memory seems to consolidate earlier in the night. This has led some researchers to recommend that students avoid pulling all-nighters before exams, since skipping sleep may undermine the very consolidation process needed to retain studied material. Although much about the relationship between sleep and memory remains under investigation, the existing evidence points clearly toward sleep being an active, necessary participant in learning rather than a passive break from it.\" According to the passage, what distinguishes procedural memory from factual memory in terms of sleep?",
     "options": [
-      "Procedural memory depends more on later stages of sleep, while factual memory consolidates earlier.",
-      "Procedural memory does not appear to require sleep at all.",
       "Both types of memory consolidate at exactly the same point in the night.",
+      "Procedural memory does not appear to require sleep at all.",
+      "Procedural memory depends more on later stages of sleep, while factual memory consolidates earlier.",
       "Factual memory depends more on later stages of sleep, while procedural memory consolidates earlier."
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "The passage states this distinction directly: procedural memory depends more on later sleep stages, while factual memory consolidates earlier in the night. The option that has factual memory depending on later stages while procedural memory consolidates earlier simply reverses the two, which is easy to miss without reading closely.",
     "source": "original"
   },
@@ -1463,11 +1463,11 @@
     "prompt": "Passage: \"Researchers studying sleep have found that it plays an active role in strengthening memories formed during the day, a process known as memory consolidation. Rather than simply resting, the brain appears to replay and reorganize recent experiences during certain sleep stages, particularly during deep, slow-wave sleep. Studies involving both animals and humans have shown that people who sleep shortly after learning new information tend to retain it better than those who stay awake for a comparable period. Interestingly, not all types of memory benefit equally; procedural memory, such as the skill of playing a musical instrument, appears to depend more heavily on later stages of sleep, while factual memory seems to consolidate earlier in the night. This has led some researchers to recommend that students avoid pulling all-nighters before exams, since skipping sleep may undermine the very consolidation process needed to retain studied material. Although much about the relationship between sleep and memory remains under investigation, the existing evidence points clearly toward sleep being an active, necessary participant in learning rather than a passive break from it.\" Why does the passage suggest students should avoid pulling all-nighters before exams?",
     "options": [
       "Because staying awake for longer actually improves memory consolidation overall.",
-      "Because skipping sleep may undermine the consolidation process needed to retain studied material.",
+      "Because exams always feel easier after a full night's sleep regardless of how much studying was done.",
       "Because pulling an all-nighter causes permanent and irreversible loss of memory.",
-      "Because exams always feel easier after a full night's sleep regardless of how much studying was done."
+      "Because skipping sleep may undermine the consolidation process needed to retain studied material."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "The passage states this reasoning directly: skipping sleep \"may undermine the very consolidation process needed to retain studied material.\"",
     "source": "original"
   },

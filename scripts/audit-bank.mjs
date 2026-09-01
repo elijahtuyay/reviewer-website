@@ -335,14 +335,26 @@ for (const q of all) {
 const total = rows.at(-1);
 
 for (const r of rows.slice(0, -1)) {
-  // Per-file, and only on the larger files: wide bands, because the point is to
-  // catch a file where one slot is loaded, not to demand a flat distribution
-  // from a sample of 30.
-  if (r.n < 100) continue;
+  /*
+   * Every file, not only the large ones.
+   *
+   * This check used to skip anything under 100 questions, on the reasoning that
+   * a sample of 30 is too noisy to judge. That exemption let a real regression
+   * through: a re-slotting pass pushed GMAT Quantitative to 17 keys of 30 in
+   * slot A (56.7%, p = 2e-4 against chance) and the audit reported OK, because
+   * that file has 30 questions. "Too small to judge precisely" is not the same
+   * as "too small to judge at all" — 56.7% is far outside anything sampling
+   * noise produces.
+   *
+   * The band widens for small files instead of vanishing.
+   */
+  const [lo, hi] = r.n >= 100 ? [14, 36] : [10, 42];
   r.slots.slice(0, 4).forEach((c, i) => {
     const p = pct(c, r.n);
-    if (p < 14 || p > 36)
-      failures.push(`${r.name}: slot ${i + 1} is the key ${fmt(p)} of the time (want 14-36%)`);
+    if (p < lo || p > hi)
+      failures.push(
+        `${r.name}: slot ${i + 1} is the key ${fmt(p)} of the time (want ${lo}-${hi}% at n=${r.n})`
+      );
   });
 }
 

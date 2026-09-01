@@ -102,12 +102,12 @@
     "difficulty": "medium",
     "prompt": "Argument: \"The city should build a new highway to reduce traffic congestion downtown, since traffic has increased 30% over the past five years.\" Which of the following is an assumption underlying this argument?",
     "options": [
-      "A new highway will not simply attract more cars and eventually recreate congestion.",
       "The city can finance the highway without cutting other transportation projects.",
+      "A new highway will not simply attract more cars and eventually recreate congestion.",
       "Downtown business owners support the project and expect it to bring in more customers.",
       "Reducing traffic congestion downtown matters more than any other problem the city faces."
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "The argument assumes the highway will genuinely reduce congestion rather than just redistribute or eventually recreate it through induced demand, a common gap in this type of infrastructure argument.",
     "source": "original"
   },
@@ -119,11 +119,11 @@
     "prompt": "Argument: \"Since employees who take regular breaks report higher job satisfaction, the company should mandate hourly breaks to improve overall satisfaction.\" Which assumption does this argument rely on?",
     "options": [
       "Employees currently take their breaks at staggered times rather than all at the same hour of the day.",
-      "Mandating breaks will produce the same effect as employees voluntarily choosing to take them.",
       "The company has enough staff on hand to cover for everyone who steps away each hour.",
+      "Mandating breaks will produce the same effect as employees voluntarily choosing to take them.",
       "How often employees take breaks is the only real influence on their overall job satisfaction."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "The argument assumes a mandated break has the same positive effect as a self-chosen one: the observed correlation between voluntary breaks and satisfaction doesn't guarantee the same result if breaks are imposed.",
     "source": "original"
   },
@@ -136,10 +136,10 @@
     "options": [
       "There is no other classroom activity that develops empathy as effectively as reading fiction does.",
       "Students at these schools currently read far fewer novels than students at comparable schools.",
-      "The observed link between reading fiction and empathy reflects causation, not just correlation.",
-      "Every novel a school might choose to assign builds empathy to roughly the same degree."
+      "Every novel a school might choose to assign builds empathy to roughly the same degree.",
+      "The observed link between reading fiction and empathy reflects causation, not just correlation."
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "The argument assumes a causal relationship, when the initial claim only establishes a correlation between reading fiction and empathy.",
     "source": "original"
   },
@@ -150,12 +150,12 @@
     "difficulty": "medium",
     "prompt": "Argument: \"Since the new fitness app has 500,000 downloads, it must be effective at helping people get fit.\" What is the flawed assumption here?",
     "options": [
-      "Every one of the 500,000 people who downloaded the app is still using it on a regular weekly basis.",
+      "High download numbers indicate effectiveness, rather than just popularity or marketing reach.",
       "The size of the download count mainly reflects how affordable the app was next to its rivals.",
       "Fitness apps in general produce better physical results for their users than gyms do.",
-      "High download numbers indicate effectiveness, rather than just popularity or marketing reach."
+      "Every one of the 500,000 people who downloaded the app is still using it on a regular weekly basis."
     ],
-    "correctIndex": 3,
+    "correctIndex": 0,
     "explanation": "The argument wrongly assumes downloads (popularity) equal actual effectiveness, ignoring that popularity could stem from marketing rather than real results.",
     "source": "original"
   },
@@ -166,12 +166,12 @@
     "difficulty": "easy",
     "prompt": "\"All members of the hiking club own hiking boots. Sarah does not own hiking boots.\" What can be validly concluded?",
     "options": [
-      "Sarah is not a member of the hiking club.",
+      "Sarah will buy hiking boots soon.",
       "All hiking club members go hiking very often.",
       "Sarah strongly dislikes hiking.",
-      "Sarah will buy hiking boots soon."
+      "Sarah is not a member of the hiking club."
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "This is the contrapositive of \"all members own boots\": if someone doesn't own boots, they're not a member, a valid logical inference.",
     "source": "original"
   },
@@ -182,12 +182,12 @@
     "difficulty": "medium",
     "prompt": "\"Every time it rains heavily, the river level rises. The river level has not risen today.\" What can be validly concluded?",
     "options": [
-      "The river is at its lowest level ever.",
       "It did not rain heavily today.",
+      "The river is at its lowest level ever.",
       "It rained only lightly in the city today.",
       "It will rain heavily somewhere tomorrow."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "By the contrapositive of the stated rule, no rise in river level means it did not rain heavily today, a valid inference.",
     "source": "original"
   },
@@ -199,11 +199,11 @@
     "prompt": "\"Sales of umbrellas increase every time it rains in the city. Yesterday, umbrella sales were unusually high.\" What can be reasonably inferred?",
     "options": [
       "The umbrella shop must have lowered its prices sharply yesterday.",
-      "It definitely rained in the city at some point yesterday.",
       "It is possible that it rained in the city yesterday.",
+      "It definitely rained in the city at some point yesterday.",
       "It will almost certainly rain again tomorrow."
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Concluding it \"definitely\" rained would be affirming the consequent, a logical fallacy: other factors could also raise sales. Only \"possible\" is validly supported.",
     "source": "original"
   },
@@ -214,12 +214,12 @@
     "difficulty": "medium",
     "prompt": "Five colleagues (H, I, J, K, L) sit in a row of five chairs, numbered 1 to 5 from left to right. J sits exactly two seats to the right of H. I sits immediately to the left of K. L does not sit at either end. K sits at seat 5. Where does H sit?",
     "options": [
-      "Seat 1",
       "Seat 3",
+      "Seat 1",
       "Seat 2",
       "Seat 4"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "K=5, so I (immediately left of K) = 4. The remaining seats {1, 2, 3} go to H, J, L with $J = H+2$. Only H=1, J=3 fits within that set (H=2 would put J=4, already taken). That leaves L=2, which satisfies \"not at either end\" since seats 1 and 5 are the ends. H sits at seat 1.",
     "source": "original"
   },
@@ -342,12 +342,12 @@
     "difficulty": "hard",
     "prompt": "Seven friends (A, B, C, D, E, F, G) sit evenly spaced around a circular table, all facing outward, away from the table. B sits three seats clockwise from A. C sits immediately to the right of B. D sits immediately to the left of A. E sits two seats clockwise from D. F sits immediately to the right of E. Where does G sit relative to A?",
     "options": [
-      "Second to the left of A",
-      "Second to the right of A",
       "Immediately to the right of A",
+      "Second to the right of A",
+      "Second to the left of A",
       "Third to the right of A"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Numbering seats 1-7 clockwise with A=1: B (three seats clockwise) = 4. C (immediately right of B) = 5. D (immediately left of A) = 7. E (two seats clockwise from D) = $7+2=9$, which wraps to 2. F (immediately right of E) = 3. Every seat except 6 is now taken, so G=6. Going counterclockwise from A (1 to 7 to 6) is two steps, so G sits second to the left of A.",
     "source": "original"
   },
@@ -374,12 +374,12 @@
     "difficulty": "hard",
     "prompt": "Five friends (A, B, C, D, and E) sit in a row of five chairs, numbered 1 to 5 from left to right. B sits immediately to the right of A. C sits immediately to the right of B. D sits at one of the ends. E sits somewhere between D and A. E does not sit at seat 2. What is the order from left to right?",
     "options": [
-      "A, B, C, E, D",
+      "D, E, A, B, C",
       "E, A, B, C, D",
       "A, B, C, D, E",
-      "D, E, A, B, C"
+      "A, B, C, E, D"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "The block A-B-C occupies three consecutive seats, and D sits at an end. Testing A=1 (so B=2, C=3) forces D=5 (the only remaining end), with E strictly between D and A, i.e. E in {2,3,4}; since 2 and 3 are taken and E cannot be seat 2 anyway, E=4. Testing A=3 (B=4, C=5) instead forces D=1, with E between D and A, i.e. E=2, but that violates \"E does not sit at seat 2.\" Only the first case survives: order A, B, C, E, D.",
     "source": "original"
   },
@@ -390,12 +390,12 @@
     "difficulty": "hard",
     "prompt": "Six friends P, Q, R, S, T, U sit evenly spaced around a circular table, facing outward, away from the table. Q sits directly opposite P. R and S occupy the two seats immediately beside Q, with R on Q's right. T sits immediately to the left of S. Where does U sit?",
     "options": [
-      "Immediately to the right of Q",
       "Immediately to the left of P",
+      "Immediately to the right of Q",
       "Immediately to the left of S",
       "Opposite R"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Number the seats 1 to 6 clockwise and place P at seat 1. Because everyone faces outward, away from the table, each person's right is the clockwise direction. With six evenly spaced seats, the seat directly opposite P is seat 4, so Q sits there. R and S are Q's two neighbors, seats 3 and 5; R is on Q's right, which is clockwise from seat 4, so R is at 5 and S is at 3. T is immediately to the left (counterclockwise) of S, so T is at 2. Seat 6 is the only one left, and it is the counterclockwise neighbor of P, that is, immediately to P's left, so U sits there. Checking the other choices against this arrangement: the seat immediately to Q's right is 5, which belongs to R; the seat immediately to S's left is 2, which belongs to T; and the seat opposite R is also 2, again T.",
     "source": "original"
   },
@@ -407,11 +407,11 @@
     "prompt": "Four houses are arranged in a row: House 1, House 2, House 3, House 4 (left to right). The blue house is immediately to the right of the red house. The green house is at one of the ends. The yellow house is not adjacent to the green house. Which house is the red house?",
     "options": [
       "House 3",
-      "House 1",
       "House 2",
+      "House 1",
       "House 4"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Testing both possible positions for the green house (House 1 or House 4) and checking the yellow-not-adjacent-to-green constraint, only two arrangements satisfy all conditions: Green-Red-Blue-Yellow (1-2-3-4) or Yellow-Red-Blue-Green (1-2-3-4). In both valid arrangements, the red house is House 2.",
     "source": "original"
   },
@@ -422,12 +422,12 @@
     "difficulty": "easy",
     "prompt": "In a certain code, \"SUN\" is written as \"TVO\". How is \"MOON\" written in the same code?",
     "options": [
-      "NPPO",
+      "MPQO",
       "NPPN",
       "MPPO",
-      "MPQO"
+      "NPPO"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Each letter is shifted forward by one position in the alphabet (S→T, U→V, N→O). Applying this to MOON: M→N, O→P, O→P, N→O, giving \"NPPO\".",
     "source": "original"
   },
@@ -438,12 +438,12 @@
     "difficulty": "medium",
     "prompt": "In a certain code, each letter is replaced by double its position in the alphabet, so \"CAT\" (C=3, A=1, T=20) is written as \"6-2-40\". How is \"DOG\" written in the same code?",
     "options": [
-      "4-30-7",
       "8-30-14",
+      "4-30-7",
       "8-14-30",
       "8-15-14"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "D is the 4th letter ($4 \\times 2 = 8$), O is the 15th letter ($15 \\times 2 = 30$), G is the 7th letter ($7 \\times 2 = 14$). So DOG becomes \"8-30-14\".",
     "source": "original"
   },
@@ -455,11 +455,11 @@
     "prompt": "If \"PAPER\" is coded as \"QBQFS\" (each letter shifted forward by one position), how is \"PENCIL\" coded in the same pattern?",
     "options": [
       "QGODJM",
-      "PFODJM",
       "QFODJM",
+      "PFODJM",
       "QFODJN"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Shifting each letter of PENCIL forward by one: P→Q, E→F, N→O, C→D, I→J, L→M, giving \"QFODJM\".",
     "source": "original"
   },
@@ -470,12 +470,12 @@
     "difficulty": "easy",
     "prompt": "Pointing to a boy in a photograph, a woman says, \"His mother is the only daughter of my mother.\" How is the woman related to the boy?",
     "options": [
-      "Mother",
-      "Aunt",
       "Grandmother",
+      "Aunt",
+      "Mother",
       "Sister"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "\"My mother\" unambiguously refers to the woman's own mother, who has only one daughter. Since the woman herself is female and is a child of her own mother, she must be that only daughter. So \"his mother\" is the woman herself, making her the boy's mother.",
     "source": "original"
   },
@@ -487,11 +487,11 @@
     "prompt": "A is B's brother. C is A's mother. D is C's father. E is D's mother. How is B related to D?",
     "options": [
       "Sibling",
-      "Grandchild",
+      "Child",
       "Niece/Nephew",
-      "Child"
+      "Grandchild"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "A and B are siblings, sharing the same mother, C. D is C's father, making D the maternal grandfather of both A and B. So B is D's grandchild.",
     "source": "original"
   },
@@ -502,12 +502,12 @@
     "difficulty": "easy",
     "prompt": "Find the next number in the series: 2, 6, 12, 20, 30, ?",
     "options": [
-      "42",
       "56",
+      "42",
       "44",
       "48"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Each term is $n(n+1)$: $1 \\times 2 = 2$, $2 \\times 3 = 6$, $3 \\times 4 = 12$, $4 \\times 5 = 20$, $5 \\times 6 = 30$, so the sixth term is $6 \\times 7 = 42$. Equivalently, the gaps run 4, 6, 8, 10 and grow by 2 each step, so the next gap is 12 and $30 + 12 = 42$. Adding 14 gives 44, which comes from carrying the gap forward by 4 (the size of the first gap) instead of by 2. Pairing 6 with 8 rather than with 7 gives $6 \\times 8 = 48$. Treating 42 as though it were already listed and computing the term after it, $7 \\times 8 = 56$, is an off-by-one on the term index.",
     "source": "original"
   },
@@ -519,11 +519,11 @@
     "prompt": "Find the next letter in the series: B, D, G, K, P, ?",
     "options": [
       "T",
-      "V",
       "W",
+      "V",
       "U"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "The gaps between letter positions increase by one each time: B(2)→D(4) is +2, D→G(7) is +3, G→K(11) is +4, K→P(16) is +5. The next gap is +6, giving position 22, which is V.",
     "source": "original"
   },
@@ -536,10 +536,10 @@
     "options": [
       "94",
       "90",
-      "95",
-      "96"
+      "96",
+      "95"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "Each term follows the pattern $a_{n+1} = 2a_n + 1$. $5 \\times 2 + 1 = 11$, $11 \\times 2 + 1 = 23$, $23 \\times 2 + 1 = 47$, $47 \\times 2 + 1 = 95$.",
     "source": "original"
   },
@@ -550,12 +550,12 @@
     "difficulty": "easy",
     "prompt": "A man walks 5 km north, then turns right and walks 3 km, then turns right again and walks 5 km. How far is he from his starting point?",
     "options": [
-      "3 km",
-      "5 km",
       "8 km",
+      "5 km",
+      "3 km",
       "13 km"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "North 5 km, then right turn (east) 3 km, then right turn again (south) 5 km. The north and south legs cancel out (5 km each, opposite directions), leaving only the 3 km eastward displacement.",
     "source": "original"
   },
@@ -598,12 +598,12 @@
     "difficulty": "hard",
     "prompt": "Eight students are divided into two teams of four for a project: Team X and Team Y. A is on Team X. B is on Team Y. C is on the same team as B. D is on a different team from A. E is on the same team as A. F is on the same team as D. G is on a different team from F. H is on the same team as G. Which team is H on?",
     "options": [
-      "Team X",
       "Both teams",
+      "Team X",
       "Team Y",
       "Cannot be determined"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Following the chain: A=X, so E=X (same as A). B=Y, so C=Y (same as B). D is different from A, so D=Y, and F=Y (same as D). G is different from F, so G=X, and H=X (same as G). Team X ends up with A, E, G, H, and Team Y with B, C, D, F, four each. H is on Team X.",
     "source": "original"
   },
@@ -663,11 +663,11 @@
     "prompt": "Six colleagues (P, Q, R, S, T, U) sit in a row of six chairs, numbered 1 to 6 from left to right. P sits at seat 1. Q sits two seats to the right of P. R sits immediately to the left of Q. S sits at seat 6. T does not sit at seat 1. T sits immediately to the right of U. Where does U sit?",
     "options": [
       "Seat 5",
-      "Seat 4",
       "Seat 3",
+      "Seat 4",
       "Seat 2"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "P=1, $Q = P+2 = 3$, $R = Q-1 = 2$, S=6. The remaining seats {4, 5} go to T and U with $T = U+1$, so U=4 and T=5 is the only fit (U=5,T=6 is impossible since S already occupies 6). This also satisfies \"T does not sit at seat 1.\" U sits at seat 4.",
     "source": "original"
   },
@@ -679,11 +679,11 @@
     "prompt": "Six people (A, B, C, D, E, F) sit evenly spaced around a circular table, all facing outward, away from the table. B sits two seats clockwise from A. C sits immediately to the right of B. D sits immediately to the left of A. F sits immediately to the right of C. Where does E sit relative to A?",
     "options": [
       "Third to the right of A",
-      "Immediately to the right of A",
+      "Immediately to the left of A",
       "Opposite A",
-      "Immediately to the left of A"
+      "Immediately to the right of A"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "Numbering seats 1-6 clockwise with A=1: B (two seats clockwise) = 3, C (immediately right of B) = 4, D (immediately left of A) = 6, F (immediately right of C) = 5. The only remaining seat is 2, for E, which is the clockwise neighbor of A, i.e., immediately to the right of A.",
     "source": "original"
   },
@@ -806,12 +806,12 @@
     "difficulty": "medium",
     "prompt": "Argument: \"The company should switch all its delivery trucks to electric vehicles, since electric vehicles have lower fuel costs than gasoline trucks.\" Which of the following is an assumption underlying this argument?",
     "options": [
-      "The savings from lower fuel costs will not be offset by higher purchase or maintenance costs of electric vehicles.",
       "Electric delivery trucks have already been adopted by most of the company's direct competitors.",
+      "The savings from lower fuel costs will not be offset by higher purchase or maintenance costs of electric vehicles.",
       "Company drivers would rather operate electric trucks than the gasoline ones they use now.",
       "The price of gasoline will keep climbing over the next several years in this region."
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "The argument assumes the fuel savings actually translate into net savings, ignoring the possibility that higher upfront or maintenance costs could offset the benefit.",
     "source": "original"
   },
@@ -823,11 +823,11 @@
     "prompt": "Argument: \"Because the average reading score in District A is higher than in District B, District A's schools must be providing better reading instruction.\" What does this argument assume?",
     "options": [
       "Reading scores are the only meaningful measure of the quality of a school district's teaching.",
-      "The score gap is not primarily explained by differences in students' socioeconomic backgrounds or outside resources.",
       "District B employs fewer reading teachers per student than District A currently employs.",
+      "The score gap is not primarily explained by differences in students' socioeconomic backgrounds or outside resources.",
       "District A operates a greater number of schools and therefore reaches more students than District B."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "The argument assumes the score difference reflects instructional quality rather than confounding factors like students' home environment or economic resources.",
     "source": "original"
   },
@@ -840,10 +840,10 @@
     "options": [
       "All technicians must eventually retake the exam.",
       "Jason will retake the exam next term.",
-      "Jason has failed at his job.",
-      "Jason is not a certified technician."
+      "Jason is not a certified technician.",
+      "Jason has failed at his job."
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "This is the contrapositive of \"all certified technicians passed the exam\": if someone didn't pass, they aren't certified, a valid inference.",
     "source": "original"
   },
@@ -854,12 +854,12 @@
     "difficulty": "medium",
     "prompt": "\"In a factory, machines serviced monthly break down less often than machines serviced yearly. Machine 12 broke down frequently this year.\" What can be reasonably inferred?",
     "options": [
-      "It is possible that Machine 12 was not serviced monthly.",
+      "Machine 12 is now beyond repair.",
       "All machines in the factory will break down eventually.",
       "Machine 12 was definitely serviced yearly rather than monthly.",
-      "Machine 12 is now beyond repair."
+      "It is possible that Machine 12 was not serviced monthly."
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Concluding Machine 12 was \"definitely\" serviced yearly would be affirming the consequent: other causes could also explain frequent breakdowns. Only \"possible\" is validly supported.",
     "source": "original"
   },
@@ -936,10 +936,10 @@
     "options": [
       "R, T, P, Q, S",
       "T, P, Q, R, S",
-      "T, P, Q, S, R",
-      "P, T, Q, S, R"
+      "P, T, Q, S, R",
+      "T, P, Q, S, R"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "Q=3, so P (immediately left of Q) = seat 2, and S (immediately right of Q) = seat 4. T (immediately left of P) = seat 1. R takes the only remaining seat, 5 (the rightmost end, consistent with the clue). Order: T, P, Q, S, R.",
     "source": "original"
   },
@@ -950,12 +950,12 @@
     "difficulty": "medium",
     "prompt": "Six colleagues (A, B, C, D, E, F) sit in a row of six chairs, left to right. C sits at the leftmost end. D sits immediately to the right of A. B sits immediately to the right of D. F sits immediately to the right of B. E sits immediately to the right of F. Where does A sit?",
     "options": [
-      "Fifth from the left",
+      "Second from the left",
       "Fourth from the left",
       "Third from the left",
-      "Second from the left"
+      "Fifth from the left"
     ],
-    "correctIndex": 3,
+    "correctIndex": 0,
     "explanation": "C occupies seat 1. The chain A-D-B-F-E forms a block of 5 consecutive people, and only seats 2-6 remain, so this block must fill them in order: A=2, D=3, B=4, F=5, E=6. A sits second from the left.",
     "source": "original"
   },
@@ -966,12 +966,12 @@
     "difficulty": "medium",
     "prompt": "Six people sit evenly spaced around a circular table, facing outward, away from the table: J, K, L, M, N, O. K sits second to the right of J. L sits immediately to the left of K. M sits directly opposite J. N sits immediately to the right of M. Where does O sit?",
     "options": [
-      "Immediately to the left of M",
-      "Opposite L",
       "Immediately to the left of J",
+      "Opposite L",
+      "Immediately to the left of M",
       "Immediately to the right of K"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "Numbering seats 1-6 clockwise with J at 1: K (second to the right) is at 3, L (immediately left of K) is at 2, M (opposite J) is at 4, N (immediately right of M) is at 5. The only remaining seat is 6, which is immediately to the left (counterclockwise neighbor) of J, so O sits there.",
     "source": "original"
   },
@@ -983,11 +983,11 @@
     "prompt": "Six colleagues sit around a circular table facing outward, away from the table: R, S, T, U, V, W. T sits immediately to the right of R. U sits second to the left of T. V sits directly opposite U. S sits immediately to the right of V. Where does W sit relative to R?",
     "options": [
       "Directly opposite R",
-      "Immediately to the right of R",
+      "Second to the left of R",
       "Immediately to the left of R",
-      "Second to the left of R"
+      "Immediately to the right of R"
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "Numbering seats 1-6 clockwise with R at 1: T=2, U (second to the left of T) = 6, V (opposite U) = 3, S (immediately right of V) = 4. The only remaining seat is 5, for W. Going counterclockwise from R (1→6→5), W is two seats to the left of R.",
     "source": "original"
   },
@@ -1111,11 +1111,11 @@
     "prompt": "Eight students are divided into two teams of four for a project: Team X and Team Y. Priya is on Team X. Liam is on Team Y. Noah is on the same team as Liam. Sam is on a different team from Priya. Which team is Sam on?",
     "options": [
       "Cannot be determined",
-      "Team Y",
       "Team X",
+      "Team Y",
       "Both teams"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "There are only two teams, so \"a different team from Priya\" leaves exactly one possibility. Priya is on Team X, therefore Sam is on Team Y. \"Cannot be determined\" is tempting because the clues about Liam and Noah are never needed and their presence suggests more work is required, but a two-way split means ruling out one team settles the other. \"Both teams\" is impossible, since the eight students are divided into two teams of four and each student occupies one seat in that split.",
     "source": "original"
   },
@@ -1126,12 +1126,12 @@
     "difficulty": "medium",
     "prompt": "Six friends (J, K, L, M, N, O) sit in a row of six chairs, numbered 1 to 6 from left to right. L sits third from the left. N sits second from the right. J sits immediately to the left of L. Exactly one person sits between L and O. M sits immediately to the right of N. Who sits at seat 1?",
     "options": [
-      "O",
       "K",
+      "O",
       "N",
       "J"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "L=3 and N=5 (second from the right of 6). J=2 (immediately left of L). \"Exactly one person between L and O\" means O is at position 1 or 5, but 5 is taken by N, so O=1. M=6 (immediately right of N), leaving K=4. Seat 1 is occupied by O.",
     "source": "original"
   },
@@ -1142,12 +1142,12 @@
     "difficulty": "medium",
     "prompt": "Five people (A, B, C, D, E) sit evenly spaced around a circular table, all facing outward, away from the table. B sits second to the right of A. C sits immediately to the left of B. D sits immediately to the right of B. Where does E sit relative to A?",
     "options": [
-      "Immediately to the left of A",
-      "Second to the left of A",
       "Immediately to the right of A",
+      "Second to the left of A",
+      "Immediately to the left of A",
       "Second to the right of A"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Numbering seats 1-5 clockwise with A at 1: B (second to the right) = 3, C (immediately left of B) = 2, D (immediately right of B) = 4. The only remaining seat is 5, for E, which is the counterclockwise neighbor of A, i.e., immediately to the left of A.",
     "source": "original"
   },
@@ -1159,11 +1159,11 @@
     "prompt": "Five people (Amy, Ben, Cleo, Dev, and Ella) stand in a line for a photo, numbered position 1 to 5 from left to right. Amy is at position 1. Ben is not at either end. Cleo is somewhere to the right of Ben. Dev is immediately to the left of Ella. Ella is not at position 5. Cleo is not adjacent to Ella. What is Ella's position?",
     "options": [
       "2",
-      "3",
       "5",
+      "3",
       "4"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "Amy=1. Dev and Ella must be consecutive (Ella immediately after Dev) within positions {2,3,4,5}, and Ella is not at position 5, leaving two candidate pairs: (Dev=2,Ella=3) or (Dev=3,Ella=4). Testing (Dev=3,Ella=4) forces Ben=2 and Cleo=5, but then Cleo is adjacent to Ella, violating the \"not adjacent\" clue. So (Dev=2,Ella=3) is the only valid case, with Ben=4 and Cleo=5. Ella sits at position 3.",
     "source": "original"
   },
@@ -1175,11 +1175,11 @@
     "prompt": "Four friends (W, X, Y, Z) sit evenly spaced around a square table, facing outward, away from the table. X sits directly opposite W. Y sits immediately to the right of W. Where does Z sit relative to X?",
     "options": [
       "Immediately to the left of X",
-      "Immediately to the right of X",
+      "Immediately to the right of Y",
       "Directly opposite X",
-      "Immediately to the right of Y"
+      "Immediately to the right of X"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "Numbering seats 1-4 clockwise with W at 1: X (opposite W) = 3, Y (immediately right of W) = 2. The only remaining seat is 4, for Z, which is the clockwise neighbor of X (seat 3), i.e., immediately to the right of X.",
     "source": "original"
   },
@@ -1192,10 +1192,10 @@
     "options": [
       "7",
       "6",
-      "3",
-      "2"
+      "2",
+      "3"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "G=1, D=2, F=5 (three seats right of D), B=4 (immediately left of F). The remaining seats {3, 6, 7} go to A, C, E, with C directly right of E. The only consecutive pair within {3, 6, 7} is (6, 7), so E=6, C=7, leaving A=3 by elimination.",
     "source": "original"
   },
@@ -1208,10 +1208,10 @@
     "options": [
       "DJMUCQ",
       "DJNUCP",
-      "EJMUCP",
-      "DJMUCP"
+      "DJMUCP",
+      "EJMUCP"
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "Shifting each letter of FLOWER back by 2: F→D, L→J, O→M, W→U, E→C, R→P, giving \"DJMUCP\".",
     "source": "original"
   },
@@ -1222,12 +1222,12 @@
     "difficulty": "medium",
     "prompt": "In a code language, \"sun rises east\" is written as \"pit dor kaf\", \"sun sets west\" is written as \"pit lom naz\", and \"moon rises west\" is written as \"ruv dor naz\". What is the code for \"rises\"?",
     "options": [
-      "dor",
+      "kaf",
       "naz",
       "pit",
-      "kaf"
+      "dor"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Comparing sentences 1 and 3, both contain \"rises\" and both codes share the word \"dor\": no other word or code is common to both, so \"rises\" = \"dor\". (Cross-checking: \"sun\"=\"pit\" from sentences 1-2, \"west\"=\"naz\" from sentences 2-3, leaving \"east\"=\"kaf\", \"sets\"=\"lom\", \"moon\"=\"ruv\" with no conflicts.)",
     "source": "original"
   },
@@ -1240,10 +1240,10 @@
     "options": [
       "Cannot be determined",
       "Both teams",
-      "Team Y",
-      "Team X"
+      "Team X",
+      "Team Y"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "M=X, so O=X (same as M) and N=Y (different from M), so P=Y (same as N). Q=X and R=X (same as Q), and since exactly two of Q, R, S are on Team X, S must be Y. Team X now has M, O, Q, R (four), so Team Y must hold N, P, S, and T, four each. T is on Team Y, which also follows directly since T is stated to be on a different team from M (Team X).",
     "source": "original"
   },
@@ -1254,12 +1254,12 @@
     "difficulty": "hard",
     "prompt": "In a code, each letter is replaced by the letter immediately after it in the alphabet, and then the whole word is reversed. Using this rule, \"CAT\" becomes \"UBD\" (C→D, A→B, T→U gives DBU, then reversed gives UBD). Using the same rule, what does \"LION\" become?",
     "options": [
-      "MJPO",
       "OPJM",
+      "MJPO",
       "PJOM",
       "OJPM"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Shift each letter forward by one: L→M, I→J, O→P, N→O, giving \"MJPO\". Reversing this string gives \"OPJM\".",
     "source": "original"
   },
@@ -1270,12 +1270,12 @@
     "difficulty": "hard",
     "prompt": "Seven colleagues (A, B, C, D, E, F, G) sit in a row of seven chairs, numbered 1 to 7 from left to right. B sits two seats to the right of A. C sits immediately to the left of B. D sits at seat 7. E sits exactly two seats to the right of F. G does not sit at seat 1. A sits to the left of F. Where does A sit?",
     "options": [
-      "Seat 3",
+      "Seat 1",
       "Seat 2",
       "Seat 4",
-      "Seat 1"
+      "Seat 3"
     ],
-    "correctIndex": 3,
+    "correctIndex": 0,
     "explanation": "D=7. With $B = A+2$, $C = B-1$, and $E = F+2$, testing A=1 gives B=3, C=2; the remaining seats {4,5,6} then need F and E with $E = F+2$, which only F=4,E=6 satisfies, leaving G=5 (not seat 1, consistent with the clue, and A=1 is indeed left of F=4). No other value of A satisfies every constraint at once. A sits at seat 1.",
     "source": "original"
   },
@@ -1286,12 +1286,12 @@
     "difficulty": "easy",
     "prompt": "Pointing to a man, Riya says, \"He is the son of my father's sister.\" How is the man related to Riya?",
     "options": [
-      "Brother",
-      "Nephew",
       "Cousin",
+      "Nephew",
+      "Brother",
       "Uncle"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "Riya's father's sister is Riya's aunt. The aunt's son is Riya's cousin.",
     "source": "original"
   },
@@ -1303,11 +1303,11 @@
     "prompt": "A is a man. Pointing to B, A says, \"B's mother is my mother's only daughter.\" How is A related to B?",
     "options": [
       "Cousin",
-      "Grandfather",
+      "Uncle",
       "Father",
-      "Uncle"
+      "Grandfather"
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "Since A is male, he cannot be his own mother's \"only daughter\", so that daughter must be A's sister, who is B's mother. A is therefore the brother of B's mother, making A the boy's/girl's uncle.",
     "source": "original"
   },
@@ -1316,15 +1316,15 @@
     "section": "logical-reasoning",
     "topic": "Blood Relations",
     "difficulty": "medium",
-    "prompt": "Sam is a woman. Pointing to a photograph, Sam says, \"The girl's father is the only son of my mother.\" How is the girl related to Sam?",
+    "prompt": "Sam is a woman. Pointing to a photograph, Sam says, \"The girl's father is the only son of my mother.\" How is Sam related to the girl?",
     "options": [
-      "Aunt",
-      "Grandmother",
       "Sister",
+      "Grandmother",
+      "Aunt",
       "Mother"
     ],
-    "correctIndex": 0,
-    "explanation": "Since Sam is female, she cannot be her own mother's \"only son\", so that son must be Sam's brother, who is the girl's father. Sam is therefore the girl's father's sister, i.e., the girl's aunt.",
+    "correctIndex": 2,
+    "explanation": "Since Sam is female, she cannot be her own mother's \"only son\", so that son must be Sam's brother, and he is the girl's father. Sam is therefore the sister of the girl's father, which makes Sam the girl's aunt. Note the direction the question asks for: the girl is Sam's niece, so answering with the relationship the other way round is the trap here.",
     "source": "original"
   },
   {
@@ -1335,11 +1335,11 @@
     "prompt": "P is the brother of Q. Q is the daughter of R. R is the husband of S. S has only one daughter, Q. T is the son of S. How is T related to P?",
     "options": [
       "Cousin",
-      "Brother",
+      "Uncle",
       "Father",
-      "Uncle"
+      "Brother"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "Q is the daughter of R and S. P, being Q's brother, is also a child of R and S. T, being a son of S (and thus of the couple R and S), is likewise their child. Since P and T are both children of the same parents, T is P's brother.",
     "source": "original"
   },
@@ -1350,12 +1350,12 @@
     "difficulty": "hard",
     "prompt": "Arjun says, \"I have as many brothers as sisters.\" His sister Meena says, \"I have twice as many brothers as sisters.\" How many sons and daughters do their parents have?",
     "options": [
-      "4 sons and 4 daughters",
-      "3 sons and 4 daughters",
       "4 sons and 3 daughters",
+      "3 sons and 4 daughters",
+      "4 sons and 4 daughters",
       "5 sons and 2 daughters"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "Let $b$ be the number of sons and $g$ the number of daughters. Arjun (a son) has $b-1$ brothers and $g$ sisters; \"equal\" gives $b - 1 = g$. Meena (a daughter) has $b$ brothers and $g-1$ sisters; \"twice as many\" gives $b = 2(g-1)$. Substituting $b = g+1$ into the second equation: $g + 1 = 2g - 2$, so $g = 3$ and $b = 4$. The family has 4 sons and 3 daughters.",
     "source": "original"
   },
@@ -1366,12 +1366,12 @@
     "difficulty": "easy",
     "prompt": "Find the next number in the series: 3, 7, 15, 31, 63, ?",
     "options": [
-      "126",
+      "127",
       "128",
       "125",
-      "127"
+      "126"
     ],
-    "correctIndex": 3,
+    "correctIndex": 0,
     "explanation": "Each term follows the pattern $a_{n+1} = 2a_n + 1$. $63 \\times 2 + 1 = 127$.",
     "source": "original"
   },
@@ -1382,12 +1382,12 @@
     "difficulty": "medium",
     "prompt": "Find the next letter in the series: A, C, F, J, O, ?",
     "options": [
-      "U",
       "W",
+      "U",
       "V",
       "T"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "The gaps between letter positions increase by one each time: A(1)→C(3) is +2, C→F(6) is +3, F→J(10) is +4, J→O(15) is +5. The next gap is +6, giving position 21, which is U.",
     "source": "original"
   },
@@ -1399,11 +1399,11 @@
     "prompt": "Find the missing term in the series: 2A, 4C, 8E, 16G, ?",
     "options": [
       "32J",
-      "32I",
       "32H",
+      "32I",
       "30I"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "The numbers double each time (2, 4, 8, 16, 32), and the letters skip forward by two positions each time (A, C, E, G, I). The next term is \"32I\".",
     "source": "original"
   },
@@ -1416,10 +1416,10 @@
     "options": [
       "70",
       "72",
-      "68",
-      "69"
+      "69",
+      "68"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "The gaps between consecutive terms are 3, 5, 9, 17, and the gaps between those gaps double each step (2, 4, 8, then 16). The next gap is therefore $17 + 16 = 33$, giving $35 + 33 = 68$. The same series can be read as doubling with a shrinking correction: $2 \\times 1 + 2 = 4$, $2 \\times 4 + 1 = 9$, $2 \\times 9 + 0 = 18$, $2 \\times 18 - 1 = 35$, so the correction is now $-2$ and $2 \\times 35 - 2 = 68$. Reusing the previous correction of $-1$ instead of advancing it gives 69, the same figure a solver reaches by doubling the last gap ($17 + 17 = 34$) rather than adding the next second gap. Doubling the last term and dropping the correction altogether gives 70, and running the correction in the wrong direction, $2 \\times 35 + 2$, gives 72.",
     "source": "original"
   },
@@ -1430,12 +1430,12 @@
     "difficulty": "hard",
     "prompt": "Eight people (A, B, C, D, E, F, G, H) sit evenly spaced around a circular table, all facing outward, away from the table. B sits directly opposite A. C sits two seats clockwise from B. D sits immediately to the left of C. E sits immediately to the right of A. F sits two seats clockwise from E. G sits immediately to the right of C. Where does H sit relative to A?",
     "options": [
-      "Directly opposite A",
-      "Second to the left of A",
       "Second to the right of A",
+      "Second to the left of A",
+      "Directly opposite A",
       "Third to the right of A"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "Numbering seats 1-8 clockwise with A=1: B (opposite A) = 5. C (two seats clockwise from B) = 7. D (immediately left of C) = 6. E (immediately right of A) = 2. F (two seats clockwise from E) = 4. G (immediately right of C) = 8. The only remaining seat is 3, for H, which is two seats clockwise from A, i.e., second to the right of A.",
     "source": "original"
   },
@@ -1447,11 +1447,11 @@
     "prompt": "A man walks 6 km east, then turns left and walks 6 km, then turns left again and walks 6 km. How far and in which direction is he from his starting point?",
     "options": [
       "12 km, north",
-      "6 km, north",
+      "6 km, east",
       "6 km, south",
-      "6 km, east"
+      "6 km, north"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "East 6 km, then left turn (north) 6 km, then left turn again (west) 6 km. The east and west legs cancel out (6 km each, opposite directions), leaving only the 6 km northward displacement from the middle leg.",
     "source": "original"
   },
@@ -1462,12 +1462,12 @@
     "difficulty": "medium",
     "prompt": "Point B is 8 km north of Point A. Point C is 6 km east of Point B. Point D is 8 km south of Point C. What is the direction and distance of Point D from Point A?",
     "options": [
-      "8 km east",
-      "6 km north",
       "6 km east",
+      "6 km north",
+      "8 km east",
       "6 km west"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "Using coordinates with A at $(0,0)$: $B = (0,8)$, $C = (6,8)$, $D = (6,0)$. The north ($+8$) and south ($-8$) legs cancel, leaving D directly 6 km east of A.",
     "source": "original"
   },
@@ -1479,11 +1479,11 @@
     "prompt": "Facing north, Riya turns 90° clockwise and walks 4 km, then turns 90° clockwise again and walks 3 km. What is the shortest distance between her starting point and her current position?",
     "options": [
       "7 km",
-      "6 km",
+      "5 km",
       "4 km",
-      "5 km"
+      "6 km"
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "Turning 90° clockwise from north faces her east; walking 4 km east gives $(4,0)$. Turning 90° clockwise again faces her south; walking 3 km south gives $(4,-3)$. The straight-line distance is $\\sqrt{4^2+3^2} = 5$ km.",
     "source": "original"
   },
@@ -1494,12 +1494,12 @@
     "difficulty": "hard",
     "prompt": "A cyclist starts at point O, rides 10 km north to point P, then 6 km west to point Q, then 10 km south to point R, then 2 km east to point S. What is the shortest distance from S to O, and in which direction is O from S?",
     "options": [
-      "4 km, east",
-      "6 km, east",
       "4 km, north",
+      "6 km, east",
+      "4 km, east",
       "4 km, west"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Using coordinates with O at $(0,0)$: $P = (0,10)$, $Q = (-6,10)$, $R = (-6,0)$, $S = (-4,0)$. The north and south legs (10 km each) cancel, leaving S 4 km west of O; equivalently, O is 4 km east of S.",
     "source": "original"
   },
@@ -1510,12 +1510,12 @@
     "difficulty": "hard",
     "prompt": "In a class of 50 students, 6 students play neither football nor cricket. The number of students who play only cricket is exactly twice the number who play only football. 14 students play both football and cricket. How many students play only football?",
     "options": [
-      "10",
-      "15",
       "12",
+      "15",
+      "10",
       "8"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Students playing at least one sport = $50 - 6 = 44$. Let $x$ = students playing only football, so only cricket = $2x$ (given). Then $x + 2x + 14 = 44$, so $3x = 30$, giving $x = 10$ students who play only football.",
     "source": "original"
   },
@@ -1543,11 +1543,11 @@
     "prompt": "In a group of 200 people, 90 read Newspaper A, 80 read Newspaper B, 70 read Newspaper C, 30 read both A and B, 25 read both B and C, 20 read both A and C, and 10 read all three. How many people read none of the three newspapers?",
     "options": [
       "5",
-      "25",
+      "10",
       "15",
-      "10"
+      "25"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "By inclusion-exclusion: $|A \\cup B \\cup C| = 90 + 80 + 70 - 30 - 25 - 20 + 10 = 175$, so the number reading none is $200 - 175 = 25$. The distractors are the three ways this is usually got wrong: 10 answers with the all-three group itself rather than the people outside every set; 15 adds that group back twice instead of once; and 5 adds it back three times, once for each pair it appears in.",
     "source": "original"
   },
@@ -1558,12 +1558,12 @@
     "difficulty": "easy",
     "prompt": "If January 1, 2023 was a Sunday, what day of the week was January 1, 2024? (2023 has 365 days, since it is not a leap year.)",
     "options": [
-      "Monday",
       "Tuesday",
+      "Monday",
       "Sunday",
       "Wednesday"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "365 days is exactly 52 weeks plus 1 extra day ($365 = 52 \\times 7 + 1$), so the day of the week advances by one: Sunday + 1 = Monday.",
     "source": "original"
   },
@@ -1591,11 +1591,11 @@
     "prompt": "At what time between 3 and 4 o'clock will the minute hand and hour hand of a clock be exactly opposite each other (180° apart)?",
     "options": [
       "$45$ minutes past 3",
-      "$49\\frac{1}{11}$ minutes past 3",
       "$49$ minutes past 3",
+      "$49\\frac{1}{11}$ minutes past 3",
       "$50$ minutes past 3"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "At $t$ minutes past 3:00, the hour hand is at $90 + 0.5t$ degrees and the minute hand is at $6t$ degrees. Setting the minute hand 180° ahead: $6t - (90 + 0.5t) = 180$, so $5.5t = 270$, giving $t = \\frac{270}{5.5} = 49\\frac{1}{11}$ minutes.",
     "source": "original"
   }
