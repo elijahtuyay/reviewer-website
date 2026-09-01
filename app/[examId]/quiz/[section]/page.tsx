@@ -61,13 +61,13 @@ export default function QuizPage({
             <button
               type="button"
               onClick={() => window.location.reload()}
-              className="flex min-h-11 items-center justify-center rounded-md bg-accent px-5 text-sm font-medium text-accent-foreground hover:opacity-90"
+              className="btn btn-primary"
             >
               Try again
             </button>
             <Link
               href={`/${exam.id}`}
-              className="flex min-h-11 items-center justify-center rounded-md border border-line-strong px-5 text-sm font-medium text-foreground hover:bg-panel-hover"
+              className="btn btn-secondary"
             >
               Back to sections
             </Link>

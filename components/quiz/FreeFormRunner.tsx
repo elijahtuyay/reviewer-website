@@ -133,7 +133,7 @@ export default function FreeFormRunner({
             <button
               type="button"
               onClick={() => setMobileNavOpen(true)}
-              className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground hover:bg-panel-hover lg:hidden"
+              className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground transition-colors hover:bg-panel-hover active:bg-line lg:hidden"
             >
               Sections
             </button>
@@ -153,7 +153,7 @@ export default function FreeFormRunner({
                 <button
                   type="button"
                   onClick={pause}
-                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground hover:bg-panel-hover"
+                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground transition-colors hover:bg-panel-hover active:bg-line"
                 >
                   Pause
                 </button>
@@ -163,13 +163,13 @@ export default function FreeFormRunner({
                 <button
                   type="button"
                   onClick={() => setPendingAction("restart")}
-                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground hover:bg-panel-hover"
+                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground transition-colors hover:bg-panel-hover active:bg-line"
                 >
                   Retake
                 </button>
                 <Link
                   href={`/${exam.id}`}
-                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground hover:bg-panel-hover"
+                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground transition-colors hover:bg-panel-hover active:bg-line"
                 >
                   Back to sections
                 </Link>
@@ -179,7 +179,7 @@ export default function FreeFormRunner({
         </div>
 
         <div className="mt-4 flex gap-8">
-          <aside className="hidden w-56 shrink-0 flex-col gap-6 lg:flex">
+          <aside className="hidden w-72 shrink-0 flex-col gap-6 lg:flex">
             <div className="sticky top-24 flex flex-col gap-6">
               <SectionNav
                 examId={exam.id}
@@ -208,7 +208,7 @@ export default function FreeFormRunner({
                 <button
                   type="button"
                   onClick={() => setPendingAction("restart")}
-                  className="inline-flex min-h-11 items-center px-1 text-xs text-muted underline underline-offset-2 hover:text-foreground"
+                  className="inline-flex min-h-11 items-center px-1 text-xs text-muted underline underline-offset-2 transition-colors hover:text-foreground"
                 >
                   Restart section
                 </button>
@@ -253,7 +253,7 @@ export default function FreeFormRunner({
                   // min-h-11 is the app's 44px tap-target floor. py-2.5 alone
                   // made this 40px — on the single most consequential control
                   // in the app.
-                  className="min-h-11 w-full rounded-md bg-accent py-2.5 text-sm font-medium text-accent-foreground transition hover:opacity-90 active:opacity-80"
+                  className="min-h-11 w-full rounded-md bg-accent py-2.5 text-sm font-medium text-accent-foreground transition hover:opacity-90 active:brightness-95"
                 >
                   Submit ({answeredCount}/{questions.length} answered)
                 </button>

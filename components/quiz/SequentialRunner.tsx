@@ -146,10 +146,24 @@ export default function SequentialRunner({
               would advertise navigation that does not exist. */}
           {!reviewMode && !inReviewPass && (
             <div className="mb-6">
-              <div className="h-1.5 w-full overflow-hidden rounded-full bg-panel-hover">
+              {/* scaleX on a full-width child, not an animated `width`.
+                  Animating width runs layout and paint on every frame of every
+                  advance; a transform is composited on its own layer and never
+                  touches layout. transform-origin has to be pinned left or the
+                  bar grows from its center. */}
+              <div
+                className="h-1.5 w-full overflow-hidden rounded-full bg-panel-hover"
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={totalQuestions}
+                aria-valuenow={Math.min(cursor, totalQuestions)}
+                aria-label="Section progress"
+              >
                 <div
-                  className="h-full rounded-full bg-accent transition-[width] duration-300 motion-reduce:transition-none"
-                  style={{ width: `${(Math.min(cursor, totalQuestions) / totalQuestions) * 100}%` }}
+                  className="h-full origin-left rounded-full bg-accent transition-transform duration-300 ease-standard motion-reduce:transition-none"
+                  style={{
+                    transform: `scaleX(${Math.min(cursor, totalQuestions) / totalQuestions})`,
+                  }}
                 />
               </div>
               <p className="mt-2 text-xs text-muted">
@@ -184,7 +198,7 @@ export default function SequentialRunner({
                     type="button"
                     onClick={() => toggleFlag(current.id)}
                     aria-pressed={flagged.includes(current.id)}
-                    className={`flex min-h-11 items-center justify-center gap-2 rounded-md border px-4 text-sm font-medium transition-colors ${
+                    className={`flex min-h-11 items-center justify-center gap-2 rounded-md border px-4 text-sm font-medium transition-[color,background-color,border-color,transform] active:scale-[0.98] ${
                       flagged.includes(current.id)
                         ? "border-accent bg-accent/10 text-foreground dark:bg-accent/20"
                         : "border-line-strong text-muted hover:bg-panel-hover hover:text-foreground"
@@ -200,7 +214,7 @@ export default function SequentialRunner({
                   type="button"
                   onClick={advance}
                   disabled={!exam.rules.allowSkip && !currentAnswered}
-                  className="flex min-h-11 items-center justify-center rounded-md bg-accent px-6 text-sm font-semibold text-accent-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="flex min-h-11 items-center justify-center rounded-md bg-accent px-6 text-sm font-semibold text-accent-foreground transition hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100"
                 >
                   {isLastServed ? "Finish section" : "Next question"}
                 </button>
@@ -356,7 +370,7 @@ function ReviewPass({
         <button
           type="button"
           onClick={onSubmit}
-          className="w-full rounded-md bg-accent py-2.5 text-sm font-medium text-accent-foreground hover:opacity-90"
+          className="min-h-11 w-full rounded-md bg-accent py-2.5 text-sm font-medium text-accent-foreground transition hover:opacity-90 active:brightness-95"
         >
           Submit section
         </button>

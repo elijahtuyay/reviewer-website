@@ -172,7 +172,7 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
               M
             </span>
           )}
-          <span aria-hidden className={`text-xs text-muted transition-transform ${open ? "rotate-180" : ""}`}>
+          <span aria-hidden className={`text-xs text-muted transition-transform motion-reduce:transition-none ${open ? "rotate-180" : ""}`}>
             ▾
           </span>
         </button>
@@ -343,7 +343,7 @@ function CalcButton({ spec, onPress }: { spec: KeySpec; onPress: (key: Calculato
     <button
       type="button"
       onClick={() => onPress(spec.key)}
-      className={`flex h-11 items-center justify-center rounded-md border text-sm text-foreground transition-colors hover:bg-panel-hover ${tone}`}
+      className={`flex h-11 items-center justify-center rounded-md border text-sm text-foreground transition-[color,background-color,border-color,transform] hover:bg-panel-hover active:scale-95 active:bg-panel-hover ${tone}`}
     >
       <span aria-hidden>{spec.label}</span>
       <span className="sr-only">{spec.srLabel ?? spec.label}</span>

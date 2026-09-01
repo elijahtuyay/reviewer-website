@@ -29,6 +29,11 @@ export default function ProgressTracker({
           ? `Results (${answeredNumbers.length}/${totalQuestions} answered)`
           : `Progress (${answeredNumbers.length}/${totalQuestions})`}
       </p>
+      {/* 36px cells, up from 28px. Still under the app's 44px floor, but the
+          grid is 36 cells in a sidebar and 44px each would not fit any column
+          width the layout can give it; 36px clears WCAG 2.5.8 with room and is
+          a real improvement for touch. The aside was widened to w-72 to suit:
+          6 x 36px + 5 x 6px gaps = 246px inside a 254px content box. */}
       <div className="mt-3 grid grid-cols-6 gap-1.5">
         {Array.from({ length: totalQuestions }, (_, i) => i + 1).map((num) => {
           // Every branch sets its own font-weight. The base className must NOT
@@ -43,11 +48,17 @@ export default function ProgressTracker({
             // the WCAG 1.4.1 failure already fixed for the answer options.
             // Bold = correct, underlined = incorrect, plain = skipped.
             if (correctSet.has(num)) {
-              style = "bg-green-600 font-bold text-white dark:bg-green-500";
+              // green-700/white measures 5.02 and green-400/green-950 8.55.
+              // The old pair was 3.30 light and 2.28 dark — the worst contrast
+              // in the app, on the screen a user stares at after finishing.
+              style = "bg-green-700 font-bold text-white dark:bg-green-400 dark:text-green-950";
               state = "correct";
             } else if (incorrectSet.has(num)) {
+              // 6.47 light / 5.84 dark, from 4.83 / 3.76. The dark background
+              // has to move to red-400 as well: red-950 text on red-500 is
+              // still only 4.29.
               style =
-                "bg-red-600 font-medium text-white underline decoration-2 underline-offset-2 dark:bg-red-500";
+                "bg-red-700 font-medium text-white underline decoration-2 underline-offset-2 dark:bg-red-400 dark:text-red-950";
               state = "incorrect";
             } else {
               style = "bg-panel-hover font-normal text-muted hover:bg-line";
@@ -64,7 +75,7 @@ export default function ProgressTracker({
               type="button"
               onClick={() => onJump(num)}
               aria-label={`Question ${num}, ${state}`}
-              className={`flex h-7 w-7 items-center justify-center rounded text-[11px] transition-colors ${style}`}
+              className={`flex h-9 w-9 items-center justify-center rounded-md text-xs transition-colors ${style}`}
             >
               {num}
             </button>
@@ -79,7 +90,7 @@ export default function ProgressTracker({
           ? // Color first, because color is what is actually perceptible at
             // this cell size: the bold/underline redundancy is real and is kept
             // for colorblind users, but leading with it described a signal
-            // nobody can see on a 28px square.
+            // nobody can see at this cell size.
             "Green is correct (bold), red is incorrect (underlined), gray was skipped."
           : // "Filled" was wrong: every cell has a fill, so the caption read as
             // "you have answered all of them". The distinction is the accent

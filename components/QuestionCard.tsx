@@ -157,7 +157,9 @@ export default function QuestionCard({
           let marker: string | null = null;
           if (reviewMode) {
             if (isCorrectOption) {
-              style = "border-green-600 bg-green-50 dark:border-green-500 dark:bg-green-950/40";
+              // border-green-700: -600 is 2.95 against --background, under the 3:1 that
+              // WCAG 1.4.11 asks of a boundary identifying a control.
+              style = "border-green-700 bg-green-50 dark:border-green-500 dark:bg-green-950/40";
               marker = "Correct answer";
             } else if (isSelected && !isCorrectOption) {
               style = "border-red-600 bg-red-50 dark:border-red-500 dark:bg-red-950/40";
@@ -196,7 +198,19 @@ export default function QuestionCard({
               // min-h-11 is the 44px tap-target minimum, and it doubles as the
               // headroom stacked math (fractions, exponents) needs to sit in a
               // row without the box having to grow around it.
-              className={`flex min-h-11 scroll-mt-24 items-center justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-sm leading-relaxed text-foreground transition-colors ${style} ${reviewMode || lockedReason ? "cursor-default" : "cursor-pointer"} ${lockedReason ? "opacity-60" : ""}`}
+              // transition-[...box-shadow], not transition-colors: the selected
+              // state's `ring-1` compiles to a box-shadow in Tailwind v4, which
+              // transition-colors does not cover, so the ring snapped on while
+              // the border underneath it faded. active:scale gives the press
+              // the acknowledgement it had on no touch device, where :hover
+              // does not exist at all.
+              //
+              // text-base, not text-sm: the options were 14px under a 16px
+              // stem, i.e. the text a candidate re-reads three times before
+              // committing was the smallest text on the card.
+              className={`flex min-h-11 scroll-mt-24 items-center justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-base leading-relaxed text-foreground transition-[color,background-color,border-color,box-shadow,transform] ${
+                reviewMode || lockedReason ? "" : "active:scale-[0.995]"
+              } ${style} ${reviewMode || lockedReason ? "cursor-default" : "cursor-pointer"} ${lockedReason ? "opacity-60" : ""}`}
             >
               <span>
                 <MathText text={option} />

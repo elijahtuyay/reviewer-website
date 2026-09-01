@@ -258,7 +258,7 @@ function ComingSoon({ exam }: { exam: ExamModule }) {
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             href="/"
-            className="flex min-h-11 items-center justify-center rounded-md bg-accent px-5 text-sm font-medium text-accent-foreground hover:opacity-90"
+            className="btn btn-primary"
           >
             See the exams that are ready
           </Link>

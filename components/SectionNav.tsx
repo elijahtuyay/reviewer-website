@@ -66,7 +66,9 @@ export default function SectionNav({
               <span className="text-xs text-muted">Submitted</span>
             ) : breakdown.submitted ? (
               <span className="flex gap-2 text-xs">
-                <span className="text-green-700 dark:text-green-400">{breakdown.correct} correct</span>
+                {/* green-800, not -700: on --background the -700 measures 4.49, which is a
+                    fail by 0.01. On bg-green-50 (the answer options) -700 is fine. */}
+                <span className="text-green-800 dark:text-green-400">{breakdown.correct} correct</span>
                 <span className="text-red-700 dark:text-red-400">{breakdown.incorrect} wrong</span>
                 <span className="text-muted">{breakdown.skipped} skipped</span>
               </span>
@@ -103,7 +105,7 @@ export default function SectionNav({
           <Link
             key={section.id}
             href={`/${examId}/quiz/${section.id}`}
-            className={`${baseClasses} ${activeClasses} ${isCurrent ? "" : "hover:bg-panel-hover"}`}
+            className={`${baseClasses} ${activeClasses} ${isCurrent ? "" : "hover:bg-panel-hover active:bg-line"}`}
           >
             {content}
           </Link>

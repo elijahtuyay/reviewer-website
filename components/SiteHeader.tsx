@@ -20,7 +20,9 @@ export default function SiteHeader() {
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-6">
         <Link
           href="/"
-          className="flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground"
+          // min-h-11 with a negative margin so the 44px target does not
+            // change the header's h-14 rhythm. The logo was a ~24px target.
+            className="-my-2 flex min-h-11 items-center gap-2 rounded-md text-sm font-semibold tracking-tight text-foreground transition-colors hover:text-accent-text"
         >
           <span
             aria-hidden
@@ -36,7 +38,7 @@ export default function SiteHeader() {
             <Link
               key={exam.id}
               href={`/${exam.id}`}
-              className="flex min-h-11 items-center gap-1.5 rounded-md px-2 text-muted hover:bg-panel-hover hover:text-foreground sm:px-3"
+              className="flex min-h-11 items-center gap-1.5 rounded-md px-2 text-muted transition-colors hover:bg-panel-hover hover:text-foreground active:bg-line sm:px-3"
             >
               {exam.shortLabel}
               {!exam.available && (

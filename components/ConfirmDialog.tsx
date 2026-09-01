@@ -99,7 +99,7 @@ export default function ConfirmDialog({
   // per-call "tone" meant green confirmed one dialog and canceled another a
   // single tap apart, which is worse than either convention on its own.
   const confirmClasses =
-    "border border-red-600 text-red-700 hover:bg-red-50 dark:border-red-500 dark:text-red-400 dark:hover:bg-red-950/40";
+    "border border-red-700 text-red-700 hover:bg-red-50 dark:border-red-500 dark:text-red-400 dark:hover:bg-red-950/40";
   const cancelClasses = "bg-accent text-accent-foreground hover:opacity-90";
 
   return (
@@ -112,14 +112,14 @@ export default function ConfirmDialog({
         aria-label="Close"
         tabIndex={-1}
         onClick={onCancel}
-        className="absolute inset-0 bg-black/40"
+        className="backdrop-in absolute inset-0 bg-black/40"
       />
       <div
         role="alertdialog"
         aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={bodyId}
-        className="relative max-h-[90vh] w-full max-w-sm overflow-y-auto rounded-lg border border-line bg-background p-5 shadow-lg"
+        className="dialog-in relative max-h-[90vh] w-full max-w-sm overflow-y-auto rounded-lg border border-line bg-background p-5 shadow-lg"
       >
         <h2 id={titleId} className="text-base font-semibold text-foreground">
           {title}
@@ -135,7 +135,7 @@ export default function ConfirmDialog({
             ref={cancelRef}
             type="button"
             onClick={onCancel}
-            className={`flex h-11 items-center justify-center rounded-md px-4 text-sm font-medium ${cancelClasses}`}
+            className={`flex h-11 items-center justify-center rounded-md px-4 text-sm font-medium transition active:scale-[0.98] ${cancelClasses}`}
           >
             {cancelLabel}
           </button>
@@ -143,7 +143,7 @@ export default function ConfirmDialog({
             ref={confirmRef}
             type="button"
             onClick={onConfirm}
-            className={`flex h-11 items-center justify-center rounded-md px-4 text-sm font-medium ${confirmClasses}`}
+            className={`flex h-11 items-center justify-center rounded-md px-4 text-sm font-medium transition active:scale-[0.98] ${confirmClasses}`}
           >
             {confirmLabel}
           </button>

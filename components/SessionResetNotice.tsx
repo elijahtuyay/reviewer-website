@@ -109,7 +109,7 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
               <li key={entry.id} className="flex items-center gap-1">
                 <Link
                   href={`/${examId}/quiz/${entry.id}`}
-                  className="flex min-h-11 flex-1 flex-wrap items-center justify-between gap-x-3 rounded-md px-2 py-1.5 text-sm hover:bg-panel-hover"
+                  className="flex min-h-11 flex-1 flex-wrap items-center justify-between gap-x-3 rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-panel-hover active:bg-line"
                 >
                   <span className="font-medium text-foreground underline underline-offset-2">{entry.label}</span>
                   <span className="text-xs text-muted">{entry.detail}</span>
@@ -122,7 +122,7 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
                   type="button"
                   onClick={() => setPendingClear(entry)}
                   aria-label={`Clear saved progress for ${entry.label}`}
-                  className="flex h-11 shrink-0 items-center justify-center rounded-md border border-line-strong px-3 text-xs font-medium text-muted hover:bg-panel-hover hover:text-foreground"
+                  className="flex h-11 shrink-0 items-center justify-center rounded-md border border-line-strong px-3 text-xs font-medium text-muted transition-colors hover:bg-panel-hover hover:text-foreground active:bg-line"
                 >
                   Clear
                 </button>
@@ -136,7 +136,7 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
             <button
               type="button"
               onClick={() => setPendingClear("all")}
-              className="mt-3 flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm font-medium text-foreground hover:bg-panel-hover"
+              className="btn btn-secondary mt-3"
             >
               Clear all saved progress
             </button>

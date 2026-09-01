@@ -29,7 +29,7 @@ export default function SiteFooter() {
               <Link
                 key={exam.id}
                 href={`/${exam.id}`}
-                className="inline-flex min-h-11 items-center gap-2 text-sm text-foreground hover:underline"
+                className="inline-flex min-h-11 items-center gap-2 text-sm text-foreground transition-colors hover:text-accent-text hover:underline"
               >
                 {exam.shortLabel}
                 {!exam.available && (

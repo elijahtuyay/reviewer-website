@@ -123,7 +123,7 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
 
   return (
     <div
-      className={`font-mono text-sm tabular-nums ${isLow ? "font-semibold text-red-600 dark:text-red-400" : "text-muted"}`}
+      className={`font-mono text-sm tabular-nums ${isLow ? "font-semibold text-red-700 dark:text-red-400" : "text-muted"}`}
     >
       {label}
     </div>
