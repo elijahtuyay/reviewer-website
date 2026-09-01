@@ -502,13 +502,13 @@
     "difficulty": "easy",
     "prompt": "Find the next number in the series: 2, 6, 12, 20, 30, ?",
     "options": [
-      "40",
-      "36",
+      "42",
+      "56",
       "44",
-      "42"
+      "48"
     ],
-    "correctIndex": 3,
-    "explanation": "Each term follows the pattern $n(n+1)$: $1 \\times 2 = 2$, $2 \\times 3 = 6$, $3 \\times 4 = 12$, $4 \\times 5 = 20$, $5 \\times 6 = 30$, so the next term is $6 \\times 7 = 42$.",
+    "correctIndex": 0,
+    "explanation": "Each term is $n(n+1)$: $1 \\times 2 = 2$, $2 \\times 3 = 6$, $3 \\times 4 = 12$, $4 \\times 5 = 20$, $5 \\times 6 = 30$, so the sixth term is $6 \\times 7 = 42$. Equivalently, the gaps run 4, 6, 8, 10 and grow by 2 each step, so the next gap is 12 and $30 + 12 = 42$. Adding 14 gives 44, which comes from carrying the gap forward by 4 (the size of the first gap) instead of by 2. Pairing 6 with 8 rather than with 7 gives $6 \\times 8 = 48$. Treating 42 as though it were already listed and computing the term after it, $7 \\times 8 = 56$, is an off-by-one on the term index.",
     "source": "original"
   },
   {
@@ -1414,13 +1414,13 @@
     "difficulty": "hard",
     "prompt": "Find the next number in the series: 1, 4, 9, 18, 35, ?",
     "options": [
-      "67",
       "70",
+      "72",
       "68",
       "69"
     ],
     "correctIndex": 2,
-    "explanation": "The differences between consecutive terms are 3, 5, 9, 17, and the differences of those differences double each time (2, 4, 8, next 16). So the next difference is $17 + 16 = 33$, giving the next term as $35 + 33 = 68$.",
+    "explanation": "The gaps between consecutive terms are 3, 5, 9, 17, and the gaps between those gaps double each step (2, 4, 8, then 16). The next gap is therefore $17 + 16 = 33$, giving $35 + 33 = 68$. The same series can be read as doubling with a shrinking correction: $2 \\times 1 + 2 = 4$, $2 \\times 4 + 1 = 9$, $2 \\times 9 + 0 = 18$, $2 \\times 18 - 1 = 35$, so the correction is now $-2$ and $2 \\times 35 - 2 = 68$. Reusing the previous correction of $-1$ instead of advancing it gives 69, the same figure a solver reaches by doubling the last gap ($17 + 17 = 34$) rather than adding the next second gap. Doubling the last term and dropping the correction altogether gives 70, and running the correction in the wrong direction, $2 \\times 35 + 2$, gives 72.",
     "source": "original"
   },
   {
@@ -1542,13 +1542,13 @@
     "difficulty": "hard",
     "prompt": "In a group of 200 people, 90 read Newspaper A, 80 read Newspaper B, 70 read Newspaper C, 30 read both A and B, 25 read both B and C, 20 read both A and C, and 10 read all three. How many people read none of the three newspapers?",
     "options": [
+      "5",
+      "10",
       "15",
-      "20",
-      "25",
-      "30"
+      "25"
     ],
-    "correctIndex": 2,
-    "explanation": "By inclusion-exclusion: $|A \\cup B \\cup C| = 90 + 80 + 70 - 30 - 25 - 20 + 10 = 175$. People reading none = $200 - 175 = 25$.",
+    "correctIndex": 3,
+    "explanation": "By inclusion-exclusion: $|A \\cup B \\cup C| = 90 + 80 + 70 - 30 - 25 - 20 + 10 = 175$, so the number reading none is $200 - 175 = 25$. The distractors are the three ways this is usually got wrong: 10 answers with the all-three group itself rather than the people outside every set; 15 adds that group back twice instead of once; and 5 both adds it back too often and drops one of the pairwise overlaps.",
     "source": "original"
   },
   {

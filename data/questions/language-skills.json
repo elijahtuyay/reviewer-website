@@ -169,10 +169,10 @@
       "vibrant",
       "delicate",
       "transient",
-      "durable"
+      "everlasting"
     ],
     "correctIndex": 2,
-    "explanation": "Transient means lasting for a very short time, matching blossoms that last \"only a week or two.\" Vibrant describes vivid color or energy, a quality the blossoms may have but one that says nothing about how long they last. Delicate describes physical fragility, which is plausible for blossoms but does not itself explain their short duration; something delicate could still last a long time if left undisturbed. Durable describes something built to withstand wear over a long period, the opposite of what the sentence describes.",
+    "explanation": "Transient means lasting for a very short time, matching blossoms that last \"only a week or two.\" Vibrant describes vivid color or energy, a quality the blossoms may have but one that says nothing about how long they last. Delicate describes physical fragility, which is plausible for blossoms but does not itself explain their short duration; something delicate could still last a long time if left undisturbed. Everlasting describes something that continues indefinitely, the direct opposite of a beauty that lasts \"only a week or two.\"",
     "source": "original"
   },
   {
@@ -838,13 +838,13 @@
     "difficulty": "hard",
     "prompt": "Choose the word that best completes the sentence: \"The committee's report was criticized as ____, offering sweeping conclusions without citing a single verifiable source.\"",
     "options": [
-      "biased",
+      "self-congratulatory",
       "redundant",
       "unsubstantiated",
       "authoritative"
     ],
     "correctIndex": 2,
-    "explanation": "Unsubstantiated means not backed up by evidence, matching a report that offers conclusions \"without citing a single verifiable source.\" Biased describes a report skewed by favoritism, which is a different flaw from lacking evidence entirely; a report can be well cited and still biased. Authoritative describes a report that speaks with earned confidence and credibility, the opposite of one criticized for weak support. Redundant means needlessly repetitive, a criticism about wordiness rather than about missing evidence.",
+    "explanation": "Unsubstantiated means not backed up by evidence, matching a report that offers conclusions \"without citing a single verifiable source.\" Self-congratulatory describes a report that praises its own authors, a complaint about tone rather than about whether the conclusions are supported. Authoritative describes a report that speaks with earned confidence and credibility, the opposite of one criticized for weak support. Redundant means needlessly repetitive, a criticism about wordiness rather than about missing evidence.",
     "source": "original"
   },
   {
@@ -951,12 +951,12 @@
     "prompt": "Choose the word that best completes the sentence: \"Her ____ remarks about her colleague's work created tension in the office.\"",
     "options": [
       "flattering",
-      "offhand",
+      "noncommittal",
       "candid",
       "disparaging"
     ],
     "correctIndex": 3,
-    "explanation": "Disparaging means belittling or critical, which explains why the remarks \"created tension in the office.\" Candid means honest and straightforward, which could describe fair, even positive, feedback that would not necessarily cause conflict. Flattering describes praise, the opposite of remarks that would create tension. Offhand describes a casual, unplanned manner, which speaks to how the remarks were delivered rather than to their critical content.",
+    "explanation": "Disparaging means belittling or critical, which explains why the remarks \"created tension in the office.\" Candid means honest and straightforward, which could describe fair, even positive, feedback that would not necessarily cause conflict. Flattering describes praise, the opposite of remarks that would create tension. Noncommittal describes remarks that avoid taking a position at all, which is unlikely to create tension precisely because it gives no one anything to object to.",
     "source": "original"
   },
   {
@@ -985,10 +985,10 @@
       "irrefutable",
       "circumstantial",
       "conclusive",
-      "abundant"
+      "incontrovertible"
     ],
     "correctIndex": 1,
-    "explanation": "Circumstantial evidence is based on inference rather than direct proof, explaining why the jury \"could not reach a firm conclusion.\" Abundant describes a large quantity of evidence, which says nothing about whether that evidence is direct or merely suggestive; a jury could have abundant circumstantial evidence. Conclusive and irrefutable both describe evidence strong enough to settle a matter beyond doubt, the opposite of evidence that left the jury undecided.",
+    "explanation": "Circumstantial evidence is based on inference rather than direct proof, explaining why the jury \"could not reach a firm conclusion.\" Incontrovertible describes evidence that cannot be disputed, which would have made the jury’s decision easy rather than impossible. Conclusive and irrefutable both describe evidence strong enough to settle a matter beyond doubt, the opposite of evidence that left the jury undecided.",
     "source": "original"
   },
   {
@@ -999,12 +999,12 @@
     "prompt": "Choose the word that best completes the sentence: \"The professor's lecture was so ____ that even the most attentive students struggled to follow it.\"",
     "options": [
       "monotone",
-      "lucid",
+      "straightforward",
       "lengthy",
       "convoluted"
     ],
     "correctIndex": 3,
-    "explanation": "Convoluted means excessively complicated or tangled, explaining why \"even the most attentive students struggled to follow\" the lecture. Lengthy describes duration, not complexity; a long lecture can still be easy to follow. Lucid means clear and easy to understand, the opposite of what caused students to struggle. Monotone describes a flat, unchanging vocal tone, a delivery issue that does not by itself explain confusion over content.",
+    "explanation": "Convoluted means excessively complicated or tangled, explaining why \"even the most attentive students struggled to follow\" the lecture. Lengthy describes duration, not complexity; a long lecture can still be easy to follow. Straightforward means direct and easy to follow, the opposite of what left even attentive students lost. Monotone describes a flat, unchanging vocal tone, a delivery issue that does not by itself explain confusion over content.",
     "source": "original"
   },
   {
@@ -1096,11 +1096,11 @@
     "options": [
       "autocratic",
       "participative",
-      "erratic",
+      "interventionist",
       "reactive"
     ],
     "correctIndex": 1,
-    "explanation": "Participative describes a style that involves others in decisions, matching a manager who \"empowered employees to make their own decisions.\" Autocratic describes a controlling style where the leader makes decisions alone, the direct opposite of empowering employees. Reactive describes responding to events as they arise, a quality about timing and responsiveness rather than about how much autonomy employees are given. Erratic describes inconsistent, unpredictable behavior, which would undermine employee confidence rather than empower them.",
+    "explanation": "Participative describes a style that involves others in decisions, matching a manager who \"empowered employees to make their own decisions.\" Autocratic describes a controlling style where the leader makes decisions alone, the direct opposite of empowering employees. Reactive describes responding to events as they arise, a quality about timing and responsiveness rather than about how much autonomy employees are given. Interventionist describes a manager who steps into decisions rather than leaving them to others, which is what empowering employees rules out.",
     "source": "original"
   },
   {

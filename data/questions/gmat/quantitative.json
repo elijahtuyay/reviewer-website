@@ -6,13 +6,13 @@
     "difficulty": "easy",
     "prompt": "A jacket priced at 240 dollars is discounted by 15 percent. What is the sale price?",
     "options": [
-      "225 dollars",
       "216 dollars",
-      "196 dollars",
-      "204 dollars"
+      "225 dollars",
+      "204 dollars",
+      "276 dollars"
     ],
-    "correctIndex": 3,
-    "explanation": "A 15 percent discount leaves 85 percent of the original price. $240 \\times 0.85 = 204$. A common slip is subtracting 15 rather than 15 percent, which would give 225.",
+    "correctIndex": 2,
+    "explanation": "A 15 percent discount leaves 85 percent of the original price, so $240 \\times 0.85 = 204$ dollars. Applying a habitual 10 percent instead of 15 percent gives 216. Subtracting 15 dollars rather than 15 percent gives 225. Adding the 15 percent instead of subtracting it gives 276.",
     "source": "original"
   },
   {
@@ -38,13 +38,13 @@
     "difficulty": "easy",
     "prompt": "If $5x - 8 = 3x + 10$, what is the value of $x$?",
     "options": [
-      "18",
-      "6",
+      "9",
       "1",
-      "9"
+      "-1",
+      "-9"
     ],
-    "correctIndex": 3,
-    "explanation": "Collect the variable terms: $5x - 3x = 10 + 8$, so $2x = 18$ and $x = 9$. Substituting back, both sides equal 37.",
+    "correctIndex": 0,
+    "explanation": "Collect the variable terms: $5x - 3x = 10 + 8$, so $2x = 18$ and $x = 9$. Substituting back, both sides equal 37. Moving the 8 across without changing its sign gives $2x = 10 - 8 = 2$ and $x = 1$. Flipping the sign on both constants gives $2x = -2$ and $x = -1$. Carrying both constants to the left instead of the right gives $2x = -18$ and $x = -9$.",
     "source": "original"
   },
   {
@@ -86,13 +86,13 @@
     "difficulty": "easy",
     "prompt": "A number increased from 80 to 92. What was the percentage increase?",
     "options": [
-      "15 percent",
-      "20 percent",
-      "13 percent",
-      "12 percent"
+      "87 percent",
+      "115 percent",
+      "150 percent",
+      "15 percent"
     ],
-    "correctIndex": 0,
-    "explanation": "The increase is 12, and percentage change is measured against the ORIGINAL value: $12/80 = 0.15$, so 15 percent. Dividing by the new value instead gives about 13 percent, which is the usual trap here.",
+    "correctIndex": 3,
+    "explanation": "The increase is 12, and percentage change is measured against the ORIGINAL value: $12/80 = 0.15$, so 15 percent. Inverting the comparison and computing $80/92$ gives about 87 percent. Reporting the whole ratio $92/80$ rather than the change gives 115 percent. Dividing 12 by 8 instead of 80 misplaces a decimal and gives 150 percent.",
     "source": "original"
   },
   {
@@ -150,13 +150,13 @@
     "difficulty": "easy",
     "prompt": "What is $2/3$ of $3/8$?",
     "options": [
-      "6/11",
-      "5/11",
+      "1/12",
       "1/4",
-      "3/16"
+      "1/8",
+      "1/24"
     ],
-    "correctIndex": 2,
-    "explanation": "Multiply the fractions: $(2 \\times 3)/(3 \\times 8) = 6/24 = 1/4$. Adding the numerators and denominators instead produces the 5/11 style of wrong answer.",
+    "correctIndex": 1,
+    "explanation": "Multiply straight across: $(2 \\times 3)/(3 \\times 8) = 6/24 = 1/4$. Losing the 3 in the numerator and computing $2/24$ gives $1/12$. Canceling the threes and then dropping the 2 that is left on top gives $1/8$. Multiplying only the denominators and keeping a bare 1 on top gives $1/24$.",
     "source": "original"
   },
   {
@@ -214,13 +214,13 @@
     "difficulty": "medium",
     "prompt": "If $n$ is a positive integer and $n^2$ is divisible by 12, what is the smallest possible value of $n$?",
     "options": [
-      "4",
       "12",
-      "3",
+      "36",
+      "144",
       "6"
     ],
     "correctIndex": 3,
-    "explanation": "$12 = 2^2 \\times 3$. For $n^2$ to contain $3^1$ it must contain $3^2$, since every prime in a perfect square appears an even number of times, so $n$ must contain a 3. It must also contain a 2. The smallest such $n$ is $2 \\times 3 = 6$, and indeed $36$ is divisible by 12. With $n = 4$, $n^2 = 16$ is not.",
+    "explanation": "$12 = 2^2 \\times 3$. For $n^2$ to contain $3^1$ it must contain $3^2$, since every prime in a perfect square appears an even number of times, so $n$ must contain a 3. It must also contain a 2. The smallest such $n$ is $2 \\times 3 = 6$, and indeed $36$ is divisible by 12. Assuming $n$ itself has to be divisible by 12 gives 12. Answering with $n^2$, the smallest perfect square divisible by 12, gives 36. Taking $n = 12$ and then squaring it gives 144.",
     "source": "original"
   },
   {
@@ -262,13 +262,13 @@
     "difficulty": "medium",
     "prompt": "How many different three-letter arrangements can be formed from the letters of the word LAMP, using no letter more than once?",
     "options": [
-      "24",
-      "4",
       "12",
-      "64"
+      "6",
+      "24",
+      "4"
     ],
-    "correctIndex": 0,
-    "explanation": "Order matters, so this is a permutation: $4 \\times 3 \\times 2 = 24$. Treating it as a combination instead gives 4, and allowing repeats gives $4^3 = 64$.",
+    "correctIndex": 2,
+    "explanation": "Order matters, so this is a permutation: $4 \\times 3 \\times 2 = 24$. Filling only two of the three slots stops at $4 \\times 3 = 12$. Arranging three letters without first choosing which three gives $3! = 6$. Treating the problem as a combination, where only the selection counts, gives 4.",
     "source": "original"
   },
   {
@@ -342,13 +342,13 @@
     "difficulty": "hard",
     "prompt": "If $x + y = 10$ and $x^2 - y^2 = 40$, what is the value of $x$?",
     "options": [
-      "6",
       "7",
-      "5",
-      "8"
+      "20",
+      "10",
+      "14"
     ],
-    "correctIndex": 1,
-    "explanation": "Factor the difference of squares: $x^2 - y^2 = (x+y)(x-y)$. With $x + y = 10$, this gives $10(x - y) = 40$, so $x - y = 4$. Adding that to $x + y = 10$ gives $2x = 14$ and $x = 7$. Solving the quadratic directly works too but wastes time.",
+    "correctIndex": 0,
+    "explanation": "Factor the difference of squares: $x^2 - y^2 = (x+y)(x-y)$. With $x + y = 10$, this gives $10(x - y) = 40$, so $x - y = 4$. Adding that to $x + y = 10$ gives $2x = 14$ and $x = 7$. Halving the 40, as though $x^2 - y^2$ simplified to $2x$, gives 20. Mistaking the given sum for the answer gives 10. Stopping at $2x = 14$ without dividing gives 14.",
     "source": "original"
   },
   {
@@ -422,13 +422,13 @@
     "difficulty": "hard",
     "prompt": "If $f(x) = 2x - 3$, what is the value of $f(f(4))$?",
     "options": [
+      "-2",
       "7",
-      "5",
-      "11",
-      "13"
+      "2",
+      "5"
     ],
-    "correctIndex": 0,
-    "explanation": "Work outward from the inside. $f(4) = 2(4) - 3 = 5$, then $f(5) = 2(5) - 3 = 7$. Applying the rule only once gives 5, which is the intended trap.",
+    "correctIndex": 1,
+    "explanation": "Work outward from the inside. $f(4) = 2(4) - 3 = 5$, then $f(5) = 2(5) - 3 = 7$. Reading the rule as $2(x - 3)$ gives $f(4) = 2$ and then $f(2) = -2$. Applying the rule twice but forgetting to double on the second pass gives $5 - 3 = 2$. Applying the rule only once gives 5, which is the intended trap.",
     "source": "original"
   },
   {
@@ -457,10 +457,10 @@
       "6/36",
       "1/9",
       "5/36",
-      "1/6"
+      "1/12"
     ],
     "correctIndex": 2,
-    "explanation": "There are 36 equally likely outcomes. A sum of 8 arises from (2,6), (3,5), (4,4), (5,3) and (6,2), which is 5 outcomes, giving 5/36. Counting (4,4) twice would wrongly give 6/36.",
+    "explanation": "There are 36 equally likely outcomes. A sum of 8 arises from (2,6), (3,5), (4,4), (5,3) and (6,2), which is 5 outcomes, giving 5/36. Counting (4,4) twice wrongly gives 6/36; dropping it gives 1/9; and counting only the unordered pairs {2,6}, {3,5} and {4,4}, as though order did not matter, gives 1/12.",
     "source": "original"
   },
   {
