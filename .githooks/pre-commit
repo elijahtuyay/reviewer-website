@@ -1,0 +1,43 @@
+#!/bin/sh
+#
+# Hard-fails any commit that stages copyrighted reference material or a secret.
+#
+# `.gitignore` already excludes `internal docs/`, but an ignore rule is advisory:
+# `git add -f` walks straight past it, and so does any tool that stages by
+# explicit path. This repo is PUBLIC and that directory holds three third-party
+# books plus their Anna's Archive conversions, so a single slip is a DMCA notice
+# against a named individual and a history rewrite to undo. Cheap guard, very
+# expensive failure.
+#
+# Enabled via a versioned hooks path so it travels with the repo:
+#   git config core.hooksPath .githooks
+# (re-run that after a fresh clone; git does not set it for you).
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -z "$staged" ] && exit 0
+
+blocked=$(printf '%s\n' "$staged" | grep -E '^internal docs/' || true)
+if [ -n "$blocked" ]; then
+  echo "pre-commit: refusing to commit copyrighted reference material." >&2
+  echo "These paths are calibration-only and must never enter a public repo:" >&2
+  printf '  %s\n' $blocked >&2
+  echo "See PROJECT_CONTEXT.md \"Copyright rule\". Unstage with: git restore --staged 'internal docs/'" >&2
+  exit 1
+fi
+
+envfiles=$(printf '%s\n' "$staged" | grep -E '(^|/)\.env' || true)
+if [ -n "$envfiles" ]; then
+  echo "pre-commit: refusing to commit an env file:" >&2
+  printf '  %s\n' $envfiles >&2
+  exit 1
+fi
+
+# Content scan, staged blobs only. Deliberately narrow: patterns that are
+# unambiguously a live credential, so this never cries wolf on documentation
+# that merely names a variable.
+if git diff --cached -U0 --diff-filter=ACMR | grep -nE '^\+.*(postgres(ql)?://[^ "'"'"']*:[^ "'"'"']*@|npg_[A-Za-z0-9]{16,}|sk-[A-Za-z0-9]{20,}|BEGIN [A-Z ]*PRIVATE KEY)' >&2; then
+  echo "pre-commit: the staged lines above look like a live credential. Remove it." >&2
+  exit 1
+fi
+
+exit 0
