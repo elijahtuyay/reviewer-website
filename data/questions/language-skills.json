@@ -1302,13 +1302,13 @@
     "difficulty": "hard",
     "prompt": "Thermostat is to Temperature as Governor is to ___?",
     "options": [
-      "Election",
+      "Fuel Consumption",
       "Engine Speed",
-      "Legislation",
-      "Politics"
+      "Voltage",
+      "Legislation"
     ],
     "correctIndex": 1,
-    "explanation": "A thermostat is a device that regulates temperature; a governor here refers to the mechanical device that regulates engine speed, not the political office. \"Politics,\" \"Legislation,\" and \"Election\" are traps that rely on the political sense of \"governor,\" which isn't the sense being tested here.",
+    "explanation": "A thermostat is a device that regulates temperature; a governor here is the mechanical device that regulates engine speed, not the political office. Fuel consumption changes as a consequence of engine speed but is not what the device acts on. Voltage is held steady by a voltage regulator, a different device. Legislation relies on the political sense of the word, which is not the sense being tested.",
     "source": "original"
   },
   {

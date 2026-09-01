@@ -39,12 +39,12 @@
     "prompt": "A company's headcount by year:\n2020: 40\n2021: 52\n2022: 65\n2023: 78\n\nIn which year did headcount grow by the largest absolute amount?",
     "options": [
       "Growth was equal in 2022 and 2023",
-      "2021",
+      "Growth was equal in 2021 and 2022",
       "2022",
       "2023"
     ],
     "correctIndex": 0,
-    "explanation": "The year-on-year increases are 12 for 2021, 13 for 2022 and 13 for 2023. The largest absolute rise is 13, and it occurs twice, so no single year holds it alone. Reading the raw headcount instead of the change is what makes 2023 tempting.",
+    "explanation": "The year-on-year increases are 12 for 2021, 13 for 2022 and 13 for 2023. The largest absolute rise is 13, and it occurs twice, so no single year holds it alone. Reading the raw headcount instead of the change is what makes 2023 tempting, and 2021's rise of 12 is close enough to 13 to look equal if the differences are eyeballed rather than subtracted.",
     "source": "original"
   },
   {
@@ -383,10 +383,10 @@
       "It fell from 20 percent to 15 percent.",
       "It stayed level at 20 percent in both years.",
       "It fell from 20 percent to 18 percent.",
-      "It rose from 20 percent to 15 percent."
+      "It fell from 25 percent to 17.6 percent."
     ],
     "correctIndex": 0,
-    "explanation": "Year 1 profit is 2.0 on revenue of 10.0, a 20 percent margin. Year 2 profit is 1.8 on revenue of 12.0, a 15 percent margin. Profit in absolute terms fell only slightly, but because revenue grew, the margin fell more sharply than the profit did.",
+    "explanation": "Year 1 profit is 2.0 on revenue of 10.0, a 20 percent margin. Year 2 profit is 1.8 on revenue of 12.0, a 15 percent margin. Profit in absolute terms fell only slightly, but because revenue grew, the margin fell more sharply than the profit did. Dividing profit by COST rather than revenue gives 25 percent falling to 17.6 percent; dividing Year 2's profit by Year 1's revenue gives 18 percent; and assuming revenue and costs grew in step gives a flat 20 percent.",
     "source": "original"
   },
   {
@@ -478,13 +478,13 @@
     "difficulty": "hard",
     "prompt": "Website visitors and conversions:\nMonth 1: 20000 visitors, 600 conversions\nMonth 2: 25000 visitors, 700 conversions\n\nWhat happened to the conversion rate between the two months?",
     "options": [
-      "It rose from 3.0 percent to 2.8 percent.",
+      "It rose from 3.0 percent to 3.5 percent.",
       "It fell from 3.0 percent to 2.8 percent.",
       "It stayed the same, since both figures increased.",
       "It rose because conversions increased by 100."
     ],
     "correctIndex": 1,
-    "explanation": "Month 1 converts 600 of 20000, which is 3.0 percent. Month 2 converts 700 of 25000, which is 2.8 percent. Conversions rose in absolute terms while the rate fell, because visitors grew faster than conversions did.",
+    "explanation": "Month 1 converts 600 of 20000, which is 3.0 percent. Month 2 converts 700 of 25000, which is 2.8 percent. Conversions rose in absolute terms while the rate fell, because visitors grew faster than conversions did. Dividing Month 2's 700 conversions by Month 1's 20000 visitors gives 3.5 percent and the wrong direction; the other two options stop at the fact that conversions increased and never compute a rate at all.",
     "source": "original"
   }
 ]

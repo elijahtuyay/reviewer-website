@@ -222,6 +222,24 @@ Small shared modules added in v2.3.0, each existing because the same bug was abo
 
 GMAT Focus: Data Insights 20q, Quantitative 21q, Verbal 23q, 45 minutes each, 64 questions, 205-805. Verbal has NO sentence correction; Quantitative has NO geometry; Data Sufficiency belongs to **Data Insights**, not Quantitative. Bank is a **90-question seed** (30 per section, 10 per difficulty), not a finished bank: a perfect run exhausts the ten hard questions and falls back to medium.
 
+**Known GMAT fidelity gaps, recorded rather than papered over.** The seed bank
+approximates several things the real exam does differently, and a relabel would
+hide the gap instead of closing it:
+
+- **`gd-005`, `gd-010`, `gd-016` and `gd-026` are tagged Two-Part Analysis but
+  are ordinary single-answer questions.** Real Two-Part Analysis is a two-column
+  table requiring two selections, which the runner cannot render today. Closing
+  this needs a question type and a UI, not a new topic string.
+- **GMAT Verbal items have 4 options; the real exam has 5.** That moves the
+  blind-guess baseline from 20% to 25% and feeds a scoring model calibrated on
+  five.
+- CR stimuli run 18-34 words against a real 60-120, and RC passages 110-121
+  words with 2 questions each against a real 200-350 with 3-4. There are only 4
+  distinct Verbal passages, so a 23-of-30 draw often serves the same one twice.
+- 10 of 25 GMAT CR items use the same "find the alternative cause" template, and
+  that is the same shape of hole that reached 94.7% on NMAT Critical Reasoning
+  before it was measured. It is unmeasured here.
+
 `npm run verify:engine` asserts (and exits non-zero) on the adaptive ladder and both scoring models. It has already caught three real bugs: a perfect attempt scoring 810 on a band whose maximum is 805, difficulty weighting being a no-op, and timing out scoring higher than finishing. **Run it after touching `lib/adaptive.ts` or `lib/scoring.ts`.**
 
 ### The on-screen calculator (v2.2.0, PR #20)
