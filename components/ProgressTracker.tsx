@@ -85,7 +85,9 @@ export default function ProgressTracker({
           // carry one: Tailwind orders font-weight utilities by stylesheet
           // position, not by class-attribute order, so a base `font-medium`
           // silently beat the `font-bold` these branches ask for.
-          let style = "bg-panel-hover font-medium text-muted hover:bg-line";
+          // text-foreground/70 for the same reason as the skipped branch below:
+    // text-muted on --panel-hover is 4.24:1 in dark mode, under AA at this size.
+    let style = "bg-panel-hover font-medium text-foreground/70 hover:bg-line";
           let state = "not answered";
           if (reviewMode) {
             // All three review states carry a non-color cue as well as a fill,

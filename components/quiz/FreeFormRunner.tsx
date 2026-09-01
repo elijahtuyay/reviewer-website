@@ -191,7 +191,7 @@ export default function FreeFormRunner({
                   />
                   {/* Hidden on phones: it is duplicated inside the mobile
                       sheet, and the header has no width to spare there. */}
-                  <p className="mt-1 hidden text-xs text-muted sm:block">
+                  <p className="mt-1 hidden text-xs text-foreground/70 sm:block">
                     {answeredCount}/{questions.length} answered
                   </p>
                 </div>

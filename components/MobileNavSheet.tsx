@@ -64,11 +64,31 @@ export default function MobileNavSheet({ open, onClose, children }: MobileNavShe
       // so the trap has to be computed from the live DOM each time.
       const sheet = sheetRef.current;
       if (!sheet) return;
+      /*
+       * `el.tabIndex >= 0` is load-bearing, not defensive.
+       *
+       * The selector matches `button:not([disabled])`, which happily includes a
+       * button carrying tabindex="-1" — and the progress grid inside this sheet
+       * is now a roving tabindex, so 35 of its 36 cells are exactly that. The
+       * collected list ran to 38 entries whose LAST was cell "36", untabbable,
+       * while only 3 entries were really in the tab order. `active === last`
+       * could therefore never be true, the wrap never fired, and Tab walked out
+       * of an aria-modal dialog into the page behind it: measured 4 escapes in
+       * 16 presses, landing on the site header.
+       *
+       * This worked before the grid became a roving tabindex, when all 36 cells
+       * were tabbable and cell 36 genuinely was the last stop. It is a good
+       * example of an a11y fix in one component breaking one in another.
+       */
       const focusable = Array.from(
         sheet.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          'a[href], button:not([disabled]), input, select, textarea, [tabindex]'
         )
-      ).filter((el) => el.offsetParent !== null || el === document.activeElement);
+      ).filter(
+        (el) =>
+          el.tabIndex >= 0 &&
+          (el.offsetParent !== null || el === document.activeElement)
+      );
       if (focusable.length === 0) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];

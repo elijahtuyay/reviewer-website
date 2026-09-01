@@ -258,7 +258,11 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
              */
             ref={panelRef}
             style={{ maxHeight: "var(--calc-max-h, calc(100vh - 11rem))" }}
-            className="absolute top-full left-0 z-30 mt-2 flex w-60 flex-col overflow-y-auto rounded-lg border border-line-strong bg-panel p-3 shadow-lg xl:-translate-x-[calc(100%+1rem)]"
+            // scrollbar-gutter: stable — once the panel scrolls, Chrome paints its
+            // overlay scrollbar across the right-hand key column (ON/C, the
+            // divide and multiply keys read as shaved). Nothing is clipped by
+            // layout, but reserving the gutter keeps the keys fully drawn.
+            className="absolute top-full left-0 z-30 mt-2 flex w-60 flex-col overflow-y-auto rounded-lg border border-line-strong bg-panel p-3 shadow-lg [scrollbar-gutter:stable] xl:-translate-x-[calc(100%+1rem)]"
           >
             <div className="shrink-0 rounded-md border border-line bg-background px-3 py-2 text-right">
               <div className="flex items-center justify-between gap-2">
