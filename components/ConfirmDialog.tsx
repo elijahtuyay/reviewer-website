@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef } from "react";
+import { getLastFocused, restoreFocus } from "@/lib/last-focused";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -55,7 +56,13 @@ export default function ConfirmDialog({
   useEffect(() => {
     if (!open) return;
 
-    const previouslyFocused = document.activeElement as HTMLElement | null;
+    // getLastFocused(), NOT document.activeElement. On the quiz page the commit
+    // that opens this dialog also marks the runner `inert`, and DOM mutations
+    // land before passive effects, so activeElement has already been reset to
+    // <body> and restoring it would be a no-op. See lib/last-focused.ts. (This
+    // read looked correct because it IS correct on the exam-setup page, which
+    // marks nothing inert — which is how it survived review.)
+    const previouslyFocused = getLastFocused();
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     cancelRef.current?.focus();
@@ -80,7 +87,7 @@ export default function ConfirmDialog({
     return () => {
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", handleKeyDown);
-      previouslyFocused?.focus?.();
+      restoreFocus(previouslyFocused);
     };
   }, [open]);
 

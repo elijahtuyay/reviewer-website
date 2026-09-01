@@ -72,7 +72,7 @@ export default function SectionNav({
               </span>
             ) : (
               <span className="text-xs text-muted">
-                {breakdown.answered}/{section.questionCount}
+                {breakdown.answered}/{breakdown.total}
               </span>
             )}
           </>

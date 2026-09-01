@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import { Attempt } from "@/components/quiz/useAttempt";
 import { AttemptNotice, BackToSetup, NoCalculatorNote } from "@/components/quiz/shared";
+import { scrollBehavior } from "@/lib/motion";
 import CalculatorPanel from "@/components/quiz/CalculatorPanel";
 import Timer from "@/components/Timer";
 import QuestionCard from "@/components/QuestionCard";
@@ -79,11 +80,27 @@ export default function FreeFormRunner({
     requestAnimationFrame(() => window.scrollTo({ top: 0 }));
   }
 
+  /**
+   * Two things had to change here, and both are the same mistake scrollToTop
+   * above already documents.
+   *
+   * The scroll used to be issued BEFORE closing the sheet, so on a phone it ran
+   * while `document.body` was still `overflow: hidden` from the sheet's scroll
+   * lock and while the target's ancestor was still `inert`. The page simply did
+   * not move, which reads as the jump grid being decorative. Closing first and
+   * deferring a frame lets the lock unwind before the scroll is asked for.
+   *
+   * And the behavior is now chosen rather than hard-coded: a full-page smooth
+   * scroll across 36 questions is the largest motion event in the app, and it
+   * was the one thing `prefers-reduced-motion` could not switch off.
+   */
   function handleJump(questionNumber: number) {
-    document
-      .getElementById(`question-${questionNumber}`)
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
     setMobileNavOpen(false);
+    requestAnimationFrame(() => {
+      document
+        .getElementById(`question-${questionNumber}`)
+        ?.scrollIntoView({ behavior: scrollBehavior(), block: "start" });
+    });
   }
 
   /**
@@ -233,7 +250,10 @@ export default function FreeFormRunner({
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  className="w-full rounded-md bg-accent py-2.5 text-sm font-medium text-accent-foreground hover:opacity-90"
+                  // min-h-11 is the app's 44px tap-target floor. py-2.5 alone
+                  // made this 40px — on the single most consequential control
+                  // in the app.
+                  className="min-h-11 w-full rounded-md bg-accent py-2.5 text-sm font-medium text-accent-foreground transition hover:opacity-90 active:opacity-80"
                 >
                   Submit ({answeredCount}/{questions.length} answered)
                 </button>

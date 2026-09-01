@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { getLastFocused, restoreFocus } from "@/lib/last-focused";
 
 interface PauseOverlayProps {
   paused: boolean;
@@ -43,10 +44,16 @@ export default function PauseOverlay({ paused, onResume, frozenTimeLabel }: Paus
    * it, resuming left focus on a button that was about to unmount, so it landed
    * on <body> and the next Tab restarted from the skip link at the top of the
    * document rather than continuing from the Pause button (WCAG 2.4.3).
+   *
+   * getLastFocused(), NOT document.activeElement: pausing sets `inert` on the
+   * quiz in the same commit that opens this overlay, and React applies every DOM
+   * mutation before it runs passive effects, so activeElement is already <body>
+   * by the time this line runs. The restore below then dutifully focused <body>
+   * and the bug it was written to fix was still there. See lib/last-focused.ts.
    */
   useEffect(() => {
     if (!paused) return;
-    previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
+    previouslyFocusedRef.current = getLastFocused();
     resumeRef.current?.focus();
 
     /**
@@ -66,7 +73,7 @@ export default function PauseOverlay({ paused, onResume, frozenTimeLabel }: Paus
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      previouslyFocusedRef.current?.focus?.();
+      restoreFocus(previouslyFocusedRef.current);
     };
   }, [paused]);
 
