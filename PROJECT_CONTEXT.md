@@ -415,6 +415,30 @@ removed the questions from the audit's numeric pool.** The parser now strips any
 leading or trailing unit word specifically so that dodge cannot work, and it
 consequently sees 131 numeric questions where a narrower one saw 99.
 
+**A mechanical fix for one bias can mint another, and this one did.** The
+re-slotting script's round-robin restarted at slot 0 for every topic, so every
+topic with fewer than four questions fed only the low slots -- and a
+30-question GMAT bank is mostly small topics. Bank-wide "always pick A" went
+from 25.6% to **33.1%**, and GMAT Quantitative to **56.7%** (17 of 30, six
+consecutive at one point). That is a bigger hole than the per-topic clustering
+the pass was closing, and it undid a property already fixed twice, in PR #7 and
+PR #14. The counter now runs ACROSS topics within a file rather than resetting.
+
+**The audit did not catch it, and that hole is worth remembering too:** the
+per-file slot check skipped files under 100 questions, on the reasoning that a
+sample of 30 is too noisy to judge. "Too small to judge precisely" is not "too
+small to judge at all". The band now widens for small files instead of
+disappearing, and the fix was verified by running the new audit against the
+committed regressed bank and watching it fail.
+
+Two rules fall out of this for any future bank-wide mechanical pass:
+1. **Snapshot `id -> options[correctIndex]` before, compare after.** Both
+   re-slot passes did, which is the only reason "no answer key moved" is a fact
+   here rather than a hope.
+2. **Re-measure EVERY statistic afterwards, not just the one you set out to
+   move.** The pass fixed its target metric and broke a neighboring one, and
+   both were already in the audit.
+
 Data Sufficiency remains in **canonical A-E statement order** (PR #7's bank-wide
 option shuffle had scrambled all 11, which trains the wrong habit, since real DS
 uses a fixed memorized order). `gd-004` was re-keyed from A to E in v2.3.0.
