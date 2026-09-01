@@ -1548,7 +1548,7 @@
       "25"
     ],
     "correctIndex": 3,
-    "explanation": "By inclusion-exclusion: $|A \\cup B \\cup C| = 90 + 80 + 70 - 30 - 25 - 20 + 10 = 175$, so the number reading none is $200 - 175 = 25$. The distractors are the three ways this is usually got wrong: 10 answers with the all-three group itself rather than the people outside every set; 15 adds that group back twice instead of once; and 5 both adds it back too often and drops one of the pairwise overlaps.",
+    "explanation": "By inclusion-exclusion: $|A \\cup B \\cup C| = 90 + 80 + 70 - 30 - 25 - 20 + 10 = 175$, so the number reading none is $200 - 175 = 25$. The distractors are the three ways this is usually got wrong: 10 answers with the all-three group itself rather than the people outside every set; 15 adds that group back twice instead of once; and 5 adds it back three times, once for each pair it appears in.",
     "source": "original"
   },
   {

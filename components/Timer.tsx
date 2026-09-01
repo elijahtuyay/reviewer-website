@@ -17,6 +17,13 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
   // render body (react-hooks/purity), so the first real value lands on the first
   // tick, which the mount effect fires immediately.
   const [secondsLeft, setSecondsLeft] = useState<number | null>(null);
+  /**
+   * What the screen reader hears. Only set when a threshold is crossed, so the
+   * live region is silent for 44 of the 45 minutes rather than reading the
+   * clock aloud every second.
+   */
+  const [announcement, setAnnouncement] = useState("");
+  const announcedRef = useRef<Set<number>>(new Set());
   const onExpireRef = useRef(onExpire);
   const onDeadlineChangeRef = useRef(onDeadlineChange);
   // Deadline-based instead of tick-counted: browsers throttle setInterval in
@@ -115,17 +122,58 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
     };
   }, [paused, endAt]);
 
+  /**
+   * Time checkpoints, announced once each.
+   *
+   * Before this the countdown was a plain div with no role and no live region,
+   * and the only "running out" signal was color and weight at 60 seconds. A
+   * screen-reader user therefore got NO warning of any kind before the section
+   * submitted itself under them. Sixty seconds is also very late for a visual
+   * warning, which is why five minutes now changes the color too.
+   */
+  useEffect(() => {
+    if (secondsLeft === null || paused) return;
+    for (const threshold of [600, 300, 60]) {
+      if (secondsLeft > threshold || announcedRef.current.has(threshold)) continue;
+      announcedRef.current.add(threshold);
+      const minutes = threshold / 60;
+      setAnnouncement(
+        `${minutes} minute${minutes === 1 ? "" : "s"} remaining in this section.`
+      );
+      return;
+    }
+  }, [secondsLeft, paused]);
+
   const isLow = secondsLeft !== null && secondsLeft <= 60;
+  const isWarning = secondsLeft !== null && secondsLeft <= 300;
   const label =
     secondsLeft === null
       ? "--:--"
       : `${Math.floor(secondsLeft / 60)}:${(secondsLeft % 60).toString().padStart(2, "0")}`;
 
+  // text-base and --foreground by default, not text-sm and --muted: this is a
+  // timed exam, and the countdown was visually subordinate to the bordered
+  // Pause button sitting next to it.
+  const tone = isLow
+    ? "text-red-700 dark:text-red-400"
+    : isWarning
+      ? "text-amber-700 dark:text-amber-400"
+      : "text-foreground";
+
   return (
-    <div
-      className={`font-mono text-sm tabular-nums ${isLow ? "font-semibold text-red-700 dark:text-red-400" : "text-muted"}`}
-    >
-      {label}
+    <div className="flex flex-col items-end">
+      <div
+        // aria-hidden on the digits themselves: without it a screen reader can
+        // re-announce the whole element every second. The live region below is
+        // the accessible channel, and it speaks only at checkpoints.
+        aria-hidden
+        className={`font-mono text-base font-semibold tabular-nums ${tone}`}
+      >
+        {label}
+      </div>
+      <span className="sr-only" role="status" aria-live="polite">
+        {announcement}
+      </span>
     </div>
   );
 }

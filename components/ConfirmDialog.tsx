@@ -98,8 +98,16 @@ export default function ConfirmDialog({
   // configurable. Every action this dialog guards is irreversible, and a
   // per-call "tone" meant green confirmed one dialog and canceled another a
   // single tap apart, which is worse than either convention on its own.
+  //
+  // The red outline is gone, and this narrows a decision that had been left
+  // open. Keeping the accent on Cancel is deliberate and stays (green = keeps
+  // your work; the confirming action is the irreversible one). But red is the
+  // color this app uses for a WRONG ANSWER, and two independent reviewers read
+  // the confirm button as an error state rather than as the thing they had just
+  // asked for. Submitting a section is irreversible, not a mistake. A neutral
+  // outline keeps the hierarchy without the false alarm.
   const confirmClasses =
-    "border border-red-700 text-red-700 hover:bg-red-50 dark:border-red-500 dark:text-red-400 dark:hover:bg-red-950/40";
+    "border border-line-strong text-foreground hover:bg-panel-hover active:bg-line";
   const cancelClasses = "bg-accent text-accent-foreground hover:opacity-90";
 
   return (

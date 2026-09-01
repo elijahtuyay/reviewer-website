@@ -140,9 +140,25 @@ export default function FreeFormRunner({
             <button
               type="button"
               onClick={() => setMobileNavOpen(true)}
-              className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground transition-colors hover:bg-panel-hover active:bg-line lg:hidden"
+              // Icon-only below `sm`. The right-hand cluster is shrink-0 and ate
+              // ~300px of a 390px header, which collapsed the min-w-0 title
+              // column and truncated the h1 of the page you are on to
+              // "Langua...". This is a regression of a bug PROJECT_CONTEXT
+              // already recorded as fixed, so it is worth being blunt about the
+              // cause: anything added to this cluster comes straight out of the
+              // section title's width.
+              className="flex h-11 min-w-11 items-center justify-center rounded-md border border-line-strong text-sm text-foreground transition-colors hover:bg-panel-hover active:bg-line sm:px-3 lg:hidden"
             >
-              Sections
+              <svg
+                aria-hidden
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="h-4 w-4 sm:hidden"
+              >
+                <path d="M3 5h14v2H3V5zm0 4h14v2H3V9zm0 4h14v2H3v-2z" />
+              </svg>
+              <span className="hidden sm:inline">Sections</span>
+              <span className="sr-only sm:hidden">Sections and progress</span>
             </button>
             {!reviewMode ? (
               <div className="flex items-center gap-3">
@@ -153,7 +169,9 @@ export default function FreeFormRunner({
                     paused={paused}
                     onDeadlineChange={onDeadlineChange}
                   />
-                  <p className="mt-1 text-xs text-muted">
+                  {/* Hidden on phones: it is duplicated inside the mobile
+                      sheet, and the header has no width to spare there. */}
+                  <p className="mt-1 hidden text-xs text-muted sm:block">
                     {answeredCount}/{questions.length} answered
                   </p>
                 </div>

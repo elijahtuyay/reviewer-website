@@ -110,8 +110,14 @@ export default function PauseOverlay({ paused, onResume, frozenTimeLabel }: Paus
       {frozenTimeLabel && (
         <p className="font-mono text-3xl tabular-nums text-foreground">{frozenTimeLabel}</p>
       )}
+      {/* One sentence, not a fragment hanging off the number above it. The
+          old copy rendered as "Paused" / "25:02" / "left when you paused. Your
+          timer is stopped until you resume." — a clause starting lowercase
+          whose subject was a separate block two elements up. */}
       <p id={bodyId} className="max-w-xs text-center text-sm text-muted">
-        {frozenTimeLabel ? "left when you paused. " : ""}Your timer is stopped until you resume.
+        {frozenTimeLabel
+          ? "That is the time you had left. The clock is stopped until you resume."
+          : "The clock is stopped until you resume."}
       </p>
       <button
         ref={resumeRef}

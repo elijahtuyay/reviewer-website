@@ -208,8 +208,19 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
              * position, not merely awkward. On a 1366x768 laptop that silently
              * swallowed the bottom of the panel, and the explanatory note used
              * to live there.
+             *
+             * The subtrahend must cover the panel's own DISTANCE FROM THE TOP OF
+             * THE VIEWPORT, not just the header. It was 7rem, which only
+             * accounts for the h-20 header, while the panel actually starts
+             * below the header PLUS the sticky wrapper's toggle row PLUS this
+             * element's mt-2 — about 9rem when pinned. So on a 768px-tall laptop
+             * the computed max-height ran roughly 28px past the bottom of the
+             * screen and the `=` key sat just under the fold, and further down
+             * still while the resume banner was on screen. 11rem leaves the last
+             * row clear at 768px and lets internal scrolling engage before the
+             * panel can outgrow the viewport rather than after.
              */
-            className="absolute top-full left-0 z-30 mt-2 flex max-h-[calc(100vh-7rem)] w-60 flex-col overflow-y-auto rounded-lg border border-line-strong bg-panel p-3 shadow-lg xl:-translate-x-[calc(100%+1rem)]"
+            className="absolute top-full left-0 z-30 mt-2 flex max-h-[calc(100vh-11rem)] w-60 flex-col overflow-y-auto rounded-lg border border-line-strong bg-panel p-3 shadow-lg xl:-translate-x-[calc(100%+1rem)]"
           >
             <div className="shrink-0 rounded-md border border-line bg-background px-3 py-2 text-right">
               <div className="flex items-center justify-between gap-2">
@@ -242,7 +253,7 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
                 what fits both constraints: the message that stops someone
                 concluding "this calculator is broken" is never more than a
                 glance away, and it costs no keypad space. */}
-            <p className="mt-2 shrink-0 rounded bg-panel-hover px-2 py-1.5 text-[0.7rem] leading-snug text-foreground/90">
+            <p className="mt-2 shrink-0 rounded bg-panel-hover px-2 py-1.5 text-xs leading-snug text-foreground/90">
               <strong className="font-semibold">Not a bug:</strong> runs left to right, so{" "}
               <span className="font-mono whitespace-nowrap">2 + 3 × 4</span> is 20.
             </p>
@@ -273,12 +284,12 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
                 type="button"
                 onClick={() => setDetailsOpen(!detailsOpen)}
                 aria-expanded={detailsOpen}
-                className="flex h-11 items-center text-[0.7rem] font-medium text-accent-text hover:underline"
+                className="flex h-11 items-center text-xs font-medium text-accent-text hover:underline"
               >
                 {detailsOpen ? "Hide" : "Why does it do that?"}
               </button>
               {detailsOpen && (
-                <ul className="flex flex-col gap-1.5 pb-1 text-[0.7rem] leading-relaxed text-foreground/90">
+                <ul className="flex flex-col gap-1.5 pb-1 text-xs leading-relaxed text-foreground/90">
                   <li>
                     It copies the exam&apos;s calculator exactly. There is no order of operations,
                     so for <span className="font-mono whitespace-nowrap">a×b + c×d</span> bank each

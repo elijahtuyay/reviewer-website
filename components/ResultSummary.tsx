@@ -97,8 +97,21 @@ export default function ResultSummary({ result, sectionLabel, exam }: ResultSumm
           {result.byTopic.map((t) => (
             <div key={t.topic} className="flex items-center justify-between gap-4 text-sm">
               <span className="text-muted">{t.topic}</span>
-              <span className="font-mono text-muted">
-                {t.correct}/{t.total}
+              {/* Skipped is called out rather than folded into the denominator.
+                  "Error Identification 0/8" read as a failed topic to a user who
+                  had simply never reached those eight questions, which is the
+                  wrong thing to tell someone deciding whether to trust the
+                  product. The summary above already separates the three
+                  outcomes; this row now agrees with it. */}
+              <span className="flex shrink-0 items-center gap-2 font-mono text-muted">
+                <span>
+                  {t.correct}/{t.total}
+                </span>
+                {t.unanswered > 0 && (
+                  <span className="font-sans text-xs">
+                    ({t.unanswered} skipped)
+                  </span>
+                )}
               </span>
             </div>
           ))}

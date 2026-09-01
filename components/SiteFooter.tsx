@@ -33,7 +33,7 @@ export default function SiteFooter() {
               >
                 {exam.shortLabel}
                 {!exam.available && (
-                  <span className="rounded-full bg-panel-hover px-1.5 py-0.5 text-[10px] font-medium text-muted">
+                  <span className="rounded-full bg-panel-hover px-1.5 py-0.5 text-xs font-medium text-muted">
                     soon
                   </span>
                 )}

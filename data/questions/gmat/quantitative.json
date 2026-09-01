@@ -44,7 +44,7 @@
       "-9"
     ],
     "correctIndex": 0,
-    "explanation": "Collect the variable terms: $5x - 3x = 10 + 8$, so $2x = 18$ and $x = 9$. Substituting back, both sides equal 37. Moving the 8 across without changing its sign gives $2x = 10 - 8 = 2$ and $x = 1$. Flipping the sign on both constants gives $2x = -2$ and $x = -1$. Carrying both constants to the left instead of the right gives $2x = -18$ and $x = -9$.",
+    "explanation": "Collect the variable terms: $5x - 3x = 10 + 8$, so $2x = 18$ and $x = 9$. Substituting back, both sides equal 37. Moving the 8 across without changing its sign gives $2x = 10 - 8 = 2$ and $x = 1$. Flipping the sign on both constants gives $2x = -2$ and $x = -1$. Reversing the direction of both moves, so that each constant changes sides without changing sign, gives $2x = -18$ and $x = -9$.",
     "source": "original"
   },
   {
@@ -86,13 +86,13 @@
     "difficulty": "easy",
     "prompt": "A number increased from 80 to 92. What was the percentage increase?",
     "options": [
-      "87 percent",
-      "115 percent",
-      "150 percent",
+      "7 percent",
+      "12 percent",
+      "13 percent",
       "15 percent"
     ],
     "correctIndex": 3,
-    "explanation": "The increase is 12, and percentage change is measured against the ORIGINAL value: $12/80 = 0.15$, so 15 percent. Inverting the comparison and computing $80/92$ gives about 87 percent. Reporting the whole ratio $92/80$ rather than the change gives 115 percent. Dividing 12 by 8 instead of 80 misplaces a decimal and gives 150 percent.",
+    "explanation": "The increase is 12, and percentage change is measured against the ORIGINAL value: $12/80 = 0.15$, so 15 percent. Dividing the change by the NEW value, $12/92$, gives about 13 percent, which is the usual trap. Reporting the raw difference of 12 as though it were already a percentage gives 12 percent. Dividing the change by the two values added together, $12/172$, gives about 7 percent.",
     "source": "original"
   },
   {
@@ -214,13 +214,13 @@
     "difficulty": "medium",
     "prompt": "If $n$ is a positive integer and $n^2$ is divisible by 12, what is the smallest possible value of $n$?",
     "options": [
-      "12",
-      "36",
-      "144",
+      "2",
+      "3",
+      "4",
       "6"
     ],
     "correctIndex": 3,
-    "explanation": "$12 = 2^2 \\times 3$. For $n^2$ to contain $3^1$ it must contain $3^2$, since every prime in a perfect square appears an even number of times, so $n$ must contain a 3. It must also contain a 2. The smallest such $n$ is $2 \\times 3 = 6$, and indeed $36$ is divisible by 12. Assuming $n$ itself has to be divisible by 12 gives 12. Answering with $n^2$, the smallest perfect square divisible by 12, gives 36. Taking $n = 12$ and then squaring it gives 144.",
+    "explanation": "$12 = 2^2 \\times 3$. For $n^2$ to contain $3^1$ it must contain $3^2$, since every prime in a perfect square appears an even number of times, so $n$ must contain a 3. It must also contain a 2. The smallest such $n$ is $2 \\times 3 = 6$, and indeed $36$ is divisible by 12. Noticing only that $n$ must be even gives 2; noticing only the factor of 3 gives 3; and carrying the $2^2$ from the factorization of 12 straight into $n$ gives 4. None of those squares is divisible by 12.",
     "source": "original"
   },
   {

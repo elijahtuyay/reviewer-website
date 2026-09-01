@@ -1005,10 +1005,10 @@
       "₱12,800",
       "₱16,000",
       "₱18,000",
-      "₱21,000"
+      "₱21,333"
     ],
     "correctIndex": 1,
-    "explanation": "The four months total ₱12,000 + ₱28,000 + ₱6,000 + ₱18,000 = ₱64,000. Dividing by the 4 months gives an average of ₱16,000. Dividing by 5 gives ₱12,800 and dividing by 3 gives about ₱21,000, so both distractors come from miscounting the periods; ₱18,000 is simply one of the listed months.",
+    "explanation": "The four months total ₱12,000 + ₱28,000 + ₱6,000 + ₱18,000 = ₱64,000. Dividing by the 4 months gives an average of ₱16,000. Dividing by 5 gives ₱12,800 and dividing by 3 gives ₱21,333, so both distractors come from miscounting the periods; ₱18,000 is simply one of the listed months.",
     "source": "original"
   },
   {

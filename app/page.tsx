@@ -81,7 +81,7 @@ export default async function Home() {
         }}
       />
 
-      <Hero examCount={availableCount} totalBank={totalBank} />
+      <Hero exams={AVAILABLE_EXAMS} totalBank={totalBank} />
 
       <StatBand
         stats={[
@@ -103,7 +103,12 @@ export default async function Home() {
 
 /* ------------------------------------------------------------------ hero -- */
 
-function Hero({ examCount, totalBank }: { examCount: number; totalBank: number }) {
+function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) {
+  // Named, not counted. A visitor who already knows they want the NMAT could not
+  // tell from anything above the fold that this site covers it: the headline
+  // names no exam, the eyebrow said "graduate admissions practice", and the
+  // subhead said "2 exams". The only occurrence of either name was in the nav.
+  const names = exams.map((e) => e.shortLabel).join(" and ");
   return (
     // The one saturated surface on the site, and deliberately the ROOT accent
     // rather than an exam's: this page sits above every exam, so borrowing one
@@ -124,10 +129,10 @@ function Hero({ examCount, totalBank }: { examCount: number; totalBank: number }
           Sit the real thing before you sit the real thing.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed opacity-90 sm:text-lg">
-          {examCount === 1 ? "One exam" : `${examCount} exams`}, each built to its own published
-          format: real section timings, {totalBank.toLocaleString("en-US")} questions written by
-          hand, and a written explanation waiting behind every single answer. No sign-up, no
-          paywall.
+          Full-length timed practice for the <strong className="font-semibold">{names}</strong>,
+          each built to its own published format: real section timings,{" "}
+          {totalBank.toLocaleString("en-US")} questions written by hand, and a written explanation
+          waiting behind every single answer. No sign-up, no paywall.
         </p>
 
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -145,7 +150,31 @@ function Hero({ examCount, totalBank }: { examCount: number; totalBank: number }
           </Link>
         </div>
 
-        <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-xs font-medium opacity-80 sm:text-sm">
+        {/* Direct routes, deliberately quieter than the two buttons above.
+            Both of those scroll rather than navigate, so a visitor who arrived
+            already knowing which exam they wanted had nothing to click — but
+            they are still the primary action, so these sit underneath as text
+            rather than competing as a second row of buttons. */}
+        <p className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm opacity-90">
+          <span>Already know which one?</span>
+          {exams.map((exam, i) => (
+            <span key={exam.id} className="flex items-center gap-2">
+              {i > 0 && (
+                <span aria-hidden className="opacity-60">
+                  &middot;
+                </span>
+              )}
+              <Link
+                href={`/${exam.id}`}
+                className="inline-flex min-h-11 items-center rounded font-semibold underline underline-offset-4 transition hover:opacity-80"
+              >
+                Practice the {exam.shortLabel}
+              </Link>
+            </span>
+          ))}
+        </p>
+
+        <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-xs font-medium opacity-80 sm:text-sm">
           <li>Real section timings</li>
           <li aria-hidden>&middot;</li>
           <li>Every answer explained</li>
@@ -223,7 +252,7 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
                   <div className="flex flex-wrap items-center gap-2">
                     <h3 className="text-lg font-semibold text-foreground">{exam.label}</h3>
                     {!exam.available && (
-                      <span className="rounded-full bg-panel-hover px-2 py-0.5 text-[11px] font-medium text-muted">
+                      <span className="rounded-full bg-panel-hover px-2 py-0.5 text-xs font-medium text-muted">
                         Coming soon
                       </span>
                     )}

@@ -985,10 +985,10 @@
       "irrefutable",
       "circumstantial",
       "conclusive",
-      "incontrovertible"
+      "abundant"
     ],
     "correctIndex": 1,
-    "explanation": "Circumstantial evidence is based on inference rather than direct proof, explaining why the jury \"could not reach a firm conclusion.\" Incontrovertible describes evidence that cannot be disputed, which would have made the jury’s decision easy rather than impossible. Conclusive and irrefutable both describe evidence strong enough to settle a matter beyond doubt, the opposite of evidence that left the jury undecided.",
+    "explanation": "Circumstantial evidence is based on inference rather than direct proof, explaining why the jury \"could not reach a firm conclusion.\" Abundant describes a large quantity of evidence, which says nothing about whether that evidence is direct or merely suggestive; a jury could have abundant circumstantial evidence. Conclusive and irrefutable both describe evidence strong enough to settle a matter beyond doubt, the opposite of evidence that left the jury undecided.",
     "source": "original"
   },
   {
