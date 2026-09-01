@@ -10,6 +10,7 @@ import {
 import { ExamModule } from "@/lib/exams/types";
 import SessionResetNotice from "@/components/SessionResetNotice";
 import SectionStartButton from "@/components/SectionStartButton";
+import { loadSection } from "@/lib/question-bank";
 
 /**
  * Per-exam title/description. The root layout supplies the `%s | Exam Reviewer`
@@ -60,6 +61,28 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
     return <ComingSoon exam={exam} />;
   }
 
+  /*
+   * The size of the pool each section draws from, read at build time.
+   *
+   * The home page advertises the whole bank as one number, and a GMAT candidate
+   * seeing "390 questions written by hand" would reasonably expect that to be
+   * what they get. They get 90 -- 30 per section, against sections of 20 to 23 --
+   * so a second attempt re-serves most of the same pool with nothing on the page
+   * having said so. Stating the pool per section is the honest version, and it
+   * is the number that actually tells you how much repetition to expect.
+   *
+   * This is a Server Component and the page is prerendered, so the banks are
+   * read at build time and never reach the browser.
+   */
+  const poolSizes = new Map(
+    await Promise.all(
+      exam.sections.map(
+        async (section) =>
+          [section.id, (await loadSection(exam.id, section.id)).length] as const
+      )
+    )
+  );
+
   return (
     <div className="flex flex-1 justify-center bg-background">
       <main className="w-full max-w-2xl px-6 py-16 sm:py-24">
@@ -101,6 +124,12 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
                   <h2 className="text-sm font-medium text-foreground">{section.label}</h2>
                   <span className="shrink-0 text-xs text-muted">
                     {section.questionCount} questions &middot; {section.minutes} min
+                    {poolSizes.get(section.id) ? (
+                      <>
+                        {" "}
+                        &middot; drawn from {poolSizes.get(section.id)}
+                      </>
+                    ) : null}
                   </span>
                 </div>
                 <p className="mt-1 text-xs leading-relaxed text-muted">{section.description}</p>

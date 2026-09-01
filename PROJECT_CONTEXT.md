@@ -153,6 +153,22 @@ document for two releases and sent readers looking for files that were gone.
 - **PR #20** (v2.2.0) — the on-screen calculator for GMAT Data Insights, plus explicit "no calculator here" copy on the sections that grant none. The engine is a pure reducer asserted by `verify:engine`. Review established that the real device is an emulated TI-108, which invalidated four details the first implementation had guessed at or imported from the pre-Focus calculator. Full detail in "The on-screen calculator" below; read it before touching either file.
 - **PR #18** (v2.1.0) — the accounts backend: Neon Postgres, Drizzle with committed migrations, better-auth email/password, one dynamic API route. No user-facing change; there is still no sign-in UI and no route requires a session. Full detail in "THE ACCOUNTS BACKEND" below, including two config options that better-auth silently ignored.
 
+## Known non-issue: NMAT has THREE sections, and this is correct
+
+A review lane reported that "mirrors the real exam: 108 questions across 3
+independently-timed sections" is an overclaim, on the grounds that NMAT Part I
+has four subtests (Verbal, Inductive Reasoning, Quantitative, Perceptual
+Acuity). **That is a different exam.** Those are the sections of the Philippine
+*National Medical* Admission Test. This app targets **NMAT by GMAC**, the
+graduate management admissions test, whose Official Guide 2021 uses exactly
+Language Skills, Quantitative Skills and Logical Reasoning.
+
+Checked against the reference guide before changing anything: "Language Skills"
+appears 14 times, "Quantitative Skills" 13, "Logical Reasoning" 20, and
+"Perceptual Acuity" and "National Medical" **zero**. The two exams share a name
+and a country and nothing else. Expect this to be raised again; the copy is
+right and should not be softened.
+
 ## Known non-issue: the answer-key distribution
 
 A separate Claude session reported (2026-08-21) that the correct answer sits in slot 1 for 86% of Logical Reasoning questions and 49% overall, and that `ls-010`'s explanation was a copy-paste slip about "malevolent/vindictive/benevolent/altruistic". **Both were checked against the files on disk and both are false.** The measured distribution is 25.0 / 22.0 / 27.7 / 24.3 / 1.0 percent across indices 0-4 of all 300 questions (the 1% at index 4 is the 11 quantitative questions with five options), and `ls-010` carries a correct, on-topic explanation about sleep and memory consolidation. The word "malevolent" appears nowhere in the bank. The reported 86% figure is verbatim the pre-v1.5.0 bug that PR #7 already fixed, so that session was almost certainly reading a stale snapshot. Re-measure before acting on a claim like this:

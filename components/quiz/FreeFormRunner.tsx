@@ -129,10 +129,30 @@ export default function FreeFormRunner({
   return (
     <div className="flex flex-1 justify-center bg-background">
       <div className="w-full max-w-6xl px-6 py-10 sm:py-16" inert={inert} aria-hidden={inert}>
-        <div className="sticky top-0 z-20 flex h-20 items-center justify-between gap-3 border-b border-line bg-background/95 backdrop-blur">
-          <div className="min-w-0">
+        {/*
+          Below `sm` the title takes its OWN ROW and the controls wrap beneath
+          it. Shrinking the type and shortening the buttons was not enough and
+          could not have been: on a 320px screen the clock, Pause and the
+          Sections button need most of the row, so any title long enough to
+          matter ("Quantitative Skills" is 141px) has nowhere to go and the h1 of
+          the page you are on renders as "Quant...". Two rows is the honest
+          answer at that width.
+
+          The fixed h-20 is kept from `sm` up, because the sidebar's `top-24`
+          alignment is computed from it -- but the sidebar only exists at `lg`,
+          so nothing depends on the height below that.
+        */}
+        <div className="sticky top-0 z-20 flex min-h-20 flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-line bg-background/95 py-2 backdrop-blur sm:h-20 sm:flex-nowrap sm:py-0">
+          <div className="min-w-0 basis-full sm:basis-auto">
             <BackToSetup examId={exam.id} />
-            <h1 className="mt-1 truncate text-lg font-semibold text-foreground sm:text-xl">
+            {/* text-base below `sm`. The header is a fixed h-20 row shared with
+                the clock and up to two buttons, and at 18px the longest section
+                name ("Quantitative Skills", 158px) could not fit the space left
+                over at 320-390px -- it rendered as "Quant...", the h1 of the
+                page you are on. Shrinking the type and shortening the review
+                buttons below `sm` buys back more than the 5px it was missing
+                by. `truncate` stays as a backstop, not as the mechanism. */}
+              <h1 className="mt-1 truncate text-base font-semibold text-foreground sm:text-lg md:text-xl">
               {section.label}
             </h1>
           </div>
@@ -196,7 +216,11 @@ export default function FreeFormRunner({
                   href={`/${exam.id}`}
                   className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground transition-colors hover:bg-panel-hover active:bg-line"
                 >
-                  Back to sections
+                  {/* The review-mode cluster is the widest of the three states
+                      and never got the responsive treatment the Sections button
+                      got, which is why the title clipped hardest here. */}
+                  <span className="sm:hidden">Sections</span>
+                  <span className="hidden sm:inline">Back to sections</span>
                 </Link>
               </div>
             )}
@@ -278,7 +302,7 @@ export default function FreeFormRunner({
                   // min-h-11 is the app's 44px tap-target floor. py-2.5 alone
                   // made this 40px — on the single most consequential control
                   // in the app.
-                  className="min-h-11 w-full rounded-md bg-accent py-2.5 text-sm font-medium text-accent-foreground transition hover:opacity-90 active:brightness-95"
+                  className="min-h-11 w-full rounded-md bg-accent py-2.5 text-sm font-medium text-accent-foreground transition hover:opacity-90 active:scale-[0.99]"
                 >
                   Submit ({answeredCount}/{questions.length} answered)
                 </button>

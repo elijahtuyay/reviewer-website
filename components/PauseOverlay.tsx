@@ -135,7 +135,7 @@ export default function PauseOverlay({ paused, onResume, frozenTimeLabel }: Paus
         // Untabbable once the overlay is fading out, so the 200ms exit window
         // can't park focus on a control that is invisible and on its way out.
         tabIndex={paused ? 0 : -1}
-        className="flex h-11 items-center justify-center rounded-md bg-accent px-6 text-sm font-medium text-accent-foreground hover:opacity-90"
+        className="flex h-11 items-center justify-center rounded-md bg-accent px-6 text-sm font-medium text-accent-foreground transition hover:opacity-90 active:scale-[0.98]"
       >
         Resume
       </button>

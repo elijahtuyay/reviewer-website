@@ -96,6 +96,7 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
   const panelId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
   /** Wraps toggle + panel, so click-outside can ask "did this land on either of us?". */
+  const panelRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
   /**
@@ -138,6 +139,35 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
   function handleKey(key: CalculatorKey) {
     setState((current) => press(current, key));
   }
+
+  /**
+   * Keeps --calc-max-h equal to the space actually left below the panel's top
+   * edge. Runs on scroll and resize because both change that distance: scrolling
+   * pins the sticky wrapper (moving the panel UP by the height of everything
+   * above it) and the resume banner changes it again by appearing at all.
+   */
+  useEffect(() => {
+    if (!open) return;
+    const panel = panelRef.current;
+    if (!panel) return;
+
+    function measure() {
+      const el = panelRef.current;
+      if (!el) return;
+      // Read the top from the element's own box, then leave a 1rem gutter so the
+      // last key row is never flush against the bottom of the screen.
+      const top = el.getBoundingClientRect().top;
+      el.style.setProperty("--calc-max-h", `${Math.max(160, window.innerHeight - top - 16)}px`);
+    }
+
+    measure();
+    window.addEventListener("scroll", measure, { passive: true });
+    window.addEventListener("resize", measure);
+    return () => {
+      window.removeEventListener("scroll", measure);
+      window.removeEventListener("resize", measure);
+    };
+  }, [open]);
 
   return (
     // `sticky top-20` parks this directly under the h-20 quiz header once the
@@ -209,18 +239,26 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
              * swallowed the bottom of the panel, and the explanatory note used
              * to live there.
              *
-             * The subtrahend must cover the panel's own DISTANCE FROM THE TOP OF
-             * THE VIEWPORT, not just the header. It was 7rem, which only
-             * accounts for the h-20 header, while the panel actually starts
-             * below the header PLUS the sticky wrapper's toggle row PLUS this
-             * element's mt-2 — about 9rem when pinned. So on a 768px-tall laptop
-             * the computed max-height ran roughly 28px past the bottom of the
-             * screen and the `=` key sat just under the fold, and further down
-             * still while the resume banner was on screen. 11rem leaves the last
-             * row clear at 768px and lets internal scrolling engage before the
-             * panel can outgrow the viewport rather than after.
+             * The cap is MEASURED, not a constant, and that is the whole point.
+             *
+             * Any hard-coded subtrahend encodes one assumption about how far
+             * down the panel starts, and that distance is not fixed: the sticky
+             * wrapper is only pinned once the page has scrolled, and the resume
+             * banner pushes everything down another ~80px when it is showing.
+             * A constant tuned for the pinned case (the previous 11rem, and the
+             * 7rem before it) is therefore too generous at scrollY 0 — so the
+             * panel overflowed the viewport WITHOUT ever reaching its own cap,
+             * which meant no internal scrollbar appeared to rescue the user and
+             * the "=" key simply sat under the fold. Measured at 1366x768 with
+             * the banner: panel top 357, "=" bottom 779, viewport 768.
+             *
+             * --calc-max-h is written from the element's real bounding box on
+             * scroll and resize, so the panel always stops 1rem above the fold
+             * and scrolls internally past that.
              */
-            className="absolute top-full left-0 z-30 mt-2 flex max-h-[calc(100vh-11rem)] w-60 flex-col overflow-y-auto rounded-lg border border-line-strong bg-panel p-3 shadow-lg xl:-translate-x-[calc(100%+1rem)]"
+            ref={panelRef}
+            style={{ maxHeight: "var(--calc-max-h, calc(100vh - 11rem))" }}
+            className="absolute top-full left-0 z-30 mt-2 flex w-60 flex-col overflow-y-auto rounded-lg border border-line-strong bg-panel p-3 shadow-lg xl:-translate-x-[calc(100%+1rem)]"
           >
             <div className="shrink-0 rounded-md border border-line bg-background px-3 py-2 text-right">
               <div className="flex items-center justify-between gap-2">
@@ -269,7 +307,7 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
               <button
                 type="button"
                 onClick={() => handleKey("=")}
-                className="col-span-2 flex h-11 items-center justify-center rounded-md bg-accent text-base font-semibold text-accent-foreground hover:opacity-90"
+                className="col-span-2 flex h-11 items-center justify-center rounded-md bg-accent text-base font-semibold text-accent-foreground transition hover:opacity-90 active:scale-95"
               >
                 <span aria-hidden>=</span>
                 <span className="sr-only">Equals</span>

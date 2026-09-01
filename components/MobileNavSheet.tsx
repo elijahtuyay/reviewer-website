@@ -120,9 +120,7 @@ export default function MobileNavSheet({ open, onClose, children }: MobileNavShe
         aria-label="Close"
         tabIndex={-1}
         onClick={onClose}
-        className={`absolute inset-0 bg-black/40 transition-opacity ${
-          open ? "opacity-100 duration-300 ease-enter" : "opacity-0 duration-200 ease-exit"
-        }`}
+        className={`absolute inset-0 bg-black/40 ${open ? "backdrop-in" : "backdrop-out"}`}
       />
       {/*
         bg-panel, not bg-background: the sheet used to be the same color as the
@@ -131,9 +129,11 @@ export default function MobileNavSheet({ open, onClose, children }: MobileNavShe
         read as a separate surface. Panel plus a shadow gives it an edge at both
         themes, and matches ConfirmDialog.
 
-        Translate + opacity only, so the slide composites rather than triggering
-        layout. This is the one element in the app a user most expects to slide
-        up, and it used to appear instantly.
+        The slide is a @keyframes animation rather than a transition -- see the
+        note in globals.css. A transition here silently did nothing on open,
+        because the sheet is inserted already carrying its open classes and so
+        has no from-state to interpolate. Transform and opacity only, so it
+        composites rather than triggering layout.
       */}
       <div
         ref={sheetRef}
@@ -145,10 +145,8 @@ export default function MobileNavSheet({ open, onClose, children }: MobileNavShe
         // the exit transition while the page behind it is live again.
         inert={!open || undefined}
         aria-hidden={!open || undefined}
-        className={`absolute inset-x-0 bottom-0 max-h-[80vh] overflow-y-auto rounded-t-xl border-t border-line bg-panel p-4 pb-8 shadow-lg transition-[transform,opacity] ${
-          open
-            ? "translate-y-0 opacity-100 duration-300 ease-enter"
-            : "translate-y-4 opacity-0 duration-200 ease-exit"
+        className={`absolute inset-x-0 bottom-0 max-h-[80vh] overflow-y-auto rounded-t-xl border-t border-line bg-panel p-4 pb-8 shadow-lg ${
+          open ? "sheet-in" : "sheet-out"
         }`}
       >
         <div className="mb-3 flex items-center justify-between">

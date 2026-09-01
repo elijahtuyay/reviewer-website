@@ -1,3 +1,7 @@
+"use client";
+
+import { useRef, useState } from "react";
+
 interface ProgressTrackerProps {
   totalQuestions: number;
   answeredNumbers: number[];
@@ -20,6 +24,43 @@ export default function ProgressTracker({
   const correctSet = new Set(correctNumbers);
   const incorrectSet = new Set(incorrectNumbers);
 
+  /**
+   * Roving tabindex: the grid is ONE tab stop, and arrow keys move within it.
+   *
+   * 36 individually tabbable cells put 36 stops between the top of the page and
+   * the first answer option — measured at 46 Tab presses to reach question 1,
+   * and the skip link only saved five of them because it targets the page
+   * wrapper, which still contains this grid. On a timed section that is a real
+   * cost, paid by exactly the users who can least afford it.
+   *
+   * This is the same pattern QuestionCard already uses for its options, and it
+   * is what WAI-ARIA prescribes for a grid of related controls.
+   */
+  const cellRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const [tabStop, setTabStop] = useState(0);
+  const COLUMNS = 6;
+
+  function focusCell(index: number) {
+    const clamped = Math.max(0, Math.min(totalQuestions - 1, index));
+    setTabStop(clamped);
+    cellRefs.current[clamped]?.focus();
+  }
+
+  function handleGridKeyDown(event: React.KeyboardEvent, index: number) {
+    const moves: Record<string, number> = {
+      ArrowRight: index + 1,
+      ArrowLeft: index - 1,
+      ArrowDown: index + COLUMNS,
+      ArrowUp: index - COLUMNS,
+      Home: 0,
+      End: totalQuestions - 1,
+    };
+    const next = moves[event.key];
+    if (next === undefined) return;
+    event.preventDefault();
+    focusCell(next);
+  }
+
   return (
     <div className="rounded-lg border border-line p-4">
       <p className="text-xs font-medium tracking-wide text-muted uppercase">
@@ -34,7 +75,11 @@ export default function ProgressTracker({
           width the layout can give it; 36px clears WCAG 2.5.8 with room and is
           a real improvement for touch. The aside was widened to w-72 to suit:
           6 x 36px + 5 x 6px gaps = 246px inside a 254px content box. */}
-      <div className="mt-3 grid grid-cols-6 gap-1.5">
+      <div
+        role="group"
+        aria-label="Jump to a question"
+        className="mt-3 grid grid-cols-6 gap-1.5"
+      >
         {Array.from({ length: totalQuestions }, (_, i) => i + 1).map((num) => {
           // Every branch sets its own font-weight. The base className must NOT
           // carry one: Tailwind orders font-weight utilities by stylesheet
@@ -61,7 +106,11 @@ export default function ProgressTracker({
                 "bg-red-700 font-medium text-white underline decoration-2 underline-offset-2 dark:bg-red-400 dark:text-red-950";
               state = "incorrect";
             } else {
-              style = "bg-panel-hover font-normal text-muted hover:bg-line";
+              // text-foreground/70, not text-muted: muted on --panel-hover
+              // measures 4.24:1 in dark mode at 12px. This is the one cell
+              // state the contrast pass did not touch, because it is also the
+              // only one that keeps the default surface.
+              style = "bg-panel-hover font-normal text-foreground/70 hover:bg-line";
               state = "skipped";
             }
           } else if (answeredSet.has(num)) {
@@ -72,8 +121,13 @@ export default function ProgressTracker({
           return (
             <button
               key={num}
+              ref={(el) => {
+                cellRefs.current[num - 1] = el;
+              }}
               type="button"
               onClick={() => onJump(num)}
+              onKeyDown={(event) => handleGridKeyDown(event, num - 1)}
+              tabIndex={num - 1 === tabStop ? 0 : -1}
               aria-label={`Question ${num}, ${state}`}
               className={`flex h-9 w-9 items-center justify-center rounded-md text-xs transition-colors ${style}`}
             >
@@ -86,6 +140,7 @@ export default function ProgressTracker({
       {/* States named in text, so the grid is readable without relying on the
           fills at all. */}
       <p className="mt-2 text-xs text-muted">
+        <span className="sr-only">Use the arrow keys to move between questions. </span>
         {reviewMode
           ? // Color first, because color is what is actually perceptible at
             // this cell size: the bold/underline redundancy is real and is kept

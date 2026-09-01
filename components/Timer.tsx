@@ -176,9 +176,10 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
       ? "--:--"
       : `${Math.floor(secondsLeft / 60)}:${(secondsLeft % 60).toString().padStart(2, "0")}`;
 
-  // text-base and --foreground by default, not text-sm and --muted: this is a
-  // timed exam, and the countdown was visually subordinate to the bordered
-  // Pause button sitting next to it.
+  // text-lg/xl and --foreground, not text-sm and --muted. This is a timed exam
+  // and the countdown was the least prominent thing in its own header: 14px
+  // muted text beside a bordered 44px Pause button, so the only unbordered
+  // element in the row was the one that matters. It now wins the row.
   const tone = isLow
     ? "text-red-700 dark:text-red-400"
     : isWarning
@@ -197,7 +198,7 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
         // and only at checkpoints.
         role="timer"
         aria-label={secondsLeft === null ? "Time remaining" : `${label} remaining in this section`}
-        className={`font-mono text-base font-semibold tabular-nums ${tone}`}
+        className={`font-mono text-lg font-semibold tabular-nums sm:text-xl ${tone}`}
       >
         {label}
       </div>

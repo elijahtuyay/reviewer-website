@@ -288,6 +288,65 @@ body {
   animation: backdrop-in 200ms var(--ease-enter);
 }
 
+/*
+ * Bottom-sheet entrance and exit.
+ *
+ * Keyframes, not a transition, and the reason is worth writing down because the
+ * transition version LOOKED right in the source and did nothing. The sheet is
+ * unmounted while closed (`if (!open && !stillExiting) return null`), so it is
+ * inserted into the DOM already carrying its open classes — a transition has no
+ * previous value to interpolate from and the browser jumps straight to the end
+ * state. Measured: zero intermediate frames on open, fourteen on close. The
+ * exit animated only because the node already existed when `open` flipped.
+ * ConfirmDialog was already right for the same reason: it uses @keyframes.
+ *
+ * translateY(100%), not the 16px the transition version used, which read as a
+ * fade rather than a sheet.
+ */
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes sheet-out {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.sheet-in {
+  animation: sheet-in 300ms var(--ease-enter);
+}
+
+/* `forwards` so the sheet stays off-screen for the rest of the exit window. */
+.sheet-out {
+  animation: sheet-out 200ms var(--ease-exit) forwards;
+}
+
+@keyframes backdrop-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.backdrop-out {
+  animation: backdrop-out 200ms var(--ease-exit) forwards;
+}
+
 /* Apple-style route transition: a quick, gentle fade + rise on every page mount. */
 @keyframes page-fade-in {
   from {

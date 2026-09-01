@@ -106,7 +106,8 @@ function QuestionCard({
     // focus() alone doesn't scroll an element the browser already considers
     // visible, so arrowing upward can land on an option sitting underneath the
     // h-20 sticky header, hiding both the option and its focus ring. Paired with
-    // scroll-mt-24 on the button, this brings it clear of the header.
+    // scroll-mt on the button, this brings it clear of the header, which is
+    // two rows tall below `sm`.
     target?.scrollIntoView({ block: "nearest" });
   }
 
@@ -119,7 +120,7 @@ function QuestionCard({
   return (
     <div
       id={`question-${index + 1}`}
-      className="scroll-mt-20 border-b border-line py-8 first:pt-0 last:border-b-0"
+      className="scroll-mt-32 border-b border-line py-8 first:pt-0 last:border-b-0 sm:scroll-mt-20"
     >
       <div className="flex items-baseline gap-3">
         <span className="text-sm font-medium text-muted">{index + 1}</span>
@@ -214,8 +215,8 @@ function QuestionCard({
               // text-base, not text-sm: the options were 14px under a 16px
               // stem, i.e. the text a candidate re-reads three times before
               // committing was the smallest text on the card.
-              className={`flex min-h-11 scroll-mt-24 items-center justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-base leading-relaxed text-foreground transition-[color,background-color,border-color,box-shadow,transform] ${
-                reviewMode || lockedReason ? "" : "active:scale-[0.995]"
+              className={`flex min-h-11 scroll-mt-40 items-center sm:scroll-mt-24 justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-base leading-relaxed text-foreground transition-[color,background-color,border-color,box-shadow,transform] ${
+                reviewMode || lockedReason ? "" : "active:scale-[0.99]"
               } ${style} ${reviewMode || lockedReason ? "cursor-default" : "cursor-pointer"} ${lockedReason ? "opacity-60" : ""}`}
             >
               <span>
