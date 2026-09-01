@@ -335,14 +335,33 @@ characters, duplicate option VALUES (not merely duplicate strings),
 self-containment, option-letter references in explanations, and the difficulty
 mix.
 
-Four "answer without reading" strategies have been measured, fixed and
-re-measured. The last was found in v2.3.0 and was by far the strongest:
+**Options are NEVER shuffled at runtime, and this is the fact the whole section
+turns on.** `lib/question-bank.ts` shuffles which QUESTIONS are drawn for an
+attempt; it has never shuffled the options within one. PR #7's shuffle was a
+one-time mechanical pass over the files. So the stored order is exactly what
+every candidate sees on every attempt, and any slot pattern in the JSON is a
+pattern in the product.
+
+That is why the per-file slot spread is not enough on its own: **a candidate
+practices one topic at a time, and a per-file average hides a loaded topic
+completely.** Measured in v2.3.0, while every per-file number looked healthy:
+Para Forming keyed the LAST option in 8 of 10 questions, so clicking the fourth
+option without reading scored 80% on that topic, and Critical Reasoning: Weaken
+keyed the second in 4 of 4. 281 questions were re-slotted (by swapping two
+entries in `options`, so every keyed VALUE is provably unchanged), and
+`audit:bank` now fails on any topic where one slot holds more than 50% of the
+keys. Data Sufficiency is exempt and must stay exempt: its five options are a
+fixed memorized order on the real exam.
+
+Five "answer without reading" strategies have been measured, fixed and
+re-measured. The last two were found in v2.3.0 and were by far the strongest:
 
 | Strategy | Before | After | Chance |
 | --- | --- | --- | --- |
 | Always pick slot 1 | 25.0% (fine since PR #7) | 25.9% | 25% |
 | Pick the longest option (prose questions) | 47% overall; **94.7% on Critical Reasoning** | **21.2%** overall | 25% |
 | **Cross off the largest and smallest number, guess between the other two** | **96.0%** | **59.5%** | 50% |
+| **Click the same slot every time, within one topic** | **100%** on Weaken, **80%** on Para Forming | max 40% on any topic | 25% |
 | Para Forming: assume the answer starts with Q | 8 of 10 keys opened with Q | P3 / Q3 / R2 / S2 | even |
 
 The middle-two finding is worth understanding rather than just recording,
