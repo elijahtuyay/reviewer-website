@@ -6,12 +6,12 @@
     "difficulty": "easy",
     "prompt": "A jacket priced at 240 dollars is discounted by 15 percent. What is the sale price?",
     "options": [
-      "216 dollars",
-      "225 dollars",
       "204 dollars",
+      "225 dollars",
+      "216 dollars",
       "276 dollars"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "A 15 percent discount leaves 85 percent of the original price, so $240 \\times 0.85 = 204$ dollars. Applying a habitual 10 percent instead of 15 percent gives 216. Subtracting 15 dollars rather than 15 percent gives 225. Adding the 15 percent instead of subtracting it gives 276.",
     "source": "original"
   },
@@ -23,12 +23,12 @@
     "prompt": "The ratio of pens to pencils in a drawer is $3:5$. If there are 25 pencils, how many pens are there?",
     "options": [
       "15",
-      "12",
-      "14",
-      "18"
+      "5",
+      "8",
+      "40"
     ],
     "correctIndex": 0,
-    "explanation": "The 5 parts of the ratio correspond to 25 pencils, so one part is 25 divided by 5, which is 5. Pens are 3 parts, so there are 15. Subtracting the ratio difference from 25, or applying the ratio the wrong way round, produces the other options.",
+    "explanation": "The 5 parts of the ratio correspond to 25 pencils, so one part is 25 divided by 5, which is 5. Pens are 3 parts, so there are 15. Answering 5 stops at the value of a single part; 8 answers with the total number of parts in the ratio, 3 plus 5; and 40 gives the total number of items in the drawer, 15 pens plus 25 pencils, rather than the pens alone.",
     "source": "original"
   },
   {
@@ -70,12 +70,12 @@
     "difficulty": "easy",
     "prompt": "Which of the following is a prime number?",
     "options": [
-      "57",
+      "53",
       "55",
       "51",
-      "53"
+      "57"
     ],
-    "correctIndex": 3,
+    "correctIndex": 0,
     "explanation": "53 has no divisor other than 1 and itself. The others all factor: $51 = 3 \\times 17$, $55 = 5 \\times 11$, and $57 = 3 \\times 19$.",
     "source": "original"
   },
@@ -87,11 +87,11 @@
     "prompt": "A number increased from 80 to 92. What was the percentage increase?",
     "options": [
       "7 percent",
-      "12 percent",
+      "15 percent",
       "13 percent",
-      "15 percent"
+      "12 percent"
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "The increase is 12, and percentage change is measured against the ORIGINAL value: $12/80 = 0.15$, so 15 percent. Dividing the change by the NEW value, $12/92$, gives about 13 percent, which is the usual trap. Reporting the raw difference of 12 as though it were already a percentage gives 12 percent. Dividing the change by the two values added together, $12/172$, gives about 7 percent.",
     "source": "original"
   },
@@ -102,12 +102,12 @@
     "difficulty": "easy",
     "prompt": "A car travels 180 kilometers in 3 hours. At the same speed, how far does it travel in 5 hours?",
     "options": [
-      "270 kilometers",
+      "300 kilometers",
       "240 kilometers",
       "360 kilometers",
-      "300 kilometers"
+      "270 kilometers"
     ],
-    "correctIndex": 3,
+    "correctIndex": 0,
     "explanation": "The speed is $180 \\div 3 = 60$ kilometers per hour, so in 5 hours it covers $60 \\times 5 = 300$ kilometers.",
     "source": "original"
   },
@@ -134,12 +134,12 @@
     "difficulty": "easy",
     "prompt": "In a class of 30 students, 18 study French and 15 study German. If every student studies at least one of the two, how many study both?",
     "options": [
-      "5",
       "3",
+      "5",
       "12",
       "2"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "By the inclusion-exclusion principle, $18 + 15 - \\text{both} = 30$, so both $= 33 - 30 = 3$.",
     "source": "original"
   },
@@ -150,12 +150,12 @@
     "difficulty": "easy",
     "prompt": "What is $2/3$ of $3/8$?",
     "options": [
-      "1/12",
       "1/4",
+      "1/12",
       "1/8",
       "1/24"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Multiply straight across: $(2 \\times 3)/(3 \\times 8) = 6/24 = 1/4$. Losing the 3 in the numerator and computing $2/24$ gives $1/12$. Canceling the threes and then dropping the 2 that is left on top gives $1/8$. Multiplying only the denominators and keeping a bare 1 on top gives $1/24$.",
     "source": "original"
   },
@@ -166,12 +166,12 @@
     "difficulty": "medium",
     "prompt": "Machine A completes a job in 6 hours and machine B completes the same job in 12 hours. Working together, how long do they take?",
     "options": [
-      "9 hours",
       "4 hours",
+      "9 hours",
       "18 hours",
       "3 hours"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Add the rates, not the times. A does $1/6$ of the job per hour and B does $1/12$, so together they do $1/6 + 1/12 = 3/12 = 1/4$ per hour, finishing in 4 hours. Averaging the two times would give 9 hours, which is the classic error.",
     "source": "original"
   },
@@ -182,12 +182,12 @@
     "difficulty": "medium",
     "prompt": "If $x^2 - 7x + 12 = 0$, what are the possible values of $x$?",
     "options": [
-      "2 and 6",
-      "1 and 12",
       "3 and 4",
+      "1 and 12",
+      "2 and 6",
       "-3 and -4"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "Factor into $(x-3)(x-4) = 0$, giving $x = 3$ or $x = 4$. Both signs are positive because the constant term is positive while the linear coefficient is negative.",
     "source": "original"
   },
@@ -198,12 +198,12 @@
     "difficulty": "medium",
     "prompt": "The average of six numbers is 20. When one number is removed, the average of the remaining five is 22. What number was removed?",
     "options": [
-      "10",
       "18",
+      "10",
       "2",
       "12"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "The original sum is $6 \\times 20 = 120$ and the remaining sum is $5 \\times 22 = 110$, so the removed number is $120 - 110 = 10$. Note the average ROSE when it was removed, so the removed value must be below the original average.",
     "source": "original"
   },
@@ -215,11 +215,11 @@
     "prompt": "If $n$ is a positive integer and $n^2$ is divisible by 12, what is the smallest possible value of $n$?",
     "options": [
       "2",
-      "3",
+      "6",
       "4",
-      "6"
+      "3"
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "$12 = 2^2 \\times 3$. For $n^2$ to contain $3^1$ it must contain $3^2$, since every prime in a perfect square appears an even number of times, so $n$ must contain a 3. It must also contain a 2. The smallest such $n$ is $2 \\times 3 = 6$, and indeed $36$ is divisible by 12. Noticing only that $n$ must be even gives 2; noticing only the factor of 3 gives 3; and carrying the $2^2$ from the factorization of 12 straight into $n$ gives 4. None of those squares is divisible by 12.",
     "source": "original"
   },
@@ -230,12 +230,12 @@
     "difficulty": "medium",
     "prompt": "A price rises by 20 percent and then falls by 20 percent. Compared with the original price, the final price is:",
     "options": [
-      "4 percent lower",
-      "4 percent higher",
       "the same",
+      "4 percent higher",
+      "4 percent lower",
       "2 percent lower"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Successive percentage changes multiply rather than cancel: $1.20 \\times 0.80 = 0.96$, which is 4 percent below the original. The second change is applied to the larger intermediate price, so the fall outweighs the rise.",
     "source": "original"
   },
@@ -246,12 +246,12 @@
     "difficulty": "medium",
     "prompt": "A 40-liter solution is 25 percent acid. How many liters of pure acid must be added to make it 40 percent acid?",
     "options": [
-      "8",
+      "10",
       "6",
       "12",
-      "10"
+      "8"
     ],
-    "correctIndex": 3,
+    "correctIndex": 0,
     "explanation": "Start with $0.25 \\times 40 = 10$ liters of acid. Adding $x$ liters of pure acid gives $(10 + x)$ acid in $(40 + x)$ total, and setting $(10+x)/(40+x) = 0.40$ yields $10 + x = 16 + 0.4x$, so $0.6x = 6$ and $x = 10$. The trap is forgetting that added acid raises the total volume too.",
     "source": "original"
   },
@@ -263,11 +263,11 @@
     "prompt": "How many different three-letter arrangements can be formed from the letters of the word LAMP, using no letter more than once?",
     "options": [
       "12",
-      "6",
       "24",
+      "6",
       "4"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Order matters, so this is a permutation: $4 \\times 3 \\times 2 = 24$. Filling only two of the three slots stops at $4 \\times 3 = 12$. Arranging three letters without first choosing which three gives $3! = 6$. Treating the problem as a combination, where only the selection counts, gives 4.",
     "source": "original"
   },
@@ -278,12 +278,12 @@
     "difficulty": "medium",
     "prompt": "If $-3x + 7 > 1$, which of the following describes $x$?",
     "options": [
-      "$x > 2$",
-      "$x < -2$",
       "$x < 2$",
+      "$x < -2$",
+      "$x > 2$",
       "$x > -2$"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "Subtract 7 to get $-3x > -6$, then divide by $-3$. Dividing an inequality by a negative number reverses its direction, so $x < 2$. Forgetting to flip is the single most common error on inequality questions.",
     "source": "original"
   },
@@ -294,12 +294,12 @@
     "difficulty": "medium",
     "prompt": "What is the median of the list 3, 11, 7, 2, 9, 5?",
     "options": [
-      "7",
       "6",
+      "7",
       "5",
       "6.5"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Sort first: 2, 3, 5, 7, 9, 11. With an even count the median is the average of the two middle values, $(5 + 7)/2 = 6$. Taking the middle of the unsorted list is the usual mistake.",
     "source": "original"
   },
@@ -311,11 +311,11 @@
     "prompt": "A cyclist rides out at 15 kilometers per hour and returns along the same route at 10 kilometers per hour. What is the average speed for the whole trip?",
     "options": [
       "13 kilometers per hour",
-      "11 kilometers per hour",
       "12 kilometers per hour",
+      "11 kilometers per hour",
       "12.5 kilometers per hour"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Average speed is total distance over total time, not the average of the two speeds. For a distance $d$ each way, the time is $d/15 + d/10 = d/6$, and the total distance is $2d$, giving $2d \\div (d/6) = 12$. The 12.5 option is the tempting arithmetic mean.",
     "source": "original"
   },
@@ -327,11 +327,11 @@
     "prompt": "If $n$ is a positive even integer, what is the remainder when $7^n$ is divided by 4?",
     "options": [
       "2",
-      "1",
       "3",
+      "1",
       "0"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "Since 7 is 4 plus 3, the remainder of $7^n$ matches that of $3^n$. Powers of 3 modulo 4 cycle 3, 1, 3, 1 for $n = 1, 2, 3, 4$, so every even power leaves remainder 1. Check it directly: $7^2 = 49$, and 49 is 12 fours plus 1.",
     "source": "original"
   },
@@ -374,12 +374,12 @@
     "difficulty": "hard",
     "prompt": "Each number in a data set is increased by 5. Which of the following is true?",
     "options": [
-      "The mean is unchanged and the standard deviation increases by 5.",
       "The mean increases by 5 and the standard deviation is unchanged.",
+      "The mean is unchanged and the standard deviation increases by 5.",
       "Both the mean and the standard deviation are unchanged.",
       "Both the mean and the standard deviation increase by 5."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Adding a constant shifts every value equally, so the center moves by 5 while the spread around it does not change at all. Standard deviation measures dispersion, and dispersion is untouched by a translation. It would change if every value were MULTIPLIED by a constant.",
     "source": "original"
   },
@@ -422,12 +422,12 @@
     "difficulty": "hard",
     "prompt": "If $f(x) = 2x - 3$, what is the value of $f(f(4))$?",
     "options": [
-      "-2",
       "7",
+      "-2",
       "2",
       "5"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "Work outward from the inside. $f(4) = 2(4) - 3 = 5$, then $f(5) = 2(5) - 3 = 7$. Reading the rule as $2(x - 3)$ gives $f(4) = 2$ and then $f(2) = -2$. Applying the rule twice but forgetting to double on the second pass gives $5 - 3 = 2$. Applying the rule only once gives 5, which is the intended trap.",
     "source": "original"
   },
@@ -440,10 +440,10 @@
     "options": [
       "20",
       "36",
-      "24",
-      "18"
+      "18",
+      "24"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "Factor into primes: $360 = 2^3 \\times 3^2 \\times 5^1$. The divisor count is the product of one more than each exponent: $(3+1)(2+1)(1+1) = 4 \\times 3 \\times 2 = 24$.",
     "source": "original"
   },
@@ -456,10 +456,10 @@
     "options": [
       "6/36",
       "1/9",
-      "5/36",
-      "1/12"
+      "1/12",
+      "5/36"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "There are 36 equally likely outcomes. A sum of 8 arises from (2,6), (3,5), (4,4), (5,3) and (6,2), which is 5 outcomes, giving 5/36. Counting (4,4) twice wrongly gives 6/36; dropping it gives 1/9; and counting only the unordered pairs {2,6}, {3,5} and {4,4}, as though order did not matter, gives 1/12.",
     "source": "original"
   },
@@ -471,11 +471,11 @@
     "prompt": "Two trains 300 kilometers apart travel toward each other, one at 70 kilometers per hour and the other at 80 kilometers per hour. How long until they meet?",
     "options": [
       "4 hours",
-      "2 hours",
       "3 hours",
+      "2 hours",
       "2.5 hours"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "When objects approach each other their speeds add, so the gap closes at $70 + 80 = 150$ kilometers per hour. The 300-kilometer gap therefore closes in $300 \\div 150 = 2$ hours. Using one train's speed alone gives the 4-hour style of wrong answer.",
     "source": "original"
   }

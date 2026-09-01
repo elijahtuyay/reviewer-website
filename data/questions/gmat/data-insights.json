@@ -6,12 +6,12 @@
     "difficulty": "easy",
     "prompt": "Regional sales for the quarter, in thousands of units:\nNorth: 120\nSouth: 95\nEast: 140\nWest: 85\n\nWhich region accounted for the largest share of total sales?",
     "options": [
-      "West",
       "East",
+      "West",
       "North",
       "South"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "East recorded 140 thousand units, the highest single figure in the table. The total is 440 thousand, so East holds roughly 32 percent of it.",
     "source": "original"
   },
@@ -23,11 +23,11 @@
     "prompt": "Regional sales for the quarter, in thousands of units:\nNorth: 120\nSouth: 95\nEast: 140\nWest: 85\n\nWhat were total sales for the quarter, in thousands of units?",
     "options": [
       "540",
-      "560",
       "440",
+      "560",
       "525"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Add the four figures: 120 plus 95 plus 140 plus 85 gives 440 thousand units. The larger figures all come from row-tracking slips: 560 counts the North row twice, 525 counts the West row twice, and 540 comes from reading South's 95 as 195.",
     "source": "original"
   },
@@ -38,12 +38,12 @@
     "difficulty": "easy",
     "prompt": "A company's headcount by year:\n2020: 40\n2021: 52\n2022: 65\n2023: 78\n\nIn which year did headcount grow by the largest absolute amount?",
     "options": [
-      "2021",
       "Growth was equal in 2022 and 2023",
+      "2021",
       "2022",
       "2023"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "The year-on-year increases are 12 for 2021, 13 for 2022 and 13 for 2023. The largest absolute rise is 13, and it occurs twice, so no single year holds it alone. Reading the raw headcount instead of the change is what makes 2023 tempting.",
     "source": "original"
   },
@@ -120,12 +120,12 @@
     "difficulty": "easy",
     "prompt": "Monthly rainfall in millimeters:\nJanuary: 30\nFebruary: 45\nMarch: 60\nApril: 45\n\nWhat was the mean monthly rainfall over these four months?",
     "options": [
-      "45",
       "48",
+      "45",
       "42",
       "50"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "The total is 180 millimeters over four months, so the mean is 45. Here the mean and the median happen to coincide, which is not generally true.",
     "source": "original"
   },
@@ -138,10 +138,10 @@
     "options": [
       "36 percent",
       "30 percent",
-      "25 percent",
-      "45 percent"
+      "45 percent",
+      "25 percent"
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "Total staff is 24 plus 36 plus 20, which is 80, and 36 divided by 80 is 0.45, so 45 percent. Reading the Engineering headcount itself as a percentage gives 36 percent. Dividing the Sales row by the total instead gives 24 out of 80, or 30 percent, and taking the Support row gives 20 out of 80, or 25 percent.",
     "source": "original"
   },
@@ -152,12 +152,12 @@
     "difficulty": "easy",
     "prompt": "A train travels at 90 kilometers per hour for 2 hours, then at 60 kilometers per hour for 1 hour.\n\nWhat is the total distance traveled?",
     "options": [
-      "240 kilometers",
       "150 kilometers",
+      "240 kilometers",
       "225 kilometers",
       "270 kilometers"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "The two legs cover 180 and 60 kilometers respectively, giving 240 in total. Averaging the speeds first and multiplying by 3 hours gives 225, which is wrong because the legs are of unequal duration.",
     "source": "original"
   },
@@ -186,11 +186,11 @@
     "prompt": "Memo 1: The project budget is 500 thousand dollars.\nMemo 2: Labor accounts for 60 percent of the budget, materials for 25 percent, and the rest is contingency.\nMemo 3: Labor costs have overrun by 10 percent.\n\nBy how much has the total project cost exceeded the original budget, assuming other lines are on plan?",
     "options": [
       "50 thousand",
-      "60 thousand",
       "30 thousand",
+      "60 thousand",
       "10 thousand"
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "Labor was budgeted at 60 percent of 500 thousand, which is 300 thousand. A 10 percent overrun on that line is 30 thousand. The overrun applies to the labor line only, not to the whole budget, which is what makes 50 thousand tempting.",
     "source": "original"
   },
@@ -202,11 +202,11 @@
     "prompt": "Units sold and revenue by product:\nProduct A: 200 units, 4000 revenue\nProduct B: 150 units, 4500 revenue\nProduct C: 300 units, 4500 revenue\n\nWhich product has the highest revenue per unit?",
     "options": [
       "Product C",
-      "Product B",
+      "Products B and C are tied",
       "Product A",
-      "Products B and C are tied"
+      "Product B"
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "Revenue per unit is 20 for A, 30 for B and 15 for C. B is highest despite selling the fewest units, which is the point of the question: total revenue and revenue per unit rank differently here.",
     "source": "original"
   },
@@ -218,11 +218,11 @@
     "prompt": "Quarterly revenue in millions:\nQ1: 2.0\nQ2: 2.5\nQ3: 2.4\nQ4: 3.0\n\nWhat was the percentage growth from Q1 to Q4?",
     "options": [
       "100 percent",
-      "50 percent",
       "25 percent",
+      "50 percent",
       "33 percent"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "Revenue rose from 2.0 to 3.0, an increase of 1.0 measured against the starting value: 1.0 divided by 2.0 is 0.5, so 50 percent. Dividing by the final value instead gives 33 percent.",
     "source": "original"
   },
@@ -251,11 +251,11 @@
     "prompt": "A company charges a fixed fee plus a per-hour rate. A 3-hour job costs 190 dollars and a 5-hour job costs 290 dollars.\n\nWhat is the fixed fee?",
     "options": [
       "100 dollars",
-      "40 dollars",
       "50 dollars",
+      "40 dollars",
       "90 dollars"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "The extra 2 hours add 100 dollars, so the hourly rate is 50 dollars. Substituting into the 3-hour job: 190 minus 3 times 50 gives a fixed fee of 40 dollars. Check it against the other job: 40 plus 5 times 50 is 290. Stopping at 50 reports the hourly rate rather than the fixed fee the question asks for. The 100 is the price difference between the two jobs, not a fee, and subtracting that difference from the 190 dollar job instead of subtracting 3 hours of rate leaves 90.",
     "source": "original"
   },
@@ -282,12 +282,12 @@
     "difficulty": "medium",
     "prompt": "Test scores for five students:\n40, 50, 55, 60, 95\n\nWhich statement is true of this data set?",
     "options": [
-      "The median is greater than the mean by more than five points.",
-      "The median is greater than the mean by exactly five points.",
       "The mean is greater than the median.",
+      "The median is greater than the mean by exactly five points.",
+      "The median is greater than the mean by more than five points.",
       "The mean and the median are equal to one another."
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "The scores total 300, so the mean is 60, while the middle value of the sorted list is 55. The single high score of 95 pulls the mean above the median, which is the signature of a right-skewed data set. The median is below the mean here, not above it.",
     "source": "original"
   },
@@ -298,13 +298,13 @@
     "difficulty": "medium",
     "prompt": "Market share by company:\nAlpha: 35 percent\nBeta: 28 percent\nGamma: 22 percent\nOthers: 15 percent\n\nIf the market is worth 800 million, what is Gamma's revenue?",
     "options": [
-      "176 million",
+      "280 million",
       "224 million",
       "120 million",
-      "280 million"
+      "176 million"
     ],
-    "correctIndex": 0,
-    "explanation": "Gamma holds 22 percent of 800 million: 0.22 times 800 gives 176 million. The other figures correspond to Beta, Alpha and Others respectively.",
+    "correctIndex": 3,
+    "explanation": "Gamma holds 22 percent of 800 million: 0.22 times 800 gives 176 million. The distractors are the other three slices read off the wrong row: 280 million is Alpha's 35 percent, 224 million is Beta's 28 percent, and 120 million is the 15 percent held by Others.",
     "source": "original"
   },
   {
@@ -350,10 +350,10 @@
     "options": [
       "20 percent",
       "25 percent",
-      "19 percent",
-      "21 percent"
+      "21 percent",
+      "19 percent"
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "Profit is 0.15 times 4.2, which is 0.63, plus 0.25 times 3.0, which is 0.75, giving 1.38 million on revenue of 7.2 million. That is 0.1917, so 19 percent. Averaging the two margins without weighting them gives 20 percent and ignores that the divisions differ in size. Pairing each margin with the other division's revenue inverts the weighting and gives 21 percent. Quoting 25 percent reports the stronger division's margin as if it were the whole company's.",
     "source": "original"
   },
@@ -365,11 +365,11 @@
     "prompt": "Employees and average salary by office:\nOffice A: 20 employees, average 50\nOffice B: 30 employees, average 60\nOffice C: 50 employees, average 44\n\nWhat is the average salary across all employees?",
     "options": [
       "48",
-      "51.3",
+      "50",
       "52",
-      "50"
+      "51.3"
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "Total salary is 20 times 50 plus 30 times 60 plus 50 times 44, which is 1000 plus 1800 plus 2200, giving 5000 across 100 employees, so the average is 50. Averaging the three office averages instead gives 51.3, which ignores the differing headcounts.",
     "source": "original"
   },
@@ -380,12 +380,12 @@
     "difficulty": "hard",
     "prompt": "A company's revenue and costs, in millions:\nYear 1: revenue 10.0, costs 8.0\nYear 2: revenue 12.0, costs 10.2\n\nWhat happened to the profit margin between Year 1 and Year 2?",
     "options": [
-      "It fell from 20 percent to 18 percent.",
-      "It stayed level at 20 percent in both years.",
       "It fell from 20 percent to 15 percent.",
+      "It stayed level at 20 percent in both years.",
+      "It fell from 20 percent to 18 percent.",
       "It rose from 20 percent to 15 percent."
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "Year 1 profit is 2.0 on revenue of 10.0, a 20 percent margin. Year 2 profit is 1.8 on revenue of 12.0, a 15 percent margin. Profit in absolute terms fell only slightly, but because revenue grew, the margin fell more sharply than the profit did.",
     "source": "original"
   },
@@ -464,10 +464,10 @@
     "options": [
       "Program Q, at 30 percent.",
       "Program P, at 20 percent.",
-      "Program R, at 42 percent.",
-      "Program R, at 12 percent."
+      "Program R, at 12 percent.",
+      "Program R, at 42 percent."
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "Acceptance rates are 20 percent for P, 30 percent for Q and 12 percent for R. The most selective program is the one accepting the smallest proportion, which is R. Reading the raw acceptance count as a percentage produces the 42 percent option.",
     "source": "original"
   },

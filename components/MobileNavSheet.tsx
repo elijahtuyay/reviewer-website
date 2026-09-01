@@ -9,7 +9,7 @@ interface MobileNavSheetProps {
   children: React.ReactNode;
 }
 
-/** Matches --duration-normal in globals.css; the sheet stays mounted this long after closing so the exit can play. */
+/** Must match the exit `duration-200` on the sheet below: it stays mounted this long after closing so the transition can play out. */
 const EXIT_DURATION_MS = 200;
 
 /**
@@ -140,6 +140,11 @@ export default function MobileNavSheet({ open, onClose, children }: MobileNavShe
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
+        // Same reasoning as PauseOverlay: an aria-modal dialog claims the rest
+        // of the document is hidden, so it must not linger in the tree through
+        // the exit transition while the page behind it is live again.
+        inert={!open || undefined}
+        aria-hidden={!open || undefined}
         className={`absolute inset-x-0 bottom-0 max-h-[80vh] overflow-y-auto rounded-t-xl border-t border-line bg-panel p-4 pb-8 shadow-lg transition-[transform,opacity] ${
           open
             ? "translate-y-0 opacity-100 duration-300 ease-enter"

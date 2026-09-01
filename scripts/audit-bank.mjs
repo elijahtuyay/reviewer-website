@@ -234,6 +234,102 @@ for (const r of rows) {
   );
 }
 
+/* ------------------------------------------------- per-topic slot clustering */
+
+/*
+ * The bank-wide slot spread can look perfect while a single topic is loaded
+ * entirely onto one slot — and a candidate practices ONE TOPIC AT A TIME.
+ *
+ * This is not hypothetical. Options are never shuffled at runtime: the draw
+ * shuffles which QUESTIONS you get, never the options inside one, so the stored
+ * order is exactly what every candidate sees on every attempt. Before this check
+ * existed, Para Forming keyed the last option in 8 of 10 (click the fourth
+ * without reading, score 80% on the topic) and Critical Reasoning: Weaken keyed
+ * the second in 4 of 4, while every per-file number looked healthy.
+ *
+ * Data Sufficiency is exempt and must stay exempt: its five options are a fixed
+ * memorized order on the real exam, deliberately identical across every DS
+ * question, so they cannot be re-slotted without training the wrong habit.
+ */
+const SLOT_EXEMPT_TOPICS = new Set(["Data Sufficiency"]);
+const topicSlots = new Map();
+for (const q of all) {
+  if (SLOT_EXEMPT_TOPICS.has(q.topic)) continue;
+  const key = `${q.__bank} / ${q.topic}`;
+  if (!topicSlots.has(key)) topicSlots.set(key, []);
+  topicSlots.get(key).push(q.correctIndex);
+}
+
+const clustered = [];
+for (const [key, slots] of topicSlots) {
+  // Under 4 questions any distribution looks lopsided and means nothing.
+  if (slots.length < 4) continue;
+  const counts = new Map();
+  for (const slot of slots) counts.set(slot, (counts.get(slot) ?? 0) + 1);
+  const [slot, count] = [...counts].sort((a, b) => b[1] - a[1])[0];
+  const share = pct(count, slots.length);
+  clustered.push({ key, slot, count, n: slots.length, share });
+}
+clustered.sort((a, b) => b.share - a.share);
+
+console.log("\nMost concentrated topics (which slot the key sits in)");
+for (const c of clustered.slice(0, 5)) {
+  console.log(
+    `  ${c.key.padEnd(46)} slot ${c.slot + 1}: ${c.count}/${c.n} (${fmt(c.share)})`
+  );
+}
+
+for (const c of clustered) {
+  if (c.share <= 50) continue;
+  failures.push(
+    `${c.key}: the key is in slot ${c.slot + 1} for ${c.count} of ${c.n} questions (${fmt(
+      c.share
+    )}) — answerable without reading`
+  );
+}
+
+/* --------------------------------------------------------- British spelling */
+
+/*
+ * The v2.0.2 sweep covered the -our / -ise / -re families and still missed
+ * "catalogued", because -logue belongs to none of them; one occurrence survived
+ * in 390 questions until an audit happened to read it.
+ *
+ * Stems rather than an enumerated word list, which is what let "labour" through
+ * once before. Words that are legitimately -our in American English (four, hour,
+ * tour, pour, flour, contour, devour) are simply absent from the stem list.
+ */
+const BRITISH = [
+  // Only the catalog family. A blanket -logue rule would be wrong: "dialogue"
+  // and "monologue" are standard American English, while "catalogue" is the
+  // British variant of "catalog". This is the word that slipped past the v2.0.2
+  // sweep, seven times inside one question.
+  [/\bcatalogu(?:e|es|ed|ing)\b/i, "catalogue: use catalog / cataloged"],
+  [/\b\w*(?:lab|col|fav|neighb|behavi|hono|hum|rum|vig|end|harb)our\w*\b/i, "-our: use -or"],
+  [/\bwhilst\b/i, "whilst: use while"],
+  [/\bdefence\b/i, "defence: use defense"],
+  [/\banalys(?:e|ed|es|ing)\b/i, "analyse: use analyze"],
+  [/\bprogramme\b/i, "programme: use program"],
+  [/\bgrey\b/i, "grey: use gray"],
+  [/\bjudgement\b/i, "judgement: use judgment"],
+  [/\bpractis(?:e|ed|ing)\b/i, "practise (verb): use practice"],
+  [/\b(?:centre|metre|litre|theatre|fibre)s?\b/i, "-re: use -er"],
+  [/\b(?:kilo|centi|milli)metres?\b/i, "-metre: use -meter"],
+  [/\b(?:travell|cancell|modell|signall|labell)(?:ed|ing)\b/i, "doubled l: use a single l"],
+];
+for (const q of all) {
+  for (const [label, text] of [
+    ["prompt", q.prompt],
+    ["explanation", q.explanation],
+    ...q.options.map((o, i) => [`option ${i}`, o]),
+  ]) {
+    for (const [re, name] of BRITISH) {
+      const hit = text.match(re);
+      if (hit) failures.push(`${q.id}: British spelling "${hit[0]}" in ${label} (${name})`);
+    }
+  }
+}
+
 /* ------------------------------------------------------------- the contract */
 
 const total = rows.at(-1);

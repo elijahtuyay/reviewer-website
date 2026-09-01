@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { hasMath, preloadMath } from "@/components/MathText";
+import { preloadMath, questionNeedsMath } from "@/components/MathText";
 import type { ExamId, Question, SectionId } from "@/data/schema";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import {
@@ -83,7 +83,6 @@ export interface Attempt {
 
   select: (questionId: string, optionIndex: number) => void;
   toggleFlag: (questionId: string) => void;
-  goToCursor: (index: number) => void;
   advance: () => void;
   submit: (expired?: boolean) => void;
   restart: () => void;
@@ -217,7 +216,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
       // reading question one, rather than making them wait a round trip when
       // the first formula tries to render. Two of the six sections contain no
       // math at all and correctly never ask for it.
-      if (pool.some((q) => hasMath(q.prompt) || q.options.some(hasMath))) {
+      if (pool.some(questionNeedsMath)) {
         preloadMath();
       }
 
@@ -498,14 +497,6 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     [persist, cleanAnswers, answers, phase]
   );
 
-  const goToCursor = useCallback(
-    (index: number) => {
-      setCursor(index);
-      persist({ answers: cleanAnswers(answers), cursor: index, inReview: phase === "reviewEdit" });
-    },
-    [persist, cleanAnswers, answers, phase]
-  );
-
   /**
    * Moves to the next question on a sequential exam, serving a new one if the
    * section has not reached its full length yet. On an adaptive exam this is
@@ -684,7 +675,6 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     canChangeAnswer,
     select,
     toggleFlag,
-    goToCursor,
     advance,
     submit,
     restart,

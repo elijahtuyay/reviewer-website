@@ -97,6 +97,15 @@ export default function PauseOverlay({ paused, onResume, frozenTimeLabel }: Paus
       aria-modal="true"
       aria-labelledby={titleId}
       aria-describedby={bodyId}
+      // inert + aria-hidden for the whole 200ms exit window. The first-mount
+      // guard above already argues that an aria-modal dialog must not sit in the
+      // tree over live content; that argument applies just as well on the way
+      // out, and was only ever handled for the keyboard (via tabIndex below).
+      // Without this, resuming leaves a dialog labeled "Paused" asserting that
+      // the rest of the document is hidden, while the quiz behind it is already
+      // interactive again.
+      inert={!paused || undefined}
+      aria-hidden={!paused || undefined}
       className={`fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-background/80 backdrop-blur-2xl transition-opacity duration-200 motion-reduce:transition-none ${
         paused ? "opacity-100" : "pointer-events-none opacity-0"
       }`}

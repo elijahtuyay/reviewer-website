@@ -6,12 +6,12 @@
     "difficulty": "easy",
     "prompt": "Every employee who completed the safety course received a certificate. Marcus did not receive a certificate. Which conclusion follows?",
     "options": [
-      "The safety course is harder than most employees had expected.",
       "Marcus did not complete the safety course.",
+      "The safety course is harder than most employees had expected.",
       "Marcus was never told about the safety course by his supervisor.",
       "Marcus is planning to take the safety course later this year."
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "This is the contrapositive: if completing the course guarantees a certificate, then no certificate means the course was not completed. The other options add facts the statements never supply.",
     "source": "original"
   },
@@ -71,11 +71,11 @@
     "prompt": "All the paintings in the north gallery were produced after 1900. The museum's oldest painting hangs in the south gallery. Which statement must be true?",
     "options": [
       "The museum's oldest painting was produced before 1900.",
-      "The south gallery holds more paintings than the north gallery does.",
+      "The museum's oldest painting is not in the north gallery.",
       "Every painting in the south gallery predates every painting in the north.",
-      "The museum's oldest painting is not in the north gallery."
+      "The south gallery holds more paintings than the north gallery does."
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "The second sentence states directly where the oldest painting hangs, so it is not in the north gallery. It does NOT follow that it predates 1900: the oldest painting could still be from 1950 if the whole collection is modern.",
     "source": "original"
   },
@@ -102,12 +102,12 @@
     "difficulty": "easy",
     "prompt": "Passage: \"Urban planners have long debated whether adding road capacity relieves congestion. The phenomenon known as induced demand suggests it often does not: when a route becomes faster, journeys that were previously not worth making become worthwhile, and drivers who had shifted to other routes or times return. Within a few years, traffic frequently returns to something close to its former level. Some planners argue that this makes road widening futile. Others respond that the extra journeys represent real economic activity that was previously being suppressed, and that the appropriate measure of success is total trips served rather than travel speed.\" How do the two groups of planners in the passage differ?",
     "options": [
-      "They disagree about which measure should count as success.",
       "They disagree about whether drivers respond to changes in journey times.",
+      "They disagree about which measure should count as success.",
       "They disagree about how expensive road widening projects usually are.",
       "They disagree about whether induced demand exists at all in modern cities."
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Both groups accept that traffic returns; they part company over whether to judge a road by travel speed or by total trips served. Neither disputes the existence of induced demand or the responsiveness of drivers, and cost is never mentioned.",
     "source": "original"
   },
@@ -119,11 +119,11 @@
     "prompt": "Argument: \"Our new training program works, because employees who took it were promoted more often than those who did not.\" Which finding would most weaken this?",
     "options": [
       "The training program was delivered online rather than in person at the company offices.",
-      "The program lasted three days rather than the planned five.",
       "Managers selected their strongest performers to attend the training.",
+      "The program lasted three days rather than the planned five.",
       "A few employees found parts of the training repetitive."
     ],
-    "correctIndex": 2,
+    "correctIndex": 1,
     "explanation": "If the strongest performers were chosen to attend, they would likely have been promoted anyway, so the promotion gap reflects who was selected rather than what the training did. Format, length, and opinion do not disturb the causal claim.",
     "source": "original"
   },
@@ -135,11 +135,11 @@
     "prompt": "Argument: \"The city should install more streetlights, since brighter streets will reduce night-time accidents.\" Which assumption is required?",
     "options": [
       "Night-time accidents outnumber daytime accidents in the city.",
-      "Streetlights are the cheapest available road safety measure.",
+      "Poor visibility contributes to at least some night-time accidents.",
       "Residents living near the streets have asked for better lighting.",
-      "Poor visibility contributes to at least some night-time accidents."
+      "Streetlights are the cheapest available road safety measure."
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "The argument only works if darkness is part of the problem; if visibility played no role, more light would change nothing. Cost, popularity, and the daytime comparison are not needed for the conclusion to follow.",
     "source": "original"
   },
@@ -152,10 +152,10 @@
     "options": [
       "Customers were less interested in the bakery's products today.",
       "The bakery will run a discount tomorrow to clear its stock.",
-      "The bakery baked more items today than it usually does.",
-      "The bakery did not run a discount today."
+      "The bakery did not run a discount today.",
+      "The bakery baked more items today than it usually does."
     ],
-    "correctIndex": 3,
+    "correctIndex": 2,
     "explanation": "Again the contrapositive: a discount guarantees selling out, so not selling out means there was no discount. The remaining options speculate about causes and future behavior that the statements do not license.",
     "source": "original"
   },
@@ -167,11 +167,11 @@
     "prompt": "Argument: \"Because employees at the branch that adopted flexible hours reported higher satisfaction, the company should adopt flexible hours everywhere to raise satisfaction overall.\" Which assumption does the argument depend on?",
     "options": [
       "Satisfaction is the single most important measure of a company's health.",
-      "The branch that adopted flexible hours is not unusual in ways that explain its higher satisfaction.",
       "Every single employee at the branch preferred the flexible arrangement to the old fixed one.",
+      "The branch that adopted flexible hours is not unusual in ways that explain its higher satisfaction.",
       "Flexible hours are administratively simpler to manage than fixed hours."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "Generalizing from one branch requires that the branch be representative; if it differed in some relevant way, the result may not transfer. The unanimity and single-measure options are far stronger than the argument needs, and administrative simplicity is beside the point.",
     "source": "original"
   },
@@ -182,12 +182,12 @@
     "difficulty": "medium",
     "prompt": "A city claims its new recycling campaign worked because the tonnage sent to landfill fell last year. Which question would be most useful in evaluating that claim?",
     "options": [
-      "Which neighborhoods received the campaign materials first?",
-      "How much did the city spend designing the recycling campaign?",
       "Did the total amount of waste generated in the city also fall last year?",
+      "How much did the city spend designing the recycling campaign?",
+      "Which neighborhoods received the campaign materials first?",
       "How many residents recall having seen the recycling campaign's advertisements last year?"
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "If total waste fell, landfill tonnage would drop whether or not anyone recycled more, so this question separates the two explanations. Spending, rollout order, and recall do not distinguish them.",
     "source": "original"
   },
@@ -199,11 +199,11 @@
     "prompt": "Passage: \"For much of the twentieth century, economists treated firms as rational actors that minimize costs. Behavioral research has complicated that picture. Studies of managerial decision-making find that executives often persist with failing projects, committing further resources to justify what has already been spent. This pattern, sometimes called escalation of commitment, is difficult to reconcile with pure cost minimization, since the money already spent cannot be recovered and should not influence a forward-looking decision. Defenders of the traditional model respond that persistence may be rational in a different sense: abandoning a project publicly signals failure, and a manager's career prospects, rather than the firm's balance sheet, may be what is being optimized.\" What is the primary purpose of the passage?",
     "options": [
       "To argue that the traditional economic model of the firm should be abandoned entirely.",
-      "To present a challenge to a traditional model and a response to that challenge.",
       "To recommend specific practices that managers should adopt when projects fail.",
+      "To present a challenge to a traditional model and a response to that challenge.",
       "To describe a series of experiments conducted on executives at large firms."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "The passage lays out the traditional view, presents behavioral evidence against it, and then gives the traditional side's reply. It stops short of endorsing either position or recommending anything.",
     "source": "original"
   },
@@ -216,10 +216,10 @@
     "options": [
       "less common among executives than the behavioral research claims.",
       "irrational from any point of view that could reasonably be adopted.",
-      "rational once the manager's own interests are the thing being optimized.",
-      "a phenomenon that appears only in firms already facing serious financial difficulty."
+      "a phenomenon that appears only in firms already facing serious financial difficulty.",
+      "rational once the manager's own interests are the thing being optimized."
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "Their reply relocates the objective rather than denying the behavior: it is rational, but with respect to the manager's career rather than the firm's costs. They do not dispute how often it occurs or restrict it to struggling firms.",
     "source": "original"
   },
@@ -246,12 +246,12 @@
     "difficulty": "medium",
     "prompt": "Argument: \"No member of the research team has published on marine biology, so the team is unqualified to review the marine survey.\" Which best describes the flaw?",
     "options": [
-      "It confuses the order in which two related events actually occurred.",
-      "It draws a conclusion about a group from evidence about one member of it.",
       "It treats publication in a field as the only possible source of competence in it.",
+      "It draws a conclusion about a group from evidence about one member of it.",
+      "It confuses the order in which two related events actually occurred.",
       "It relies on a survey whose sample was far too small to support any general conclusion."
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "The argument equates \"has not published\" with \"is unqualified\", ignoring that expertise can come from practice, training, or related fields. No sample or ordering is involved, and the evidence concerns every member rather than one.",
     "source": "original"
   },
@@ -263,11 +263,11 @@
     "prompt": "Argument: \"The redesigned checkout page caused the rise in completed purchases, since completions rose 18 percent in the month after launch.\" Which fact would most strengthen this?",
     "options": [
       "The redesign was praised by several user experience specialists.",
-      "The redesigned page loads marginally faster than the previous version.",
+      "Visitors randomly shown the old page in the same month completed far fewer purchases.",
       "The company's total advertising spend was unchanged throughout that same month.",
-      "Visitors randomly shown the old page in the same month completed far fewer purchases."
+      "The redesigned page loads marginally faster than the previous version."
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "A randomized comparison run in the same period removes essentially every rival explanation at once, which is stronger than merely holding one other factor constant. Praise and load time say nothing about causation, and constant advertising rules out only a single alternative.",
     "source": "original"
   },
@@ -279,11 +279,11 @@
     "prompt": "A factory's records show that whenever the night shift is understaffed, output falls below target. Last Tuesday output met its target. Which statement must be true about last Tuesday?",
     "options": [
       "The night shift produced more units than the day shift did that day.",
-      "The night shift was not understaffed.",
+      "The factory hired additional workers for the night shift.",
       "Output exceeded the target by a substantial margin.",
-      "The factory hired additional workers for the night shift."
+      "The night shift was not understaffed."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "Understaffing guarantees missing the target, so meeting it rules out understaffing. Nothing follows about relative shift output, hiring, or the size of the margin.",
     "source": "original"
   },
@@ -294,12 +294,12 @@
     "difficulty": "medium",
     "prompt": "Argument: \"Since the region's farms produce more food than its population consumes, no one in the region should go hungry.\" Which assumption is required?",
     "options": [
-      "The food produced is actually distributed to those who need it.",
+      "The region's farms will maintain their current output in future years.",
       "The region imports no food at all from neighboring areas.",
       "Every farm in the region grows the same variety of crops.",
-      "The region's farms will maintain their current output in future years."
+      "The food produced is actually distributed to those who need it."
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Aggregate sufficiency says nothing about who gets what; the conclusion needs distribution to reach the people who need food. Future output, imports, and crop variety are not required for the inference as stated.",
     "source": "original"
   },
@@ -310,12 +310,12 @@
     "difficulty": "medium",
     "prompt": "Passage: \"Antibiotic resistance is often described as a future crisis, but the mechanism is old. Bacteria have exchanged resistance genes for as long as antibiotics have existed in nature, which is far longer than they have existed in medicine. What has changed is the intensity of selection. Widespread clinical and agricultural use kills susceptible bacteria efficiently, leaving resistant ones to multiply without competition. Reducing total antibiotic use is therefore the primary lever available, though it is politically difficult: the benefit of restraint is diffuse and delayed, while the cost falls immediately on the patient or farmer asked to go without.\" According to the passage, what has changed in recent times?",
     "options": [
-      "The willingness of farmers to reduce their use of antibiotics.",
-      "Bacteria have only recently developed the ability to exchange genes.",
       "The intensity of selection favoring resistant bacteria.",
+      "Bacteria have only recently developed the ability to exchange genes.",
+      "The willingness of farmers to reduce their use of antibiotics.",
       "The speed at which new antibiotics can be brought to market."
     ],
-    "correctIndex": 2,
+    "correctIndex": 0,
     "explanation": "The passage says the mechanism is old and identifies intensity of selection as what has changed. It explicitly denies that gene exchange is new, and never discusses development speed or a change in willingness.",
     "source": "original"
   },
@@ -327,11 +327,11 @@
     "prompt": "Passage: \"Antibiotic resistance is often described as a future crisis, but the mechanism is old. Bacteria have exchanged resistance genes for as long as antibiotics have existed in nature, which is far longer than they have existed in medicine. What has changed is the intensity of selection. Widespread clinical and agricultural use kills susceptible bacteria efficiently, leaving resistant ones to multiply without competition. Reducing total antibiotic use is therefore the primary lever available, though it is politically difficult: the benefit of restraint is diffuse and delayed, while the cost falls immediately on the patient or farmer asked to go without.\" The final sentence suggests that the main obstacle to reducing antibiotic use is:",
     "options": [
       "the difficulty of measuring how much antibiotic is used in agriculture.",
-      "a lack of scientific agreement about how resistance actually spreads.",
+      "an asymmetry between who bears the cost and who receives the benefit.",
       "the absence of any effective alternative treatment for common infections.",
-      "an asymmetry between who bears the cost and who receives the benefit."
+      "a lack of scientific agreement about how resistance actually spreads."
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "The passage contrasts a diffuse, delayed benefit with an immediate, concentrated cost, which is precisely a cost-benefit asymmetry. It reports no scientific disagreement, and neither alternatives nor measurement are mentioned.",
     "source": "original"
   },
@@ -344,10 +344,10 @@
     "options": [
       "The satisfaction survey was sent to premium subscribers slightly more often.",
       "Some premium features are also available to free users on a trial basis.",
-      "Users who were already most satisfied are the ones who chose to upgrade.",
-      "Premium subscribers pay a fee that free users have chosen not to pay."
+      "Premium subscribers pay a fee that free users have chosen not to pay.",
+      "Users who were already most satisfied are the ones who chose to upgrade."
     ],
-    "correctIndex": 2,
+    "correctIndex": 3,
     "explanation": "Self-selection reverses the causal direction: satisfaction produced the upgrade rather than the upgrade producing satisfaction, so moving people up would not carry the effect with it. The fee is already implied, survey frequency is a minor bias, and trials would if anything narrow the gap.",
     "source": "original"
   },
@@ -406,13 +406,13 @@
     "difficulty": "hard",
     "prompt": "Every applicant who was interviewed had passed the written test. Some applicants who passed the written test were not offered a position. Which statement must be true?",
     "options": [
-      "No applicant was offered a position without first being interviewed.",
+      "Some applicants were not offered a position.",
       "Some applicants who were interviewed were not offered a position.",
       "Every applicant who passed the written test was interviewed at some stage.",
-      "Some applicants who passed the written test may not have been interviewed."
+      "No applicant was offered a position without first being interviewed."
     ],
-    "correctIndex": 3,
-    "explanation": "The first statement says interviewees are a subset of test-passers, not the reverse, so some passers might never have been interviewed. The option asserting that interviewees were rejected does not follow, because the rejected passers could all be people who were never interviewed.",
+    "correctIndex": 0,
+    "explanation": "The second premise states outright that some applicants passed the written test and were not offered a position, so it follows with certainty that some applicants were not offered a position. Nothing else here is guaranteed. The first premise makes interviewees a subset of test-passers, not the reverse, so it does not establish that every passer was interviewed, and it does not establish that a position required an interview. The claim that some interviewees were rejected does not follow either, because the rejected passers could all be people who were never interviewed.",
     "source": "original"
   },
   {
@@ -423,11 +423,11 @@
     "prompt": "Argument: \"The decline in the songbird population is caused by pesticide use, since the decline began in the same decade that pesticide application became widespread.\" Which fact would most strengthen this?",
     "options": [
       "Pesticide manufacturers expanded their production capacity considerably during that same decade.",
-      "Songbird numbers held steady in an otherwise similar region where pesticides were never adopted.",
       "Several other bird species also declined somewhat over the same period.",
+      "Songbird numbers held steady in an otherwise similar region where pesticides were never adopted.",
       "Farmers in the region reported higher crop yields after adopting pesticides."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "A comparable region without the suspected cause and without the effect is the closest thing to a control, which is what turns coincident timing into evidence. Production capacity and yields concern pesticides but not birds, and other species declining is consistent with many causes.",
     "source": "original"
   },
@@ -439,11 +439,11 @@
     "prompt": "Passage: \"The standard account of the industrial revolution credits technological invention. Recent economic history has emphasized something less visible: the cost of labor. In regions where wages were high relative to the price of fuel, replacing workers with machines paid for itself quickly, and inventions that were technically feasible elsewhere were adopted first where they were commercially worthwhile. On this account the machines were not the cause so much as the response. Critics of the wage explanation note that it struggles with cases where adoption preceded any clear wage advantage, and argue that it understates the role of scientific institutions in making the inventions possible at all.\" Which of the following best expresses the wage explanation described in the passage?",
     "options": [
       "Workers in high-wage regions actively resisted the introduction of machinery.",
-      "High wages relative to fuel costs made mechanization commercially worthwhile.",
       "Machines were invented in regions where scientific institutions were strongest.",
+      "High wages relative to fuel costs made mechanization commercially worthwhile.",
       "Technological invention was the primary driver of industrial change."
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "explanation": "The passage states that where wages were high relative to fuel prices, replacing labor with machines paid for itself, which is the wage explanation in a sentence. The institutions option belongs to the critics, and the invention-first option is the standard account the passage is contrasting with.",
     "source": "original"
   },
@@ -455,11 +455,11 @@
     "prompt": "Passage: \"The standard account of the industrial revolution credits technological invention. Recent economic history has emphasized something less visible: the cost of labor. In regions where wages were high relative to the price of fuel, replacing workers with machines paid for itself quickly, and inventions that were technically feasible elsewhere were adopted first where they were commercially worthwhile. On this account the machines were not the cause so much as the response. Critics of the wage explanation note that it struggles with cases where adoption preceded any clear wage advantage, and argue that it understates the role of scientific institutions in making the inventions possible at all.\" Which finding would most undermine the wage explanation?",
     "options": [
       "A region with high wages that also happened to have unusually strong scientific institutions.",
-      "A region with low wages and cheap fuel that mechanized earlier than high-wage regions did.",
+      "Evidence that fuel prices varied considerably between neighboring regions.",
       "Evidence that some inventors were motivated by curiosity rather than profit.",
-      "Evidence that fuel prices varied considerably between neighboring regions."
+      "A region with low wages and cheap fuel that mechanized earlier than high-wage regions did."
     ],
-    "correctIndex": 1,
+    "correctIndex": 3,
     "explanation": "The explanation predicts that mechanization follows high wages, so a low-wage region mechanizing first is a direct counterexample, and the passage itself flags adoption preceding wage advantage as the critics' line of attack. The other options are compatible with the wage account.",
     "source": "original"
   },
@@ -471,11 +471,11 @@
     "prompt": "A publisher concludes that its new cover design increased sales, because titles with the new design outsold those with the old one last quarter. Which question would be most useful in evaluating that conclusion?",
     "options": [
       "Which printing house produced the covers for the new titles?",
-      "Do readers actually say they notice cover designs when browsing shelves in a shop?",
+      "Were the titles given the new design already expected to sell better?",
       "How much did the publisher pay the designer for the new covers?",
-      "Were the titles given the new design already expected to sell better?"
+      "Do readers actually say they notice cover designs when browsing shelves in a shop?"
     ],
-    "correctIndex": 3,
+    "correctIndex": 1,
     "explanation": "If stronger titles were the ones chosen for the redesign, the sales gap reflects the books rather than the covers, so this question targets the assignment mechanism that the conclusion depends on. Cost, stated attention, and printer identity leave the comparison untouched.",
     "source": "original"
   }

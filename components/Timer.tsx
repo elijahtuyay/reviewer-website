@@ -2,6 +2,9 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
+/** Checkpoints announced to assistive technology, descending. */
+const THRESHOLDS = [600, 300, 60];
+
 interface TimerProps {
   /** Wall-clock epoch ms when time runs out. Owned by the quiz page so it survives a reload. */
   endAt: number;
@@ -24,6 +27,8 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
    */
   const [announcement, setAnnouncement] = useState("");
   const announcedRef = useRef<Set<number>>(new Set());
+  /** False until the first real reading has seeded the latch. See the effect below. */
+  const seededRef = useRef(false);
   const onExpireRef = useRef(onExpire);
   const onDeadlineChangeRef = useRef(onDeadlineChange);
   // Deadline-based instead of tick-counted: browsers throttle setInterval in
@@ -53,6 +58,12 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
       // A deadline in the future means a live attempt, so a previous expiry
       // (e.g. before a Retake) must not keep the guard latched.
       if (endAt > Date.now()) expiredRef.current = false;
+      // Same reasoning for the announcement latch. "Restart section" renders
+      // while the Timer is still mounted, so a Retake hands down a new deadline
+      // WITHOUT a remount; leaving the latch set meant the fresh 45-minute
+      // attempt could never announce its 10- and 5-minute warnings again.
+      announcedRef.current = new Set();
+      seededRef.current = false;
       // Repaint immediately instead of waiting for the next scheduled tick.
       setSecondsLeft(Math.max(0, Math.ceil((endAt - Date.now()) / 1000)));
     }
@@ -133,7 +144,21 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
    */
   useEffect(() => {
     if (secondsLeft === null || paused) return;
-    for (const threshold of [600, 300, 60]) {
+
+    // Seed from the FIRST reading rather than announcing on `<= threshold`.
+    // Resuming an attempt with 3:00 left mounts the timer already below both the
+    // 10- and 5-minute marks, and announcing state rather than a crossing made a
+    // screen reader say "10 minutes remaining" and then, one second later, "5
+    // minutes remaining" to someone three minutes from an auto-submit.
+    if (!seededRef.current) {
+      seededRef.current = true;
+      for (const threshold of THRESHOLDS) {
+        if (secondsLeft <= threshold) announcedRef.current.add(threshold);
+      }
+      return;
+    }
+
+    for (const threshold of THRESHOLDS) {
       if (secondsLeft > threshold || announcedRef.current.has(threshold)) continue;
       announcedRef.current.add(threshold);
       const minutes = threshold / 60;
@@ -163,10 +188,15 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
   return (
     <div className="flex flex-col items-end">
       <div
-        // aria-hidden on the digits themselves: without it a screen reader can
-        // re-announce the whole element every second. The live region below is
-        // the accessible channel, and it speaks only at checkpoints.
-        aria-hidden
+        // role="timer" rather than aria-hidden. Hiding the digits outright did
+        // stop the per-second chatter, but it also removed the only way for a
+        // screen-reader user to ASK what time is left — which they need before
+        // committing to a long reading-comprehension passage. A timer role is
+        // readable on demand and is not an implicit live region, so it does not
+        // announce itself; the separate polite region below does the announcing,
+        // and only at checkpoints.
+        role="timer"
+        aria-label={secondsLeft === null ? "Time remaining" : `${label} remaining in this section`}
         className={`font-mono text-base font-semibold tabular-nums ${tone}`}
       >
         {label}
