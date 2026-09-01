@@ -188,7 +188,7 @@ export default function SequentialRunner({
                 question={current}
                 index={cursor}
                 selectedIndex={answers[current.id] ?? null}
-                onSelect={(optionIndex) => select(current.id, optionIndex)}
+                onSelect={select}
                 reviewMode={false}
               />
 
@@ -353,7 +353,7 @@ function ReviewPass({
                 question={question}
                 index={index}
                 selectedIndex={answers[question.id] ?? null}
-                onSelect={(optionIndex) => select(question.id, optionIndex)}
+                onSelect={select}
                 reviewMode={false}
                 lockedReason={
                   locked

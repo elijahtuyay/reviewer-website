@@ -101,21 +101,3 @@ export function pickNextQuestionId(
 
   return null;
 }
-
-/**
- * The difficulty mix actually served, for the results screen. On an adaptive
- * section this is the interesting part: it is the visible trace of how the
- * exam read you.
- */
-export function difficultyMix(questions: Question[]): Record<Difficulty, number> {
-  const mix: Record<Difficulty, number> = { easy: 0, medium: 0, hard: 0 };
-  for (const q of questions) mix[q.difficulty]++;
-  return mix;
-}
-
-/** Highest rung reached during the attempt, which reads as "how far you climbed". */
-export function peakLevel(questions: Question[]): Difficulty {
-  let best = 0;
-  for (const q of questions) best = Math.max(best, LADDER.indexOf(q.difficulty));
-  return LADDER[best];
-}

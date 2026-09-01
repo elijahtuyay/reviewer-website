@@ -1,9 +1,49 @@
+"use client";
+
 import { Fragment } from "react";
-import { InlineMath } from "react-katex";
+import dynamic from "next/dynamic";
+
+/**
+ * KaTeX is loaded only by the sections that actually contain math.
+ *
+ * `dynamic()` sits at module top level because that is where Next requires it;
+ * calling it inside render would create a new component type every render and
+ * remount the subtree. `ssr: false` is free here rather than a trade-off: the
+ * question banks are themselves dynamically imported on the client, so no
+ * question text is ever server-rendered and there is nothing for SSR to do.
+ *
+ * The `loading` fallback renders the LaTeX source rather than nothing, so a
+ * question is never briefly missing a term. In practice it is rarely seen at
+ * all, because `preloadMath()` below starts the chunk fetch as soon as a
+ * section is known to contain math — long before the user has read far enough
+ * to reach one.
+ */
+const MathSpan = dynamic(() => import("@/components/MathSpan"), {
+  ssr: false,
+  loading: () => null,
+});
 
 interface MathTextProps {
   text: string;
   className?: string;
+}
+
+/** True when a string contains at least one `$...$` math span. */
+export function hasMath(text: string): boolean {
+  return /\$[^$]+\$/.test(text);
+}
+
+/**
+ * Starts downloading the KaTeX chunk without rendering anything.
+ *
+ * Called once per section, from the quiz page, after the bank resolves and only
+ * when the drawn questions actually contain math. Without it the chunk is not
+ * requested until the first math span renders, which is a round trip the user
+ * waits through mid-question; with it the fetch overlaps the time they spend
+ * reading question one.
+ */
+export function preloadMath() {
+  void import("@/components/MathSpan");
 }
 
 /**
@@ -33,11 +73,11 @@ function renderLineWithMath(line: string) {
     if (part.length > 2 && part.startsWith("$") && part.endsWith("$")) {
       // `\displaystyle` rather than KaTeX's default inline (text) style.
       //
-      // In text style a fraction is typeset at script size: on a 14px answer
-      // button the numerals land around 8px with sub-pixel gaps above and below
-      // the rule, which reads as the denominator touching the fraction bar.
-      // Display style typesets numerator and denominator at full size with the
-      // proper rule gap, which is what makes fractions legible in an option.
+      // In text style a fraction is typeset at script size: on an answer button
+      // the numerals land tiny with sub-pixel gaps above and below the rule,
+      // which reads as the denominator touching the fraction bar. Display style
+      // typesets numerator and denominator at full size with the proper rule
+      // gap, which is what makes fractions legible in an option.
       //
       // Applied here, once, instead of in the question bank: it is a rendering
       // decision, so it belongs in the renderer. Putting `\displaystyle` in the
@@ -52,7 +92,7 @@ function renderLineWithMath(line: string) {
       const body = part.slice(1, -1);
       const stacks =
         body.includes("\\frac") || body.includes("\\dfrac") || body.includes("\\binom");
-      return <InlineMath key={i} math={stacks ? `\\displaystyle ${body}` : body} />;
+      return <MathSpan key={i} math={stacks ? `\\displaystyle ${body}` : body} />;
     }
     return part ? <Fragment key={i}>{part}</Fragment> : null;
   });

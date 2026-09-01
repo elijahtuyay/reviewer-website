@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useMemo } from "react";
 import { getExam } from "@/lib/exams/registry";
 import { ExamId, SectionId } from "@/data/schema";
 import { getSectionBreakdown } from "@/lib/section-result";
@@ -24,6 +25,25 @@ export default function SectionNav({
   currentResult,
 }: SectionNavProps) {
   const sections = getExam(examId).sections;
+
+  /**
+   * The OTHER sections' saved state, read once.
+   *
+   * getSectionBreakdown is a synchronous sessionStorage.getItem plus a
+   * JSON.parse, and this ran inside the render body — so on the quiz page it
+   * executed on every answer click, twice, as main-thread I/O during render.
+   * Those sections cannot change while this tab is sitting on this page (the
+   * section lock is what guarantees it), so reading them once per section is
+   * not a cache, it is the correct number of reads.
+   */
+  const storedBreakdowns = useMemo(() => {
+    const map = new Map<SectionId, ReturnType<typeof getSectionBreakdown>>();
+    for (const section of sections) {
+      if (section.id === currentSection) continue;
+      map.set(section.id, getSectionBreakdown(examId, section.id, section.questionCount));
+    }
+    return map;
+  }, [examId, currentSection, sections]);
 
   return (
     <nav className="flex flex-col gap-1.5">
@@ -57,7 +77,8 @@ export default function SectionNav({
                   maxScore: null,
                   scoreKnown: false,
                 }
-              : getSectionBreakdown(examId, section.id, section.questionCount);
+              : (storedBreakdowns.get(section.id) ??
+                getSectionBreakdown(examId, section.id, section.questionCount));
 
         const content = (
           <>

@@ -73,10 +73,6 @@ export function getLoadedSection(examId: ExamId, sectionId: SectionId): Question
   return cache.get(key(examId, sectionId)) ?? [];
 }
 
-export function isSectionLoaded(examId: ExamId, sectionId: SectionId): boolean {
-  return cache.has(key(examId, sectionId));
-}
-
 function shuffle<T>(items: T[]): T[] {
   const result = [...items];
   for (let i = result.length - 1; i > 0; i--) {

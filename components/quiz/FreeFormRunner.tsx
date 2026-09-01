@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import { Attempt } from "@/components/quiz/useAttempt";
 import { AttemptNotice, BackToSetup, NoCalculatorNote } from "@/components/quiz/shared";
@@ -58,19 +58,26 @@ export default function FreeFormRunner({
 
   const reviewMode = phase === "done";
 
-  const answeredNumbers = questions
-    .map((q, i) => (answers[q.id] !== null && answers[q.id] !== undefined ? i + 1 : null))
-    .filter((n): n is number => n !== null);
-  const correctNumbers = questions
-    .map((q, i) => (answers[q.id] === q.correctIndex ? i + 1 : null))
-    .filter((n): n is number => n !== null);
-  const incorrectNumbers = questions
-    .map((q, i) =>
-      answers[q.id] !== null && answers[q.id] !== undefined && answers[q.id] !== q.correctIndex
-        ? i + 1
-        : null
-    )
-    .filter((n): n is number => n !== null);
+  /**
+   * One pass instead of three, memoized instead of rebuilt.
+   *
+   * These were six array allocations over 36 questions on every render, and
+   * because they were fresh arrays each time they were also a hard blocker on
+   * ever memoizing ProgressTracker, which receives them.
+   */
+  const { answeredNumbers, correctNumbers, incorrectNumbers } = useMemo(() => {
+    const answered: number[] = [];
+    const correct: number[] = [];
+    const incorrect: number[] = [];
+    questions.forEach((q, i) => {
+      const answer = answers[q.id];
+      if (answer === null || answer === undefined) return;
+      answered.push(i + 1);
+      if (answer === q.correctIndex) correct.push(i + 1);
+      else incorrect.push(i + 1);
+    });
+    return { answeredNumbers: answered, correctNumbers: correct, incorrectNumbers: incorrect };
+  }, [questions, answers]);
 
   /**
    * Deferring a frame lets the confirmation dialog's body scroll-lock unwind
@@ -240,7 +247,7 @@ export default function FreeFormRunner({
                 question={question}
                 index={index}
                 selectedIndex={answers[question.id] ?? null}
-                onSelect={(optionIndex) => select(question.id, optionIndex)}
+                onSelect={select}
                 reviewMode={reviewMode}
               />
             ))}

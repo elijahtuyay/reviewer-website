@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { hasMath, preloadMath } from "@/components/MathText";
 import type { ExamId, Question, SectionId } from "@/data/schema";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import {
@@ -211,6 +212,15 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
       }
       setBankVersion((v) => v + 1);
 
+      // KaTeX is code-split, so start its chunk downloading the moment we know
+      // this section actually contains math — while the candidate is still
+      // reading question one, rather than making them wait a round trip when
+      // the first formula tries to render. Two of the six sections contain no
+      // math at all and correctly never ask for it.
+      if (pool.some((q) => hasMath(q.prompt) || q.options.some(hasMath))) {
+        preloadMath();
+      }
+
       const stored = getStoredProgress(examId, sectionId);
       const isResume = stored.questionIds.length > 0;
 
@@ -368,6 +378,20 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
   const reviewChangesLeft = rules.reviewEdit
     ? Math.max(0, rules.reviewEdit.maxChanges - reviewChangesUsed)
     : null;
+  /**
+   * The baseline, mirrored into a ref.
+   *
+   * `select` must consult the review allowance, but taking `reviewBaseline` and
+   * `answers` as dependencies gave `select` a new identity on every single
+   * answer. That is what made memoizing QuestionCard impossible and re-rendered
+   * all 36 cards on every click. The ref lets `select` stay stable while still
+   * reading the current value.
+   */
+  const reviewBaselineRef = useRef(reviewBaseline);
+  useEffect(() => {
+    reviewBaselineRef.current = reviewBaseline;
+  }, [reviewBaseline]);
+
   /** True when this question can still be changed: already altered, or allowance left. */
   const canChangeAnswer = useCallback(
     (questionId: string) => {
@@ -421,21 +445,44 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     [phase, persist, cleanAnswers, examId, sectionId, questionIds, exam.scoring, section.questionCount]
   );
 
+  /**
+   * Deliberately does NOT depend on `answers`.
+   *
+   * It used to, through `canChangeAnswer`, which made `select` a new function
+   * after every click. Every QuestionCard then got a new `onSelect` prop, so
+   * memoizing the card was pointless and one answer re-rendered all 36 of them.
+   * The allowance check now runs inside the state updater against `prev`, which
+   * is the freshest answers by definition — strictly more correct than the
+   * closure it replaced, as well as cheaper.
+   */
   const select = useCallback(
     (questionId: string, optionIndex: number) => {
       if (phase !== "taking" && phase !== "reviewEdit") return;
 
-      // The allowance is measured against the baseline, so reverting a question
-      // to what it was when review opened is always free and never blocked.
-      if (phase === "reviewEdit" && !canChangeAnswer(questionId)) return;
-
       setAnswers((prev) => {
+        // The allowance is measured against the baseline, so reverting a
+        // question to what it was when review opened is always free and never
+        // blocked. Mirrors canChangeAnswer, which still exists for the UI to
+        // ask the same thing while rendering.
+        if (phase === "reviewEdit" && rules.reviewEdit) {
+          const baseline = reviewBaselineRef.current;
+          const original = baseline[questionId];
+          const used = Object.entries(baseline).filter(
+            ([id, was]) => prev[id] !== undefined && prev[id] !== null && prev[id] !== was
+          ).length;
+          const blocked =
+            original !== undefined &&
+            prev[questionId] === original &&
+            used >= rules.reviewEdit.maxChanges;
+          if (blocked) return prev;
+        }
+
         const next = { ...prev, [questionId]: optionIndex };
         persist({ answers: cleanAnswers(next), inReview: phase === "reviewEdit" });
         return next;
       });
     },
-    [phase, canChangeAnswer, persist, cleanAnswers]
+    [phase, rules.reviewEdit, persist, cleanAnswers]
   );
 
   const toggleFlag = useCallback(

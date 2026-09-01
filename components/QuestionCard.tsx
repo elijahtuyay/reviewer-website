@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import { Question } from "@/data/schema";
 import MathText from "@/components/MathText";
 
@@ -47,7 +47,13 @@ interface QuestionCardProps {
   question: Question;
   index: number;
   selectedIndex: number | null;
-  onSelect?: (optionIndex: number) => void;
+  /**
+   * Takes the question id as well as the option, so runners can pass the
+   * attempt's `select` straight through. They used to wrap it in an inline
+   * arrow to close over the id, which handed every card a brand-new prop on
+   * every render and made the memo below useless.
+   */
+  onSelect?: (questionId: string, optionIndex: number) => void;
   reviewMode?: boolean;
   /**
    * Set while a capped review pass has run out of changes and this question is
@@ -58,7 +64,7 @@ interface QuestionCardProps {
   lockedReason?: string;
 }
 
-export default function QuestionCard({
+function QuestionCard({
   question,
   index,
   selectedIndex,
@@ -192,7 +198,7 @@ export default function QuestionCard({
               tabIndex={optionIndex === tabStop ? 0 : -1}
               onClick={() => {
                 if (reviewMode || lockedReason) return;
-                onSelect?.(optionIndex);
+                onSelect?.(question.id, optionIndex);
               }}
               onKeyDown={(event) => handleKeyDown(event, optionIndex)}
               // min-h-11 is the 44px tap-target minimum, and it doubles as the
@@ -254,3 +260,16 @@ export default function QuestionCard({
     </div>
   );
 }
+
+/**
+ * Memoized, and the props above are shaped to make that possible.
+ *
+ * A section renders up to 36 of these. Every answer click re-rendered all of
+ * them — roughly 180 MathText renders and 144 option buttons rebuilt per click —
+ * because two things handed each card a new prop every time: an inline
+ * `onSelect` arrow in the runners, and `select` itself changing identity on
+ * every answer (see the note on it in useAttempt). With both fixed, the
+ * remaining props are the stable question object, primitives, and a stable
+ * callback, so exactly one card re-renders per click.
+ */
+export default memo(QuestionCard);
