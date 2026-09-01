@@ -679,7 +679,29 @@ During PR #7, three background content-editing agents were dispatched in paralle
 
 **Rule going forward: never dispatch more than one agent with write access to the same file at the same time.** If multiple content edits are needed on one file, either do them yourself sequentially, or dispatch agents one at a time and verify each one's result against the actual current file state before starting the next. This is the same class of near-miss documented elsewhere in this file (the `git mv` question-bank-relocation near-miss) — concurrent writers to shared state in this repo have bitten this project twice now.
 
-Stale local+remote branches from already-merged PRs still exist and were NOT cleaned up (not destructive, left for the user to decide): `chore/versioning-workflow`, `feature/question-bank-expansion-and-random-draw`, `feature/ui-theme-and-navigation`, `feature/batch-ux-content-overhaul`, `feature/gov-design-polish`, `feature/gov-design-typography`. Safe to delete (all merged), but ask before doing so since it's a git-history-visible action.
+**Branches: `main` is the only one, local and remote, as of v2.3.0.** All 19
+merged feature branches were deleted at the user's request after PR #21.
+
+This paragraph used to name six of them as "not cleaned up, left for the user to
+decide". By the time anyone acted on it there were **nineteen** — the list had
+been written at PR #6 and never revisited while PRs #7 through #21 piled up.
+That is the third stale-note defect this document has produced (see also the six
+"open" question defects that had all been fixed, and the MobileNavSheet focus
+trap recorded as fixed when it never was), so the note now states an invariant
+rather than an inventory.
+
+**If you need to check merged-ness before deleting a branch, `git branch
+--merged main` is the wrong tool here.** This project squash-merges, so a
+merged branch's tip is never an ancestor of `main` and every branch looks
+unmerged. Ask GitHub instead:
+
+```bash
+gh pr list --state merged --limit 100 --json headRefName -q '.[].headRefName' | sort -u
+```
+
+Then confirm each local branch is in sync with its remote (so nothing unpushed
+is lost) and record the tip SHAs before deleting — `git branch <name> <sha>`
+restores any of them, and GitHub retains merged PR refs regardless.
 
 ## Open loop status
 
@@ -735,4 +757,21 @@ that appears not to have applied is usually this.
 
 ---
 
-**Current state: `main` is clean, builds and lints with zero errors/warnings, at v2.2.0.**
+**Current state: `main` is at v2.3.0, and is the only branch.**
+
+"Clean" is four commands rather than a claim, and all four pass on `main`:
+
+```bash
+npx tsc --noEmit        # zero errors
+npm run lint            # zero errors, zero warnings
+npm run verify:engine   # adaptive ladder, both scoring models, the calculator
+npm run audit:bank      # every statistical guarantee about the question bank
+```
+
+`npm run build` must also still print exactly ONE dynamic route
+(`ƒ /api/auth/[...all]`), with every page `○ (Static)` or `● (SSG)`. That
+invariant is load-bearing: it is what keeps the site free to host and what the
+CSP decision in `next.config.ts` depends on.
+
+This line has been wrong before — it read v2.2.0 while `main` was at v2.3.0 —
+so if the version above disagrees with `VERSION.txt`, trust `VERSION.txt`.
