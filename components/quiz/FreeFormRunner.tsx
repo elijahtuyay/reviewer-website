@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import { Attempt } from "@/components/quiz/useAttempt";
 import { AttemptNotice, BackToSetup, NoCalculatorNote } from "@/components/quiz/shared";
+import { scrollBehavior } from "@/lib/motion";
 import CalculatorPanel from "@/components/quiz/CalculatorPanel";
 import Timer from "@/components/Timer";
 import QuestionCard from "@/components/QuestionCard";
@@ -57,19 +58,26 @@ export default function FreeFormRunner({
 
   const reviewMode = phase === "done";
 
-  const answeredNumbers = questions
-    .map((q, i) => (answers[q.id] !== null && answers[q.id] !== undefined ? i + 1 : null))
-    .filter((n): n is number => n !== null);
-  const correctNumbers = questions
-    .map((q, i) => (answers[q.id] === q.correctIndex ? i + 1 : null))
-    .filter((n): n is number => n !== null);
-  const incorrectNumbers = questions
-    .map((q, i) =>
-      answers[q.id] !== null && answers[q.id] !== undefined && answers[q.id] !== q.correctIndex
-        ? i + 1
-        : null
-    )
-    .filter((n): n is number => n !== null);
+  /**
+   * One pass instead of three, memoized instead of rebuilt.
+   *
+   * These were six array allocations over 36 questions on every render, and
+   * because they were fresh arrays each time they were also a hard blocker on
+   * ever memoizing ProgressTracker, which receives them.
+   */
+  const { answeredNumbers, correctNumbers, incorrectNumbers } = useMemo(() => {
+    const answered: number[] = [];
+    const correct: number[] = [];
+    const incorrect: number[] = [];
+    questions.forEach((q, i) => {
+      const answer = answers[q.id];
+      if (answer === null || answer === undefined) return;
+      answered.push(i + 1);
+      if (answer === q.correctIndex) correct.push(i + 1);
+      else incorrect.push(i + 1);
+    });
+    return { answeredNumbers: answered, correctNumbers: correct, incorrectNumbers: incorrect };
+  }, [questions, answers]);
 
   /**
    * Deferring a frame lets the confirmation dialog's body scroll-lock unwind
@@ -79,11 +87,27 @@ export default function FreeFormRunner({
     requestAnimationFrame(() => window.scrollTo({ top: 0 }));
   }
 
+  /**
+   * Two things had to change here, and both are the same mistake scrollToTop
+   * above already documents.
+   *
+   * The scroll used to be issued BEFORE closing the sheet, so on a phone it ran
+   * while `document.body` was still `overflow: hidden` from the sheet's scroll
+   * lock and while the target's ancestor was still `inert`. The page simply did
+   * not move, which reads as the jump grid being decorative. Closing first and
+   * deferring a frame lets the lock unwind before the scroll is asked for.
+   *
+   * And the behavior is now chosen rather than hard-coded: a full-page smooth
+   * scroll across 36 questions is the largest motion event in the app, and it
+   * was the one thing `prefers-reduced-motion` could not switch off.
+   */
   function handleJump(questionNumber: number) {
-    document
-      .getElementById(`question-${questionNumber}`)
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
     setMobileNavOpen(false);
+    requestAnimationFrame(() => {
+      document
+        .getElementById(`question-${questionNumber}`)
+        ?.scrollIntoView({ behavior: scrollBehavior(), block: "start" });
+    });
   }
 
   /**
@@ -105,10 +129,30 @@ export default function FreeFormRunner({
   return (
     <div className="flex flex-1 justify-center bg-background">
       <div className="w-full max-w-6xl px-6 py-10 sm:py-16" inert={inert} aria-hidden={inert}>
-        <div className="sticky top-0 z-20 flex h-20 items-center justify-between gap-3 border-b border-line bg-background/95 backdrop-blur">
-          <div className="min-w-0">
+        {/*
+          Below `sm` the title takes its OWN ROW and the controls wrap beneath
+          it. Shrinking the type and shortening the buttons was not enough and
+          could not have been: on a 320px screen the clock, Pause and the
+          Sections button need most of the row, so any title long enough to
+          matter ("Quantitative Skills" is 141px) has nowhere to go and the h1 of
+          the page you are on renders as "Quant...". Two rows is the honest
+          answer at that width.
+
+          The fixed h-20 is kept from `sm` up, because the sidebar's `top-24`
+          alignment is computed from it -- but the sidebar only exists at `lg`,
+          so nothing depends on the height below that.
+        */}
+        <div className="sticky top-0 z-20 flex min-h-20 flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-line bg-background/95 py-2 backdrop-blur sm:h-20 sm:flex-nowrap sm:py-0">
+          <div className="min-w-0 basis-full sm:basis-auto">
             <BackToSetup examId={exam.id} />
-            <h1 className="mt-1 truncate text-lg font-semibold text-foreground sm:text-xl">
+            {/* text-base below `sm`. The header is a fixed h-20 row shared with
+                the clock and up to two buttons, and at 18px the longest section
+                name ("Quantitative Skills", 158px) could not fit the space left
+                over at 320-390px -- it rendered as "Quant...", the h1 of the
+                page you are on. Shrinking the type and shortening the review
+                buttons below `sm` buys back more than the 5px it was missing
+                by. `truncate` stays as a backstop, not as the mechanism. */}
+              <h1 className="mt-1 truncate text-base font-semibold text-foreground sm:text-lg md:text-xl">
               {section.label}
             </h1>
           </div>
@@ -116,9 +160,25 @@ export default function FreeFormRunner({
             <button
               type="button"
               onClick={() => setMobileNavOpen(true)}
-              className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground hover:bg-panel-hover lg:hidden"
+              // Icon-only below `sm`. The right-hand cluster is shrink-0 and ate
+              // ~300px of a 390px header, which collapsed the min-w-0 title
+              // column and truncated the h1 of the page you are on to
+              // "Langua...". This is a regression of a bug PROJECT_CONTEXT
+              // already recorded as fixed, so it is worth being blunt about the
+              // cause: anything added to this cluster comes straight out of the
+              // section title's width.
+              className="flex h-11 min-w-11 items-center justify-center rounded-md border border-line-strong text-sm text-foreground transition-colors hover:bg-panel-hover active:bg-line sm:px-3 lg:hidden"
             >
-              Sections
+              <svg
+                aria-hidden
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="h-4 w-4 sm:hidden"
+              >
+                <path d="M3 5h14v2H3V5zm0 4h14v2H3V9zm0 4h14v2H3v-2z" />
+              </svg>
+              <span className="hidden sm:inline">Sections</span>
+              <span className="sr-only sm:hidden">Sections and progress</span>
             </button>
             {!reviewMode ? (
               <div className="flex items-center gap-3">
@@ -129,14 +189,16 @@ export default function FreeFormRunner({
                     paused={paused}
                     onDeadlineChange={onDeadlineChange}
                   />
-                  <p className="mt-1 text-xs text-muted">
+                  {/* Hidden on phones: it is duplicated inside the mobile
+                      sheet, and the header has no width to spare there. */}
+                  <p className="mt-1 hidden text-xs text-foreground/70 sm:block">
                     {answeredCount}/{questions.length} answered
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={pause}
-                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground hover:bg-panel-hover"
+                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground transition-colors hover:bg-panel-hover active:bg-line"
                 >
                   Pause
                 </button>
@@ -146,15 +208,19 @@ export default function FreeFormRunner({
                 <button
                   type="button"
                   onClick={() => setPendingAction("restart")}
-                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground hover:bg-panel-hover"
+                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground transition-colors hover:bg-panel-hover active:bg-line"
                 >
                   Retake
                 </button>
                 <Link
                   href={`/${exam.id}`}
-                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground hover:bg-panel-hover"
+                  className="flex h-11 items-center justify-center rounded-md border border-line-strong px-3 text-sm text-foreground transition-colors hover:bg-panel-hover active:bg-line"
                 >
-                  Back to sections
+                  {/* The review-mode cluster is the widest of the three states
+                      and never got the responsive treatment the Sections button
+                      got, which is why the title clipped hardest here. */}
+                  <span className="sm:hidden">Sections</span>
+                  <span className="hidden sm:inline">Back to sections</span>
                 </Link>
               </div>
             )}
@@ -162,7 +228,7 @@ export default function FreeFormRunner({
         </div>
 
         <div className="mt-4 flex gap-8">
-          <aside className="hidden w-56 shrink-0 flex-col gap-6 lg:flex">
+          <aside className="hidden w-72 shrink-0 flex-col gap-6 lg:flex">
             <div className="sticky top-24 flex flex-col gap-6">
               <SectionNav
                 examId={exam.id}
@@ -191,7 +257,7 @@ export default function FreeFormRunner({
                 <button
                   type="button"
                   onClick={() => setPendingAction("restart")}
-                  className="inline-flex min-h-11 items-center px-1 text-xs text-muted underline underline-offset-2 hover:text-foreground"
+                  className="inline-flex min-h-11 items-center px-1 text-xs text-muted underline underline-offset-2 transition-colors hover:text-foreground"
                 >
                   Restart section
                 </button>
@@ -223,7 +289,7 @@ export default function FreeFormRunner({
                 question={question}
                 index={index}
                 selectedIndex={answers[question.id] ?? null}
-                onSelect={(optionIndex) => select(question.id, optionIndex)}
+                onSelect={select}
                 reviewMode={reviewMode}
               />
             ))}
@@ -233,7 +299,10 @@ export default function FreeFormRunner({
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  className="w-full rounded-md bg-accent py-2.5 text-sm font-medium text-accent-foreground hover:opacity-90"
+                  // min-h-11 is the app's 44px tap-target floor. py-2.5 alone
+                  // made this 40px — on the single most consequential control
+                  // in the app.
+                  className="min-h-11 w-full rounded-md bg-accent py-2.5 text-sm font-medium text-accent-foreground transition hover:opacity-90 active:scale-[0.99]"
                 >
                   Submit ({answeredCount}/{questions.length} answered)
                 </button>

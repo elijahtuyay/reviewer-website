@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import { Question } from "@/data/schema";
 import MathText from "@/components/MathText";
 
@@ -47,7 +47,13 @@ interface QuestionCardProps {
   question: Question;
   index: number;
   selectedIndex: number | null;
-  onSelect?: (optionIndex: number) => void;
+  /**
+   * Takes the question id as well as the option, so runners can pass the
+   * attempt's `select` straight through. They used to wrap it in an inline
+   * arrow to close over the id, which handed every card a brand-new prop on
+   * every render and made the memo below useless.
+   */
+  onSelect?: (questionId: string, optionIndex: number) => void;
   reviewMode?: boolean;
   /**
    * Set while a capped review pass has run out of changes and this question is
@@ -58,7 +64,7 @@ interface QuestionCardProps {
   lockedReason?: string;
 }
 
-export default function QuestionCard({
+function QuestionCard({
   question,
   index,
   selectedIndex,
@@ -100,7 +106,8 @@ export default function QuestionCard({
     // focus() alone doesn't scroll an element the browser already considers
     // visible, so arrowing upward can land on an option sitting underneath the
     // h-20 sticky header, hiding both the option and its focus ring. Paired with
-    // scroll-mt-24 on the button, this brings it clear of the header.
+    // scroll-mt on the button, this brings it clear of the header, which is
+    // two rows tall below `sm`.
     target?.scrollIntoView({ block: "nearest" });
   }
 
@@ -113,7 +120,7 @@ export default function QuestionCard({
   return (
     <div
       id={`question-${index + 1}`}
-      className="scroll-mt-20 border-b border-line py-8 first:pt-0 last:border-b-0"
+      className="scroll-mt-32 border-b border-line py-8 first:pt-0 last:border-b-0 sm:scroll-mt-20"
     >
       <div className="flex items-baseline gap-3">
         <span className="text-sm font-medium text-muted">{index + 1}</span>
@@ -157,7 +164,9 @@ export default function QuestionCard({
           let marker: string | null = null;
           if (reviewMode) {
             if (isCorrectOption) {
-              style = "border-green-600 bg-green-50 dark:border-green-500 dark:bg-green-950/40";
+              // border-green-700: -600 is 2.95 against --background, under the 3:1 that
+              // WCAG 1.4.11 asks of a boundary identifying a control.
+              style = "border-green-700 bg-green-50 dark:border-green-500 dark:bg-green-950/40";
               marker = "Correct answer";
             } else if (isSelected && !isCorrectOption) {
               style = "border-red-600 bg-red-50 dark:border-red-500 dark:bg-red-950/40";
@@ -190,13 +199,25 @@ export default function QuestionCard({
               tabIndex={optionIndex === tabStop ? 0 : -1}
               onClick={() => {
                 if (reviewMode || lockedReason) return;
-                onSelect?.(optionIndex);
+                onSelect?.(question.id, optionIndex);
               }}
               onKeyDown={(event) => handleKeyDown(event, optionIndex)}
               // min-h-11 is the 44px tap-target minimum, and it doubles as the
               // headroom stacked math (fractions, exponents) needs to sit in a
               // row without the box having to grow around it.
-              className={`flex min-h-11 scroll-mt-24 items-center justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-sm leading-relaxed text-foreground transition-colors ${style} ${reviewMode || lockedReason ? "cursor-default" : "cursor-pointer"} ${lockedReason ? "opacity-60" : ""}`}
+              // transition-[...box-shadow], not transition-colors: the selected
+              // state's `ring-1` compiles to a box-shadow in Tailwind v4, which
+              // transition-colors does not cover, so the ring snapped on while
+              // the border underneath it faded. active:scale gives the press
+              // the acknowledgement it had on no touch device, where :hover
+              // does not exist at all.
+              //
+              // text-base, not text-sm: the options were 14px under a 16px
+              // stem, i.e. the text a candidate re-reads three times before
+              // committing was the smallest text on the card.
+              className={`flex min-h-11 scroll-mt-40 items-center sm:scroll-mt-24 justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-base leading-relaxed text-foreground transition-[color,background-color,border-color,box-shadow,transform] ${
+                reviewMode || lockedReason ? "" : "active:scale-[0.99]"
+              } ${style} ${reviewMode || lockedReason ? "cursor-default" : "cursor-pointer"} ${lockedReason ? "opacity-60" : ""}`}
             >
               <span>
                 <MathText text={option} />
@@ -240,3 +261,16 @@ export default function QuestionCard({
     </div>
   );
 }
+
+/**
+ * Memoized, and the props above are shaped to make that possible.
+ *
+ * A section renders up to 36 of these. Every answer click re-rendered all of
+ * them — roughly 180 MathText renders and 144 option buttons rebuilt per click —
+ * because two things handed each card a new prop every time: an inline
+ * `onSelect` arrow in the runners, and `select` itself changing identity on
+ * every answer (see the note on it in useAttempt). With both fixed, the
+ * remaining props are the stable question object, primitives, and a stable
+ * callback, so exactly one card re-renders per click.
+ */
+export default memo(QuestionCard);

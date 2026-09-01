@@ -2,6 +2,9 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
+/** Checkpoints announced to assistive technology, descending. */
+const THRESHOLDS = [600, 300, 60];
+
 interface TimerProps {
   /** Wall-clock epoch ms when time runs out. Owned by the quiz page so it survives a reload. */
   endAt: number;
@@ -17,6 +20,15 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
   // render body (react-hooks/purity), so the first real value lands on the first
   // tick, which the mount effect fires immediately.
   const [secondsLeft, setSecondsLeft] = useState<number | null>(null);
+  /**
+   * What the screen reader hears. Only set when a threshold is crossed, so the
+   * live region is silent for 44 of the 45 minutes rather than reading the
+   * clock aloud every second.
+   */
+  const [announcement, setAnnouncement] = useState("");
+  const announcedRef = useRef<Set<number>>(new Set());
+  /** False until the first real reading has seeded the latch. See the effect below. */
+  const seededRef = useRef(false);
   const onExpireRef = useRef(onExpire);
   const onDeadlineChangeRef = useRef(onDeadlineChange);
   // Deadline-based instead of tick-counted: browsers throttle setInterval in
@@ -46,6 +58,12 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
       // A deadline in the future means a live attempt, so a previous expiry
       // (e.g. before a Retake) must not keep the guard latched.
       if (endAt > Date.now()) expiredRef.current = false;
+      // Same reasoning for the announcement latch. "Restart section" renders
+      // while the Timer is still mounted, so a Retake hands down a new deadline
+      // WITHOUT a remount; leaving the latch set meant the fresh 45-minute
+      // attempt could never announce its 10- and 5-minute warnings again.
+      announcedRef.current = new Set();
+      seededRef.current = false;
       // Repaint immediately instead of waiting for the next scheduled tick.
       setSecondsLeft(Math.max(0, Math.ceil((endAt - Date.now()) / 1000)));
     }
@@ -115,17 +133,78 @@ export default function Timer({ endAt, onExpire, paused = false, onDeadlineChang
     };
   }, [paused, endAt]);
 
+  /**
+   * Time checkpoints, announced once each.
+   *
+   * Before this the countdown was a plain div with no role and no live region,
+   * and the only "running out" signal was color and weight at 60 seconds. A
+   * screen-reader user therefore got NO warning of any kind before the section
+   * submitted itself under them. Sixty seconds is also very late for a visual
+   * warning, which is why five minutes now changes the color too.
+   */
+  useEffect(() => {
+    if (secondsLeft === null || paused) return;
+
+    // Seed from the FIRST reading rather than announcing on `<= threshold`.
+    // Resuming an attempt with 3:00 left mounts the timer already below both the
+    // 10- and 5-minute marks, and announcing state rather than a crossing made a
+    // screen reader say "10 minutes remaining" and then, one second later, "5
+    // minutes remaining" to someone three minutes from an auto-submit.
+    if (!seededRef.current) {
+      seededRef.current = true;
+      for (const threshold of THRESHOLDS) {
+        if (secondsLeft <= threshold) announcedRef.current.add(threshold);
+      }
+      return;
+    }
+
+    for (const threshold of THRESHOLDS) {
+      if (secondsLeft > threshold || announcedRef.current.has(threshold)) continue;
+      announcedRef.current.add(threshold);
+      const minutes = threshold / 60;
+      setAnnouncement(
+        `${minutes} minute${minutes === 1 ? "" : "s"} remaining in this section.`
+      );
+      return;
+    }
+  }, [secondsLeft, paused]);
+
   const isLow = secondsLeft !== null && secondsLeft <= 60;
+  const isWarning = secondsLeft !== null && secondsLeft <= 300;
   const label =
     secondsLeft === null
       ? "--:--"
       : `${Math.floor(secondsLeft / 60)}:${(secondsLeft % 60).toString().padStart(2, "0")}`;
 
+  // text-lg/xl and --foreground, not text-sm and --muted. This is a timed exam
+  // and the countdown was the least prominent thing in its own header: 14px
+  // muted text beside a bordered 44px Pause button, so the only unbordered
+  // element in the row was the one that matters. It now wins the row.
+  const tone = isLow
+    ? "text-red-700 dark:text-red-400"
+    : isWarning
+      ? "text-amber-700 dark:text-amber-400"
+      : "text-foreground";
+
   return (
-    <div
-      className={`font-mono text-sm tabular-nums ${isLow ? "font-semibold text-red-600 dark:text-red-400" : "text-muted"}`}
-    >
-      {label}
+    <div className="flex flex-col items-end">
+      <div
+        // role="timer" rather than aria-hidden. Hiding the digits outright did
+        // stop the per-second chatter, but it also removed the only way for a
+        // screen-reader user to ASK what time is left — which they need before
+        // committing to a long reading-comprehension passage. A timer role is
+        // readable on demand and is not an implicit live region, so it does not
+        // announce itself; the separate polite region below does the announcing,
+        // and only at checkpoints.
+        role="timer"
+        aria-label={secondsLeft === null ? "Time remaining" : `${label} remaining in this section`}
+        className={`font-mono text-lg font-semibold tabular-nums sm:text-xl ${tone}`}
+      >
+        {label}
+      </div>
+      <span className="sr-only" role="status" aria-live="polite">
+        {announcement}
+      </span>
     </div>
   );
 }

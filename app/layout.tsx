@@ -6,7 +6,6 @@ import PageTransition from "@/components/PageTransition";
 import SiteFooter from "@/components/SiteFooter";
 import { SITE_NAME, SITE_TAGLINE } from "@/lib/site";
 import { SITE_URL } from "@/lib/site-url";
-import "katex/dist/katex.min.css";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -68,7 +67,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             difference between one Tab and several. */}
         <a
           href="#main-content"
-          className="sr-only rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50"
+          // Parked off-screen rather than `sr-only`, because Tailwind's
+          // `not-sr-only` resets padding to 0 — so the focused skip link was a
+          // 100x20 target with its text flush against the edges, on the one
+          // control that exists purely for keyboard users. Sliding it in from
+          // above keeps the padding and gives it a real 44px box.
+          className="absolute -top-20 left-2 z-50 inline-flex min-h-11 items-center rounded-md bg-accent px-4 text-sm font-medium text-accent-foreground transition-[top] focus:top-2"
         >
           Skip to content
         </a>

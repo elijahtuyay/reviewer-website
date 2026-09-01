@@ -9,8 +9,11 @@ import { SITE_NAME } from "@/lib/site";
  * sidebar's `top-24` alignment to be recomputed on every page.
  *
  * The nav used to be three inert "soon" chips (Exams, Pricing, Account), which
- * is a lot of dead pixels for a header. Exams are real links now; Account is
- * the only genuinely unbuilt thing left, and it says so.
+ * is a lot of dead pixels for a header. Exams became real links; the last chip,
+ * "Account soon", is gone too. It was a non-interactive span advertising a
+ * feature that does not exist, on every screen including the inside of a timed
+ * exam, and there is no sign-in UI for it to be a promise about. Put it back
+ * when there is something behind it.
  */
 export default function SiteHeader() {
   const exams = EXAM_LIST;
@@ -20,11 +23,13 @@ export default function SiteHeader() {
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-6">
         <Link
           href="/"
-          className="flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground"
+          // min-h-11 with a negative margin so the 44px target does not
+            // change the header's h-14 rhythm. The logo was a ~24px target.
+            className="-my-2 flex min-h-11 items-center gap-2 rounded-md text-sm font-semibold tracking-tight text-foreground transition-colors hover:text-accent-text"
         >
           <span
             aria-hidden
-            className="flex h-6 w-6 items-center justify-center rounded bg-accent text-[10px] font-bold text-accent-foreground"
+            className="flex h-6 w-6 items-center justify-center rounded bg-accent text-xs font-bold text-accent-foreground"
           >
             ER
           </span>
@@ -36,22 +41,16 @@ export default function SiteHeader() {
             <Link
               key={exam.id}
               href={`/${exam.id}`}
-              className="flex min-h-11 items-center gap-1.5 rounded-md px-2 text-muted hover:bg-panel-hover hover:text-foreground sm:px-3"
+              className="flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-md px-2 text-muted transition-colors hover:bg-panel-hover hover:text-foreground active:bg-line sm:px-3"
             >
               {exam.shortLabel}
               {!exam.available && (
-                <span className="hidden rounded-full bg-panel-hover px-1.5 py-0.5 text-[10px] font-medium sm:inline">
+                <span className="hidden rounded-full bg-panel-hover px-1.5 py-0.5 text-xs font-medium sm:inline">
                   soon
                 </span>
               )}
             </Link>
           ))}
-          <span className="ml-1 hidden items-center gap-1.5 px-2 text-muted md:flex">
-            Account
-            <span className="rounded-full bg-panel-hover px-1.5 py-0.5 text-[10px] font-medium">
-              soon
-            </span>
-          </span>
           <ThemeToggle />
         </nav>
       </div>

@@ -5,6 +5,13 @@ export interface TopicBreakdown {
   topic: string;
   correct: number;
   total: number;
+  /**
+   * Served but not answered. Tracked separately because "0/8" cannot tell a
+   * candidate whether they got a topic wrong or never reached it, and the
+   * results screen was reporting topics the user had skipped entirely as though
+   * they had failed them.
+   */
+  unanswered: number;
 }
 
 export interface ScoreResult {
@@ -92,11 +99,12 @@ export function scoreAttempt(
     }
 
     if (!topicMap.has(question.topic)) {
-      topicMap.set(question.topic, { topic: question.topic, correct: 0, total: 0 });
+      topicMap.set(question.topic, { topic: question.topic, correct: 0, total: 0, unanswered: 0 });
     }
     const topicEntry = topicMap.get(question.topic)!;
     topicEntry.total++;
     if (isCorrect) topicEntry.correct++;
+    else if (selectedIndex === null) topicEntry.unanswered++;
   }
 
   const byTopic = Array.from(topicMap.values());

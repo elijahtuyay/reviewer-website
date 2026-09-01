@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-08-23, at PR #20 / VERSION.txt `2.2.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-02, at PR #21 / VERSION.txt `2.3.0`.
 
 ## What this project is
 
@@ -39,7 +39,15 @@ Programme P:"` has no word boundary before the second `Programme` and `programm
 
 ## Copyright rule (critical, applies to ALL future content work)
 
-Three reference books exist at `C:\Users\elija\Downloads\nmat test files\` (with markdown conversions in its `md/` subfolder, plus the user's own GMAT notes as .txt files):
+Three reference books live at **`internal docs/nmat test files/`, inside the repo working tree** (with markdown conversions in its `md/` subfolder, plus the user's own GMAT notes as .txt files, and a generated answer-key PDF one level up). An earlier version of this document placed them at `C:\Users\elija\Downloads\nmat test files\`; they moved, and nobody updated the path or added an ignore rule.
+
+**`internal docs/` is gitignored as of v2.3.0, and `.githooks/pre-commit` hard-fails any commit that stages a path under it.** Both are necessary. The repo is PUBLIC, the directory was untracked but NOT ignored, and CLAUDE.md forbids blanket staging only *while an agent is running* — so any session with no agent running was explicitly permitted to `git add -A` and publish three copyrighted books to GitHub. An ignore rule alone is advisory (`git add -f` walks straight past it), which is why there is also a hook. Enable it after a fresh clone with `git config core.hooksPath .githooks`; git does not set it for you. Verified nothing was ever committed:
+
+```bash
+git log --all --diff-filter=A --name-only --pretty=format: | grep -i "internal docs"   # empty
+```
+
+The books:
 - NMAT Official Guide 2021
 - Princeton Review GMAT Premium Prep
 - GMAT for Dummies
@@ -85,8 +93,20 @@ document for two releases and sent readers looking for files that were gone.
 - Mobile nav: below the `lg` Tailwind breakpoint, the desktop sidebar (`SectionNav` + `ProgressTracker`) is hidden. `components/MobileNavSheet.tsx` is the mobile fallback — a bottom sheet triggered by a "Sections" header button, with Escape-to-close, body scroll-lock, and the background marked `inert` while open (mirrors the pause-overlay pattern).
 - Focus-visible ring: global `:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }` in `app/globals.css` — added specifically because all three researched government design systems (see below) treat visible focus as non-negotiable.
 - Answer correctness in review mode is shown by **both color AND a text label** ("Correct answer" / "Your answer") — never color alone (WCAG requirement, was a real bug, fixed in PR #6).
+- **Design tokens and motion (v2.3.0).** `app/globals.css` is the single source for both. Three things there are load-bearing and easy to undo by accident:
+  - **`--focus-ring` is NOT `--accent`.** `outline-offset: 2px` draws the ring on the element's PARENT surface, so it must clear 3:1 against every surface a control can sit on. Raw `--accent` measured 2.60:1 on the dark panel and 2.25:1 on `--panel-hover`, and **1.00:1 on the home page's accent hero band — no focus indicator at all on the site's two primary CTAs.** `--focus-ring` derives from `--accent-text`, which clears 3:1 everywhere for both exams. Accent-filled surfaces carry `.on-accent`, which flips the ring to `--accent-foreground`. **Like `--accent-text`, it must be re-declared on `.exam-theme`** — a custom property containing `var()` resolves at the element that DECLARES it, so a `:root`-only declaration would leave every GMAT page focus-ringing in NMAT green.
+  - **Motion tokens are `--ease-standard` / `--ease-enter` / `--ease-exit` / `--ease-page`,** exposed as Tailwind utilities through the `--ease-*` namespace, and Tailwind's own default transition curve is retuned at the root. The values are Material 3's, which is the only design system this project follows that publishes motion at all — USWDS, Canada.ca and SGDS ship color/type/spacing and stop. **Apple publishes principles and no numbers, so do not attribute a duration or a bezier to it.** Rules: animate `transform`/`opacity`/`filter` only, never `width` or any layout property; enter with `--ease-enter` and leave faster with `--ease-exit`; stay under 300ms unless the distance traveled is large.
+  - **Press feedback is `scale`, never `opacity`.** Fading an accent fill toward the page erodes the text contrast the tokens exist to guarantee. Before v2.3.0 there were ZERO `:active` states in the app — fifty hover affordances and no press feedback, on a product whose audience is mostly touch, where `:hover` does not exist at all.
+  - `.btn` / `.btn-primary` / `.btn-secondary` exist because the primary button was written out byte-for-byte in **seven** files and the secondary in six, which is exactly why their motion had drifted apart. Add a button variant there, not at a call site.
+  - `prefers-reduced-motion` is a global net that collapses durations rather than four hand-placed classes (which meant anything added later was unguarded by default). It cannot reach JS-driven motion, so `lib/motion.ts` supplies `scrollBehavior()` for `scrollIntoView`.
 - Design philosophy: the user explicitly asked to model UI conventions on **first-world government websites (US/Canada/Singapore)** — USWDS, Canada.ca (GC Design System), Singapore's SGDS — researched live via WebSearch. Applied *principles* (restraint, accessibility, clear typographic hierarchy, minimal functional-only motion, visible focus states, 44px tap targets) rather than a visual reskin. Explicit user instruction: **"don't go for anything too fancy."** Do not redesign colors/spacing/typography wholesale without being asked again.
 - Attempt state is **session-scoped and never resumed silently** (v1.6.0). The quiz shows a banner distinguishing resumed / already-submitted / expired attempts, each with a Retake action, and `components/SessionResetNotice.tsx` on the section-select page warns that progress is cleared when the tab closes, lists sections holding saved work, and offers "Clear saved progress". If you touch this area, keep the invariant: **any state restored from a previous visit must be stated in the UI.**
+- **The timer is announced, not just colored** (v2.3.0). It carries a polite
+  live region that speaks at 10, 5 and 1 minutes; before that it was a plain div
+  with no role, so a screen-reader user got no warning of any kind before the
+  section submitted itself under them. The digits are `aria-hidden` so the clock
+  is not re-announced every second. Five minutes also changes the color, because
+  the old sixty-second threshold is very late for a visual warning too.
 - Timer (`components/Timer.tsx`): **deadline-based, not tick-counted.** As of v1.6.0 the deadline is owned by the quiz page and persisted (prop `endAt`, not `minutes`), so a reload resumes the same clock instead of granting a fresh section. Pausing persists `pausedAt` so a reload while paused doesn't charge the user for time spent paused; resuming reports the shifted deadline back via `onDeadlineChange`. It computes remaining time from `Date.now()` vs. a stored deadline on every tick, not by decrementing a counter — this was a real bug fix (browsers throttle `setInterval` in backgrounded tabs, which used to silently grant free exam time). Pause shifts the deadline forward by the paused duration. Has a `visibilitychange` listener for immediate correction on tab refocus. If you touch this file, do NOT reintroduce `Date.now()` calls inside the render body — React's `react-hooks/purity` lint rule will fail the build; deadline initialization must happen inside a `useEffect`.
 
 ## Known issues already fixed (context for why the code looks the way it does)
@@ -100,9 +120,20 @@ document for two releases and sent readers looking for files that were gone.
 7. **Sub-44px tap targets** on PauseOverlay's Resume button, ThemeToggle, header buttons — bumped to 44px (accessibility minimum).
 8. **Color-only correctness indicator** — fixed with text markers (see above).
 9. **`MobileNavSheet` had no focus trap/Escape/scroll-lock** when first built — I (the agent) caught this myself in a follow-up self-review after background review agents hit the session's API rate limit mid-task. Fixed before merging.
-10. Two pre-existing lint false-positives were cleaned up (`ThemeToggle`'s `react-hooks/set-state-in-effect`, `ThemeInitScript`'s `@next/next/no-before-interactive-script-outside-document` — both are legitimate patterns the lint rules don't account for; each has an inline `eslint-disable` comment explaining why).
+10. **Focus never returned to the control that opened an overlay**, though both PauseOverlay and ConfirmDialog contained a comment saying it did (fixed v2.3.0). They captured `document.activeElement` inside their open effect — but React applies every DOM mutation for a commit BEFORE running passive effects, and the commit that opens either overlay is the same commit that marks the runner `inert`. A focused element becoming inert resets focus to `<body>`, so both were faithfully restoring focus to `<body>`. It looked correct, and it genuinely IS correct on the exam-setup page, which marks nothing inert — which is how it survived review. **`lib/last-focused.ts` tracks `focusin` instead**, since focus moving away fires `focusout`, so the trigger survives the inert reset. A layout effect does not help; mutations still run first.
+11. **`MobileNavSheet` had no focus trap, no dialog role and no focus management** (fixed v2.3.0) — despite item 9 above recording all of it as fixed. Only Escape and the scroll lock ever landed. The "Sections" button is inside the `inert` wrapper, so opening the sheet dropped focus to `<body>` and Tab then walked the site header, i.e. the page behind an `aria-modal` dialog, before ever reaching the sheet.
+12. Two pre-existing lint false-positives were cleaned up (`ThemeToggle`'s `react-hooks/set-state-in-effect`, `ThemeInitScript`'s `@next/next/no-before-interactive-script-outside-document` — both are legitimate patterns the lint rules don't account for; each has an inline `eslint-disable` comment explaining why).
 
 ## PR/version history (what shipped, in order)
+
+- **PR #21** (v2.3.0) — the full-department audit: six parallel review lanes (logic,
+  visual design/motion, security, question-bank content, new-user UX, performance)
+  followed by fixes. Three wrong answer keys; the 96% middle-two exploit; a focus
+  ring that was invisible on the home page's primary CTAs; focus restoration that
+  had never worked inside the quiz; security headers and the auth kill switch;
+  KaTeX code-split off two sections that contain no math; the 36-card re-render per
+  click; the dark-mode flash. Details are in the relevant sections above rather than
+  here. New standing tools: `npm run audit:bank` and `.githooks/pre-commit`.
 
 - `e824c05` (v1.0.1) — established the semver + branch/PR workflow itself.
 - `c1fc6be`/`643e08e` (v1.1.0) — UI redesign: theme system, sidebar nav, resumable sessions.
@@ -121,6 +152,22 @@ document for two releases and sent readers looking for files that were gone.
 
 - **PR #20** (v2.2.0) — the on-screen calculator for GMAT Data Insights, plus explicit "no calculator here" copy on the sections that grant none. The engine is a pure reducer asserted by `verify:engine`. Review established that the real device is an emulated TI-108, which invalidated four details the first implementation had guessed at or imported from the pre-Focus calculator. Full detail in "The on-screen calculator" below; read it before touching either file.
 - **PR #18** (v2.1.0) — the accounts backend: Neon Postgres, Drizzle with committed migrations, better-auth email/password, one dynamic API route. No user-facing change; there is still no sign-in UI and no route requires a session. Full detail in "THE ACCOUNTS BACKEND" below, including two config options that better-auth silently ignored.
+
+## Known non-issue: NMAT has THREE sections, and this is correct
+
+A review lane reported that "mirrors the real exam: 108 questions across 3
+independently-timed sections" is an overclaim, on the grounds that NMAT Part I
+has four subtests (Verbal, Inductive Reasoning, Quantitative, Perceptual
+Acuity). **That is a different exam.** Those are the sections of the Philippine
+*National Medical* Admission Test. This app targets **NMAT by GMAC**, the
+graduate management admissions test, whose Official Guide 2021 uses exactly
+Language Skills, Quantitative Skills and Logical Reasoning.
+
+Checked against the reference guide before changing anything: "Language Skills"
+appears 14 times, "Quantitative Skills" 13, "Logical Reasoning" 20, and
+"Perceptual Acuity" and "National Medical" **zero**. The two exams share a name
+and a country and nothing else. Expect this to be raised again; the copy is
+right and should not be softened.
 
 ## Known non-issue: the answer-key distribution
 
@@ -167,6 +214,16 @@ The contract is `lib/exams/types.ts`. The crucial idea is that an exam declares 
 
 Files: `lib/exams/{types,registry}.ts`, `lib/exams/{nmat,gmat}/index.ts`, `lib/question-bank.ts` (lazy per-section loading), `lib/adaptive.ts`, `lib/scoring.ts`, `components/quiz/{useAttempt.ts,FreeFormRunner.tsx,SequentialRunner.tsx,shared.tsx}`, `app/[examId]/quiz/[section]/page.tsx` (a shell that picks a runner).
 
+Small shared modules added in v2.3.0, each existing because the same bug was about to be fixed at three call sites:
+
+| Path | What it is |
+| --- | --- |
+| `lib/last-focused.ts` | Tracks `focusin` so overlays can return focus to their trigger. Read the note in the file before replacing it with `document.activeElement`, which is what it exists to correct. |
+| `lib/motion.ts` | `prefersReducedMotion()` / `scrollBehavior()`, for motion CSS cannot reach — a `scrollIntoView` option has to be chosen at the call site. |
+| `components/MathSpan.tsx` | The KaTeX boundary. Dynamically imported by `MathText`, and the ONLY place `react-katex` and `katex.min.css` are referenced. |
+| `scripts/audit-bank.mjs` | `npm run audit:bank`. See "Answer-key statistics". |
+| `.githooks/pre-commit` | Blocks staging copyrighted material or a credential. Needs `git config core.hooksPath .githooks` once per clone. |
+
 `useAttempt` holds ALL attempt state for every exam: storage, timing, pause, expiry, the section lock, adaptive serving, scoring, the review pass. Runners are presentation only.
 
 ### Question banks are now lazily loaded per section
@@ -180,6 +237,24 @@ Files: `lib/exams/{types,registry}.ts`, `lib/exams/{nmat,gmat}/index.ts`, `lib/q
 ### GMAT specifics
 
 GMAT Focus: Data Insights 20q, Quantitative 21q, Verbal 23q, 45 minutes each, 64 questions, 205-805. Verbal has NO sentence correction; Quantitative has NO geometry; Data Sufficiency belongs to **Data Insights**, not Quantitative. Bank is a **90-question seed** (30 per section, 10 per difficulty), not a finished bank: a perfect run exhausts the ten hard questions and falls back to medium.
+
+**Known GMAT fidelity gaps, recorded rather than papered over.** The seed bank
+approximates several things the real exam does differently, and a relabel would
+hide the gap instead of closing it:
+
+- **`gd-005`, `gd-010`, `gd-016` and `gd-026` are tagged Two-Part Analysis but
+  are ordinary single-answer questions.** Real Two-Part Analysis is a two-column
+  table requiring two selections, which the runner cannot render today. Closing
+  this needs a question type and a UI, not a new topic string.
+- **GMAT Verbal items have 4 options; the real exam has 5.** That moves the
+  blind-guess baseline from 20% to 25% and feeds a scoring model calibrated on
+  five.
+- CR stimuli run 18-34 words against a real 60-120, and RC passages 110-121
+  words with 2 questions each against a real 200-350 with 3-4. There are only 4
+  distinct Verbal passages, so a 23-of-30 draw often serves the same one twice.
+- 10 of 25 GMAT CR items use the same "find the alternative cause" template, and
+  that is the same shape of hole that reached 94.7% on NMAT Critical Reasoning
+  before it was measured. It is unmeasured here.
 
 `npm run verify:engine` asserts (and exits non-zero) on the adaptive ladder and both scoring models. It has already caught three real bugs: a perfect attempt scoring 810 on a band whose maximum is 805, difficulty weighting being a no-op, and timing out scoring higher than finishing. **Run it after touching `lib/adaptive.ts` or `lib/scoring.ts`.**
 
@@ -279,27 +354,134 @@ keeps the attempt but wipes a banked memory value.
 - **Per-exam accents must be measured, not picked.** GMAT's first blue was 1.59:1 on the dark background, half of NMAT green's 3.11:1, which made the selected-option ring fainter than the neutral borders around it. `#2563eb` matches NMAT's profile.
 - **Generated copy has to match the rules.** The break bullet claimed Pause implements the exam's timed break budget; nothing enforces one. If a rule has no engine behind it, say what the app actually does.
 
-### Answer-key statistics (re-measure before trusting any claim about these)
+### Answer-key statistics — now enforced by a script, not by this document
 
-The bank has now been hardened against three different "answer without reading" strategies. All three were measured, fixed, and re-measured:
+**Run `npm run audit:bank` rather than trusting any number written here.** Every
+statistical claim this project has made about the bank used to live in this
+section as prose, get doubted, and get re-derived from scratch; one of those
+re-derivations turned out to be a session reading a stale snapshot, and cost a
+full investigation to disprove. `scripts/audit-bank.mjs` exits non-zero when a
+guarantee is breached, so a bias that was solved once cannot quietly return.
+
+It checks the key spread per file, the longest-option heuristic, where the key
+sits among numeric options, KaTeX parseability of every math span, raw control
+characters, duplicate option VALUES (not merely duplicate strings),
+self-containment, option-letter references in explanations, and the difficulty
+mix.
+
+**Options are NEVER shuffled at runtime, and this is the fact the whole section
+turns on.** `lib/question-bank.ts` shuffles which QUESTIONS are drawn for an
+attempt; it has never shuffled the options within one. PR #7's shuffle was a
+one-time mechanical pass over the files. So the stored order is exactly what
+every candidate sees on every attempt, and any slot pattern in the JSON is a
+pattern in the product.
+
+That is why the per-file slot spread is not enough on its own: **a candidate
+practices one topic at a time, and a per-file average hides a loaded topic
+completely.** Measured in v2.3.0, while every per-file number looked healthy:
+Para Forming keyed the LAST option in 8 of 10 questions, so clicking the fourth
+option without reading scored 80% on that topic, and Critical Reasoning: Weaken
+keyed the second in 4 of 4. 281 questions were re-slotted (by swapping two
+entries in `options`, so every keyed VALUE is provably unchanged), and
+`audit:bank` now fails on any topic where one slot holds more than 50% of the
+keys. Data Sufficiency is exempt and must stay exempt: its five options are a
+fixed memorized order on the real exam.
+
+Five "answer without reading" strategies have been measured, fixed and
+re-measured. The last two were found in v2.3.0 and were by far the strongest:
 
 | Strategy | Before | After | Chance |
 | --- | --- | --- | --- |
-| Always pick slot 1 | 25.0% (already fine since PR #7) | 25.3% | 25% |
-| Pick the longest option (prose questions) | 47% overall; **94.7% on Critical Reasoning**, 75% on Reading Comprehension | **14.7%** overall, 0% on CR, 3.6% on RC | 25% |
-| Para Forming: assume the answer starts with Q | 8 of 10 keys opened with Q, 0 with R or S | P3 / Q3 / R2 / S2 | even |
-| Para Forming: pick the majority opening letter | never eliminated the key (10/10) | key is in the plurality 6/10 | mixed |
+| Always pick slot 1 | 25.0% (fine since PR #7) | 25.9% | 25% |
+| Pick the longest option (prose questions) | 47% overall; **94.7% on Critical Reasoning** | **21.2%** overall | 25% |
+| **Cross off the largest and smallest number, guess between the other two** | **96.0%** | **59.5%** | 50% |
+| **Click the same slot every time, within one topic** | **100%** on Weaken, **80%** on Para Forming | max 40% on any topic | 25% |
+| Para Forming: assume the answer starts with Q | 8 of 10 keys opened with Q | P3 / Q3 / R2 / S2 | even |
 
-Data Sufficiency was also restored to **canonical A-E statement order** (PR #7's bank-wide option shuffle had scrambled all 11, which trains the wrong habit since real DS uses a fixed memorized order), and rebalanced from "both together" being correct 5 of 11 times to 2/2/3/2/2 across A-E. Two questions were rewritten to achieve that: `qs-036` now hinges on the $(l+w)^2$ identity so statement (1) alone suffices, and `qs-095` is now genuinely insufficient even combined.
+The middle-two finding is worth understanding rather than just recording,
+because its cause is a habit any future author will share: building distractors
+by nudging the correct value up AND down brackets it structurally. A candidate
+who read nothing scored 48% across the entire numeric portion of both exams. The
+fix moved 42 keys to an extreme, **alternating direction** — pushing them all one
+way would simply have minted "always pick the largest", which is why the audit
+tracks both extremes separately, each against its own 25% baseline.
 
-**If you add Critical Reasoning, Reading Comprehension, or Para Forming questions, check these numbers again.** The natural way to write a CR question is a long, carefully-hedged correct answer next to three short dismissive distractors, which is exactly how the 94.7% happened.
+Two questions are knowingly left as middle-key hits, and this is not an
+oversight: `qs-073`'s answer is a count of 2 drawn from 0-4, and `qs-079`'s is
+the middle of five plotted years, so no four-option set can place either at an
+extreme without rewriting the prompt. **They were briefly "fixed" by writing the
+options as "2 students" and "Year 2021", which did not remove the bias — it
+removed the questions from the audit's numeric pool.** The parser now strips any
+leading or trailing unit word specifically so that dodge cannot work, and it
+consequently sees 131 numeric questions where a narrower one saw 99.
+
+**A mechanical fix for one bias can mint another, and this one did.** The
+re-slotting script's round-robin restarted at slot 0 for every topic, so every
+topic with fewer than four questions fed only the low slots -- and a
+30-question GMAT bank is mostly small topics. Bank-wide "always pick A" went
+from 25.6% to **33.1%**, and GMAT Quantitative to **56.7%** (17 of 30, six
+consecutive at one point). That is a bigger hole than the per-topic clustering
+the pass was closing, and it undid a property already fixed twice, in PR #7 and
+PR #14. The counter now runs ACROSS topics within a file rather than resetting.
+
+**The audit did not catch it, and that hole is worth remembering too:** the
+per-file slot check skipped files under 100 questions, on the reasoning that a
+sample of 30 is too noisy to judge. "Too small to judge precisely" is not "too
+small to judge at all". The band now widens for small files instead of
+disappearing, and the fix was verified by running the new audit against the
+committed regressed bank and watching it fail.
+
+Two rules fall out of this for any future bank-wide mechanical pass:
+1. **Snapshot `id -> options[correctIndex]` before, compare after.** Both
+   re-slot passes did, which is the only reason "no answer key moved" is a fact
+   here rather than a hope.
+2. **Re-measure EVERY statistic afterwards, not just the one you set out to
+   move.** The pass fixed its target metric and broke a neighboring one, and
+   both were already in the audit.
+
+Data Sufficiency remains in **canonical A-E statement order** (PR #7's bank-wide
+option shuffle had scrambled all 11, which trains the wrong habit, since real DS
+uses a fixed memorized order). `gd-004` was re-keyed from A to E in v2.3.0.
+
+**If you add Critical Reasoning, Reading Comprehension, Para Forming, or any
+numeric question, run the audit.** The natural way to write a CR question is a
+long, carefully-hedged correct answer beside three short dismissive distractors,
+which is exactly how the 94.7% happened.
+
+### Three wrong answer keys, found in v2.3.0
+
+All three were in `data/questions/gmat/data-insights.json`, and in all three the
+**explanation already contained the correct reasoning while `correctIndex`
+disagreed with it.** That disagreement is the signature to grep for:
+
+- `gd-004` keyed "statement (1) alone is sufficient" on the false claim that 11
+  is the only prime between 10 and 14. 13 is also prime, and also odd, so the
+  statements are insufficient even together. Re-keyed to E. The range was
+  deliberately not narrowed to rescue the old answer, because "two values fit,
+  so it is not sufficient" is the better Data Sufficiency lesson.
+- `gd-005` keyed 20 dollars, the notebook subtotal, not the 32 dollar total.
+- `gd-016` keyed 50 dollars, the hourly rate, where the question asks for the
+  40 dollar fixed fee.
+
+`gq-029` separately offered `6/36` and `1/6` as two different options. They are
+the same number, so a student who double-counted (4,4) found their wrong answer
+listed twice.
+
+**A trap for whoever edits the bank next, which cost real time here:** writing an
+edit script through a shell heredoc can collapse a doubled backslash, after which
+JSON reads the survivor as an escape and every LaTeX times-operator becomes a
+literal TAB followed by "imes". Eight spans were corrupted this way mid-pass. The
+`$` delimiters stay balanced and **KaTeX still parses the result happily**, since
+"imes" is just variables, so only the raw control-character check caught it.
+Write bank edits from a real script file, never a heredoc.
 
 ### Open items (originally logged in PR #13; struck-through ones are since closed)
 
 1. ~~The whole 300-question bank ships to the client on every page.~~ **CLOSED in v2.0.0** by per-section dynamic imports in `lib/question-bank.ts`, plus persisting the score as `StoredProgress.summary` so the breakdown never needs the bank.
 2. ~~The correct option is systematically the longest; Data Sufficiency lost canonical order; Para Forming always opens with P or Q.~~ **CLOSED in PR #14 (v1.12.0)** — see the Answer-key statistics table above for the before/after numbers.
-3. **Six specific question defects**: `ls-055` (two defensible answers), `lr-072` (offers "opposite A" in a five-seat circle), `ls-063` (explanation says a cobbler *makes* shoes), `ls-101` ("abundant with" is not idiomatic), `ls-045`, `qs-030`. Zero wrong keyed answers across all 300.
-4. `ProgressTracker` cells are 28px, under the 44px minimum the rest of the app holds to.
+3. ~~**Six specific question defects**: `ls-055`, `lr-072`, `ls-063`, `ls-101`, `ls-045`, `qs-030`.~~ **CLOSED in v2.3.0.** All six were re-checked against the files on disk and **all six had already been fixed** by earlier passes without this list being updated. `lr-072` no longer offers an "opposite" option and its puzzle was brute-forced as uniquely solvable; `ls-055` has exactly one part-to-whole match; `ls-063`'s explanation says a cobbler *works on* shoes; `ls-101` is now a vocabulary item that does not contain the phrase; `ls-045` and `qs-030` were verified correct. **The lesson is about the list, not the questions:** a stale to-do that reads as an open defect costs the next reader an investigation each time. Re-verify before re-reporting.
+   The v2.3.0 audit did find three genuinely wrong keys, all in GMAT Data Insights — see "Three wrong answer keys" above.
+4. ~~`ProgressTracker` cells are 28px.~~ **CLOSED in v2.3.0** — 36px, with the sidebar widened `w-56` to `w-72` to fit (6 x 36px + 5 x 6px gaps = 246px inside a 254px content box). Still under the app's 44px floor, and deliberately: 36 cells at 44px do not fit any column width this layout can give them, and 36px clears WCAG 2.5.8 comfortably.
 5. `ConfirmDialog` styles the confirming action as a red outline and the cancel as solid green. A reviewer called this inverted; it is a **documented deliberate choice** from an earlier PR (green = keeps your work). Left alone pending a decision.
 
 
@@ -437,12 +619,35 @@ authentication attempt is a sequential scan.
 
 Documented rather than fixed, in rough priority order:
 
-1. **No rate limiting that survives a cold start.** `/api/auth/sign-up/email` is
-   publicly reachable and effectively unmetered across instances.
+1. ~~**No rate limiting that survives a cold start.**~~ **MITIGATED, not solved, in
+   v2.3.0.** The account endpoints now 404 unless `AUTH_ROUTES_ENABLED=1`, which is
+   what actually protects the database today, and explicit `rateLimit` rules were
+   added (3 sign-ups/hour, 10 sign-ins/5min) in place of the library's uniform
+   100-per-10s. **The storage is still per-instance memory and dies on every cold
+   start, so cross-instance rate limiting remains ABSENT.** Turning the routes on
+   without solving that re-opens the original hole.
+   Why it mattered more than it looked: with no sign-in UI and no users, the risk
+   was never account compromise. It was that `/api/auth/sign-up/email` was an
+   anonymous unmetered write into the ONLY database, which is production, has no
+   staging copy and no backup — and enough Vercel invocations make the Hobby plan
+   pause the whole project, taking the exam site down with it. better-auth's origin
+   check only fires on cookie-bearing requests, so a scripted POST is never
+   origin-checked at all.
 2. The orphaned-user window described above.
-3. **No CSP or security headers yet.** `frame-ancestors` must ship in the same PR as
-   the first sign-in form, not in a later "headers phase," or the form is
-   clickjackable the day it appears.
+3. ~~**No CSP or security headers yet.**~~ **CLOSED in v2.3.0.** `next.config.ts` was
+   an empty object; it now sets CSP, HSTS (production only, deliberately without
+   `preload`), `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy` and
+   `Permissions-Policy`, and drops the `X-Powered-By` banner. `frame-ancestors 'none'`
+   is therefore in place BEFORE the first sign-in form exists, which was the point.
+   **`script-src` keeps `'unsafe-inline'` and this is a measured decision, not an
+   oversight** — Next serializes each page's React Flight payload into inline scripts
+   whose contents change every build, so hashes are unmaintainable, and a nonce needs
+   middleware, which would force every page out of static prerendering and break the
+   one-dynamic-route invariant. Under CSP2+ any hash or nonce silently VOIDS
+   `'unsafe-inline'`, so the two cannot be combined as a fallback. When the sign-in UI
+   ships, add a `middleware.ts` matched to the auth routes only and give those
+   responses a nonce plus `'strict-dynamic'`; they must be uncacheable anyway, so the
+   static pages keep their prerender.
 4. 30-day sliding sessions with no UI to revoke them. The endpoints already exist
    behind the catch-all route; only the interface is missing. Ship the session list
    with the first auth UI, or shorten `expiresIn` to 7 days until it exists.
@@ -467,6 +672,11 @@ this project does not have. Two consequences for the UI:
 
 During PR #7, three background content-editing agents were dispatched in parallel, all targeting `data/questions/language-skills.json` (different topics: Para Forming, Sentence Completion, Reading Comprehension/Vocabulary). They collided — each did a full-file read-modify-write, and whichever wrote last silently clobbered the others' work (and my own direct edits made in between). This wasn't caught by any agent's self-report; only independent verification (re-reading the file fresh and checking against expected state) caught it. Recovery required resuming each agent serially (one at a time, waiting for full completion + verification before starting the next) rather than trying to merge divergent edits.
 
+**The rule held up in v2.3.0, and the shape of what happened is worth recording.** Four content agents ran in parallel against four DIFFERENT bank files, which is allowed and worked. Two things still came out of it:
+
+- One agent noticed edits in its file that were not its own (mine, made before it started) and correctly flagged them as a possible concurrent-write collision rather than silently overwriting them. Its full read-modify-write preserved them. **That flag is the behavior you want** — but note it could not tell "an edit made before I started" from "an edit made while I was running", and neither can you after the fact. Only the ordering saved it.
+- An agent reported success on work that was silently corrupted: a shell heredoc collapsed a doubled backslash and turned every LaTeX times-operator into a literal TAB. Its own verification passed, because the `$` delimiters stayed balanced and KaTeX parses the wreckage happily. **A second agent's warning and an independent mechanical check caught it, not the agent's self-report.** Never treat an agent's "verified, all checks pass" as verification of anything the checks do not actually cover.
+
 **Rule going forward: never dispatch more than one agent with write access to the same file at the same time.** If multiple content edits are needed on one file, either do them yourself sequentially, or dispatch agents one at a time and verify each one's result against the actual current file state before starting the next. This is the same class of near-miss documented elsewhere in this file (the `git mv` question-bank-relocation near-miss) — concurrent writers to shared state in this repo have bitten this project twice now.
 
 Stale local+remote branches from already-merged PRs still exist and were NOT cleaned up (not destructive, left for the user to decide): `chore/versioning-workflow`, `feature/question-bank-expansion-and-random-draw`, `feature/ui-theme-and-navigation`, `feature/batch-ux-content-overhaul`, `feature/gov-design-polish`, `feature/gov-design-typography`. Safe to delete (all merged), but ask before doing so since it's a git-history-visible action.
@@ -476,6 +686,34 @@ Stale local+remote branches from already-merged PRs still exist and were NOT cle
 The PDF-answer-key review loop mentioned in earlier versions of this doc is **closed** — the user came back with a feedback batch (pause screen copy, transitions, PQRS predictability, topic bunching, RC overload, weak distractors, a specific modifier-question bug, progress-grid coloring) and all of it shipped in PR #7 (v1.5.0), see above. No PDF-review open loop remains as of this writing.
 
 If asked to regenerate the answer-key PDF in the future: one-off Node script (`data/questions/*.json` → self-contained HTML using local KaTeX assets from `node_modules/katex` → headless Chrome `--print-to-pdf`, no new npm dependencies needed). Pattern: build HTML with `renderMathInElement` from `node_modules/katex/dist/contrib/auto-render.min.js`, then `"C:\Program Files\Google\Chrome\Application\chrome.exe" --headless --disable-gpu --no-pdf-header-footer --print-to-pdf=<out>.pdf <file>.html`. Not committed to the repo (it's a report generator, not app code).
+
+## Verifying UI work in a browser (two traps that produce confident wrong answers)
+
+There is no browser MCP wired into this repo. The v2.3.0 pass drove real
+headless Chrome over the DevTools Protocol with a ~60-line zero-dependency
+driver (Node's global `WebSocket` plus `/json/list`), which is worth rebuilding
+rather than trusting inspection. Two mistakes were made and corrected while
+doing it, and both LOOK right:
+
+1. **`element.focus()` from script does not make `:focus-visible` match.**
+   Chrome gates that pseudo-class on interaction heuristics, so
+   `getComputedStyle(el).outlineColor` silently falls back to the element's own
+   `currentColor`. This produced a confident "5.30:1 PASS" on a white-text
+   button and an equally confident "1.00:1 FAIL" on a green-text one, neither of
+   which measured a focus ring at all. Dispatch a real `Tab` via
+   `Input.dispatchKeyEvent` and assert `el.matches(':focus-visible')` before
+   measuring anything.
+2. **These colors resolve as `oklab(...)`, because the theme derives them with
+   `color-mix`.** Scraping numbers out of that string strips the minus signs and
+   then treats oklab components as if they were 0-255 sRGB. Let the browser
+   resolve them: paint into a 1x1 canvas over the page background and read the
+   pixel back, which also composites translucent surfaces to what the eye sees.
+
+Also worth knowing: `npm run start` fails with `EADDRINUSE` if a previous server
+is still bound, and **the old server keeps answering**, so screenshots silently
+show a stale build. On Windows, `pkill -f next-server` does not work; find the
+PID with `netstat -ano | grep :3000` and `taskkill //PID <pid> //F`. A "fix"
+that appears not to have applied is usually this.
 
 ## Environment quirks worth knowing
 

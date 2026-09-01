@@ -81,7 +81,7 @@ export default async function Home() {
         }}
       />
 
-      <Hero examCount={availableCount} totalBank={totalBank} />
+      <Hero exams={AVAILABLE_EXAMS} totalBank={totalBank} />
 
       <StatBand
         stats={[
@@ -103,12 +103,20 @@ export default async function Home() {
 
 /* ------------------------------------------------------------------ hero -- */
 
-function Hero({ examCount, totalBank }: { examCount: number; totalBank: number }) {
+function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) {
+  // Named, not counted. A visitor who already knows they want the NMAT could not
+  // tell from anything above the fold that this site covers it: the headline
+  // names no exam, the eyebrow said "graduate admissions practice", and the
+  // subhead said "2 exams". The only occurrence of either name was in the nav.
+  const names = exams.map((e) => e.shortLabel).join(" and ");
   return (
     // The one saturated surface on the site, and deliberately the ROOT accent
     // rather than an exam's: this page sits above every exam, so borrowing one
     // exam's color here would make the platform look like it belongs to it.
-    <section className="relative overflow-hidden bg-accent text-accent-foreground">
+    // `on-accent` flips --focus-ring to the accent's own foreground. Without it
+    // the ring is accent-on-accent: 1.00:1, i.e. no focus indicator at all on
+    // the two primary calls to action of the entire site.
+    <section className="on-accent relative overflow-hidden bg-accent text-accent-foreground">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/0 via-black/10 to-black/30"
@@ -117,32 +125,56 @@ function Hero({ examCount, totalBank }: { examCount: number; totalBank: number }
         <p className="text-xs font-semibold tracking-widest uppercase opacity-90">
           Graduate admissions practice
         </p>
-        <h1 className="mx-auto mt-4 max-w-3xl text-3xl leading-tight font-bold sm:text-4xl md:text-5xl">
+        <h1 className="mx-auto mt-4 max-w-3xl text-3xl leading-tight font-bold text-balance sm:text-4xl md:text-5xl">
           Sit the real thing before you sit the real thing.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed opacity-90 sm:text-lg">
-          {examCount === 1 ? "One exam" : `${examCount} exams`}, each built to its own published
-          format: real section timings, {totalBank.toLocaleString("en-US")} questions written by
-          hand, and a written explanation waiting behind every single answer. No sign-up, no
-          paywall.
+          Full-length timed practice for the <strong className="font-semibold">{names}</strong>,
+          each built to its own published format: real section timings,{" "}
+          {totalBank.toLocaleString("en-US")} questions written by hand, and a written explanation
+          waiting behind every single answer. No sign-up, no paywall.
         </p>
 
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
             href="#exams"
-            className="flex min-h-12 w-full items-center justify-center rounded-lg bg-accent-foreground px-7 text-sm font-semibold text-accent transition hover:opacity-90 sm:w-auto"
+            className="flex min-h-12 w-full items-center justify-center rounded-lg bg-accent-foreground px-7 text-sm font-semibold text-accent transition hover:opacity-90 active:scale-[0.98] sm:w-auto"
           >
             Choose your exam
           </Link>
           <Link
             href="#how-it-works"
-            className="flex min-h-12 w-full items-center justify-center rounded-lg border border-current px-7 text-sm font-semibold transition hover:bg-black/15 sm:w-auto"
+            className="flex min-h-12 w-full items-center justify-center rounded-lg border border-current px-7 text-sm font-semibold transition hover:bg-black/15 active:scale-[0.98] sm:w-auto"
           >
             See how it works
           </Link>
         </div>
 
-        <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-xs font-medium opacity-80 sm:text-sm">
+        {/* Direct routes, deliberately quieter than the two buttons above.
+            Both of those scroll rather than navigate, so a visitor who arrived
+            already knowing which exam they wanted had nothing to click — but
+            they are still the primary action, so these sit underneath as text
+            rather than competing as a second row of buttons. */}
+        <p className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm opacity-90">
+          <span>Already know which one?</span>
+          {exams.map((exam, i) => (
+            <span key={exam.id} className="flex items-center gap-2">
+              {i > 0 && (
+                <span aria-hidden className="opacity-60">
+                  &middot;
+                </span>
+              )}
+              <Link
+                href={`/${exam.id}`}
+                className="inline-flex min-h-11 items-center rounded font-semibold underline underline-offset-4 transition hover:opacity-80"
+              >
+                Practice the {exam.shortLabel}
+              </Link>
+            </span>
+          ))}
+        </p>
+
+        <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-xs font-medium opacity-80 sm:text-sm">
           <li>Real section timings</li>
           <li aria-hidden>&middot;</li>
           <li>Every answer explained</li>
@@ -220,7 +252,7 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
                   <div className="flex flex-wrap items-center gap-2">
                     <h3 className="text-lg font-semibold text-foreground">{exam.label}</h3>
                     {!exam.available && (
-                      <span className="rounded-full bg-panel-hover px-2 py-0.5 text-[11px] font-medium text-muted">
+                      <span className="rounded-full bg-panel-hover px-2 py-0.5 text-xs font-medium text-muted">
                         Coming soon
                       </span>
                     )}
@@ -257,7 +289,7 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
 
               <Link
                 href={`/${exam.id}`}
-                className="mt-6 flex min-h-11 items-center justify-center rounded-lg px-4 text-sm font-semibold transition hover:opacity-90"
+                className="mt-6 flex min-h-11 items-center justify-center rounded-lg px-4 text-sm font-semibold transition hover:opacity-90 active:scale-[0.98]"
                 style={{ backgroundColor: exam.theme.accent, color: exam.theme.accentForeground }}
               >
                 {exam.available
@@ -516,7 +548,7 @@ function Faq({ faqs }: { faqs: FaqEntry[] }) {
               key={faq.q}
               className="group rounded-lg border border-line bg-panel px-5 open:pb-5"
             >
-              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-foreground marker:content-none">
+              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 rounded-lg text-sm font-semibold text-foreground transition-colors marker:content-none hover:text-accent-text">
                 {faq.q}
                 <svg
                   aria-hidden
@@ -558,7 +590,7 @@ function ClosingCta() {
         </p>
         <Link
           href="#exams"
-          className="mt-8 inline-flex min-h-12 items-center justify-center rounded-lg bg-accent px-8 text-sm font-semibold text-accent-foreground transition hover:opacity-90"
+          className="mt-8 inline-flex min-h-12 items-center justify-center rounded-lg bg-accent px-8 text-sm font-semibold text-accent-foreground transition hover:opacity-90 active:scale-[0.98]"
         >
           Choose your exam
         </Link>

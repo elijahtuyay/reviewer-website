@@ -69,10 +69,30 @@ export default function SequentialRunner({
   return (
     <div className="flex flex-1 justify-center bg-background">
       <div className="w-full max-w-3xl px-6 py-10 sm:py-16" inert={inert} aria-hidden={inert}>
-        <div className="sticky top-0 z-20 flex h-20 items-center justify-between gap-3 border-b border-line bg-background/95 backdrop-blur">
-          <div className="min-w-0">
+        {/*
+          Below `sm` the title takes its OWN ROW and the controls wrap beneath
+          it. Shrinking the type and shortening the buttons was not enough and
+          could not have been: on a 320px screen the clock, Pause and the
+          Sections button need most of the row, so any title long enough to
+          matter ("Quantitative Skills" is 141px) has nowhere to go and the h1 of
+          the page you are on renders as "Quant...". Two rows is the honest
+          answer at that width.
+
+          The fixed h-20 is kept from `sm` up, because the sidebar's `top-24`
+          alignment is computed from it -- but the sidebar only exists at `lg`,
+          so nothing depends on the height below that.
+        */}
+        <div className="sticky top-0 z-20 flex min-h-20 flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-line bg-background/95 py-2 backdrop-blur sm:h-20 sm:flex-nowrap sm:py-0">
+          <div className="min-w-0 basis-full sm:basis-auto">
             <BackToSetup examId={exam.id} />
-            <h1 className="mt-1 truncate text-lg font-semibold text-foreground sm:text-xl">
+            {/* text-base below `sm`. The header is a fixed h-20 row shared with
+                the clock and up to two buttons, and at 18px the longest section
+                name ("Quantitative Skills", 158px) could not fit the space left
+                over at 320-390px -- it rendered as "Quant...", the h1 of the
+                page you are on. Shrinking the type and shortening the review
+                buttons below `sm` buys back more than the 5px it was missing
+                by. `truncate` stays as a backstop, not as the mechanism. */}
+              <h1 className="mt-1 truncate text-base font-semibold text-foreground sm:text-lg md:text-xl">
               {section.label}
             </h1>
           </div>
@@ -146,10 +166,24 @@ export default function SequentialRunner({
               would advertise navigation that does not exist. */}
           {!reviewMode && !inReviewPass && (
             <div className="mb-6">
-              <div className="h-1.5 w-full overflow-hidden rounded-full bg-panel-hover">
+              {/* scaleX on a full-width child, not an animated `width`.
+                  Animating width runs layout and paint on every frame of every
+                  advance; a transform is composited on its own layer and never
+                  touches layout. transform-origin has to be pinned left or the
+                  bar grows from its center. */}
+              <div
+                className="h-1.5 w-full overflow-hidden rounded-full bg-panel-hover"
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={totalQuestions}
+                aria-valuenow={Math.min(cursor, totalQuestions)}
+                aria-label="Section progress"
+              >
                 <div
-                  className="h-full rounded-full bg-accent transition-[width] duration-300 motion-reduce:transition-none"
-                  style={{ width: `${(Math.min(cursor, totalQuestions) / totalQuestions) * 100}%` }}
+                  className="h-full origin-left rounded-full bg-accent transition-transform duration-300 ease-standard motion-reduce:transition-none"
+                  style={{
+                    transform: `scaleX(${Math.min(cursor, totalQuestions) / totalQuestions})`,
+                  }}
                 />
               </div>
               <p className="mt-2 text-xs text-muted">
@@ -174,7 +208,7 @@ export default function SequentialRunner({
                 question={current}
                 index={cursor}
                 selectedIndex={answers[current.id] ?? null}
-                onSelect={(optionIndex) => select(current.id, optionIndex)}
+                onSelect={select}
                 reviewMode={false}
               />
 
@@ -184,7 +218,7 @@ export default function SequentialRunner({
                     type="button"
                     onClick={() => toggleFlag(current.id)}
                     aria-pressed={flagged.includes(current.id)}
-                    className={`flex min-h-11 items-center justify-center gap-2 rounded-md border px-4 text-sm font-medium transition-colors ${
+                    className={`flex min-h-11 items-center justify-center gap-2 rounded-md border px-4 text-sm font-medium transition-[color,background-color,border-color,transform] active:scale-[0.98] ${
                       flagged.includes(current.id)
                         ? "border-accent bg-accent/10 text-foreground dark:bg-accent/20"
                         : "border-line-strong text-muted hover:bg-panel-hover hover:text-foreground"
@@ -200,7 +234,7 @@ export default function SequentialRunner({
                   type="button"
                   onClick={advance}
                   disabled={!exam.rules.allowSkip && !currentAnswered}
-                  className="flex min-h-11 items-center justify-center rounded-md bg-accent px-6 text-sm font-semibold text-accent-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="flex min-h-11 items-center justify-center rounded-md bg-accent px-6 text-sm font-semibold text-accent-foreground transition hover:opacity-90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100"
                 >
                   {isLastServed ? "Finish section" : "Next question"}
                 </button>
@@ -339,7 +373,7 @@ function ReviewPass({
                 question={question}
                 index={index}
                 selectedIndex={answers[question.id] ?? null}
-                onSelect={(optionIndex) => select(question.id, optionIndex)}
+                onSelect={select}
                 reviewMode={false}
                 lockedReason={
                   locked
@@ -356,7 +390,7 @@ function ReviewPass({
         <button
           type="button"
           onClick={onSubmit}
-          className="w-full rounded-md bg-accent py-2.5 text-sm font-medium text-accent-foreground hover:opacity-90"
+          className="min-h-11 w-full rounded-md bg-accent py-2.5 text-sm font-medium text-accent-foreground transition hover:opacity-90 active:scale-[0.99]"
         >
           Submit section
         </button>

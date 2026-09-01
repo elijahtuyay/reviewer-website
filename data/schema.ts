@@ -33,11 +33,3 @@ export interface Answer {
   questionId: string;
   selectedIndex: number | null;
 }
-
-export interface QuizAttempt {
-  exam: ExamId;
-  section: SectionId;
-  answers: Answer[];
-  startedAt: number;
-  submittedAt: number | null;
-}

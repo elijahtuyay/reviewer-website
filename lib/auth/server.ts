@@ -98,6 +98,33 @@ const options = {
    */
   logger: { level: "warn" },
 
+  /**
+   * Explicit limits, replacing the library default of 100 requests per 10
+   * seconds applied uniformly to every endpoint. Sign-up is the expensive one:
+   * each call is a Vercel invocation plus two writes to the single production
+   * database, and better-auth's built-in path rules cover only the
+   * password-reset and verification-email paths, so sign-up was getting the
+   * generic allowance.
+   *
+   * READ THIS BEFORE RELYING ON IT: the default storage is in-memory, which on
+   * Vercel means per-instance and gone on every cold start. Our own `rate_limit`
+   * table is NOT better-auth's model (it expects `{ key, count, lastRequest }`)
+   * and is not registered with the adapter, so `storage: "database"` would not
+   * pick it up. Treat cross-instance rate limiting as ABSENT, not merely weak.
+   * This raises the cost of a casual script and does nothing against a
+   * distributed one; the route-level kill switch is what actually protects the
+   * database today.
+   */
+  rateLimit: {
+    enabled: true,
+    window: 60,
+    max: 30,
+    customRules: {
+      "/sign-up/email": { window: 3600, max: 3 },
+      "/sign-in/email": { window: 300, max: 10 },
+    },
+  },
+
   emailAndPassword: {
     enabled: true,
     /**

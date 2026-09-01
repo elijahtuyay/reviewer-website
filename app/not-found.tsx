@@ -29,7 +29,7 @@ export default function NotFound() {
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             href="/"
-            className="flex min-h-11 items-center justify-center rounded-md bg-accent px-5 text-sm font-medium text-accent-foreground hover:opacity-90"
+            className="btn btn-primary"
           >
             Back to home
           </Link>
@@ -38,7 +38,7 @@ export default function NotFound() {
           {featured && (
             <Link
               href={`/${featured.id}`}
-              className="flex min-h-11 items-center justify-center rounded-md border border-line-strong px-5 text-sm font-medium text-foreground hover:bg-panel-hover"
+              className="btn btn-secondary"
             >
               Go to {featured.shortLabel} practice
             </Link>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef } from "react";
+import { getLastFocused, restoreFocus } from "@/lib/last-focused";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -55,7 +56,13 @@ export default function ConfirmDialog({
   useEffect(() => {
     if (!open) return;
 
-    const previouslyFocused = document.activeElement as HTMLElement | null;
+    // getLastFocused(), NOT document.activeElement. On the quiz page the commit
+    // that opens this dialog also marks the runner `inert`, and DOM mutations
+    // land before passive effects, so activeElement has already been reset to
+    // <body> and restoring it would be a no-op. See lib/last-focused.ts. (This
+    // read looked correct because it IS correct on the exam-setup page, which
+    // marks nothing inert — which is how it survived review.)
+    const previouslyFocused = getLastFocused();
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     cancelRef.current?.focus();
@@ -80,7 +87,7 @@ export default function ConfirmDialog({
     return () => {
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", handleKeyDown);
-      previouslyFocused?.focus?.();
+      restoreFocus(previouslyFocused);
     };
   }, [open]);
 
@@ -91,8 +98,16 @@ export default function ConfirmDialog({
   // configurable. Every action this dialog guards is irreversible, and a
   // per-call "tone" meant green confirmed one dialog and canceled another a
   // single tap apart, which is worse than either convention on its own.
+  //
+  // The red outline is gone, and this narrows a decision that had been left
+  // open. Keeping the accent on Cancel is deliberate and stays (green = keeps
+  // your work; the confirming action is the irreversible one). But red is the
+  // color this app uses for a WRONG ANSWER, and two independent reviewers read
+  // the confirm button as an error state rather than as the thing they had just
+  // asked for. Submitting a section is irreversible, not a mistake. A neutral
+  // outline keeps the hierarchy without the false alarm.
   const confirmClasses =
-    "border border-red-600 text-red-700 hover:bg-red-50 dark:border-red-500 dark:text-red-400 dark:hover:bg-red-950/40";
+    "border border-line-strong text-foreground hover:bg-panel-hover active:bg-line";
   const cancelClasses = "bg-accent text-accent-foreground hover:opacity-90";
 
   return (
@@ -105,14 +120,14 @@ export default function ConfirmDialog({
         aria-label="Close"
         tabIndex={-1}
         onClick={onCancel}
-        className="absolute inset-0 bg-black/40"
+        className="backdrop-in absolute inset-0 bg-black/40"
       />
       <div
         role="alertdialog"
         aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={bodyId}
-        className="relative max-h-[90vh] w-full max-w-sm overflow-y-auto rounded-lg border border-line bg-background p-5 shadow-lg"
+        className="dialog-in relative max-h-[90vh] w-full max-w-sm overflow-y-auto rounded-lg border border-line bg-background p-5 shadow-lg"
       >
         <h2 id={titleId} className="text-base font-semibold text-foreground">
           {title}
@@ -128,7 +143,7 @@ export default function ConfirmDialog({
             ref={cancelRef}
             type="button"
             onClick={onCancel}
-            className={`flex h-11 items-center justify-center rounded-md px-4 text-sm font-medium ${cancelClasses}`}
+            className={`flex h-11 items-center justify-center rounded-md px-4 text-sm font-medium transition active:scale-[0.98] ${cancelClasses}`}
           >
             {cancelLabel}
           </button>
@@ -136,7 +151,7 @@ export default function ConfirmDialog({
             ref={confirmRef}
             type="button"
             onClick={onConfirm}
-            className={`flex h-11 items-center justify-center rounded-md px-4 text-sm font-medium ${confirmClasses}`}
+            className={`flex h-11 items-center justify-center rounded-md px-4 text-sm font-medium transition active:scale-[0.98] ${confirmClasses}`}
           >
             {confirmLabel}
           </button>

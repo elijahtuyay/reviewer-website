@@ -73,13 +73,13 @@ export function SectionLockScreen({
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             href={`/${examId}/quiz/${blockedBy.sectionId}`}
-            className="flex min-h-11 items-center justify-center rounded-md bg-accent px-5 text-sm font-medium text-accent-foreground hover:opacity-90"
+            className="btn btn-primary"
           >
             Back to {blockedBy.label}
           </Link>
           <Link
             href={`/${examId}`}
-            className="flex min-h-11 items-center justify-center rounded-md border border-line-strong px-5 text-sm font-medium text-foreground hover:bg-panel-hover"
+            className="btn btn-secondary"
           >
             Exam setup
           </Link>
@@ -142,8 +142,14 @@ export function NoCalculatorNote({ exam }: { exam: ExamModule }) {
  * "Langua...", which is the h1 of the page you are on.
  */
 export function BackToSetup({ examId }: { examId: ExamId }) {
+  // inline-flex + min-h/min-w-11: below `sm` this collapses to a bare arrow,
+  // which was a ~20px tap target — on the one viewport where it is the only way
+  // back to the setup page.
   return (
-    <Link href={`/${examId}`} className="text-sm text-muted hover:text-foreground">
+    <Link
+      href={`/${examId}`}
+      className="inline-flex min-h-11 min-w-11 items-center text-sm text-muted transition-colors hover:text-foreground"
+    >
       <span aria-hidden>&larr;</span>
       <span className="ml-1 hidden sm:inline">Exam setup</span>
       <span className="sr-only">Back to exam setup</span>

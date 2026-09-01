@@ -42,3 +42,8 @@ next-env.d.ts
 
 # claude code local-only settings (personal, not shared)
 .claude/settings.local.json
+
+# Copyrighted reference material — calibration reference only, never committed.
+# See PROJECT_CONTEXT.md "Copyright rule". These are third-party books and the
+# user's private notes; an accidental `git add -A` would publish them.
+/internal docs/

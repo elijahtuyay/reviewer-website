@@ -110,7 +110,7 @@ export default function SectionStartButton({
     <div className="mt-5">
       <Link
         href={href}
-        className="flex min-h-11 items-center justify-center rounded-lg bg-accent px-4 text-sm font-semibold text-accent-foreground transition hover:opacity-90"
+        className="flex min-h-11 items-center justify-center rounded-lg bg-accent px-4 text-sm font-semibold text-accent-foreground transition hover:opacity-90 active:scale-[0.98]"
       >
         {label}
       </Link>

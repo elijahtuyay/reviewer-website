@@ -48,6 +48,44 @@
    * re-declares it on the wrapper that carries the override.
    */
   --accent-text: color-mix(in oklab, var(--accent), black 10%);
+  /*
+   * The focus ring, which is NOT --accent.
+   *
+   * `outline-offset: 2px` draws the ring on the element's PARENT surface, not
+   * on the element, so the ring has to clear 3:1 (WCAG 1.4.11) against every
+   * surface a focusable control can sit on. Raw --accent does not: measured
+   * 2.60 on the dark panel (the site header, the calculator popover, the FAQ,
+   * the exam cards) and 2.25 on --panel-hover. Worst of all it is 1.00 against
+   * bg-accent itself, so the two hero CTAs on the home page — the primary call
+   * to action of the whole site — had a literally invisible focus ring.
+   *
+   * --accent-text is already nudged toward the surface's opposite for exactly
+   * this reason and clears 3:1 everywhere for both exams (worst case 4.76).
+   * Reusing it keeps one derived color instead of two.
+   */
+  --focus-ring: var(--accent-text);
+  /*
+   * Motion. See the @theme block below for the easing utilities; these two are
+   * the durations used directly in stylesheets.
+   *
+   * Nothing here was ever a choice before: every bare `transition` in the app
+   * ran at Tailwind's default 150ms / cubic-bezier(0.4, 0, 0.2, 1), which is
+   * Material *2*'s standard curve, superseded by M3's cubic-bezier(0.2, 0, 0, 1).
+   */
+  --duration-page: 320ms;
+}
+
+/*
+ * Scrollbars, native control chrome and the default selection highlight are
+ * painted by the UA from this, not from our tokens. Without it a dark page
+ * renders light scrollbars against #1e1f22.
+ */
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
 }
 
 .dark {
@@ -75,10 +113,29 @@
  */
 .exam-theme {
   --accent-text: color-mix(in oklab, var(--accent), black 10%);
+  /*
+   * --focus-ring is `var(--accent-text)`, and the same substitution rule bites
+   * it: a custom property containing var() resolves at the element that
+   * DECLARES it. Declared only on :root it would stay bound to :root's
+   * --accent-text and every GMAT page would focus-ring in NMAT green. If you
+   * add another accent-derived token, it goes in BOTH places — this pair and
+   * the :root/.dark pair above.
+   */
+  --focus-ring: var(--accent-text);
 }
 
 .dark .exam-theme {
   --accent-text: color-mix(in oklab, var(--accent), white 40%);
+  --focus-ring: var(--accent-text);
+}
+
+/*
+ * Surfaces filled with the accent itself, where an accent-derived ring has
+ * nothing to contrast against (1.00:1). White is 5.30 on NMAT green and 5.17 on
+ * GMAT blue, so the ring flips to the accent's own foreground.
+ */
+.on-accent {
+  --focus-ring: var(--accent-foreground);
 }
 
 @theme inline {
@@ -94,6 +151,35 @@
   --color-accent-text: var(--accent-text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /*
+   * Motion tokens. Tailwind v4 turns the --ease-* namespace into real
+   * utilities, so these are usable as `ease-standard` / `ease-enter` /
+   * `ease-exit` next to the built-in `ease-out`.
+   *
+   * Values are Material 3's published motion tokens, which is the only one of
+   * the design systems this project follows that ships motion at all — USWDS,
+   * Canada.ca and SGDS publish color/type/spacing and stop there. Apple
+   * publishes principles and no numbers, so nothing here is attributed to it.
+   *
+   * Rules the whole app now follows: animate transform/opacity/filter only,
+   * never width or a layout property; enter with --ease-enter, leave with
+   * --ease-exit (leaving is faster than arriving); keep UI motion under 300ms
+   * unless the distance traveled is large.
+   */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --ease-page: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /*
+   * Retunes every bare `transition` in the app in one place. Tailwind's own
+   * defaults are 150ms and Material 2's curve; 150ms is right for the hover and
+   * press feedback that most of those sites are doing, but the curve is a
+   * generation out of date.
+   */
+  --default-transition-duration: 150ms;
+  --default-transition-timing-function: var(--ease-standard);
 }
 
 /*
@@ -116,8 +202,39 @@ body {
  * screen-reader users otherwise lose track of where they are.
  */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
+}
+
+/*
+ * The two button shapes this app actually has.
+ *
+ * The primary ("flex min-h-11 items-center justify-center rounded-md bg-accent
+ * px-5 text-sm font-medium text-accent-foreground hover:opacity-90") was
+ * written out byte-for-byte in SEVEN files, and the secondary in six. That is
+ * why motion was inconsistent: some copies picked up a `transition` at some
+ * point and others never did, so two visually identical buttons a few pixels
+ * apart animated differently. Adding a transition at each call site would have
+ * fixed today's symptom and left the next copy to drift again.
+ *
+ * Press feedback is `scale`, never `opacity`. On an accent fill, fading toward
+ * the page erodes the text contrast this pass spent its time repairing, while a
+ * transform costs nothing and composites. 0.98 over 150ms is the standard
+ * magnitude; it reads on a touchscreen, where :hover does not exist at all and
+ * the app previously acknowledged a tap only by changing state.
+ */
+@layer components {
+  .btn {
+    @apply flex min-h-11 items-center justify-center rounded-md px-5 text-sm font-medium transition active:scale-[0.98];
+  }
+
+  .btn-primary {
+    @apply bg-accent text-accent-foreground hover:opacity-90;
+  }
+
+  .btn-secondary {
+    @apply border border-line-strong text-foreground hover:bg-panel-hover active:bg-line;
+  }
 }
 
 /*
@@ -132,6 +249,104 @@ body {
  * at the source, in components/MathText.tsx, by rendering them in display style.
  */
 
+/*
+ * Dialog entrance. Enter-only on purpose: ConfirmDialog unmounts on close
+ * (`if (!open) return null`), and giving it an exit would mean keeping an
+ * alertdialog in the accessibility tree after the user dismissed it — the
+ * first-mount trap PauseOverlay already documents, but worse, because this one
+ * is an alertdialog. A dismissal wants to be instant anyway; it is the arrival
+ * that needs to be explained.
+ *
+ * 8px rise and a 0.98 scale, not a zoom from zero: the dialog is a surface
+ * appearing above the page, not an object being created.
+ */
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dialog-in {
+  animation: dialog-in 200ms var(--ease-enter);
+}
+
+.backdrop-in {
+  animation: backdrop-in 200ms var(--ease-enter);
+}
+
+/*
+ * Bottom-sheet entrance and exit.
+ *
+ * Keyframes, not a transition, and the reason is worth writing down because the
+ * transition version LOOKED right in the source and did nothing. The sheet is
+ * unmounted while closed (`if (!open && !stillExiting) return null`), so it is
+ * inserted into the DOM already carrying its open classes — a transition has no
+ * previous value to interpolate from and the browser jumps straight to the end
+ * state. Measured: zero intermediate frames on open, fourteen on close. The
+ * exit animated only because the node already existed when `open` flipped.
+ * ConfirmDialog was already right for the same reason: it uses @keyframes.
+ *
+ * translateY(100%), not the 16px the transition version used, which read as a
+ * fade rather than a sheet.
+ */
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes sheet-out {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.sheet-in {
+  animation: sheet-in 300ms var(--ease-enter);
+}
+
+/* `forwards` so the sheet stays off-screen for the rest of the exit window. */
+.sheet-out {
+  animation: sheet-out 200ms var(--ease-exit) forwards;
+}
+
+@keyframes backdrop-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.backdrop-out {
+  animation: backdrop-out 200ms var(--ease-exit) forwards;
+}
+
 /* Apple-style route transition: a quick, gentle fade + rise on every page mount. */
 @keyframes page-fade-in {
   from {
@@ -145,11 +360,30 @@ body {
 }
 
 .page-transition {
-  animation: page-fade-in 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: page-fade-in var(--duration-page) var(--ease-page);
 }
 
+/*
+ * Reduce, don't remove.
+ *
+ * Coverage used to be four hand-placed `motion-reduce:` classes, so anything
+ * added later was unguarded by default — including the largest motion event in
+ * the app, the smooth scroll across a 36-question page when you click a cell in
+ * the progress grid (that one is a JS call and is fixed at its source in
+ * FreeFormRunner, since a media query cannot reach a scrollIntoView option).
+ *
+ * Collapsing durations rather than setting `animation: none` keeps every state
+ * change that a transition was carrying — a selected option still turns accent,
+ * a dialog still appears — while removing the movement, which is what the
+ * preference actually asks for.
+ */
 @media (prefers-reduced-motion: reduce) {
-  .page-transition {
-    animation: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

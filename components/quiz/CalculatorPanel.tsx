@@ -96,6 +96,7 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
   const panelId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
   /** Wraps toggle + panel, so click-outside can ask "did this land on either of us?". */
+  const panelRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
   /**
@@ -139,6 +140,35 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
     setState((current) => press(current, key));
   }
 
+  /**
+   * Keeps --calc-max-h equal to the space actually left below the panel's top
+   * edge. Runs on scroll and resize because both change that distance: scrolling
+   * pins the sticky wrapper (moving the panel UP by the height of everything
+   * above it) and the resume banner changes it again by appearing at all.
+   */
+  useEffect(() => {
+    if (!open) return;
+    const panel = panelRef.current;
+    if (!panel) return;
+
+    function measure() {
+      const el = panelRef.current;
+      if (!el) return;
+      // Read the top from the element's own box, then leave a 1rem gutter so the
+      // last key row is never flush against the bottom of the screen.
+      const top = el.getBoundingClientRect().top;
+      el.style.setProperty("--calc-max-h", `${Math.max(160, window.innerHeight - top - 16)}px`);
+    }
+
+    measure();
+    window.addEventListener("scroll", measure, { passive: true });
+    window.addEventListener("resize", measure);
+    return () => {
+      window.removeEventListener("scroll", measure);
+      window.removeEventListener("resize", measure);
+    };
+  }, [open]);
+
   return (
     // `sticky top-20` parks this directly under the h-20 quiz header once the
     // page scrolls, so the calculator stays reachable through a long
@@ -172,7 +202,7 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
               M
             </span>
           )}
-          <span aria-hidden className={`text-xs text-muted transition-transform ${open ? "rotate-180" : ""}`}>
+          <span aria-hidden className={`text-xs text-muted transition-transform motion-reduce:transition-none ${open ? "rotate-180" : ""}`}>
             ▾
           </span>
         </button>
@@ -208,8 +238,31 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
              * position, not merely awkward. On a 1366x768 laptop that silently
              * swallowed the bottom of the panel, and the explanatory note used
              * to live there.
+             *
+             * The cap is MEASURED, not a constant, and that is the whole point.
+             *
+             * Any hard-coded subtrahend encodes one assumption about how far
+             * down the panel starts, and that distance is not fixed: the sticky
+             * wrapper is only pinned once the page has scrolled, and the resume
+             * banner pushes everything down another ~80px when it is showing.
+             * A constant tuned for the pinned case (the previous 11rem, and the
+             * 7rem before it) is therefore too generous at scrollY 0 — so the
+             * panel overflowed the viewport WITHOUT ever reaching its own cap,
+             * which meant no internal scrollbar appeared to rescue the user and
+             * the "=" key simply sat under the fold. Measured at 1366x768 with
+             * the banner: panel top 357, "=" bottom 779, viewport 768.
+             *
+             * --calc-max-h is written from the element's real bounding box on
+             * scroll and resize, so the panel always stops 1rem above the fold
+             * and scrolls internally past that.
              */
-            className="absolute top-full left-0 z-30 mt-2 flex max-h-[calc(100vh-7rem)] w-60 flex-col overflow-y-auto rounded-lg border border-line-strong bg-panel p-3 shadow-lg xl:-translate-x-[calc(100%+1rem)]"
+            ref={panelRef}
+            style={{ maxHeight: "var(--calc-max-h, calc(100vh - 11rem))" }}
+            // scrollbar-gutter: stable — once the panel scrolls, Chrome paints its
+            // overlay scrollbar across the right-hand key column (ON/C, the
+            // divide and multiply keys read as shaved). Nothing is clipped by
+            // layout, but reserving the gutter keeps the keys fully drawn.
+            className="absolute top-full left-0 z-30 mt-2 flex w-60 flex-col overflow-y-auto rounded-lg border border-line-strong bg-panel p-3 shadow-lg [scrollbar-gutter:stable] xl:-translate-x-[calc(100%+1rem)]"
           >
             <div className="shrink-0 rounded-md border border-line bg-background px-3 py-2 text-right">
               <div className="flex items-center justify-between gap-2">
@@ -242,7 +295,7 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
                 what fits both constraints: the message that stops someone
                 concluding "this calculator is broken" is never more than a
                 glance away, and it costs no keypad space. */}
-            <p className="mt-2 shrink-0 rounded bg-panel-hover px-2 py-1.5 text-[0.7rem] leading-snug text-foreground/90">
+            <p className="mt-2 shrink-0 rounded bg-panel-hover px-2 py-1.5 text-xs leading-snug text-foreground/90">
               <strong className="font-semibold">Not a bug:</strong> runs left to right, so{" "}
               <span className="font-mono whitespace-nowrap">2 + 3 × 4</span> is 20.
             </p>
@@ -258,7 +311,7 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
               <button
                 type="button"
                 onClick={() => handleKey("=")}
-                className="col-span-2 flex h-11 items-center justify-center rounded-md bg-accent text-base font-semibold text-accent-foreground hover:opacity-90"
+                className="col-span-2 flex h-11 items-center justify-center rounded-md bg-accent text-base font-semibold text-accent-foreground transition hover:opacity-90 active:scale-95"
               >
                 <span aria-hidden>=</span>
                 <span className="sr-only">Equals</span>
@@ -273,12 +326,12 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
                 type="button"
                 onClick={() => setDetailsOpen(!detailsOpen)}
                 aria-expanded={detailsOpen}
-                className="flex h-11 items-center text-[0.7rem] font-medium text-accent-text hover:underline"
+                className="flex h-11 items-center text-xs font-medium text-accent-text hover:underline"
               >
                 {detailsOpen ? "Hide" : "Why does it do that?"}
               </button>
               {detailsOpen && (
-                <ul className="flex flex-col gap-1.5 pb-1 text-[0.7rem] leading-relaxed text-foreground/90">
+                <ul className="flex flex-col gap-1.5 pb-1 text-xs leading-relaxed text-foreground/90">
                   <li>
                     It copies the exam&apos;s calculator exactly. There is no order of operations,
                     so for <span className="font-mono whitespace-nowrap">a×b + c×d</span> bank each
@@ -343,7 +396,7 @@ function CalcButton({ spec, onPress }: { spec: KeySpec; onPress: (key: Calculato
     <button
       type="button"
       onClick={() => onPress(spec.key)}
-      className={`flex h-11 items-center justify-center rounded-md border text-sm text-foreground transition-colors hover:bg-panel-hover ${tone}`}
+      className={`flex h-11 items-center justify-center rounded-md border text-sm text-foreground transition-[color,background-color,border-color,transform] hover:bg-panel-hover active:scale-95 active:bg-panel-hover ${tone}`}
     >
       <span aria-hidden>{spec.label}</span>
       <span className="sr-only">{spec.srLabel ?? spec.label}</span>

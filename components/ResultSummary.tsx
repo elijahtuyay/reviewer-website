@@ -22,6 +22,10 @@ export default function ResultSummary({ result, sectionLabel, exam }: ResultSumm
       : 0;
   const scaled = result.kind === "scaled";
 
+  // The topic rows only include questions that were served. On a free-form
+  // section that is always the whole section; on an adaptive one it is not.
+  const servedTotal = result.byTopic.reduce((sum, t) => sum + t.total, 0);
+
   return (
     <div className="border-b border-line pb-8">
       <p className="text-sm font-medium tracking-wide text-muted uppercase">
@@ -93,12 +97,35 @@ export default function ResultSummary({ result, sectionLabel, exam }: ResultSumm
 
       <div className="mt-6">
         <p className="text-sm font-medium text-foreground">By topic</p>
+        {/* On an adaptive section the ladder stops where the clock did, so these
+            rows cover only what was actually served and will not add up to the
+            total in the summary above. Both numbers are correct; presenting them
+            side by side without saying so is what makes them look contradictory. */}
+        {servedTotal < result.totalQuestions && (
+          <p className="mt-1 text-xs text-muted">
+            Covers the {servedTotal} question{servedTotal === 1 ? "" : "s"} you were served.{" "}
+            {result.totalQuestions - servedTotal} of {result.totalQuestions} were never reached.
+          </p>
+        )}
         <div className="mt-2 flex flex-col gap-1.5">
           {result.byTopic.map((t) => (
             <div key={t.topic} className="flex items-center justify-between gap-4 text-sm">
               <span className="text-muted">{t.topic}</span>
-              <span className="font-mono text-muted">
-                {t.correct}/{t.total}
+              {/* Skipped is called out rather than folded into the denominator.
+                  "Error Identification 0/8" read as a failed topic to a user who
+                  had simply never reached those eight questions, which is the
+                  wrong thing to tell someone deciding whether to trust the
+                  product. The summary above already separates the three
+                  outcomes; this row now agrees with it. */}
+              <span className="flex shrink-0 items-center gap-2 font-mono text-muted">
+                <span>
+                  {t.correct}/{t.total}
+                </span>
+                {t.unanswered > 0 && (
+                  <span className="font-sans text-xs">
+                    ({t.unanswered} skipped)
+                  </span>
+                )}
               </span>
             </div>
           ))}

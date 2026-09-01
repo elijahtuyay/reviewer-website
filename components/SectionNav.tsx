@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useMemo } from "react";
 import { getExam } from "@/lib/exams/registry";
 import { ExamId, SectionId } from "@/data/schema";
 import { getSectionBreakdown } from "@/lib/section-result";
@@ -24,6 +25,25 @@ export default function SectionNav({
   currentResult,
 }: SectionNavProps) {
   const sections = getExam(examId).sections;
+
+  /**
+   * The OTHER sections' saved state, read once.
+   *
+   * getSectionBreakdown is a synchronous sessionStorage.getItem plus a
+   * JSON.parse, and this ran inside the render body — so on the quiz page it
+   * executed on every answer click, twice, as main-thread I/O during render.
+   * Those sections cannot change while this tab is sitting on this page (the
+   * section lock is what guarantees it), so reading them once per section is
+   * not a cache, it is the correct number of reads.
+   */
+  const storedBreakdowns = useMemo(() => {
+    const map = new Map<SectionId, ReturnType<typeof getSectionBreakdown>>();
+    for (const section of sections) {
+      if (section.id === currentSection) continue;
+      map.set(section.id, getSectionBreakdown(examId, section.id, section.questionCount));
+    }
+    return map;
+  }, [examId, currentSection, sections]);
 
   return (
     <nav className="flex flex-col gap-1.5">
@@ -57,7 +77,8 @@ export default function SectionNav({
                   maxScore: null,
                   scoreKnown: false,
                 }
-              : getSectionBreakdown(examId, section.id, section.questionCount);
+              : (storedBreakdowns.get(section.id) ??
+                getSectionBreakdown(examId, section.id, section.questionCount));
 
         const content = (
           <>
@@ -66,13 +87,15 @@ export default function SectionNav({
               <span className="text-xs text-muted">Submitted</span>
             ) : breakdown.submitted ? (
               <span className="flex gap-2 text-xs">
-                <span className="text-green-700 dark:text-green-400">{breakdown.correct} correct</span>
+                {/* green-800, not -700: on --background the -700 measures 4.49, which is a
+                    fail by 0.01. On bg-green-50 (the answer options) -700 is fine. */}
+                <span className="text-green-800 dark:text-green-400">{breakdown.correct} correct</span>
                 <span className="text-red-700 dark:text-red-400">{breakdown.incorrect} wrong</span>
                 <span className="text-muted">{breakdown.skipped} skipped</span>
               </span>
             ) : (
               <span className="text-xs text-muted">
-                {breakdown.answered}/{section.questionCount}
+                {breakdown.answered}/{breakdown.total}
               </span>
             )}
           </>
@@ -94,7 +117,7 @@ export default function SectionNav({
           return (
             <div key={section.id} className={`${baseClasses} ${lockedClasses} cursor-not-allowed opacity-60`}>
               {content}
-              <span className="text-[11px] text-muted">Locked until current section is submitted</span>
+              <span className="text-xs text-muted">Locked until current section is submitted</span>
             </div>
           );
         }
@@ -103,7 +126,7 @@ export default function SectionNav({
           <Link
             key={section.id}
             href={`/${examId}/quiz/${section.id}`}
-            className={`${baseClasses} ${activeClasses} ${isCurrent ? "" : "hover:bg-panel-hover"}`}
+            className={`${baseClasses} ${activeClasses} ${isCurrent ? "" : "hover:bg-panel-hover active:bg-line"}`}
           >
             {content}
           </Link>

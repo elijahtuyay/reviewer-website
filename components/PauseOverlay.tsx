@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { getLastFocused, restoreFocus } from "@/lib/last-focused";
 
 interface PauseOverlayProps {
   paused: boolean;
@@ -43,10 +44,16 @@ export default function PauseOverlay({ paused, onResume, frozenTimeLabel }: Paus
    * it, resuming left focus on a button that was about to unmount, so it landed
    * on <body> and the next Tab restarted from the skip link at the top of the
    * document rather than continuing from the Pause button (WCAG 2.4.3).
+   *
+   * getLastFocused(), NOT document.activeElement: pausing sets `inert` on the
+   * quiz in the same commit that opens this overlay, and React applies every DOM
+   * mutation before it runs passive effects, so activeElement is already <body>
+   * by the time this line runs. The restore below then dutifully focused <body>
+   * and the bug it was written to fix was still there. See lib/last-focused.ts.
    */
   useEffect(() => {
     if (!paused) return;
-    previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
+    previouslyFocusedRef.current = getLastFocused();
     resumeRef.current?.focus();
 
     /**
@@ -66,7 +73,7 @@ export default function PauseOverlay({ paused, onResume, frozenTimeLabel }: Paus
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      previouslyFocusedRef.current?.focus?.();
+      restoreFocus(previouslyFocusedRef.current);
     };
   }, [paused]);
 
@@ -90,6 +97,15 @@ export default function PauseOverlay({ paused, onResume, frozenTimeLabel }: Paus
       aria-modal="true"
       aria-labelledby={titleId}
       aria-describedby={bodyId}
+      // inert + aria-hidden for the whole 200ms exit window. The first-mount
+      // guard above already argues that an aria-modal dialog must not sit in the
+      // tree over live content; that argument applies just as well on the way
+      // out, and was only ever handled for the keyboard (via tabIndex below).
+      // Without this, resuming leaves a dialog labeled "Paused" asserting that
+      // the rest of the document is hidden, while the quiz behind it is already
+      // interactive again.
+      inert={!paused || undefined}
+      aria-hidden={!paused || undefined}
       className={`fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-background/80 backdrop-blur-2xl transition-opacity duration-200 motion-reduce:transition-none ${
         paused ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
@@ -103,8 +119,14 @@ export default function PauseOverlay({ paused, onResume, frozenTimeLabel }: Paus
       {frozenTimeLabel && (
         <p className="font-mono text-3xl tabular-nums text-foreground">{frozenTimeLabel}</p>
       )}
+      {/* One sentence, not a fragment hanging off the number above it. The
+          old copy rendered as "Paused" / "25:02" / "left when you paused. Your
+          timer is stopped until you resume." — a clause starting lowercase
+          whose subject was a separate block two elements up. */}
       <p id={bodyId} className="max-w-xs text-center text-sm text-muted">
-        {frozenTimeLabel ? "left when you paused. " : ""}Your timer is stopped until you resume.
+        {frozenTimeLabel
+          ? "That is the time you had left. The clock is stopped until you resume."
+          : "The clock is stopped until you resume."}
       </p>
       <button
         ref={resumeRef}
@@ -113,7 +135,7 @@ export default function PauseOverlay({ paused, onResume, frozenTimeLabel }: Paus
         // Untabbable once the overlay is fading out, so the 200ms exit window
         // can't park focus on a control that is invisible and on its way out.
         tabIndex={paused ? 0 : -1}
-        className="flex h-11 items-center justify-center rounded-md bg-accent px-6 text-sm font-medium text-accent-foreground hover:opacity-90"
+        className="flex h-11 items-center justify-center rounded-md bg-accent px-6 text-sm font-medium text-accent-foreground transition hover:opacity-90 active:scale-[0.98]"
       >
         Resume
       </button>
