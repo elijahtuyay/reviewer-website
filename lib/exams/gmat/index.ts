@@ -23,7 +23,7 @@ const gmat: ExamModule = {
   label: "GMAT Focus Edition",
   shortLabel: "GMAT",
   description:
-    "Adaptive, and one question at a time. Three sections of 45 minutes, a 205 to 805 score, and a written explanation on every answer.",
+    "This exam is adaptive, and it gives you one question at a time. It has three sections of 45 minutes and a score from 205 to 805. Every answer has a written explanation.",
   /**
    * Measured, not picked by eye. The first choice (#1e3a8a) was only 1.59:1
    * against the dark background, half of NMAT green's 3.11:1, which left the

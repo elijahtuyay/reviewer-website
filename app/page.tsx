@@ -123,10 +123,10 @@ function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) 
           Take a real timed section today.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed opacity-90 sm:text-lg">
-          The section lengths, the time limits and the rules about what you can skip come from each
+          The section lengths, the time limits and the rules about what you can skip follow each
           exam&rsquo;s own published format. We write all{" "}
-          {totalBank.toLocaleString("en-US")} questions here, and each one carries an explanation you
-          read the moment you submit. You pay nothing and you make no account.
+          {totalBank.toLocaleString("en-US")} questions here, and each one has an explanation you read
+          after you submit. You pay nothing, and you need no account.
         </p>
 
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -197,7 +197,7 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
             Select your exam
           </p>
           <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
-            Each exam runs on its own rules
+            The rules change with the exam
           </h2>
           <p className="mt-3 leading-relaxed text-muted">
             The section lengths, the time limits, the skip rules and the adaptive difficulty all
@@ -331,11 +331,11 @@ const STEPS = [
   },
   {
     title: "Answer the questions",
-    body: "Press Pause if you need to stop the timer. At zero, the section submits whatever you answered and scores it.",
+    body: "Press Pause if you need to stop the timer. When it reaches zero, the section submits your answers and scores them.",
   },
   {
     title: "Read the explanations",
-    body: "You get your score, a result for each topic, and every question again with its correct answer and an explanation.",
+    body: "You get your score and a result for each topic. You then see every question again, with its correct answer and an explanation.",
   },
 ];
 
@@ -381,7 +381,7 @@ const FEATURES = [
     // declaratives, and an unbroken run of them reads like a spec sheet on a
     // page whose job is to earn trust. So the lengths here run long, medium,
     // short on purpose, and the paragraph does not end on a slogan.
-    body: "The question counts and the time limits come from each exam's published structure. Open one section and the others lock until you submit it. The timer continues even when you move to a different browser tab. Only the Pause button stops it, and the screen then says the timer is stopped.",
+    body: "The question counts and the time limits follow each exam's published structure. Open one section and the others lock until you submit it. The timer continues even when you move to a different browser tab. Only the Pause button stops it, and the screen then says the timer is stopped.",
     points: [
       "Each section has its own timer, and the timer does not reset when you reload the page",
       "Pause blurs the questions and stops the timer",
@@ -396,7 +396,7 @@ const FEATURES = [
     // what this project can stand behind. "A person writes every question" is a
     // stronger and different claim, and it briefly appeared in four places
     // including the affiliation disclaimer, which is a legal notice.
-    body: "We write each question and each explanation for this site, and we keep every version under review. The explanation is therefore the author's reasoning, not the output of a language model at the moment you ask. The incorrect options are plausible on purpose, because each one matches a mistake a candidate really makes.",
+    body: "We write each question and each explanation for this site, and we keep every version under review. The explanation is therefore the author's reasoning, not the output of a language model at the moment you ask. The incorrect options are plausible on purpose, because each one matches a mistake candidates make.",
     points: [
       "A written explanation on every question",
       "Balanced answer positions and answer lengths, so a guess pattern fails",
@@ -409,7 +409,7 @@ const FEATURES = [
     // NMAT for two releases after the GMAT shipped.
     eyebrow: "One engine, every format",
     title: "The difficulty changes with your answers",
-    body: "On an adaptive exam the questions come one at a time, and they become harder after two correct answers in a row. Your score then includes the difficulty of each question you answered, not only the number you answered correctly. A fixed paper works the other way. You see the whole section at once, and you can leave a question and return to it later.",
+    body: "On an adaptive exam the questions come one at a time, and they become harder after two correct answers in a row. Your score then includes the difficulty of each question you answered, not only the number you answered correctly. A fixed paper is different. You see the whole section at once, and you can leave a question and return to it later.",
     points: [
       "The difficulty changes with your recent answers",
       "The score includes question difficulty, not only the count",
@@ -563,8 +563,8 @@ function ClosingCta() {
       <div className="mx-auto w-full max-w-3xl px-6 py-16 text-center sm:py-20">
         <h2 className="text-2xl font-bold text-foreground sm:text-3xl">Start with one section</h2>
         <p className="mx-auto mt-4 max-w-xl leading-relaxed text-muted">
-          Give it the time limit it deserves. When you submit, the explanations tell you what to
-          study next.
+          Give it the full time limit. When you submit, the explanations tell you what to study
+          next.
         </p>
         <Link
           href="#exams"

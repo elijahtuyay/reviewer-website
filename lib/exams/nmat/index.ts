@@ -18,7 +18,7 @@ const nmat: ExamModule = {
   label: "NMAT by GMAC",
   shortLabel: "NMAT",
   description:
-    "A fixed paper, one section at a time. You see the whole section at once, and every answer has a written explanation.",
+    "This is a fixed paper, and you take one section at a time. You see the whole section at once, and every answer has a written explanation.",
   theme: { accent: "#0f7b4d", accentForeground: "#ffffff" },
   available: true,
 
