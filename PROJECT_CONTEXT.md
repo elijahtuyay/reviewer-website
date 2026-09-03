@@ -4,7 +4,7 @@
 
 ## What this project is
 
-An exam-prep web app for **NMAT by GMAC** (a Philippine business-school admission test), built with Next.js 16.3.0 (Turbopack), React 19, TypeScript, and Tailwind v4, with a Neon Postgres database behind Drizzle and better-auth as of v2.1.0 (backend only, no sign-in UI yet). A second exam, **GMAT Focus**, is fully playable on a deliberate 90-question seed bank (30 per section, 10 per difficulty) — enough to exercise the adaptive engine, not a finished bank. See "THE MODULAR EXAM ARCHITECTURE" below. The repo lives at:
+An exam-prep web app for **NMAT by GMAC** (a Philippine business-school admission test), built with Next.js 16.3.0 (Turbopack), React 19, TypeScript, and Tailwind v4, with a Neon Postgres database behind Drizzle and better-auth as of v2.1.0 (backend only, no sign-in UI yet). A second exam, **GMAT Focus**, is fully playable on a 270-question bank (90 per section, 32 hard in each), which stopped being a seed bank in v2.8.0. A third, **GRE General**, arrived in v2.6.0 with 192 questions. See "THE MODULAR EXAM ARCHITECTURE" below. The repo lives at:
 
 ```
 C:\Users\elija\Documents\Personal Files\AI_ML\Codes\reviewer-website
@@ -200,7 +200,8 @@ the opposite of GMAT Focus and the easiest way to write a wrong bank.
 real totals (Verbal 27 questions / 41 minutes, Quantitative 27 / 47), but the
 real split into two separately timed sub-sections is not reproduced. Splitting
 the bank four ways would leave each section a pool barely larger than one
-sitting, which is the repeat problem the GMAT seed bank already demonstrates.
+sitting, which is the problem the GMAT seed bank demonstrated before v2.8.0
+tripled it.
 
 **The GRE is far closer to a paper exam than the GMAT**, which is the part people
 assume wrongly because both are computer-delivered. Inside a section you move
@@ -922,6 +923,66 @@ small to judge at all". The band now widens for small files instead of
 disappearing, and the fix was verified by running the new audit against the
 committed regressed bank and watching it fail.
 
+### Every guessing heuristic is now scored in standard errors, not percent
+
+Three of the four holes the v2.8.0 review lanes found in `audit-bank.mjs` were
+the same hole: **a threshold written as a literal, calibrated on conditions that
+had since changed.** Every band in the script assumed four options and a
+hundred-question file. Five of the eight banks now offer five options, and the
+GMAT banks went from 30 questions to 90.
+
+What that cost, measured rather than guessed:
+
+- The slot band was `[14, 36]` at n>=100 and `[10, 42]` below it. The GMAT banks
+  tripled and stayed in the wide bucket, where a slot holding 42% of the keys at
+  n=90 is **more than five standard errors from chance** and still passed.
+- On a five-option bank those same literals mean 1.7x and 2.1x chance, not the
+  1.44x and 1.68x they were chosen to mean. The printed labels said "chance is
+  25%" over numbers where chance was 20%.
+- The two numeric-extreme caps and the middle-two cap were asserted **on the ALL
+  row only**, so their spare headroom grew with the bank rather than with the
+  evidence: 31 hits to 44, and 26 to 43, at an unchanged percentage. NMAT
+  Logical Reasoning could go to 100% middle-keyed and the ALL row would still
+  pass.
+
+Every one of them is now `|share - chance|` divided by the standard error of
+that share, per bank, with the chance rate derived from the bank's own modal
+option count. **The threshold is 3 SE to fail and 2 SE to print a watch line.**
+Three is about one false alarm in 370 checks and a run makes about sixty, which
+is the point: a green build has to mean green, or the next author learns to
+shrug at this script.
+
+**The watch list is the half that will matter later.** It prints anything past
+2 SE without failing, so a drift is visible one release before it breaks the
+build, and nobody has to re-derive it by hand. Both of this project's real
+biases were found by a person measuring something the script did not print.
+
+Two entries sit on it today and are known, not overlooked: `gmat/quantitative`
+keys the smallest numeric option 9.3% of the time against 20% by chance
+(-2.3 SE), and `logical-reasoning` keys the largest 4.3% of the time (-2.3 SE).
+Both are the mirror-image tell — "never pick the smallest" is a free
+elimination — and both were left rather than fixed, because moving them means
+changing distractor VALUES, and every distractor in that bank had just been
+verified as reachable by a named arithmetic mistake. **A weaker distractor is a
+worse question than a worse statistic.**
+
+### The check that was structurally unable to see the bias it was built for
+
+The longest-option check asks "is the key THE longest option". GMAT Verbal
+passed it at 26.2% against 20% by chance while a candidate guessing between the
+**two** longest scored 58.0% against 40% (+3.1 SE). One rank down was invisible.
+
+It passed because two opposite artifacts cancelled inside one file. The 60
+newly written questions keyed the longest option 40.7% of the time, the classic
+long-hedged-key-beside-short-dismissive-distractors shape. The 30 that had a
+fifth option retrofitted keyed it **0%** of the time, because the added
+distractor was usually the longest string in the question. A file average hid
+both, and either one alone would have failed.
+
+`audit:bank` now measures the top-two length rank as well, skipping questions
+where the second and third longest options tie, because there is no "top two"
+for a candidate to see there.
+
 Two rules fall out of this for any future bank-wide mechanical pass:
 1. **Snapshot `id -> options[correctIndex]` before, compare after.** Both
    re-slot passes did, which is the only reason "no answer key moved" is a fact
@@ -929,6 +990,13 @@ Two rules fall out of this for any future bank-wide mechanical pass:
 2. **Re-measure EVERY statistic afterwards, not just the one you set out to
    move.** The pass fixed its target metric and broke a neighboring one, and
    both were already in the audit.
+3. **Prove no key moved, and say what "moved" means.** The v2.8.0 retrofit
+   touched **82** pre-existing questions (the other 8 already carried five
+   options), and a review lane found the PR body's "byte-identical keys" claim
+   was false: six Data Sufficiency keys were re-cased by the canonical-set
+   normalization the new audit invariant forces. No answer moved, but the
+   correct claim is "semantically identical, six re-cased", and the looser one
+   would have hidden a real edit if there had been one.
 
 Data Sufficiency remains in **canonical A-E statement order** (PR #7's bank-wide
 option shuffle had scrambled all 11, which trains the wrong habit, since real DS

@@ -582,16 +582,16 @@
     "section": "quantitative",
     "topic": "Arithmetic: Ratios",
     "difficulty": "easy",
-    "prompt": "In a parking lot the ratio of cars to vans is $7:2$. If the lot holds 63 cars, how many vans does it hold?",
+    "prompt": "A basket holds only apples and oranges, in the ratio $4:5$. If the basket holds 54 pieces of fruit in all, how many apples are in the basket?",
     "options": [
-      "45 vans",
-      "63 vans",
-      "18 vans",
-      "126 vans",
-      "81 vans"
+      "24",
+      "30",
+      "45",
+      "48",
+      "54"
     ],
-    "correctIndex": 2,
-    "explanation": "The 7 parts correspond to 63 cars, so one part is $63 \\div 7 = 9$ vehicles, and the 2 parts of vans come to 18. Multiplying 63 by 2 without first dividing by 7 gives 126. Reporting the total number of vehicles, $63 + 18$, gives 81, and reporting how many more cars than vans there are, $63 - 18$, gives 45. Repeating the car count gives 63.",
+    "correctIndex": 0,
+    "explanation": "The ratio splits the basket into $4 + 5 = 9$ equal parts, so one part is $54 \\div 9 = 6$ pieces and the apples are $4 \\times 6 = 24$. 30 is the orange count, 45 is five sixths of the total rather than four ninths, 48 comes from scaling by 12 instead of 6, and 54 is the whole basket.",
     "source": "original"
   },
   {
@@ -1398,16 +1398,16 @@
     "section": "quantitative",
     "topic": "Number Properties",
     "difficulty": "medium",
-    "prompt": "If $n$ is an integer, which of the following must be an odd integer?",
+    "prompt": "If $n$ is a positive integer and $n^2$ is divisible by 12, what is the largest integer that must be a divisor of $n$?",
     "options": [
-      "$n + 2$",
-      "$2n$",
-      "$3n$",
-      "$n^2 + n$",
-      "$n^2 + n + 1$"
+      "2",
+      "3",
+      "4",
+      "6",
+      "12"
     ],
-    "correctIndex": 4,
-    "explanation": "The expression $n^2 + n$ factors as $n(n + 1)$, a product of two consecutive integers, so one of them is even and the product is always even. One more than an even number is always odd, so $n^2 + n + 1$ is odd for every integer $n$. Doubling an integer is always even. Adding 2 keeps whatever parity $n$ had, and tripling $n$ does the same, so both are odd only when $n$ is odd.",
+    "correctIndex": 3,
+    "explanation": "Write $12 = 2^2 \\times 3$. For $n^2$ to carry a factor of 3, $n$ must carry one, since 3 is prime. For $n^2$ to carry $2^2$, $n$ must carry at least one 2. So $n$ is a multiple of $2 \\times 3 = 6$, and $n = 6$ itself satisfies the condition, so nothing larger is forced. 2 and 3 each divide $n$ but are not the largest such integer, 4 need not divide $n$ (take $n = 6$), and 12 need not either.",
     "source": "original"
   },
   {

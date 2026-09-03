@@ -69,9 +69,6 @@ const optionsOf = (q) => (Array.isArray(q.options) ? q.options : []);
 
 const failures = [];
 const notes = [];
-function check(ok, message) {
-  if (!ok) failures.push(message);
-}
 
 const banks = BANKS.map(([name, path]) => ({
   name,
@@ -288,6 +285,39 @@ for (const bank of [...banks, { name: "ALL", questions: all }]) {
     if (optionsOf(q)[q.correctIndex].length === max) longestHit += 1;
   }
 
+  /*
+   * The same bias one rank lower down.
+   *
+   * "Is the key THE longest option" is a single question, and a bank can pass
+   * it while a candidate who guesses between the two longest still beats
+   * chance by half again. GMAT Verbal did exactly that: the key was the
+   * longest 26.2% of the time (chance 20%, comfortably inside the band) while
+   * sitting in the top two 58.0% of the time against a chance rate of 40%.
+   *
+   * It passed because two opposite artifacts cancelled. The 60 newly written
+   * questions keyed the longest option 40.7% of the time; the 30 that had a
+   * fifth option added later keyed it 0% of the time, because the added
+   * distractor was usually the longest string in the question. A file average
+   * hid both.
+   *
+   * Ties at the boundary are skipped rather than resolved: if the second and
+   * third longest options are the same length there is no "top two" for a
+   * candidate to pick out by eye.
+   */
+  let top2N = 0;
+  let top2Hit = 0;
+  for (const q of qs) {
+    if (!isSingle(q)) continue;
+    if (SLOT_EXEMPT_TOPICS.has(q.topic)) continue;
+    if (optionsOf(q).some((o) => numeric(o) !== null)) continue;
+    const lens = optionsOf(q).map((o) => o.length);
+    if (lens.length < 4) continue;
+    const sorted = [...lens].sort((a, b) => b - a);
+    if (sorted[1] === sorted[2]) continue;
+    top2N += 1;
+    if (optionsOf(q)[q.correctIndex].length >= sorted[1]) top2Hit += 1;
+  }
+
   // The middle-two heuristic: on a question whose options are all distinct
   // numbers, cross off the largest and smallest and guess between what is left.
   // Distractors built by nudging the answer up AND down bracket it structurally,
@@ -330,8 +360,32 @@ for (const bank of [...banks, { name: "ALL", questions: all }]) {
     singleN: qs.filter(isSingle).length,
     slots,
     longest: [longestHit, longestN],
+    top2: [top2Hit, top2N],
     mid: [midHit, midN],
     extremes: [minHit, maxHit, midN],
+    /*
+     * How many options this bank's questions actually offer.
+     *
+     * Every threshold below used to be a literal calibrated on four options,
+     * and five of the eight banks now have five. A blind guess on those is 20%,
+     * not 25%, so a band of "up to 38%" read as 1.5x chance and was really
+     * 1.9x, and the printed labels said "chance is 25%" under numbers where it
+     * was not. Take the mode rather than the max: NMAT Quantitative has eleven
+     * five-option questions among eighty-nine four-option ones, and it is a
+     * four-option bank.
+     */
+    optCount: (() => {
+      const counts = new Map();
+      for (const q of qs) {
+        if (!isSingle(q)) continue;
+        const k = optionsOf(q).length;
+        counts.set(k, (counts.get(k) ?? 0) + 1);
+      }
+      let best = 4;
+      let bestN = -1;
+      for (const [k, c] of counts) if (c > bestN) [best, bestN] = [k, c];
+      return best;
+    })(),
   });
 }
 
@@ -344,7 +398,7 @@ for (const r of rows) {
   console.log(`  ${r.name.padEnd(20)} ${label}  ${spread}`);
 }
 
-console.log("\nKey is the longest option (prose questions only) — chance is 25%");
+console.log("\nKey is the longest option (prose questions only)");
 for (const r of rows) {
   const [hit, n] = r.longest;
   console.log(
@@ -352,7 +406,16 @@ for (const r of rows) {
   );
 }
 
-console.log("\nWhere the key sits among numeric options — chance is 25 / 50 / 25");
+console.log("\nKey is one of the two longest options (prose questions only)");
+for (const r of rows) {
+  const [hit, n] = r.top2;
+  const chance = n ? fmt((200 / r.optCount)) : "n/a";
+  console.log(
+    `  ${r.name.padEnd(20)} ${fmt(pct(hit, n)).padStart(6)}  (${hit}/${n}, chance ${chance})`
+  );
+}
+
+console.log("\nWhere the key sits among numeric options (chance is 1 / n-2 / 1 over n)");
 for (const r of rows) {
   const [lo, hi, n] = r.extremes;
   console.log(
@@ -608,7 +671,14 @@ for (const q of all) {
 
 /* ------------------------------------------------------------- the contract */
 
-const total = rows.at(-1);
+const WATCH = [];
+const FAIL_Z = 3;
+const WATCH_Z = 2;
+
+const zOf = (hit, n, chance) => {
+  const se = Math.sqrt(((chance / 100) * (1 - chance / 100)) / n) * 100;
+  return se === 0 ? 0 : (pct(hit, n) - chance) / se;
+};
 
 for (const r of rows.slice(0, -1)) {
   /*
@@ -628,13 +698,28 @@ for (const r of rows.slice(0, -1)) {
   // have a slot, so a file that also holds multi-select and numeric-entry
   // questions would otherwise be judged against a denominator it cannot reach.
   if (r.singleN === 0) continue;
-  const [lo, hi] = r.singleN >= 100 ? [14, 36] : [10, 42];
-  r.slots.slice(0, 4).forEach((c, i) => {
-    const p = pct(c, r.singleN);
-    if (p < lo || p > hi)
-      failures.push(
-        `${r.name}: slot ${i + 1} is the key ${fmt(p)} of the time (want ${lo}-${hi}% at n=${r.singleN})`
-      );
+  /*
+   * The band is a multiple of chance, not a literal.
+   *
+   * It used to be [14, 36] at n >= 100 and [10, 42] below that, both written
+   * against a four-option 25% chance rate. Two things then drifted out from
+   * under it. The GMAT banks went from 30 questions to 90 and stayed in the
+   * wide bucket, where a slot holding 42% of the keys is more than five
+   * standard deviations from chance and still passes. And five of the eight
+   * banks now offer five options, where those same literals mean 1.7x and 2.1x
+   * chance rather than 1.44x and 1.68x.
+   *
+   * The n >= 100 cliff also had nothing behind it. 60 is where a bank is large
+   * enough that a 1.45x deviation is not sampling noise.
+   */
+  const chance = 100 / r.optCount;
+  r.slots.slice(0, r.optCount).forEach((c, i) => {
+    const z = zOf(c, r.singleN, chance);
+    const line =
+      `${r.name}: slot ${i + 1} is the key ${fmt(pct(c, r.singleN))} of the time ` +
+      `(${c}/${r.singleN}, chance ${fmt(chance)}, ${z > 0 ? "+" : ""}${z.toFixed(1)} SE)`;
+    if (Math.abs(z) >= FAIL_Z) failures.push(line);
+    else if (Math.abs(z) >= WATCH_Z) WATCH.push(line);
   });
 }
 
@@ -656,41 +741,86 @@ for (const r of rows.slice(0, -1)) {
  * The band is generous because the samples are small, and the point is to catch
  * a HABIT rather than to demand a flat distribution.
  */
-for (const r of rows.slice(0, -1)) {
-  const [hit, n] = r.longest;
-  if (n < 20) continue;
-  const share = pct(hit, n);
-  if (share > 33)
-    failures.push(
-      `${r.name}: the key is the longest option ${fmt(share)} of the time (${hit}/${n}) — too often`
-    );
-  if (share < 8)
-    failures.push(
-      `${r.name}: the key is the longest option ${fmt(share)} of the time (${hit}/${n}) — too rarely, ` +
-        `so "never pick the longest" is a free elimination`
-    );
-}
+/* The longest-option gate is one of the banded checks below. */
 
-const [longHit, longN] = total.longest;
-check(
-  pct(longHit, longN) <= 33,
-  `longest-option heuristic scores ${fmt(pct(longHit, longN))} bank-wide (want <=33%)`
+/*
+ * A band around chance, applied per bank, for every heuristic that has one.
+ *
+ * These were four assertions on the ALL row, and the ALL row is the wrong place
+ * for all of them. Measured while the GMAT bank tripled: the "largest" and
+ * "smallest" caps kept roughly the same percentage but their spare headroom
+ * grew from 31 hits to 44 and from 26 to 43, purely because the denominator
+ * grew. Concretely, NMAT Logical Reasoning could go to 100% middle-keyed and
+ * the ALL row would still land inside the cap.
+ *
+ * Each band is a multiple of that bank's own chance rate, so a five-option bank
+ * is judged against 20% and a four-option bank against 25%.
+ */
+/*
+ * Distance from chance, in standard errors.
+ *
+ * The threshold is 3, which on a two-sided test is about one false alarm in
+ * 370 checks. A run makes roughly sixty of them, so a green build means green
+ * and an author is not taught to shrug at this script.
+ *
+ * Anything past 2 is printed as a watch line without failing. That is the half
+ * of this that matters in practice: the numbers the band forgives stay on
+ * screen, so a bank drifting toward a real bias is visible one release before
+ * it breaks the build, and nobody has to re-derive it from scratch. Both of
+ * this project's genuine biases were found by someone measuring by hand.
+ */
+
+const band = (label, pick, chanceOf, minN, note, { ceilingOnly = false } = {}) => {
+  for (const r of rows) {
+    const [hit, n] = pick(r);
+    if (n < minN) continue;
+    const chance = chanceOf(r);
+    const z = zOf(hit, n, chance);
+    if (ceilingOnly && z < 0) continue;
+    const how = z > 0 ? "too often" : `too rarely, ${note}`;
+    const line =
+      `${r.name}: ${label} scores ${fmt(pct(hit, n))} ` +
+      `(${hit}/${n}, chance ${fmt(chance)}, ${z > 0 ? "+" : ""}${z.toFixed(1)} SE) — ${how}`;
+    if (Math.abs(z) >= FAIL_Z) failures.push(line);
+    else if (Math.abs(z) >= WATCH_Z) WATCH.push(line);
+  }
+};
+
+const FREE_ELIMINATION =
+  'so the rule inverts into a free elimination, which is worth as much to a guesser';
+
+band('"guess between the two longest"', (r) => r.top2, (r) => 200 / r.optCount, 25, FREE_ELIMINATION);
+band('"pick the longest"', (r) => r.longest, (r) => 100 / r.optCount, 25, FREE_ELIMINATION);
+band(
+  '"always pick the largest"',
+  (r) => [r.extremes[1], r.extremes[2]],
+  (r) => 100 / r.optCount,
+  20,
+  FREE_ELIMINATION
+);
+band(
+  '"always pick the smallest"',
+  (r) => [r.extremes[0], r.extremes[2]],
+  (r) => 100 / r.optCount,
+  20,
+  FREE_ELIMINATION
 );
 
-const [midHit, midN] = total.mid;
-check(
-  pct(midHit, midN) <= 68,
-  `middle-two heuristic scores ${fmt(pct(midHit, midN))} bank-wide (want <=68%, chance is 50%)`
-);
-
-const [minHit, maxHit] = total.extremes;
-check(
-  pct(maxHit, midN) <= 38,
-  `"always pick the largest" scores ${fmt(pct(maxHit, midN))} bank-wide (want <=38%, chance is 25%)`
-);
-check(
-  pct(minHit, midN) <= 38,
-  `"always pick the smallest" scores ${fmt(pct(minHit, midN))} bank-wide (want <=38%, chance is 25%)`
+/*
+ * The middle-two rule keeps a ceiling and no floor, unlike the two above.
+ *
+ * Its floor would be "every key is at an extreme", which is not a bias a
+ * candidate can act on without knowing WHICH extreme — and both extremes are
+ * already banded separately just above. Its chance rate is the share of ranks
+ * that are neither end.
+ */
+band(
+  "the middle-two heuristic",
+  (r) => r.mid,
+  (r) => (100 * (r.optCount - 2)) / r.optCount,
+  20,
+  "",
+  { ceilingOnly: true }
 );
 
 for (const b of banks) {
@@ -707,6 +837,11 @@ for (const b of banks) {
 
 console.log("\nDifficulty mix");
 for (const n of notes) console.log(`  ${n}`);
+
+if (WATCH.length) {
+  console.log("\nWatch list (past 2 standard errors from chance, not yet a failure)");
+  for (const w of WATCH) console.log("  ~ " + w);
+}
 
 console.log("\n" + "=".repeat(72));
 if (failures.length > 0) {

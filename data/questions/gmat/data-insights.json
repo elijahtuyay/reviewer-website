@@ -1177,7 +1177,7 @@
     "section": "data-insights",
     "topic": "Data Sufficiency",
     "difficulty": "hard",
-    "prompt": "If $r$ and $s$ are nonzero, is $r > s$?\n(1) $r^2 > s^2$\n(2) $rs > 0$",
+    "prompt": "If $x$ and $y$ are positive integers, is $x + y$ even?\n(1) $x^2 + y$ is odd.\n(2) $x + 2y$ is odd.",
     "options": [
       "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient.",
       "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient.",
@@ -1185,8 +1185,8 @@
       "EACH statement ALONE is sufficient.",
       "Statements (1) and (2) TOGETHER are NOT sufficient."
     ],
-    "correctIndex": 4,
-    "explanation": "Statement (1) compares magnitudes rather than values, so it holds for $r = 3$ and $s = 1$, where $r$ is larger, and for $r = -3$ and $s = -1$, where $r$ is smaller. Statement (2) says only that the two share a sign. Both of those pairs satisfy both statements at once and give opposite answers, so the statements are not sufficient even in combination. Squaring erases the sign, which is exactly what the question turns on.",
+    "correctIndex": 0,
+    "explanation": "Statement (1) settles it. $x^2$ has the same parity as $x$, so $x^2 + y$ is odd exactly when $x$ and $y$ have opposite parity, and a sum of two numbers of opposite parity is odd. The answer is a definite no, which is sufficient. Statement (2) says only that $x$ is odd, because $2y$ is even whatever $y$ is, and it leaves the parity of $y$ open, so $x + y$ can be either.",
     "source": "original"
   },
   {
