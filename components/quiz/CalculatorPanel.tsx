@@ -2,11 +2,11 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import {
-  CalculatorKey,
-  hasMemory,
-  initialCalculatorState,
-  press,
-} from "@/lib/calculator/basic-di";
+  BASIC_DI_MODEL,
+  CalculatorModel,
+  GRE_MODEL,
+  KeySpec,
+} from "@/components/quiz/calculator-models";
 
 /**
  * The on-screen calculator, as a disclosure anchored to the top left of a
@@ -34,59 +34,22 @@ import {
 interface CalculatorPanelProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  /**
+   * Which device. The two exams provide genuinely different calculators, and
+   * the difference is not cosmetic: one honors order of operations and the
+   * other does not. See `calculator-models.tsx`.
+   */
+  kind: "basic-di" | "gre-standard";
 }
 
-/** Label, key, and an optional accessible name where the glyph does not read well aloud. */
-type KeySpec = { label: string; key: CalculatorKey; srLabel?: string; variant?: "op" | "fn" | "mem" };
+const MODELS: Record<CalculatorPanelProps["kind"], CalculatorModel> = {
+  "basic-di": BASIC_DI_MODEL,
+  "gre-standard": GRE_MODEL,
+};
 
-/**
- * The TI-108's key set, and ONLY its key set.
- *
- * An earlier revision had a backspace key and split clear into `C` and `AC`.
- * Both were imports from the pre-Focus Integrated Reasoning calculator, which
- * is the exact device this component's own module header warns against copying
- * from. The real one has no backspace at all and a single `ON/C`: one press
- * clears the entry, a second clears the calculation.
- *
- * Do not add a convenience key here. Every key that exists on screen and not on
- * the exam is a habit a student builds and then loses on test day, which is the
- * same failure this whole feature exists to prevent.
- */
-const ROWS: KeySpec[][] = [
-  [
-    { label: "MRC", key: "mrc", srLabel: "Memory recall, press twice to clear memory", variant: "mem" },
-    { label: "M+", key: "m+", srLabel: "Memory add", variant: "mem" },
-    { label: "M−", key: "m-", srLabel: "Memory subtract", variant: "mem" },
-    { label: "ON/C", key: "onC", srLabel: "Clear entry, press twice to clear everything", variant: "fn" },
-  ],
-  [
-    { label: "√", key: "sqrt", srLabel: "Square root", variant: "fn" },
-    { label: "%", key: "%", srLabel: "Percent", variant: "fn" },
-    { label: "+/−", key: "+/-", srLabel: "Change sign", variant: "fn" },
-    { label: "÷", key: "/", srLabel: "Divide", variant: "op" },
-  ],
-  [
-    { label: "7", key: "7" },
-    { label: "8", key: "8" },
-    { label: "9", key: "9" },
-    { label: "×", key: "*", srLabel: "Multiply", variant: "op" },
-  ],
-  [
-    { label: "4", key: "4" },
-    { label: "5", key: "5" },
-    { label: "6", key: "6" },
-    { label: "−", key: "-", srLabel: "Minus", variant: "op" },
-  ],
-  [
-    { label: "1", key: "1" },
-    { label: "2", key: "2" },
-    { label: "3", key: "3" },
-    { label: "+", key: "+", srLabel: "Plus", variant: "op" },
-  ],
-];
-
-export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelProps) {
-  const [state, setState] = useState(initialCalculatorState);
+export default function CalculatorPanel({ open, onOpenChange, kind }: CalculatorPanelProps) {
+  const model = MODELS[kind];
+  const [state, setState] = useState<unknown>(() => model.initial());
   /**
    * The expanded explainer under the keypad. Collapsed by default and NOT
    * persisted, so it comes back on a fresh attempt rather than having been read
@@ -136,8 +99,8 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
     };
   }, [open, onOpenChange]);
 
-  function handleKey(key: CalculatorKey) {
-    setState((current) => press(current, key));
+  function handleKey(key: string) {
+    setState((current: unknown) => model.press(current, key));
   }
 
   /**
@@ -193,7 +156,7 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
               headless screenshot before it was replaced. */}
           <CalculatorIcon />
           Calculator
-          {hasMemory(state) && (
+          {model.hasMemory(state) && (
             // Memory survives closing the panel, so the indicator has to be
             // visible on the closed toggle too. Otherwise a stored value is
             // invisible until reopened, which is how a stale M+ silently ends
@@ -267,8 +230,8 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
             <div className="shrink-0 rounded-md border border-line bg-background px-3 py-2 text-right">
               <div className="flex items-center justify-between gap-2">
                 <span
-                  className={`text-xs font-semibold ${hasMemory(state) ? "text-accent-text" : "text-transparent"}`}
-                  aria-hidden={!hasMemory(state)}
+                  className={`text-xs font-semibold ${model.hasMemory(state) ? "text-accent-text" : "text-transparent"}`}
+                  aria-hidden={!model.hasMemory(state)}
                 >
                   M
                 </span>
@@ -278,7 +241,7 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
                   aria-live="polite"
                   className="min-w-0 truncate font-mono text-2xl tabular-nums text-foreground"
                 >
-                  {state.display}
+                  {model.display(state)}
                 </output>
               </div>
             </div>
@@ -300,22 +263,14 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
               right, so <span className="font-mono whitespace-nowrap">2 + 3 × 4</span> is 20.
             </p>
 
+            {/* Every key comes from the model, the wide equals included, so the
+                two devices cannot drift apart in this file. */}
             <div className="mt-3 grid shrink-0 grid-cols-4 gap-1.5">
-              {ROWS.flatMap((row) =>
+              {model.rows.flatMap((row) =>
                 row.map((spec) => (
                   <CalcButton key={spec.key + spec.label} spec={spec} onPress={handleKey} />
                 ))
               )}
-              <CalcButton spec={{ label: "0", key: "0" }} onPress={handleKey} />
-              <CalcButton spec={{ label: ".", key: ".", srLabel: "Decimal point" }} onPress={handleKey} />
-              <button
-                type="button"
-                onClick={() => handleKey("=")}
-                className="col-span-2 flex h-11 items-center justify-center rounded-md bg-accent text-base font-semibold text-accent-foreground transition hover:opacity-90 active:scale-95"
-              >
-                <span aria-hidden>=</span>
-                <span className="sr-only">Equals</span>
-              </button>
             </div>
 
             {/* Detail on demand, below the keypad, collapsed by default. The
@@ -390,7 +345,7 @@ function CalculatorIcon() {
   );
 }
 
-function CalcButton({ spec, onPress }: { spec: KeySpec; onPress: (key: CalculatorKey) => void }) {
+function CalcButton({ spec, onPress }: { spec: KeySpec; onPress: (key: string) => void }) {
   const tone =
     spec.variant === "op"
       ? "border-line-strong bg-panel-hover font-semibold"

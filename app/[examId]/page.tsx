@@ -256,12 +256,21 @@ function expectations(exam: ExamModule): string[] {
    * Collapsing them printed a flat lie on the page a candidate reads
    * immediately before starting a timed section.
    */
-  const simulated = exam.sections.filter((s) => s.calculator === "basic-di");
+  const simulated = exam.sections.filter(
+    (s) => s.calculator === "basic-di" || s.calculator === "gre-standard"
+  );
   const realOnly = exam.sections.filter((s) => s.calculator === "not-simulated");
 
   if (simulated.length > 0) {
+    // The two devices behave differently enough that one sentence cannot
+    // describe both. The TI-108 runs left to right; the GRE's does not.
+    const leftToRight = simulated.some((s) => s.calculator === "basic-di");
     lines.push(
-      `This exam gives you an on-screen calculator in ${joinWithAnd(simulated.map((s) => s.label))} only, exactly as the real exam does. It is a copy of the exam calculator, with the same limits. The display holds 8 digits, and it calculates strictly left to right with no order of operations.`
+      `This exam gives you an on-screen calculator in ${joinWithAnd(simulated.map((s) => s.label))} only, exactly as the real exam does. It is a copy of the exam calculator, with the same limits. The display holds 8 digits, and ${
+        leftToRight
+          ? "it calculates strictly left to right with no order of operations"
+          : "it follows order of operations, so multiplication happens before addition"
+      }.`
     );
   }
   if (realOnly.length > 0) {

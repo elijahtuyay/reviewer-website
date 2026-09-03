@@ -20,6 +20,13 @@ import type { Question } from "../data/schema.ts";
 import type { ScoringModel } from "../lib/exams/types.ts";
 import { press, initialCalculatorState } from "../lib/calculator/basic-di.ts";
 import type { CalculatorKey, CalculatorState } from "../lib/calculator/basic-di.ts";
+import {
+  pressGre,
+  initialGreCalculatorState,
+  hasGreMemory,
+  displayValue,
+} from "../lib/calculator/gre-standard.ts";
+import type { GreCalculatorKey } from "../lib/calculator/gre-standard.ts";
 import { readFileSync } from "node:fs";
 
 let failures = 0;
@@ -274,6 +281,64 @@ expect(
   scoreAttempt([numQuestion], [{ questionId: numQuestion.id, value: "  " }], { kind: "points", pointsPerCorrectAnswer: 1 }, 1)
     .unansweredCount === 1
 );
+
+/* ------------------------------------------- the GRE calculator ---------- */
+
+/*
+ * The device ETS provides in Quantitative Reasoning, which is NOT the TI-108
+ * the GMAT provides. These assertions exist as much to stop someone
+ * "simplifying" the two calculators into one as to catch a regression.
+ */
+function greRun(keys: GreCalculatorKey[]) {
+  let s = initialGreCalculatorState();
+  for (const k of keys) s = pressGre(s, k);
+  return s;
+}
+const greKeys = (text: string): GreCalculatorKey[] =>
+  text.split(" ").filter(Boolean) as GreCalculatorKey[];
+const greDisplay = (text: string) => greRun(greKeys(text)).display;
+
+// THE defining difference. The GMAT device gives 20 for this.
+check("order of operations: multiplication binds tighter than addition", greDisplay("2 + 3 * 4 ="), "14");
+check("the GMAT device gives 20 for the same keys", type("2 + 3 * 4 =").display, "20");
+check("division binds tighter than subtraction", greDisplay("1 0 - 6 / 2 ="), "7");
+check("equal precedence runs left to right", greDisplay("8 / 4 * 2 ="), "4");
+
+// Parentheses, which the GMAT device does not have at all.
+check("parentheses override precedence", greDisplay("( 2 + 3 ) * 4 ="), "20");
+check("nested parentheses", greDisplay("( 2 + ( 3 * 4 ) ) ="), "14");
+check("an unclosed parenthesis still evaluates at equals", greDisplay("( 2 + 3 * 4 ="), "14");
+check("a stray closing parenthesis is ignored", greDisplay("2 + 3 ) ="), "5");
+check("an open parenthesis after a number is refused", greDisplay("2 ( 3 ="), "23");
+
+// The keys it shares with every calculator.
+check("square root", greDisplay("9 sqrt"), "3");
+check("the square root of a negative errors", greDisplay("9 negate sqrt"), "Error");
+check("a root feeds the next operation", greDisplay("9 sqrt + 1 ="), "4");
+check("sign change on an entry", greDisplay("5 negate ="), "-5");
+check("divide by zero errors", greDisplay("5 / 0 ="), "Error");
+check("only C recovers from an error", greRun([...greKeys("5 / 0 ="), "7"]).display, "Error");
+check("C recovers", greRun([...greKeys("5 / 0 ="), "C", "7"]).display, "7");
+check("a second decimal point is ignored, the digit after it is not", greDisplay("1 . 5 . 5 ="), "1.55");
+check("a leading zero is replaced", greDisplay("0 7 ="), "7");
+
+// Eight digits, and the ceiling applies to memory too.
+check("the display holds eight digits", greDisplay("1 2 3 4 5 6 7 8 9"), "12345678");
+check("a result past eight digits errors", greDisplay("9 9 9 9 9 9 9 9 * 9 ="), "Error");
+check("memory adds", greRun(greKeys("7 M+ C MR")).display, "7");
+check("memory subtracts", greRun(greKeys("7 M+ C 2 M- C MR")).display, "5");
+check("memory clears", greRun(greKeys("7 M+ MC C MR")).display, "0");
+expect(
+  "memory survives a clear, which is what makes it useful",
+  greRun(greKeys("7 M+ C MR")).memory === 7
+);
+expect("the memory indicator follows the register", hasGreMemory(greRun(greKeys("7 M+"))));
+expect("an empty register shows no indicator", !hasGreMemory(greRun(greKeys("7 M+ MC"))));
+check("a memory value past the ceiling errors", greDisplay("9 9 9 9 9 9 9 9 M+ M+ M+ M+ M+ M+ M+ M+ M+ M+ M+"), "Error");
+
+// Transfer Display hands the shown value to a Numeric Entry box.
+expect("the display value is available to transfer", displayValue(greRun(greKeys("1 2 . 5 ="))) === 12.5);
+expect("an errored display transfers nothing", displayValue(greRun(greKeys("5 / 0 ="))) === null);
 
 const pts = scoreAttempt(
   everything,

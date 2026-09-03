@@ -143,7 +143,9 @@ export function NoCalculatorNote({ exam }: { exam: ExamModule }) {
    * being redundant with the setup page, which already says NMAT gives you
    * none in any section.
    */
-  const elsewhere = exam.sections.filter((s) => s.calculator === "basic-di");
+  const elsewhere = exam.sections.filter(
+    (s) => s.calculator === "basic-di" || s.calculator === "gre-standard"
+  );
   if (elsewhere.length === 0) return null;
 
   return (

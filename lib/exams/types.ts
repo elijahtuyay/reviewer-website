@@ -20,6 +20,11 @@ import { Difficulty, ExamId, Question, SectionId } from "@/data/schema";
  * square root, a percent key, three memory keys, and strictly left-to-right
  * evaluation with no order of operations. Modeled in `lib/calculator/basic-di.ts`.
  *
+ * "gre-standard" is the calculator ETS provides in GRE Quantitative Reasoning.
+ * It is a genuinely different device: it honors order of operations, so
+ * 2 + 3 x 4 is 14 where the TI-108 gives 20, and it has parentheses and no
+ * percent key. Modeled in `lib/calculator/gre-standard.ts`.
+ *
  * "not-simulated" means THE REAL EXAM PROVIDES ONE HERE AND THIS APP DOES NOT
  * MODEL IT YET. It exists because `null` already means something different and
  * load-bearing: null is "the real exam gives you none either", which the setup
@@ -35,7 +40,7 @@ import { Difficulty, ExamId, Question, SectionId } from "@/data/schema";
  * A calculator that is subtly wrong is worse than an absent one, because the
  * candidate practices habits that break on test day.
  */
-export type CalculatorKind = "basic-di" | "not-simulated" | null;
+export type CalculatorKind = "basic-di" | "gre-standard" | "not-simulated" | null;
 
 export interface SectionConfig {
   id: SectionId;

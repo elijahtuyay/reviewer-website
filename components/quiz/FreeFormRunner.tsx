@@ -292,8 +292,12 @@ export default function FreeFormRunner({
                 free-form exam that does grant one needs no special case, which
                 is the whole point of declaring it on SectionConfig. */}
             {!reviewMode &&
-              (section.calculator === "basic-di" ? (
-                <CalculatorPanel open={calcVisible} onOpenChange={setCalcOpen} />
+              (section.calculator === "basic-di" || section.calculator === "gre-standard" ? (
+                <CalculatorPanel
+                  open={calcVisible}
+                  onOpenChange={setCalcOpen}
+                  kind={section.calculator}
+                />
               ) : section.calculator === "not-simulated" ? (
                 <CalculatorNotSimulatedNote />
               ) : (
