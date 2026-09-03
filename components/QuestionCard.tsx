@@ -1,8 +1,15 @@
 "use client";
 
-import { memo, useRef } from "react";
+import { memo, useRef, useState } from "react";
 import { Question } from "@/data/schema";
 import MathText from "@/components/MathText";
+import {
+  AnswerValue,
+  isAnswered as hasAnswer,
+  isCorrectAnswer,
+  kindOf,
+  parseNumericAnswer,
+} from "@/lib/answers";
 
 /**
  * Reading-comprehension prompts embed their whole passage, because a random
@@ -46,14 +53,28 @@ function splitPassage(prompt: string): { passage: string; stem: string } | null 
 interface QuestionCardProps {
   question: Question;
   index: number;
-  selectedIndex: number | null;
   /**
-   * Takes the question id as well as the option, so runners can pass the
+   * The candidate's answer: an option index, an array of them, or typed text.
+   * See `lib/answers.ts` for why this is not a bare number any more.
+   */
+  value: AnswerValue | null;
+  /**
+   * Takes the question id as well as the answer, so runners can pass the
    * attempt's `select` straight through. They used to wrap it in an inline
    * arrow to close over the id, which handed every card a brand-new prop on
    * every render and made the memo below useless.
    */
-  onSelect?: (questionId: string, optionIndex: number) => void;
+  onSelect?: (questionId: string, value: AnswerValue) => void;
+  /**
+   * Multi-select only. Sends the INTENT (toggle this option) rather than a
+   * computed array, so the new answer is derived from the freshest state.
+   *
+   * Two clicks inside one frame both read the same `value` prop, because React
+   * has not re-rendered between them, so a computed array from the second click
+   * overwrote the first. Measured in a real browser: two picks on a Sentence
+   * Equivalence in one tick left exactly one selected.
+   */
+  onToggle?: (questionId: string, optionIndex: number, selectExactly: number | null) => void;
   reviewMode?: boolean;
   /**
    * Set while a capped review pass has run out of changes and this question is
@@ -67,15 +88,41 @@ interface QuestionCardProps {
 function QuestionCard({
   question,
   index,
-  selectedIndex,
+  value,
   onSelect,
+  onToggle,
   reviewMode = false,
   lockedReason,
 }: QuestionCardProps) {
   const passageParts = splitPassage(question.prompt);
-  const isAnswered = selectedIndex !== null;
-  const isCorrect = selectedIndex === question.correctIndex;
+  const kind = kindOf(question);
+  const isAnswered = hasAnswer(value);
+  const isCorrect = isCorrectAnswer(question, value);
   const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  /**
+   * The option a third pick pushed out, announced rather than left to be
+   * noticed.
+   *
+   * Once the cap is met, selecting another option replaces the OLDEST. That is
+   * a deliberate choice (a dead click reads as a broken checkbox), but it
+   * happened in total silence: no message, no live region, and if the dropped
+   * option was above the scroll position the candidate never learned that one
+   * of their two answers was gone.
+   */
+  const [replaced, setReplaced] = useState<string | null>(null);
+
+  const options = question.options ?? [];
+  /** Which option indices are currently chosen, whatever the question kind. */
+  const chosen: number[] =
+    kind === "multi"
+      ? Array.isArray(value)
+        ? value
+        : []
+      : typeof value === "number"
+        ? [value]
+        : [];
+  const interactive = !reviewMode && !lockedReason;
 
   /**
    * Arrow-key navigation, per the WAI-ARIA radiogroup pattern: the group is a
@@ -99,7 +146,7 @@ function QuestionCard({
     if (!keys.includes(event.key)) return;
     event.preventDefault();
     const forward = event.key === "ArrowDown" || event.key === "ArrowRight";
-    const count = question.options.length;
+    const count = options.length;
     const next = (optionIndex + (forward ? 1 : -1) + count) % count;
     const target = optionRefs.current[next];
     target?.focus();
@@ -111,11 +158,19 @@ function QuestionCard({
     target?.scrollIntoView({ block: "nearest" });
   }
 
-  // Roving tabindex: the selected option is the group's tab stop, or the first
-  // option when nothing is selected yet. Clamped because a stored answer index
-  // that no longer matches the options array would otherwise leave the group
-  // with no tab stop at all, i.e. unreachable by keyboard.
-  const tabStop = Math.min(Math.max(selectedIndex ?? 0, 0), question.options.length - 1);
+  /*
+   * Roving tabindex: the selected option is the group's tab stop, or the first
+   * option when nothing is selected yet. Clamped because a stored answer index
+   * that no longer matches the options array would otherwise leave the group
+   * with no tab stop at all, i.e. unreachable by keyboard.
+   *
+   * Only radiogroups rove. A checkbox group is a series of INDEPENDENT tab
+   * stops per WAI-ARIA, because each box toggles on its own and a candidate has
+   * to be able to reach the second of two picks without arrowing past the
+   * first. Getting this backwards would make Sentence Equivalence unusable by
+   * keyboard, which is the question type the multi path exists for.
+   */
+  const tabStop = Math.min(Math.max(chosen[0] ?? 0, 0), Math.max(0, options.length - 1));
 
   return (
     <div
@@ -143,19 +198,65 @@ function QuestionCard({
         )}
       </div>
 
-      {/* A short static name, NOT aria-labelledby the prompt: screen readers
-          re-announce a group's name on entry and on every focus move inside it,
-          and prompts here embed whole reading passages (the longest is ~1330
-          characters), so labeling by the prompt would re-read a passage on
-          every arrow key. */}
+      {/*
+        How many to pick AND what makes a pick correct, said before the options
+        rather than discovered by being marked wrong.
+
+        Two things were wrong here. The count alone omitted the rule that
+        DEFINES Sentence Equivalence: the two words must leave the sentence
+        meaning the same thing. Without it a candidate reasonably picks the two
+        words that each fit the blank, which is a different and easier question.
+
+        And the whole line was gated on a truthy `selectExactly`, so the open
+        "select all that apply" variant, which sets it to null, displayed NO
+        instruction at all. Its only cue was a clause at the end of a 130-word
+        passage, in body type, above three options that look like any other.
+      */}
+      {kind === "multi" && (
+        <p id={`${question.id}-multi-rule`} className="mt-4 ml-7 text-sm font-medium text-accent-text">
+          {question.selectExactly === 2
+            ? "Select the 2 answers that fit the sentence and give it the same meaning."
+            : question.selectExactly
+              ? `Select exactly ${question.selectExactly} answers.`
+              : "Select every answer that applies. There may be one, two or three."}
+        </p>
+      )}
+
+      {kind === "numeric" ? (
+        <NumericEntry
+          question={question}
+          index={index}
+          value={value}
+          onSelect={onSelect}
+          reviewMode={reviewMode}
+          lockedReason={lockedReason}
+        />
+      ) : (
+      /* A short static name, NOT aria-labelledby the prompt: screen readers
+         re-announce a group's name on entry and on every focus move inside it,
+         and prompts here embed whole reading passages (the longest is ~1330
+         characters), so labeling by the prompt would re-read a passage on
+         every arrow key. */
       <div
         className="mt-4 ml-7 flex flex-col gap-2"
-        role="radiogroup"
+        role={kind === "multi" ? "group" : "radiogroup"}
         aria-label={`Answer options for question ${index + 1}`}
+        /*
+         * The rule has to be ANNOUNCED, not merely adjacent.
+         *
+         * Tabbing from a radio in one question lands directly on the first
+         * checkbox of the next, so a screen-reader user could enter a
+         * select-two group without ever hearing that two answers are required.
+         * Being the previous DOM sibling is not an association.
+         */
+        aria-describedby={kind === "multi" ? `${question.id}-multi-rule` : undefined}
       >
-        {question.options.map((option, optionIndex) => {
-          const isSelected = selectedIndex === optionIndex;
-          const isCorrectOption = optionIndex === question.correctIndex;
+        {options.map((option, optionIndex) => {
+          const isSelected = chosen.includes(optionIndex);
+          const isCorrectOption =
+            kind === "multi"
+              ? (question.correctIndices ?? []).includes(optionIndex)
+              : optionIndex === question.correctIndex;
 
           // border-line-strong, not border-line: an unselected option's border is
           // the only thing identifying it as a control, so it needs the 3:1
@@ -167,7 +268,18 @@ function QuestionCard({
               // border-green-700: -600 is 2.95 against --background, under the 3:1 that
               // WCAG 1.4.11 asks of a boundary identifying a control.
               style = "border-green-700 bg-green-50 dark:border-green-500 dark:bg-green-950/40";
-              marker = "Correct answer";
+              /*
+               * On a select-two question the candidate needs to know WHICH of
+               * their two picks was right, and which correct answer they missed.
+               * A bare "Correct answer" on every keyed option made a pick you
+               * got right look identical to one you never chose, on the one
+               * question type where that is the whole result.
+               */
+              marker = isSelected
+                ? "Correct answer, you selected this"
+                : kind === "multi"
+                  ? "Correct answer, you missed this"
+                  : "Correct answer";
             } else if (isSelected && !isCorrectOption) {
               style = "border-red-600 bg-red-50 dark:border-red-500 dark:bg-red-950/40";
               marker = "Your answer";
@@ -182,6 +294,31 @@ function QuestionCard({
             style = "border-accent ring-1 ring-accent bg-accent/10 dark:bg-accent/20";
           }
 
+          /*
+           * A SQUARE marker for a checkbox and a round one for a radio.
+           *
+           * Before this the two were styled identically, so `role="checkbox"`
+           * told a screen reader that more than one answer was expected and
+           * told a sighted candidate nothing at all. Every test delivery
+           * platform, ETS included, uses this shape convention, and on a phone
+           * the one instruction line scrolls away before the last option.
+           *
+           * Drawn with a border rather than an icon so it inherits the option's
+           * own state colors and needs no extra contrast tuning.
+           */
+          const marker_shape = kind === "multi" ? "rounded-[3px]" : "rounded-full";
+          /*
+           * Filled means "you chose this", and NOTHING else.
+           *
+           * It used to also fill on any correct option in review, so on a
+           * section with 26 unanswered questions every keyed option showed a
+           * filled dot, which reads as "you picked this" and is false. The
+           * multi markers disambiguate in text; a single-select radio does not.
+           * Correctness is carried by the border and the label, which is where
+           * it belongs.
+           */
+          const filled = isSelected;
+
           return (
             <button
               key={optionIndex}
@@ -189,19 +326,36 @@ function QuestionCard({
                 optionRefs.current[optionIndex] = el;
               }}
               type="button"
-              role="radio"
+              role={kind === "multi" ? "checkbox" : "radio"}
               aria-checked={isSelected}
               // aria-disabled rather than `disabled` in review mode: a disabled
               // button is removed from the tab order, which would make the whole
               // review unreachable by keyboard. This keeps every option
               // focusable and announced while ignoring clicks.
               aria-disabled={reviewMode || Boolean(lockedReason) || undefined}
-              tabIndex={optionIndex === tabStop ? 0 : -1}
+              // See the note on tabStop: checkboxes each keep their own stop.
+              tabIndex={kind === "multi" || optionIndex === tabStop ? 0 : -1}
               onClick={() => {
-                if (reviewMode || lockedReason) return;
-                onSelect?.(question.id, optionIndex);
+                if (!interactive) return;
+                if (kind === "multi") {
+                  // Work out what is about to be pushed out BEFORE the toggle,
+                  // because afterwards it is simply absent. chosen[0] is the
+                  // oldest pick, which is the one toggleMultiAnswer drops.
+                  const cap = question.selectExactly ?? null;
+                  const evicts =
+                    cap !== null && !isSelected && chosen.length >= cap ? options[chosen[0]] : null;
+                  setReplaced(evicts);
+                  onToggle?.(question.id, optionIndex, cap);
+                } else {
+                  onSelect?.(question.id, optionIndex);
+                }
               }}
-              onKeyDown={(event) => handleKeyDown(event, optionIndex)}
+              onKeyDown={(event) => {
+                // Arrows are the radiogroup pattern and do not belong in a
+                // checkbox group, where Tab is the documented way between boxes.
+                if (kind === "multi") return;
+                handleKeyDown(event, optionIndex);
+              }}
               // min-h-11 is the 44px tap-target minimum, and it doubles as the
               // headroom stacked math (fractions, exponents) needs to sit in a
               // row without the box having to grow around it.
@@ -215,12 +369,36 @@ function QuestionCard({
               // text-base, not text-sm: the options were 14px under a 16px
               // stem, i.e. the text a candidate re-reads three times before
               // committing was the smallest text on the card.
-              className={`flex min-h-11 scroll-mt-40 items-center sm:scroll-mt-24 justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-base leading-relaxed text-foreground transition-[color,background-color,border-color,box-shadow,transform] ${
+              /*
+               * Stacked below `sm`, side by side above it.
+               *
+               * The review markers grew from "Correct answer" (~85px) to
+               * "Correct answer, you selected this" (~185px) so the candidate
+               * can tell which of two picks was right. That took ~100px out of
+               * the text column at the one width that cannot spare it: at 390px
+               * an unbreakable word painted straight through the marker, up to
+               * 31px of overlap, rendering as "impenetreableanswer, you
+               * selected this". `min-w-0` lets a flex child shrink below its
+               * content, so nothing stopped it.
+               */
+              className={`flex min-h-11 scroll-mt-40 flex-col items-start gap-1 sm:scroll-mt-24 sm:flex-row sm:items-center sm:justify-between sm:gap-3 rounded-md border px-4 py-2.5 text-left text-base leading-relaxed text-foreground transition-[color,background-color,border-color,box-shadow,transform] ${
                 reviewMode || lockedReason ? "" : "active:scale-[0.99]"
               } ${style} ${reviewMode || lockedReason ? "cursor-default" : "cursor-pointer"} ${lockedReason ? "opacity-60" : ""}`}
             >
-              <span>
-                <MathText text={option} />
+              <span className="flex min-w-0 items-start gap-3 [overflow-wrap:anywhere]">
+                <span
+                  aria-hidden
+                  className={`mt-1 flex h-4 w-4 shrink-0 items-center justify-center border ${marker_shape} ${
+                    filled ? "border-current" : "border-muted"
+                  }`}
+                >
+                  {filled && (
+                    <span className={`h-2 w-2 bg-current ${marker_shape}`} />
+                  )}
+                </span>
+                <span className="min-w-0">
+                  <MathText text={option} />
+                </span>
               </span>
               {marker && (
                 <span
@@ -234,6 +412,17 @@ function QuestionCard({
             </button>
           );
         })}
+      </div>
+      )}
+
+      {/* Polite, and mounted unconditionally so filling it later counts as the
+          content change a screen reader announces. */}
+      <div role="status" aria-live="polite" className="ml-7">
+        {kind === "multi" && replaced && !reviewMode && (
+          <p className="mt-2 text-xs text-muted">
+            You already selected {question.selectExactly}, so {replaced} was removed.
+          </p>
+        )}
       </div>
 
       {lockedReason && !reviewMode && (
@@ -257,6 +446,114 @@ function QuestionCard({
             <MathText text={question.explanation} />
           </p>
         </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * GRE Numeric Entry: no options, you type the number.
+ *
+ * A text input rather than `type="number"`, deliberately. A number input hides
+ * what was typed behind browser locale rules, silently discards a trailing
+ * decimal point while someone is mid-entry, and answers a scroll wheel over a
+ * focused field by changing the value, which on a timed exam is a way to lose
+ * an answer you already gave. `inputMode="decimal"` still brings up the numeric
+ * keypad on a phone, which is the only part of `type="number"` worth having.
+ *
+ * The raw text is stored, not a parsed number, so "0.50" stays "0.50" on the
+ * review screen instead of being redisplayed as something the candidate did not
+ * write. Marking parses it (see `parseNumericAnswer`), and tolerates commas,
+ * currency signs and simple fractions, because being marked wrong over a comma
+ * teaches nothing about mathematics.
+ */
+function NumericEntry({
+  question,
+  index,
+  value,
+  onSelect,
+  reviewMode,
+  lockedReason,
+}: {
+  question: Question;
+  index: number;
+  value: AnswerValue | null;
+  onSelect?: (questionId: string, value: AnswerValue) => void;
+  reviewMode: boolean;
+  lockedReason?: string;
+}) {
+  const text = typeof value === "string" ? value : value === null || value === undefined ? "" : String(value);
+  const entered = parseNumericAnswer(text);
+  const correct = isCorrectAnswer(question, text);
+
+  return (
+    <div className="mt-4 ml-7">
+      <label className="flex items-center gap-2">
+        <span className="sr-only">
+          Your answer for question {index + 1}
+          {question.answerPrefix ? `, in ${question.answerPrefix}` : ""}
+          {question.answerSuffix ? `, in ${question.answerSuffix}` : ""}
+        </span>
+        {question.answerPrefix && (
+          <span aria-hidden className="text-base text-muted">
+            {question.answerPrefix}
+          </span>
+        )}
+        <input
+          type="text"
+          inputMode="decimal"
+          autoComplete="off"
+          value={text}
+          readOnly={reviewMode || Boolean(lockedReason)}
+          onChange={(event) => {
+            if (reviewMode || lockedReason) return;
+            onSelect?.(question.id, event.target.value);
+          }}
+          placeholder="Your answer"
+          aria-describedby={`${question.id}-numeric-help`}
+          // min-h-11 is the app's 44px tap-target floor, and w-40 is wide enough
+          // for eight digits plus a decimal point, which is the most the real
+          // exam's own calculator can produce.
+          className={`min-h-11 w-40 rounded-md border px-3 text-base text-foreground transition-[color,background-color,border-color] placeholder:text-muted ${
+            reviewMode
+              ? correct
+                ? "border-green-700 bg-green-50 dark:border-green-500 dark:bg-green-950/40"
+                : "border-red-600 bg-red-50 dark:border-red-500 dark:bg-red-950/40"
+              : "border-line-strong focus:border-accent"
+          } ${lockedReason ? "opacity-60" : ""}`}
+        />
+        {question.answerSuffix && (
+          <span aria-hidden className="text-base text-muted">
+            {question.answerSuffix}
+          </span>
+        )}
+      </label>
+
+      {/*
+        What the box will accept, said out loud.
+        `parseNumericAnswer` is generous: it takes a fraction, and it strips
+        commas, currency signs and a percent sign. None of that was discoverable,
+        so a candidate with the right value sat deciding between "0.5" and "1/2".
+      */}
+      {!reviewMode && (
+        <p id={`${question.id}-numeric-help`} className="mt-2 text-xs text-muted">
+          Type a number. A fraction such as 3/4 is accepted.
+          {entered === null && text.trim().length > 0 && (
+            <span className="ml-1 text-foreground">That is not a number yet.</span>
+          )}
+        </p>
+      )}
+
+      {reviewMode && (
+        <p className="mt-2 text-sm text-muted">
+          Correct answer:{" "}
+          <span className="font-medium text-foreground">
+            {question.answerPrefix ?? ""}
+            {question.correctValue}
+            {question.answerSuffix ?? ""}
+          </span>
+          {entered !== null && !correct && <> &middot; you entered {text.trim()}</>}
+        </p>
       )}
     </div>
   );

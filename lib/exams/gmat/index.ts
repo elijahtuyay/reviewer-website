@@ -140,6 +140,11 @@ const gmat: ExamModule = {
     // Leaving questions unreached costs far more than getting them wrong,
     // which is the single most important pacing lesson the real exam teaches.
     unansweredPenaltyPerQuestion: 0.02,
+    // The Focus band moves in tens, so a reported score is always a multiple of ten.
+    scoreStep: 10,
+    // Adaptive: climbing to the hard questions is the achievement, so the top
+    // of the band has to require it.
+    denominator: "fixed-reference",
   },
 
   loadSection: jsonBank({

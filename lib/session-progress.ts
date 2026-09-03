@@ -1,5 +1,6 @@
 import { ExamId, SectionId } from "@/data/schema";
 import { AdaptiveState } from "@/lib/adaptive";
+import { AnswerMap } from "@/lib/answers";
 
 /**
  * A snapshot of the scored result, written once at submit time.
@@ -20,7 +21,7 @@ export interface StoredSummary {
 }
 
 export interface StoredProgress {
-  answers: Record<string, number>;
+  answers: AnswerMap;
   submitted: boolean;
   /**
    * The drawn question set, in display order. For an adaptive section this
@@ -50,7 +51,7 @@ export interface StoredProgress {
    * away from the original answer and another to move back, with the attempt
    * ending up exactly where it started.
    */
-  reviewBaseline: Record<string, number>;
+  reviewBaseline: AnswerMap;
   /** Difficulty ladder position, for adaptive sections. Null for fixed-form ones. */
   adaptive: AdaptiveState | null;
   /** Sequential sections track which question is on screen; free-navigation ones ignore it. */

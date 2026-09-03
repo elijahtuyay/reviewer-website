@@ -19,8 +19,23 @@ import { Difficulty, ExamId, Question, SectionId } from "@/data/schema";
  * "basic-di" is the GMAT Focus Data Insights calculator: four functions, a
  * square root, a percent key, three memory keys, and strictly left-to-right
  * evaluation with no order of operations. Modeled in `lib/calculator/basic-di.ts`.
+ *
+ * "not-simulated" means THE REAL EXAM PROVIDES ONE HERE AND THIS APP DOES NOT
+ * MODEL IT YET. It exists because `null` already means something different and
+ * load-bearing: null is "the real exam gives you none either", which the setup
+ * page states out loud as a rule. The GRE grants a calculator in Quantitative
+ * Reasoning, so calling that null would have printed a flat lie on the page a
+ * candidate reads before starting.
+ *
+ * Why the GRE's is not simply `basic-di`: it is a different device. It honors
+ * order of operations (2 + 3 x 4 is 14, where the TI-108 gives 20), it has
+ * parentheses, it has a Transfer Display key that types the result into a
+ * Numeric Entry box, and it accepts keyboard input. This repo has already
+ * shipped a calculator that borrowed three details from the wrong device once.
+ * A calculator that is subtly wrong is worse than an absent one, because the
+ * candidate practices habits that break on test day.
  */
-export type CalculatorKind = "basic-di" | null;
+export type CalculatorKind = "basic-di" | "not-simulated" | null;
 
 export interface SectionConfig {
   id: SectionId;
@@ -79,8 +94,23 @@ export interface ExamRules {
    * `maxChanges` edits and only reachable with time left on the clock.
    */
   reviewEdit: ReviewEditRules | null;
-  /** Whether the candidate picks the order the sections are taken in. */
-  sectionOrder: "fixed" | "chooseable";
+  /**
+   * Who picks the order the sections are taken in.
+   *
+   * Three values, not two, because "you choose here" and "you choose on the
+   * real exam" are different facts and the setup page states both.
+   *
+   *  - "fixed": a set order here (NMAT).
+   *  - "chooseable": you choose here AND on the real exam (GMAT Focus).
+   *  - "chooseable-here-only": you choose here, but the real exam chooses for
+   *    you (the GRE, which fixes the writing task first and then orders the
+   *    remaining sections itself).
+   *
+   * Collapsing the last two printed "the real exam also lets you decide the
+   * order before you start" on a GRE page, which is simply untrue, and it is
+   * the exact failure this generated-copy design exists to prevent.
+   */
+  sectionOrder: "fixed" | "chooseable" | "chooseable-here-only";
   /**
    * True if starting a section locks the others until it is submitted. Both
    * current exams do this; it is declared rather than assumed so an untimed
@@ -134,6 +164,39 @@ export type ScoringModel =
        * why finishing with guesses beats running out of time.
        */
       unansweredPenaltyPerQuestion: number;
+      /**
+       * The increment the reported score moves in.
+       *
+       * Declared rather than fixed, because the two scaled exams here are not
+       * close: GMAT Focus is 205-805 in tens, and the GRE is 130-170 in ones.
+       * Rounding the GRE to the nearest ten would give a candidate five
+       * reachable scores across the whole measure.
+       */
+      scoreStep: number;
+      /**
+       * What the earned weight is measured AGAINST, and the reason this is
+       * declared rather than assumed.
+       *
+       * "fixed-reference": a full section of the hardest available material.
+       * Correct for an ADAPTIVE exam, because there the candidate climbs to the
+       * hard questions by answering well, so reaching them IS the achievement
+       * and the top of the band should require it.
+       *
+       * "served": the weight of the questions actually drawn. Correct for a
+       * NON-ADAPTIVE exam, where the mix is random and the candidate has no
+       * influence over it. Under a fixed reference such an exam cannot reach
+       * its own maximum: a 27-question GRE draw averages about 2.28 weight per
+       * question against a 3.2 ceiling, so a FLAWLESS attempt scored ~159 of
+       * 170, and two flawless attempts differed by up to 11 points purely from
+       * draw luck. Meanwhile the setup page stated "the score runs from 130 to
+       * 170" as fact.
+       *
+       * Difficulty still counts under "served": getting the hard questions
+       * right earns more than getting the easy ones right on any partial run.
+       * What it stops doing is punishing a candidate for a draw they did not
+       * choose.
+       */
+      denominator: "fixed-reference" | "served";
     };
 
 /**
@@ -150,6 +213,24 @@ export interface ExamModule {
   sections: SectionConfig[];
   rules: ExamRules;
   scoring: ScoringModel;
+  /**
+   * True things about the REAL exam that this app does not model as a rule.
+   *
+   * The setup page's "what to expect" list is generated from `rules` on
+   * purpose, so the copy cannot claim behavior the engine does not have. That
+   * design has one gap: a fact that is true of the real exam and deliberately
+   * NOT implemented here has no rule to be generated from, so it silently goes
+   * unsaid. The GRE opens with a 30-minute essay this site does not simulate,
+   * and a candidate who meets that for the first time on test day was failed by
+   * this page, not by the engine.
+   *
+   * Each entry is appended to the generated list verbatim. Use it only for
+   * differences between the real exam and this app. Anything the engine
+   * actually does belongs in `rules`, where it cannot drift: this field is an
+   * escape hatch, and an escape hatch used for ordinary copy becomes the
+   * hand-written blurb the generated list was built to replace.
+   */
+  notes?: string[];
   /**
    * Loads one section's questions. Deliberately async and per-section: it is a
    * dynamic import, so a section's questions are a separate chunk that is only

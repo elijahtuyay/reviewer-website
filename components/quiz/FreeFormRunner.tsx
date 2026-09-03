@@ -4,7 +4,13 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import { Attempt } from "@/components/quiz/useAttempt";
-import { AttemptNotice, BackToSetup, NoCalculatorNote } from "@/components/quiz/shared";
+import { isAnswered, isCorrectAnswer } from "@/lib/answers";
+import {
+  AttemptNotice,
+  BackToSetup,
+  CalculatorNotSimulatedNote,
+  NoCalculatorNote,
+} from "@/components/quiz/shared";
 import { scrollBehavior } from "@/lib/motion";
 import CalculatorPanel from "@/components/quiz/CalculatorPanel";
 import Timer from "@/components/Timer";
@@ -39,7 +45,7 @@ export default function FreeFormRunner({
 
   const {
     phase, notice, questions, answers, deadline, paused, frozenTimeLabel,
-    answeredCount, result, select, submit, restart, pause, resume, onDeadlineChange,
+    answeredCount, result, select, toggleOption, submit, restart, pause, resume, onDeadlineChange,
   } = attempt;
 
   /**
@@ -71,9 +77,24 @@ export default function FreeFormRunner({
     const incorrect: number[] = [];
     questions.forEach((q, i) => {
       const answer = answers[q.id];
-      if (answer === null || answer === undefined) return;
+      /*
+       * isAnswered / isCorrectAnswer, never `=== q.correctIndex`.
+       *
+       * This is the runner `navigation: "free"` selects, which is the GRE's,
+       * and the GRE is the exam whose answers are not option indices. A
+       * multi-select answer is an array and a numeric one is typed text, so
+       * neither can ever equal `correctIndex` (which is `undefined` for them
+       * anyway). Every one of them was pushed to `incorrectNumbers` and painted
+       * RED in the progress grid, beside a card that correctly said "Correct"
+       * and a score that had counted it right.
+       *
+       * The null check had the matching flaw: an empty numeric string and an
+       * empty selection array are both non-null, so a touched-then-emptied
+       * answer counted as answered here while `useAttempt` said otherwise.
+       */
+      if (!isAnswered(answer)) return;
       answered.push(i + 1);
-      if (answer === q.correctIndex) correct.push(i + 1);
+      if (isCorrectAnswer(q, answer)) correct.push(i + 1);
       else incorrect.push(i + 1);
     });
     return { answeredNumbers: answered, correctNumbers: correct, incorrectNumbers: incorrect };
@@ -273,6 +294,8 @@ export default function FreeFormRunner({
             {!reviewMode &&
               (section.calculator === "basic-di" ? (
                 <CalculatorPanel open={calcVisible} onOpenChange={setCalcOpen} />
+              ) : section.calculator === "not-simulated" ? (
+                <CalculatorNotSimulatedNote />
               ) : (
                 <NoCalculatorNote exam={exam} />
               ))}
@@ -288,8 +311,9 @@ export default function FreeFormRunner({
                 key={question.id}
                 question={question}
                 index={index}
-                selectedIndex={answers[question.id] ?? null}
+                value={answers[question.id] ?? null}
                 onSelect={select}
+                onToggle={toggleOption}
                 reviewMode={reviewMode}
               />
             ))}
@@ -319,7 +343,14 @@ export default function FreeFormRunner({
         }
         body={
           pendingAction === "submit"
-            ? `${questions.length - answeredCount} of ${questions.length} questions have no answer. After you submit, you can read every explanation. You cannot change an answer.`
+            ? // The count is recomputed here rather than trusted from the click
+              // that opened the dialog. Answers can change in the same frame as
+              // the click, and the dialog then rendered "0 of 27 questions have
+              // no answer", which is a nonsense sentence in a modal asking for
+              // an irreversible decision.
+              questions.length - answeredCount <= 0
+              ? "Every question has an answer. After you submit, you can read every explanation. You cannot change an answer."
+              : `${questions.length - answeredCount} of ${questions.length} questions have no answer. After you submit, you can read every explanation. You cannot change an answer.`
             : "This deletes your answers for this section. It draws a new set of questions and starts a new timer. You cannot undo this."
         }
         confirmLabel={pendingAction === "submit" ? "Submit section" : "Restart section"}

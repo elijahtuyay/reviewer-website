@@ -4,7 +4,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import { Attempt } from "@/components/quiz/useAttempt";
-import { AttemptNotice, BackToSetup, NoCalculatorNote } from "@/components/quiz/shared";
+import { isAnswered } from "@/lib/answers";
+import {
+  AttemptNotice,
+  BackToSetup,
+  CalculatorNotSimulatedNote,
+  NoCalculatorNote,
+} from "@/components/quiz/shared";
 import CalculatorPanel from "@/components/quiz/CalculatorPanel";
 import Timer from "@/components/Timer";
 import QuestionCard from "@/components/QuestionCard";
@@ -39,7 +45,7 @@ export default function SequentialRunner({
   const {
     phase, notice, questions, answers, flagged, cursor, totalQuestions, deadline,
     paused, frozenTimeLabel, answeredCount, result, reviewChangesLeft,
-    select, toggleFlag, advance, submit, restart, pause, resume, onDeadlineChange,
+    select, toggleOption, toggleFlag, advance, submit, restart, pause, resume, onDeadlineChange,
   } = attempt;
 
   /**
@@ -59,8 +65,9 @@ export default function SequentialRunner({
   const reviewMode = phase === "done";
   const inReviewPass = phase === "reviewEdit";
   const current = questions[cursor];
-  const currentAnswered =
-    current && answers[current.id] !== null && answers[current.id] !== undefined;
+  // isAnswered, not a null check. Latent today because no sequential exam has a
+  // multi or numeric question, and a live bug the moment one does.
+  const currentAnswered = current && isAnswered(answers[current.id]);
   const servedCount = questions.length;
   const isLastServed = servedCount >= totalQuestions && cursor === servedCount - 1;
 
@@ -157,6 +164,8 @@ export default function SequentialRunner({
           {!reviewMode &&
             (section.calculator === "basic-di" ? (
               <CalculatorPanel open={calcVisible} onOpenChange={setCalcOpen} />
+            ) : section.calculator === "not-simulated" ? (
+              <CalculatorNotSimulatedNote />
             ) : (
               <NoCalculatorNote exam={exam} />
             ))}
@@ -207,8 +216,9 @@ export default function SequentialRunner({
                 key={current.id}
                 question={current}
                 index={cursor}
-                selectedIndex={answers[current.id] ?? null}
+                value={answers[current.id] ?? null}
                 onSelect={select}
+                onToggle={toggleOption}
                 reviewMode={false}
               />
 
@@ -272,7 +282,7 @@ export default function SequentialRunner({
                 key={question.id}
                 question={question}
                 index={index}
-                selectedIndex={answers[question.id] ?? null}
+                value={answers[question.id] ?? null}
                 reviewMode
               />
             ))}
@@ -321,7 +331,8 @@ function ReviewPass({
   attempt: Attempt;
   onSubmit: () => void;
 }) {
-  const { questions, answers, flagged, select, reviewChangesLeft, canChangeAnswer } = attempt;
+  const { questions, answers, flagged, select, toggleOption, reviewChangesLeft, canChangeAnswer } =
+    attempt;
   const limit = exam.rules.reviewEdit?.maxChanges ?? 0;
   const exhausted = reviewChangesLeft !== null && reviewChangesLeft <= 0;
   const flaggedQuestions = questions
@@ -376,8 +387,9 @@ function ReviewPass({
               <QuestionCard
                 question={question}
                 index={index}
-                selectedIndex={answers[question.id] ?? null}
+                value={answers[question.id] ?? null}
                 onSelect={select}
+                onToggle={toggleOption}
                 reviewMode={false}
                 lockedReason={
                   locked

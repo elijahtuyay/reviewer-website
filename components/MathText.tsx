@@ -72,12 +72,15 @@ export function hasMath(text: string): boolean {
 export function questionNeedsMath(question: {
   prompt: string;
   explanation: string;
-  options: string[];
+  // Optional since the GRE brought numeric-entry questions, which have no
+  // options at all. A required array here would have made the preloader the
+  // one thing standing between a new question kind and a compile.
+  options?: string[];
 }): boolean {
   return (
     hasMath(question.prompt) ||
     hasMath(question.explanation) ||
-    question.options.some(hasMath)
+    (question.options ?? []).some(hasMath)
   );
 }
 

@@ -1,0 +1,1817 @@
+[
+  {
+    "id": "grv-001",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage: \"For most of the twentieth century, scholars treated the doodles in the margins of medieval manuscripts as idle distractions, the work of bored copyists with time and ink to spare. Recent studies have reversed that verdict. Catalogs of marginal images from a single monastery show that the same motifs recur across decades, in the hands of different scribes, and that they cluster beside particular kinds of text. A rabbit brandishing a sword appears next to passages on cowardice; a snail appears next to warnings about delay. Far from being random, the margins seem to have carried a running commentary on the page they framed, legible to readers who were trained to expect it.\" The passage is primarily concerned with?",
+    "options": [
+      "revising an earlier assessment of medieval marginal images",
+      "cataloging the motifs that appear most often in monastic manuscripts",
+      "explaining why medieval scribes had so much unoccupied time",
+      "arguing that medieval readers preferred pictures to written text",
+      "tracing the influence of monastic art on later European painting"
+    ],
+    "correctIndex": 0,
+    "explanation": "The passage opens with the older view that marginal images were idle distractions, states that recent work has reversed that verdict, and then gives the evidence for the reversal. Revising an earlier assessment is therefore the whole shape of the piece. The catalogs and the recurring motifs are evidence offered in support of that revision, not the subject of the passage, so treating the cataloging of motifs as the main concern mistakes a supporting detail for the point.",
+    "source": "original"
+  },
+  {
+    "id": "grv-002",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"Lichens are not single organisms but partnerships, usually of a fungus and an alga, and they draw nearly all their nutrients directly from the air rather than from soil. That habit makes them unusually sensitive to what the air carries. In cities where sulfur dioxide levels stayed high through the middle of the last century, whole genera vanished from tree trunks and stone walls, leaving only a few tolerant crusts behind. When emissions fell, some of the missing species returned, though slowly and unevenly, and a few never did. Surveyors now read the composition of a wall's lichen community as a rough historical record, treating present absences as evidence of pollution that ended decades before anyone thought to measure it.\" It can be inferred from the passage that a lichen survey of a given wall may?",
+    "options": [
+      "distinguish fungal partners from algal ones without magnification",
+      "predict the level of sulfur dioxide that the site will carry in future",
+      "show that tolerant crusts grow faster than the species they replaced",
+      "reveal the air quality at the site during a period that no instrument recorded",
+      "establish that no lichen species has ever recolonized a cleaned wall"
+    ],
+    "correctIndex": 3,
+    "explanation": "The final sentence says surveyors treat missing species as evidence of pollution that ended before anyone measured it, so a survey can speak to conditions in an unmeasured past. Prediction of future levels is a different operation and nothing in the passage supports it. The passage also states that some species did return, which rules out any claim that recolonization never happens.",
+    "source": "original"
+  },
+  {
+    "id": "grv-003",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"Programs of urban renewal are still routinely judged by the figures they were designed to move: units demolished, acres cleared, assessed values raised. By those measures the postwar clearances in many American cities were successes, and their administrators said so at the time. What the figures could not register was the fate of the households counted out of the neighborhood, most of whom were rehoused, if at all, in districts already under strain. Later scholarship has recovered some of those trajectories from relocation files, and the picture that emerges is less an accounting error than a choice about what would be counted. The metrics did not fail. They did exactly what they were built to do, which was to make one kind of loss invisible.\" The author's attitude toward the metrics described is best characterized as?",
+    "options": [
+      "puzzled by their persistent inaccuracy",
+      "critical of what they were designed to omit",
+      "confident that better data will settle the dispute",
+      "admiring of their administrative efficiency",
+      "indifferent to the debate they have provoked"
+    ],
+    "correctIndex": 1,
+    "explanation": "The author insists that the metrics did not fail but worked as designed, and that the design made a particular loss invisible. That is criticism aimed at what the metrics were built to leave out rather than at faulty measurement. Calling the author puzzled by inaccuracy inverts the closing point, since the passage explicitly denies that an error occurred.",
+    "source": "original"
+  },
+  {
+    "id": "grv-004",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"Before 1977 the accepted account of ocean food webs began at the surface: sunlight fed plankton, plankton fed everything below, and the deep sea lived on what drifted down. The discovery of dense animal communities around hydrothermal vents, kilometers beneath any light, forced a revision. The vents emit hydrogen sulfide, a compound lethal to most animals, and bacteria there oxidize it for energy, supporting tube worms and clams that carry those bacteria inside their own tissues. Sunlight is not wholly irrelevant even here, since the oxygen the bacteria consume is itself a product of surface photosynthesis. The vents therefore did not overturn the older account so much as reveal its limits, showing that a chemical rather than a luminous source can anchor a food web.\" The sentence noting that vent bacteria consume oxygen produced at the surface serves primarily to?",
+    "options": [
+      "identify the mechanism by which tube worms digest their resident bacteria",
+      "cast doubt on the observations of vent communities made in 1977",
+      "explain why hydrogen sulfide proves lethal to most deep-sea animals",
+      "propose an experiment that would test the older account of food webs",
+      "qualify the independence of vent communities from sunlight"
+    ],
+    "correctIndex": 4,
+    "explanation": "The sentence concedes that surface photosynthesis still supplies the oxygen the vent bacteria need, which limits how independent of sunlight these communities can be said to be, and the closing sentence draws exactly that conclusion. The sentence does not question the 1977 findings, since the passage treats them as established. It also says nothing about how hydrogen sulfide harms animals, a point the passage mentions only in passing.",
+    "source": "original"
+  },
+  {
+    "id": "grv-005",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"A transcription turns a recorded solo into notation, and every transcription is an argument about what in the performance was essential. Standard notation fixes pitch and duration on a grid. It has no settled way to record the slight delay behind the beat that gives a phrase its pull, or a pitch bent a fraction flat and then released. Transcribers who invent symbols for these things produce scores that few players can read at sight. Those who leave them out produce scores that are readable and, in the judgment of many performers, wrong. The dispute is not really about notation. It is about whether a solo is a set of notes that a player happened to deliver in a particular way, or a way of delivering that happens to involve notes.\" The passage suggests that a readable transcription of a jazz solo is likely to?",
+    "options": [
+      "contain more symbols than most working performers can interpret",
+      "record the exact pitch of every bent note in the original solo",
+      "omit features that some performers consider essential",
+      "be rejected by transcribers who prefer standard notation",
+      "reproduce the rhythmic delay that gives a phrase its pull"
+    ],
+    "correctIndex": 2,
+    "explanation": "The passage pairs readability with omission: transcribers who leave out the delays and bends produce scores that are readable and that many performers call wrong. Omitting features some performers consider essential is that pairing restated. The alternative that a readable score records every bent pitch describes the other horn of the dilemma, the score dense with invented symbols that few players can read.",
+    "source": "original"
+  },
+  {
+    "id": "grv-006",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"Economists once treated remittances sent home by migrant workers as a straightforward transfer, a sum leaving one economy and arriving in another. Household surveys complicate that view. In several receiving regions, the arrival of regular remittances coincides with a measurable withdrawal of adult household members from local wage labor, so that total household income rises by less than the sum received. The effect is strongest where local wages are low and weakest where they approach what the migrant earns abroad. None of this makes remittances unhelpful. Recipient households are better off, and the money is spent locally. It does mean that a policy costed on the assumption that every dollar received is a dollar added will overstate what the flow accomplishes.\" The passage implies that the shortfall it describes would be smallest in a region where?",
+    "options": [
+      "local wages are close to what migrants earn abroad",
+      "remittances arrive irregularly rather than on a schedule",
+      "recipient households spend the money outside the region",
+      "the number of migrants working abroad has recently declined",
+      "the migrant sends a larger share of foreign earnings home"
+    ],
+    "correctIndex": 0,
+    "explanation": "The shortfall comes from household members leaving local wage work, and the passage states that this effect is weakest where local wages approach the migrant's foreign earnings. Where the gap is small, less local income is given up, so the shortfall shrinks. Sending home a larger share raises the sum received but does nothing to change the incentive to leave local work, so it does not narrow the gap between the sum received and the income gained.",
+    "source": "original"
+  },
+  {
+    "id": "grv-007",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"The claim that trees in a forest share sugar through a common fungal network has moved quickly from laboratory result to popular certainty. The underlying observations are real: fungal threads do connect the roots of neighboring trees, and labeled carbon injected into one tree can later be detected in another. What remains unsettled is how much carbon travels, in which direction, and whether the transfer benefits the receiving tree at all. Field trials that block the fungal route have produced small and inconsistent effects on seedling growth. A network can exist without functioning as a cooperative, and fungi that link two trees are under no obligation to serve either. The evidence supports a plumbing system. It does not yet support the account of forests as generous communities.\" The passage is primarily concerned with?",
+    "options": [
+      "reporting a laboratory technique for labeling the carbon in trees",
+      "denying that fungal threads connect the roots of neighboring trees",
+      "explaining why seedlings grow poorly once fungal routes are blocked",
+      "distinguishing an established finding from a broader claim built on it",
+      "recommending that field trials replace laboratory work in forest ecology"
+    ],
+    "correctIndex": 3,
+    "explanation": "The passage accepts the connection and the carbon movement as real, then separates those findings from the popular conclusion that forests are cooperative, which it says the evidence does not yet support. That separation is the point of the piece. The passage does not deny the connections themselves, and it reports the blocking trials as small and inconsistent rather than as evidence that seedlings suffer.",
+    "source": "original"
+  },
+  {
+    "id": "grv-008",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"Every cleaning of an old painting removes something. Varnish yellows, and stripping it can restore a range of color the artist certainly intended. It can also take with it the thin final glazes by which the artist adjusted that color, since glaze and varnish are chemically close and centuries of contact have not kept them apart. Restorers know this, and the careful ones stop early, leaving a film they cannot fully characterize rather than risking the layer beneath. Critics who demand that a picture be returned to its original state are asking for a condition no one now living has seen, and asking it of a procedure that cannot be undone. Caution here is not timidity. It is the only honest response to an irreversible act performed on incomplete information.\" The author's attitude toward restorers who stop cleaning early is best described as?",
+    "options": [
+      "grudging tolerance of a practice that has become outdated",
+      "approval grounded in the limits of current knowledge",
+      "suspicion that their caution conceals a lack of skill",
+      "regret that their work can never afterward be undone",
+      "enthusiasm tempered by sympathy for the critics"
+    ],
+    "correctIndex": 1,
+    "explanation": "The last two sentences say plainly that this caution is not timidity but the only honest response to an irreversible act performed on incomplete information, which is approval resting on how little can be known. Suspicion of a lack of skill reverses that judgment. The author does treat the procedure as irreversible, but presents that fact as the reason the caution is right rather than as a cause for regret about the restorers' work.",
+    "source": "original"
+  },
+  {
+    "id": "grv-009",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"Historians who work from interviews are routinely warned that memory is unreliable, and it is. Dates slide, sequences invert, and a story told for the fortieth time has been shaped by the thirty-nine tellings before it. Documentary sources, however, are not innocent of the same faults. A ledger records what its keeper chose to enter, in categories chosen by someone else, and a report written for a superior is a performance as surely as an interview is. The relevant question is therefore not which kind of source is trustworthy but what each kind is trustworthy about. An interview is poor evidence of when a strike began and good evidence of what it felt like to be asked to cross the line.\" The observation that a ledger records only what its keeper chose to enter functions primarily to?",
+    "options": [
+      "recommend that historians rely on documentary sources instead of interviews",
+      "explain why a single story comes to be retold so many times",
+      "identify the categories most often used by the keepers of ledgers",
+      "concede that memory is less reliable than the written record",
+      "show that written sources share the weakness blamed on memory"
+    ],
+    "correctIndex": 4,
+    "explanation": "The observation arrives right after the word however and introduces the claim that documentary sources are not innocent of the same faults, so its job is to bring the written record under the same charge of selectivity brought against memory. The passage argues against ranking the two kinds of source, which is why a recommendation to prefer documents runs against its point. It concedes that memory is unreliable in the first sentence, not here.",
+    "source": "original"
+  },
+  {
+    "id": "grv-010",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"Male white-crowned sparrows learn their songs in a narrow window early in life, and the version a bird learns is the one sung where it was reared. Populations only a few kilometers apart can therefore sing recognizably different dialects, and females in playback trials respond more readily to the local form. It is tempting to read this as an engine of speciation, with dialect boundaries hardening into reproductive ones. Genetic sampling across several such boundaries has not supported that reading: birds move, they mate across dialect lines often enough to keep the populations mixed, and a young male that settles in a new area can learn the song he hears there. The dialect is a real boundary for behavior and a porous one for genes.\" The passage implies that a young male sparrow that settles far from where it was reared may?",
+    "options": [
+      "fail to attract any female in its new territory",
+      "retain its original dialect for the rest of its adult life",
+      "come to sing a dialect other than the one it first heard",
+      "carry genes markedly distinct from those of the local population",
+      "establish a new dialect boundary within a few kilometers"
+    ],
+    "correctIndex": 2,
+    "explanation": "The passage states directly that a young male settling in a new area can learn the song he hears there, so his adult dialect need not be the one he was reared on. The claim that he would fail to attract any female overstates the playback result, which shows only that females respond more readily to the local form. The genetic sampling in the passage points the other way as well, since mating across dialect lines keeps the populations mixed.",
+    "source": "original"
+  },
+  {
+    "id": "grv-011",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "easy",
+    "prompt": "Although the committee had been formed to settle the dispute once and for all, its final report was so ______ that both sides read it as a victory.",
+    "options": [
+      "detailed",
+      "belated",
+      "equivocal",
+      "deferential",
+      "premature"
+    ],
+    "correctIndex": 2,
+    "explanation": "A report that both sides can claim as a victory must be open to two readings, which is what equivocal means. A belated or premature report might be criticized for its timing, but timing would not let opposing parties each find support in it. A detailed report would ordinarily make the disagreement easier to settle, not harder.",
+    "source": "original"
+  },
+  {
+    "id": "grv-012",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "easy",
+    "prompt": "Known for speeches that regularly ran past midnight, the senator was anything but ______; her colleagues learned to eat a full dinner before she rose to speak.",
+    "options": [
+      "laconic",
+      "impassioned",
+      "eloquent",
+      "coherent",
+      "audible"
+    ],
+    "correctIndex": 0,
+    "explanation": "The blank follows anything but, so it takes a word the senator's habits contradict, and the detail about speeches running past midnight points at length. Laconic means using very few words, which is exactly what a speaker who talks through dinner is not. Nothing in the sentence bears on whether she was persuasive, clear, or loud.",
+    "source": "original"
+  },
+  {
+    "id": "grv-013",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "medium",
+    "prompt": "The drug's effect on the underlying disease turned out to be negligible, but its ______ influence on the patients' sleep was enough to keep it in the formulary.",
+    "options": [
+      "spurious",
+      "adverse",
+      "transient",
+      "notorious",
+      "restorative"
+    ],
+    "correctIndex": 4,
+    "explanation": "The word but sets the second clause against a negligible effect, and the influence described is one that justifies keeping the drug in use, so it must be a beneficial one. Restorative means acting to repair or renew health, which is what a drug that improves sleep is doing. An adverse influence would argue for withdrawing the drug, and a spurious one would be no reason to keep it at all.",
+    "source": "original"
+  },
+  {
+    "id": "grv-014",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "medium",
+    "prompt": "Asked directly whether the funds had been moved, the treasurer chose to ______, and his long account of committee procedure left the room no wiser about where the money had gone.",
+    "options": [
+      "procrastinate",
+      "prevaricate",
+      "acquiesce",
+      "reminisce",
+      "enumerate"
+    ],
+    "correctIndex": 1,
+    "explanation": "The treasurer speaks at length yet answers nothing, which describes deliberate evasion rather than silence or delay. To prevaricate is to speak evasively so as to avoid telling the truth. To procrastinate is to put off acting, which does not fit a man who is already speaking, and to acquiesce would mean giving in rather than dodging.",
+    "source": "original"
+  },
+  {
+    "id": "grv-015",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "medium",
+    "prompt": "The reforms proved ______ rather than sweeping: each one addressed a single office, and none of them altered the structure that had produced the failures.",
+    "options": [
+      "punitive",
+      "overdue",
+      "piecemeal",
+      "unpopular",
+      "clandestine"
+    ],
+    "correctIndex": 2,
+    "explanation": "The blank is set against sweeping, and the colon explains the contrast: the reforms came one office at a time and left the underlying structure alone. Piecemeal describes exactly that, change made in separate small parts. Overdue and unpopular are ordinary complaints about reform but neither of them opposes sweeping.",
+    "source": "original"
+  },
+  {
+    "id": "grv-016",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "hard",
+    "prompt": "For all his reputation as an ______ negotiator, the ambassador proved surprisingly willing to abandon positions that he had called nonnegotiable only a week earlier.",
+    "options": [
+      "adroit",
+      "affable",
+      "impartial",
+      "intransigent",
+      "ingenuous"
+    ],
+    "correctIndex": 3,
+    "explanation": "For all his reputation signals that the ambassador's conduct contradicts the reputation, and what he did was give up positions he had sworn to hold. The reputation must therefore be for refusing to yield, which is what intransigent means. An adroit negotiator who conceded quickly would surprise nobody, since skilled negotiators trade positions on purpose.",
+    "source": "original"
+  },
+  {
+    "id": "grv-017",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "hard",
+    "prompt": "The theory was still ______ when he first presented it: suggestive in outline, but lacking the definitions and the evidence that would later make it usable.",
+    "options": [
+      "inchoate",
+      "discredited",
+      "derivative",
+      "arcane",
+      "orthodox"
+    ],
+    "correctIndex": 0,
+    "explanation": "The colon defines the blank as a theory that has an outline but not yet the parts that would make it work, which is a beginning rather than a failure. Inchoate means just begun and not fully formed. Discredited would mean the theory had already been refuted, but the sentence says it went on to become usable, and arcane would describe a theory that is hard to understand rather than one that is unfinished.",
+    "source": "original"
+  },
+  {
+    "id": "grv-018",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "easy",
+    "kind": "multi",
+    "prompt": "Funding for the observatory was ______ from its first year, and the director spent more evenings writing applications for grants than looking through the telescope.",
+    "options": [
+      "meager",
+      "scant",
+      "restricted",
+      "generous",
+      "delayed",
+      "anonymous"
+    ],
+    "correctIndices": [
+      0,
+      1
+    ],
+    "selectExactly": 2,
+    "explanation": "A director who spends more evenings raising money than observing is working with too little of it, and meager and scant both mean present in too small a quantity. Restricted and delayed each fit the grammar, but money that must be spent on named items, or that arrives late, can still be plentiful, and neither word has a partner in the list. Generous reverses the sentence, and anonymous describes who gave the money rather than how much of it there was.",
+    "source": "original"
+  },
+  {
+    "id": "grv-019",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "The new evidence eventually forced the panel to ______ the conclusion it had published a decade earlier and defended in every review since.",
+    "options": [
+      "repudiate",
+      "reiterate",
+      "disavow",
+      "publicize",
+      "endorse",
+      "corroborate"
+    ],
+    "correctIndices": [
+      0,
+      2
+    ],
+    "selectExactly": 2,
+    "explanation": "Evidence that forces a panel to act against a conclusion it had long defended must make the panel give that conclusion up, and repudiate and disavow both mean to reject something one had previously asserted. Reiterate and endorse fit the grammar but reverse the meaning, leaving the panel restating the very conclusion the new evidence undermines. Publicize and corroborate leave the conclusion standing and so do not answer to the word forced.",
+    "source": "original"
+  },
+  {
+    "id": "grv-020",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "Although the new drainage system did not solve the flooding, it did ______ the damage in the streets nearest the river.",
+    "options": [
+      "mitigate",
+      "eliminate",
+      "document",
+      "ameliorate",
+      "aggravate",
+      "redistribute"
+    ],
+    "correctIndices": [
+      0,
+      3
+    ],
+    "selectExactly": 2,
+    "explanation": "Although concedes that the problem persists while granting the system some partial success, so the blank calls for making the damage less severe without removing it. Mitigate and ameliorate both carry that sense. Eliminate fits the grammar but contradicts the concession, since a system that ended the damage would have solved the flooding, and aggravate makes the system harmful rather than partly helpful.",
+    "source": "original"
+  },
+  {
+    "id": "grv-021",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "Her manner under cross-examination was ______: she answered every question fully, corrected the record twice, and never once raised her voice.",
+    "options": [
+      "composed",
+      "combative",
+      "evasive",
+      "imperious",
+      "unruffled",
+      "condescending"
+    ],
+    "correctIndices": [
+      0,
+      4
+    ],
+    "selectExactly": 2,
+    "explanation": "The colon lists behavior that is cooperative and free of agitation, and composed and unruffled both describe a person who stays calm under pressure. Combative and imperious fit the grammar but describe a witness fighting the questioner, which the full answers and the level voice rule out. Evasive is contradicted by the detail that she answered every question fully.",
+    "source": "original"
+  },
+  {
+    "id": "grv-022",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "The critic's tone throughout the review was ______, praising the novel's ambition in terms that made its failure unmistakable.",
+    "options": [
+      "sardonic",
+      "reverent",
+      "wistful",
+      "credulous",
+      "effusive",
+      "mordant"
+    ],
+    "correctIndices": [
+      0,
+      5
+    ],
+    "selectExactly": 2,
+    "explanation": "Praise worded so that it exposes a failure is mockery dressed as compliment, and sardonic and mordant both name a scornful, cutting tone of that kind. Reverent and effusive fit the grammar but describe unmixed admiration, which cannot make a failure unmistakable. Credulous would mean the critic was taken in by the novel, the opposite of a reviewer who sees through it.",
+    "source": "original"
+  },
+  {
+    "id": "grv-023",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "Years of drought had left the region's governing bodies ______, still capable of issuing directives but no longer of enforcing any of them.",
+    "options": [
+      "insolvent",
+      "enfeebled",
+      "debilitated",
+      "dormant",
+      "autonomous",
+      "unaccountable"
+    ],
+    "correctIndices": [
+      1,
+      2
+    ],
+    "selectExactly": 2,
+    "explanation": "Bodies that can still issue orders but cannot enforce them have lost their strength without losing their existence, and enfeebled and debilitated both mean weakened in exactly that way. Dormant fits the grammar but says the bodies are inactive, which the continued issuing of directives contradicts. Insolvent names one possible cause of the weakness rather than the condition described, and unaccountable describes how the bodies answer for themselves rather than how much power they retain.",
+    "source": "original"
+  },
+  {
+    "id": "grv-024",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "What began as a private grievance grew, through years of retelling, into a ______ that governed every decision he made about his career.",
+    "options": [
+      "pretext",
+      "fixation",
+      "misgiving",
+      "obsession",
+      "anecdote",
+      "justification"
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "selectExactly": 2,
+    "explanation": "A grievance that swells until it governs every career decision has become a preoccupation the man cannot set aside, and fixation and obsession both name that condition. Anecdote fits the grammar and suits the retelling, but a story told often is not something that governs decisions. Misgiving is far too mild for a feeling of that force, and pretext would make the grievance an excuse rather than a driving concern.",
+    "source": "original"
+  },
+  {
+    "id": "grv-025",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage: \"Salt marshes sit between the tide and the land, and coastal engineers have begun to count them as storm defenses. A marsh slows a surge in two ways: the stems drag against moving water, and the soft ground takes up some of what arrives. Measurements along the Gulf coast suggest that a wide marsh can lower the height of a surge by a useful fraction before the water reaches a seawall. The protection is not unconditional. A narrow marsh does very little, and a marsh cut through by navigation channels can even carry water inland faster than open ground would. Planners who treat any marsh at all as a defense therefore overstate the case. The useful question is which marshes, of what width, and in what condition.\" According to the passage, the protection a salt marsh offers depends chiefly on:",
+    "options": [
+      "the height of the seawall that stands behind it",
+      "the number of navigation channels dredged along the whole Gulf coast",
+      "the speed at which its stems grow back after a storm has passed",
+      "its width and whether channels have been cut through it",
+      "the depth of the water that covers it at an ordinary high tide"
+    ],
+    "correctIndex": 3,
+    "explanation": "The passage says that a narrow marsh does very little and that a marsh cut through by navigation channels can carry water inland faster, so width and condition are what decide whether a marsh defends anything. The seawall appears only as what the surge reaches afterward. Nothing in the passage bears on how fast stems grow back or on how deep the ordinary tide runs.",
+    "source": "original"
+  },
+  {
+    "id": "grv-026",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"When Hannah Voss published her first novel in 1931, reviewers praised its plotting and said almost nothing about its language. Sixty years later, critics writing about the same book reversed the emphasis. The plot was dismissed as conventional, while the prose was described as the work's real achievement. It is tempting to read this shift as a simple correction, as though later readers finally noticed what earlier ones had missed. The evidence does not support that reading. Reviewers in 1931 wrote for a readership that consumed fiction serially and judged it by narrative momentum, and their vocabulary for describing style was thin. The later critics inherited a vocabulary built for exactly that task. Each generation described what its critical language equipped it to describe, and each was silent about the rest.\" The author's main purpose in the passage is to:",
+    "options": [
+      "question an explanation for a change in critical opinion",
+      "establish that Voss's prose is superior to her plotting",
+      "trace the development of critical vocabulary across two centuries",
+      "argue that the early reviewers of Voss were careless readers",
+      "compare the reading habits of serial and modern audiences in detail"
+    ],
+    "correctIndex": 0,
+    "explanation": "The passage reports a shift in how Voss was judged, raises the tempting reading that later critics simply corrected earlier ones, and then rejects it, attributing the shift to the critical vocabulary available in each period. That is an argument against an explanation, not an evaluation of Voss herself. The passage never claims the prose is better than the plotting, and it treats the early reviewers as limited by their vocabulary rather than as careless.",
+    "source": "original"
+  },
+  {
+    "id": "grv-027",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"Ocean sediment cores contain layers of volcanic ash, and each layer can in principle be matched to a known eruption. Because ash from a single eruption falls over a wide area within days, a matched layer marks the same instant in every core that contains it. Geologists prize such markers because the ordinary way of dating a core relies on accumulation rate, which varies from site to site. Matching, however, requires a chemical fingerprint, and volcanoes drawing on one magma reservoir can produce ash of nearly identical composition across successive eruptions. Where two eruptions a few centuries apart cannot be told apart chemically, the marker dates a core only as precisely as the interval between them. The technique thus delivers its greatest gains where a region's eruptive history is chemically varied.\" The passage suggests that the ash layer technique is most useful when:",
+    "options": [
+      "sediment accumulates at the same rate at every site",
+      "a single eruption deposits ash over an unusually narrow area",
+      "the interval between successive eruptions is very short",
+      "cores are dated by accumulation rate before any layer is matched",
+      "a region's eruptions differ from one another in composition"
+    ],
+    "correctIndex": 4,
+    "explanation": "The closing sentence states the condition outright: the gains are greatest where a region's eruptive history is chemically varied, since only then can a layer be tied to one eruption rather than to several. Short intervals between chemically similar eruptions are precisely the problem case the passage describes, not the favorable one. Uniform accumulation rates would reduce the need for ash markers rather than improve them.",
+    "source": "original"
+  },
+  {
+    "id": "grv-028",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"Economists have reported that recycling participation rises when a city replaces a per bag trash fee with a flat monthly charge. The standard account credits convenience: residents freed from counting bags stop hoarding waste and sort more of it. Frei's study of eleven midsized cities complicates that account. In every case the switch to a flat charge arrived together with the delivery of larger recycling bins, and Frei found that participation tracked bin capacity closely while showing no consistent relation to the fee structure. Where a city altered only its fee, participation barely moved. Where a city enlarged bins without touching fees, participation rose about as much as it did under the paired change. Frei stops short of calling the fee irrelevant, noting that no city in the sample raised fees while enlarging bins.\" Frei's closing observation, that no city raised fees while enlarging bins, serves to:",
+    "options": [
+      "identify a city that contradicts the bin capacity finding",
+      "acknowledge a combination of changes that the study was unable to evaluate",
+      "explain the mechanism by which larger bins raise participation",
+      "concede that the convenience account is correct after all",
+      "show that fee structure and bin capacity are measured on one scale"
+    ],
+    "correctIndex": 1,
+    "explanation": "The sample contains cities that changed fees alone, cities that enlarged bins alone, and cities that did both in the same direction, but none in which the two changes pulled against each other. Because of that gap, the study cannot say what a fee increase would do alongside a larger bin, which is why Frei declines to call fees irrelevant. The remark concedes a limit on the evidence rather than endorsing the convenience account, which the rest of the passage undercuts.",
+    "source": "original"
+  },
+  {
+    "id": "grv-029",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"Comparative linguists reconstruct words that no living person has heard. From regular correspondences among the sounds of related languages, they infer the form a parent word must have taken, and they mark it with an asterisk to show that it is a reconstruction rather than a record. The method is powerful where the daughter languages are many and well attested. Its results thin out as the reconstructed layer recedes, because each step backward is built on the output of the step before it, and a small error made early in the chain travels forward with no independent text to check it against. Some linguists therefore treat a deep reconstruction as shorthand for a set of correspondences rather than as a claim about a word anyone once said. Others take it literally. The dispute is not about the data, which both sides accept.\" The passage indicates that deep reconstructions are contested chiefly because:",
+    "options": [
+      "the daughter languages contradict one another about basic sounds",
+      "few linguists are now trained in the comparative method",
+      "an error made early in the chain cannot be checked against any surviving text",
+      "the asterisk convention was adopted only recently",
+      "written records of the parent language were destroyed"
+    ],
+    "correctIndex": 2,
+    "explanation": "The passage says each step backward rests on the step before it and that an early error travels forward with no independent text to catch it, so uncertainty compounds as the reconstruction goes deeper. That is the reason it gives for the disagreement, which it states is not about the data itself. It never claims the daughter languages contradict one another, and it presents the absence of a written record as a condition of the method rather than as the destruction of documents that once existed.",
+    "source": "original"
+  },
+  {
+    "id": "grv-030",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"The spread of the mechanical clock through European towns in the fourteenth century is often described as the moment when time became public. Before the clock, the argument runs, the day was measured by bells rung at the discretion of a monastery or a guild, and the length of an hour varied with the season. The tower clock replaced negotiated time with uniform time. The record complicates that story. Town accounts show that the earliest civic clocks were adjusted constantly, sometimes weekly, to keep them agreeing with the sun, and that the person doing the adjusting was often the same official who had previously ordered the bells. Uniformity did arrive, but slowly, and for decades it rested on a human judgment the machine was supposed to have replaced.\" The passage as a whole functions to:",
+    "options": [
+      "qualify a familiar account by pointing to evidence it overlooks",
+      "reject the claim that mechanical clocks spread in the fourteenth century",
+      "praise town officials for the accuracy of their early adjustments",
+      "argue that seasonal hours were more accurate than uniform hours",
+      "trace the mechanical design of the earliest surviving tower clocks"
+    ],
+    "correctIndex": 0,
+    "explanation": "The passage restates a familiar claim about clocks making time public, then draws on town accounts showing that early clocks needed frequent human adjustment, often by the very official who had run the bells. That tempers the claim without denying it, since the passage grants that uniformity did eventually arrive. The spread of clocks is never disputed, and the passage makes no judgment about which system measured time more accurately.",
+    "source": "original"
+  },
+  {
+    "id": "grv-031",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"Female cuckoos lay their eggs in the nests of other species, and a long tradition of research treats the host's failure to reject the foreign egg as evidence of a sensory limit. Recent work points elsewhere. In several host species, birds that clearly detect the intruder still leave it in place, and they do so more often when their own clutch is large. Rejecting an egg means puncturing it or lifting it out, and both actions risk cracking a neighboring egg of the bird's own. A host with six eggs stands to lose more from a clumsy rejection than a host with two. What looked like blindness may instead be arithmetic, and if so it should vary with clutch size rather than with the closeness of the mimicry.\" The newer account described in the passage predicts which of the following?",
+    "options": [
+      "Hosts with the sharpest vision will reject foreign eggs least often.",
+      "Cuckoos will avoid nests that already contain many eggs.",
+      "Rejection will become more common as cuckoo mimicry improves.",
+      "Hosts with small clutches will reject foreign eggs more readily.",
+      "Hosts will abandon a nest entirely rather than risk cracking an egg."
+    ],
+    "correctIndex": 3,
+    "explanation": "On the newer account, rejection is a cost calculation: puncturing or lifting an egg endangers the host's own eggs, and a large clutch raises what is at stake. A host with few eggs risks less and should therefore reject more readily. The passage says explicitly that the behavior should vary with clutch size rather than with the quality of the mimicry, so a prediction keyed to improving mimicry belongs to the older account.",
+    "source": "original"
+  },
+  {
+    "id": "grv-032",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"The transit authority's case for the new line rests on a projection that the corridor will carry sixty thousand riders a day by 2040. The projection is built from current travel patterns along the corridor, adjusted for expected population growth. It is not obviously wrong, but it is doing something the authority never acknowledges. Current travel along that corridor was shaped by the absence of rail: the households that most wanted rail service moved elsewhere years ago, and the businesses that would have gathered around a station never opened. A line built through the corridor would change who lives there and what they travel for, which is the entire point of building it. A forecast that holds those things fixed is not a forecast of the line at all. It is a description of the corridor without the line.\" The passage argues that the ridership projection is flawed chiefly because it:",
+    "options": [
+      "relies on figures for population growth that are unlikely to be achieved",
+      "counts riders who would have taken an existing bus service anyway",
+      "reaches too far into the future for any method to be reliable",
+      "was prepared by the same authority that stands to gain from approval",
+      "holds fixed the very conditions the project is meant to change"
+    ],
+    "correctIndex": 4,
+    "explanation": "The passage grants that the projection is not obviously wrong and objects instead that it is built from travel patterns formed by the absence of rail, then notes that the line would change who lives in the corridor and why they travel. A forecast that freezes those conditions cannot measure the effect of altering them. The passage never disputes the growth figures, and it says nothing about a bus service or about who prepared the numbers.",
+    "source": "original"
+  },
+  {
+    "id": "grv-033",
+    "section": "verbal",
+    "topic": "Reading Comprehension: Select All",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "Passage: \"A ten year study of street trees in three coastal cities found that trees planted in continuous soil trenches grew nearly twice as fast as trees of the same species planted in individual pits. The trenches and the pits held the same total volume of soil, so the researchers attribute the difference to root spread rather than to soil quantity. Survival did not follow growth. Trench planted trees died at about the same rate as pit planted trees over the decade, and in the two cities that salt their roads in winter the trench trees died somewhat faster. The authors suggest that a trench conducts road salt along its length, exposing roots that a sealed pit would have shielded. They recommend trenches where winter salting is not practiced, and caution that a growth advantage should not be assumed to bring a survival advantage with it.\" Select every statement the passage supports:",
+    "options": [
+      "Trench planted trees grew faster than pit planted trees of the same species.",
+      "The trenches and the pits in the study held equal total volumes of soil.",
+      "Trench planted trees survived better than pit planted trees in every city studied."
+    ],
+    "correctIndices": [
+      0,
+      1
+    ],
+    "selectExactly": null,
+    "explanation": "The passage opens by reporting that trench planted trees grew nearly twice as fast as the same species in pits, so the growth statement is supported. It also states that the trenches and pits held the same total volume of soil, which is why the authors credit root spread rather than soil quantity, so the volume statement is supported as well. The survival statement is contradicted: death rates were about equal overall, and in the two cities that salt their roads the trench trees died somewhat faster.",
+    "source": "original"
+  },
+  {
+    "id": "grv-034",
+    "section": "verbal",
+    "topic": "Reading Comprehension: Select All",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "Passage: \"In reconstructing literacy in seventeenth century villages, historians often count signatures on marriage registers, treating a signature as evidence of literacy and a mark as evidence of its absence. Cressy defended the measure on the ground that writing was taught after reading, so anyone who could sign could almost certainly read. Spufford's objection is not that the measure is wrong but that it is asymmetric. A signature does establish reading ability. A mark establishes nothing, since many who could read never learned to write, and women were far likelier than men to fall into that group. Signature counts therefore yield a floor for literacy rather than an estimate of it, and that floor sits further below the truth for women than for men.\" Select every statement the passage supports:",
+    "options": [
+      "Spufford holds that a signature is unreliable evidence of reading ability.",
+      "Signature counts understate female literacy more than they understate male literacy.",
+      "Cressy argued that writing was normally taught before reading."
+    ],
+    "correctIndices": [
+      1
+    ],
+    "selectExactly": null,
+    "explanation": "The passage says the floor produced by signature counts sits further below the truth for women than for men, because women were likelier to read without writing, so the statement about understating female literacy is supported. The statement about Spufford is contradicted: her objection is that the measure is asymmetric, and she grants outright that a signature does establish reading ability. The statement about Cressy reverses him, since he argued that writing was taught after reading, which is what makes a signature imply reading.",
+    "source": "original"
+  },
+  {
+    "id": "grv-035",
+    "section": "verbal",
+    "topic": "Reading Comprehension: Select All",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "Passage: \"Radio telescopes gain resolution by being combined. Two dishes separated by a hundred kilometers can resolve detail that neither could resolve alone, provided their signals are recorded with timing precise enough to be aligned afterward. Atomic clocks made that alignment routine in the 1970s, and arrays now span continents. The gain is not free. A pair of widely separated dishes samples only one spacing at a time, so an image built from a few pairs contains gaps that must be filled by assumption. Adding a dish fills gaps, and each new dish contributes a pair with every dish already in the array, which is why arrays grew quickly once the timing problem was solved. The rotation of the Earth helps as well, sweeping each pair through a range of effective spacings over a night of observation.\" Select every statement the passage supports:",
+    "options": [
+      "Precise timing had to be available before widely separated dishes could be combined.",
+      "Adding one dish to an existing array increases the number of pairs by more than one.",
+      "The rotation of the Earth changes the effective spacing sampled by a given pair."
+    ],
+    "correctIndices": [
+      0,
+      1,
+      2
+    ],
+    "selectExactly": null,
+    "explanation": "The passage makes combination conditional on timing precise enough to align the recordings and credits atomic clocks with making that routine, so the timing statement is supported. It also says each new dish contributes a pair with every dish already present, which is more than one pair whenever the array already holds two or more dishes, so the second statement is supported. The last is stated directly: rotation sweeps each pair through a range of effective spacings during a night of observation.",
+    "source": "original"
+  },
+  {
+    "id": "grv-036",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "easy",
+    "prompt": "Although the committee had been assembled to settle the dispute, its members proved so ______ that they could not agree even on an agenda.",
+    "options": [
+      "punctual",
+      "cordial",
+      "fractious",
+      "resourceful",
+      "attentive"
+    ],
+    "correctIndex": 2,
+    "explanation": "The contrast signaled by \"although\" calls for a word explaining why a committee formed to settle a dispute failed at even a first step. A fractious group is one prone to quarreling, which accounts for the failure. A cordial or attentive group would be expected to make progress, so those words fight the sentence rather than completing it.",
+    "source": "original"
+  },
+  {
+    "id": "grv-037",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "easy",
+    "prompt": "Far from being ______, the new bridge design borrows its central idea from a technique that masons used four centuries ago.",
+    "options": [
+      "counterintuitive",
+      "expensive",
+      "practical",
+      "controversial",
+      "unprecedented"
+    ],
+    "correctIndex": 4,
+    "explanation": "\"Far from being\" sets the blank against what follows, and what follows is an old borrowed technique. The word that the borrowing denies is unprecedented, meaning without earlier example. Nothing in the sentence bears on cost, and calling the design counterintuitive or uncontroversial would not follow from its having historical roots.",
+    "source": "original"
+  },
+  {
+    "id": "grv-038",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "medium",
+    "prompt": "The biographer's refusal to editorialize is admirable, but it leaves the reader to supply connections the author has ______, and not every reader will supply the same ones.",
+    "options": [
+      "withheld",
+      "invented",
+      "belabored",
+      "documented",
+      "misconstrued"
+    ],
+    "correctIndex": 0,
+    "explanation": "Refusing to editorialize means declining to draw the connections for the reader, so the blank needs a word for holding something back. Withheld names exactly that omission and explains why readers must supply the links themselves. Belabored and documented both describe an author who supplied more rather than less, which is the opposite of the refusal the sentence praises.",
+    "source": "original"
+  },
+  {
+    "id": "grv-039",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "medium",
+    "prompt": "Reviewers who complained that the memoir was ______ missed the point: its author had set out to record one ordinary week in exhaustive detail, and any dramatic incident would have violated the design.",
+    "options": [
+      "sentimental",
+      "obscure",
+      "derivative",
+      "uneventful",
+      "unreliable"
+    ],
+    "correctIndex": 3,
+    "explanation": "The colon explains the complaint away, and the explanation is that the book was built to exclude dramatic incident. The complaint the reviewers made must therefore be that nothing happens, which uneventful names. Charges of sentimentality or unreliability would not be answered at all by the fact that the author deliberately avoided drama.",
+    "source": "original"
+  },
+  {
+    "id": "grv-040",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "medium",
+    "prompt": "The mineral's value to industry is ______ its rarity: it is abundant in the crust, yet almost no substitute performs as well at high temperatures.",
+    "options": [
+      "proportional to",
+      "independent of",
+      "explained by",
+      "limited by",
+      "a consequence of"
+    ],
+    "correctIndex": 1,
+    "explanation": "The clause after the colon says the mineral is common and nearly irreplaceable at once, so its worth cannot rest on scarcity. Independent of captures that separation between value and rarity. Proportional to and a consequence of both tie the value to rarity, which the second half of the sentence rules out directly.",
+    "source": "original"
+  },
+  {
+    "id": "grv-041",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "hard",
+    "prompt": "Scholars once treated the poet's late silence as a ______, assuming that a writer who stops must have been stopped, but the surviving letters suggest instead a decision reached slowly and defended at length.",
+    "options": [
+      "reprieve",
+      "pretense",
+      "misfortune",
+      "provocation",
+      "concession"
+    ],
+    "correctIndex": 2,
+    "explanation": "The clause after the blank glosses it: earlier scholars assumed the poet did not choose to stop but was stopped, that is, that the silence befell him. Misfortune names something suffered rather than chosen, which is the reading the letters overturn. Pretense and concession both describe deliberate acts, so either would collapse the contrast the sentence builds between the old view and the letters.",
+    "source": "original"
+  },
+  {
+    "id": "grv-042",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "easy",
+    "kind": "multi",
+    "prompt": "The instructions were so ______ that even the newest volunteers finished the setup without asking anyone for help.",
+    "options": [
+      "detailed",
+      "lucid",
+      "concise",
+      "novel",
+      "straightforward",
+      "tedious"
+    ],
+    "correctIndices": [
+      1,
+      4
+    ],
+    "selectExactly": 2,
+    "explanation": "The result clause says untrained volunteers needed no help, so the instructions must have been easy to understand. Lucid and straightforward both mean readily understood and yield the same sentence. Detailed and concise are tempting because both are praise, but a set of instructions can be long or short and still be confusing, so neither guarantees the stated result, and they would not match each other in meaning in any case.",
+    "source": "original"
+  },
+  {
+    "id": "grv-043",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "The senator's apology was widely judged ______, a performance calculated to end the story rather than to acknowledge the harm.",
+    "options": [
+      "heartfelt",
+      "perfunctory",
+      "belated",
+      "incendiary",
+      "candid",
+      "pro forma"
+    ],
+    "correctIndices": [
+      1,
+      5
+    ],
+    "selectExactly": 2,
+    "explanation": "The appositive describes an apology staged to close a controversy rather than to admit fault, so the blank needs a word for going through the motions. Perfunctory and pro forma both mean done as a formality and produce the same sentence. Belated fits grammatically but says the apology was late, which is a different complaint, and heartfelt and candid contradict the description outright.",
+    "source": "original"
+  },
+  {
+    "id": "grv-044",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "Once celebrated for the boldness of her early canvases, the painter spent her last decade producing work so ______ that collectors stopped attending her openings.",
+    "options": [
+      "monumental",
+      "contentious",
+      "insipid",
+      "vapid",
+      "prolific",
+      "somber"
+    ],
+    "correctIndices": [
+      2,
+      3
+    ],
+    "selectExactly": 2,
+    "explanation": "The sentence contrasts early boldness with late work that drove collectors away, so the blank calls for a word meaning dull and lacking flavor. Insipid and vapid are near synonyms in that sense and give the sentence one meaning. Contentious would explain the loss of an audience but describes work that provokes rather than bores, which reverses the contrast with boldness, and somber names a mood rather than a want of interest.",
+    "source": "original"
+  },
+  {
+    "id": "grv-045",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "The proposal's supporters and its critics agree on almost nothing, so the chair's summary, which satisfied both camps, was a remarkably ______ document.",
+    "options": [
+      "candid",
+      "exhaustive",
+      "adroit",
+      "partisan",
+      "deft",
+      "provisional"
+    ],
+    "correctIndices": [
+      2,
+      4
+    ],
+    "selectExactly": 2,
+    "explanation": "Satisfying two camps that agree on almost nothing is a feat of skill, so the blank needs a word for skillful handling. Adroit and deft carry that sense and yield the same sentence. Partisan describes a document that would please only one side, and candid, while flattering, does not explain how a summary managed to satisfy opponents at once.",
+    "source": "original"
+  },
+  {
+    "id": "grv-046",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "Reviewers praised the study's methods but dismissed its central claim as ______, noting that the author had generalized from a single small city to an entire region.",
+    "options": [
+      "unremarkable",
+      "meticulous",
+      "untenable",
+      "provisional",
+      "derivative",
+      "indefensible"
+    ],
+    "correctIndices": [
+      2,
+      5
+    ],
+    "selectExactly": 2,
+    "explanation": "The reviewers accept the methods and reject the claim on the ground that it stretches one small case over a whole region, so the blank needs a word meaning impossible to sustain under scrutiny. Untenable and indefensible both carry that sense and give the sentence one meaning. Provisional is tempting because an overstretched claim is often called preliminary, but it describes a claim offered tentatively rather than one dismissed, and unremarkable faults the claim for dullness instead of for overreach.",
+    "source": "original"
+  },
+  {
+    "id": "grv-047",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "His public manner was so ______ that colleagues were startled to learn how ferociously he argued in private.",
+    "options": [
+      "voluble",
+      "abrasive",
+      "meticulous",
+      "diffident",
+      "retiring",
+      "genial"
+    ],
+    "correctIndices": [
+      3,
+      4
+    ],
+    "selectExactly": 2,
+    "explanation": "The surprise depends on a contrast between the public manner and ferocious private argument, so the blank needs a word for shrinking from notice. Diffident and retiring both describe a reserved, self effacing manner and produce the same sentence. Genial would supply a contrast of a different kind, warmth against ferocity rather than reticence against it, and abrasive removes the contrast altogether.",
+    "source": "original"
+  },
+  {
+    "id": "grv-048",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "The essay is valuable less for its argument, which is thin, than for the ______ with which it assembles evidence that other historians had left scattered.",
+    "options": [
+      "brevity",
+      "detachment",
+      "audacity",
+      "assiduity",
+      "levity",
+      "diligence"
+    ],
+    "correctIndices": [
+      3,
+      5
+    ],
+    "selectExactly": 2,
+    "explanation": "The praise attaches to the patient gathering of evidence others had neglected, so the blank needs a word for sustained careful effort. Assiduity and diligence are synonyms in that sense and give the sentence one meaning. Audacity would praise nerve rather than labor, and detachment names an attitude toward the material rather than the effort spent collecting it.",
+    "source": "original"
+  },
+  {
+    "id": "grv-049",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage: \"Long runs of wage data for medieval England come largely from the accounts of cathedrals and colleges, which paid carpenters and masons by the day and wrote down what they paid. Economists have used those figures to chart real earnings across four centuries, and the series is now cited in textbooks. The institutions that kept such records, however, were unusual employers. They hired skilled men for long building projects, paid in coin at a fixed daily rate, and had every reason to keep tidy books for an auditor. Most laborers of the period worked on farms, were paid partly in food and lodging, and left no written trace at all. The wage series is therefore precise and narrow at once, a reliable account of what a small and privileged group of craftsmen earned.\" The passage suggests that the wage series described is limited chiefly because?",
+    "options": [
+      "the accounts were audited by officials who had an interest in the totals",
+      "the daily rates recorded were revised many times over four centuries",
+      "it draws on employers whose practices were atypical of the period",
+      "cathedral projects rarely lasted long enough to yield continuous figures",
+      "the surviving books were written in a script few economists can read"
+    ],
+    "correctIndex": 2,
+    "explanation": "The passage grants that the figures are precise and then explains what they cover: skilled men on long projects, paid in coin at a fixed rate by institutions that kept careful books, while most workers of the period farmed, were paid partly in kind, and left no record. The limit is one of coverage rather than of accuracy. The claim that the projects were too short reverses the passage, which describes them as long, and nothing is said about the legibility of the accounts or about auditors having a stake in the numbers.",
+    "source": "original"
+  },
+  {
+    "id": "grv-050",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"When an experiment contradicts a theory, the theory is rarely abandoned on the spot, and the reason is not stubbornness. A prediction is never derived from a hypothesis alone. It requires assumptions about the instruments, about the purity of the samples, and about a dozen background theories the experimenter never set out to test. A failed prediction shows that something in that bundle is false, and it does not say which part. Historians have documented episodes in which the sensible move was to doubt the apparatus, and the anomaly duly vanished once a better instrument arrived. They have documented others in which the same move sheltered a theory long past the point of usefulness. What separates the two is not a rule of method but a judgment made afterward, once it is clear which repair paid.\" The passage indicates that the decision to blame an anomaly on the apparatus rather than on the hypothesis under test is?",
+    "options": [
+      "prohibited by the standards that govern careful experimental work",
+      "justified whenever the relevant background theories are themselves well confirmed",
+      "the reason that most background assumptions are never tested at all",
+      "the mistake that has most often delayed the acceptance of new instruments",
+      "judged sound or unsound only in hindsight"
+    ],
+    "correctIndex": 4,
+    "explanation": "The closing sentence says that what separates a productive doubt of the apparatus from a sheltering one is not a rule of method but a judgment made afterward, once it is clear which repair paid. That places the assessment after the fact rather than at the moment of choice. The passage does not forbid the move, since it reports cases where it was the sensible one, and it offers no test based on how well the background theories are confirmed.",
+    "source": "original"
+  },
+  {
+    "id": "grv-051",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"Volcanic glass carries a chemical signature specific to the flow that produced it, so a blade found hundreds of kilometers inland can be matched to its outcrop. Maps built this way show glass from a single source turning up across wide territories, and the earliest interpreters read those maps as evidence of long trading expeditions. A simpler mechanism accounts for the same pattern. If each community exchanged only with its immediate neighbors, and those neighbors with theirs, material would travel far while no individual traveled more than a day. Telling the two apart requires something the distribution maps cannot supply on their own, such as whether the quantity of glass falls off smoothly with distance or drops in steps at the edges of territories. Where that gradient has been measured, it has usually favored the chain of short exchanges.\" The passage indicates that a smooth decline in the quantity of volcanic glass with distance from its source would support?",
+    "options": [
+      "the conclusion that the outcrop was worked for only a short period",
+      "the view that material moved through a series of local exchanges",
+      "the claim that traders carried glass directly over long distances",
+      "a revision of the chemical method used to match blades to outcrops",
+      "the idea that inland communities produced volcanic glass of their own"
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage offers the shape of the decline as the test that distribution maps alone cannot provide, and it reports that where the gradient has been measured it has favored the chain of short exchanges. A smooth falloff therefore points to neighbor to neighbor movement. Long expeditions are the older reading, which the gradient evidence is said to undercut rather than support, and local production would break the match between a blade and a distant outcrop that the chemical signature establishes.",
+    "source": "original"
+  },
+  {
+    "id": "grv-052",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"A string divided in simple ratios produces intervals the ear hears as pure, but the ratios do not close: stack twelve pure fifths and the note reached is slightly sharp of the octave where the stacking began. Every tuning system is a decision about where to put that leftover discrepancy. The meantone keyboards of the sixteenth century pushed nearly all of it into a few remote intervals, which were left unusable, and bought with that sacrifice thirds of remarkable purity in the keys that remained. Equal temperament spreads the error evenly, so that no interval is pure and none is unusable. The change is usually described as progress. It is better described as a trade of local purity for uniform serviceability, made by musicians who wanted to modulate wherever they liked.\" The author's characterization of the shift to equal temperament is best described as?",
+    "options": [
+      "a reframing of an apparent improvement as an exchange",
+      "an endorsement of meantone tuning over its later rivals",
+      "an argument that remote keys ought to have been left unusable",
+      "a demonstration that the tuning discrepancy can be removed entirely",
+      "a rejection of the claim that pure fifths can be stacked at all"
+    ],
+    "correctIndex": 0,
+    "explanation": "The passage sets the usual account, progress, against its own: a trade of local purity for uniform serviceability. Calling the shift an exchange rather than an advance is exactly that move. The author does not prefer meantone, since the sacrifice it demands is stated as plainly as its reward, and the passage says the discrepancy must be put somewhere rather than that it can be made to disappear.",
+    "source": "original"
+  },
+  {
+    "id": "grv-053",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"Reported incidence of a disease can rise for two reasons that look identical in the published figures. Genuine spread raises the number of people who have the disease. A widened case definition raises the number who count as having it. In 1993 an expanded definition of one syndrome added several conditions to the list of qualifying diagnoses, and reported cases rose sharply in the following year in every country that adopted the new wording, while remaining flat in the countries that kept the old one. Analysts who wanted the underlying trend had to rebuild the older definition inside the newer data and count again. The exercise is tedious and it is not optional, because a surveillance system that changes what it counts has changed its units in the middle of the series.\" The passage suggests that the comparison between adopting and non adopting countries was useful because it?",
+    "options": [
+      "established that the syndrome was spreading faster than anyone had thought",
+      "identified the particular diagnoses added to the qualifying list",
+      "removed the need to rebuild the older case definition",
+      "separated the effect of the wording from real spread",
+      "showed that a surveillance system should never revise a case definition"
+    ],
+    "correctIndex": 3,
+    "explanation": "Cases jumped only where the definition changed and stayed flat where it did not, which is what allows the jump to be attributed to the wording rather than to the disease. That is the whole use of the contrast. The comparison does not make the rebuilding unnecessary, since the passage calls that work not optional, and the passage treats a revised definition as something to be accounted for rather than as something forbidden.",
+    "source": "original"
+  },
+  {
+    "id": "grv-054",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"Before official law reporting, the decisions of English judges reached the profession through volumes compiled privately by barristers who had been in court. The compilers differed in skill and in candor. Some wrote down the arguments they admired and passed over those they did not; some wrote from memory weeks later; a few were known to improve a judgment they thought had come out badly reasoned. Later courts cited these volumes as authority all the same, and a doctrine could rest for a century on one sentence that one man believed he had heard. The move to official reporting in the nineteenth century is usually told as a story about accuracy. It was just as much a story about who was permitted to decide which parts of a hearing would survive.\" The final sentence suggests that official reporting changed?",
+    "options": [
+      "the number of cases that the English courts were able to hear",
+      "control over which portion of a proceeding would enter the record",
+      "the rule requiring later courts to follow earlier decisions",
+      "the willingness of barristers to attend hearings in person",
+      "the reasoning that judges were expected to give from the bench"
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage describes compilers who chose which arguments to record and sometimes reworked what they had heard, then closes by framing the reform as a question of who was permitted to decide what survived. The change is in who holds that selective power. The passage says nothing about how many cases were heard, and it treats citation of earlier decisions as the settled practice that made the compilers' choices consequential rather than as something the reform altered.",
+    "source": "original"
+  },
+  {
+    "id": "grv-055",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"A steel beam loaded well below the stress that would break it can still fail, provided the load is applied and released enough times. Nineteenth century engineers, who sized structures by static strength alone, met this first as a mystery of axles that snapped after years of ordinary service. Laboratory work eventually established that certain steels survive an unlimited number of cycles as long as the alternating stress stays under a threshold, and that threshold, the endurance limit, became a design tool. Aluminum has no such threshold. Every alternating load, however small, consumes some part of the metal's life, so an aluminum structure is designed not for indefinite service but for a stated number of cycles, after which it is retired whether or not it shows any damage.\" The passage indicates that an aluminum structure differs from a comparable steel one in that it?",
+    "options": [
+      "cannot be loaded above the stress that would break it outright",
+      "fails only after a visible crack has already appeared in it",
+      "was entirely unknown to the engineers of the nineteenth century",
+      "must be withdrawn from service after a specified life",
+      "survives an unlimited number of cycles below a threshold stress"
+    ],
+    "correctIndex": 3,
+    "explanation": "Because aluminum has no endurance limit, every cycle uses up part of its life, and the passage says such a structure is retired after a stated number of cycles regardless of its condition. Surviving an unlimited number of cycles below a threshold is the property of the steels described, not of aluminum, so that choice attaches the wrong material to the right fact. The passage also stresses that retirement happens whether or not damage shows, which rules out any account tying failure to a visible crack.",
+    "source": "original"
+  },
+  {
+    "id": "grv-056",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage: \"In the eighteenth century French cartographers began leaving parts of their maps blank. Earlier maps had filled the interior of every continent with rivers, mountains and kingdoms drawn from rumor, and a patron read an empty space as a failure of the mapmaker rather than a failure of the evidence. The new convention treated a blank as a claim in its own right, a statement that nothing reliable was known. Sales suffered at first, and rival houses advertised their own crowded sheets as more complete. Within a generation the blank had become a mark of seriousness, and maps still full of invented detail were dismissed as decorative. The change owed nothing to new surveys. It was a change in what a map was understood to be for.\" The passage is primarily concerned with?",
+    "options": [
+      "a shift in what mapmakers treated a map as claiming",
+      "the surveys that first filled in the interiors of the continents",
+      "the commercial failure of eighteenth century French cartography",
+      "techniques for distinguishing rumor from reliable geographic evidence",
+      "the decorative traditions of early modern European mapmaking"
+    ],
+    "correctIndex": 0,
+    "explanation": "The passage traces a convention from ridicule to respectability and ends by saying the change owed nothing to new surveys, being instead a change in what a map was understood to be for. That is a shift in what the map asserts. New surveys are explicitly ruled out as the cause, and the early loss of sales is one stage in the story rather than its subject, since the convention went on to prevail.",
+    "source": "original"
+  },
+  {
+    "id": "grv-057",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"A script with roughly twenty five signs is almost certainly alphabetic, since that is about the number of distinct sounds a spoken language separates. A script with several hundred signs is logographic, its signs standing for whole words. Between those poles, at somewhere near eighty to a hundred signs, sits the syllabary, in which one sign carries a consonant and a vowel together. Counting signs is therefore the first move a decipherer makes, and it can be made before a single sign has been read. It is also fallible. A count taken from a small corpus runs low, because the rarest signs have not yet turned up, and a script that borrowed a handful of foreign names may carry signs used for nothing else. The count narrows the field. It does not settle the question.\" The passage indicates that a sign count taken from a small corpus is likely to?",
+    "options": [
+      "overstate the number of sounds that the spoken language separated",
+      "identify the script as logographic rather than as syllabic",
+      "reveal which of the signs were borrowed from a foreign language",
+      "understate the total number of signs the script used",
+      "be impossible to make before the signs have been read"
+    ],
+    "correctIndex": 3,
+    "explanation": "The passage says a count from a small corpus runs low because the rarest signs have not yet appeared, which is an undercount of the script's full inventory. A count that ran low would if anything push a syllabary toward the alphabetic end of the scale rather than toward the logographic one. The passage also states plainly that the count can be made before any sign is read, so the claim that it cannot be made is contradicted outright.",
+    "source": "original"
+  },
+  {
+    "id": "grv-058",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"Until the middle of the nineteenth century a bolt and its nut were made as a pair, filed to fit each other, and neither would serve with any other. Joseph Whitworth's proposal for a common thread form is usually credited with ending that arrangement, and the credit is not misplaced, but it hides the difficulty. A standard is worth adopting only once others have adopted it, so the first workshop to convert bears the whole cost of new tooling and collects none of the benefit. What broke the deadlock was not persuasion. It was the railway companies, buyers large enough to write a thread form into a contract and leave their suppliers no choice. The lesson has been rediscovered in other industries since: a technically superior standard does not spread on its merits alone, and something has to make the earliest adopters whole.\" The passage attributes the adoption of a common thread form chiefly to?",
+    "options": [
+      "the technical superiority of the thread form that Whitworth proposed",
+      "the falling cost of filing a bolt and a nut to fit each other",
+      "purchasers large enough to impose the form on their suppliers",
+      "the persuasive campaign that Whitworth conducted among workshops",
+      "workshops that converted early and absorbed the cost of doing so"
+    ],
+    "correctIndex": 2,
+    "explanation": "The passage names the railway companies as the force that broke the deadlock, on the ground that a buyer big enough to write the thread form into a contract leaves suppliers no choice. Persuasion is ruled out in the same sentence. Technical merit is ruled out by the closing line, which says a superior standard does not spread on its merits alone, and the early converting workshop is presented as the party who bears the cost, which is the problem rather than the solution.",
+    "source": "original"
+  },
+  {
+    "id": "grv-059",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "easy",
+    "prompt": "The restaurant's popularity proved ______: crowds filled every table for a single summer, and by the following spring the room was empty most evenings.",
+    "options": [
+      "ephemeral",
+      "deserved",
+      "gradual",
+      "costly",
+      "regional"
+    ],
+    "correctIndex": 0,
+    "explanation": "The colon supplies the evidence for the blank, and the evidence is a rush of custom that lasted one season and then stopped. Ephemeral means lasting a very short time, which is what a single crowded summer amounts to. Gradual would describe how the popularity arrived rather than how briefly it lasted, and nothing in the sentence bears on whether the crowds were earned or on what the food cost.",
+    "source": "original"
+  },
+  {
+    "id": "grv-060",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "medium",
+    "prompt": "The author's footnotes are anything but ______: several run for half a page, and more than one pursues an objection that the main text never raises.",
+    "options": [
+      "accurate",
+      "numerous",
+      "obscure",
+      "cursory",
+      "persuasive"
+    ],
+    "correctIndex": 3,
+    "explanation": "Anything but sets the blank against what follows, and what follows is length and thoroughness: half page notes that chase objections the text does not even mention. Cursory means done quickly and without attention to detail, which such notes are not. Numerous fails because footnotes that run half a page are long rather than few, and the sentence gives no evidence about whether the notes are correct or convincing.",
+    "source": "original"
+  },
+  {
+    "id": "grv-061",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "medium",
+    "prompt": "The commission's mandate survived the committee stage intact, but its powers did not: successive amendments left them so ______ that it could compel neither testimony nor the production of a single document.",
+    "options": [
+      "contested",
+      "attenuated",
+      "expansive",
+      "belated",
+      "provisional"
+    ],
+    "correctIndex": 1,
+    "explanation": "Successive amendments acted on the powers and the result is a commission that can require nothing of anyone, so the blank needs a word for force that has been reduced, which is what attenuated means. Expansive reverses the direction the amendments moved in. Contested says that others dispute the powers, and a disputed power can still compel while the dispute runs. Belated describes when the powers arrived, and powers that arrive late still compel once they exist. Provisional says the powers are temporary, and a temporary power compels for as long as it lasts.",
+    "source": "original"
+  },
+  {
+    "id": "grv-062",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "medium",
+    "prompt": "Critics who dismissed the architect as an ______ of his teacher had plainly not seen the later houses, in which almost nothing of that teacher's manner survives.",
+    "options": [
+      "rival",
+      "patron",
+      "successor",
+      "detractor",
+      "epigone"
+    ],
+    "correctIndex": 4,
+    "explanation": "The sentence answers a dismissal, and the answer is that the later houses keep almost nothing of the teacher's manner, so the charge being refuted must be one of imitation. An epigone is an undistinguished follower who works in a predecessor's style. Successor states only that one came after another, which the later houses would not refute, and calling the architect a rival or a detractor would make him an opponent rather than a copyist.",
+    "source": "original"
+  },
+  {
+    "id": "grv-063",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "hard",
+    "prompt": "The memoir is ______ exactly where a reader expects candor: the years of the scandal occupy two pages, and the account of them names no one at all.",
+    "options": [
+      "reticent",
+      "effusive",
+      "meandering",
+      "scrupulous",
+      "bitter"
+    ],
+    "correctIndex": 0,
+    "explanation": "The colon shows what the book does with its most delicate material, which is to compress it into two anonymous pages. Reticent means unwilling to say much, and that reserve is what disappoints the expectation of candor. Effusive and meandering both describe a writer who says more rather than less, so either would leave the two page treatment unexplained.",
+    "source": "original"
+  },
+  {
+    "id": "grv-064",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "hard",
+    "prompt": "Far from being the ______ reading his opponents alleged, the historian's account of the treaty gave more space to the evidence against his thesis than to the evidence for it.",
+    "options": [
+      "orthodox",
+      "cautious",
+      "obsolete",
+      "tendentious",
+      "derivative"
+    ],
+    "correctIndex": 3,
+    "explanation": "Far from being denies the accusation, and what the historian actually did was dwell on evidence that cut against his own thesis. The charge denied must therefore be that he argued to a foregone conclusion, which is what tendentious means. Orthodox and derivative would accuse him of unoriginality, a charge that weighing contrary evidence would do nothing to answer.",
+    "source": "original"
+  },
+  {
+    "id": "grv-065",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "hard",
+    "prompt": "The society's early minutes are ______, recording the attendance and little besides, so the reasons for its sudden dissolution must be sought elsewhere.",
+    "options": [
+      "voluminous",
+      "fabricated",
+      "exiguous",
+      "contested",
+      "illegible"
+    ],
+    "correctIndex": 2,
+    "explanation": "The clause after the blank says what the minutes contain, which is a list of names and almost nothing else, and the conclusion drawn is that the answer lies outside them. Exiguous means extremely scanty, which is what a record of attendance alone amounts to. Illegible is tempting because it too would send a researcher elsewhere, but an unreadable book could not be described as recording attendance, and voluminous says the opposite of what the sentence reports.",
+    "source": "original"
+  },
+  {
+    "id": "grv-066",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "easy",
+    "kind": "multi",
+    "prompt": "At the concentrations found in tap water the compound is ______, although a laboratory dose thousands of times larger will kill a fish within minutes.",
+    "options": [
+      "volatile",
+      "expensive",
+      "unstable",
+      "detectable",
+      "harmless",
+      "innocuous"
+    ],
+    "correctIndices": [
+      4,
+      5
+    ],
+    "selectExactly": 2,
+    "explanation": "The concession about a lethal laboratory dose is worth making only if the compound does no damage at ordinary strength, so the blank needs a word meaning not harmful. Harmless and innocuous carry that sense and produce one sentence. Detectable fits the grammar and is tempting because a substance can be present without doing harm, but it reports only that the compound can be found, which the contrast with a lethal dose does not turn on. Volatile and unstable describe chemical behavior rather than safety.",
+    "source": "original"
+  },
+  {
+    "id": "grv-067",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "The company's apology did nothing to ______ the neighbors, who filed their complaint with the district the very next morning.",
+    "options": [
+      "mollify",
+      "placate",
+      "alarm",
+      "reimburse",
+      "impress",
+      "summon"
+    ],
+    "correctIndices": [
+      0,
+      1
+    ],
+    "selectExactly": 2,
+    "explanation": "An apology that fails to stop a complaint has failed to soothe the people it was addressed to, and mollify and placate both mean to calm someone's anger. Impress fits the grammar and is tempting, since an unimpressed neighbor might well complain, but being impressed is a judgment about quality rather than a settling of anger, and no other word here shares that sense. Alarm reverses the sense, and reimburse names a payment the sentence never mentions.",
+    "source": "original"
+  },
+  {
+    "id": "grv-068",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "Faced with a smaller grant than it had budgeted for, the museum was obliged to ______ a summer program that had once filled the whole of July and August.",
+    "options": [
+      "curtail",
+      "publicize",
+      "truncate",
+      "underwrite",
+      "relocate",
+      "evaluate"
+    ],
+    "correctIndices": [
+      0,
+      2
+    ],
+    "selectExactly": 2,
+    "explanation": "A shortfall forces the museum to make a program that once ran two full months into something less, so the blank calls for cutting it short. Curtail and truncate both mean exactly that and yield the same sentence. Relocate fits the grammar and is a plausible response to a budget problem, but moving a program says nothing about its length, and underwrite would require money the museum has just been denied.",
+    "source": "original"
+  },
+  {
+    "id": "grv-069",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "Regulators struggled to keep pace with the ______ market in secondhand parts, which was adding dozens of new sellers every month.",
+    "options": [
+      "burgeoning",
+      "unregulated",
+      "speculative",
+      "mushrooming",
+      "lucrative",
+      "disreputable"
+    ],
+    "correctIndices": [
+      0,
+      3
+    ],
+    "selectExactly": 2,
+    "explanation": "The clause after the blank measures the market by how fast it is adding sellers, so the blank needs a word for rapid growth. Burgeoning and mushrooming both mean growing quickly and give the sentence one meaning. Unregulated fits the grammar and suits the mention of regulators, but it describes the market's legal status rather than its growth, and a market can be small and unregulated at once. Lucrative and disreputable likewise say nothing about how fast the market is expanding.",
+    "source": "original"
+  },
+  {
+    "id": "grv-070",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "The manual's instructions were so ______ that the technicians gave up on them and learned the procedure by watching one another.",
+    "options": [
+      "opaque",
+      "abbreviated",
+      "self-explanatory",
+      "informal",
+      "impenetrable",
+      "precise"
+    ],
+    "correctIndices": [
+      0,
+      4
+    ],
+    "selectExactly": 2,
+    "explanation": "Technicians who abandon a manual and learn by imitation have found the text impossible to understand, and opaque and impenetrable both describe writing that cannot be seen through. Abbreviated fits the grammar and could explain the failure, but brevity is not the same as unintelligibility, and no other word here pairs with it. Self-explanatory and precise both describe a manual that would have worked, which the outcome rules out.",
+    "source": "original"
+  },
+  {
+    "id": "grv-071",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "A treasurer who had been ______ with the society's funds for a decade left it unable to pay for a hall it had already booked.",
+    "options": [
+      "prodigal",
+      "frugal",
+      "meticulous",
+      "candid",
+      "punctilious",
+      "profligate"
+    ],
+    "correctIndices": [
+      0,
+      5
+    ],
+    "selectExactly": 2,
+    "explanation": "A decade of spending that ends with the society unable to meet a booking it has already made points to money poured out without restraint, and prodigal and profligate both name that recklessness with funds. Frugal reverses it, and a frugal treasurer would leave the society solvent. Meticulous and punctilious describe care in handling records rather than the scale of spending, and a careful treasurer might still be honest and poor at forecasting, which is a different failing from the one the sentence reports.",
+    "source": "original"
+  },
+  {
+    "id": "grv-072",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "Her questions from the floor were ______, cutting through an hour of preamble to the one figure the report had buried in an appendix.",
+    "options": [
+      "conciliatory",
+      "trenchant",
+      "incisive",
+      "tedious",
+      "tentative",
+      "voluble"
+    ],
+    "correctIndices": [
+      1,
+      2
+    ],
+    "selectExactly": 2,
+    "explanation": "Questions that cut through an hour of padding to the single buried number are sharp and penetrating, and trenchant and incisive both carry that sense. Voluble fits the grammar but describes a speaker who talks a great deal, which is the opposite of cutting through. Tentative would describe questions too hesitant to reach anything, and conciliatory names a wish to smooth things over rather than the force of the questioning.",
+    "source": "original"
+  },
+  {
+    "id": "grv-073",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "easy",
+    "prompt": "Passage: \"The earliest cuneiform tablets from southern Mesopotamia record quantities of grain, oil and livestock, together with the names of the officials answerable for them. Nothing in them is narrative. For centuries after writing appeared, scribes used it almost entirely to track goods moving into and out of temple storerooms, and the signs themselves were cut for that work: a mark for a measure, a mark for a commodity, a mark for a person. Literary composition arrives late, and when it does the script has to be stretched to carry it, acquiring signs that stand for sounds rather than for things. Writing, on this evidence, was not invented to preserve speech. It was invented to keep counts, and only afterward taught to do anything else.\" According to the passage, the sign system used on the earliest tablets was:",
+    "options": [
+      "shaped for the work of counting goods and their keepers",
+      "borrowed from an older script used for religious poetry",
+      "already able to represent the sounds of spoken words",
+      "confined to the names of officials in temple storerooms",
+      "unreadable to the scribes who produced the later literary tablets"
+    ],
+    "correctIndex": 0,
+    "explanation": "The passage says the signs were cut for the work of tracking goods, listing a mark for a measure, a mark for a commodity and a mark for a person, which is counting goods and the people answerable for them. Sound signs are described as a later acquisition, so the claim that the early script could already represent speech reverses the sequence the passage gives. Confining the signs to officials' names ignores the measures and commodities that make up most of what the tablets record.",
+    "source": "original"
+  },
+  {
+    "id": "grv-074",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"Concrete piers built by Roman engineers two thousand years ago still stand in coastal water, while harbor works poured a century ago have crumbled. The difference is not craftsmanship but chemistry. Roman builders combined volcanic ash with lime and seawater, and the resulting material does not merely resist the sea. Water percolating through it dissolves parts of the ash and deposits interlocking crystals in the cracks, so the concrete grows stronger across decades. Modern cement, by contrast, is formulated to reach its full strength within weeks and then to hold it, and the same crystal growth that heals a Roman pier would be read as damage in a modern slab. The Roman recipe is not a lost superior technology. It is a different bargain, one that trades early strength for very slow repair, and few contemporary projects can wait.\" The passage suggests that the Roman recipe is poorly suited to contemporary construction chiefly because it:",
+    "options": [
+      "cannot be poured where salt water is present",
+      "gains its strength far too slowly",
+      "depends on volcanic ash that no longer exists",
+      "produces crystals that weaken the material over time",
+      "was intended for piers rather than for structures on land"
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage ends by calling the Roman mixture a bargain that trades early strength for very slow repair, and adds that few contemporary projects can wait, which points at the pace of strengthening. The crystals are described as healing rather than weakening, so treating them as a defect inverts the passage. Seawater is part of the Roman mixture rather than an obstacle to it.",
+    "source": "original"
+  },
+  {
+    "id": "grv-075",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"Fisheries scientists learn the size of a stock from the surveys conducted early in their careers, and those figures become the standard against which every later change is judged. The trouble is that each cohort of scientists inherits a smaller sea. A decline of ten percent measured from a starting point already reduced by three quarters reads as a modest loss, and management set to restore the recent past aims at a target no earlier generation would have accepted. Work using port ledgers, tax tithes and the catch logs of sailing vessels has pushed the reference point back by centuries, and the resulting curves are steeper than any survey series shows. The method is coarse, since old records count barrels rather than fish. It is nonetheless the only evidence that the modern baseline is itself a result of fishing.\" The passage implies that a stock judged stable by current survey data may nonetheless:",
+    "options": [
+      "hold more fish than it did before commercial fishing began",
+      "lie beyond the range of the vessels that once worked it",
+      "hold a small fraction of its historical abundance",
+      "be governed by rules written before any survey existed",
+      "recover fully as soon as catch limits are reduced"
+    ],
+    "correctIndex": 2,
+    "explanation": "The passage describes a starting point already reduced by three quarters and says curves drawn from old records are steeper than any survey series, so stability measured from the recent past is consistent with a large loss from the historical level. Nothing supports a claim of full recovery once limits are cut, which the passage never discusses. The suggestion that stocks are larger than before commercial fishing contradicts the entire argument.",
+    "source": "original"
+  },
+  {
+    "id": "grv-076",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"Poems are retranslated far more often than they are translated, and one familiar explanation holds that translations age while originals do not. A translation, on this view, is written in the idiom of its moment and carries that idiom as a second layer over the poem, so that within two generations the layer is audible as period costume and a new version becomes necessary. The account is attractive and incomplete. The same argument would predict a steady stream of retranslated technical manuals, and none appears. What separates the two cases is not the aging of language but the status of the earlier version: a manual is replaced when it is wrong, whereas a poem in translation is replaced by a translator who wants to argue with a predecessor. Retranslation is less a repair than a reply.\" The observation about technical manuals functions primarily to:",
+    "options": [
+      "supply an example that confirms the aging explanation",
+      "identify the readers for whom manuals are usually translated",
+      "propose a method for dating an anonymous translation",
+      "note a case the proposed explanation does not fit",
+      "praise translators who revise their own earlier work"
+    ],
+    "correctIndex": 3,
+    "explanation": "The manual sentence arrives immediately after the aging account is called incomplete and shows that the account predicts something that does not occur, which is a counterexample rather than a confirmation. The passage then uses that failure to introduce its own explanation, that retranslation is an argument with a predecessor. The sentence says nothing about who reads manuals or about dating an unsigned text.",
+    "source": "original"
+  },
+  {
+    "id": "grv-077",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"A honeybee swarm hanging from a branch must select a new cavity, and it does so without any bee comparing the candidates. Scouts return from separate sites and dance for them, and the length of a dance reflects how good the dancer found its site. Scouts also deliver a brief signal that silences bees dancing for rival sites, so weaker candidates lose advertisers faster than strong ones. The decision itself is taken elsewhere. Scouts revisiting a promising cavity count the other scouts present, and when that number passes a threshold they return and prepare the swarm to fly. The choice is therefore settled at the site rather than in the cluster, and the swarm can commit while bees are still dancing on the branch for somewhere else.\" According to the passage, a swarm commits to a cavity when:",
+    "options": [
+      "most of the scouts in the hanging cluster have danced for it",
+      "the queen has inspected the chosen cavity herself",
+      "no scout on the branch is still advertising a rival site",
+      "the cavity is the nearest of those the scouts have located",
+      "enough scouts are present at the cavity itself"
+    ],
+    "correctIndex": 4,
+    "explanation": "The passage says scouts revisiting a promising cavity count the scouts present there and act once that number passes a threshold, and it states outright that the choice is settled at the site rather than in the cluster. The closing sentence rules out any requirement that rival dancing has stopped, since the swarm can commit while bees still dance for somewhere else. Distance is never given as a criterion, and the queen is not described as inspecting anything.",
+    "source": "original"
+  },
+  {
+    "id": "grv-078",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"Estimates of wealth inequality in early modern towns rest largely on tax rolls, and the rolls have a shape worth stating plainly. Households too poor to owe anything were left off entirely, while the wealthiest families held charters, offices or clerical status that exempted much of what they owned. Both ends of the distribution are therefore thinner on the page than they were in the street. This is not simple noise. Noise would scatter an estimate around the truth, whereas an omission at both extremes compresses the measured spread in one direction only, so every figure drawn from a roll is a lower bound on the inequality of the town. Historians can correct for this, but only by assuming a size for the two missing groups, and the assumption, not the roll, then carries the result.\" The author's central claim about wealth estimates drawn from tax rolls is that they:",
+    "options": [
+      "err in a direction that can be predicted",
+      "are too imprecise to be worth computing",
+      "agree closely with estimates from household inventories",
+      "have been abandoned by most economic historians",
+      "understate inequality only during periods of rapid growth"
+    ],
+    "correctIndex": 0,
+    "explanation": "The passage distinguishes noise, which scatters an estimate around the truth, from an omission at both extremes, which it says compresses the measured spread in one direction and makes every roll based figure a lower bound. That is a bias with a known sign, which is exactly an error whose direction can be predicted. The passage does not dismiss the estimates as worthless, since it describes how historians correct them, and it attaches no condition about growth.",
+    "source": "original"
+  },
+  {
+    "id": "grv-079",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "hard",
+    "prompt": "Passage: \"Nineteenth century collectors of ballads rarely printed what they heard. Confronted with a dozen versions of one song, each with gaps and each with lines the collector judged corrupt, they assembled a composite: the strongest opening from one singer, the fullest middle from another, a closing stanza mended by the editor's own hand. Later scholarship has been severe about this, and rightly, since the composites were presented as the songs themselves and the singers were reduced to sources. One complication is seldom pressed. The printed composites circulated in cheap editions, were learned from the page by singers in the same districts, and were collected again a generation later from people who had them by heart.\" The final sentence most directly complicates the claim that:",
+    "options": [
+      "collectors recorded the tunes less carefully than the words",
+      "ballads were carried chiefly by professional performers",
+      "the printed composites stand entirely outside the living tradition",
+      "singers in one village knew the versions sung in the next",
+      "modern editors have given up the search for a best text"
+    ],
+    "correctIndex": 2,
+    "explanation": "The last sentence traces the composites from print back into the mouths of singers and then back into the collections, which means the editors' inventions became part of the tradition they were accused of falsifying. That unsettles any clean separation between the printed text and the living song. The sentence says nothing about tunes, about professional singers, or about the practice of modern editors.",
+    "source": "original"
+  },
+  {
+    "id": "grv-080",
+    "section": "verbal",
+    "topic": "Reading Comprehension",
+    "difficulty": "medium",
+    "prompt": "Passage: \"Painting a dark roof white lowers the temperature of the space beneath it, and the size of that effect is not in dispute. Measurements on individual buildings are consistent across climates, and the cooling load falls immediately. Claims about whole cities are a different matter. Reflected light does not simply leave the city: some is absorbed by the haze above it, and reducing the heat rising from roofs also weakens the upward air movement that carries moisture aloft, so several model studies report suppressed afternoon rainfall downwind. The models disagree with one another about the size of that penalty and about where it lands. A homeowner and a regional planner are therefore looking at two different questions, and evidence that settles one of them settles nothing about the other.\" The passage is chiefly concerned with distinguishing:",
+    "options": [
+      "the cost of a reflective coating from the cost of insulation",
+      "roofs painted white from roofs planted with vegetation",
+      "measurements taken in summer from measurements taken in winter",
+      "an effect on one building from an effect on a region",
+      "sunlight reflected away from heat generated indoors"
+    ],
+    "correctIndex": 3,
+    "explanation": "The passage grants that the cooling of a single building is well established and then argues that the regional consequences, including possible rainfall suppression, remain unsettled, closing with the point that the homeowner and the planner face different questions. That contrast between scales is the organizing idea. Vegetation, insulation costs and seasonal comparisons are never raised.",
+    "source": "original"
+  },
+  {
+    "id": "grv-081",
+    "section": "verbal",
+    "topic": "Reading Comprehension: Select All",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "Passage: \"The spruce belly of an old violin carries growth rings, and matching them against a regional ring chronology yields the year the outermost surviving ring was formed. That year is not the year the instrument was made. Wood was seasoned before use, often for a decade, and the maker planed the plank down, removing an unknown number of outer rings in the process. The date is therefore a floor. If the rings run later than the year an attribution claims, the attribution is finished, since no maker works wood that has not yet grown. If they run earlier, nothing follows at all, because any quantity of time may have passed between the last surviving ring and the day the belly was carved.\" Select every statement the passage supports:",
+    "options": [
+      "A ring date later than a violin's claimed date refutes the attribution.",
+      "Ring analysis establishes the exact year in which a violin was assembled.",
+      "Rings from the outside of the original plank may be absent from a finished belly."
+    ],
+    "correctIndices": [
+      0,
+      2
+    ],
+    "selectExactly": null,
+    "explanation": "The passage states that rings running later than a claimed date finish the attribution, because no maker can work wood that has not yet grown, so the first statement is supported. It also says the maker planed the plank down and removed an unknown number of outer rings, so the statement about missing outer rings is supported as well. The claim about an exact year of assembly is contradicted directly: seasoning and planing make the date a floor rather than a construction year.",
+    "source": "original"
+  },
+  {
+    "id": "grv-082",
+    "section": "verbal",
+    "topic": "Reading Comprehension: Select All",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "Passage: \"A seed bank looks like a solution to the loss of crop diversity, and in part it is. Dried and held below freezing, seeds of most cereals stay viable for decades. Three costs are less visible. Viability must be checked, and a check means germinating a sample, so every test spends part of the very holding it protects. Many tropical trees produce seeds that die when dried, and these cannot be frozen at all, so their diversity is kept as orchards that must be watered, weeded and defended against disease every year. And an accession whose germination has fallen must be grown out and reharvested, a process that exposes the population to the pests, soils and daylight of one field in one season, and returns a sample that is no longer quite what was deposited.\" Select every statement the passage supports:",
+    "options": [
+      "Testing whether stored seeds remain viable consumes part of the stored sample.",
+      "Some species cannot be preserved by the drying and freezing method.",
+      "Regrowing an accession can leave it genetically unlike the deposited sample."
+    ],
+    "correctIndices": [
+      0,
+      1,
+      2
+    ],
+    "selectExactly": null,
+    "explanation": "The passage says a viability check means germinating a sample and so spends part of the holding, which supports the first statement. It says seeds of many tropical trees die when dried and cannot be frozen, which supports the second. And it says growing an accession out exposes it to one field in one season and returns a sample no longer quite what was deposited, which supports the third.",
+    "source": "original"
+  },
+  {
+    "id": "grv-083",
+    "section": "verbal",
+    "topic": "Reading Comprehension: Select All",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "Passage: \"Commercial mapmakers have long inserted a fictitious lane or a misspelled hamlet into an otherwise accurate sheet. The purpose is evidentiary. Streets cannot be copyrighted, and a rival who reproduces a map can always say the ground itself dictated the result, but a rival whose sheet carries an invented lane cannot say that, because the ground has no such lane on it. The device does nothing against a competitor who sends surveyors out, since honest work will never reproduce the trap. It also carries an odd risk: at least one invented road has been built, by a council working from the map, after which the fiction ceased to be one.\" Select every statement the passage supports:",
+    "options": [
+      "A rival sheet carrying an invented lane shows that the ground was surveyed independently.",
+      "A trap entry gives no protection against a competitor who surveys the ground.",
+      "Mapmakers abandoned the practice once courts declined to hear such claims."
+    ],
+    "correctIndices": [
+      1
+    ],
+    "selectExactly": null,
+    "explanation": "The passage says the device does nothing against a competitor who sends surveyors out, because honest work will never reproduce the trap, so the second statement is supported. The first statement is reversed: an invented lane on a rival sheet is evidence of copying, since the ground carries no such lane. The third is unsupported, as the passage mentions no court decision and no abandonment of the practice.",
+    "source": "original"
+  },
+  {
+    "id": "grv-084",
+    "section": "verbal",
+    "topic": "Reading Comprehension: Select All",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "Passage: \"Several birds can sleep one half of the brain at a time, holding open the eye served by the waking half. Ducks resting in a row show the pattern most clearly: those at the two ends use it far more often than those in the middle, and they keep the outward facing eye open, toward whatever the row is not already watching. Recordings from frigatebirds carried the finding out to sea. The birds do sleep on the wing, and they use the one sided state there, but the total is startling: under an hour a day aloft against more than twelve hours ashore. The state is thus not a full substitute for ordinary sleep. It is a way of buying a little of it in conditions that would otherwise permit none.\" Select every statement the passage supports:",
+    "options": [
+      "Ducks at the ends of a row use the one sided pattern more than those in the middle.",
+      "Frigatebirds in flight sleep about as many hours as they do on land.",
+      "A bird in the one sided state keeps open the eye served by the waking half of the brain."
+    ],
+    "correctIndices": [
+      0,
+      2
+    ],
+    "selectExactly": null,
+    "explanation": "The passage says ducks at the two ends of a row use the pattern far more often than those in the middle, which supports the first statement. It also opens by describing the waking half holding open the eye it serves, which supports the third. The frigatebird statement is contradicted by the figures given, under an hour a day in flight against more than twelve hours ashore.",
+    "source": "original"
+  },
+  {
+    "id": "grv-085",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "easy",
+    "prompt": "The gull has become so ______ in inland towns that the county's birdwatchers no longer trouble to record it.",
+    "options": [
+      "elusive",
+      "migratory",
+      "aggressive",
+      "protected",
+      "commonplace"
+    ],
+    "correctIndex": 4,
+    "explanation": "Observers stop recording a bird when seeing it tells them nothing, which happens once it is everywhere. Commonplace supplies that reason directly. A bird that was elusive would be worth recording precisely because sightings were rare, an aggressive one would draw more notice rather than less, and protected status would ordinarily increase the pressure to log a sighting.",
+    "source": "original"
+  },
+  {
+    "id": "grv-086",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "easy",
+    "prompt": "The instructions printed on the packet were ______: press once, wait, press again.",
+    "options": [
+      "terse",
+      "ambiguous",
+      "ornamental",
+      "contradictory",
+      "impenetrable"
+    ],
+    "correctIndex": 0,
+    "explanation": "The colon supplies the evidence for the blank, and what follows is three short commands and nothing else. Terse means using few words, which is what the sample shows. Ambiguous, contradictory and impenetrable all describe instructions a reader could not follow, whereas these are perfectly followable.",
+    "source": "original"
+  },
+  {
+    "id": "grv-087",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "medium",
+    "prompt": "His reading that summer was ______: a chapter of history one evening, half a novel the next, and nothing carried through to its end.",
+    "options": [
+      "voracious",
+      "systematic",
+      "clandestine",
+      "desultory",
+      "laborious"
+    ],
+    "correctIndex": 3,
+    "explanation": "The list after the colon describes reading that jumps between books and finishes none, which is aimless rather than intense or hidden. Desultory names exactly that lack of plan or persistence. Voracious is tempting because the man reads widely, but a voracious reader consumes books rather than abandoning them, and systematic reverses the description outright.",
+    "source": "original"
+  },
+  {
+    "id": "grv-088",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "medium",
+    "prompt": "The quarrel over water rights has proved ______: three commissions have taken it up, and each has adjourned without producing a recommendation.",
+    "options": [
+      "inconsequential",
+      "intractable",
+      "recent",
+      "lucrative",
+      "technical"
+    ],
+    "correctIndex": 1,
+    "explanation": "Three bodies have tried the question and none has resolved it, so the blank needs a word for a difficulty that resists solution. Intractable carries that sense. Inconsequential fails because a trivial matter would not occupy three commissions, and technical explains at most why the work is slow rather than why it never concludes.",
+    "source": "original"
+  },
+  {
+    "id": "grv-089",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "hard",
+    "prompt": "The scheme to raise wheat on the plateau was ______ from the outset: the soil was thin, the growing season was short, and its author had never farmed anything.",
+    "options": [
+      "lucrative",
+      "conventional",
+      "quixotic",
+      "clandestine",
+      "deliberate"
+    ],
+    "correctIndex": 2,
+    "explanation": "The colon lists conditions guaranteeing failure alongside a promoter with no relevant experience, so the blank needs a word for a hopelessly impractical undertaking pursued anyway. Quixotic means exactly that. Lucrative contradicts the listed obstacles, and conventional would suggest the scheme was ordinary, which the same list denies.",
+    "source": "original"
+  },
+  {
+    "id": "grv-090",
+    "section": "verbal",
+    "topic": "Text Completion",
+    "difficulty": "hard",
+    "prompt": "The essay's boldest claims are also its most ______: not one of them is tied to a source, and the notes lead back to nothing but the author's own assertions.",
+    "options": [
+      "technical",
+      "derivative",
+      "provocative",
+      "conventional",
+      "unsubstantiated"
+    ],
+    "correctIndex": 4,
+    "explanation": "The colon supplies the reason for the blank: the claims rest on no evidence beyond the author's word, and unsubstantiated means exactly that, unsupported by proof. Provocative describes the effect a claim has on a reader rather than what stands behind it, and the sentence has already granted boldness. Derivative would say the claims were taken from other writers, which is the opposite of notes that lead back only to the author himself.",
+    "source": "original"
+  },
+  {
+    "id": "grv-091",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "easy",
+    "kind": "multi",
+    "prompt": "The climb turned out to be far more ______ than the guidebook had suggested, and two of the six walkers turned back before noon.",
+    "options": [
+      "scenic",
+      "arduous",
+      "popular",
+      "grueling",
+      "direct",
+      "remote"
+    ],
+    "correctIndices": [
+      1,
+      3
+    ],
+    "selectExactly": 2,
+    "explanation": "Walkers giving up partway through indicate a climb harder than they were led to expect, and arduous and grueling both mean demanding great effort, producing one sentence. Remote fits the grammar and might explain a difficult day, but it describes where the climb is rather than how hard it is, and it has no partner among the choices. Scenic and popular give no reason for anyone to turn back.",
+    "source": "original"
+  },
+  {
+    "id": "grv-092",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "The storm did not ______ until well after midnight, by which time the roof of the equipment shed was gone.",
+    "options": [
+      "intensify",
+      "subside",
+      "shift",
+      "threaten",
+      "abate",
+      "form"
+    ],
+    "correctIndices": [
+      1,
+      4
+    ],
+    "selectExactly": 2,
+    "explanation": "Damage accumulating through the night means the storm went on at full force until late, so the blank needs a word for becoming less severe. Subside and abate both carry that sense and yield the same sentence. Intensify reverses it, and form would place the storm's beginning after the roof had already been torn off.",
+    "source": "original"
+  },
+  {
+    "id": "grv-093",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "Since the ban on new licenses took effect, a trade that was once ______ for the stallholders near the terminal now barely covers their rent.",
+    "options": [
+      "seasonal",
+      "lucrative",
+      "precarious",
+      "unlicensed",
+      "crowded",
+      "remunerative"
+    ],
+    "correctIndices": [
+      1,
+      5
+    ],
+    "selectExactly": 2,
+    "explanation": "The contrast with a trade that now barely covers rent points to one that used to pay well, and lucrative and remunerative both mean producing a good income. Precarious describes risk and fits the present state rather than the earlier one the sentence sets against it. Seasonal and crowded describe when the trade runs and how many compete in it, neither of which is what rent is being measured against, and neither has a partner here.",
+    "source": "original"
+  },
+  {
+    "id": "grv-094",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "medium",
+    "kind": "multi",
+    "prompt": "The chair ruled the question out of order, holding that it was not ______ to the motion then under debate.",
+    "options": [
+      "hostile",
+      "novel",
+      "germane",
+      "pertinent",
+      "audible",
+      "urgent"
+    ],
+    "correctIndices": [
+      2,
+      3
+    ],
+    "selectExactly": 2,
+    "explanation": "A question is ruled out of order when it has no bearing on the matter being debated, and germane and pertinent both mean relevant to the matter at hand. Urgent fits the grammar but concerns timing rather than relevance, and a chair does not ordinarily exclude a question for being unhurried. Hostile would describe the questioner's stance rather than the question's connection to the motion.",
+    "source": "original"
+  },
+  {
+    "id": "grv-095",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "The transfer of the collection was ______: the crates left the building at night, and the registrar learned of the move only when she found the shelves empty.",
+    "options": [
+      "routine",
+      "hurried",
+      "clandestine",
+      "illegal",
+      "surreptitious",
+      "expensive"
+    ],
+    "correctIndices": [
+      2,
+      4
+    ],
+    "selectExactly": 2,
+    "explanation": "Crates leaving at night and a registrar who learns of the move only from the empty shelves describe a transfer carried out in secret, and clandestine and surreptitious both mean done in a concealed way. Illegal is tempting, because concealment suggests wrongdoing, but nothing in the sentence says a law was broken and no other word here means unlawful. Routine, hurried and expensive describe how ordinary, how fast and how costly the move was rather than how hidden it was.",
+    "source": "original"
+  },
+  {
+    "id": "grv-096",
+    "section": "verbal",
+    "topic": "Sentence Equivalence",
+    "difficulty": "hard",
+    "kind": "multi",
+    "prompt": "The report is ______: ninety pages that state in three different ways what a single page could have carried.",
+    "options": [
+      "confidential",
+      "belated",
+      "prolix",
+      "cursory",
+      "technical",
+      "verbose"
+    ],
+    "correctIndices": [
+      2,
+      5
+    ],
+    "selectExactly": 2,
+    "explanation": "Ninety pages that say three times over what one page could carry describe writing that uses far more words than it needs, and prolix and verbose both name that fault. Cursory reverses the sentence, since a cursory report would be too short rather than too long. Belated and confidential describe when the report arrived and who may read it, and technical describes its vocabulary, none of which is the length the sentence complains of.",
+    "source": "original"
+  }
+]

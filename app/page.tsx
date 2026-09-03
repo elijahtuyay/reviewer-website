@@ -4,6 +4,7 @@ import { AVAILABLE_EXAMS, EXAM_LIST, totalMinutes, totalQuestions } from "@/lib/
 import { ExamModule } from "@/lib/exams/types";
 import { loadSection } from "@/lib/question-bank";
 import { AFFILIATION_DISCLAIMER, SITE_NAME, SITE_TAGLINE } from "@/lib/site";
+import { joinWithAnd } from "@/lib/text";
 import { SITE_URL } from "@/lib/site-url";
 
 export const metadata: Metadata = {
@@ -102,7 +103,9 @@ function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) 
   // The names now sit in the eyebrow rather than mid-paragraph, which is where
   // a visitor scanning the fold actually looks, and it lets the paragraph below
   // spend its first sentence on something other than repeating the nav.
-  const names = exams.map((e) => e.shortLabel).join(" and ");
+  // joinWithAnd, not .join(" and "): at three exams a plain join reads
+  // "NMAT and GMAT and GRE".
+  const names = joinWithAnd(exams.map((e) => e.shortLabel));
   return (
     // The one saturated surface on the site, and deliberately the ROOT accent
     // rather than an exam's: this page sits above every exam, so borrowing one
@@ -205,7 +208,24 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        {/*
+          Three up once there is room, because three cards do not need the width
+          a two-up card gets.
+
+          Between `md` and `lg` this IS two columns with a third card alone in
+          row two. That is deliberate and the earlier comment here was wrong to
+          imply otherwise: at 768px the alternative is three full-width cards in
+          one column, which is worse, and the orphan is one short row rather
+          than a hole in the middle of the grid.
+
+          Both class strings are written out in full, because Tailwind scans
+          source text and never sees a computed class name.
+        */}
+        <div
+          className={`mt-10 grid gap-6 ${
+            exams.length >= 3 ? "md:grid-cols-2 lg:grid-cols-3" : "lg:grid-cols-2"
+          }`}
+        >
           {exams.map(({ exam, bank }) => (
             <article
               key={exam.id}
@@ -299,12 +319,24 @@ function examHighlights(exam: ExamModule, bank: number): string[] {
   if (!exam.rules.allowSkip) {
     lines.push("You must answer each question before the next question appears");
   }
+  // Two lines that describe a FIXED-PAPER exam, which had almost nothing to say
+  // about itself: every other rule here is phrased as a departure from that
+  // shape, so NMAT generated three bullets against GMAT eight and its card read
+  // as the unfinished one beside them.
+  if (exam.rules.navigation === "free") {
+    lines.push("The whole section is on one page, so you can answer in any order");
+  }
+  if (exam.scoring.kind === "points") {
+    lines.push(
+      `Each correct answer is worth ${exam.scoring.pointsPerCorrectAnswer} points, and an incorrect one costs nothing`
+    );
+  }
   if (exam.rules.reviewEdit) {
     lines.push(
       `You can flag questions, then change up to ${exam.rules.reviewEdit.maxChanges} answers if time remains`
     );
   }
-  if (exam.rules.sectionOrder === "chooseable") {
+  if (exam.rules.sectionOrder !== "fixed") {
     lines.push("You can take the sections in any order");
   }
   if (exam.scoring.kind === "scaled") {
@@ -318,6 +350,17 @@ function examHighlights(exam: ExamModule, bank: number): string[] {
       ? `${bank.toLocaleString("en-US")} questions in the question bank`
       : "The question bank is not ready yet"
   );
+  /*
+   * Capped, because the cards stretch to a shared height and the lists ran 3,
+   * 8 and 5. The three-item card carried roughly 300px of dead space above its
+   * button and read as the unfinished one, which is the opposite of what a
+   * bank of 300 questions has earned.
+   *
+   * The bank count is pushed last and is the line worth keeping, so the cap
+   * drops from the middle rather than the end.
+   */
+  const CAP = 5;
+  if (lines.length > CAP) return [...lines.slice(0, CAP - 1), lines[lines.length - 1]];
   return lines;
 }
 
