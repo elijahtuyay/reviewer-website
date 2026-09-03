@@ -208,10 +208,19 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
           </p>
         </div>
 
-        {/* Three exams do not fit a two-column grid without leaving an orphan
-            in the second row, and they do not need the width a two-up card
-            gets. Both class strings are written out in full, because Tailwind
-            scans source text and a computed class name is not emitted. */}
+        {/*
+          Three up once there is room, because three cards do not need the width
+          a two-up card gets.
+
+          Between `md` and `lg` this IS two columns with a third card alone in
+          row two. That is deliberate and the earlier comment here was wrong to
+          imply otherwise: at 768px the alternative is three full-width cards in
+          one column, which is worse, and the orphan is one short row rather
+          than a hole in the middle of the grid.
+
+          Both class strings are written out in full, because Tailwind scans
+          source text and never sees a computed class name.
+        */}
         <div
           className={`mt-10 grid gap-6 ${
             exams.length >= 3 ? "md:grid-cols-2 lg:grid-cols-3" : "lg:grid-cols-2"

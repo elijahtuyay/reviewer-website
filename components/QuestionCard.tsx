@@ -213,7 +213,7 @@ function QuestionCard({
         passage, in body type, above three options that look like any other.
       */}
       {kind === "multi" && (
-        <p className="mt-4 ml-7 text-sm font-medium text-accent-text">
+        <p id={`${question.id}-multi-rule`} className="mt-4 ml-7 text-sm font-medium text-accent-text">
           {question.selectExactly === 2
             ? "Select the 2 answers that fit the sentence and give it the same meaning."
             : question.selectExactly
@@ -241,6 +241,15 @@ function QuestionCard({
         className="mt-4 ml-7 flex flex-col gap-2"
         role={kind === "multi" ? "group" : "radiogroup"}
         aria-label={`Answer options for question ${index + 1}`}
+        /*
+         * The rule has to be ANNOUNCED, not merely adjacent.
+         *
+         * Tabbing from a radio in one question lands directly on the first
+         * checkbox of the next, so a screen-reader user could enter a
+         * select-two group without ever hearing that two answers are required.
+         * Being the previous DOM sibling is not an association.
+         */
+        aria-describedby={kind === "multi" ? `${question.id}-multi-rule` : undefined}
       >
         {options.map((option, optionIndex) => {
           const isSelected = chosen.includes(optionIndex);
@@ -298,7 +307,17 @@ function QuestionCard({
            * own state colors and needs no extra contrast tuning.
            */
           const marker_shape = kind === "multi" ? "rounded-[3px]" : "rounded-full";
-          const filled = isSelected || (reviewMode && isCorrectOption);
+          /*
+           * Filled means "you chose this", and NOTHING else.
+           *
+           * It used to also fill on any correct option in review, so on a
+           * section with 26 unanswered questions every keyed option showed a
+           * filled dot, which reads as "you picked this" and is false. The
+           * multi markers disambiguate in text; a single-select radio does not.
+           * Correctness is carried by the border and the label, which is where
+           * it belongs.
+           */
+          const filled = isSelected;
 
           return (
             <button
@@ -350,11 +369,23 @@ function QuestionCard({
               // text-base, not text-sm: the options were 14px under a 16px
               // stem, i.e. the text a candidate re-reads three times before
               // committing was the smallest text on the card.
-              className={`flex min-h-11 scroll-mt-40 items-center sm:scroll-mt-24 justify-between gap-3 rounded-md border px-4 py-2.5 text-left text-base leading-relaxed text-foreground transition-[color,background-color,border-color,box-shadow,transform] ${
+              /*
+               * Stacked below `sm`, side by side above it.
+               *
+               * The review markers grew from "Correct answer" (~85px) to
+               * "Correct answer, you selected this" (~185px) so the candidate
+               * can tell which of two picks was right. That took ~100px out of
+               * the text column at the one width that cannot spare it: at 390px
+               * an unbreakable word painted straight through the marker, up to
+               * 31px of overlap, rendering as "impenetreableanswer, you
+               * selected this". `min-w-0` lets a flex child shrink below its
+               * content, so nothing stopped it.
+               */
+              className={`flex min-h-11 scroll-mt-40 flex-col items-start gap-1 sm:scroll-mt-24 sm:flex-row sm:items-center sm:justify-between sm:gap-3 rounded-md border px-4 py-2.5 text-left text-base leading-relaxed text-foreground transition-[color,background-color,border-color,box-shadow,transform] ${
                 reviewMode || lockedReason ? "" : "active:scale-[0.99]"
               } ${style} ${reviewMode || lockedReason ? "cursor-default" : "cursor-pointer"} ${lockedReason ? "opacity-60" : ""}`}
             >
-              <span className="flex min-w-0 items-start gap-3">
+              <span className="flex min-w-0 items-start gap-3 [overflow-wrap:anywhere]">
                 <span
                   aria-hidden
                   className={`mt-1 flex h-4 w-4 shrink-0 items-center justify-center border ${marker_shape} ${
