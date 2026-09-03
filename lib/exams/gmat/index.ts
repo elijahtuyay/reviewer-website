@@ -23,7 +23,7 @@ const gmat: ExamModule = {
   label: "GMAT Focus Edition",
   shortLabel: "GMAT",
   description:
-    "Practice for the GMAT Focus Edition. Each of the three sections has a 45-minute time limit. The difficulty changes with your answers, and every answer has a written explanation.",
+    "Adaptive, and one question at a time. Three sections of 45 minutes, a 205 to 805 score, and a written explanation on every answer.",
   /**
    * Measured, not picked by eye. The first choice (#1e3a8a) was only 1.59:1
    * against the dark background, half of NMAT green's 3.11:1, which left the
