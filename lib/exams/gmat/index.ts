@@ -23,7 +23,7 @@ const gmat: ExamModule = {
   label: "GMAT Focus Edition",
   shortLabel: "GMAT",
   description:
-    "Practice for the GMAT Focus Edition: three 45-minute sections, adaptive difficulty, and a written explanation for every answer.",
+    "Practice for the GMAT Focus Edition. Each of the three sections has a 45-minute time limit. The difficulty changes with your answers, and every answer has a written explanation.",
   /**
    * Measured, not picked by eye. The first choice (#1e3a8a) was only 1.59:1
    * against the dark background, half of NMAT green's 3.11:1, which left the
@@ -45,7 +45,7 @@ const gmat: ExamModule = {
       id: "data-insights",
       label: "Data Insights",
       description:
-        "Data sufficiency, table analysis, two-part analysis, graphics interpretation, and multi-source reasoning.",
+        "This section tests data sufficiency, table analysis, two-part analysis, graphics interpretation and multi-source reasoning.",
       questionCount: 20,
       minutes: 45,
       /**
@@ -59,7 +59,8 @@ const gmat: ExamModule = {
     {
       id: "quantitative",
       label: "Quantitative Reasoning",
-      description: "Problem solving across arithmetic, algebra, statistics, and sets. No geometry.",
+      description:
+        "This section tests problem solving in arithmetic, algebra, statistics and sets. It has no geometry.",
       questionCount: 21,
       minutes: 45,
       /**
@@ -74,7 +75,8 @@ const gmat: ExamModule = {
     {
       id: "verbal",
       label: "Verbal Reasoning",
-      description: "Reading comprehension and critical reasoning. No sentence correction.",
+      description:
+        "This section tests reading comprehension and critical reasoning. It has no sentence correction.",
       questionCount: 23,
       minutes: 45,
       calculator: null,

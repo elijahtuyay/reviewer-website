@@ -17,8 +17,8 @@ export default function SiteFooter() {
           <div className="max-w-xs">
             <p className="text-sm font-semibold text-foreground">{SITE_NAME}</p>
             <p className="mt-2 text-sm text-muted">
-              Free, timed practice exams built to match the real thing, with a written
-              explanation for every answer.
+              Free practice exams with real section time limits. Every answer has a written
+              explanation.
             </p>
           </div>
 

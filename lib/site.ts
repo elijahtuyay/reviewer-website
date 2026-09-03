@@ -10,13 +10,17 @@
 
 export const SITE_NAME = "Exam Reviewer";
 
-export const SITE_TAGLINE = "Free, timed practice exams with every answer explained.";
+export const SITE_TAGLINE = "Free practice exams with every answer explained.";
 
 /**
  * Shown in the footer and on the about section of the home page. This is a
  * genuinely independent study tool: naming the real exam is nominative fair
  * use, but implying endorsement is not, so the disclaimer is not optional
  * decoration.
+ *
+ * Written to ASD-STE100: short simple-tense sentences, one claim each, so a
+ * non-native reader cannot come away with the wrong idea about who runs this
+ * site. A legal notice is the last place to spend a subordinate clause.
  */
 export const AFFILIATION_DISCLAIMER =
-  "This site is an independent study tool. It is not affiliated with, endorsed by, or connected to the Graduate Management Admission Council (GMAC) or any testing body. Every question here is originally written for practice and does not reproduce actual examination content. Practicing here does not guarantee any particular exam result.";
+  "This site is an independent study tool. It has no affiliation and no connection with the Graduate Management Admission Council (GMAC) or with any other testing body. No testing body endorses this site. Every question here is original, and written for practice only. No question reproduces real exam content. Practice on this site does not guarantee any particular result on your exam.";

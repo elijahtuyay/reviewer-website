@@ -296,8 +296,8 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
                 concluding "this calculator is broken" is never more than a
                 glance away, and it costs no keypad space. */}
             <p className="mt-2 shrink-0 rounded bg-panel-hover px-2 py-1.5 text-xs leading-snug text-foreground/90">
-              <strong className="font-semibold">Not a bug:</strong> runs left to right, so{" "}
-              <span className="font-mono whitespace-nowrap">2 + 3 × 4</span> is 20.
+              <strong className="font-semibold">Not a bug:</strong> it calculates left to
+              right, so <span className="font-mono whitespace-nowrap">2 + 3 × 4</span> is 20.
             </p>
 
             <div className="mt-3 grid shrink-0 grid-cols-4 gap-1.5">
@@ -333,19 +333,29 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
               {detailsOpen && (
                 <ul className="flex flex-col gap-1.5 pb-1 text-xs leading-relaxed text-foreground/90">
                   <li>
-                    It copies the exam&apos;s calculator exactly. There is no order of operations,
-                    so for <span className="font-mono whitespace-nowrap">a×b + c×d</span> bank each
-                    product with <span className="font-mono">M+</span>, then press{" "}
+                    This is a copy of the exam calculator. It has no order of operations. For{" "}
+                    <span className="font-mono whitespace-nowrap">a×b + c×d</span>, add each product
+                    to memory with <span className="font-mono">M+</span>. Then press{" "}
                     <span className="font-mono">MRC</span>.
                   </li>
                   <li>
-                    <span className="font-mono">%</span> is taken from what you&apos;re adding it
-                    to: <span className="font-mono whitespace-nowrap">12 + 10 %</span> shows 1.2,
-                    and <span className="font-mono">=</span> gives 13.2.
+                    {/* The condition is the point. `%` is contextual: a percentage
+                        OF the running total under + or -, and a plain divide by
+                        100 otherwise. A version of this line that said "% uses
+                        the number before it" was wrong in its own example,
+                        because 12 + 10 % takes 10% of 12, not of 10. */}
+                    With <span className="font-mono">+</span> or{" "}
+                    <span className="font-mono">−</span>,{" "}
+                    <span className="font-mono">%</span> takes that percentage of the running
+                    total: <span className="font-mono whitespace-nowrap">12 + 10 %</span> shows
+                    1.2, and <span className="font-mono">=</span> shows 13.2. With{" "}
+                    <span className="font-mono">×</span> or <span className="font-mono">÷</span>,{" "}
+                    <span className="font-mono">%</span> divides by 100.
                   </li>
                   <li>
-                    The display holds <strong>8 digits</strong>. Past 99,999,999 it errors until you
-                    press <span className="font-mono">ON/C</span>, exactly as on test day.
+                    The display holds <strong>8 digits</strong>. Above 99,999,999 it shows an error.
+                    Press <span className="font-mono">ON/C</span> to clear it. The real exam
+                    calculator does the same.
                   </li>
                 </ul>
               )}

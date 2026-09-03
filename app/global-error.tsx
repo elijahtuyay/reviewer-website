@@ -33,11 +33,11 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
       >
         <main style={{ maxWidth: "28rem" }}>
           <h1 style={{ fontSize: "1.5rem", fontWeight: 600, margin: 0 }}>
-            The app failed to load
+            The site failed to load
           </h1>
           <p style={{ marginTop: "1rem", lineHeight: 1.6 }}>
-            Something went wrong outside the page itself. Reloading usually fixes it, and any
-            section you had started is still saved in this browser tab.
+            The error is outside the page. Reload the page. This usually corrects the error, and
+            this browser tab still holds any section you started.
           </p>
           <button
             type="button"

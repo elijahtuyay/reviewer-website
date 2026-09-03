@@ -124,9 +124,12 @@ export default function PauseOverlay({ paused, onResume, frozenTimeLabel }: Paus
           timer is stopped until you resume." — a clause starting lowercase
           whose subject was a separate block two elements up. */}
       <p id={bodyId} className="max-w-xs text-center text-sm text-muted">
+        {/* "is stopped", not "stops". The timer is ALREADY stopped by the time
+            anyone reads this, and "stops until" describes a future action. A
+            past participle used as an adjective is exactly what STE permits. */}
         {frozenTimeLabel
-          ? "That is the time you had left. The clock is stopped until you resume."
-          : "The clock is stopped until you resume."}
+          ? "That is your remaining time. The timer is stopped until you press Resume."
+          : "The timer is stopped until you press Resume."}
       </p>
       <button
         ref={resumeRef}

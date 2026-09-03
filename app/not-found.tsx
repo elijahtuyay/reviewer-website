@@ -20,11 +20,9 @@ export default function NotFound() {
     <div className="flex flex-1 justify-center bg-background">
       <main className="w-full max-w-lg px-6 py-24 text-center">
         <p className="text-sm font-medium tracking-wide text-muted uppercase">Error 404</p>
-        <h1 className="mt-2 text-3xl font-semibold text-foreground">
-          We couldn&apos;t find that page
-        </h1>
+        <h1 className="mt-2 text-3xl font-semibold text-foreground">This page does not exist</h1>
         <p className="mt-4 text-foreground/90">
-          The link may be out of date, or the exam it points to may not have a question bank yet.
+          The link may be old. The exam in the link may also have no question bank yet.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link

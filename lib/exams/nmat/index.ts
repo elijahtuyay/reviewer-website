@@ -18,7 +18,7 @@ const nmat: ExamModule = {
   label: "NMAT by GMAC",
   shortLabel: "NMAT",
   description:
-    "Practice quizzes for NMAT by GMAC: timed sections, instant review, and explained answers.",
+    "Practice for the NMAT by GMAC. Each section has its own time limit. Every answer has a written explanation.",
   theme: { accent: "#0f7b4d", accentForeground: "#ffffff" },
   available: true,
 
@@ -26,7 +26,8 @@ const nmat: ExamModule = {
     {
       id: "language-skills",
       label: "Language Skills",
-      description: "Reading comprehension, grammar, vocabulary, and sentence correction.",
+      description:
+        "This section tests reading comprehension, grammar, vocabulary and sentence correction.",
       questionCount: 36,
       minutes: 28,
       calculator: null,
@@ -35,7 +36,7 @@ const nmat: ExamModule = {
       id: "quantitative-skills",
       label: "Quantitative Skills",
       description:
-        "Arithmetic, algebra, geometry, number properties, data interpretation, and data sufficiency.",
+        "This section tests arithmetic, algebra, geometry, number properties, data interpretation and data sufficiency.",
       questionCount: 36,
       minutes: 52,
       calculator: null,
@@ -44,7 +45,7 @@ const nmat: ExamModule = {
       id: "logical-reasoning",
       label: "Logical Reasoning",
       description:
-        "Verbal reasoning (critical reasoning, syllogisms) and analytical/puzzle-based reasoning.",
+        "This section tests critical reasoning, syllogisms and analytical puzzles.",
       questionCount: 36,
       minutes: 40,
       calculator: null,
