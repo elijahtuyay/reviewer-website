@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-03, at PR #22 / VERSION.txt `2.4.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-04, at PR #23 / VERSION.txt `2.5.0`.
 
 ## What this project is
 
@@ -222,6 +222,40 @@ document for two releases and sent readers looking for files that were gone.
 12. Two pre-existing lint false-positives were cleaned up (`ThemeToggle`'s `react-hooks/set-state-in-effect`, `ThemeInitScript`'s `@next/next/no-before-interactive-script-outside-document` — both are legitimate patterns the lint rules don't account for; each has an inline `eslint-disable` comment explaining why).
 
 ## PR/version history (what shipped, in order)
+
+- **PR #23** (v2.5.0) — the copy reads as written by a person, at the user's
+  direction: "they reeked too much of AI slop." This is a different complaint
+  from the one v2.4.0 answered, and **v2.4.0 is part of what caused it.** STE
+  fixed the vocabulary and left the rhythm alone. Its rules cap sentence LENGTH
+  and ask for one instruction per sentence, so the obedient way to write it is a
+  column of 17-word subject-verb-object declaratives, and that metronome is the
+  single loudest machine-written tell. Nothing in ASD-STE100 asks for uniform
+  length, and the fix was to vary it: the hero subhead now runs 21 / 18 / 8
+  words.
+
+  The other three patterns, worth naming because they regrow:
+
+  - **The pull-quote heading.** "One timed section shows you where you stand"
+    and "An adaptive exam adapts" are epigrams, not headings. The second also
+    broke the settled vocabulary, since **"follows" is reserved for *conforms
+    to*** and difficulty **changes with** your answers.
+  - **The closing one-liner.** Two feature paragraphs ended on a line that
+    existed for the cadence rather than the reader ("Practice without a time
+    limit teaches you the topics but not the exam"; "A good incorrect option
+    matches a real mistake"). Both are also "not X, but Y" contrasts.
+  - **The triad.** A hero chip row of exactly three items, a stat band of
+    exactly four, and a "not one quiz under different names" negative listing.
+
+  Two whole bands were **deleted** on the user's explicit instruction: the
+  four-cell stat band and the hero chip row. Every fact in them appeared
+  elsewhere on the page already. The home page no longer has a `StatBand`
+  component.
+
+  **`npm run audit:copy` cannot see any of this and was never going to.** It
+  checks tense, sentence length, semicolons and a banned-phrase list. It passed
+  before this PR and passes after, at 268 strings against 274 (the drop is the
+  deleted bands). Rhythm, pull-quotes and triads stay an author-and-reviewer
+  judgment, in the same bucket as Rule 3.7 and dictionary membership.
 
 - **PR #22** (v2.4.0) — every user-facing description rewritten to ASD-STE100,
   at the user's direction, because the old copy read as machine-written
@@ -877,7 +911,7 @@ that appears not to have applied is usually this.
 
 ---
 
-**Current state: `main` is at v2.4.0, and is the only branch.**
+**Current state: `main` is at v2.5.0, and is the only branch.**
 
 "Clean" is five commands rather than a claim, and all five pass on `main`:
 

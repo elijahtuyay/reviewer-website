@@ -18,8 +18,7 @@ export const metadata: Metadata = {
  * they can respect that exam's rules.
  *
  * Everything here iterates the registry. Adding an exam module puts a card in
- * the picker, a row in the stats, and an entry in the footer without this file
- * changing at all.
+ * the picker and an entry in the footer without this file changing at all.
  */
 
 /** Server-side only: this page is statically prerendered, so the banks never reach the browser. */
@@ -83,22 +82,6 @@ export default async function Home() {
 
       <Hero exams={AVAILABLE_EXAMS} totalBank={totalBank} />
 
-      <StatBand
-        stats={[
-          {
-            value: String(availableCount),
-            label: availableCount === 1 ? "exam, fully timed" : "exams, fully timed",
-          },
-          { value: totalBank.toLocaleString("en-US"), label: "original questions" },
-          // "100%", not "Every". The band renders four large values and the eye
-          // reads that slot as a number, so a bare determiner sat there as a
-          // dangling fragment. The label also carries the condition back:
-          // explanations appear after you submit, not before.
-          { value: "100%", label: "explained after you submit" },
-          { value: "Free", label: "no account and no payment" },
-        ]}
-      />
-
       <ExamPicker exams={exams} />
       <HowItWorks />
       <FeatureBands />
@@ -115,6 +98,10 @@ function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) 
   // tell from anything above the fold that this site covers it: the headline
   // names no exam, the eyebrow said "graduate admissions practice", and the
   // subhead said "2 exams". The only occurrence of either name was in the nav.
+  //
+  // The names now sit in the eyebrow rather than mid-paragraph, which is where
+  // a visitor scanning the fold actually looks, and it lets the paragraph below
+  // spend its first sentence on something other than repeating the nav.
   const names = exams.map((e) => e.shortLabel).join(" and ");
   return (
     // The one saturated surface on the site, and deliberately the ROOT accent
@@ -130,17 +117,16 @@ function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) 
       />
       <div className="relative mx-auto w-full max-w-5xl px-6 py-20 text-center sm:py-28">
         <p className="text-xs font-semibold tracking-widest uppercase opacity-90">
-          Graduate admission practice
+          {names} practice
         </p>
         <h1 className="mx-auto mt-4 max-w-3xl text-3xl leading-tight font-bold text-balance sm:text-4xl md:text-5xl">
-          Take a full timed section before you take the real exam.
+          Take a real timed section today.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed opacity-90 sm:text-lg">
-          This site gives you full practice exams for the{" "}
-          <strong className="font-semibold">{names}</strong>. Each exam follows its own published
-          format and its own section time limits. We write every one of the{" "}
-          {totalBank.toLocaleString("en-US")} questions for this site, and every answer has a
-          written explanation. You do not need an account, and you pay nothing.
+          The section lengths, the time limits and the rules about what you can skip follow each
+          exam&rsquo;s own published format. We write all{" "}
+          {totalBank.toLocaleString("en-US")} questions here, and each one has an explanation you read
+          after you submit. You pay nothing, and you need no account.
         </p>
 
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -181,35 +167,7 @@ function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) 
             </span>
           ))}
         </p>
-
-        <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-xs font-medium opacity-80 sm:text-sm">
-          <li>Real section time limits</li>
-          <li aria-hidden>&middot;</li>
-          <li>Every answer explained</li>
-          <li aria-hidden>&middot;</li>
-          <li>One timed section at a time</li>
-        </ul>
       </div>
-    </section>
-  );
-}
-
-/* ----------------------------------------------------------------- stats -- */
-
-function StatBand({ stats }: { stats: { value: string; label: string }[] }) {
-  return (
-    <section className="border-b border-line bg-panel">
-      <dl className="mx-auto grid w-full max-w-5xl grid-cols-2 gap-x-6 gap-y-8 px-6 py-10 sm:grid-cols-4">
-        {/* The number reads first, but a definition list requires the term
-            before its description, so the label stays the term and flex
-            `order` flips the visual sequence without reordering the DOM. */}
-        {stats.map((stat) => (
-          <div key={stat.label} className="flex flex-col text-center">
-            <dt className="order-2 mt-1 text-xs text-muted sm:text-sm">{stat.label}</dt>
-            <dd className="order-1 text-2xl font-bold text-foreground sm:text-3xl">{stat.value}</dd>
-          </div>
-        ))}
-      </dl>
     </section>
   );
 }
@@ -239,12 +197,11 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
             Select your exam
           </p>
           <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
-            Each exam follows its own format
+            The rules change with the exam
           </h2>
           <p className="mt-3 leading-relaxed text-muted">
-            These are different exams, not one quiz under different names. The section lengths, the
-            time limits, the skip rules and the adaptive difficulty all depend on the exam you
-            select.
+            The section lengths, the time limits, the skip rules and the adaptive difficulty all
+            depend on the exam you select. Each card below lists what changes.
           </p>
         </div>
 
@@ -374,11 +331,11 @@ const STEPS = [
   },
   {
     title: "Answer the questions",
-    body: "Watch the timer as you work. Press Pause to stop the timer. When the timer reaches zero, the section submits your answers.",
+    body: "Press Pause if you need to stop the timer. When it reaches zero, the section submits your answers and scores them.",
   },
   {
     title: "Read the explanations",
-    body: "You then see your score and a result for each topic. You also see every question, its correct answer and an explanation.",
+    body: "You get your score and a result for each topic. You then see every question again, with its correct answer and an explanation.",
   },
 ];
 
@@ -391,7 +348,7 @@ function HowItWorks() {
             How it works
           </p>
           <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
-            Three steps, and none of them needs an account
+            Three steps to a scored section
           </h2>
         </div>
 
@@ -420,11 +377,11 @@ const FEATURES = [
   {
     eyebrow: "The real exam format",
     title: "Practice with the real time limits",
-    // Four sentences, not five, and two of them carry a connective. STE caps
-    // sentence LENGTH; it does not ask for a page of subject-verb-object
+    // STE caps sentence LENGTH; it does not ask for a page of subject-verb-object
     // declaratives, and an unbroken run of them reads like a spec sheet on a
-    // page whose job is to earn trust.
-    body: "The question counts and the time limits come from each exam's published structure. While you work in one section, the others stay locked, and the timer continues even if you open a different browser tab. You must press Pause deliberately, and the screen then shows that the timer is stopped. Practice without a time limit teaches you the topics but not the exam.",
+    // page whose job is to earn trust. So the lengths here run long, medium,
+    // short on purpose, and the paragraph does not end on a slogan.
+    body: "The question counts and the time limits follow each exam's published structure. Open one section and the others lock until you submit it. The timer continues even when you move to a different browser tab. Only the Pause button stops it, and the screen then says the timer is stopped.",
     points: [
       "Each section has its own timer, and the timer does not reset when you reload the page",
       "Pause blurs the questions and stops the timer",
@@ -432,14 +389,14 @@ const FEATURES = [
     ],
   },
   {
-    eyebrow: "Written in advance",
+    eyebrow: "Written before you ask",
     title: "Every answer has an explanation",
     // The claim is that the explanation is written and reviewed BEFORE you ask,
     // and is kept under version control. That is what the old copy claimed and
     // what this project can stand behind. "A person writes every question" is a
     // stronger and different claim, and it briefly appeared in four places
     // including the affiliation disclaimer, which is a legal notice.
-    body: "We write each question and each explanation for this site, and we keep every version under review. The explanation is therefore the author's reasoning, not the output of a language model at the moment you ask. The incorrect options are plausible on purpose. A good incorrect option matches a real mistake.",
+    body: "We write each question and each explanation for this site, and we keep every version under review. The explanation is therefore the author's reasoning, not the output of a language model at the moment you ask. The incorrect options are plausible on purpose, because each one matches a mistake candidates make.",
     points: [
       "A written explanation on every question",
       "Balanced answer positions and answer lengths, so a guess pattern fails",
@@ -451,8 +408,8 @@ const FEATURES = [
     // from the registry, and the one hand-written count in the app named only
     // NMAT for two releases after the GMAT shipped.
     eyebrow: "One engine, every format",
-    title: "An adaptive exam adapts",
-    body: "Some exams adapt to you, and the practice here adapts too. The questions come one at a time, and they become harder after two correct answers in a row. The score includes the difficulty of each question you answered. Other exams are a fixed paper. There you see the whole section at once, and you can skip a question and return to it later.",
+    title: "The difficulty changes with your answers",
+    body: "On an adaptive exam the questions come one at a time, and they become harder after two correct answers in a row. Your score then includes the difficulty of each question you answered, not only the number you answered correctly. A fixed paper is different. You see the whole section at once, and you can leave a question and return to it later.",
     points: [
       "The difficulty changes with your recent answers",
       "The score includes question difficulty, not only the count",
@@ -532,11 +489,11 @@ function buildFaqs(totalBank: number, examCount: number): FaqEntry[] {
       q: "Which exams can I practice?",
       a: `${
         examCount === 1 ? "One exam is" : `${examCount} exams are`
-      } ready now. Each exam follows its own published format. No exam is a generic quiz under a new name. A new exam does not change how the current exams behave.`,
+      } ready now. Each exam follows its own published format, down to the section lengths and the skip rules. Adding an exam later does not change how the current ones behave.`,
     },
     {
       q: "Does my progress save?",
-      a: "Yes, but only in this browser tab. Your answers and your remaining time survive a page reload. They also survive when you move to another page on this site. When you close the tab, the browser deletes them. This is deliberate. A half-spent timer from three days ago is worse than a new attempt.",
+      a: "Yes, but only in this browser tab. Your answers and your remaining time survive a page reload, and they survive when you move to another page on this site. The browser deletes them when you close the tab, which is deliberate: a half-spent timer from three days ago helps nobody.",
     },
     {
       q: "Can I retake a section?",
@@ -604,11 +561,10 @@ function ClosingCta() {
     // visible end to the page.
     <section className="bg-accent/5 dark:bg-accent/10">
       <div className="mx-auto w-full max-w-3xl px-6 py-16 text-center sm:py-20">
-        <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-          One timed section shows you where you stand
-        </h2>
+        <h2 className="text-2xl font-bold text-foreground sm:text-3xl">Start with one section</h2>
         <p className="mx-auto mt-4 max-w-xl leading-relaxed text-muted">
-          Take one section now. The explanations then show you what to study next.
+          Give it the full time limit. When you submit, the explanations tell you what to study
+          next.
         </p>
         <Link
           href="#exams"

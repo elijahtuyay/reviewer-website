@@ -12,6 +12,33 @@
 
 When there is a choice between a short-term patch and a longer-term solution that requires rework or an overhaul but reduces future headache, **always choose the latter.** Fix causes at the level they actually live at: if the same problem would otherwise need re-patching at three call sites, fix it once in the shared layer. Prefer this even when it means touching more files than the immediate bug report implies.
 
+## Writing copy (standing rule, no exceptions)
+
+Before you write or edit ANY user-facing text on this site, invoke BOTH skills
+first, at drafting time rather than as a review pass afterward:
+
+- **`stop-slop`** — removes AI writing patterns: pull-quote closers, "not X but
+  Y" contrasts, three-item triads, adverbs, throat-clearing, and metronomic
+  sentence length.
+- **`asd-ste100-skill-master`** — Simplified Technical English, adopted in
+  v2.4.0. See the STE section of `PROJECT_CONTEXT.md` for the settled
+  vocabulary.
+
+Then run `npm run audit:copy`, which checks the STE half mechanically and exits
+non-zero on a finding.
+
+**Both are required, because neither is sufficient.** STE fixes vocabulary and
+ambiguity and says nothing about rhythm. Following it obediently produces a
+column of 17-word subject-verb-object declaratives, which is the loudest
+machine-written tell there is: that is exactly what v2.4.0 shipped and what
+v2.5.0 had to undo. `audit:copy` cannot see rhythm, pull-quotes or triads and
+was never going to.
+
+**The question bank is EXEMPT.** `data/questions/**` is left as is. A Language
+Skills question about the present perfect has to be able to contain the present
+perfect, and exam prose should read like exam prose. American English still
+governs the bank.
+
 ## Concurrency rule for agents
 
 **Never stage with `git add -A`, `git add .`, or `git commit -a` while a write-capable agent is running.** Stage explicit paths instead. Even when agents are writing files you are not touching, a blanket stage sweeps their in-progress edits into your commit, which mis-attributes the work and can capture a half-finished file. This has happened: a content agent's question-bank edits landed inside two unrelated accessibility commits. Nothing was lost, but the history lied about what changed and why.

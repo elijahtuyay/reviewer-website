@@ -90,9 +90,9 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
         <p className="text-sm font-medium tracking-wide text-muted uppercase">Exam Format</p>
         <h1 className="mt-2 text-3xl font-semibold text-foreground">{exam.label}</h1>
         <p className="mt-4 text-foreground/90">
-          This exam has {totalQuestions(exam)} questions in {exam.sections.length} sections. Each
-          section has its own time limit. The total time is {totalMinutes(exam)} minutes. Read the
-          points below before you start.
+          This exam has {totalQuestions(exam)} questions across {exam.sections.length} sections, and
+          it runs {totalMinutes(exam)} minutes in total. Each section has its own time limit and its
+          own rules. Read the points below before you start.
         </p>
 
         <ul className="mt-8 flex flex-col gap-3 text-sm text-foreground/90">
@@ -273,7 +273,7 @@ function ComingSoon({ exam }: { exam: ExamModule }) {
           <p className="text-sm font-medium tracking-wide text-muted uppercase">Exam Format</p>
           <h1 className="mt-2 text-3xl font-semibold text-foreground">{exam.label}</h1>
           <p className="mx-auto mt-4 max-w-md text-foreground/90">
-            {exam.shortLabel} practice is not ready yet. The format below is complete. The question
+            {exam.shortLabel} practice is not ready yet. The format below is final. The question
             bank is not complete.
           </p>
         </div>
