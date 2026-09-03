@@ -29,9 +29,9 @@ export async function generateMetadata({
   return {
     title: exam.available ? `${exam.label} practice exam` : `${exam.label} (coming soon)`,
     description: exam.available
-      ? `Free ${exam.shortLabel} practice: ${totalQuestions(exam)} questions across ${
+      ? `Free ${exam.shortLabel} practice. ${totalQuestions(exam)} questions in ${
           exam.sections.length
-        } independently-timed sections, with a written explanation for every answer.`
+        } sections. Each section has its own time limit. Every answer has a written explanation.`
       : exam.description,
     alternates: { canonical: `/${exam.id}` },
     robots: exam.available ? undefined : { index: false, follow: true },
@@ -89,9 +89,9 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
         <p className="text-sm font-medium tracking-wide text-muted uppercase">Exam Format</p>
         <h1 className="mt-2 text-3xl font-semibold text-foreground">{exam.label}</h1>
         <p className="mt-4 text-foreground/90">
-          This reviewer mirrors the real exam: {totalQuestions(exam)} questions across{" "}
-          {exam.sections.length} independently-timed sections, {totalMinutes(exam)} minutes in
-          total. Here&apos;s what to expect before you begin.
+          This exam has {totalQuestions(exam)} questions in {exam.sections.length} sections. Each
+          section has its own time limit. The total time is {totalMinutes(exam)} minutes. Read the
+          points below before you start.
         </p>
 
         <ul className="mt-8 flex flex-col gap-3 text-sm text-foreground/90">
@@ -108,13 +108,12 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
         <div className="mt-10">
           <p className="text-sm font-medium text-foreground">
             {exam.rules.sectionOrder === "chooseable"
-              ? "Take the sections in any order you like"
-              : "Choose a section to begin"}
+              ? "Take the sections in any order"
+              : "Select a section to start"}
           </p>
           {exam.rules.sectionOrder === "chooseable" && (
             <p className="mt-1 text-xs text-muted">
-              The real exam lets you decide the order before you start, so nothing here is
-              sequenced for you.
+              The real exam also lets you decide the order before you start.
             </p>
           )}
           <div className="mt-4 flex flex-col gap-4">
@@ -165,55 +164,55 @@ function expectations(exam: ExamModule): string[] {
   const lines: string[] = [];
 
   lines.push(
-    "Each section has its own time limit and question count. Time from one section does not carry over to another."
+    "Each section has its own time limit and its own question count. Time from one section does not move to another section."
   );
 
   if (exam.rules.lockToOneSection) {
     lines.push(
-      "Once a section is in progress, the others stay locked until you submit it, just like the real exam."
+      "While a section is in progress, the other sections stay locked. You must submit it first. The real exam does the same."
     );
   }
 
   if (exam.rules.navigation === "sequential") {
     lines.push(
-      "Questions come one at a time and you cannot page back through them, because each one is chosen based on how you answered the last."
+      "The questions come one at a time. You cannot return to a previous question, because each question depends on your previous answers."
     );
   } else {
     lines.push(
-      "The whole section is on one page. You can answer in any order and change your mind until you submit."
+      "The whole section is on one page. You can answer in any order. You can change an answer until you submit."
     );
   }
 
   if (!exam.rules.allowSkip) {
     lines.push(
-      "You cannot skip. Every question needs an answer before the next appears, so a considered guess beats stalling."
+      "You cannot skip a question. Each question needs an answer before the next question appears. A considered guess is better than a long delay."
     );
   }
 
   if (exam.rules.adaptive) {
     lines.push(
-      "The section is adaptive: it opens at medium difficulty, hardens when you string correct answers together, and eases off when you do not."
+      "The section is adaptive. It starts at medium difficulty. It becomes harder after a run of correct answers, and easier after incorrect ones."
     );
   }
 
   if (exam.rules.reviewEdit) {
     lines.push(
-      `If you reach the end with time to spare, you get a review pass where you can change up to ${exam.rules.reviewEdit.maxChanges} answers${
-        exam.rules.reviewEdit.allowFlagging ? ", starting with any you flagged along the way" : ""
+      `If you reach the end and time remains, you enter a review pass. There you can change up to ${exam.rules.reviewEdit.maxChanges} answers${
+        exam.rules.reviewEdit.allowFlagging ? ", and the questions you flagged come first" : ""
       }.`
     );
   }
 
   if (exam.scoring.kind === "points") {
     lines.push(
-      `Scoring: +${exam.scoring.pointsPerCorrectAnswer} points per correct answer, and there is no negative marking for wrong answers.`
+      `Each correct answer is worth ${exam.scoring.pointsPerCorrectAnswer} points. An incorrect answer costs you nothing.`
     );
   } else {
     lines.push(
-      `Scoring runs from ${exam.scoring.min} to ${exam.scoring.max} and weighs how hard the questions you answered correctly were, so difficulty counts and not just the tally.`
+      `The score runs from ${exam.scoring.min} to ${exam.scoring.max}. It includes the difficulty of the questions you answered correctly, not only the count.`
     );
     lines.push(
-      "Questions you never reach cost you more than questions you get wrong, which is why finishing matters more than perfecting any one item."
+      "A question you never reach costs you more than an incorrect answer. Finish the section, and do not spend all your time on one question."
     );
   }
 
@@ -234,10 +233,10 @@ function expectations(exam: ExamModule): string[] {
   const withCalculator = exam.sections.filter((s) => s.calculator !== null);
   if (withCalculator.length > 0 && withCalculator.length < exam.sections.length) {
     lines.push(
-      `An on-screen calculator is provided in ${listSections(withCalculator.map((s) => s.label))} and nowhere else, exactly as the real exam does. It is the exam's own calculator, quirks included: an eight-digit display, and strictly left to right with no order of operations.`
+      `This exam gives you an on-screen calculator in ${listSections(withCalculator.map((s) => s.label))} only, exactly as the real exam does. It is a copy of the exam calculator, with the same limits: an 8-digit display, and no order of operations.`
     );
   } else if (withCalculator.length === 0) {
-    lines.push("No calculator in any section, on screen or otherwise, the same as the real exam.");
+    lines.push("No section gives you a calculator. The real exam gives you none either.");
   }
 
   if (exam.rules.optionalBreakMinutes) {
@@ -245,12 +244,12 @@ function expectations(exam: ExamModule): string[] {
     // "plays the role" of the exam's timed break, which implied a budget that
     // nothing enforces: pausing here is unlimited in both count and length.
     lines.push(
-      `The real exam grants one optional ${exam.rules.optionalBreakMinutes}-minute break. Practicing here, the Pause button freezes the clock whenever you need it, with no limit on how often or how long.`
+      `The real exam gives you one optional ${exam.rules.optionalBreakMinutes}-minute break. Here, the Pause button stops the timer at any time. There is no limit on the number of pauses or on their length.`
     );
   }
 
   lines.push(
-    "After you submit a section, you'll see your score, a per-topic breakdown, and every question reviewed with the correct answer and an explanation."
+    "After you submit a section, you see your score and a result for each topic. You also see every question, its correct answer and an explanation."
   );
 
   return lines;
@@ -264,8 +263,8 @@ function ComingSoon({ exam }: { exam: ExamModule }) {
           <p className="text-sm font-medium tracking-wide text-muted uppercase">Exam Format</p>
           <h1 className="mt-2 text-3xl font-semibold text-foreground">{exam.label}</h1>
           <p className="mx-auto mt-4 max-w-md text-foreground/90">
-            {exam.shortLabel} practice is being built. The structure below is already mapped out;
-            what is missing is the question bank.
+            {exam.shortLabel} practice is not ready yet. The format below is complete. The question
+            bank is not.
           </p>
         </div>
 
