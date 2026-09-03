@@ -2,20 +2,30 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import {
-  CalculatorKey,
-  hasMemory,
-  initialCalculatorState,
-  press,
-} from "@/lib/calculator/basic-di";
+  BASIC_DI_MODEL,
+  CalculatorModel,
+  GRE_MODEL,
+  KeySpec,
+} from "@/components/quiz/calculator-models";
 
 /**
  * The on-screen calculator, as a disclosure anchored to the top left of a
  * section.
  *
- * Rendered only where `section.calculator` says so, which today is GMAT Data
- * Insights and nothing else. All the arithmetic lives in
- * `lib/calculator/basic-di.ts`; this file is the keypad and nothing more, which
- * is what lets `npm run verify:engine` assert the behavior without a DOM.
+ * Rendered only where `section.calculator` says so: GMAT Data Insights and GRE
+ * Quantitative Reasoning, which get DIFFERENT devices. This file is the shell
+ * and nothing more. The arithmetic lives in `lib/calculator/basic-di.ts` and
+ * `lib/calculator/gre-standard.ts`, and the keypad, banner and explainer come
+ * from `calculator-models.tsx`, which is what lets `npm run verify:engine`
+ * assert the behavior without a DOM.
+ *
+ * EVERYTHING DEVICE-SPECIFIC MUST COME FROM THE MODEL. This component shipped
+ * once with `model.banner` and `model.details` declared, supplied correctly per
+ * device, and never read: the GRE panel told candidates it "calculates left to
+ * right, so 2 + 3 x 4 is 20", which is the opposite of what its own reducer
+ * does, and named three keys its keypad does not have. TypeScript cannot see an
+ * unread object field, so the only guard is that every device-specific string
+ * in here reads from `model`.
  *
  * ── Deliberately NOT keyboard-enterable ──────────────────────────────────
  *
@@ -34,59 +44,22 @@ import {
 interface CalculatorPanelProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  /**
+   * Which device. The two exams provide genuinely different calculators, and
+   * the difference is not cosmetic: one honors order of operations and the
+   * other does not. See `calculator-models.tsx`.
+   */
+  kind: "basic-di" | "gre-standard";
 }
 
-/** Label, key, and an optional accessible name where the glyph does not read well aloud. */
-type KeySpec = { label: string; key: CalculatorKey; srLabel?: string; variant?: "op" | "fn" | "mem" };
+const MODELS: Record<CalculatorPanelProps["kind"], CalculatorModel> = {
+  "basic-di": BASIC_DI_MODEL,
+  "gre-standard": GRE_MODEL,
+};
 
-/**
- * The TI-108's key set, and ONLY its key set.
- *
- * An earlier revision had a backspace key and split clear into `C` and `AC`.
- * Both were imports from the pre-Focus Integrated Reasoning calculator, which
- * is the exact device this component's own module header warns against copying
- * from. The real one has no backspace at all and a single `ON/C`: one press
- * clears the entry, a second clears the calculation.
- *
- * Do not add a convenience key here. Every key that exists on screen and not on
- * the exam is a habit a student builds and then loses on test day, which is the
- * same failure this whole feature exists to prevent.
- */
-const ROWS: KeySpec[][] = [
-  [
-    { label: "MRC", key: "mrc", srLabel: "Memory recall, press twice to clear memory", variant: "mem" },
-    { label: "M+", key: "m+", srLabel: "Memory add", variant: "mem" },
-    { label: "M−", key: "m-", srLabel: "Memory subtract", variant: "mem" },
-    { label: "ON/C", key: "onC", srLabel: "Clear entry, press twice to clear everything", variant: "fn" },
-  ],
-  [
-    { label: "√", key: "sqrt", srLabel: "Square root", variant: "fn" },
-    { label: "%", key: "%", srLabel: "Percent", variant: "fn" },
-    { label: "+/−", key: "+/-", srLabel: "Change sign", variant: "fn" },
-    { label: "÷", key: "/", srLabel: "Divide", variant: "op" },
-  ],
-  [
-    { label: "7", key: "7" },
-    { label: "8", key: "8" },
-    { label: "9", key: "9" },
-    { label: "×", key: "*", srLabel: "Multiply", variant: "op" },
-  ],
-  [
-    { label: "4", key: "4" },
-    { label: "5", key: "5" },
-    { label: "6", key: "6" },
-    { label: "−", key: "-", srLabel: "Minus", variant: "op" },
-  ],
-  [
-    { label: "1", key: "1" },
-    { label: "2", key: "2" },
-    { label: "3", key: "3" },
-    { label: "+", key: "+", srLabel: "Plus", variant: "op" },
-  ],
-];
-
-export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelProps) {
-  const [state, setState] = useState(initialCalculatorState);
+export default function CalculatorPanel({ open, onOpenChange, kind }: CalculatorPanelProps) {
+  const model = MODELS[kind];
+  const [state, setState] = useState<unknown>(() => model.initial());
   /**
    * The expanded explainer under the keypad. Collapsed by default and NOT
    * persisted, so it comes back on a fresh attempt rather than having been read
@@ -136,8 +109,8 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
     };
   }, [open, onOpenChange]);
 
-  function handleKey(key: CalculatorKey) {
-    setState((current) => press(current, key));
+  function handleKey(key: string) {
+    setState((current: unknown) => model.press(current, key));
   }
 
   /**
@@ -192,8 +165,8 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
               Windows: U+1F5A9 has almost no font coverage there. Verified in a
               headless screenshot before it was replaced. */}
           <CalculatorIcon />
-          Calculator
-          {hasMemory(state) && (
+          {model.label}
+          {model.hasMemory(state) && (
             // Memory survives closing the panel, so the indicator has to be
             // visible on the closed toggle too. Otherwise a stored value is
             // invisible until reopened, which is how a stale M+ silently ends
@@ -266,11 +239,18 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
           >
             <div className="shrink-0 rounded-md border border-line bg-background px-3 py-2 text-right">
               <div className="flex items-center justify-between gap-2">
-                <span
-                  className={`text-xs font-semibold ${hasMemory(state) ? "text-accent-text" : "text-transparent"}`}
-                  aria-hidden={!hasMemory(state)}
-                >
-                  M
+                <span className="flex items-center gap-2 text-xs font-semibold">
+                  <span
+                    className={model.hasMemory(state) ? "text-accent-text" : "text-transparent"}
+                    aria-hidden={!model.hasMemory(state)}
+                  >
+                    M
+                  </span>
+                  {/* Open parentheses, which are otherwise invisible: neither
+                      key changes the display, so a forgotten one is unfindable. */}
+                  {model.status?.(state) && (
+                    <span className="text-accent-text">{model.status(state)}</span>
+                  )}
                 </span>
                 {/* Polite, not assertive: results should be announced when the
                     user lands on them, not interrupt every intermediate digit. */}
@@ -278,7 +258,7 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
                   aria-live="polite"
                   className="min-w-0 truncate font-mono text-2xl tabular-nums text-foreground"
                 >
-                  {state.display}
+                  {model.display(state)}
                 </output>
               </div>
             </div>
@@ -295,27 +275,21 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
                 what fits both constraints: the message that stops someone
                 concluding "this calculator is broken" is never more than a
                 glance away, and it costs no keypad space. */}
+            {/* The one line that has to survive every layout, so it is short,
+                permanent, and ABOVE the keypad. From the model: the two devices
+                disagree about the answer to the very sum it quotes. */}
             <p className="mt-2 shrink-0 rounded bg-panel-hover px-2 py-1.5 text-xs leading-snug text-foreground/90">
-              <strong className="font-semibold">Not a bug:</strong> it calculates left to
-              right, so <span className="font-mono whitespace-nowrap">2 + 3 × 4</span> is 20.
+              {model.banner}
             </p>
 
+            {/* Every key comes from the model, the wide equals included, so the
+                two devices cannot drift apart in this file. */}
             <div className="mt-3 grid shrink-0 grid-cols-4 gap-1.5">
-              {ROWS.flatMap((row) =>
+              {model.rows.flatMap((row) =>
                 row.map((spec) => (
                   <CalcButton key={spec.key + spec.label} spec={spec} onPress={handleKey} />
                 ))
               )}
-              <CalcButton spec={{ label: "0", key: "0" }} onPress={handleKey} />
-              <CalcButton spec={{ label: ".", key: ".", srLabel: "Decimal point" }} onPress={handleKey} />
-              <button
-                type="button"
-                onClick={() => handleKey("=")}
-                className="col-span-2 flex h-11 items-center justify-center rounded-md bg-accent text-base font-semibold text-accent-foreground transition hover:opacity-90 active:scale-95"
-              >
-                <span aria-hidden>=</span>
-                <span className="sr-only">Equals</span>
-              </button>
             </div>
 
             {/* Detail on demand, below the keypad, collapsed by default. The
@@ -332,31 +306,7 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
               </button>
               {detailsOpen && (
                 <ul className="flex flex-col gap-1.5 pb-1 text-xs leading-relaxed text-foreground/90">
-                  <li>
-                    This is a copy of the exam calculator. It has no order of operations. For{" "}
-                    <span className="font-mono whitespace-nowrap">a×b + c×d</span>, add each product
-                    to memory with <span className="font-mono">M+</span>. Then press{" "}
-                    <span className="font-mono">MRC</span>.
-                  </li>
-                  <li>
-                    {/* The condition is the point. `%` is contextual: a percentage
-                        OF the running total under + or -, and a plain divide by
-                        100 otherwise. A version of this line that said "% uses
-                        the number before it" was wrong in its own example,
-                        because 12 + 10 % takes 10% of 12, not of 10. */}
-                    With <span className="font-mono">+</span> or{" "}
-                    <span className="font-mono">−</span>,{" "}
-                    <span className="font-mono">%</span> takes that percentage of the running
-                    total: <span className="font-mono whitespace-nowrap">12 + 10 %</span> shows
-                    1.2, and <span className="font-mono">=</span> shows 13.2. With{" "}
-                    <span className="font-mono">×</span> or <span className="font-mono">÷</span>,{" "}
-                    <span className="font-mono">%</span> divides by 100.
-                  </li>
-                  <li>
-                    The display holds <strong>8 digits</strong>. Above 99,999,999 it shows an error.
-                    Press <span className="font-mono">ON/C</span> to clear it. The real exam
-                    calculator does the same.
-                  </li>
+                  {model.details}
                 </ul>
               )}
             </div>
@@ -390,9 +340,19 @@ function CalculatorIcon() {
   );
 }
 
-function CalcButton({ spec, onPress }: { spec: KeySpec; onPress: (key: CalculatorKey) => void }) {
-  const tone =
-    spec.variant === "op"
+function CalcButton({ spec, onPress }: { spec: KeySpec; onPress: (key: string) => void }) {
+  /*
+   * `span` and `primary` are honored here, and were not.
+   *
+   * Both were declared on KeySpec, set on the equals key of both devices, and
+   * read by nothing. On the GMAT that silently REGRESSED a key which used to be
+   * written out explicitly as a wide accent button, and on the GRE it left `=`
+   * alone in column one of a four-column grid with three empty cells beside it,
+   * pushing the key below the panel's own fold at 1366x768.
+   */
+  const tone = spec.primary
+    ? "border-transparent bg-accent font-semibold text-accent-foreground hover:opacity-90"
+    : spec.variant === "op"
       ? "border-line-strong bg-panel-hover font-semibold"
       : spec.variant === "mem" || spec.variant === "fn"
         // Was `text-muted`, which read as disabled next to the digits and put
@@ -406,7 +366,9 @@ function CalcButton({ spec, onPress }: { spec: KeySpec; onPress: (key: Calculato
     <button
       type="button"
       onClick={() => onPress(spec.key)}
-      className={`flex h-11 items-center justify-center rounded-md border text-sm text-foreground transition-[color,background-color,border-color,transform] hover:bg-panel-hover active:scale-95 active:bg-panel-hover ${tone}`}
+      className={`flex h-11 items-center justify-center rounded-md border text-sm transition-[color,background-color,border-color,transform] active:scale-95 ${
+        spec.primary ? "" : "text-foreground hover:bg-panel-hover active:bg-panel-hover"
+      } ${spec.span === 4 ? "col-span-4" : spec.span === 2 ? "col-span-2" : ""} ${tone}`}
     >
       <span aria-hidden>{spec.label}</span>
       <span className="sr-only">{spec.srLabel ?? spec.label}</span>

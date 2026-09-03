@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-04, at PR #24 / VERSION.txt `2.6.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-04, at PR #25 / VERSION.txt `2.7.0`.
 
 ## What this project is
 
@@ -326,16 +326,105 @@ checks, because its `selectExactly` is null and its main defense is that the
 NUMBER of correct statements varies. If that type grows, check the count
 distribution rather than the positions.
 
+### THERE ARE TWO CALCULATORS NOW, AND THEY MUST NOT BE MERGED
+
+`lib/calculator/basic-di.ts` is the GMAT Focus TI-108. `lib/calculator/gre-standard.ts`
+is the device ETS provides in GRE Quantitative Reasoning. They are different
+machines and the differences change answers:
+
+| | GMAT (`basic-di`) | GRE (`gre-standard`) |
+| --- | --- | --- |
+| `2 + 3 x 4` | **20**, strictly left to right | **14**, order of operations |
+| parentheses | none | yes |
+| percent key | yes, and contextual | none |
+| clear | one `ON/C` for entry and calculation | `C` clears the calculation, `MC` clears memory |
+
+`verify:engine` asserts both, and asserts that same key sequence against BOTH
+devices side by side, specifically so that a later "simplification" into one
+shared calculator fails the build. Merging them would teach the wrong arithmetic
+for whichever exam the candidate is not taking.
+
+**`CalculatorPanel` is a shell driven by a model** (`calculator-models.tsx`).
+Everything that took real work to get right lives in the shell and is shared:
+the sticky/absolute positioning, the MEASURED `--calc-max-h`, the
+width-and-breakpoint coupling, click-outside, Escape, and the memory indicator
+on the closed toggle. Only the keypad rows, the one-line banner and the
+disclosure detail differ per device. **Do not duplicate the shell to add a third
+calculator** — that component's own header records three separate layout bugs,
+each found once, and a copy would need each fixed twice.
+
+One bug the assertions caught while the GRE reducer was being written: `C`
+returned the initial state wholesale and wiped memory. Memory surviving a clear
+is exactly what makes it useful on a device whose only escape from precedence is
+banking a subtotal.
+
+### A MODEL FIELD THAT NOTHING READS IS INVISIBLE TO EVERY TOOL
+
+`CalculatorPanel` shipped with `model.banner`, `model.details`, `model.label`,
+`KeySpec.span` and `KeySpec.primary` all declared, all supplied correctly per
+device, and **none of them read**. The GRE panel therefore explained itself with
+the TI-108's copy: "it calculates left to right, so 2 + 3 x 4 is 20", directly
+contradicting its own reducer, which returns 14 and is asserted doing so two
+files away. Its explainer named three keys its keypad does not have.
+
+`tsc`, `lint`, 30 calculator assertions and a browser run that exercised the
+arithmetic all passed. An unread object field is not a type error, not a lint
+error, and not visible to a test that only presses keys.
+
+**When you split one component into a shell plus per-instance data, assert on
+the RENDERED difference, not just the behavior.** `banner.mjs` in the scratchpad
+does this: it opens each panel and requires the GRE's to say 14 and the GMAT's
+to say 20. Two review lanes found this independently, which is the only reason
+it did not ship.
+
+### The `entryMode` trap is not specific to one calculator
+
+`gre-standard.ts` reproduced, verbatim, the bug PROJECT_CONTEXT already records
+against `basic-di.ts`: treating "nothing is being typed" as "no operand was
+supplied". A square root, a memory recall, a sign flip and a closed parenthesis
+all produce a value while `entry` is null, so `2 + 9 √ × 4 =` returned 8 —
+the root's 3 discarded and the `+` overwritten by the `×`.
+
+Both calculators now carry an explicit flag for "the display holds an operand
+not yet committed" (`operandReady`), and both carry assertions for it. **Any
+future calculator needs the same flag and the same assertions**, because the
+temptation to fold the two conditions together is apparently irresistible.
+
+A related one worth stating: a well-formed-expression fuzzer cannot see this
+class. The review lane ran 300,000 random expressions with zero mismatches while
+all four blockers were live, because a fuzzer generates valid input and this bug
+lives in the sequences a human types by accident.
+
 ### Known gaps, recorded rather than papered over
 
 - No Analytical Writing. An essay cannot be auto-scored, and a writing box that
   awards a number nobody stands behind is worse than an honest absence.
 - No section-level adaptivity, and each measure is one section rather than two.
-- No calculator in Quantitative Reasoning (see above).
 - **Text Completion is single-blank only.** The real exam has one-, two- and
   three-blank variants, where each blank has its own three options. Rendering
   that needs a per-blank control the card does not have. One-blank items with
   five options are entirely real, so what ships is faithful as far as it goes.
+- Transfer Display is modeled in the reducer (`displayValue`) but is not wired
+  to the Numeric Entry box, so the value is read and retyped rather than
+  transferred. The cost is a habit rather than an answer.
+- The GRE keypad is seven rows, because 25 keys do not divide into four
+  columns. At scroll position zero its last row sits about 25px below the
+  fold and needs the panel's own internal scroll. Any page scroll engages
+  the sticky wrapper and the whole pad is visible.
+- No keyboard entry on either calculator, deliberately. See the long note in
+  `basic-di.ts`.
+
+### Quantitative Comparison has its own layout
+
+All 32 QC questions store optional common information, then a line each for
+"Quantity A:" and "Quantity B:". `QuestionCard` splits that shape and renders
+two labeled, equal-width boxes, guarded exactly as `splitPassage` is: both
+labels present, on their own lines, B last, neither quantity spanning lines.
+Anything else falls through to plain rendering rather than showing a mangled
+card.
+
+Equal widths are deliberate. The question is which quantity is larger, and a
+wider box would answer it for the candidate.
 
 ## Copyright rule (critical, applies to ALL future content work)
 
@@ -1129,7 +1218,7 @@ that appears not to have applied is usually this.
 
 ---
 
-**Current state: `main` is at v2.6.0, and is the only branch.**
+**Current state: `main` is at v2.7.0, and is the only branch.**
 
 "Clean" is five commands rather than a claim, and all five pass on `main`:
 

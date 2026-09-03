@@ -50,6 +50,33 @@ function splitPassage(prompt: string): { passage: string; stem: string } | null 
   return { passage, stem };
 }
 
+/**
+ * GRE Quantitative Comparison presents two quantities to be compared, and the
+ * real exam labels and separates them rather than running them into the stem.
+ *
+ * The stored shape is optional common information, then a line each for
+ * "Quantity A:" and "Quantity B:". Rendered as three plain sentences, the two
+ * things the whole question is about looked like continuation prose, on the
+ * largest single topic in the GRE quantitative bank.
+ *
+ * Guarded the same way `splitPassage` is: anything that does not match exactly
+ * falls through to the ordinary rendering rather than producing a mangled card.
+ * Both labels must be present, on their own lines, with the B line last.
+ */
+const QUANTITY_SHAPE = /^([\s\S]*?)Quantity A:\s*([\s\S]+?)\nQuantity B:\s*([\s\S]+)$/;
+
+function splitQuantities(
+  prompt: string
+): { common: string; a: string; b: string } | null {
+  const match = QUANTITY_SHAPE.exec(prompt);
+  if (!match) return null;
+  const [, common, a, b] = match;
+  // A quantity that itself spans lines is not this shape.
+  if (a.includes("\n") || b.includes("\n")) return null;
+  if (!a.trim() || !b.trim()) return null;
+  return { common: common.trim(), a: a.trim(), b: b.trim() };
+}
+
 interface QuestionCardProps {
   question: Question;
   index: number;
@@ -95,6 +122,7 @@ function QuestionCard({
   lockedReason,
 }: QuestionCardProps) {
   const passageParts = splitPassage(question.prompt);
+  const quantities = passageParts ? null : splitQuantities(question.prompt);
   const kind = kindOf(question);
   const isAnswered = hasAnswer(value);
   const isCorrect = isCorrectAnswer(question, value);
@@ -190,6 +218,30 @@ function QuestionCard({
             <p className="mt-4 leading-relaxed text-foreground">
               <MathText text={passageParts.stem} />
             </p>
+          </div>
+        ) : quantities ? (
+          <div className="min-w-0 flex-1">
+            {quantities.common && (
+              <p className="leading-relaxed text-foreground">
+                <MathText text={quantities.common} />
+              </p>
+            )}
+            {/* Side by side once there is room, stacked on a phone. Equal
+                widths, because the question is whether one is larger and a
+                wider box would answer it for the candidate. */}
+            <div className={`grid gap-3 sm:grid-cols-2 ${quantities.common ? "mt-4" : ""}`}>
+              {([
+                ["Quantity A", quantities.a],
+                ["Quantity B", quantities.b],
+              ] as const).map(([label, value]) => (
+                <div key={label} className="rounded-md border border-line bg-panel px-4 py-3">
+                  <p className="text-xs font-medium tracking-wide text-muted uppercase">{label}</p>
+                  <p className="mt-1 leading-relaxed text-foreground">
+                    <MathText text={value} />
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
           <p className="leading-relaxed text-foreground">

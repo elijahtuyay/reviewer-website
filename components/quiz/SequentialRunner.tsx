@@ -162,8 +162,12 @@ export default function SequentialRunner({
               shown during the review pass: the clock is running and answers can
               still change there, so the tool the exam grants is still granted. */}
           {!reviewMode &&
-            (section.calculator === "basic-di" ? (
-              <CalculatorPanel open={calcVisible} onOpenChange={setCalcOpen} />
+            (section.calculator === "basic-di" || section.calculator === "gre-standard" ? (
+              <CalculatorPanel
+                open={calcVisible}
+                onOpenChange={setCalcOpen}
+                kind={section.calculator}
+              />
             ) : section.calculator === "not-simulated" ? (
               <CalculatorNotSimulatedNote />
             ) : (

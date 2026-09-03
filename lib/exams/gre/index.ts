@@ -83,23 +83,21 @@ const gre: ExamModule = {
         "This section tests arithmetic, algebra, geometry and data analysis. It includes quantitative comparison.",
       questionCount: 27,
       minutes: 47,
-      /**
-       * "not-simulated", NOT null, and the distinction is the whole reason that
-       * value exists. The real GRE gives you an on-screen calculator here, so
-       * null would make the setup page state, as a rule, that no calculator is
-       * provided. That would be a flat lie on the page a candidate reads
-       * immediately before starting.
+      /*
+       * Its OWN calculator, not the GMAT's.
        *
-       * It is not "basic-di" either, because that models a different device.
-       * The GMAT's is a TI-108: strictly left to right, so 2 + 3 x 4 is 20. The
-       * GRE's honors order of operations and gives the same expression 14, has
-       * parentheses, has a Transfer Display key that types the result straight
-       * into a Numeric Entry box, and takes keyboard input. Handing a candidate
-       * the wrong calculator is worse than handing them none, because they
-       * practice habits that break on test day, and this repo has already
-       * shipped a calculator that borrowed three details from the wrong device.
+       * This was "not-simulated" while only the TI-108 existed in the app,
+       * because handing a candidate the wrong device is worse than handing them
+       * none: they practice habits that break on test day, and this repo has
+       * already shipped a calculator that borrowed three details from the wrong
+       * device. `lib/calculator/gre-standard.ts` now models the right one.
+       *
+       * The differences are not cosmetic. It honors order of operations, so
+       * 2 + 3 x 4 is 14 where the TI-108 gives 20. It has parentheses and no
+       * percent key, and its C clears the calculation while leaving memory
+       * alone, where the TI-108 uses one ON/C for both jobs.
        */
-      calculator: "not-simulated",
+      calculator: "gre-standard",
     },
   ],
 
