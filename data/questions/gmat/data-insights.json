@@ -67,17 +67,18 @@
   {
     "id": "gd-005",
     "section": "data-insights",
-    "topic": "Two-Part Analysis",
+    "topic": "Table Analysis",
     "difficulty": "easy",
-    "prompt": "A shop sells notebooks at 4 dollars each and pens at 3 dollars each. A customer buys 5 notebooks and 4 pens.\n\nWhat is the total cost?",
+    "prompt": "A shop records one day of stationery sales.\nItem | Unit price (dollars) | Units sold\nNotebook | 4 | 5\nPen | 3 | 4\nEraser | 2 | 6\nWhat was the total value of the notebook and pen sales?",
     "options": [
+      "20 dollars",
       "27 dollars",
-      "35 dollars",
       "32 dollars",
-      "20 dollars"
+      "35 dollars",
+      "44 dollars"
     ],
     "correctIndex": 2,
-    "explanation": "Notebooks cost 5 times 4, which is 20, and pens cost 4 times 3, which is 12, so the total is 32 dollars. Each distractor is a partial answer: 20 stops at the notebooks, 35 buys 5 pens instead of 4, and 27 prices both items at 3 dollars.",
+    "explanation": "Multiply each unit price by its units sold and add the two rows the question names: $5 \\times 4 = 20$ dollars of notebooks and $4 \\times 3 = 12$ dollars of pens, so 32 dollars. Adding the unit prices and multiplying by the units gives 27 and treats two different prices as one. Including the eraser row adds 12 more and answers a question that was not asked.",
     "source": "original"
   },
   {
@@ -148,17 +149,18 @@
   {
     "id": "gd-010",
     "section": "data-insights",
-    "topic": "Two-Part Analysis",
+    "topic": "Table Analysis",
     "difficulty": "easy",
-    "prompt": "A train travels at 90 kilometers per hour for 2 hours, then at 60 kilometers per hour for 1 hour.\n\nWhat is the total distance traveled?",
+    "prompt": "A train journey is recorded in three legs.\nLeg | Speed (km per hour) | Duration (hours)\n1 | 90 | 2\n2 | 60 | 1\n3 | 75 | 2\nWhat distance did the train cover in the first two legs?",
     "options": [
       "150 kilometers",
-      "270 kilometers",
       "225 kilometers",
-      "240 kilometers"
+      "240 kilometers",
+      "270 kilometers",
+      "390 kilometers"
     ],
-    "correctIndex": 3,
-    "explanation": "The two legs cover 180 and 60 kilometers respectively, giving 240 in total. Averaging the speeds first and multiplying by 3 hours gives 225, which is wrong because the legs are of unequal duration.",
+    "correctIndex": 2,
+    "explanation": "Distance is speed times time for each leg, added: $90 \\times 2 = 180$ kilometers and $60 \\times 1 = 60$ kilometers, so 240 kilometers. Averaging the two speeds and multiplying by the total time gives 225, which is only correct when the durations are equal. Including the third leg gives 390 and answers a different question.",
     "source": "original"
   },
   {
@@ -246,17 +248,18 @@
   {
     "id": "gd-016",
     "section": "data-insights",
-    "topic": "Two-Part Analysis",
+    "topic": "Table Analysis",
     "difficulty": "medium",
-    "prompt": "A company charges a fixed fee plus a per-hour rate. A 3-hour job costs 190 dollars and a 5-hour job costs 290 dollars.\n\nWhat is the fixed fee?",
+    "prompt": "A contractor quotes a fixed fee plus an hourly rate.\nJob | Hours | Total cost (dollars)\nA | 3 | 190\nB | 5 | 290\nC | 8 | 440\nWhat is the fixed fee?",
     "options": [
       "40 dollars",
       "50 dollars",
-      "100 dollars",
-      "90 dollars"
+      "63 dollars",
+      "90 dollars",
+      "100 dollars"
     ],
     "correctIndex": 0,
-    "explanation": "The extra 2 hours add 100 dollars, so the hourly rate is 50 dollars. Substituting into the 3-hour job: 190 minus 3 times 50 gives a fixed fee of 40 dollars. Check it against the other job: 40 plus 5 times 50 is 290. Stopping at 50 reports the hourly rate rather than the fixed fee the question asks for. The 100 is the price difference between the two jobs, not a fee, and subtracting that difference from the 190 dollar job instead of subtracting 3 hours of rate leaves 90.",
+    "explanation": "Two rows give the hourly rate: costs rise 100 dollars over 2 more hours, so the rate is 50 dollars per hour. Substituting into job A, $190 - 3 \\times 50 = 40$ dollars is the fixed fee, and job C confirms it at $440 - 8 \\times 50 = 40$. Reading the hourly rate itself as the answer gives 50. Dividing job A's total by its hours gives about 63, which is the average cost per hour, not the fee.",
     "source": "original"
   },
   {
@@ -409,17 +412,18 @@
   {
     "id": "gd-026",
     "section": "data-insights",
-    "topic": "Two-Part Analysis",
+    "topic": "Table Analysis",
     "difficulty": "hard",
-    "prompt": "A subscription costs 12 dollars per month or 120 dollars per year paid upfront.\n\nAfter how many full months does the annual plan become strictly cheaper than paying monthly?",
+    "prompt": "A service lists three ways to pay.\nPlan | Charge\nMonthly | 12 dollars per month\nAnnual | 120 dollars once, covering 12 months\nTwo-year | 220 dollars once, covering 24 months\nAfter how many full months of use does the annual plan cost strictly less than paying monthly?",
     "options": [
+      "9 months",
       "10 months",
       "11 months",
       "12 months",
-      "9 months"
+      "13 months"
     ],
-    "correctIndex": 1,
-    "explanation": "Monthly payments reach 120 dollars after exactly 10 months, so at 10 months the two plans cost the same. The annual plan only becomes strictly cheaper once the eleventh payment is made, at 132 dollars, so 11 months is the answer.",
+    "correctIndex": 2,
+    "explanation": "Paying monthly costs $12m$ dollars after $m$ months, and the annual plan costs 120 dollars whatever $m$ is. Strictly less means $120 < 12m$, so $m > 10$ and the first whole month that qualifies is the eleventh. At exactly 10 months the two are equal at 120 dollars, which is not strictly less, so 10 is the common trap. The two-year row is there to be set aside.",
     "source": "original"
   },
   {
