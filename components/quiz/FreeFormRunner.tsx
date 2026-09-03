@@ -315,12 +315,12 @@ export default function FreeFormRunner({
       <ConfirmDialog
         open={pendingAction !== null}
         title={
-          pendingAction === "submit" ? "Submit with questions unanswered?" : "Start this section over?"
+          pendingAction === "submit" ? "Submit with unanswered questions?" : "Start this section over?"
         }
         body={
           pendingAction === "submit"
-            ? `${questions.length - answeredCount} of ${questions.length} questions are still unanswered. Once you submit, you can review your answers but you can't change them.`
-            : "This deletes your answers for this section and draws a new set of questions, with a fresh timer. It can't be undone."
+            ? `${questions.length - answeredCount} of ${questions.length} questions have no answer. After you submit, you can read every explanation. You cannot change an answer.`
+            : "This deletes your answers for this section. It draws a new set of questions and starts a new timer. You cannot undo this."
         }
         confirmLabel={pendingAction === "submit" ? "Submit section" : "Start over"}
         cancelLabel={pendingAction === "submit" ? "Keep answering" : "Keep my answers"}

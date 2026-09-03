@@ -251,7 +251,7 @@ function QuestionCard({
                 : "text-muted"
             }`}
           >
-            {isAnswered ? (isCorrect ? "Correct" : "Incorrect") : "Not answered"}
+            {isAnswered ? (isCorrect ? "Correct" : "Incorrect") : "No answer"}
           </p>
           <p className="mt-2 leading-relaxed text-foreground">
             <MathText text={question.explanation} />

@@ -12,20 +12,23 @@ import { ExamModule } from "@/lib/exams/types";
  * `ExamRules`, not behind an `examId` check.
  */
 
-/** Phrased in the past tense: these banners re-show on every return visit, not just the first. */
+/**
+ * Phrased in the simple past: these banners re-show on every return visit, not
+ * just the first. Simple tenses only, per ASD-STE100, so there is no "has been
+ * running" here for a reader to unpack mid-attempt.
+ */
 const NOTICE_COPY = {
   resumed: {
-    title: "You have an attempt already in progress.",
-    detail:
-      "It was started earlier in this browser session, and its timer has been running since then.",
+    title: "This section is already in progress.",
+    detail: "You started it earlier in this browser session, and the timer continued after that.",
   },
   completed: {
     title: "You already submitted this section.",
-    detail: "It was submitted earlier in this browser session. Your scored review is below.",
+    detail: "You submitted it earlier in this browser session. Your scored review is below.",
   },
   expired: {
-    title: "This section was submitted when its time ran out.",
-    detail: "Your answers up to that point were scored. Review them below.",
+    title: "The time for this section ended.",
+    detail: "The site scored the answers you gave before that moment. Your review is below.",
   },
 } as const;
 
@@ -66,9 +69,9 @@ export function SectionLockScreen({
           Finish {blockedBy.label} first
         </h1>
         <p className="mt-4 leading-relaxed text-foreground/90">
-          {blockedBy.label} is still in progress ({blockedBy.answered} of {blockedBy.total}{" "}
-          answered) and its timer is running. Sections are taken one at a time here, the same way
-          they are in the real exam, so {sectionLabel} stays closed until that one is submitted.
+          {blockedBy.label} is still in progress, with {blockedBy.answered} of {blockedBy.total}{" "}
+          answered, and its timer continues. This site gives you one section at a time, the same as
+          the real exam. {sectionLabel} stays closed until you submit {blockedBy.label}.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
@@ -85,8 +88,8 @@ export function SectionLockScreen({
           </Link>
         </div>
         <p className="mt-6 text-xs text-muted">
-          Don&apos;t want to finish it? Clear that section from the exam setup page and this one
-          will open.
+          Do you want to stop that section? Clear it on the exam setup page, and this section
+          opens.
         </p>
       </main>
     </div>
@@ -130,8 +133,7 @@ export function NoCalculatorNote({ exam }: { exam: ExamModule }) {
   return (
     <p className="mb-4 text-xs leading-relaxed text-muted">
       <span className="font-medium text-foreground">No calculator in this section.</span> The{" "}
-      {exam.label} provides one only in{" "}
-      {elsewhere.map((s) => s.label).join(", ")}.
+      {exam.label} gives you one in {elsewhere.map((s) => s.label).join(", ")} only.
     </p>
   );
 }

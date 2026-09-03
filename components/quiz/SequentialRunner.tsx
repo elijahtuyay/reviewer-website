@@ -188,8 +188,8 @@ export default function SequentialRunner({
               </div>
               <p className="mt-2 text-xs text-muted">
                 {exam.rules.adaptive
-                  ? "Each question is chosen from how the previous ones went, so you cannot go back."
-                  : "You cannot return to a question once you move on."}
+                  ? "Each question depends on your previous answers. You cannot return to a question."
+                  : "You cannot return to a question after you continue."}
               </p>
             </div>
           )}
@@ -245,8 +245,8 @@ export default function SequentialRunner({
                 // refuses to advance too, and a disabled control with no
                 // explanation reads as a bug.
                 <p className="mt-3 text-right text-xs text-muted">
-                  Choose an answer to continue. You cannot skip on this exam, so a considered guess
-                  beats leaving it blank.
+                  Select an answer to continue. This exam has no skip. A considered guess is better
+                  than no answer.
                 </p>
               )}
             </>
@@ -282,13 +282,13 @@ export default function SequentialRunner({
         }
         body={
           pendingAction === "submit"
-            ? `You have ${answeredCount} of ${totalQuestions} answered${
-                reviewChangesLeft !== null ? ` and ${reviewChangesLeft} change${reviewChangesLeft === 1 ? "" : "s"} left` : ""
-              }. Once you submit you can read every explanation, but you can't change anything.`
-            : "This deletes your answers for this section and starts a new adaptive run, with a fresh timer. It can't be undone."
+            ? `You answered ${answeredCount} of ${totalQuestions} questions${
+                reviewChangesLeft !== null ? `, and you have ${reviewChangesLeft} change${reviewChangesLeft === 1 ? "" : "s"} left` : ""
+              }. After you submit, you can read every explanation. You cannot change an answer.`
+            : "This deletes your answers for this section. It starts a new adaptive attempt with a new timer. You cannot undo this."
         }
         confirmLabel={pendingAction === "submit" ? "Submit section" : "Start over"}
-        cancelLabel={pendingAction === "submit" ? "Keep reviewing" : "Keep my answers"}
+        cancelLabel={pendingAction === "submit" ? "Continue the section" : "Keep my answers"}
         onConfirm={() => {
           const action = pendingAction;
           setPendingAction(null);
@@ -328,14 +328,14 @@ function ReviewPass({
     <div>
       <div className="rounded-lg border border-accent bg-accent/10 px-4 py-3 dark:bg-accent/20">
         <p className="text-sm font-medium text-foreground">
-          You reached the end with time to spare
+          You reached the end, and time remains
         </p>
         <p className="mt-1 text-sm text-foreground/90">
-          You can change up to {limit} answer{limit === 1 ? "" : "s"} before submitting.{" "}
+          You can change up to {limit} answer{limit === 1 ? "" : "s"} before you submit.{" "}
           {exhausted
-            ? "You have used them all, so the rest are locked until you undo one."
-            : `${reviewChangesLeft} left. Changing an answer back to what it was costs nothing.`}{" "}
-          The clock is still running.
+            ? "You used all of them. The rest stay locked until you undo one change."
+            : `${reviewChangesLeft} left. A change back to your first answer costs nothing.`}{" "}
+          The timer continues.
         </p>
       </div>
 
@@ -377,7 +377,7 @@ function ReviewPass({
                 reviewMode={false}
                 lockedReason={
                   locked
-                    ? `You have used all ${limit} changes. Undo one of your changes to free this up.`
+                    ? `You used all ${limit} changes. Undo one change to unlock this question.`
                     : undefined
                 }
               />

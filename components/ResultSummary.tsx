@@ -55,7 +55,7 @@ export default function ResultSummary({ result, sectionLabel, exam }: ResultSumm
           far the exam let you climb, which a raw tally cannot. */}
       {exam.rules.adaptive && (
         <div className="mt-6 rounded-lg border border-line bg-panel p-4">
-          <p className="text-sm font-medium text-foreground">How far the questions climbed</p>
+          <p className="text-sm font-medium text-foreground">The difficulty you reached</p>
           <div className="mt-3 flex flex-col gap-2">
             {DIFFICULTY_ORDER.map((level) => {
               const total = result.served[level];
@@ -89,22 +89,22 @@ export default function ResultSummary({ result, sectionLabel, exam }: ResultSumm
               estimate of them would be a lie about their own result. */}
           <p className="mt-3 text-xs text-muted">
             {result.served.hard > 0 && result.correctByDifficulty.hard === result.served.hard
-              ? "The section opened at medium and moved with your streak. You cleared every hard question it had to offer, so any easier ones later were the bank running out of harder material, not the exam lowering its estimate of you."
-              : "The section opened at medium and moved with your streak. Reaching more hard questions means the exam kept raising its estimate of you."}
+              ? "The section started at medium difficulty and followed your answers. You answered every hard question correctly. The bank then had no harder question left, so the later questions were easier. That is not a lower estimate of your level."
+              : "The section started at medium difficulty and followed your answers. More hard questions mean a higher estimate of your level."}
           </p>
         </div>
       )}
 
       <div className="mt-6">
-        <p className="text-sm font-medium text-foreground">By topic</p>
+        <p className="text-sm font-medium text-foreground">Results by topic</p>
         {/* On an adaptive section the ladder stops where the clock did, so these
             rows cover only what was actually served and will not add up to the
             total in the summary above. Both numbers are correct; presenting them
             side by side without saying so is what makes them look contradictory. */}
         {servedTotal < result.totalQuestions && (
           <p className="mt-1 text-xs text-muted">
-            Covers the {servedTotal} question{servedTotal === 1 ? "" : "s"} you were served.{" "}
-            {result.totalQuestions - servedTotal} of {result.totalQuestions} were never reached.
+            This covers the {servedTotal} question{servedTotal === 1 ? "" : "s"} the exam gave you.
+            You did not reach {result.totalQuestions - servedTotal} of {result.totalQuestions}.
           </p>
         )}
         <div className="mt-2 flex flex-col gap-1.5">
@@ -123,7 +123,7 @@ export default function ResultSummary({ result, sectionLabel, exam }: ResultSumm
                 </span>
                 {t.unanswered > 0 && (
                   <span className="font-sans text-xs">
-                    ({t.unanswered} skipped)
+                    ({t.unanswered} with no answer)
                   </span>
                 )}
               </span>
@@ -136,7 +136,7 @@ export default function ResultSummary({ result, sectionLabel, exam }: ResultSumm
           for my actual exam", and the honest answer is "nothing directly". */}
       <p className="mt-6 text-xs text-muted">
         {scaled
-          ? `This is a practice estimate on the ${exam.shortLabel} scale, weighted by question difficulty and reduced for anything left unanswered. It models how the real exam behaves; it is not an official ${exam.shortLabel} score or a prediction of one.`
+          ? `This is a practice estimate on the ${exam.shortLabel} scale. It includes question difficulty, and it reduces the score for every unanswered question. It is a model of the real exam. It is not an official ${exam.shortLabel} score, and it does not predict one.`
           : `This is a raw practice score for this section only. It is not an official ${exam.shortLabel} score or percentile, and it does not predict one.`}
       </p>
     </div>

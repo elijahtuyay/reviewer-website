@@ -83,7 +83,7 @@ export default function SectionStartButton({
           Finish {state.by.label} first
         </Link>
         <p className="mt-2 text-center text-xs text-muted">
-          One section at a time, like the real exam.
+          One section at a time, the same as the real exam.
         </p>
       </div>
     );
@@ -100,11 +100,11 @@ export default function SectionStartButton({
     state.kind === "resume"
       ? `In progress, ${state.answered}/${state.total} answered`
       : state.kind === "review"
-        ? "Already submitted, opens your scored review"
+        ? "You submitted this section. This opens your review."
         : // The single most important thing a first-time visitor is not told
           // anywhere else on this page: clicking does not preview the section,
           // it starts it.
-          `Your ${minutes}-minute timer starts as soon as you open it`;
+          `The ${minutes}-minute timer starts when you open the section`;
 
   return (
     <div className="mt-5">

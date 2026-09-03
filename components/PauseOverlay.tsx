@@ -125,8 +125,8 @@ export default function PauseOverlay({ paused, onResume, frozenTimeLabel }: Paus
           whose subject was a separate block two elements up. */}
       <p id={bodyId} className="max-w-xs text-center text-sm text-muted">
         {frozenTimeLabel
-          ? "That is the time you had left. The clock is stopped until you resume."
-          : "The clock is stopped until you resume."}
+          ? "That is your remaining time. The timer stops until you press Resume."
+          : "The timer stops until you press Resume."}
       </p>
       <button
         ref={resumeRef}

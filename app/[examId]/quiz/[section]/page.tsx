@@ -47,15 +47,13 @@ export default function QuizPage({
     return (
       <div className="flex flex-1 justify-center bg-background">
         <main className="w-full max-w-lg px-6 py-16 text-center sm:py-24">
-          <p className="text-sm font-medium tracking-wide text-muted uppercase">
-            Couldn&apos;t load this section
-          </p>
+          <p className="text-sm font-medium tracking-wide text-muted uppercase">Load error</p>
           <h1 className="mt-2 text-2xl font-semibold text-foreground sm:text-3xl">
-            The questions didn&apos;t arrive
+            The questions did not arrive
           </h1>
           <p className="mt-4 leading-relaxed text-foreground/90">
-            {section.label} could not be fetched, most likely a connection drop. Nothing was
-            started and no time has been used, so reloading costs you nothing.
+            The site could not load {section.label}. The cause is usually a lost connection. This
+            attempt did not start, and it used none of your time. A reload costs you nothing.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <button

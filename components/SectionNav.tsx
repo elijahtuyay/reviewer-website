@@ -117,7 +117,9 @@ export default function SectionNav({
           return (
             <div key={section.id} className={`${baseClasses} ${lockedClasses} cursor-not-allowed opacity-60`}>
               {content}
-              <span className="text-xs text-muted">Locked until current section is submitted</span>
+              <span className="text-xs text-muted">
+                Locked until you submit the current section
+              </span>
             </div>
           );
         }

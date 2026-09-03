@@ -92,17 +92,20 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
 
   return (
     <div className="mt-8 rounded-lg border border-line bg-panel px-4 py-3">
-      <p className="text-sm font-medium text-foreground">Progress is cleared when you close this tab</p>
+      <p className="text-sm font-medium text-foreground">
+        You lose your progress when you close this tab
+      </p>
       <p className="mt-1 text-sm text-foreground/90">
-        Your answers and timer are kept only while this browser tab stays open, so you can move
-        between this page and a section freely. Closing the tab or the browser clears all sections.
-        A section&apos;s timer keeps running while you are away from it, unless you paused it first.
+        Your answers and your timer stay only while this browser tab is open. You can move between
+        this page and a section freely. When you close the tab or the browser, the site deletes all
+        of it. A section timer continues while you are away from that section. Press Pause first to
+        stop it.
       </p>
 
       {saved.length > 0 && (
         <div className="mt-3 border-t border-line pt-3">
           <p className="text-xs font-medium tracking-wide text-muted uppercase">
-            Saved from earlier in this session
+            Saved earlier in this session
           </p>
           <ul className="mt-2 flex flex-col gap-1">
             {saved.map((entry) => (
@@ -130,7 +133,7 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
             ))}
           </ul>
           <p className="mt-2 text-xs text-muted">
-            Opening one of these picks up that attempt instead of starting a new one.
+            Select one of these to continue that attempt. It does not start a new attempt.
           </p>
           {saved.length > 1 && (
             <button
@@ -149,8 +152,8 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
         title={pendingClear === "all" ? "Clear all saved progress?" : "Clear this section?"}
         body={
           pendingClear === "all"
-            ? `This deletes your saved work for all ${saved.length} sections listed above, including any you have already submitted and scored. It can't be undone.`
-            : `This deletes your saved work for ${pendingClear?.label ?? "this section"}. Your other sections are not affected. It can't be undone.`
+            ? `This deletes your saved work for all ${saved.length} sections above. It includes the sections you already submitted. You cannot undo this.`
+            : `This deletes your saved work for ${pendingClear?.label ?? "this section"}. Your other sections do not change. You cannot undo this.`
         }
         confirmLabel={pendingClear === "all" ? "Clear all" : "Clear section"}
         cancelLabel="Keep it"

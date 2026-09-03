@@ -148,11 +148,11 @@ export default function ProgressTracker({
             // this cell size: the bold/underline redundancy is real and is kept
             // for colorblind users, but leading with it described a signal
             // nobody can see at this cell size.
-            "Green is correct (bold), red is incorrect (underlined), gray was skipped."
+            "Green is correct and bold. Red is incorrect and underlined. Gray means no answer."
           : // "Filled" was wrong: every cell has a fill, so the caption read as
             // "you have answered all of them". The distinction is the accent
             // highlight, and naming a color would be wrong per exam theme.
-            "Highlighted squares are answered."}
+            "A highlighted square has an answer."}
       </p>
     </div>
   );
