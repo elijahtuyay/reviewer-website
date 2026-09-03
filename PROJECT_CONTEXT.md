@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-04, at PR #25 / VERSION.txt `2.7.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-04, at PR #26 / VERSION.txt `2.8.0`.
 
 ## What this project is
 
@@ -697,25 +697,55 @@ Small shared modules added in v2.3.0, each existing because the same bug was abo
 
 ### GMAT specifics
 
-GMAT Focus: Data Insights 20q, Quantitative 21q, Verbal 23q, 45 minutes each, 64 questions, 205-805. Verbal has NO sentence correction; Quantitative has NO geometry; Data Sufficiency belongs to **Data Insights**, not Quantitative. Bank is a **90-question seed** (30 per section, 10 per difficulty), not a finished bank: a perfect run exhausts the ten hard questions and falls back to medium.
+GMAT Focus: Data Insights 20q, Quantitative 21q, Verbal 23q, 45 minutes each, 64 questions, 205-805. Verbal has NO sentence correction; Quantitative has NO geometry; Data Sufficiency belongs to **Data Insights**, not Quantitative. The bank is **270 questions** as of v2.8.0, 90 per section with 32 hard in each, so the adaptive ladder no longer runs dry.
 
-**Known GMAT fidelity gaps, recorded rather than papered over.** The seed bank
-approximates several things the real exam does differently, and a relabel would
-hide the gap instead of closing it:
+**The GMAT bank was a 90-question seed until v2.8.0, and every gap that came
+with it is now closed.** The list is kept because the fixes are the interesting
+part, and because the same holes are the ones a future exam will dig:
 
-- **`gd-005`, `gd-010`, `gd-016` and `gd-026` are tagged Two-Part Analysis but
-  are ordinary single-answer questions.** Real Two-Part Analysis is a two-column
-  table requiring two selections, which the runner cannot render today. Closing
-  this needs a question type and a UI, not a new topic string.
-- **GMAT Verbal items have 4 options; the real exam has 5.** That moves the
-  blind-guess baseline from 20% to 25% and feeds a scoring model calibrated on
-  five.
-- CR stimuli run 18-34 words against a real 60-120, and RC passages 110-121
-  words with 2 questions each against a real 200-350 with 3-4. There are only 4
-  distinct Verbal passages, so a 23-of-30 draw often serves the same one twice.
-- 10 of 25 GMAT CR items use the same "find the alternative cause" template, and
-  that is the same shape of hole that reached 94.7% on NMAT Critical Reasoning
-  before it was measured. It is unmeasured here.
+- **Four options where the real exam has five.** Verbal, Quantitative and the
+  non-Data-Sufficiency half of Data Insights all used four. That moves a blind
+  guess from 20% to 25%, and on an ADAPTIVE exam it is not a rounding error: it
+  shifts every difficulty estimate the ladder makes. All 270 questions now carry
+  five, each retrofitted distractor tracing to one named mistake.
+- **30 questions per section against sections of 20 to 23.** A retake re-served
+  about 77% of the same paper, and a strong run exhausted the ten hard questions
+  and fell back to medium. Now 90 per section: the draw ratio is about 0.24 and
+  there are 32 hard questions per section.
+- **CR stimuli ran 18 to 34 words** against a real 60 to 120, which is not an
+  argument. New items run 74 to 126.
+- **RC passages ran 110 to 121 words** against a real 200 to 350, and worse,
+  **four PAIRS of questions were sharing one passage** (`gv-006`/`gv-007`,
+  `gv-013`/`gv-014`, `gv-020`/`gv-021`, `gv-028`/`gv-029`), so a draw could
+  serve the same text twice. Every question now carries its own passage of 250
+  to 320 words.
+- **10 of 25 CR items used one "find the alternative cause" template.** The new
+  set spans eight stems and a deliberate range of argument structures: sampling,
+  analogy, cost-benefit, plans and predictions, statistical fallacies,
+  definitional shifts, survivorship, and boldface role.
+- **Four questions were tagged Two-Part Analysis and were not.** Real Two-Part
+  Analysis is a two-column table taking one selection per column. The `multi`
+  question kind does NOT close that gap either, because picking two options from
+  one shared list loses which column each belongs to. Rather than mislabel or
+  delete them, they were rewritten as genuine Table Analysis questions with
+  embedded tables. **If Two-Part Analysis is ever built properly it needs a new
+  question kind, not a reuse of `multi`.**
+
+Two lessons from the pass itself, both worth more than the numbers:
+
+**Adding an option cannot rescue a key that is already bracketed.** A key
+sitting mid-range among four values stays mid-range whatever fifth value is
+added, so a retrofit can only protect the extremes that already exist. Two more
+were surrendered deliberately, because the only realistic distractor sat above
+the key and a rank-preserving alternative would have been contrived. **A weaker
+distractor is a worse question than a slightly worse statistic**, and that is the
+right way to resolve the tension.
+
+**A fixed option set forked without anyone noticing.** The second authoring pass
+wrote Data Sufficiency's five statements with different capitalization from the
+first, giving one bank two variants of a set whose entire point is that it never
+varies. `audit:bank` now fails on that, per bank rather than globally, since
+NMAT and GMAT may legitimately word theirs differently.
 
 `npm run verify:engine` asserts (and exits non-zero) on the adaptive ladder and both scoring models. It has already caught three real bugs: a perfect attempt scoring 810 on a band whose maximum is 805, difficulty weighting being a no-op, and timing out scoring higher than finishing. **Run it after touching `lib/adaptive.ts` or `lib/scoring.ts`.**
 
@@ -1218,7 +1248,7 @@ that appears not to have applied is usually this.
 
 ---
 
-**Current state: `main` is at v2.7.0, and is the only branch.**
+**Current state: `main` is at v2.8.0, and is the only branch.**
 
 "Clean" is five commands rather than a claim, and all five pass on `main`:
 
