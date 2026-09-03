@@ -358,6 +358,43 @@ returned the initial state wholesale and wiped memory. Memory surviving a clear
 is exactly what makes it useful on a device whose only escape from precedence is
 banking a subtotal.
 
+### A MODEL FIELD THAT NOTHING READS IS INVISIBLE TO EVERY TOOL
+
+`CalculatorPanel` shipped with `model.banner`, `model.details`, `model.label`,
+`KeySpec.span` and `KeySpec.primary` all declared, all supplied correctly per
+device, and **none of them read**. The GRE panel therefore explained itself with
+the TI-108's copy: "it calculates left to right, so 2 + 3 x 4 is 20", directly
+contradicting its own reducer, which returns 14 and is asserted doing so two
+files away. Its explainer named three keys its keypad does not have.
+
+`tsc`, `lint`, 30 calculator assertions and a browser run that exercised the
+arithmetic all passed. An unread object field is not a type error, not a lint
+error, and not visible to a test that only presses keys.
+
+**When you split one component into a shell plus per-instance data, assert on
+the RENDERED difference, not just the behavior.** `banner.mjs` in the scratchpad
+does this: it opens each panel and requires the GRE's to say 14 and the GMAT's
+to say 20. Two review lanes found this independently, which is the only reason
+it did not ship.
+
+### The `entryMode` trap is not specific to one calculator
+
+`gre-standard.ts` reproduced, verbatim, the bug PROJECT_CONTEXT already records
+against `basic-di.ts`: treating "nothing is being typed" as "no operand was
+supplied". A square root, a memory recall, a sign flip and a closed parenthesis
+all produce a value while `entry` is null, so `2 + 9 √ × 4 =` returned 8 —
+the root's 3 discarded and the `+` overwritten by the `×`.
+
+Both calculators now carry an explicit flag for "the display holds an operand
+not yet committed" (`operandReady`), and both carry assertions for it. **Any
+future calculator needs the same flag and the same assertions**, because the
+temptation to fold the two conditions together is apparently irresistible.
+
+A related one worth stating: a well-formed-expression fuzzer cannot see this
+class. The review lane ran 300,000 random expressions with zero mismatches while
+all four blockers were live, because a fuzzer generates valid input and this bug
+lives in the sequences a human types by accident.
+
 ### Known gaps, recorded rather than papered over
 
 - No Analytical Writing. An essay cannot be auto-scored, and a writing box that
@@ -369,7 +406,13 @@ banking a subtotal.
   five options are entirely real, so what ships is faithful as far as it goes.
 - Transfer Display is modeled in the reducer (`displayValue`) but is not wired
   to the Numeric Entry box, so the value is read and retyped rather than
-  transferred.
+  transferred. The cost is a habit rather than an answer.
+- The GRE keypad is seven rows, because 25 keys do not divide into four
+  columns. At scroll position zero its last row sits about 25px below the
+  fold and needs the panel's own internal scroll. Any page scroll engages
+  the sticky wrapper and the whole pad is visible.
+- No keyboard entry on either calculator, deliberately. See the long note in
+  `basic-di.ts`.
 
 ### Quantitative Comparison has its own layout
 
