@@ -11,6 +11,7 @@ import {
   GreCalculatorKey,
   hasGreMemory,
   initialGreCalculatorState,
+  openParenCount,
   pressGre,
 } from "@/lib/calculator/gre-standard";
 
@@ -38,7 +39,7 @@ export interface KeySpec {
   srLabel?: string;
   variant?: "op" | "fn" | "mem";
   /** Grid columns to span. Used by the wide equals key. */
-  span?: 2;
+  span?: 2 | 4;
   /** Rendered as the accent-filled primary key. */
   primary?: boolean;
 }
@@ -56,6 +57,11 @@ export interface CalculatorModel {
   banner: ReactNode;
   /** Detail on demand, below the keypad, collapsed by default. */
   details: ReactNode;
+  /**
+   * A short status shown beside the memory badge, or null. Exists because the
+   * parenthesis keys are otherwise completely silent.
+   */
+  status?: (state: unknown) => string | null;
 }
 
 /* ------------------------------------------------------- GMAT Focus, DI --- */
@@ -159,39 +165,47 @@ const GRE_ROWS: KeySpec[][] = [
     { label: "MC", key: "MC", srLabel: "Memory clear", variant: "mem" },
     { label: "MR", key: "MR", srLabel: "Memory recall", variant: "mem" },
     { label: "M+", key: "M+", srLabel: "Memory add", variant: "mem" },
-    { label: "M−", key: "M-", srLabel: "Memory subtract", variant: "mem" },
+    { label: "M\u2212", key: "M-", srLabel: "Memory subtract", variant: "mem" },
   ],
   [
     { label: "(", key: "(", srLabel: "Open parenthesis", variant: "fn" },
     { label: ")", key: ")", srLabel: "Close parenthesis", variant: "fn" },
-    { label: "√", key: "sqrt", srLabel: "Square root", variant: "fn" },
-    { label: "C", key: "C", srLabel: "Clear the calculation", variant: "fn" },
+    { label: "\u221a", key: "sqrt", srLabel: "Square root", variant: "fn" },
+    { label: "+/\u2212", key: "negate", srLabel: "Change sign", variant: "fn" },
   ],
   [
     { label: "7", key: "7" },
     { label: "8", key: "8" },
     { label: "9", key: "9" },
-    { label: "÷", key: "/", srLabel: "Divide", variant: "op" },
+    { label: "\u00f7", key: "/", srLabel: "Divide", variant: "op" },
   ],
   [
     { label: "4", key: "4" },
     { label: "5", key: "5" },
     { label: "6", key: "6" },
-    { label: "×", key: "*", srLabel: "Multiply", variant: "op" },
+    { label: "\u00d7", key: "*", srLabel: "Multiply", variant: "op" },
   ],
   [
     { label: "1", key: "1" },
     { label: "2", key: "2" },
     { label: "3", key: "3" },
-    { label: "−", key: "-", srLabel: "Minus", variant: "op" },
+    { label: "\u2212", key: "-", srLabel: "Minus", variant: "op" },
   ],
   [
     { label: "0", key: "0" },
     { label: ".", key: ".", srLabel: "Decimal point" },
-    { label: "+/−", key: "negate", srLabel: "Change sign", variant: "fn" },
+    { label: "C", key: "C", srLabel: "Clear the calculation", variant: "fn" },
     { label: "+", key: "+", srLabel: "Plus", variant: "op" },
   ],
-  [{ label: "=", key: "=", srLabel: "Equals", span: 2, primary: true }],
+  /*
+   * Equals gets the last row to itself, full width.
+   *
+   * 25 keys do not divide into four columns without a remainder, and the
+   * alternative left `=` alone in column one with three empty cells beside it.
+   * A full-width bar reads as the primary action, which it is, and it is the
+   * one key a candidate hits repeatedly.
+   */
+  [{ label: "=", key: "=", srLabel: "Equals", span: 4, primary: true }],
 ];
 
 export const GRE_MODEL: CalculatorModel = {
@@ -201,6 +215,10 @@ export const GRE_MODEL: CalculatorModel = {
   display: (state) => (state as { display: string }).display,
   hasMemory: (state) => hasGreMemory(state as never),
   rows: GRE_ROWS,
+  status: (state) => {
+    const open = openParenCount(state as never);
+    return open > 0 ? `( x${open}` : null;
+  },
   banner: (
     <>
       <strong className="font-semibold">Order of operations:</strong>{" "}

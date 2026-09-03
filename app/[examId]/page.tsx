@@ -266,7 +266,10 @@ function expectations(exam: ExamModule): string[] {
     // describe both. The TI-108 runs left to right; the GRE's does not.
     const leftToRight = simulated.some((s) => s.calculator === "basic-di");
     lines.push(
-      `This exam gives you an on-screen calculator in ${joinWithAnd(simulated.map((s) => s.label))} only, exactly as the real exam does. It is a copy of the exam calculator, with the same limits. The display holds 8 digits, and ${
+      // "behaves like", not "is a copy of". The GRE one has no Transfer Display
+      // key, so a flat claim of equivalence is the hedge-becomes-promise pattern
+      // this repo has recorded before.
+      `This exam gives you an on-screen calculator in ${joinWithAnd(simulated.map((s) => s.label))} only, exactly as the real exam does. It behaves like the exam calculator. The display holds 8 digits, and ${
         leftToRight
           ? "it calculates strictly left to right with no order of operations"
           : "it follows order of operations, so multiplication happens before addition"

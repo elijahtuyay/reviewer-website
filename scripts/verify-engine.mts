@@ -336,6 +336,27 @@ expect("the memory indicator follows the register", hasGreMemory(greRun(greKeys(
 expect("an empty register shows no indicator", !hasGreMemory(greRun(greKeys("7 M+ MC"))));
 check("a memory value past the ceiling errors", greDisplay("9 9 9 9 9 9 9 9 M+ M+ M+ M+ M+ M+ M+ M+ M+ M+ M+"), "Error");
 
+/*
+ * THE OPERAND-READY CLASS, which a well-formed-expression fuzzer cannot see.
+ *
+ * A square root, a memory recall, a sign flip and a closed group all produce an
+ * operand while nothing is being typed. Reading that state as "no operand" ate
+ * both the value and the pending operator. These are the review lane's exact
+ * failing inputs.
+ */
+check("a square root mid-expression keeps the pending operator", greDisplay("2 + 9 sqrt * 4 ="), "14");
+check("and with a lower-precedence operator after it", greDisplay("2 + 9 sqrt - 4 ="), "1");
+check("a recalled value is an operand", greRun(greKeys("7 M+ C 2 + MR * 4 =")).display, "30");
+check("a sign flip after an operator is an operand", greDisplay("5 + 3 negate ="), "2");
+check("a closed group is worth its value on the display", greDisplay("( 2 + 3 )"), "5");
+check("a sign flip applies to the closed group", greDisplay("( 2 + 3 ) negate ="), "-5");
+check("a square root applies to the closed group", greDisplay("( 1 6 ) sqrt ="), "4");
+check("a group keeps its place in the wider expression", greDisplay("2 + ( 3 + 1 ) * 4 ="), "18");
+check("an empty group invents nothing", greDisplay("2 + ( ) ="), "2");
+check("a dangling operator inside a group invents nothing", greDisplay("2 + ( 3 + ) ="), "5");
+check("a result is the left operand of what follows", greDisplay("2 + 3 = * 4 ="), "20");
+check("a digit after a sign flip on an empty entry", greDisplay("0 negate 5 ="), "-5");
+
 // Transfer Display hands the shown value to a Numeric Entry box.
 expect("the display value is available to transfer", displayValue(greRun(greKeys("1 2 . 5 ="))) === 12.5);
 expect("an errored display transfers nothing", displayValue(greRun(greKeys("5 / 0 ="))) === null);

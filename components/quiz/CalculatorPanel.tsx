@@ -12,10 +12,20 @@ import {
  * The on-screen calculator, as a disclosure anchored to the top left of a
  * section.
  *
- * Rendered only where `section.calculator` says so, which today is GMAT Data
- * Insights and nothing else. All the arithmetic lives in
- * `lib/calculator/basic-di.ts`; this file is the keypad and nothing more, which
- * is what lets `npm run verify:engine` assert the behavior without a DOM.
+ * Rendered only where `section.calculator` says so: GMAT Data Insights and GRE
+ * Quantitative Reasoning, which get DIFFERENT devices. This file is the shell
+ * and nothing more. The arithmetic lives in `lib/calculator/basic-di.ts` and
+ * `lib/calculator/gre-standard.ts`, and the keypad, banner and explainer come
+ * from `calculator-models.tsx`, which is what lets `npm run verify:engine`
+ * assert the behavior without a DOM.
+ *
+ * EVERYTHING DEVICE-SPECIFIC MUST COME FROM THE MODEL. This component shipped
+ * once with `model.banner` and `model.details` declared, supplied correctly per
+ * device, and never read: the GRE panel told candidates it "calculates left to
+ * right, so 2 + 3 x 4 is 20", which is the opposite of what its own reducer
+ * does, and named three keys its keypad does not have. TypeScript cannot see an
+ * unread object field, so the only guard is that every device-specific string
+ * in here reads from `model`.
  *
  * ── Deliberately NOT keyboard-enterable ──────────────────────────────────
  *
@@ -155,7 +165,7 @@ export default function CalculatorPanel({ open, onOpenChange, kind }: Calculator
               Windows: U+1F5A9 has almost no font coverage there. Verified in a
               headless screenshot before it was replaced. */}
           <CalculatorIcon />
-          Calculator
+          {model.label}
           {model.hasMemory(state) && (
             // Memory survives closing the panel, so the indicator has to be
             // visible on the closed toggle too. Otherwise a stored value is
@@ -229,11 +239,18 @@ export default function CalculatorPanel({ open, onOpenChange, kind }: Calculator
           >
             <div className="shrink-0 rounded-md border border-line bg-background px-3 py-2 text-right">
               <div className="flex items-center justify-between gap-2">
-                <span
-                  className={`text-xs font-semibold ${model.hasMemory(state) ? "text-accent-text" : "text-transparent"}`}
-                  aria-hidden={!model.hasMemory(state)}
-                >
-                  M
+                <span className="flex items-center gap-2 text-xs font-semibold">
+                  <span
+                    className={model.hasMemory(state) ? "text-accent-text" : "text-transparent"}
+                    aria-hidden={!model.hasMemory(state)}
+                  >
+                    M
+                  </span>
+                  {/* Open parentheses, which are otherwise invisible: neither
+                      key changes the display, so a forgotten one is unfindable. */}
+                  {model.status?.(state) && (
+                    <span className="text-accent-text">{model.status(state)}</span>
+                  )}
                 </span>
                 {/* Polite, not assertive: results should be announced when the
                     user lands on them, not interrupt every intermediate digit. */}
@@ -258,9 +275,11 @@ export default function CalculatorPanel({ open, onOpenChange, kind }: Calculator
                 what fits both constraints: the message that stops someone
                 concluding "this calculator is broken" is never more than a
                 glance away, and it costs no keypad space. */}
+            {/* The one line that has to survive every layout, so it is short,
+                permanent, and ABOVE the keypad. From the model: the two devices
+                disagree about the answer to the very sum it quotes. */}
             <p className="mt-2 shrink-0 rounded bg-panel-hover px-2 py-1.5 text-xs leading-snug text-foreground/90">
-              <strong className="font-semibold">Not a bug:</strong> it calculates left to
-              right, so <span className="font-mono whitespace-nowrap">2 + 3 × 4</span> is 20.
+              {model.banner}
             </p>
 
             {/* Every key comes from the model, the wide equals included, so the
@@ -287,31 +306,7 @@ export default function CalculatorPanel({ open, onOpenChange, kind }: Calculator
               </button>
               {detailsOpen && (
                 <ul className="flex flex-col gap-1.5 pb-1 text-xs leading-relaxed text-foreground/90">
-                  <li>
-                    This is a copy of the exam calculator. It has no order of operations. For{" "}
-                    <span className="font-mono whitespace-nowrap">a×b + c×d</span>, add each product
-                    to memory with <span className="font-mono">M+</span>. Then press{" "}
-                    <span className="font-mono">MRC</span>.
-                  </li>
-                  <li>
-                    {/* The condition is the point. `%` is contextual: a percentage
-                        OF the running total under + or -, and a plain divide by
-                        100 otherwise. A version of this line that said "% uses
-                        the number before it" was wrong in its own example,
-                        because 12 + 10 % takes 10% of 12, not of 10. */}
-                    With <span className="font-mono">+</span> or{" "}
-                    <span className="font-mono">−</span>,{" "}
-                    <span className="font-mono">%</span> takes that percentage of the running
-                    total: <span className="font-mono whitespace-nowrap">12 + 10 %</span> shows
-                    1.2, and <span className="font-mono">=</span> shows 13.2. With{" "}
-                    <span className="font-mono">×</span> or <span className="font-mono">÷</span>,{" "}
-                    <span className="font-mono">%</span> divides by 100.
-                  </li>
-                  <li>
-                    The display holds <strong>8 digits</strong>. Above 99,999,999 it shows an error.
-                    Press <span className="font-mono">ON/C</span> to clear it. The real exam
-                    calculator does the same.
-                  </li>
+                  {model.details}
                 </ul>
               )}
             </div>
@@ -346,8 +341,18 @@ function CalculatorIcon() {
 }
 
 function CalcButton({ spec, onPress }: { spec: KeySpec; onPress: (key: string) => void }) {
-  const tone =
-    spec.variant === "op"
+  /*
+   * `span` and `primary` are honored here, and were not.
+   *
+   * Both were declared on KeySpec, set on the equals key of both devices, and
+   * read by nothing. On the GMAT that silently REGRESSED a key which used to be
+   * written out explicitly as a wide accent button, and on the GRE it left `=`
+   * alone in column one of a four-column grid with three empty cells beside it,
+   * pushing the key below the panel's own fold at 1366x768.
+   */
+  const tone = spec.primary
+    ? "border-transparent bg-accent font-semibold text-accent-foreground hover:opacity-90"
+    : spec.variant === "op"
       ? "border-line-strong bg-panel-hover font-semibold"
       : spec.variant === "mem" || spec.variant === "fn"
         // Was `text-muted`, which read as disabled next to the digits and put
@@ -361,7 +366,9 @@ function CalcButton({ spec, onPress }: { spec: KeySpec; onPress: (key: string) =
     <button
       type="button"
       onClick={() => onPress(spec.key)}
-      className={`flex h-11 items-center justify-center rounded-md border text-sm text-foreground transition-[color,background-color,border-color,transform] hover:bg-panel-hover active:scale-95 active:bg-panel-hover ${tone}`}
+      className={`flex h-11 items-center justify-center rounded-md border text-sm transition-[color,background-color,border-color,transform] active:scale-95 ${
+        spec.primary ? "" : "text-foreground hover:bg-panel-hover active:bg-panel-hover"
+      } ${spec.span === 4 ? "col-span-4" : spec.span === 2 ? "col-span-2" : ""} ${tone}`}
     >
       <span aria-hidden>{spec.label}</span>
       <span className="sr-only">{spec.srLabel ?? spec.label}</span>
