@@ -21,8 +21,8 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
         <p className="text-sm font-medium tracking-wide text-muted uppercase">Error</p>
         <h1 className="mt-2 text-3xl font-semibold text-foreground">This page has an error</h1>
         <p className="mt-4 text-foreground/90">
-          This browser tab still holds your answers for every section you started. Press Try again
-          to continue that attempt.
+          This browser tab still holds your answers for every section you started. Press Try again.
+          This usually continues that attempt.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <button

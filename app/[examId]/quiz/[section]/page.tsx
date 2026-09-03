@@ -53,7 +53,8 @@ export default function QuizPage({
           </h1>
           <p className="mt-4 leading-relaxed text-foreground/90">
             The site could not load {section.label}. The cause is usually a lost connection. This
-            attempt did not start, and it used none of your time. A reload costs you nothing.
+            attempt did not start, and it used none of your time. You can reload this page at no
+            cost.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <button

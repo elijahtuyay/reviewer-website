@@ -36,8 +36,8 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
             The site failed to load
           </h1>
           <p style={{ marginTop: "1rem", lineHeight: 1.6 }}>
-            The error is outside the page. A page reload usually repairs it. This browser tab still
-            holds any section you started.
+            The error is outside the page. Reload the page. This usually corrects the error, and
+            this browser tab still holds any section you started.
           </p>
           <button
             type="button"

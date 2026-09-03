@@ -296,7 +296,7 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
                 concluding "this calculator is broken" is never more than a
                 glance away, and it costs no keypad space. */}
             <p className="mt-2 shrink-0 rounded bg-panel-hover px-2 py-1.5 text-xs leading-snug text-foreground/90">
-              <strong className="font-semibold">Not a fault:</strong> it calculates left to
+              <strong className="font-semibold">Not a bug:</strong> it calculates left to
               right, so <span className="font-mono whitespace-nowrap">2 + 3 × 4</span> is 20.
             </p>
 
@@ -339,9 +339,18 @@ export default function CalculatorPanel({ open, onOpenChange }: CalculatorPanelP
                     <span className="font-mono">MRC</span>.
                   </li>
                   <li>
-                    <span className="font-mono">%</span> uses the number before it.{" "}
-                    <span className="font-mono whitespace-nowrap">12 + 10 %</span> shows 1.2, and{" "}
-                    <span className="font-mono">=</span> shows 13.2.
+                    {/* The condition is the point. `%` is contextual: a percentage
+                        OF the running total under + or -, and a plain divide by
+                        100 otherwise. A version of this line that said "% uses
+                        the number before it" was wrong in its own example,
+                        because 12 + 10 % takes 10% of 12, not of 10. */}
+                    With <span className="font-mono">+</span> or{" "}
+                    <span className="font-mono">−</span>,{" "}
+                    <span className="font-mono">%</span> takes that percentage of the running
+                    total: <span className="font-mono whitespace-nowrap">12 + 10 %</span> shows
+                    1.2, and <span className="font-mono">=</span> shows 13.2. With{" "}
+                    <span className="font-mono">×</span> or <span className="font-mono">÷</span>,{" "}
+                    <span className="font-mono">%</span> divides by 100.
                   </li>
                   <li>
                     The display holds <strong>8 digits</strong>. Above 99,999,999 it shows an error.

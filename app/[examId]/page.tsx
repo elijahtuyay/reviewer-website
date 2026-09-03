@@ -11,6 +11,7 @@ import { ExamModule } from "@/lib/exams/types";
 import SessionResetNotice from "@/components/SessionResetNotice";
 import SectionStartButton from "@/components/SectionStartButton";
 import { loadSection } from "@/lib/question-bank";
+import { joinWithAnd } from "@/lib/text";
 
 /**
  * Per-exam title/description. The root layout supplies the `%s | Exam Reviewer`
@@ -148,12 +149,6 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
   );
 }
 
-/** "A", "A and B", "A, B and C" — so the generated calculator line reads as a sentence at any section count. */
-function listSections(labels: string[]): string {
-  if (labels.length <= 1) return labels[0] ?? "";
-  return `${labels.slice(0, -1).join(", ")} and ${labels[labels.length - 1]}`;
-}
-
 /**
  * The "what to expect" list, assembled from the exam's declared rules. Reading
  * these off `rules` rather than writing them per exam is what stops the copy
@@ -164,12 +159,12 @@ function expectations(exam: ExamModule): string[] {
   const lines: string[] = [];
 
   lines.push(
-    "Each section has its own time limit and its own question count. Time from one section does not move to another section."
+    "Each section has its own time limit and its own question count. You cannot use time from one section in another section."
   );
 
   if (exam.rules.lockToOneSection) {
     lines.push(
-      "While a section is in progress, the other sections stay locked. You must submit it first. The real exam does the same."
+      "While a section is in progress, the other sections stay locked. You must submit that section first. The real exam does the same."
     );
   }
 
@@ -190,15 +185,22 @@ function expectations(exam: ExamModule): string[] {
   }
 
   if (exam.rules.adaptive) {
+    // Two in a row, both ways: `stepUpAfter` and `stepDownAfter` are both 2, so
+    // "after correct answers" on one side and "after incorrect ones" on the
+    // other stated the condition asymmetrically and understated it twice.
     lines.push(
-      "The section is adaptive. It starts at medium difficulty. It becomes harder after a run of correct answers, and easier after incorrect ones."
+      "The section is adaptive. It starts at medium difficulty. It becomes harder after two correct answers in a row, and easier after two incorrect answers in a row."
     );
   }
 
   if (exam.rules.reviewEdit) {
     lines.push(
       `If you reach the end and time remains, you enter a review pass. There you can change up to ${exam.rules.reviewEdit.maxChanges} answers${
-        exam.rules.reviewEdit.allowFlagging ? ", and the questions you flagged come first" : ""
+        // NOT "the flagged questions come first". They do not: ReviewPass keeps
+        // the served order on purpose, and what it adds is a list of links at
+        // the top. Saying "come first" asserts an ordering the engine does not
+        // do, which is the exact defect this repo shipped once before.
+        exam.rules.reviewEdit.allowFlagging ? ", and a list of the questions you flagged is at the top" : ""
       }.`
     );
   }
@@ -233,10 +235,12 @@ function expectations(exam: ExamModule): string[] {
   const withCalculator = exam.sections.filter((s) => s.calculator !== null);
   if (withCalculator.length > 0 && withCalculator.length < exam.sections.length) {
     lines.push(
-      `This exam gives you an on-screen calculator in ${listSections(withCalculator.map((s) => s.label))} only, exactly as the real exam does. It is a copy of the exam calculator, with the same limits: an 8-digit display, and no order of operations.`
+      `This exam gives you an on-screen calculator in ${joinWithAnd(withCalculator.map((s) => s.label))} only, exactly as the real exam does. It is a copy of the exam calculator, with the same limits. The display holds 8 digits, and it calculates strictly left to right with no order of operations.`
     );
   } else if (withCalculator.length === 0) {
-    lines.push("No section gives you a calculator. The real exam gives you none either.");
+    lines.push(
+      "No section gives you a calculator, on screen or otherwise. The real exam does not give you one either."
+    );
   }
 
   if (exam.rules.optionalBreakMinutes) {
@@ -247,6 +251,12 @@ function expectations(exam: ExamModule): string[] {
       `The real exam gives you one optional ${exam.rules.optionalBreakMinutes}-minute break. Here, the Pause button stops the timer at any time. There is no limit on the number of pauses or on their length.`
     );
   }
+
+  // What happens at zero was on the home page and nowhere on this one, which
+  // is the page a visitor reads immediately before starting a timed section.
+  lines.push(
+    "When the timer reaches zero, the section submits your answers and scores them. You do not lose the work you did."
+  );
 
   lines.push(
     "After you submit a section, you see your score and a result for each topic. You also see every question, its correct answer and an explanation."
@@ -264,7 +274,7 @@ function ComingSoon({ exam }: { exam: ExamModule }) {
           <h1 className="mt-2 text-3xl font-semibold text-foreground">{exam.label}</h1>
           <p className="mx-auto mt-4 max-w-md text-foreground/90">
             {exam.shortLabel} practice is not ready yet. The format below is complete. The question
-            bank is not.
+            bank is not complete.
           </p>
         </div>
 

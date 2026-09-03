@@ -10,8 +10,7 @@
 
 export const SITE_NAME = "Exam Reviewer";
 
-export const SITE_TAGLINE =
-  "Free practice exams with real time limits and an explanation for every answer.";
+export const SITE_TAGLINE = "Free practice exams with every answer explained.";
 
 /**
  * Shown in the footer and on the about section of the home page. This is a
@@ -24,4 +23,4 @@ export const SITE_TAGLINE =
  * site. A legal notice is the last place to spend a subordinate clause.
  */
 export const AFFILIATION_DISCLAIMER =
-  "This site is an independent study tool. It has no connection to the Graduate Management Admission Council (GMAC) or to any other test provider. GMAC does not endorse this site. A person writes every question here for practice only. No question is a copy of real exam content. Practice on this site does not guarantee a result on your exam.";
+  "This site is an independent study tool. It has no affiliation and no connection with the Graduate Management Admission Council (GMAC) or with any other testing body. No testing body endorses this site. Every question here is original, and written for practice only. No question reproduces real exam content. Practice on this site does not guarantee any particular result on your exam.";

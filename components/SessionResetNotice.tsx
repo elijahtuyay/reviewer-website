@@ -97,9 +97,9 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
       </p>
       <p className="mt-1 text-sm text-foreground/90">
         Your answers and your timer stay only while this browser tab is open. You can move between
-        this page and a section freely. When you close the tab or the browser, the site deletes all
-        of it. A section timer continues while you are away from that section. Press Pause first to
-        stop it.
+        this page and a section freely. When you close the tab or the browser, the browser deletes
+        all of it. A section timer continues while you are away from that section. Press Pause
+        before you leave it.
       </p>
 
       {saved.length > 0 && (
@@ -152,7 +152,7 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
         title={pendingClear === "all" ? "Clear all saved progress?" : "Clear this section?"}
         body={
           pendingClear === "all"
-            ? `This deletes your saved work for all ${saved.length} sections above. It includes the sections you already submitted. You cannot undo this.`
+            ? `This deletes your saved work for all ${saved.length} sections above. It includes the sections you already submitted and scored. You cannot undo this.`
             : `This deletes your saved work for ${pendingClear?.label ?? "this section"}. Your other sections do not change. You cannot undo this.`
         }
         confirmLabel={pendingClear === "all" ? "Clear all" : "Clear section"}

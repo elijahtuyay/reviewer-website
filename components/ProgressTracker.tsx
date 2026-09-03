@@ -113,7 +113,7 @@ export default function ProgressTracker({
               // state the contrast pass did not touch, because it is also the
               // only one that keeps the default surface.
               style = "bg-panel-hover font-normal text-foreground/70 hover:bg-line";
-              state = "skipped";
+              state = "no answer";
             }
           } else if (answeredSet.has(num)) {
             style = "bg-accent font-medium text-accent-foreground";
@@ -148,7 +148,7 @@ export default function ProgressTracker({
             // this cell size: the bold/underline redundancy is real and is kept
             // for colorblind users, but leading with it described a signal
             // nobody can see at this cell size.
-            "Green is correct and bold. Red is incorrect and underlined. Gray means no answer."
+            "Green and bold means correct. Red and underlined means incorrect. Gray means no answer."
           : // "Filled" was wrong: every cell has a fill, so the caption read as
             // "you have answered all of them". The distinction is the accent
             // highlight, and naming a color would be wrong per exam theme.

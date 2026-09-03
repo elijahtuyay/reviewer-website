@@ -90,7 +90,11 @@ export default async function Home() {
             label: availableCount === 1 ? "exam, fully timed" : "exams, fully timed",
           },
           { value: totalBank.toLocaleString("en-US"), label: "original questions" },
-          { value: "Every", label: "answer has an explanation" },
+          // "100%", not "Every". The band renders four large values and the eye
+          // reads that slot as a number, so a bare determiner sat there as a
+          // dangling fragment. The label also carries the condition back:
+          // explanations appear after you submit, not before.
+          { value: "100%", label: "explained after you submit" },
           { value: "Free", label: "no account and no payment" },
         ]}
       />
@@ -134,9 +138,9 @@ function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) 
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed opacity-90 sm:text-lg">
           This site gives you full practice exams for the{" "}
           <strong className="font-semibold">{names}</strong>. Each exam follows its own published
-          format and its own section time limits. A person writes every one of the{" "}
-          {totalBank.toLocaleString("en-US")} questions. Every answer has a written explanation.
-          You need no account, and you pay nothing.
+          format and its own section time limits. We write every one of the{" "}
+          {totalBank.toLocaleString("en-US")} questions for this site, and every answer has a
+          written explanation. You do not need an account, and you pay nothing.
         </p>
 
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -181,7 +185,7 @@ function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) 
         <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-xs font-medium opacity-80 sm:text-sm">
           <li>Real section time limits</li>
           <li aria-hidden>&middot;</li>
-          <li>An explanation for every answer</li>
+          <li>Every answer explained</li>
           <li aria-hidden>&middot;</li>
           <li>One timed section at a time</li>
         </ul>
@@ -239,7 +243,8 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
           </h2>
           <p className="mt-3 leading-relaxed text-muted">
             These are different exams, not one quiz under different names. The section lengths, the
-            time limits, the skip rules and the adaptive difficulty all follow the exam you select.
+            time limits, the skip rules and the adaptive difficulty all depend on the exam you
+            select.
           </p>
         </div>
 
@@ -323,7 +328,7 @@ function examHighlights(exam: ExamModule, bank: number): string[] {
 
   lines.push(
     exam.rules.adaptive
-      ? "The questions become harder after correct answers and easier after incorrect ones"
+      ? "The questions become harder after two correct answers and easier after two incorrect ones"
       : "Each attempt uses a new random set of questions"
   );
   // Stated rather than implied: a section that draws most of its bank repeats
@@ -331,7 +336,7 @@ function examHighlights(exam: ExamModule, bank: number): string[] {
   // exam would be false.
   const perSitting = Math.max(...exam.sections.map((s) => s.questionCount));
   if (bank > 0 && perSitting / (bank / exam.sections.length) > 0.5) {
-    lines.push("The question bank is small, so a second attempt repeats many questions");
+    lines.push("The question bank is small, so a retake repeats some of the questions");
   }
 
   if (!exam.rules.allowSkip) {
@@ -369,7 +374,7 @@ const STEPS = [
   },
   {
     title: "Answer the questions",
-    body: "Watch the timer as you work. Press Pause to stop the timer. At zero the section submits your answers.",
+    body: "Watch the timer as you work. Press Pause to stop the timer. When the timer reaches zero, the section submits your answers.",
   },
   {
     title: "Read the explanations",
@@ -415,17 +420,26 @@ const FEATURES = [
   {
     eyebrow: "The real exam format",
     title: "Practice with the real time limits",
-    body: "The question counts and the time limits come from each exam's published structure. A section locks the other sections while you work in it. The timer continues if you open a different browser tab. A pause is a deliberate act, and the screen shows it. Practice without a time limit teaches you the topics but not the exam.",
+    // Four sentences, not five, and two of them carry a connective. STE caps
+    // sentence LENGTH; it does not ask for a page of subject-verb-object
+    // declaratives, and an unbroken run of them reads like a spec sheet on a
+    // page whose job is to earn trust.
+    body: "The question counts and the time limits come from each exam's published structure. While you work in one section, the others stay locked, and the timer continues even if you open a different browser tab. You must press Pause deliberately, and the screen then shows that the timer is stopped. Practice without a time limit teaches you the topics but not the exam.",
     points: [
-      "Each section has its own timer, and a page reload does not reset it",
-      "Pause hides the questions and stops the timer",
-      "At zero the section submits and scores your answers",
+      "Each section has its own timer, and the timer does not reset when you reload the page",
+      "Pause blurs the questions and stops the timer",
+      "When the timer reaches zero, the section submits and scores your answers",
     ],
   },
   {
-    eyebrow: "Written by a person",
+    eyebrow: "Written in advance",
     title: "Every answer has an explanation",
-    body: "A person writes each question and each explanation. The explanation is therefore the author's reasoning, not the output of a language model at the moment you ask. The incorrect options are plausible on purpose. A good incorrect option matches a real mistake.",
+    // The claim is that the explanation is written and reviewed BEFORE you ask,
+    // and is kept under version control. That is what the old copy claimed and
+    // what this project can stand behind. "A person writes every question" is a
+    // stronger and different claim, and it briefly appeared in four places
+    // including the affiliation disclaimer, which is a legal notice.
+    body: "We write each question and each explanation for this site, and we keep every version under review. The explanation is therefore the author's reasoning, not the output of a language model at the moment you ask. The incorrect options are plausible on purpose. A good incorrect option matches a real mistake.",
     points: [
       "A written explanation on every question",
       "Balanced answer positions and answer lengths, so a guess pattern fails",
@@ -433,11 +447,14 @@ const FEATURES = [
     ],
   },
   {
-    eyebrow: "One engine, two formats",
+    // "every format", not "two formats". Every other count on this page comes
+    // from the registry, and the one hand-written count in the app named only
+    // NMAT for two releases after the GMAT shipped.
+    eyebrow: "One engine, every format",
     title: "An adaptive exam adapts",
-    body: "Some exams adapt to the candidate, and the practice here adapts too. The questions come one at a time. They become harder after correct answers. The score includes the difficulty of each question you answered. Other exams are a fixed paper. There you see the whole section at once, and you can skip a question and return to it later.",
+    body: "Some exams adapt to you, and the practice here adapts too. The questions come one at a time, and they become harder after two correct answers in a row. The score includes the difficulty of each question you answered. Other exams are a fixed paper. There you see the whole section at once, and you can skip a question and return to it later.",
     points: [
-      "The difficulty follows your recent answers",
+      "The difficulty changes with your recent answers",
       "The score includes question difficulty, not only the count",
       "Each exam has its own rules for skips, flags and answer changes",
     ],
@@ -503,23 +520,23 @@ function buildFaqs(totalBank: number, examCount: number): FaqEntry[] {
   return [
     {
       q: "Is it really free?",
-      a: "Yes. There is no payment and no account. Select a section and start. Accounts and a saved attempt history are future plans, and the practice itself stays free.",
+      a: "Yes. There is no payment and no account. Select a section and start. Accounts and a saved attempt history are future plans, and the practice itself is free.",
     },
     {
       q: "Are these real exam questions?",
-      a: `No. Real exam questions are copyright material. A person writes every one of the ${totalBank.toLocaleString(
+      a: `No. Real exam questions are copyright material. We write every one of the ${totalBank.toLocaleString(
         "en-US"
-      )} questions here for this site. The topic mix, the difficulty and the style follow each exam's published structure. Do not trust any site that offers you real exam questions.`,
+      )} questions for this site. The topic mix, the difficulty and the style follow each exam's published structure. Do not trust any site that offers you real exam questions.`,
     },
     {
       q: "Which exams can I practice?",
       a: `${
         examCount === 1 ? "One exam is" : `${examCount} exams are`
-      } ready now. Each exam follows its own published format, and none of them shares one generic quiz. A new exam does not change how the current exams behave.`,
+      } ready now. Each exam follows its own published format. No exam is a generic quiz under a new name. A new exam does not change how the current exams behave.`,
     },
     {
       q: "Does my progress save?",
-      a: "Yes, but only in this browser tab. Your answers and your remaining time survive a page reload. They also survive a move to another page on this site. When you close the tab, the site deletes them. This is deliberate. A half-spent timer from three days ago is worse than a new attempt.",
+      a: "Yes, but only in this browser tab. Your answers and your remaining time survive a page reload. They also survive when you move to another page on this site. When you close the tab, the browser deletes them. This is deliberate. A half-spent timer from three days ago is worse than a new attempt.",
     },
     {
       q: "Can I retake a section?",
@@ -527,11 +544,11 @@ function buildFaqs(totalBank: number, examCount: number): FaqEntry[] {
     },
     {
       q: "What happens when the time ends?",
-      a: "The section submits your answers and scores them. It also tells you that the time ended. You still see every question, its correct answer and an explanation. On an adaptive exam an unanswered question costs you more than an incorrect answer. The real exam behaves the same way.",
+      a: "The section submits your answers and scores them. It also tells you that the time ended. You still see every question, its correct answer and an explanation, including the questions you never reached. On an adaptive exam an unanswered question costs you more than an incorrect answer. The real exam behaves the same way.",
     },
     {
       q: "Does it work on a phone?",
-      a: "Yes. On an exam that shows a whole section at once, the question list moves into a bottom sheet on a small screen. On an exam that shows one question at a time, there is no list to open. Every control is large enough to tap. A long reading passage is easier on a large screen.",
+      a: "Yes. On an exam that shows a whole section at once, the question list moves into a bottom sheet on a small screen. On an exam that shows one question at a time, there is no list to open. Every control is large enough to tap. A long reading passage is easier on a large screen, but you can reach everything on a phone.",
     },
   ];
 }

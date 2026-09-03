@@ -6,6 +6,7 @@ import PageTransition from "@/components/PageTransition";
 import SiteFooter from "@/components/SiteFooter";
 import { AVAILABLE_EXAMS } from "@/lib/exams/registry";
 import { SITE_NAME, SITE_TAGLINE } from "@/lib/site";
+import { joinWithAnd } from "@/lib/text";
 import { SITE_URL } from "@/lib/site-url";
 import "./globals.css";
 
@@ -24,11 +25,11 @@ const geistMono = Geist_Mono({
  * description named only NMAT for two releases after the GMAT shipped, which is
  * the same drift the rest of the app avoids by generating its copy.
  */
-const EXAM_NAMES = AVAILABLE_EXAMS.map((exam) => `the ${exam.shortLabel}`).join(" and ");
+const EXAM_NAMES = joinWithAnd(AVAILABLE_EXAMS.map((exam) => `the ${exam.shortLabel}`));
 
 /** One sentence per claim, per ASD-STE100. Also the OG and Twitter description. */
 const SITE_DESCRIPTION =
-  `Free practice exams for ${EXAM_NAMES}. Each section has its own time limit. Every answer has a written explanation.`;
+  `Free practice exams for ${EXAM_NAMES}. Each section has its own time limit. Each attempt draws a new set of questions. Every answer has a written explanation.`;
 
 /**
  * `metadataBase` is what turns the relative OG/canonical URLs below into

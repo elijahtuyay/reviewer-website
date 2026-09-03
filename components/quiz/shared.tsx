@@ -19,16 +19,30 @@ import { ExamModule } from "@/lib/exams/types";
  */
 const NOTICE_COPY = {
   resumed: {
+    /**
+     * The second sentence is the whole reason this banner exists, and it is
+     * why the simple past alone will not do here. "The timer continued after
+     * that" permits the reading "it ran on for a while and then stopped". The
+     * time is draining right now, so the copy says so in the present and then
+     * tells the reader where to look.
+     */
     title: "This section is already in progress.",
-    detail: "You started it earlier in this browser session, and the timer continued after that.",
+    detail:
+      "You started it earlier in this browser session. The timer did not stop. Check your remaining time above.",
   },
   completed: {
     title: "You already submitted this section.",
     detail: "You submitted it earlier in this browser session. Your scored review is below.",
   },
   expired: {
-    title: "The time for this section ended.",
-    detail: "The site scored the answers you gave before that moment. Your review is below.",
+    /**
+     * Says SUBMITTED, not merely that the time ended. This banner sits above a
+     * score the reader did not ask for, often a very low one, and the first
+     * question it has to answer is "can I still go in?". The answer is no.
+     */
+    title: "The time ended, and this section was submitted.",
+    detail:
+      "The site scored the answers you gave before the time ended. You cannot change them now. Your review is below.",
   },
 } as const;
 
@@ -87,9 +101,11 @@ export function SectionLockScreen({
             Exam setup
           </Link>
         </div>
+        {/* Not a question. An earlier draft opened "Do you want to stop that
+            section?", which puts a yes/no question on a screen with no yes and
+            no no. The condition goes first, per STE, and the action follows. */}
         <p className="mt-6 text-xs text-muted">
-          Do you want to stop that section? Clear it on the exam setup page, and this section
-          opens.
+          To stop that section, clear it on the exam setup page. This section then opens.
         </p>
       </main>
     </div>

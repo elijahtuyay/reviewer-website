@@ -90,8 +90,8 @@ export default function SectionNav({
                 {/* green-800, not -700: on --background the -700 measures 4.49, which is a
                     fail by 0.01. On bg-green-50 (the answer options) -700 is fine. */}
                 <span className="text-green-800 dark:text-green-400">{breakdown.correct} correct</span>
-                <span className="text-red-700 dark:text-red-400">{breakdown.incorrect} wrong</span>
-                <span className="text-muted">{breakdown.skipped} skipped</span>
+                <span className="text-red-700 dark:text-red-400">{breakdown.incorrect} incorrect</span>
+                <span className="text-muted">{breakdown.skipped} with no answer</span>
               </span>
             ) : (
               <span className="text-xs text-muted">

@@ -48,7 +48,7 @@ export default function ResultSummary({ result, sectionLabel, exam }: ResultSumm
       <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted">
         <span>{result.correctCount} correct</span>
         <span>{result.incorrectCount} incorrect</span>
-        <span>{result.unansweredCount} unanswered</span>
+        <span>{result.unansweredCount} with no answer</span>
       </div>
 
       {/* On an adaptive section the difficulty mix IS the story: it shows how
@@ -89,8 +89,8 @@ export default function ResultSummary({ result, sectionLabel, exam }: ResultSumm
               estimate of them would be a lie about their own result. */}
           <p className="mt-3 text-xs text-muted">
             {result.served.hard > 0 && result.correctByDifficulty.hard === result.served.hard
-              ? "The section started at medium difficulty and followed your answers. You answered every hard question correctly. The bank then had no harder question left, so the later questions were easier. That is not a lower estimate of your level."
-              : "The section started at medium difficulty and followed your answers. More hard questions mean a higher estimate of your level."}
+              ? "The section started at medium difficulty and changed with your answers. You answered every hard question correctly. The bank then had no harder question left. Any easier question after that point is not a lower estimate of your level."
+              : "The section started at medium difficulty and changed with your answers. More hard questions mean a higher estimate of your level."}
           </p>
         </div>
       )}
