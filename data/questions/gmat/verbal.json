@@ -38,16 +38,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Assumption",
     "difficulty": "easy",
-    "prompt": "Argument: \"The library should extend its opening hours, because a survey found that most students want to study later in the evening.\" What does this argument assume?",
+    "prompt": "The Vantry Community Library closes at seven o'clock each evening. In a survey distributed last term, sixty-two percent of the students enrolled at the nearby college said they would prefer a quiet place to study between seven and eleven at night, and a third of them said the space they use at home is too noisy for sustained work. The library board has proposed keeping the building open until eleven on weeknights. Because the extension answers a preference that students themselves reported, the board argues, the additional staffing cost is justified. Which of the following is an assumption on which the board's argument depends?",
     "options": [
-      "Students would actually use the library during the extended hours.",
-      "The library has never extended its hours at any point in the past.",
-      "No other study space in the town stays open later than the library does.",
-      "Studying later in the evening improves students' academic results.",
-      "Every student who answered the survey studies in the library regularly."
+      "Enough students will come to the library during the added hours to justify what the extension costs.",
+      "The library has not tried extending its evening hours at any point in the past ten years.",
+      "No other building in Vantry or on the college campus stays open for study later than the library does at present.",
+      "Students who do their reading late at night retain more of it than students who do the same work in the morning.",
+      "Every student who answered the survey studies in the library at least once in a typical week."
     ],
     "correctIndex": 0,
-    "explanation": "Wanting to study later is not the same as turning up, and the recommendation only works if stated preference becomes actual attendance. The other options are either irrelevant history or far stronger claims than the argument needs. The argument also does not need late study to improve results, since it rests on demand alone.",
+    "explanation": "A reported preference and an actual visit are not the same thing, and the board's case for the cost stands only if the stated demand turns into attendance. The library's past hours are history the argument does not rest on, and the reasoning needs no claim about rival study spaces in the town. Late reading producing better retention would be a bonus rather than a requirement, since the case rests on demand alone. The survey respondents need not already be regular library users for the extension to draw a crowd.",
     "source": "original"
   },
   {
@@ -55,16 +55,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Strengthen",
     "difficulty": "easy",
-    "prompt": "Argument: \"Switching to the new supplier reduced our defect rate, since defects fell by a third after the switch.\" Which fact would most strengthen this?",
+    "prompt": "Kestlin Tools buys the steel blanks from which it presses its wrenches. In March the company replaced its longtime blank supplier with a new one that promised tighter thickness tolerances. Over the nine months that followed, the proportion of finished wrenches rejected by Kestlin's inspectors fell from six percent to four percent, the lowest figure the plant has recorded. Kestlin's operations manager has concluded that the change of supplier is what brought the rejection rate down, and she has recommended a three-year contract with the new supplier on that basis. Which of the following, if true, most strengthens the operations manager's conclusion?",
     "options": [
-      "The factory's defect rate had already been falling steadily for two years before the switch was made.",
-      "The new supplier is located considerably closer to the factory.",
-      "The new supplier charges slightly more per unit than the old one.",
-      "The old supplier had served the company for more than a decade.",
-      "No change was made to the production process during the same period."
+      "Kestlin's rejection rate had been declining slowly but steadily for two years before the March change of supplier.",
+      "The new supplier's mill is close enough to Kestlin's plant that a delivery now takes one day rather than four.",
+      "The new supplier charges slightly more per blank than the previous supplier charged, and Kestlin has absorbed the difference.",
+      "The previous supplier had served Kestlin for more than a decade without a serious quality complaint.",
+      "Kestlin changed nothing else about its presses, its tooling or its inspection standards during those nine months."
     ],
     "correctIndex": 4,
-    "explanation": "Ruling out other changes in the same window is what turns a coincidence into evidence of cause. Location, tenure, and price say nothing about whether the supplier explains the fall in defects. A defect rate that was already falling before the switch would undercut the claim rather than support it, which is the reverse of what the question asks for.",
+    "explanation": "The conclusion is causal, and its weakest point is that something else in the plant might explain the fall. Holding the presses, the tooling and the inspection standard constant across the same nine months removes the leading rivals and leaves the supplier as the change that remains. Delivery distance, price and the previous supplier's long record bear on whether the contract is a good deal rather than on what moved the rejection rate. A rate already falling for two years before the change would point at a trend, which cuts against the conclusion instead of supporting it.",
     "source": "original"
   },
   {
@@ -123,16 +123,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Weaken",
     "difficulty": "easy",
-    "prompt": "Argument: \"Our new training program works, because employees who took it were promoted more often than those who did not.\" Which finding would most weaken this?",
+    "prompt": "Two years ago Hallum Freight introduced a three-day course in route planning and customer handling. Since then, drivers who completed the course have been promoted to the senior grade at nearly twice the rate of drivers who did not take it. Hallum's training director cites this gap as evidence that the course prepares drivers for the responsibilities of the senior grade, and she has asked the board to make the course a requirement for every driver the company employs. Which of the following, if true, most seriously weakens the training director's argument?",
     "options": [
-      "The training program was delivered online rather than in person at the company offices.",
-      "A few employees found parts of the training repetitive.",
-      "The promotion rate across the whole company rose during the same period.",
-      "The program lasted three days rather than the planned five.",
-      "Managers selected their strongest performers to attend the training."
+      "The course is delivered online, and drivers work through it at home rather than at the depot where they report for duty.",
+      "Several drivers who completed the course described parts of the second day as repetitive.",
+      "The rate of promotion to the senior grade rose across every one of Hallum's departments during those same two years.",
+      "The course ran for three days rather than the five days its designers had originally proposed.",
+      "Depot managers nominate the drivers they consider strongest for the course, and nomination is required to attend."
     ],
     "correctIndex": 4,
-    "explanation": "If the strongest performers were chosen to attend, they would likely have been promoted anyway, so the promotion gap reflects who was selected rather than what the training did. Format, length, and opinion do not disturb the causal claim. A company-wide rise in promotions is tempting but does not account for the gap between the two groups, which is what the argument rests on.",
+    "explanation": "The two groups were not formed by chance. If managers nominate the drivers they already rate highest, those drivers would have been promoted at a higher rate with no course at all, and the gap measures the nomination rather than the training. The delivery format, the shortened schedule and one repetitive day concern the quality of the course, not the comparison between the groups. A company wide rise in promotions lifts both groups together and so leaves the gap between them unexplained.",
     "source": "original"
   },
   {
@@ -140,16 +140,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Assumption",
     "difficulty": "easy",
-    "prompt": "Argument: \"The city should install more streetlights, since brighter streets will reduce nighttime accidents.\" Which assumption is required?",
+    "prompt": "Between ten at night and five in the morning, the roads of Corran district carry about a tenth of the traffic they carry by day, yet they account for a quarter of the district's collisions. The district council has proposed installing lighting along the eleven kilometers of Corran road that are unlit at present, at a cost of roughly four million pesos. The council maintains that the lighting will bring the number of nighttime collisions down. Which of the following is an assumption on which the council's argument depends?",
     "options": [
-      "Nighttime accidents outnumber daytime accidents in the city.",
-      "Poor visibility contributes to at least some nighttime accidents.",
-      "Residents living near the streets have asked for better lighting.",
-      "Every nighttime accident in the city happens because a driver cannot see clearly.",
-      "Streetlights are the cheapest available road safety measure."
+      "The collisions that occur on Corran's roads at night outnumber the collisions that occur on those same roads in daylight hours.",
+      "Drivers being unable to see clearly is part of what causes at least some nighttime collisions in the district.",
+      "Residents living along the unlit stretches of Corran road have asked the council more than once for better lighting.",
+      "Every nighttime collision in the district happens because a driver failed to see something on the road ahead.",
+      "Lighting is the least expensive of the road safety measures available to the council at the moment."
     ],
     "correctIndex": 1,
-    "explanation": "The argument only works if darkness is part of the problem; if visibility played no role, more light would change nothing. Cost, popularity, and the daytime comparison are not needed for the conclusion to follow. The claim that poor visibility explains every nighttime accident is far stronger than the argument requires.",
+    "explanation": "The proposal converts money into light, and light changes outcomes only if darkness is doing some of the damage. Should visibility play no part at all, the lighting would leave the collision count where it is. Whether night collisions outnumber daytime ones is a comparison the argument never uses, and cost ranking and local requests are reasons to act rather than links in the reasoning. Requiring poor visibility to explain every nighttime collision states far more than the conclusion needs.",
     "source": "original"
   },
   {
@@ -157,16 +157,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Inference",
     "difficulty": "easy",
-    "prompt": "Whenever the bakery runs a discount, it sells out before noon. Today the bakery did not sell out before noon. Which conclusion follows?",
+    "prompt": "Of the 200 households on Merrow Lane, 130 subscribe to the town's weekly newspaper and 90 keep a dog. Every household that keeps a dog and also subscribes to the paper received a free calendar from the paper in January. Which of the following must be true on the basis of the statements above?",
     "options": [
-      "The bakery sells out before noon only if it runs a discount.",
-      "Customers were less interested in the bakery's products today.",
-      "The bakery will run a discount tomorrow to clear its stock.",
-      "The bakery baked more items today than it usually does.",
-      "The bakery did not run a discount today."
+      "Most of the households on Merrow Lane that keep a dog also subscribe to the weekly newspaper.",
+      "Exactly twenty households on Merrow Lane received a free calendar from the paper in January.",
+      "Every household on Merrow Lane either subscribes to the newspaper or keeps a dog, or does both.",
+      "The paper sent more free calendars to Merrow Lane in January than it sent to any other street.",
+      "At least twenty households on Merrow Lane both subscribe to the paper and keep a dog."
     ],
     "correctIndex": 4,
-    "explanation": "Again the contrapositive: a discount guarantees selling out, so not selling out means there was no discount. The remaining options speculate about causes and future behavior that the statements do not license. Nor does it follow that a discount is the only thing that can make the bakery sell out, since the premise runs in one direction only.",
+    "explanation": "There are 200 households, and 130 plus 90 is 220, so at least 20 households have to be counted in both groups. That is the smallest overlap the numbers allow and the only conclusion the statements force. The overlap could be as large as 90, so the number of calendars is not fixed at twenty and dog owners need not mostly subscribe. Nor must every household fall into one group or the other, since an overlap of forty would leave twenty households in neither. A comparison with other streets rests on figures the statements never supply.",
     "source": "original"
   },
   {
@@ -174,16 +174,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Assumption",
     "difficulty": "medium",
-    "prompt": "Argument: \"Because employees at the branch that adopted flexible hours reported higher satisfaction, the company should adopt flexible hours everywhere to raise satisfaction overall.\" Which assumption does the argument depend on?",
+    "prompt": "For one year the Aldworth branch of Tessen Insurance let its staff set their own start and finish times within a fixed daily total. At the end of the year, staff at Aldworth rated their satisfaction with the company at 7.8 out of ten, against a company average of 6.1. Tessen's head of operations has proposed extending the arrangement to all fourteen branches, on the ground that doing so will raise satisfaction across the company as a whole. Which of the following is an assumption on which the head of operations' proposal depends?",
     "options": [
-      "Satisfaction is the single most important measure of a company's health.",
-      "Employees at the company's other branches have already asked to be allowed to set their own working hours.",
-      "Every single employee at the branch preferred the flexible arrangement to the old fixed one.",
-      "The branch that adopted flexible hours is not unusual in ways that explain its higher satisfaction.",
-      "Flexible hours are administratively simpler to manage than fixed hours."
+      "Satisfaction with the company is the measure that best predicts how long Tessen's staff stay with it.",
+      "Staff at Tessen's other thirteen branches have already asked to be allowed to set their own working hours.",
+      "Every member of the Aldworth staff preferred the flexible arrangement to the fixed hours it replaced.",
+      "Aldworth does not differ from the other branches in a way that would explain its higher satisfaction.",
+      "Flexible hours are no harder for a branch manager to administer than a fixed schedule is."
     ],
     "correctIndex": 3,
-    "explanation": "Generalizing from one branch requires that the branch be representative; if it differed in some relevant way, the result may not transfer. The unanimity and single-measure options are far stronger than the argument needs, and administrative simplicity is beside the point. A request already made at the other branches would be welcome news, but the inference does not need it.",
+    "explanation": "The proposal generalizes from one branch to fourteen, which holds only if Aldworth's result came from the hours rather than from something peculiar to Aldworth. Should the branch be younger, better managed or differently staffed, the gap may not travel. Unanimity at Aldworth and requests from the other branches would both be welcome and neither is required. What satisfaction predicts, and how hard the arrangement is to administer, bear on whether the change is worth making rather than on whether it will raise satisfaction.",
     "source": "original"
   },
   {
@@ -242,16 +242,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Weaken",
     "difficulty": "medium",
-    "prompt": "Argument: \"Cities with more parks report higher resident wellbeing, so building parks raises wellbeing.\" Which finding would most weaken this argument?",
+    "prompt": "A study of ninety mid-sized cities found that the cities in the top quarter for park area per resident scored, on average, nine points higher on a standard wellbeing index than the cities in the bottom quarter. The report's authors conclude that building parks raises the wellbeing of a city's residents, and they recommend that cities holding little parkland acquire vacant land and convert it. Which of the following, if true, most seriously weakens the authors' conclusion?",
     "options": [
-      "Wealthier cities tend both to build more parks and to score higher on wellbeing for unrelated reasons.",
-      "Some residents visit their local parks only a handful of times each year.",
-      "The study counted the number of parks in each city rather than measuring the total area of parkland available to residents.",
-      "Wellbeing surveys are conducted at different times of year in different cities in the study.",
-      "Park maintenance budgets vary considerably between the cities studied."
+      "Cities with higher tax revenue both build more parkland and score higher on wellbeing, for reasons unrelated to parks.",
+      "Some residents of the cities that have the most parkland per person visit a park only a few times in the course of a year.",
+      "The study measured park area rather than counting the number of separate parks in each city.",
+      "The wellbeing surveys were administered in different months in different cities, and index scores rise slightly in summer.",
+      "The budgets that the studied cities devote to maintaining their parks vary by a factor of four."
     ],
     "correctIndex": 0,
-    "explanation": "A common cause behind both variables explains the correlation without any causal arrow from parks to wellbeing, which is the strongest form of attack here. Infrequent visits, budget variation, and survey timing weaken the evidence only marginally. Counting parks rather than measuring parkland area is a quibble about the measure that leaves the causal claim standing.",
+    "explanation": "A correlation between two effects of a third thing is no evidence that either causes the other. If municipal wealth produces both the parkland and the wellbeing, the recommendation rests on nothing, because a poor city that converts vacant land acquires the park without acquiring the wealth. Measuring area rather than counting parks is the better of the two choices, not a defect. Infrequent visits, seasonal survey timing and uneven maintenance budgets add noise to the finding without touching the direction of the causal claim.",
     "source": "original"
   },
   {
@@ -259,16 +259,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Flaw",
     "difficulty": "medium",
-    "prompt": "Argument: \"No member of the research team has published on marine biology, so the team is unqualified to review the marine survey.\" Which best describes the flaw?",
+    "prompt": "The Marine Institute has assembled a panel of six to review the coastal habitat survey submitted by a consulting firm. A commentator objects that the review should be set aside before it begins. Not one of the panel's members has published a paper in a marine biology journal, he notes, and the panel is therefore not competent to judge the survey's methods or its findings. The institute should, in his view, appoint a new panel before it accepts anything the current one reports. Which of the following most accurately describes a flaw in the commentator's reasoning?",
     "options": [
-      "It relies on a survey whose sample was far too small to support any general conclusion.",
-      "It draws a conclusion about a group from evidence about one member of it.",
-      "It confuses the order in which two related events actually occurred.",
-      "It treats publication in a field as the only possible source of competence in it.",
-      "It uses a key term in one sense in the premise and in a different sense in the conclusion."
+      "It relies on a sample of published work far too small to support the general conclusion drawn from it.",
+      "It draws a conclusion about an entire group from evidence concerning a single member of that group.",
+      "It takes the order in which two events occurred as evidence that the earlier one caused the later one.",
+      "It treats publication in a field as the only way a person could become competent in it.",
+      "It uses a key term in one sense in its premise and in a different sense in its conclusion."
     ],
     "correctIndex": 3,
-    "explanation": "The argument equates \"has not published\" with \"is unqualified\", ignoring that expertise can come from practice, training, or related fields. No sample or ordering is involved, and the evidence concerns every member rather than one. No term shifts its meaning between the premise and the conclusion either.",
+    "explanation": "Competence can come from fieldwork, from laboratory practice, from training or from a neighboring discipline, and the commentator counts none of it. Treating an unpublished record as proof of incompetence is the step that does not hold. No sample is drawn, the evidence covers all six members rather than one, no causal claim about ordering is made, and no term shifts its meaning between the premise and the conclusion.",
     "source": "original"
   },
   {
@@ -276,16 +276,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Strengthen",
     "difficulty": "medium",
-    "prompt": "Argument: \"The redesigned checkout page caused the rise in completed purchases, since completions rose 18 percent in the month after launch.\" Which fact would most strengthen this?",
+    "prompt": "Verrow, an online retailer, replaced its checkout page in April. The new page asks for payment details on a single screen instead of three. In the month after the launch, the share of visitors who reached the checkout and went on to complete a purchase rose from 42 percent to 50 percent. Verrow's product team has concluded that the redesign is what produced the increase, and it has proposed rebuilding the account registration page along the same lines. Which of the following, if true, most strengthens the product team's conclusion?",
     "options": [
-      "Visitors randomly shown the old page in the same month completed far fewer purchases.",
-      "The redesign was praised by several user experience specialists.",
-      "Completed purchases in the month before the redesign launched were at their usual seasonal level.",
-      "The company's total advertising spend was unchanged throughout that same month.",
-      "The redesigned page loads marginally faster than the previous version."
+      "Visitors randomly shown the old checkout page during that same month completed far fewer purchases.",
+      "Several specialists in interface design have praised the new checkout page in trade publications.",
+      "Completed purchases in the month before the launch stood at their usual level for that time of year.",
+      "Verrow's advertising spending and its mix of advertising channels were unchanged throughout the month.",
+      "The new checkout page loads about a fifth of a second faster than the page that it replaced."
     ],
     "correctIndex": 0,
-    "explanation": "A randomized comparison run in the same period removes essentially every rival explanation at once, which is stronger than merely holding one other factor constant. Praise and load time say nothing about causation, and constant advertising rules out only a single alternative. A normal seasonal baseline in the prior month, like unchanged advertising, closes one alternative explanation rather than all of them at once.",
+    "explanation": "A comparison group drawn at random within the same month holds constant everything else that changed in April, including the season, the advertising and the mix of visitors arriving at the site. That is a stronger warrant than closing rival explanations one at a time. Praise from specialists and a faster load are both consistent with the redesign doing nothing to completions. A normal seasonal baseline and unchanged advertising each remove one alternative, which helps, but neither reaches as far as a concurrent randomized comparison does.",
     "source": "original"
   },
   {
@@ -293,16 +293,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Inference",
     "difficulty": "medium",
-    "prompt": "A factory's records show that whenever the night shift is understaffed, output falls below target. Last Tuesday output met its target. Which statement must be true about last Tuesday?",
+    "prompt": "A regional airline operates three routes out of Pellon. On every day last month the Pellon to Casterly flight carried more passengers than the Pellon to Ostrey flight, and the Pellon to Ostrey flight carried more passengers than the Pellon to Rill flight. Across the month the three routes together carried 24,000 passengers, and the airline canceled no flight on any route. Which of the following must be true on the basis of the statements above?",
     "options": [
-      "The night shift was not understaffed.",
-      "The factory hired additional workers for the night shift.",
-      "The night shift is understaffed on most of the days when output falls below target.",
-      "Output exceeded the target by a substantial margin.",
-      "The night shift produced more units than the day shift did that day."
+      "The Casterly route carried more than eight thousand passengers over the course of the month.",
+      "The Rill route carried fewer than six thousand passengers over the course of the month.",
+      "The Casterly route carried at least twice as many passengers last month as the Rill route did.",
+      "The Ostrey route carried exactly eight thousand passengers over the course of the month.",
+      "The Casterly flights were fuller, measured as a share of the seats on board, than the Rill flights."
     ],
     "correctIndex": 0,
-    "explanation": "Understaffing guarantees missing the target, so meeting it rules out understaffing. Nothing follows about relative shift output, hiring, or the size of the margin. It also does not follow that understaffing accounts for most of the days when output falls short, since the records run the other way.",
+    "explanation": "The daily ordering carries over to the monthly totals, so the Casterly total is the largest of the three. If the largest of three numbers that sum to twenty four thousand were eight thousand or less, the three could not reach twenty four thousand at all, so the Casterly total must exceed that figure. The Rill total is bounded above but is not forced below six thousand, no route's total is pinned to any particular number, and nothing in the statements reports how many seats any aircraft carries.",
     "source": "original"
   },
   {
@@ -310,16 +310,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Assumption",
     "difficulty": "medium",
-    "prompt": "Argument: \"Since the region's farms produce more food than its population consumes, no one in the region should go hungry.\" Which assumption is required?",
+    "prompt": "The Veren valley grows about 1.4 million tons of grain, roots and vegetables in a year, while the food consumed by everyone living in the valley amounts to roughly 900,000 tons. A regional commissioner has drawn the conclusion that hunger in the valley is a problem the valley has already solved, and he has recommended that the province direct its food assistance to districts elsewhere. Which of the following is an assumption on which the commissioner's recommendation depends?",
     "options": [
-      "The region's farms will maintain their current output in future years.",
-      "Everyone in the region can afford to buy as much food as they need.",
-      "The region imports no food at all from neighboring areas.",
-      "Every farm in the region grows the same variety of crops.",
-      "The food produced is actually distributed to those who need it."
+      "The valley's farms will produce at least as much in coming years as they produce now.",
+      "Every household in the valley can afford to buy as much food as the people in it require.",
+      "The valley brings in no food at all from the farming districts that surround it.",
+      "The valley's farms grow the same varieties of crop as the farms in the neighboring districts do.",
+      "The food the valley grows reaches the people within the valley who need to eat it."
     ],
     "correctIndex": 4,
-    "explanation": "Aggregate sufficiency says nothing about who gets what; the conclusion needs distribution to reach the people who need food. Future output, imports, and crop variety are not required for the inference as stated. Universal ability to pay is stronger than the argument needs, because food could reach people without being bought.",
+    "explanation": "Totals say nothing about who receives what, and a valley can grow a surplus while some of the people in it go without. The conclusion needs the food to reach those in need, whether by sale, by wage or by gift. Future output, imports from the surrounding districts and the varieties grown are not links the reasoning uses. Universal ability to pay would settle the matter but states more than the argument requires, since food can reach people without being bought.",
     "source": "original"
   },
   {
@@ -361,16 +361,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Weaken",
     "difficulty": "hard",
-    "prompt": "Argument: \"Our premium subscribers report far higher satisfaction than free users, so upgrading users to premium would raise satisfaction across the base.\" Which finding would most weaken this?",
+    "prompt": "Ostrel, a music streaming service, surveys its users each spring. Premium subscribers, who pay a monthly fee, rate the service at 8.4 out of ten, while users on the free tier rate it at 5.9. Ostrel's growth team has proposed offering free tier users a year of the premium service at a steep discount, reasoning that moving those users up will raise satisfaction across the whole user base and reduce the number of people who leave. Which of the following, if true, most seriously weakens the growth team's reasoning?",
     "options": [
-      "The satisfaction survey was sent to premium subscribers slightly more often.",
-      "Premium subscribers use the service for more hours each week than free users do.",
-      "Users who were already most satisfied are the ones who chose to upgrade.",
-      "Premium subscribers pay a fee that free users have chosen not to pay.",
-      "Some premium features are also available to free users on a trial basis."
+      "The satisfaction survey is sent to premium subscribers twice a year and to free tier users once a year.",
+      "Premium subscribers listen for more hours in a typical week than free tier users listen in that week.",
+      "The users who upgrade are drawn from those already most satisfied with the free tier.",
+      "Premium subscribers pay a monthly fee that free tier users have so far chosen not to pay.",
+      "Some features of the premium tier are offered to free tier users during a two-week trial."
     ],
     "correctIndex": 2,
-    "explanation": "Self-selection reverses the causal direction: satisfaction produced the upgrade rather than the upgrade producing satisfaction, so moving people up would not carry the effect with it. The fee is already implied, survey frequency is a minor bias, and trials would if anything narrow the gap. Heavier use by premium subscribers sits comfortably with the upgrade working and so does not undercut the recommendation.",
+    "explanation": "The gap may record who upgraded rather than what upgrading does. If the most satisfied users are the ones who move up, then satisfaction produced the upgrade, and pushing the rest up carries none of it with them. That the premium tier costs money is already implied by the setup. Sending the survey at different rates is a real bias but a small one, and a two-week trial would narrow the measured gap rather than create it. Heavier listening among premium subscribers is what one would expect if the upgrade did work, so it does not undercut the proposal.",
     "source": "original"
   },
   {
@@ -378,16 +378,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Assumption",
     "difficulty": "hard",
-    "prompt": "Argument: \"A tax on sugary drinks will reduce obesity, because consumption of those drinks falls sharply when their price rises.\" Which assumption is required?",
+    "prompt": "The province is considering a levy of two pesos per liter on drinks with added sugar. In the three provinces that have imposed a similar levy, sales of the taxed drinks fell between fifteen and twenty percent within a year, and they have not recovered since. The health department argues that the levy will therefore bring down the rate of obesity among the province's adults over the coming decade. Which of the following is an assumption on which the health department's argument depends?",
     "options": [
-      "Consumers do not replace the forgone drinks with other equally caloric products.",
-      "The revenue raised by the tax will be spent on public health programs.",
-      "The tax will apply to every sugary drink sold in the country without exception.",
-      "Sugary drinks are by a clear margin the single largest source of calories in the average diet.",
-      "Producers will pass the entire cost of the tax on to consumers immediately."
+      "Consumers will not replace the drinks they give up with other products of similar calorie content.",
+      "The revenue the levy raises will be spent on programs that promote better diet and more physical activity.",
+      "The levy will apply to every drink with added sugar that is sold anywhere in the province.",
+      "Drinks with added sugar are the largest single source of calories in the average adult diet.",
+      "Producers will pass the whole of the levy through to shelf prices as soon as the measure takes effect."
     ],
     "correctIndex": 0,
-    "explanation": "If people substitute other high-calorie items, consumption of the taxed drinks falls without obesity changing, breaking the chain from price to outcome. The argument does not need sugary drinks to be the largest source, nor any particular use of the revenue. The tax also need not reach every drink without exception for the conclusion to follow.",
+    "explanation": "The argument runs from a fall in sales to a fall in obesity, and that step holds only if the calories go away along with the drinks. Should buyers move to juice, to sweetened coffee or to snacks, the taxed drinks lose sales and waistlines stay where they were. The department does not need sugary drinks to be the largest source of calories, only a source worth reducing. Nor does it need the levy to reach every product without exception, or the revenue to be spent in any particular way, or the pass-through to be immediate.",
     "source": "original"
   },
   {
@@ -412,16 +412,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Flaw",
     "difficulty": "hard",
-    "prompt": "Argument: \"Either we cut the research budget or we will not survive the downturn. We must therefore cut the research budget.\" Which best describes the reasoning flaw?",
+    "prompt": "The chief executive of Landry Instruments told the board last week that the company faces a plain choice. Either it cuts the research budget by a third, she said, or it will not hold enough cash to reach the far side of the downturn. The board is plainly not willing to see the company fail. She concluded that the board must therefore approve the cut to the research budget when it meets this month. Which of the following most accurately describes a flaw in the chief executive's reasoning?",
     "options": [
-      "It uses a key term in one sense in the premise and in another sense in the conclusion.",
-      "It assumes the two stated options are the only ones available.",
-      "It mistakes a necessary condition for a sufficient one.",
-      "It generalizes from a sample that is unlikely to be representative.",
-      "It appeals to the authority of people who are not experts on the question."
+      "It uses a key term in one sense in its premise and in a different sense in its conclusion.",
+      "It treats two courses of action as the only ones open to the company.",
+      "It mistakes a condition that is necessary for one that is by itself sufficient.",
+      "It generalizes from a sample unlikely to represent the wider population it is drawn from.",
+      "It rests on the judgment of a person who is not an expert on the matter at issue."
     ],
     "correctIndex": 1,
-    "explanation": "The argument presents a false dilemma: other responses to a downturn exist, and the conclusion only follows if the two alternatives really are exhaustive. No authority is cited and no sample is involved. No term shifts its meaning between the premise and the conclusion, so a definitional complaint misses what has gone wrong here.",
+    "explanation": "A choice between two options binds only when there is no third. A company facing a downturn can also raise capital, defer other spending, sell a product line or slow its hiring, and the chief executive rules out none of these. No term shifts meaning between the premise and the conclusion, no sample is drawn, and the necessary and sufficient distinction is not what goes wrong here. Her own standing is not the issue either, since the objection is to the structure of the choice she offers.",
     "source": "original"
   },
   {
@@ -446,16 +446,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Strengthen",
     "difficulty": "hard",
-    "prompt": "Argument: \"The decline in the songbird population is caused by pesticide use, since the decline began in the same decade that pesticide application became widespread.\" Which fact would most strengthen this?",
+    "prompt": "Counts of breeding songbirds in the Aldern basin have fallen by about half since 1975. Application of the insecticides now in widest agricultural use began in the basin in the early 1970s and reached its present level by 1980. An ornithologist has argued that the insecticides are the cause of the decline, pointing to the overlap between the two periods and to laboratory work showing that the compounds are toxic to small birds. Which of the following, if true, most strengthens the ornithologist's argument?",
     "options": [
-      "Pesticide use in the region rose again in the decade after the songbird decline had already begun.",
-      "Pesticide manufacturers expanded their production capacity considerably during that same decade.",
-      "Songbird numbers held steady in an otherwise similar region where pesticides were never adopted.",
-      "Several other bird species also declined somewhat over the same period.",
-      "Farmers in the region reported higher crop yields after adopting pesticides."
+      "Application of the same insecticides in the basin rose again in the 1990s, after the decline was well under way.",
+      "The firms that manufacture the insecticides expanded their production capacity sharply during the 1970s.",
+      "Songbird numbers have held steady in a similar neighboring basin where the insecticides were never used.",
+      "Several other bird species in the basin have also declined somewhat over the same period.",
+      "Farmers in the basin report larger harvests in the years since they began applying the insecticides."
     ],
     "correctIndex": 2,
-    "explanation": "A comparable region without the suspected cause and without the effect is the closest thing to a control, which is what turns coincident timing into evidence. Production capacity and yields concern pesticides but not birds, and other species declining is consistent with many causes. A later rise in pesticide use, after the decline was under way, works against the timing the argument depends on.",
+    "explanation": "Coincident timing is weak evidence on its own, because a great deal else changed in the basin over those years. A comparable basin that lacks the insecticide and lacks the decline supplies the missing comparison and is the nearest thing to a control that field evidence allows. Production capacity and harvest size concern the insecticides but say nothing about birds. Other species declining is consistent with the insecticide and with several other causes. A rise in application after the decline had begun runs against the timing the argument leans on.",
     "source": "original"
   },
   {
@@ -772,13 +772,13 @@
     "prompt": "A regional grid operator states that it can close its last coal plant in 2031 without risking winter shortfalls, provided that the offshore wind project now under construction delivers its full rated output and that the proposed transmission line to the neighboring grid is finished by 2030. Both projects have received every permit they require. The operator's planning report therefore concludes that the coal plant will be closed on schedule in 2031, and it recommends that the region procure no further generating capacity in the meantime. The recommendation depends on which of the following assumptions?",
     "options": [
       "The offshore wind project will generate more electricity over a year than the coal plant it replaces generates.",
-      "A project that has received all of its permits is likely to be completed and operating on time.",
+      "The wind project and the transmission line will both be finished and operating on schedule.",
       "The neighboring grid will have surplus power available for export during every winter after 2030.",
       "A winter shortfall would do more damage to the region than a shortfall in any other season would.",
       "No other coal plant anywhere in the region is scheduled to be closed before the end of 2031."
     ],
     "correctIndex": 1,
-    "explanation": "The operator's claim is conditional, and the report converts it into a flat prediction plus a recommendation to buy nothing else. The only thing offered in support of the two conditions being met is that permits have been granted, so the report treats permitting as a good predictor of on-time completion. Annual output, the neighbor's surplus, the relative severity of winter, and other plants' schedules are not needed to get from the conditional claim to the recommendation.",
+    "explanation": "The operator's claim is conditional, and the report converts it into a flat prediction plus a recommendation to buy nothing else. The only thing offered in support of the two conditions being met is that permits have been granted, so the report assumes both of these two projects will in fact arrive on schedule. Annual output, the neighbor's surplus, the relative severity of winter, and other plants' schedules are not needed to get from the conditional claim to the recommendation.",
     "source": "original"
   },
   {
@@ -790,7 +790,7 @@
     "options": [
       "Some customers of Coastal Provisions already bring reusable cloth bags with them when they shop.",
       "Paper bags cost Coastal Provisions somewhat more per bag to purchase than plastic bags do, and the chain has decided to absorb the difference rather than raise its shelf prices.",
-      "A competing grocery chain in the same region removed plastic bags from its checkouts two years ago.",
+      "A competing grocery chain in the same region removed plastic bags from its checkouts two years ago and reported no loss of customers as a result.",
       "A paper bag strong enough to carry the same load weighs about six times what a plastic bag weighs, and shoppers use about the same number of either kind.",
       "Plastic bags are occasionally reused by customers as liners for household waste bins."
     ],
@@ -807,7 +807,7 @@
     "options": [
       "The foundry's workforce was cut by two thirds in 2018, while the finishing department's workforce did not change.",
       "The finishing department installed new automated cutting equipment during the course of 2019, and the firm that supplies that equipment supplies most of the plants in the region.",
-      "Injuries occurring in the finishing department are on average less severe than injuries in the foundry.",
+      "Injuries occurring in the finishing department are on average less severe than foundry injuries, and fewer of them require a worker to miss a shift.",
       "The current safety officer joined Pellier Manufacturing in 2017, the year the foundry measures began.",
       "A number of injuries at the plant each year occur in departments other than the foundry and finishing."
     ],
@@ -858,7 +858,7 @@
     "options": [
       "Marbury's parking revenue is projected to cover the full cost of operating the three routes for at least the next five years.",
       "In two comparable towns that eliminated bus fares, most of the riders gained had previously driven into the town center.",
-      "Marbury's buses currently run at roughly half of their seating capacity during the morning hours.",
+      "Marbury's buses run at roughly half of their seating capacity in the morning, so the three routes could absorb a large increase in riders without new vehicles.",
       "The town council approved the change by a wide margin after holding two public hearings on it.",
       "The routes served by Marbury's three bus lines were last redesigned more than fifteen years ago."
     ],
@@ -877,10 +877,10 @@
       "Root rot has been recorded in the wheat-growing districts of the region for more than sixty years.",
       "Commercially available wheat varieties differ from one another in their natural susceptibility to root rot.",
       "The station's agronomists have published earlier work on seed treatments for other cereal diseases.",
-      "Losses within the treated plots fell steadily as the applied concentration rose, and soil moisture readings were nearly identical across all of the plots."
+      "Soil moisture readings taken through the season were nearly identical across all of the plots."
     ],
     "correctIndex": 4,
-    "explanation": "The objection is that a factor other than the treatment could differ between the two sets of plots, and the answer meets it twice over: equal moisture removes the specific rival the skeptics named, and a dose response within the treated plots is evidence that the treatment itself is doing the work. Cost, the history of the disease, varietal differences and the researchers' publication record leave the objection standing.",
+    "explanation": "The objection is that a factor other than the treatment could differ between the two sets of plots, and the answer removes it: equal moisture across the plots rules out the specific rival the skeptics named, which leaves the treatment as the difference between the two sets. Cost, the history of the disease, varietal differences and the researchers' publication record leave the objection standing.",
     "source": "original"
   },
   {
@@ -1230,11 +1230,11 @@
     "difficulty": "easy",
     "prompt": "The Harnwell grocery chain replaced its printed weekly circular with a mobile application that sends personalized discount offers. Internal tracking shows that customers who installed the application now redeem more coupons than those same customers redeemed from the printed circular, and the redemption rate for every individual offer is higher than the rate for the corresponding offer a year earlier. Nevertheless, the total value of discounts claimed across the chain has fallen by nearly a fifth since the printed circular was discontinued.\n\nWhich of the following, if true, most helps to explain the fall in the total value of discounts claimed?",
     "options": [
-      "The application sends offers on weekdays as well as on weekends.",
+      "The application sends offers on weekdays as well as on weekends, whereas the printed circular appeared only once a week.",
       "Customers who installed the application shop at the chain slightly more often than they did before.",
       "Printing and distributing the weekly circular cost the chain more than operating the application does.",
       "Fewer than a third of the chain's customers have installed the application, and the rest now receive no offers at all.",
-      "Several competing grocery chains have also introduced applications that send discount offers."
+      "Several competing grocery chains have introduced applications of their own that send discount offers to customers who install them."
     ],
     "correctIndex": 3,
     "explanation": "Both figures the chain cites are about customers who installed the application. If most customers never installed it, and the circular that used to reach them is gone, a large group has stopped claiming discounts entirely, which can pull the chain wide total down while every rate among installers rises. The other statements concern costs, competitors, or the timing of offers, none of which bears on how much was claimed.",
@@ -1248,8 +1248,8 @@
     "prompt": "The Bellamy Textile Mill installed sensors that detect a broken thread within a second and stop the affected loom automatically. Since the installation, the number of loom stoppages recorded per shift has more than doubled, and operators spend a larger share of each shift restarting machines rather than tending them. Yet the mill's output of finished cloth per shift has increased since the sensors were installed, and the proportion of cloth that inspectors reject for flaws has fallen by half.\n\nWhich of the following, if true, best explains the mill's results?",
     "options": [
       "A break that went undetected used to be woven onward, and cutting out the flawed length took far longer than a restart does.",
-      "The sensors occasionally stop a loom when no thread has broken.",
-      "Operators at the mill are paid according to the number of shifts they work rather than by the amount of cloth they produce.",
+      "The sensors occasionally stop a loom when no thread has actually broken, and the operator must inspect the warp before restarting the machine.",
+      "Operators at the mill are paid according to the number of shifts they work rather than by the amount of cloth they produce, so a stoppage costs them nothing.",
       "The mill's inspectors examine a fixed sample of finished cloth from each shift.",
       "Looms of the type used at the mill require routine maintenance after several hundred hours of operation."
     ],
@@ -1267,7 +1267,7 @@
       "Publishers have raised the prices of new hardcover books faster than the general rate of inflation.",
       "The survey counts an audiobook and a printed book alike as a book that was read.",
       "The adult population of the country has declined slightly since 2011.",
-      "Independent bookstores have closed at a faster rate than in the preceding decade.",
+      "Independent bookstores have closed at a faster rate than in the preceding decade, and the chains that remain carry a narrower range of titles.",
       "Adults who do read now buy substantially more books each year than such adults bought in 2011."
     ],
     "correctIndex": 4,
@@ -1315,9 +1315,9 @@
     "difficulty": "hard",
     "prompt": "Regional officials say that the new bridge tolls have reduced congestion, and they point out that traffic across the tolled bridge fell nine percent in the year after the tolls took effect (first portion). Traffic on the two untolled bridges in the same corridor, however, rose by an amount that accounts for almost the whole of that decline, and total travel time across the corridor is unchanged. The tolls have therefore moved traffic around within the corridor rather than reduced it (second portion). Officials reply that a redistribution is itself useful, but that reply concerns a different objective from the one they originally claimed to have met.\n\nIn the argument, the first portion and the second portion, in that order, play which of the following roles?",
     "options": [
-      "The first is the argument's conclusion, and the second is a finding that supports it.",
+      "The first is the conclusion that the argument as a whole draws, and the second is a finding presented in support of that conclusion.",
       "The first is evidence the argument disputes, and the second is an objection raised against the argument.",
-      "The first is a prediction the argument tests, and the second reports the result of that test.",
+      "The first is a prediction that the argument sets out to test, and the second reports the result that the test of that prediction produced.",
       "The first is a finding the argument accepts but takes to have been misinterpreted, and the second is the argument's conclusion.",
       "The first is a claim the argument concedes to be false, and the second is an alternative claim offered in its place."
     ],
@@ -1353,7 +1353,7 @@
       "Some passengers filled in and returned more than one comment card during the year.",
       "A passenger who is dissatisfied with a service is far more likely to return a comment card than a satisfied passenger is.",
       "Ambro's trains arrived within five minutes of their scheduled time on most days last year, and the delays that did occur fell almost entirely on one line and one time of day.",
-      "Rail companies operating in neighboring regions do not distribute comment cards to passengers."
+      "Rail companies operating in the neighboring regions do not distribute comment cards, so Ambro has no outside figure against which to set its own result."
     ],
     "correctIndex": 2,
     "explanation": "The director treats the returned cards as though they represented passengers generally. If dissatisfied passengers return cards at a much higher rate, the returned cards overstate dissatisfaction and cannot support a claim about the majority of passengers. Whether the trains actually ran on time does not bear on what passengers think, and the remaining statements affect neither the sample nor the conclusion drawn from it.",
@@ -1366,10 +1366,10 @@
     "difficulty": "medium",
     "prompt": "When the town of Keld closed its central square to cars, retail revenue in the square rose by twelve percent within two years. Keld's square is almost exactly the size of the central square in the town of Marrow, and the two squares hold a comparable number of shops of comparable kinds. The chamber of commerce of Marrow therefore argues that closing Marrow's square to cars would produce a comparable increase in retail revenue in that square.\n\nWhich of the following, if true, most seriously weakens the chamber of commerce's argument?",
     "options": [
-      "Marrow's square contains several restaurants, whereas Keld's square contains only one.",
+      "Marrow's square contains several restaurants and cafes, whereas Keld's square contains only one, and evening trade is a larger share of Marrow's total.",
       "Retail revenue across the surrounding region rose by three percent over the same two year period.",
       "Keld introduced its ban in stages, beginning with weekends only.",
-      "The shops in Marrow's square employ more people in total than the shops in Keld's square do.",
+      "The shops in Marrow's square employ more people in total than the shops in Keld's square do, and they keep longer hours through the week and on Sundays.",
       "Nearly all shoppers reach Keld's square on foot from nearby streets, while most who shop in Marrow's square drive in from outside the town."
     ],
     "correctIndex": 4,
@@ -1385,8 +1385,8 @@
     "options": [
       "A department can schedule tightly only by using shared operating rooms in hours that another department would then have to give up.",
       "Two of the six departments have already begun to schedule their procedures more tightly.",
-      "The hospital's spending on staff has risen faster in recent years than its spending on equipment.",
-      "An hour of idle equipment time costs considerably more in some departments than in others.",
+      "The hospital's spending on staff has risen faster in recent years than its spending on equipment, and staff costs are now the larger of the two.",
+      "An hour of idle equipment time costs considerably more in some of the six departments than in others, and the two largest departments are the most expensive.",
       "Patients at the hospital sometimes cancel scheduled procedures at short notice."
     ],
     "correctIndex": 0,
@@ -1420,7 +1420,7 @@
       "Brine will remain cheaper per treated kilometer than road salt for several more winters, and the saving will be large enough to cover the cost of storing and mixing the solution.",
       "The council will usually know that snow is coming early enough to treat the network before it begins.",
       "The council's three trucks are newer than the trucks used by neighboring towns.",
-      "Residents of Dunmore have asked the council to reduce the amount of salt it spreads.",
+      "Residents of Dunmore have asked the council more than once to reduce the salt it spreads, citing damage to roadside trees and to parked vehicles.",
       "Snowfalls in Dunmore usually begin during daylight hours rather than overnight."
     ],
     "correctIndex": 1,
@@ -1436,7 +1436,7 @@
     "options": [
       "No backlist title that sold fewer than fifty copies last year would sell more than fifty copies next year.",
       "Destroying the remaining stock would cost the company nothing at all.",
-      "The backlist titles that sell well are stored in the same warehouse as those that sell poorly.",
+      "The backlist titles that sell well are stored in the same warehouse as the slow selling ones, and the warehouse is charged for by the square meter.",
       "Rell Publishing's competitors also keep large printed backlists in warehouses.",
       "The revenue given up on the destroyed titles will be smaller than the warehousing cost the change saves."
     ],
@@ -1466,16 +1466,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Assumption",
     "difficulty": "hard",
-    "prompt": "A study of one hundred technology firms found that firms whose engineers spend more than a quarter of their working time on projects of their own choosing filed more patents per engineer than the remaining firms did. The chief executive of Halden Systems, whose engineers file few patents, will therefore require every Halden engineer to spend one full day each week on a project of that engineer's own choosing, in order to raise the firm's patent output per engineer.\n\nThe chief executive's plan depends on which of the following assumptions?",
+    "prompt": "A study of one hundred technology firms found that firms whose engineers spend more than a quarter of their working time on projects of their own choosing filed more patents per engineer than the remaining firms did. The chief executive of Halden Systems, whose engineers file few patents and currently spend no working time on projects of their own choosing, will therefore require every Halden engineer to spend two full days each week on a project of that engineer's own choosing, in order to raise the firm's patent output per engineer.\n\nThe chief executive's plan depends on which of the following assumptions?",
     "options": [
       "Time that engineers must set aside for work of their own choosing yields patents as readily as time they set aside voluntarily.",
-      "Halden Systems employs fewer engineers than the average firm covered by the study.",
+      "Halden Systems employs fewer engineers than the average firm covered by the study, and it files fewer patents in total than any of them.",
       "Patents filed per engineer is the best available measure of a technology firm's innovation.",
-      "The firms in the study did not differ in the laboratory resources available to their engineers.",
+      "The firms covered by the study did not differ from one another in the laboratory resources that they made available to their engineers.",
       "Halden's engineers currently spend less than a quarter of their working time on projects they choose."
     ],
     "correctIndex": 0,
-    "explanation": "The study describes firms where engineers spend such time, while the plan compels them to. The conclusion holds only if compelled self directed time behaves like the time the study observed. The size of the firm and the merits of patent counting are not needed, uniform resources across a hundred firms is far stronger than the argument requires, and the current allocation at Halden is closer to a stated background fact than to a hidden assumption.",
+    "explanation": "The study describes firms where engineers spend such time, while the plan compels them to. The conclusion holds only if compelled self directed time behaves like the time the study observed. The size of the firm and the merits of patent counting are not needed, uniform resources across a hundred firms is far stronger than the argument requires, and the stimulus states Halden's current allocation outright, so it is not a hidden assumption.",
     "source": "original"
   },
   {
