@@ -1075,6 +1075,22 @@ Write bank edits from a real script file, never a heredoc.
 3. ~~**Six specific question defects**: `ls-055`, `lr-072`, `ls-063`, `ls-101`, `ls-045`, `qs-030`.~~ **CLOSED in v2.3.0.** All six were re-checked against the files on disk and **all six had already been fixed** by earlier passes without this list being updated. `lr-072` no longer offers an "opposite" option and its puzzle was brute-forced as uniquely solvable; `ls-055` has exactly one part-to-whole match; `ls-063`'s explanation says a cobbler *works on* shoes; `ls-101` is now a vocabulary item that does not contain the phrase; `ls-045` and `qs-030` were verified correct. **The lesson is about the list, not the questions:** a stale to-do that reads as an open defect costs the next reader an investigation each time. Re-verify before re-reporting.
    The v2.3.0 audit did find three genuinely wrong keys, all in GMAT Data Insights — see "Three wrong answer keys" above.
 4. ~~`ProgressTracker` cells are 28px.~~ **CLOSED in v2.3.0** — 36px, with the sidebar widened `w-56` to `w-72` to fit (6 x 36px + 5 x 6px gaps = 246px inside a 254px content box). Still under the app's 44px floor, and deliberately: 36 cells at 44px do not fit any column width this layout can give them, and 36px clears WCAG 2.5.8 comfortably.
+6. **`audit:bank` has no PER-TOPIC length band, and one topic is past 3 SE.**
+   The slot checks learned this lesson already: a per-file average hides a
+   loaded topic completely, which is how Para Forming came to key the last
+   option 8 times in 10 while every file-level number looked healthy. The
+   length checks never got the same treatment. Measured across all 762
+   questions while reviewing v2.8.1: **GRE Verbal Reading Comprehension keys
+   the SHORTEST option 15 of 36 times (42%, +3.2 SE against a 20% chance
+   rate)**, and nothing is watching it. GMAT Critical Reasoning: Inference sits
+   at 4 of 11 (36%, +1.4 SE), which is noise on n=11 but the same shape.
+   There is a real tension to resolve first, which is why this is logged rather
+   than fixed in a hurry: a must-be-true key is usually the most minimal claim
+   in the set, so on Inference it is NATURALLY the shortest string. A band that
+   ignores that will fail honest questions. Adding the check means deciding
+   whether the topic is exempt like Data Sufficiency, or whether the
+   distractors should be trimmed to match.
+
 5. `ConfirmDialog` styles the confirming action as a red outline and the cancel as solid green. A reviewer called this inverted; it is a **documented deliberate choice** from an earlier PR (green = keeps your work). Left alone pending a decision.
 
 

@@ -8,9 +8,9 @@
     "options": [
       "The safety course is harder than most of Halverd's employees expect it to be.",
       "Every employee who holds a numbered certificate has completed the safety course.",
-      "Marcus has not completed the safety course.",
+      "Marcus has not completed the required safety course this year.",
       "Nobody at the Ashfield depot told Marcus that the safety course was available.",
-      "Marcus will complete the safety course before the end of the calendar year."
+      "Marcus will complete the course before the year ends."
     ],
     "correctIndex": 2,
     "explanation": "Completing the course guarantees a certificate, so the absence of a certificate rules out completion. That is the contrapositive and the only conclusion the statements force. Reading the rule backward, so that a certificate proves completion, is a different claim, and nothing here rules out a certificate issued for some other reason. The difficulty of the course, what Marcus was told and what he will do next are matters the statements never touch.",
