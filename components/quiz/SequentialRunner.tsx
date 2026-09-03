@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import { Attempt } from "@/components/quiz/useAttempt";
+import { isAnswered } from "@/lib/answers";
 import {
   AttemptNotice,
   BackToSetup,
@@ -64,8 +65,9 @@ export default function SequentialRunner({
   const reviewMode = phase === "done";
   const inReviewPass = phase === "reviewEdit";
   const current = questions[cursor];
-  const currentAnswered =
-    current && answers[current.id] !== null && answers[current.id] !== undefined;
+  // isAnswered, not a null check. Latent today because no sequential exam has a
+  // multi or numeric question, and a live bug the moment one does.
+  const currentAnswered = current && isAnswered(answers[current.id]);
   const servedCount = questions.length;
   const isLastServed = servedCount >= totalQuestions && cursor === servedCount - 1;
 

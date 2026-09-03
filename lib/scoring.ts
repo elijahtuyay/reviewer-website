@@ -158,7 +158,21 @@ export function scoreAttempt(
     model.difficultyWeight.medium,
     model.difficultyWeight.hard
   );
-  availableWeight = totalQuestions * hardestWeight;
+
+  if (model.denominator === "served") {
+    /*
+     * A non-adaptive exam is measured against what it actually dealt.
+     *
+     * Any question of the section that was never served is charged at the mean
+     * weight of the ones that were, so timing out cannot shrink the
+     * denominator and inflate the ratio. On a free-navigation exam the whole
+     * section is drawn up front and this term is zero.
+     */
+    const meanWeight = questions.length > 0 ? availableWeight / questions.length : hardestWeight;
+    availableWeight += Math.max(0, totalQuestions - questions.length) * meanWeight;
+  } else {
+    availableWeight = totalQuestions * hardestWeight;
+  }
 
   const ratio = availableWeight > 0 ? Math.min(1, earnedWeight / availableWeight) : 0;
   const penalty = Math.min(1, unanswered * model.unansweredPenaltyPerQuestion);

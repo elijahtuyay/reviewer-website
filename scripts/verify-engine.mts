@@ -75,6 +75,7 @@ const GMAT: ScoringModel = {
   difficultyWeight: { easy: 1, medium: 2, hard: 3.2 },
   unansweredPenaltyPerQuestion: 0.02,
   scoreStep: 10,
+  denominator: "fixed-reference",
 };
 
 /** The GRE band, to prove the step is honored and not hard-coded at ten. */
@@ -85,6 +86,7 @@ const GRE: ScoringModel = {
   difficultyWeight: { easy: 1, medium: 2, hard: 3.2 },
   unansweredPenaltyPerQuestion: 0.02,
   scoreStep: 1,
+  denominator: "served",
 };
 const SECTION = 20;
 
@@ -155,6 +157,55 @@ const greAll = scoreAttempt(
   SECTION
 );
 expect("the GRE band never exceeds its maximum", greAll.score <= 170, `got ${greAll.score}`);
+/*
+ * A NON-ADAPTIVE scaled exam must be able to REACH its maximum, and this is the
+ * assertion whose absence let a real defect ship.
+ *
+ * Under the fixed reference the GMAT needs, a flawless GRE attempt scored about
+ * 159 of 170, because the denominator assumed a full section of the hardest
+ * material while a random draw averages far less. Nothing caught it: the old
+ * check only asserted the score stayed BELOW the ceiling, which it did, by
+ * eleven points, on a perfect run.
+ */
+check("a flawless run on a non-adaptive exam reaches the maximum", greAll.score, 170);
+const greEasyPerfect = scoreAttempt(
+  pick("easy", 10),
+  pick("easy", 10).map((q) => ({ questionId: q.id, value: q.correctIndex ?? 0 })),
+  GRE,
+  10
+);
+check(
+  "a flawless run reaches the maximum whatever the draw held",
+  greEasyPerfect.score,
+  170
+);
+/*
+ * Difficulty must still COUNT on a partial run, which is the property "served"
+ * could plausibly have destroyed and does not: getting the hard half right beats
+ * getting the easy half right.
+ */
+const mixed = pick("easy", 10).concat(pick("hard", 10));
+const hardHalfRight = scoreAttempt(
+  mixed,
+  mixed.map((q, i) => ({ questionId: q.id, value: i >= 10 ? (q.correctIndex ?? 0) : wrongFor(q) })),
+  GRE,
+  20
+);
+const easyHalfRight = scoreAttempt(
+  mixed,
+  mixed.map((q, i) => ({ questionId: q.id, value: i < 10 ? (q.correctIndex ?? 0) : wrongFor(q) })),
+  GRE,
+  20
+);
+expect(
+  "difficulty still counts on a served-denominator exam",
+  hardHalfRight.score > easyHalfRight.score,
+  `hard-half=${hardHalfRight.score} easy-half=${easyHalfRight.score}`
+);
+/* A zero or negative step would produce NaN before the clamp ever sees it. */
+for (const m of [GMAT, GRE]) {
+  if (m.kind === "scaled") expect(`${m.min}-${m.max} declares a positive score step`, m.scoreStep > 0);
+}
 check("an empty GRE attempt scores the band minimum", scoreAttempt(everything, [], GRE, SECTION).score, 130);
 const greHalf = scoreAttempt(
   everything,

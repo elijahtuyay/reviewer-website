@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import { Attempt } from "@/components/quiz/useAttempt";
+import { isAnswered, isCorrectAnswer } from "@/lib/answers";
 import {
   AttemptNotice,
   BackToSetup,
@@ -76,9 +77,24 @@ export default function FreeFormRunner({
     const incorrect: number[] = [];
     questions.forEach((q, i) => {
       const answer = answers[q.id];
-      if (answer === null || answer === undefined) return;
+      /*
+       * isAnswered / isCorrectAnswer, never `=== q.correctIndex`.
+       *
+       * This is the runner `navigation: "free"` selects, which is the GRE's,
+       * and the GRE is the exam whose answers are not option indices. A
+       * multi-select answer is an array and a numeric one is typed text, so
+       * neither can ever equal `correctIndex` (which is `undefined` for them
+       * anyway). Every one of them was pushed to `incorrectNumbers` and painted
+       * RED in the progress grid, beside a card that correctly said "Correct"
+       * and a score that had counted it right.
+       *
+       * The null check had the matching flaw: an empty numeric string and an
+       * empty selection array are both non-null, so a touched-then-emptied
+       * answer counted as answered here while `useAttempt` said otherwise.
+       */
+      if (!isAnswered(answer)) return;
       answered.push(i + 1);
-      if (answer === q.correctIndex) correct.push(i + 1);
+      if (isCorrectAnswer(q, answer)) correct.push(i + 1);
       else incorrect.push(i + 1);
     });
     return { answeredNumbers: answered, correctNumbers: correct, incorrectNumbers: incorrect };

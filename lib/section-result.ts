@@ -1,6 +1,7 @@
 import { ExamId, SectionId } from "@/data/schema";
 import { getExam } from "@/lib/exams/registry";
 import { getStoredProgress } from "@/lib/session-progress";
+import { isAnswered } from "@/lib/answers";
 
 export interface SectionBreakdown {
   submitted: boolean;
@@ -43,7 +44,10 @@ export function getSectionBreakdown(
   sectionQuestionCount: number
 ): SectionBreakdown {
   const stored = getStoredProgress(examId, sectionId);
-  const answered = Object.keys(stored.answers).length;
+  // Values, not keys. `cleanAnswers` strips null and undefined but keeps an
+  // empty numeric string and an empty selection array, both of which are real
+  // keys standing for "the candidate touched this and left it blank".
+  const answered = Object.values(stored.answers).filter(isAnswered).length;
 
   if (stored.submitted && stored.summary) {
     const s = stored.summary;
@@ -124,7 +128,7 @@ export function findActiveAttempt(
     return {
       sectionId: section.id,
       label: section.label,
-      answered: Object.keys(stored.answers).length,
+      answered: Object.values(stored.answers).filter(isAnswered).length,
       // The SECTION's length, not the number served so far. On a sequential
       // exam the served list grows as you go, so four questions into a
       // twenty-question section the lock screen read "4 of 5 answered".

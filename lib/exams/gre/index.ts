@@ -143,6 +143,14 @@ const gre: ExamModule = {
     difficultyWeight: { easy: 1, medium: 2, hard: 3.2 },
     unansweredPenaltyPerQuestion: 0.02,
     scoreStep: 1,
+    /*
+     * "served", because this exam is NOT adaptive: the 27 questions are a plain
+     * random draw and the candidate has no way to climb. Under a fixed
+     * reference a flawless attempt scored about 159 of 170 and varied by up to
+     * 11 points on draw luck alone, while the setup page stated the full band
+     * as fact.
+     */
+    denominator: "served",
   },
 
   /**

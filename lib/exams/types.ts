@@ -158,6 +158,30 @@ export type ScoringModel =
        * reachable scores across the whole measure.
        */
       scoreStep: number;
+      /**
+       * What the earned weight is measured AGAINST, and the reason this is
+       * declared rather than assumed.
+       *
+       * "fixed-reference": a full section of the hardest available material.
+       * Correct for an ADAPTIVE exam, because there the candidate climbs to the
+       * hard questions by answering well, so reaching them IS the achievement
+       * and the top of the band should require it.
+       *
+       * "served": the weight of the questions actually drawn. Correct for a
+       * NON-ADAPTIVE exam, where the mix is random and the candidate has no
+       * influence over it. Under a fixed reference such an exam cannot reach
+       * its own maximum: a 27-question GRE draw averages about 2.28 weight per
+       * question against a 3.2 ceiling, so a FLAWLESS attempt scored ~159 of
+       * 170, and two flawless attempts differed by up to 11 points purely from
+       * draw luck. Meanwhile the setup page stated "the score runs from 130 to
+       * 170" as fact.
+       *
+       * Difficulty still counts under "served": getting the hard questions
+       * right earns more than getting the easy ones right on any partial run.
+       * What it stops doing is punishing a candidate for a draw they did not
+       * choose.
+       */
+      denominator: "fixed-reference" | "served";
     };
 
 /**
