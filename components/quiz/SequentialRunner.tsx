@@ -207,7 +207,7 @@ export default function SequentialRunner({
                 key={current.id}
                 question={current}
                 index={cursor}
-                selectedIndex={answers[current.id] ?? null}
+                value={answers[current.id] ?? null}
                 onSelect={select}
                 reviewMode={false}
               />
@@ -272,7 +272,7 @@ export default function SequentialRunner({
                 key={question.id}
                 question={question}
                 index={index}
-                selectedIndex={answers[question.id] ?? null}
+                value={answers[question.id] ?? null}
                 reviewMode
               />
             ))}
@@ -376,7 +376,7 @@ function ReviewPass({
               <QuestionCard
                 question={question}
                 index={index}
-                selectedIndex={answers[question.id] ?? null}
+                value={answers[question.id] ?? null}
                 onSelect={select}
                 reviewMode={false}
                 lockedReason={

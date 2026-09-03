@@ -288,7 +288,7 @@ export default function FreeFormRunner({
                 key={question.id}
                 question={question}
                 index={index}
-                selectedIndex={answers[question.id] ?? null}
+                value={answers[question.id] ?? null}
                 onSelect={select}
                 reviewMode={reviewMode}
               />

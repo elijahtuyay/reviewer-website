@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { preloadMath, questionNeedsMath } from "@/components/MathText";
+import { AnswerValue, isAnswered, isComplete, isCorrectAnswer, sameAnswer } from "@/lib/answers";
 import type { ExamId, Question, SectionId } from "@/data/schema";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import {
@@ -62,7 +63,7 @@ export interface Attempt {
 
   /** Questions served so far, in display order. */
   questions: Question[];
-  answers: Record<string, number | null>;
+  answers: Record<string, AnswerValue | null>;
   flagged: string[];
 
   /** Index of the question on screen. Only meaningful for sequential navigation. */
@@ -81,7 +82,7 @@ export interface Attempt {
   /** Whether this question's answer may still be changed during a capped review pass. */
   canChangeAnswer: (questionId: string) => boolean;
 
-  select: (questionId: string, optionIndex: number) => void;
+  select: (questionId: string, value: AnswerValue) => void;
   toggleFlag: (questionId: string) => void;
   advance: () => void;
   submit: (expired?: boolean) => void;
@@ -111,14 +112,14 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
   const [notice, setNotice] = useState<NoticeKind>(null);
   const [blockedBy, setBlockedBy] = useState<ActiveAttempt | null>(null);
   const [questionIds, setQuestionIds] = useState<string[]>([]);
-  const [answers, setAnswers] = useState<Record<string, number | null>>({});
+  const [answers, setAnswers] = useState<Record<string, AnswerValue | null>>({});
   const [flagged, setFlagged] = useState<string[]>([]);
   const [cursor, setCursor] = useState(0);
   const [deadline, setDeadline] = useState(0);
   const [paused, setPaused] = useState(false);
   const [frozenTimeLabel, setFrozenTimeLabel] = useState<string | undefined>(undefined);
   const [adaptive, setAdaptive] = useState<AdaptiveState | null>(null);
-  const [reviewBaseline, setReviewBaseline] = useState<Record<string, number>>({});
+  const [reviewBaseline, setReviewBaseline] = useState<Record<string, AnswerValue>>({});
   const [bankVersion, setBankVersion] = useState(0);
 
   const pendingNoticeRef = useRef<NoticeKind>(null);
@@ -166,8 +167,8 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
   );
 
   /** Answers with nulls stripped, which is the shape storage holds. */
-  const cleanAnswers = useCallback((source: Record<string, number | null>) => {
-    const cleaned: Record<string, number> = {};
+  const cleanAnswers = useCallback((source: Record<string, AnswerValue | null>) => {
+    const cleaned: Record<string, AnswerValue> = {};
     for (const [id, value] of Object.entries(source)) {
       if (value !== null && value !== undefined) cleaned[id] = value;
     }
@@ -314,7 +315,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
           const served = getQuestionsByIds(pool, ids);
           const scored = scoreAttempt(
             served,
-            served.map((q) => ({ questionId: q.id, selectedIndex: stored.answers[q.id] ?? null })),
+            served.map((q) => ({ questionId: q.id, value: stored.answers[q.id] ?? null })),
             exam.scoring,
             section.questionCount
           );
@@ -352,13 +353,17 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
   }, [phase, questionIds]);
 
   // ----------------------------------------------------------------- derive --
-  const answeredCount = Object.values(answers).filter((v) => v !== null && v !== undefined).length;
+  // isAnswered, not a null check: an empty numeric entry is a string, and an
+  // untouched multi-select is an empty array. Both are truthy objects that a
+  // null check counts as answers, which would have reported a section as fully
+  // answered before the candidate typed anything.
+  const answeredCount = Object.values(answers).filter(isAnswered).length;
 
   const result = useMemo(() => {
     if (phase !== "done") return null;
     const answerList = questions.map((q) => ({
       questionId: q.id,
-      selectedIndex: answers[q.id] ?? null,
+      value: answers[q.id] ?? null,
     }));
     // section.questionCount, not questions.length: on an adaptive section the
     // served list stops where the clock did, and scoring out of what you
@@ -372,7 +377,10 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
    * answer and back again costs nothing: a misclick used to burn two of three.
    */
   const reviewChangesUsed = Object.entries(reviewBaseline).filter(
-    ([id, original]) => answers[id] !== undefined && answers[id] !== null && answers[id] !== original
+    // sameAnswer, not `!==`: two arrays holding the same two option indices are
+    // never `!==`-equal, so a Sentence Equivalence answer counted as changed on
+    // every render and burned the whole review allowance without a single click.
+    ([id, original]) => isAnswered(answers[id]) && !sameAnswer(answers[id], original)
   ).length;
   const reviewChangesLeft = rules.reviewEdit
     ? Math.max(0, rules.reviewEdit.maxChanges - reviewChangesUsed)
@@ -397,7 +405,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
       if (phase !== "reviewEdit" || !rules.reviewEdit) return true;
       const original = reviewBaseline[questionId];
       if (original === undefined) return true;
-      if (answers[questionId] !== original) return true;
+      if (!sameAnswer(answers[questionId], original)) return true;
       return reviewChangesUsed < rules.reviewEdit.maxChanges;
     },
     [phase, rules.reviewEdit, reviewBaseline, answers, reviewChangesUsed]
@@ -418,7 +426,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
         const served = getQuestionsByIds(getLoadedSection(examId, sectionId), questionIds);
         const scored = scoreAttempt(
           served,
-          served.map((q) => ({ questionId: q.id, selectedIndex: prev[q.id] ?? null })),
+          served.map((q) => ({ questionId: q.id, value: prev[q.id] ?? null })),
           exam.scoring,
           section.questionCount
         );
@@ -455,7 +463,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
    * closure it replaced, as well as cheaper.
    */
   const select = useCallback(
-    (questionId: string, optionIndex: number) => {
+    (questionId: string, value: AnswerValue) => {
       if (phase !== "taking" && phase !== "reviewEdit") return;
 
       setAnswers((prev) => {
@@ -467,16 +475,19 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
           const baseline = reviewBaselineRef.current;
           const original = baseline[questionId];
           const used = Object.entries(baseline).filter(
-            ([id, was]) => prev[id] !== undefined && prev[id] !== null && prev[id] !== was
+            // sameAnswer, not `!==`. See the note on reviewChangesUsed: an
+            // array answer is never `!==`-equal to an identical array, so this
+            // counted every multi-select question as a spent change forever.
+            ([id, was]) => isAnswered(prev[id]) && !sameAnswer(prev[id], was)
           ).length;
           const blocked =
             original !== undefined &&
-            prev[questionId] === original &&
+            sameAnswer(prev[questionId], original) &&
             used >= rules.reviewEdit.maxChanges;
           if (blocked) return prev;
         }
 
-        const next = { ...prev, [questionId]: optionIndex };
+        const next = { ...prev, [questionId]: value };
         persist({ answers: cleanAnswers(next), inReview: phase === "reviewEdit" });
         return next;
       });
@@ -507,7 +518,10 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
 
     const current = questions[cursor];
     if (!current) return;
-    if (!rules.allowSkip && (answers[current.id] === undefined || answers[current.id] === null)) {
+    // isComplete, not merely "something is there": on an exam that refuses to
+    // advance without an answer, one of the two picks on a select-two question
+    // is not an answer yet.
+    if (!rules.allowSkip && !isComplete(current, answers[current.id])) {
       return;
     }
 
@@ -544,7 +558,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     const pool = getLoadedSection(examId, sectionId);
 
     if (rules.adaptive && adaptive) {
-      const wasCorrect = answers[current.id] === current.correctIndex;
+      const wasCorrect = isCorrectAnswer(current, answers[current.id]);
       nextAdaptive = advanceAdaptiveState(adaptive, wasCorrect, rules.adaptive);
       nextId = pickNextQuestionId(pool, questionIds, nextAdaptive.level, current.topic);
     } else {

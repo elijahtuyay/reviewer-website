@@ -1,5 +1,14 @@
 import type { Answer, Difficulty, Question } from "@/data/schema";
 import type { ScoringModel } from "@/lib/exams/types";
+// RELATIVE, not "@/lib/answers", and this is load-bearing rather than a style
+// slip. `npm run verify:engine` runs this module under
+// `node --experimental-strip-types`, which strips the types but does NOT
+// resolve tsconfig path aliases, so a VALUE import through "@/" fails the whole
+// verifier with ERR_MODULE_NOT_FOUND. Every other import in the modules that
+// script loads is `import type`, which disappears before Node ever sees it.
+// This one cannot be, because these are functions. The .ts extension is
+// required too: Node ESM does not guess extensions.
+import { isAnswered, isCorrectAnswer } from "./answers.ts";
 
 export interface TopicBreakdown {
   topic: string;
@@ -67,7 +76,7 @@ export function scoreAttempt(
    */
   sectionQuestionCount?: number
 ): ScoreResult {
-  const answerByQuestionId = new Map(answers.map((a) => [a.questionId, a.selectedIndex]));
+  const answerByQuestionId = new Map(answers.map((a) => [a.questionId, a.value]));
   const topicMap = new Map<string, TopicBreakdown>();
 
   let correctCount = 0;
@@ -79,12 +88,16 @@ export function scoreAttempt(
   const correctByDifficulty: Record<Difficulty, number> = { easy: 0, medium: 0, hard: 0 };
 
   for (const question of questions) {
-    const selectedIndex = answerByQuestionId.get(question.id) ?? null;
-    const isCorrect = selectedIndex === question.correctIndex;
+    const given = answerByQuestionId.get(question.id) ?? null;
+    // Both through lib/answers.ts, never `=== question.correctIndex`: a
+    // multi-select answer is an array and a numeric one is typed text, and
+    // marking either with an identity test silently scores every one wrong.
+    const answered = isAnswered(given);
+    const isCorrect = isCorrectAnswer(question, given);
     served[question.difficulty]++;
     if (isCorrect) correctByDifficulty[question.difficulty]++;
 
-    if (selectedIndex === null || selectedIndex === undefined) {
+    if (!answered) {
       unansweredCount++;
     } else if (isCorrect) {
       correctCount++;
@@ -104,7 +117,7 @@ export function scoreAttempt(
     const topicEntry = topicMap.get(question.topic)!;
     topicEntry.total++;
     if (isCorrect) topicEntry.correct++;
-    else if (selectedIndex === null) topicEntry.unanswered++;
+    else if (!answered) topicEntry.unanswered++;
   }
 
   const byTopic = Array.from(topicMap.values());
@@ -153,15 +166,23 @@ export function scoreAttempt(
   // so it can never push a score below the band's minimum.
   const adjusted = Math.max(0, ratio * (1 - penalty));
   const span = model.max - model.min;
-  // Real band scores move in fixed steps, not continuously, so this rounds to
-  // the nearest 10 and stops the number looking spuriously precise.
-  //
-  // Rounding the OFFSET from the floor, not the absolute score: the band starts
-  // at 205, so rounding the absolute value to a multiple of 10 pushed a perfect
-  // attempt to 810, ten points above the declared maximum. The clamp is a
-  // second belt: a model whose span is not a multiple of 10 must still never
-  // report a score outside its own band.
-  const steps = Math.round((adjusted * span) / 10) * 10;
+  /*
+   * Real band scores move in fixed steps, not continuously, so this rounds and
+   * stops the number looking spuriously precise.
+   *
+   * The step is DECLARED BY THE EXAM, not fixed at 10. GMAT Focus moves in tens
+   * across a 600-point band; the GRE moves in ones across a 40-point one, and
+   * rounding a 130-170 measure to the nearest ten would leave a candidate five
+   * reachable scores and call it a scaled result.
+   *
+   * Rounding the OFFSET from the floor, not the absolute score: the GMAT band
+   * starts at 205, so rounding the absolute value to a multiple of 10 pushed a
+   * perfect attempt to 810, ten points above the declared maximum. The clamp is
+   * a second belt: a model whose span is not a multiple of its own step must
+   * still never report a score outside its own band.
+   */
+  const step = model.scoreStep;
+  const steps = Math.round((adjusted * span) / step) * step;
   const score = Math.min(model.max, Math.max(model.min, model.min + steps));
 
   return {

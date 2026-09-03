@@ -3,6 +3,14 @@
 import { memo, useRef } from "react";
 import { Question } from "@/data/schema";
 import MathText from "@/components/MathText";
+import {
+  AnswerValue,
+  isAnswered as hasAnswer,
+  isCorrectAnswer,
+  kindOf,
+  parseNumericAnswer,
+  toggleMultiAnswer,
+} from "@/lib/answers";
 
 /**
  * Reading-comprehension prompts embed their whole passage, because a random
@@ -46,14 +54,18 @@ function splitPassage(prompt: string): { passage: string; stem: string } | null 
 interface QuestionCardProps {
   question: Question;
   index: number;
-  selectedIndex: number | null;
   /**
-   * Takes the question id as well as the option, so runners can pass the
+   * The candidate's answer: an option index, an array of them, or typed text.
+   * See `lib/answers.ts` for why this is not a bare number any more.
+   */
+  value: AnswerValue | null;
+  /**
+   * Takes the question id as well as the answer, so runners can pass the
    * attempt's `select` straight through. They used to wrap it in an inline
    * arrow to close over the id, which handed every card a brand-new prop on
    * every render and made the memo below useless.
    */
-  onSelect?: (questionId: string, optionIndex: number) => void;
+  onSelect?: (questionId: string, value: AnswerValue) => void;
   reviewMode?: boolean;
   /**
    * Set while a capped review pass has run out of changes and this question is
@@ -67,15 +79,28 @@ interface QuestionCardProps {
 function QuestionCard({
   question,
   index,
-  selectedIndex,
+  value,
   onSelect,
   reviewMode = false,
   lockedReason,
 }: QuestionCardProps) {
   const passageParts = splitPassage(question.prompt);
-  const isAnswered = selectedIndex !== null;
-  const isCorrect = selectedIndex === question.correctIndex;
+  const kind = kindOf(question);
+  const isAnswered = hasAnswer(value);
+  const isCorrect = isCorrectAnswer(question, value);
   const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const options = question.options ?? [];
+  /** Which option indices are currently chosen, whatever the question kind. */
+  const chosen: number[] =
+    kind === "multi"
+      ? Array.isArray(value)
+        ? value
+        : []
+      : typeof value === "number"
+        ? [value]
+        : [];
+  const interactive = !reviewMode && !lockedReason;
 
   /**
    * Arrow-key navigation, per the WAI-ARIA radiogroup pattern: the group is a
@@ -99,7 +124,7 @@ function QuestionCard({
     if (!keys.includes(event.key)) return;
     event.preventDefault();
     const forward = event.key === "ArrowDown" || event.key === "ArrowRight";
-    const count = question.options.length;
+    const count = options.length;
     const next = (optionIndex + (forward ? 1 : -1) + count) % count;
     const target = optionRefs.current[next];
     target?.focus();
@@ -111,11 +136,19 @@ function QuestionCard({
     target?.scrollIntoView({ block: "nearest" });
   }
 
-  // Roving tabindex: the selected option is the group's tab stop, or the first
-  // option when nothing is selected yet. Clamped because a stored answer index
-  // that no longer matches the options array would otherwise leave the group
-  // with no tab stop at all, i.e. unreachable by keyboard.
-  const tabStop = Math.min(Math.max(selectedIndex ?? 0, 0), question.options.length - 1);
+  /*
+   * Roving tabindex: the selected option is the group's tab stop, or the first
+   * option when nothing is selected yet. Clamped because a stored answer index
+   * that no longer matches the options array would otherwise leave the group
+   * with no tab stop at all, i.e. unreachable by keyboard.
+   *
+   * Only radiogroups rove. A checkbox group is a series of INDEPENDENT tab
+   * stops per WAI-ARIA, because each box toggles on its own and a candidate has
+   * to be able to reach the second of two picks without arrowing past the
+   * first. Getting this backwards would make Sentence Equivalence unusable by
+   * keyboard, which is the question type the multi path exists for.
+   */
+  const tabStop = Math.min(Math.max(chosen[0] ?? 0, 0), Math.max(0, options.length - 1));
 
   return (
     <div
@@ -143,19 +176,42 @@ function QuestionCard({
         )}
       </div>
 
-      {/* A short static name, NOT aria-labelledby the prompt: screen readers
-          re-announce a group's name on entry and on every focus move inside it,
-          and prompts here embed whole reading passages (the longest is ~1330
-          characters), so labeling by the prompt would re-read a passage on
-          every arrow key. */}
+      {/* How many to pick, said BEFORE the options rather than discovered by
+          being marked wrong. GRE Sentence Equivalence gives six choices and
+          requires exactly two, and a candidate who picks one and moves on has
+          not skipped the question, they have misread the instruction. */}
+      {kind === "multi" && question.selectExactly && (
+        <p className="mt-4 ml-7 text-sm font-medium text-accent-text">
+          Select exactly {question.selectExactly} answers.
+        </p>
+      )}
+
+      {kind === "numeric" ? (
+        <NumericEntry
+          question={question}
+          index={index}
+          value={value}
+          onSelect={onSelect}
+          reviewMode={reviewMode}
+          lockedReason={lockedReason}
+        />
+      ) : (
+      /* A short static name, NOT aria-labelledby the prompt: screen readers
+         re-announce a group's name on entry and on every focus move inside it,
+         and prompts here embed whole reading passages (the longest is ~1330
+         characters), so labeling by the prompt would re-read a passage on
+         every arrow key. */
       <div
         className="mt-4 ml-7 flex flex-col gap-2"
-        role="radiogroup"
+        role={kind === "multi" ? "group" : "radiogroup"}
         aria-label={`Answer options for question ${index + 1}`}
       >
-        {question.options.map((option, optionIndex) => {
-          const isSelected = selectedIndex === optionIndex;
-          const isCorrectOption = optionIndex === question.correctIndex;
+        {options.map((option, optionIndex) => {
+          const isSelected = chosen.includes(optionIndex);
+          const isCorrectOption =
+            kind === "multi"
+              ? (question.correctIndices ?? []).includes(optionIndex)
+              : optionIndex === question.correctIndex;
 
           // border-line-strong, not border-line: an unselected option's border is
           // the only thing identifying it as a control, so it needs the 3:1
@@ -189,19 +245,30 @@ function QuestionCard({
                 optionRefs.current[optionIndex] = el;
               }}
               type="button"
-              role="radio"
+              role={kind === "multi" ? "checkbox" : "radio"}
               aria-checked={isSelected}
               // aria-disabled rather than `disabled` in review mode: a disabled
               // button is removed from the tab order, which would make the whole
               // review unreachable by keyboard. This keeps every option
               // focusable and announced while ignoring clicks.
               aria-disabled={reviewMode || Boolean(lockedReason) || undefined}
-              tabIndex={optionIndex === tabStop ? 0 : -1}
+              // See the note on tabStop: checkboxes each keep their own stop.
+              tabIndex={kind === "multi" || optionIndex === tabStop ? 0 : -1}
               onClick={() => {
-                if (reviewMode || lockedReason) return;
-                onSelect?.(question.id, optionIndex);
+                if (!interactive) return;
+                onSelect?.(
+                  question.id,
+                  kind === "multi"
+                    ? toggleMultiAnswer(value, optionIndex, question.selectExactly)
+                    : optionIndex
+                );
               }}
-              onKeyDown={(event) => handleKeyDown(event, optionIndex)}
+              onKeyDown={(event) => {
+                // Arrows are the radiogroup pattern and do not belong in a
+                // checkbox group, where Tab is the documented way between boxes.
+                if (kind === "multi") return;
+                handleKeyDown(event, optionIndex);
+              }}
               // min-h-11 is the 44px tap-target minimum, and it doubles as the
               // headroom stacked math (fractions, exponents) needs to sit in a
               // row without the box having to grow around it.
@@ -235,6 +302,7 @@ function QuestionCard({
           );
         })}
       </div>
+      )}
 
       {lockedReason && !reviewMode && (
         <p className="mt-3 ml-7 text-xs text-muted">{lockedReason}</p>
@@ -257,6 +325,94 @@ function QuestionCard({
             <MathText text={question.explanation} />
           </p>
         </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * GRE Numeric Entry: no options, you type the number.
+ *
+ * A text input rather than `type="number"`, deliberately. A number input hides
+ * what was typed behind browser locale rules, silently discards a trailing
+ * decimal point while someone is mid-entry, and answers a scroll wheel over a
+ * focused field by changing the value, which on a timed exam is a way to lose
+ * an answer you already gave. `inputMode="decimal"` still brings up the numeric
+ * keypad on a phone, which is the only part of `type="number"` worth having.
+ *
+ * The raw text is stored, not a parsed number, so "0.50" stays "0.50" on the
+ * review screen instead of being redisplayed as something the candidate did not
+ * write. Marking parses it (see `parseNumericAnswer`), and tolerates commas,
+ * currency signs and simple fractions, because being marked wrong over a comma
+ * teaches nothing about mathematics.
+ */
+function NumericEntry({
+  question,
+  index,
+  value,
+  onSelect,
+  reviewMode,
+  lockedReason,
+}: {
+  question: Question;
+  index: number;
+  value: AnswerValue | null;
+  onSelect?: (questionId: string, value: AnswerValue) => void;
+  reviewMode: boolean;
+  lockedReason?: string;
+}) {
+  const text = typeof value === "string" ? value : value === null || value === undefined ? "" : String(value);
+  const entered = parseNumericAnswer(text);
+  const correct = isCorrectAnswer(question, text);
+
+  return (
+    <div className="mt-4 ml-7">
+      <label className="flex items-center gap-2">
+        <span className="sr-only">Your answer for question {index + 1}</span>
+        {question.answerPrefix && (
+          <span aria-hidden className="text-base text-muted">
+            {question.answerPrefix}
+          </span>
+        )}
+        <input
+          type="text"
+          inputMode="decimal"
+          autoComplete="off"
+          value={text}
+          readOnly={reviewMode || Boolean(lockedReason)}
+          onChange={(event) => {
+            if (reviewMode || lockedReason) return;
+            onSelect?.(question.id, event.target.value);
+          }}
+          placeholder="Your answer"
+          // min-h-11 is the app's 44px tap-target floor, and w-40 is wide enough
+          // for eight digits plus a decimal point, which is the most the real
+          // exam's own calculator can produce.
+          className={`min-h-11 w-40 rounded-md border px-3 text-base text-foreground transition-[color,background-color,border-color] placeholder:text-muted ${
+            reviewMode
+              ? correct
+                ? "border-green-700 bg-green-50 dark:border-green-500 dark:bg-green-950/40"
+                : "border-red-600 bg-red-50 dark:border-red-500 dark:bg-red-950/40"
+              : "border-line-strong focus:border-accent"
+          } ${lockedReason ? "opacity-60" : ""}`}
+        />
+        {question.answerSuffix && (
+          <span aria-hidden className="text-base text-muted">
+            {question.answerSuffix}
+          </span>
+        )}
+      </label>
+
+      {reviewMode && (
+        <p className="mt-2 text-sm text-muted">
+          Correct answer:{" "}
+          <span className="font-medium text-foreground">
+            {question.answerPrefix ?? ""}
+            {question.correctValue}
+            {question.answerSuffix ?? ""}
+          </span>
+          {entered !== null && !correct && <> &middot; you entered {text.trim()}</>}
+        </p>
       )}
     </div>
   );

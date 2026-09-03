@@ -19,8 +19,23 @@ import { Difficulty, ExamId, Question, SectionId } from "@/data/schema";
  * "basic-di" is the GMAT Focus Data Insights calculator: four functions, a
  * square root, a percent key, three memory keys, and strictly left-to-right
  * evaluation with no order of operations. Modeled in `lib/calculator/basic-di.ts`.
+ *
+ * "not-simulated" means THE REAL EXAM PROVIDES ONE HERE AND THIS APP DOES NOT
+ * MODEL IT YET. It exists because `null` already means something different and
+ * load-bearing: null is "the real exam gives you none either", which the setup
+ * page states out loud as a rule. The GRE grants a calculator in Quantitative
+ * Reasoning, so calling that null would have printed a flat lie on the page a
+ * candidate reads before starting.
+ *
+ * Why the GRE's is not simply `basic-di`: it is a different device. It honors
+ * order of operations (2 + 3 x 4 is 14, where the TI-108 gives 20), it has
+ * parentheses, it has a Transfer Display key that types the result into a
+ * Numeric Entry box, and it accepts keyboard input. This repo has already
+ * shipped a calculator that borrowed three details from the wrong device once.
+ * A calculator that is subtly wrong is worse than an absent one, because the
+ * candidate practices habits that break on test day.
  */
-export type CalculatorKind = "basic-di" | null;
+export type CalculatorKind = "basic-di" | "not-simulated" | null;
 
 export interface SectionConfig {
   id: SectionId;
@@ -134,6 +149,15 @@ export type ScoringModel =
        * why finishing with guesses beats running out of time.
        */
       unansweredPenaltyPerQuestion: number;
+      /**
+       * The increment the reported score moves in.
+       *
+       * Declared rather than fixed, because the two scaled exams here are not
+       * close: GMAT Focus is 205-805 in tens, and the GRE is 130-170 in ones.
+       * Rounding the GRE to the nearest ten would give a candidate five
+       * reachable scores across the whole measure.
+       */
+      scoreStep: number;
     };
 
 /**

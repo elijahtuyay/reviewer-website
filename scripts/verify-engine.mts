@@ -74,16 +74,32 @@ const GMAT: ScoringModel = {
   max: 805,
   difficultyWeight: { easy: 1, medium: 2, hard: 3.2 },
   unansweredPenaltyPerQuestion: 0.02,
+  scoreStep: 10,
+};
+
+/** The GRE band, to prove the step is honored and not hard-coded at ten. */
+const GRE: ScoringModel = {
+  kind: "scaled",
+  min: 130,
+  max: 170,
+  difficultyWeight: { easy: 1, medium: 2, hard: 3.2 },
+  unansweredPenaltyPerQuestion: 0.02,
+  scoreStep: 1,
 };
 const SECTION = 20;
 
 function pick(difficulty: "easy" | "medium" | "hard", n: number) {
   return bank.filter((q) => q.difficulty === difficulty).slice(0, n);
 }
+/** A deliberately wrong answer for any question kind. */
+function wrongFor(q: Question) {
+  const options = q.options ?? [];
+  return ((q.correctIndex ?? 0) + 1) % Math.max(1, options.length);
+}
 function score(qs: Question[], correctCount: number, total = SECTION) {
   const answers = qs.map((q, i) => ({
     questionId: q.id,
-    selectedIndex: i < correctCount ? q.correctIndex : (q.correctIndex + 1) % q.options.length,
+    value: i < correctCount ? (q.correctIndex ?? 0) : wrongFor(q),
   }));
   return scoreAttempt(qs, answers, GMAT, total);
 }
@@ -115,7 +131,7 @@ expect(
 const everything = bank.slice(0, SECTION);
 const allRight = scoreAttempt(
   everything,
-  everything.map((q) => ({ questionId: q.id, selectedIndex: q.correctIndex })),
+  everything.map((q) => ({ questionId: q.id, value: q.correctIndex ?? 0 })),
   GMAT,
   SECTION
 );
@@ -124,9 +140,93 @@ const nothing = scoreAttempt(everything, [], GMAT, SECTION);
 check("an empty attempt scores the band minimum", nothing.score, 205);
 check("unreached questions are counted as unanswered", nothing.unansweredCount, SECTION);
 
+/*
+ * The band step is DECLARED, not fixed at ten.
+ *
+ * A 130-170 measure rounded to the nearest ten leaves a candidate five
+ * reachable scores, which is what the GRE would have got by inheriting the
+ * GMAT's constant. These assert that both bands move in their own step and that
+ * neither can leave its own range.
+ */
+const greAll = scoreAttempt(
+  everything,
+  everything.map((q) => ({ questionId: q.id, value: q.correctIndex ?? 0 })),
+  GRE,
+  SECTION
+);
+expect("the GRE band never exceeds its maximum", greAll.score <= 170, `got ${greAll.score}`);
+check("an empty GRE attempt scores the band minimum", scoreAttempt(everything, [], GRE, SECTION).score, 130);
+const greHalf = scoreAttempt(
+  everything,
+  everything.map((q, i) => ({
+    questionId: q.id,
+    value: i < SECTION / 2 ? (q.correctIndex ?? 0) : wrongFor(q),
+  })),
+  GRE,
+  SECTION
+);
+expect(
+  "a GRE score is not forced to a multiple of ten",
+  greHalf.score > 130 && greHalf.score < 170,
+  `got ${greHalf.score}`
+);
+
+/*
+ * The two question kinds the GRE brought. Both are marked through
+ * lib/answers.ts, and both were unmarkable by the old `=== correctIndex` test:
+ * an array is never `===` an index, and a typed string never is either.
+ */
+const seQuestion: Question = {
+  id: "verify-se",
+  section: "verbal",
+  topic: "Sentence Equivalence",
+  difficulty: "medium",
+  prompt: "Verify multi-select marking.",
+  explanation: "Both required options must be chosen, and no others.",
+  source: "verify",
+  kind: "multi",
+  options: ["a", "b", "c", "d", "e", "f"],
+  correctIndices: [1, 4],
+  selectExactly: 2,
+};
+const numQuestion: Question = {
+  id: "verify-num",
+  section: "quantitative",
+  topic: "Numeric Entry",
+  difficulty: "medium",
+  prompt: "Verify numeric marking.",
+  explanation: "Parsed, with tolerance.",
+  source: "verify",
+  kind: "numeric",
+  correctValue: 16.67,
+  tolerance: 0.01,
+};
+
+function markOne(q: Question, value: number | number[] | string | null) {
+  return scoreAttempt([q], [{ questionId: q.id, value }], { kind: "points", pointsPerCorrectAnswer: 1 }, 1)
+    .correctCount;
+}
+check("select-two marks both correct options as right", markOne(seQuestion, [1, 4]), 1);
+check("order does not matter on a select-two", markOne(seQuestion, [4, 1]), 1);
+check("one of the two required picks is not correct", markOne(seQuestion, [1]), 0);
+check("a third pick is not correct", markOne(seQuestion, [1, 4, 5]), 0);
+check("a wrong pair is not correct", markOne(seQuestion, [0, 2]), 0);
+check("numeric entry accepts the exact value", markOne(numQuestion, "16.67"), 1);
+check("numeric entry accepts within tolerance", markOne(numQuestion, "16.666"), 1);
+check("numeric entry accepts an equivalent fraction", markOne(numQuestion, "50/3"), 1);
+check("numeric entry strips a thousands separator", markOne({ ...numQuestion, correctValue: 1250, tolerance: 0 }, "1,250"), 1);
+check("numeric entry rejects a value outside tolerance", markOne(numQuestion, "16.5"), 0);
+check("numeric entry rejects junk", markOne(numQuestion, "about sixteen"), 0);
+check("an empty numeric entry is unanswered, not wrong", markOne(numQuestion, "   "), 0);
+expect(
+  "an empty numeric entry counts as unanswered",
+  scoreAttempt([numQuestion], [{ questionId: numQuestion.id, value: "  " }], { kind: "points", pointsPerCorrectAnswer: 1 }, 1)
+    .unansweredCount === 1
+);
+
 const pts = scoreAttempt(
   everything,
-  everything.map((q) => ({ questionId: q.id, selectedIndex: q.correctIndex })),
+  everything.map((q) => ({ questionId: q.id, value: q.correctIndex ?? 0 })),
   { kind: "points", pointsPerCorrectAnswer: 3 },
   SECTION
 );
