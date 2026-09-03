@@ -180,6 +180,27 @@ for (const q of all) {
       failures.push(`${q.id}: raw control character in ${label} (an escaping accident?)`);
     if (label.startsWith("option") && text.includes("\n"))
       failures.push(`${q.id}: newline inside ${label}`);
+
+    /*
+     * A LITERAL backslash-n, which reaches the screen as two characters.
+     *
+     * `MathText` splits on a real newline. 32 GRE quantitative prompts stored
+     * the two-character form, so a third of that section rendered
+     * "10 pi.\\nQuantity A:" to the candidate. The raw-control-character check
+     * above cannot see it, because a backslash and an n are both ordinary
+     * printable characters.
+     *
+     * The cause was an authoring instruction that asked for "a real
+     * two-character backslash-n in the JSON string", which is precisely the
+     * broken form. \\t and \\r are included because the same slip produces them.
+     */
+    // OUTSIDE math spans only. Inside one a backslash starts a LaTeX
+    // command, and \times, \neq and \right all match a naive test:
+    // that version produced 93 false positives across the existing banks.
+    if (/\\[nrt]/.test(text.replace(/\$[^$]*\$/g, " ")))
+      failures.push(
+        `${q.id}: literal backslash-escape in ${label} — it prints as text, use a real newline`
+      );
   }
 
   // A bare "$" outside a math span is a currency amount that will be mis-parsed
@@ -395,6 +416,105 @@ for (const c of clustered) {
   );
 }
 
+/* ------------------------------------------ multi-select key positions ---- */
+
+/*
+ * WHERE THE KEYS SIT ON A MULTI-SELECT QUESTION, which nothing checked until
+ * the GRE made a quarter of a bank multi-select.
+ *
+ * Every statistic above reads `correctIndex`, so a question with
+ * `correctIndices` was invisible to all of them. That is not a small gap: GRE
+ * Sentence Equivalence is 27 of 96 verbal questions, and it is the type where a
+ * position habit pays best, because a blind guess is 1 in 15 rather than 1 in 5.
+ *
+ * The measured bias when this check was written: of 27 Sentence Equivalence
+ * items, 23 had one key in the first three options and one in the last three,
+ * 4 had both in the front, and ZERO had both in the back, against a chance
+ * split of roughly 60/20/20. A candidate who simply never guessed a
+ * both-in-the-back-half pair went from 6.7% to 11.1% without reading a word.
+ * Separately the pair (2nd, 4th) alone was the key in 7 of 27, so guessing that
+ * one pair every time scored 25.9%.
+ *
+ * Two checks, because they catch different things. The first is the direct
+ * analogue of "always pick slot 1": how well does the best single fixed guess
+ * do? The second catches a STRUCTURAL habit that no single pair reveals, which
+ * is exactly what the front/back skew was.
+ */
+const multiByTopic = new Map();
+for (const q of all) {
+  if (kindOf(q) !== "multi") continue;
+  if (!Array.isArray(q.correctIndices) || q.selectExactly == null) continue;
+  const key = `${q.__bank} / ${q.topic}`;
+  if (!multiByTopic.has(key)) multiByTopic.set(key, []);
+  multiByTopic.get(key).push({
+    n: optionsOf(q).length,
+    idx: [...q.correctIndices].sort((a, b) => a - b),
+  });
+}
+
+if (multiByTopic.size > 0) console.log("\nMulti-select key positions");
+for (const [key, items] of multiByTopic) {
+  const n = items[0].n;
+  const k = items[0].idx.length;
+  // Chance of guessing one fixed key set, and the three structural buckets.
+  const combos = (() => {
+    let c = 1;
+    for (let i = 0; i < k; i += 1) c = (c * (n - i)) / (i + 1);
+    return Math.round(c);
+  })();
+
+  const pairCounts = new Map();
+  const buckets = { front: 0, back: 0, split: 0 };
+  const half = Math.floor(n / 2);
+  for (const it of items) {
+    const sig = it.idx.join(",");
+    pairCounts.set(sig, (pairCounts.get(sig) ?? 0) + 1);
+    const inFront = it.idx.filter((i) => i < half).length;
+    if (inFront === it.idx.length) buckets.front += 1;
+    else if (inFront === 0) buckets.back += 1;
+    else buckets.split += 1;
+  }
+  const [topSig, topCount] = [...pairCounts].sort((a, b) => b[1] - a[1])[0];
+  const bestShare = pct(topCount, items.length);
+  console.log(
+    `  ${key.padEnd(40)} n=${items.length}  best fixed guess ${fmt(bestShare)} ` +
+      `(chance ${fmt(pct(1, combos))}, set ${topSig})  front/back/split ` +
+      `${buckets.front}/${buckets.back}/${buckets.split}`
+  );
+
+  // Under 10 questions any of this is noise.
+  if (items.length < 10) continue;
+
+  /*
+   * The band is generous on purpose. This is a small sample and the point is to
+   * catch a HABIT, not to demand a flat distribution: 20% against a 6.7%
+   * chance is already three times better than reading the question.
+   */
+  if (bestShare > 20) {
+    failures.push(
+      `${key}: one key set (${topSig}) is the answer ${fmt(bestShare)} of the time ` +
+        `(chance ${fmt(pct(1, combos))}) — guessable without reading`
+    );
+  }
+
+  /*
+   * A structural habit hides from the check above, because it is spread over
+   * several key sets. Both halves must actually be used: an author who always
+   * puts one key early and one late leaves "never guess two late" on the table.
+   */
+  for (const [name, count] of [
+    ["both in the first half", buckets.front],
+    ["both in the second half", buckets.back],
+  ]) {
+    if (pct(count, items.length) < 5) {
+      failures.push(
+        `${key}: ${count} of ${items.length} questions have ${name} — ` +
+          `a candidate who never guesses that shape gains, so the positions are not really shuffled`
+      );
+    }
+  }
+}
+
 /* --------------------------------------------------------- British spelling */
 
 /*
@@ -467,6 +587,39 @@ for (const r of rows.slice(0, -1)) {
         `${r.name}: slot ${i + 1} is the key ${fmt(p)} of the time (want ${lo}-${hi}% at n=${r.singleN})`
       );
   });
+}
+
+/*
+ * PER BANK, and with a FLOOR as well as a ceiling.
+ *
+ * Both halves of that were holes. The ceiling was asserted on the ALL row only,
+ * so adding 192 GRE questions diluted it: bank-wide "longest is the key" fell
+ * from 20.4% to 14.8% and a future regression in one NMAT file gained six points
+ * of headroom under the same threshold.
+ *
+ * The floor matters more, and it exists because THIS PROJECT CAUSED THE PROBLEM
+ * IT CATCHES. The GRE authors were told the key must not be the longest option,
+ * and they complied absolutely: 0 of 53 prose questions, against 20% by chance
+ * on a five-option set. "Never pick the longest" is then a free elimination on
+ * every question, which is worth as much to a guesser as "always pick the
+ * longest" would be. An instruction to avoid a tell produced its mirror image.
+ *
+ * The band is generous because the samples are small, and the point is to catch
+ * a HABIT rather than to demand a flat distribution.
+ */
+for (const r of rows.slice(0, -1)) {
+  const [hit, n] = r.longest;
+  if (n < 20) continue;
+  const share = pct(hit, n);
+  if (share > 33)
+    failures.push(
+      `${r.name}: the key is the longest option ${fmt(share)} of the time (${hit}/${n}) — too often`
+    );
+  if (share < 8)
+    failures.push(
+      `${r.name}: the key is the longest option ${fmt(share)} of the time (${hit}/${n}) — too rarely, ` +
+        `so "never pick the longest" is a free elimination`
+    );
 }
 
 const [longHit, longN] = total.longest;

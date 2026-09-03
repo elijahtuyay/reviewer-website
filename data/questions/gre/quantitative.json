@@ -4,7 +4,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "easy",
-    "prompt": "$x = 3$\\nQuantity A: $2x + 5$\\nQuantity B: $x + 7$",
+    "prompt": "$x = 3$\nQuantity A: $2x + 5$\nQuantity B: $x + 7$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -20,7 +20,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "medium",
-    "prompt": "$0 < y < 1$\\nQuantity A: $y$\\nQuantity B: $y^2$",
+    "prompt": "$0 < y < 1$\nQuantity A: $y$\nQuantity B: $y^2$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -36,7 +36,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "medium",
-    "prompt": "The average (arithmetic mean) of 5 numbers is 12. The average of 3 of those numbers is 15.\\nQuantity A: The average of the other 2 numbers\\nQuantity B: $8$",
+    "prompt": "The average (arithmetic mean) of 5 numbers is 12. The average of 3 of those numbers is 15.\nQuantity A: The average of the other 2 numbers\nQuantity B: $8$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -52,7 +52,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "medium",
-    "prompt": "Quantity A: The number of distinct prime factors of $210$\\nQuantity B: The number of distinct prime factors of $2310$",
+    "prompt": "Quantity A: The number of distinct prime factors of $210$\nQuantity B: The number of distinct prime factors of $2310$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -68,7 +68,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "hard",
-    "prompt": "$x \\neq 0$\\nQuantity A: $\\frac{x^6}{x^2}$\\nQuantity B: $(x^2)^2$",
+    "prompt": "$x \neq 0$\nQuantity A: $\\frac{x^6}{x^2}$\nQuantity B: $(x^2)^2$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -84,7 +84,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "easy",
-    "prompt": "In triangle $PQR$, the measure of angle $P$ is 40 degrees and the measure of angle $Q$ is 65 degrees.\\nQuantity A: The measure of angle $R$, in degrees\\nQuantity B: $75$",
+    "prompt": "In triangle $PQR$, the measure of angle $P$ is 40 degrees and the measure of angle $Q$ is 65 degrees.\nQuantity A: The measure of angle $R$, in degrees\nQuantity B: $75$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -100,7 +100,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "hard",
-    "prompt": "A rectangle has a perimeter of 24.\\nQuantity A: The area of the rectangle\\nQuantity B: $36$",
+    "prompt": "A rectangle has a perimeter of 24.\nQuantity A: The area of the rectangle\nQuantity B: $36$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -116,7 +116,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "hard",
-    "prompt": "$xy > 0$ and $x + y = -6$\\nQuantity A: $x$\\nQuantity B: $-3$",
+    "prompt": "$xy > 0$ and $x + y = -6$\nQuantity A: $x$\nQuantity B: $-3$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -132,7 +132,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "hard",
-    "prompt": "$k \\neq 0$\\nQuantity A: $k^2$\\nQuantity B: $k^3$",
+    "prompt": "$k \neq 0$\nQuantity A: $k^2$\nQuantity B: $k^3$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -375,7 +375,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "easy",
-    "prompt": "$n$ is a positive integer and $3n = 51$.\\nQuantity A: $n$\\nQuantity B: $16$",
+    "prompt": "$n$ is a positive integer and $3n = 51$.\nQuantity A: $n$\nQuantity B: $16$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -391,7 +391,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "medium",
-    "prompt": "$-1 < w < 0$\\nQuantity A: $w^3$\\nQuantity B: $w^2$",
+    "prompt": "$-1 < w < 0$\nQuantity A: $w^3$\nQuantity B: $w^2$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -407,7 +407,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "medium",
-    "prompt": "A circle has a circumference of $10\\pi$.\\nQuantity A: the area of the circle\\nQuantity B: $25\\pi$",
+    "prompt": "A circle has a circumference of $10\\pi$.\nQuantity A: the area of the circle\nQuantity B: $25\\pi$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -423,7 +423,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "medium",
-    "prompt": "$a$ and $b$ are nonzero numbers and $a > b$.\\nQuantity A: $a^2$\\nQuantity B: $b^2$",
+    "prompt": "$a$ and $b$ are nonzero numbers and $a > b$.\nQuantity A: $a^2$\nQuantity B: $b^2$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -439,7 +439,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "hard",
-    "prompt": "$f$ is the function defined by $f(x) = x^2 - 6x + k$, where $k$ is a constant. The graph of $f$ in the $xy$-plane crosses the $x$-axis at two distinct points.\\nQuantity A: $k$\\nQuantity B: $0$",
+    "prompt": "$f$ is the function defined by $f(x) = x^2 - 6x + k$, where $k$ is a constant. The graph of $f$ in the $xy$-plane crosses the $x$-axis at two distinct points.\nQuantity A: $k$\nQuantity B: $0$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -455,7 +455,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "medium",
-    "prompt": "In the $xy$-plane, point $P$ is at $(-2, 5)$ and point $Q$ is at $(4, -3)$.\\nQuantity A: the distance from $P$ to $Q$\\nQuantity B: $10$",
+    "prompt": "In the $xy$-plane, point $P$ is at $(-2, 5)$ and point $Q$ is at $(4, -3)$.\nQuantity A: the distance from $P$ to $Q$\nQuantity B: $10$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -471,7 +471,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "hard",
-    "prompt": "List X: 3, 5, 7, 9, 11\\nList Y: 4, 5, 7, 9, 10\\nQuantity A: the standard deviation of List X\\nQuantity B: the standard deviation of List Y",
+    "prompt": "List X: 3, 5, 7, 9, 11\nList Y: 4, 5, 7, 9, 10\nQuantity A: the standard deviation of List X\nQuantity B: the standard deviation of List Y",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -487,7 +487,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "hard",
-    "prompt": "$x > 1$\\nQuantity A: $\\frac{x}{x+1}$\\nQuantity B: $\\frac{x+1}{x+2}$",
+    "prompt": "$x > 1$\nQuantity A: $\\frac{x}{x+1}$\nQuantity B: $\\frac{x+1}{x+2}$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -503,7 +503,7 @@
     "section": "quantitative",
     "topic": "Data Interpretation",
     "difficulty": "easy",
-    "prompt": "A store recorded the number of bicycles it sold in each of four months.\\nMonth: Bicycles sold\\nMarch: 120\\nApril: 150\\nMay: 180\\nJune: 90\\n\\nWhat was the average (arithmetic mean) number of bicycles sold per month over these four months?",
+    "prompt": "A store recorded the number of bicycles it sold in each of four months.\nMonth: Bicycles sold\nMarch: 120\nApril: 150\nMay: 180\nJune: 90\n\nWhat was the average (arithmetic mean) number of bicycles sold per month over these four months?",
     "options": [
       "135",
       "140",
@@ -520,7 +520,7 @@
     "section": "quantitative",
     "topic": "Data Interpretation",
     "difficulty": "easy",
-    "prompt": "A library recorded the number of books it lent in one week, by category.\\nCategory: Books lent\\nFiction: 240\\nHistory: 150\\nScience: 130\\nPoetry: 80\\n\\nBooks in the Fiction category were what percent of all the books lent that week?",
+    "prompt": "A library recorded the number of books it lent in one week, by category.\nCategory: Books lent\nFiction: 240\nHistory: 150\nScience: 130\nPoetry: 80\n\nBooks in the Fiction category were what percent of all the books lent that week?",
     "options": [
       "20%",
       "24%",
@@ -537,7 +537,7 @@
     "section": "quantitative",
     "topic": "Data Interpretation",
     "difficulty": "medium",
-    "prompt": "A company reported its annual revenue, in millions of dollars, for four years.\\nYear: Revenue\\n2018: 44\\n2019: 55\\n2020: 48\\n2021: 66\\n\\nThe revenue in 2021 was what percent greater than the revenue in 2019?",
+    "prompt": "A company reported its annual revenue, in millions of dollars, for four years.\nYear: Revenue\n2018: 44\n2019: 55\n2020: 48\n2021: 66\n\nThe revenue in 2021 was what percent greater than the revenue in 2019?",
     "options": [
       "37.5%",
       "20%",
@@ -554,7 +554,7 @@
     "section": "quantitative",
     "topic": "Data Interpretation",
     "difficulty": "medium",
-    "prompt": "A regional office recorded the number of support tickets it closed in one week, by channel.\\nChannel: Tickets closed\\nPhone: 540\\nEmail: 360\\nChat: 180\\nIn person: 120\\n\\nThe number of tickets closed by phone was how many times the number closed by chat?",
+    "prompt": "A regional office recorded the number of support tickets it closed in one week, by channel.\nChannel: Tickets closed\nPhone: 540\nEmail: 360\nChat: 180\nIn person: 120\n\nThe number of tickets closed by phone was how many times the number closed by chat?",
     "options": [
       "1.5",
       "2",
@@ -571,7 +571,7 @@
     "section": "quantitative",
     "topic": "Data Interpretation",
     "difficulty": "medium",
-    "prompt": "A school recorded its enrollment in three programs in two different years.\\nProgram: 2022 enrollment: 2023 enrollment\\nArts: 240: 300\\nScience: 400: 360\\nTrades: 160: 240\\n\\nWhich program had the greatest percent increase from 2022 to 2023, and what was that percent increase?",
+    "prompt": "A school recorded its enrollment in three programs in two different years.\nProgram: 2022 enrollment: 2023 enrollment\nArts: 240: 300\nScience: 400: 360\nTrades: 160: 240\n\nWhich program had the greatest percent increase from 2022 to 2023, and what was that percent increase?",
     "options": [
       "Arts, 25%",
       "Arts, 60%",
@@ -588,7 +588,7 @@
     "section": "quantitative",
     "topic": "Data Interpretation",
     "difficulty": "hard",
-    "prompt": "A distributor sold three product lines in one quarter.\\nProduct line: Units sold: Price per unit (dollars)\\nAlpha: 1,200: 15\\nBeta: 800: 25\\nGamma: 400: 30\\n\\nRevenue from Gamma was what percent of the total revenue from the three lines?",
+    "prompt": "A distributor sold three product lines in one quarter.\nProduct line: Units sold: Price per unit (dollars)\nAlpha: 1,200: 15\nBeta: 800: 25\nGamma: 400: 30\n\nRevenue from Gamma was what percent of the total revenue from the three lines?",
     "options": [
       "16.7%",
       "30%",
@@ -605,7 +605,7 @@
     "section": "quantitative",
     "topic": "Data Interpretation",
     "difficulty": "hard",
-    "prompt": "A store recorded the number of items sold and the average price per item, in dollars, in each of three departments on one day.\\nDepartment: Items sold: Average price per item\\nGarden: 40: 12\\nKitchen: 60: 20\\nHardware: 100: 8\\n\\nWhat was the average price per item across all the items sold that day, in dollars?",
+    "prompt": "A store recorded the number of items sold and the average price per item, in dollars, in each of three departments on one day.\nDepartment: Items sold: Average price per item\nGarden: 40: 12\nKitchen: 60: 20\nHardware: 100: 8\n\nWhat was the average price per item across all the items sold that day, in dollars?",
     "options": [
       "12.40",
       "13.33",
@@ -736,9 +736,9 @@
     "topic": "Numeric Entry",
     "difficulty": "hard",
     "kind": "numeric",
-    "prompt": "The average (arithmetic mean) of 6 numbers is 14. One of the numbers is removed, and the average of the remaining 5 numbers is 15. What is the value of the number that was removed?",
-    "correctValue": 9,
-    "explanation": "The 6 numbers total $6 \\times 14 = 84$, and the 5 that remain total $5 \\times 15 = 75$. The number removed is the difference, $84 - 75 = 9$. Because the average rose after the removal, the missing number has to be below the original average of 14, so any answer above 14 contradicts the setup.",
+    "prompt": "A list of 5 numbers has a mean of 12 and a median of 11. The two smallest numbers are 4 and 7, and the largest is 20. What is the remaining number?",
+    "correctValue": 18,
+    "explanation": "The 5 numbers sum to $5 \\times 12 = 60$. With 5 numbers the median is the third one when they are in order, so 11 is in the list. The four known values 4, 7, 11 and 20 sum to 42, so the remaining number is $60 - 42 = 18$. That is consistent, because 18 sits between the median and the largest value. Treating the median as the mean of the middle two values is the usual error, and it applies only when the count is even.",
     "source": "original"
   },
   {
@@ -758,7 +758,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "easy",
-    "prompt": "Quantity A: $\\sqrt{4} + \\sqrt{9}$\\nQuantity B: $\\sqrt{25}$",
+    "prompt": "Quantity A: $\\sqrt{4} + \\sqrt{9}$\nQuantity B: $\\sqrt{25}$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -774,7 +774,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "medium",
-    "prompt": "$|m| = 8$\\nQuantity A: $m$\\nQuantity B: $-8$",
+    "prompt": "$|m| = 8$\nQuantity A: $m$\nQuantity B: $-8$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -790,7 +790,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "medium",
-    "prompt": "$0 < r < \\frac{1}{3}$\\nQuantity A: $\\frac{1}{r}$\\nQuantity B: $r + 2$",
+    "prompt": "$0 < r < \\frac{1}{3}$\nQuantity A: $\\frac{1}{r}$\nQuantity B: $r + 2$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -806,7 +806,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "hard",
-    "prompt": "$y$ is a number and $2 < y < 4$.\\nQuantity A: $y^2$\\nQuantity B: $9$",
+    "prompt": "$y$ is a number and $2 < y < 4$.\nQuantity A: $y^2$\nQuantity B: $9$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -822,7 +822,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "medium",
-    "prompt": "Points $P$, $Q$, and $R$ lie on a line in that order, in a figure that is not drawn to scale. $PQ = 3x$, $QR = x + 8$, and $PR = 20$.\\nQuantity A: $PQ$\\nQuantity B: $QR$",
+    "prompt": "Points $P$, $Q$, and $R$ lie on a line in that order, in a figure that is not drawn to scale. $PQ = 3x$, $QR = x + 8$, and $PR = 20$.\nQuantity A: $PQ$\nQuantity B: $QR$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -838,7 +838,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "hard",
-    "prompt": "In triangle $ABC$, the measure of angle $A$ is 59 degrees and the measure of angle $B$ is 61 degrees. No figure is provided.\\nQuantity A: the length of side $BC$\\nQuantity B: the length of side $AC$",
+    "prompt": "In triangle $ABC$, the measure of angle $A$ is 59 degrees and the measure of angle $B$ is 61 degrees. No figure is provided.\nQuantity A: the length of side $BC$\nQuantity B: the length of side $AC$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -854,7 +854,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "medium",
-    "prompt": "Quantity A: 15 percent of 80\\nQuantity B: 80 percent of 15",
+    "prompt": "Quantity A: 15 percent of 80\nQuantity B: 80 percent of 15",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -870,7 +870,7 @@
     "section": "quantitative",
     "topic": "Quantitative Comparison",
     "difficulty": "hard",
-    "prompt": "List $L$ consists of the numbers 2, 3, 4, 5, and 46.\\nQuantity A: the mean of List $L$\\nQuantity B: the median of List $L$",
+    "prompt": "List $L$ consists of the numbers 2, 3, 4, 5, and 46.\nQuantity A: the mean of List $L$\nQuantity B: the median of List $L$",
     "options": [
       "Quantity A is greater.",
       "Quantity B is greater.",
@@ -1429,16 +1429,16 @@
     "section": "quantitative",
     "topic": "Problem Solving",
     "difficulty": "medium",
-    "prompt": "Of the 120 students in a school year, 70 take biology, 55 take chemistry, and 20 take neither subject. How many students take both biology and chemistry?",
+    "prompt": "A committee of 3 people is chosen from a group of 4 teachers and 3 parents. How many different committees include at least one parent?",
     "options": [
-      "5",
-      "25",
+      "18",
+      "31",
       "30",
-      "45",
-      "100"
+      "35",
+      "4"
     ],
     "correctIndex": 1,
-    "explanation": "Since $20$ students take neither subject, $120 - 20 = 100$ take at least one, so the overlap is $70 + 55 - 100 = 25$. Subtracting from $120$ instead of from $100$ ignores the students outside both subjects and gives $5$. The values $45$ and $30$ are the students who take only biology and only chemistry.",
+    "explanation": "Count all committees and remove the ones with no parent. There are $\\frac{7 \\times 6 \\times 5}{3 \\times 2 \\times 1} = 35$ committees of 3 from the 7 people, and $\\frac{4 \\times 3 \\times 2}{3 \\times 2 \\times 1} = 4$ of them use only teachers, so $35 - 4 = 31$ include at least one parent. Counting only the committees with exactly one parent gives 18 and misses the committees with two or three parents. Adding just the one-parent and two-parent cases gives 30 and misses the all-parent committee.",
     "source": "original"
   },
   {

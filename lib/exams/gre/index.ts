@@ -119,7 +119,9 @@ const gre: ExamModule = {
     allowSkip: true,
     adaptive: null,
     reviewEdit: null,
-    sectionOrder: "chooseable",
+    // You choose here. The real exam does not let you: it fixes the writing
+    // task first and then orders the remaining sections itself.
+    sectionOrder: "chooseable-here-only",
     lockToOneSection: true,
     // The shortened test has no scheduled break.
     optionalBreakMinutes: null,
@@ -141,7 +143,17 @@ const gre: ExamModule = {
     min: SCORE_MIN,
     max: SCORE_MAX,
     difficultyWeight: { easy: 1, medium: 2, hard: 3.2 },
-    unansweredPenaltyPerQuestion: 0.02,
+    /*
+     * ZERO, because the real GRE has no penalty of any kind: an omitted
+     * question and a wrong one are both simply worth nothing.
+     *
+     * The GMAT's 0.02 models a real behavior of that exam. Copying it here
+     * produced a generated bullet reading "a question you never reach costs you
+     * more than an incorrect answer", in a list whose other entries describe the
+     * real exam, which was false. An unanswered question already costs its own
+     * points, so the pacing lesson survives without inventing a penalty.
+     */
+    unansweredPenaltyPerQuestion: 0,
     scoreStep: 1,
     /*
      * "served", because this exam is NOT adaptive: the 27 questions are a plain

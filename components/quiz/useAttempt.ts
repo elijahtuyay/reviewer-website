@@ -367,11 +367,25 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
   }, [phase, questionIds]);
 
   // ----------------------------------------------------------------- derive --
-  // isAnswered, not a null check: an empty numeric entry is a string, and an
-  // untouched multi-select is an empty array. Both are truthy objects that a
-  // null check counts as answers, which would have reported a section as fully
-  // answered before the candidate typed anything.
-  const answeredCount = Object.values(answers).filter(isAnswered).length;
+  /*
+   * isComplete, not isAnswered, and the difference is a section's worth of work.
+   *
+   * `isAnswered` means "the candidate touched this". `isComplete` means "this is
+   * a usable answer": a Sentence Equivalence needs BOTH of its two picks, and a
+   * numeric entry needs text that parses as a number.
+   *
+   * Counting with isAnswered made a half-finished section report 27/27. That
+   * number is not cosmetic: FreeFormRunner opens the "you have unanswered
+   * questions" confirmation only when the count is short of the total, so with
+   * one pick on every select-two question and "abc" in a numeric box, the button
+   * read "Submit (27/27 answered)" and a single click submitted, no dialog, with
+   * a third of the section thrown away. The guard that exists to prevent exactly
+   * that was disarmed by the two question kinds this exam adds.
+   *
+   * `isAnswered` survives only where the question is "has this been touched",
+   * which is the progress grid's fill.
+   */
+  const answeredCount = questions.filter((q) => isComplete(q, answers[q.id])).length;
 
   const result = useMemo(() => {
     if (phase !== "done") return null;

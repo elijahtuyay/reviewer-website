@@ -26,7 +26,7 @@
       "distinguish fungal partners from algal ones without magnification",
       "predict the level of sulfur dioxide that the site will carry in future",
       "show that tolerant crusts grow faster than the species they replaced",
-      "reveal air quality at the site during a period no instrument recorded",
+      "reveal the air quality at the site during a period that no instrument recorded",
       "establish that no lichen species has ever recolonized a cleaned wall"
     ],
     "correctIndex": 3,
@@ -214,10 +214,10 @@
       "adverse",
       "transient",
       "notorious",
-      "salutary"
+      "restorative"
     ],
     "correctIndex": 4,
-    "explanation": "The word but sets the second clause against a negligible effect, and the influence described is one that justifies keeping the drug in use, so it must be a beneficial one. Salutary means producing a good effect, especially on health. An adverse influence would argue for withdrawing the drug, and a spurious one would be no reason to keep it at all.",
+    "explanation": "The word but sets the second clause against a negligible effect, and the influence described is one that justifies keeping the drug in use, so it must be a beneficial one. Restorative means acting to repair or renew health, which is what a drug that improves sleep is doing. An adverse influence would argue for withdrawing the drug, and a spurious one would be no reason to keep it at all.",
     "source": "original"
   },
   {
@@ -264,11 +264,11 @@
       "adroit",
       "affable",
       "impartial",
-      "obdurate",
+      "intransigent",
       "ingenuous"
     ],
     "correctIndex": 3,
-    "explanation": "For all his reputation signals that the ambassador's conduct contradicts the reputation, and what he did was give up positions he had sworn to hold. The reputation must therefore be for refusing to yield, which is what obdurate means. An adroit negotiator who conceded quickly would be surprising to nobody, since skilled negotiators trade positions on purpose.",
+    "explanation": "For all his reputation signals that the ambassador's conduct contradicts the reputation, and what he did was give up positions he had sworn to hold. The reputation must therefore be for refusing to yield, which is what intransigent means. An adroit negotiator who conceded quickly would surprise nobody, since skilled negotiators trade positions on purpose.",
     "source": "original"
   },
   {
@@ -294,21 +294,21 @@
     "topic": "Sentence Equivalence",
     "difficulty": "easy",
     "kind": "multi",
-    "prompt": "The mayor's account of the incident was so ______ that reporters left the briefing with less understanding of the events than they had brought into the room.",
+    "prompt": "Funding for the observatory was ______ from its first year, and the director spent more evenings writing applications for grants than looking through the telescope.",
     "options": [
-      "candid",
-      "muddled",
-      "lengthy",
-      "rehearsed",
-      "confused",
-      "detailed"
+      "meager",
+      "scant",
+      "restricted",
+      "generous",
+      "delayed",
+      "anonymous"
     ],
     "correctIndices": [
-      1,
-      4
+      0,
+      1
     ],
     "selectExactly": 2,
-    "explanation": "Reporters who understand less afterward have been given an account that is disordered, and muddled and confused both describe an account that lacks clear order. Lengthy and rehearsed each fit the grammar and are tempting given the setting, but a long or well-practiced account can be perfectly clear, so neither produces the result the sentence reports. Candid and detailed point the other way entirely, toward more understanding rather than less.",
+    "explanation": "A director who spends more evenings raising money than observing is working with too little of it, and meager and scant both mean present in too small a quantity. Restricted and delayed each fit the grammar, but money that must be spent on named items, or that arrives late, can still be plentiful, and neither word has a partner in the list. Generous reverses the sentence, and anonymous describes who gave the money rather than how much of it there was.",
     "source": "original"
   },
   {
@@ -321,14 +321,14 @@
     "options": [
       "repudiate",
       "reiterate",
-      "publicize",
       "disavow",
+      "publicize",
       "endorse",
       "corroborate"
     ],
     "correctIndices": [
       0,
-      3
+      2
     ],
     "selectExactly": 2,
     "explanation": "Evidence that forces a panel to act against a conclusion it had long defended must make the panel give that conclusion up, and repudiate and disavow both mean to reject something one had previously asserted. Reiterate and endorse fit the grammar but reverse the meaning, leaving the panel restating the very conclusion the new evidence undermines. Publicize and corroborate leave the conclusion standing and so do not answer to the word forced.",
@@ -342,16 +342,16 @@
     "kind": "multi",
     "prompt": "Although the new drainage system did not solve the flooding, it did ______ the damage in the streets nearest the river.",
     "options": [
+      "mitigate",
       "eliminate",
       "document",
-      "mitigate",
+      "ameliorate",
       "aggravate",
-      "redistribute",
-      "ameliorate"
+      "redistribute"
     ],
     "correctIndices": [
-      2,
-      5
+      0,
+      3
     ],
     "selectExactly": 2,
     "explanation": "Although concedes that the problem persists while granting the system some partial success, so the blank calls for making the damage less severe without removing it. Mitigate and ameliorate both carry that sense. Eliminate fits the grammar but contradicts the concession, since a system that ended the damage would have solved the flooding, and aggravate makes the system harmful rather than partly helpful.",
@@ -365,16 +365,16 @@
     "kind": "multi",
     "prompt": "Her manner under cross-examination was ______: she answered every question fully, corrected the record twice, and never once raised her voice.",
     "options": [
-      "combative",
       "composed",
+      "combative",
       "evasive",
-      "unruffled",
       "imperious",
+      "unruffled",
       "condescending"
     ],
     "correctIndices": [
-      1,
-      3
+      0,
+      4
     ],
     "selectExactly": 2,
     "explanation": "The colon lists behavior that is cooperative and free of agitation, and composed and unruffled both describe a person who stays calm under pressure. Combative and imperious fit the grammar but describe a witness fighting the questioner, which the full answers and the level voice rule out. Evasive is contradicted by the detail that she answered every question fully.",
@@ -392,12 +392,12 @@
       "reverent",
       "wistful",
       "credulous",
-      "mordant",
-      "effusive"
+      "effusive",
+      "mordant"
     ],
     "correctIndices": [
       0,
-      4
+      5
     ],
     "selectExactly": 2,
     "explanation": "Praise worded so that it exposes a failure is mockery dressed as compliment, and sardonic and mordant both name a scornful, cutting tone of that kind. Reverent and effusive fit the grammar but describe unmixed admiration, which cannot make a failure unmistakable. Credulous would mean the critic was taken in by the novel, the opposite of a reviewer who sees through it.",
@@ -412,15 +412,15 @@
     "prompt": "Years of drought had left the region's governing bodies ______, still capable of issuing directives but no longer of enforcing any of them.",
     "options": [
       "insolvent",
-      "dormant",
       "enfeebled",
-      "autonomous",
       "debilitated",
+      "dormant",
+      "autonomous",
       "unaccountable"
     ],
     "correctIndices": [
-      2,
-      4
+      1,
+      2
     ],
     "selectExactly": 2,
     "explanation": "Bodies that can still issue orders but cannot enforce them have lost their strength without losing their existence, and enfeebled and debilitated both mean weakened in exactly that way. Dormant fits the grammar but says the bodies are inactive, which the continued issuing of directives contradicts. Insolvent names one possible cause of the weakness rather than the condition described, and unaccountable describes how the bodies answer for themselves rather than how much power they retain.",
@@ -437,13 +437,13 @@
       "pretext",
       "fixation",
       "misgiving",
+      "obsession",
       "anecdote",
-      "justification",
-      "obsession"
+      "justification"
     ],
     "correctIndices": [
       1,
-      5
+      3
     ],
     "selectExactly": 2,
     "explanation": "A grievance that swells until it governs every career decision has become a preoccupation the man cannot set aside, and fixation and obsession both name that condition. Anecdote fits the grammar and suits the retelling, but a story told often is not something that governs decisions. Misgiving is far too mild for a feeling of that force, and pretext would make the grievance an excuse rather than a driving concern.",
@@ -454,16 +454,16 @@
     "section": "verbal",
     "topic": "Reading Comprehension",
     "difficulty": "easy",
-    "prompt": "Passage: \"Lichens are not single organisms but partnerships, usually between a fungus and an alga. The fungus supplies structure and holds moisture, while the alga photosynthesizes and supplies sugars. Because neither partner can occupy bare rock alone, the pairing lets lichens colonize surfaces that other organisms cannot use. That ability has made lichens useful to researchers who date exposed rock. The slow, fairly regular growth of certain species allows a rough estimate of how long a boulder has lain undisturbed. The method has limits. Growth rates vary with local moisture and temperature, and a colony can be damaged and regrow, which resets the apparent clock. Researchers therefore treat lichen measurements as a supplement to other dating techniques rather than as a substitute for them.\" According to the passage, lichen measurements are treated as supplementary chiefly because:",
+    "prompt": "Passage: \"Salt marshes sit between the tide and the land, and coastal engineers have begun to count them as storm defenses. A marsh slows a surge in two ways: the stems drag against moving water, and the soft ground takes up some of what arrives. Measurements along the Gulf coast suggest that a wide marsh can lower the height of a surge by a useful fraction before the water reaches a seawall. The protection is not unconditional. A narrow marsh does very little, and a marsh cut through by navigation channels can even carry water inland faster than open ground would. Planners who treat any marsh at all as a defense therefore overstate the case. The useful question is which marshes, of what width, and in what condition.\" According to the passage, the protection a salt marsh offers depends chiefly on:",
     "options": [
-      "the fungal partner grows more slowly than the algal partner does",
-      "few researchers have been trained to identify the relevant lichen species",
-      "lichens rarely colonize the rock surfaces of greatest interest",
-      "growth rate depends on conditions and colonies can be disturbed",
-      "photosynthesis stops permanently once a colony has been damaged"
+      "the height of the seawall that stands behind it",
+      "the number of navigation channels dredged along the whole Gulf coast",
+      "the speed at which its stems grow back after a storm has passed",
+      "its width and whether channels have been cut through it",
+      "the depth of the water that covers it at an ordinary high tide"
     ],
     "correctIndex": 3,
-    "explanation": "The passage states that growth rates vary with local moisture and temperature and that a damaged colony can regrow, resetting the apparent clock. Those two facts are exactly what makes the method a supplement rather than a substitute. The passage never compares the growth speeds of the two partners, and it says lichens colonize surfaces other organisms cannot use, so the idea that they avoid the rocks of interest reverses the point.",
+    "explanation": "The passage says that a narrow marsh does very little and that a marsh cut through by navigation channels can carry water inland faster, so width and condition are what decide whether a marsh defends anything. The seawall appears only as what the surge reaches afterward. Nothing in the passage bears on how fast stems grow back or on how deep the ordinary tide runs.",
     "source": "original"
   },
   {
@@ -508,7 +508,7 @@
     "prompt": "Passage: \"Economists have reported that recycling participation rises when a city replaces a per bag trash fee with a flat monthly charge. The standard account credits convenience: residents freed from counting bags stop hoarding waste and sort more of it. Frei's study of eleven midsized cities complicates that account. In every case the switch to a flat charge arrived together with the delivery of larger recycling bins, and Frei found that participation tracked bin capacity closely while showing no consistent relation to the fee structure. Where a city altered only its fee, participation barely moved. Where a city enlarged bins without touching fees, participation rose about as much as it did under the paired change. Frei stops short of calling the fee irrelevant, noting that no city in the sample raised fees while enlarging bins.\" Frei's closing observation, that no city raised fees while enlarging bins, serves to:",
     "options": [
       "identify a city that contradicts the bin capacity finding",
-      "acknowledge a combination of changes the study could not evaluate",
+      "acknowledge a combination of changes that the study was unable to evaluate",
       "explain the mechanism by which larger bins raise participation",
       "concede that the convenience account is correct after all",
       "show that fee structure and bin capacity are measured on one scale"
@@ -522,16 +522,16 @@
     "section": "verbal",
     "topic": "Reading Comprehension",
     "difficulty": "hard",
-    "prompt": "Passage: \"Conservators who clean old paintings face a question that no amount of technical skill resolves. Varnish yellows with age, and removing it restores the colors the painter mixed. But painters knew varnish would yellow, and some are documented as having adjusted their palettes in anticipation, laying in cooler blues that a warming layer would bring toward the intended hue. On such a canvas a thorough cleaning does not recover the artist's intention. It exposes a preparatory state the artist never meant anyone to see. The difficulty is that the documentation is patchy. For most painters of the period no record of studio practice survives, and the pigments cannot tell a conservator whether a cool blue was a correction for future yellowing or simply a cool blue. Conservators clean by inference, and the inference is rarely testable.\" According to the passage, the central obstacle facing conservators is:",
+    "prompt": "Passage: \"Comparative linguists reconstruct words that no living person has heard. From regular correspondences among the sounds of related languages, they infer the form a parent word must have taken, and they mark it with an asterisk to show that it is a reconstruction rather than a record. The method is powerful where the daughter languages are many and well attested. Its results thin out as the reconstructed layer recedes, because each step backward is built on the output of the step before it, and a small error made early in the chain travels forward with no independent text to check it against. Some linguists therefore treat a deep reconstruction as shorthand for a set of correspondences rather than as a claim about a word anyone once said. Others take it literally. The dispute is not about the data, which both sides accept.\" The passage indicates that deep reconstructions are contested chiefly because:",
     "options": [
-      "the absence of solvents gentle enough to remove aged varnish",
-      "persistent disagreement among conservators about whether cleaning is ever desirable",
-      "the difficulty of knowing why a painter chose a cool pigment",
-      "the tendency of restored colors to yellow again within a few years",
-      "the refusal of museums to fund chemical analysis of period pigments"
+      "the daughter languages contradict one another about basic sounds",
+      "few linguists are now trained in the comparative method",
+      "an error made early in the chain cannot be checked against any surviving text",
+      "the asterisk convention was adopted only recently",
+      "written records of the parent language were destroyed"
     ],
     "correctIndex": 2,
-    "explanation": "The passage says a cool blue may be a deliberate correction for future yellowing or simply a cool blue, and that neither the pigments nor the surviving records can settle which. That unresolvable question is what forces conservators to clean by inference. The passage raises no problem with solvents or with funding, and it says the documentation is patchy rather than that anyone has refused to pay for analysis.",
+    "explanation": "The passage says each step backward rests on the step before it and that an early error travels forward with no independent text to catch it, so uncertainty compounds as the reconstruction goes deeper. That is the reason it gives for the disagreement, which it states is not about the data itself. It never claims the daughter languages contradict one another, and it presents the absence of a written record as a condition of the method rather than as the destruction of documents that once existed.",
     "source": "original"
   },
   {
@@ -573,16 +573,16 @@
     "section": "verbal",
     "topic": "Reading Comprehension",
     "difficulty": "hard",
-    "prompt": "Passage: \"Planners frequently cite a 1978 survey in which residents of a redeveloped district reported high satisfaction with their new housing, and they treat the result as evidence that the redevelopment succeeded. The survey was administered to households living in the district at the time it was conducted. Roughly forty percent of the households displaced by the demolition had not returned, and no attempt was made to locate them. Whatever else the survey measured, it measured the views of people for whom the new housing was, by revealed preference, acceptable. A planner who wanted evidence about the redevelopment as a whole would need the missing households, and the reason those households are missing is precisely the outcome under study.\" The passage's criticism of the survey rests chiefly on the claim that:",
+    "prompt": "Passage: \"The transit authority's case for the new line rests on a projection that the corridor will carry sixty thousand riders a day by 2040. The projection is built from current travel patterns along the corridor, adjusted for expected population growth. It is not obviously wrong, but it is doing something the authority never acknowledges. Current travel along that corridor was shaped by the absence of rail: the households that most wanted rail service moved elsewhere years ago, and the businesses that would have gathered around a station never opened. A line built through the corridor would change who lives there and what they travel for, which is the entire point of building it. A forecast that holds those things fixed is not a forecast of the line at all. It is a description of the corridor without the line.\" The passage argues that the ridership projection is flawed chiefly because it:",
     "options": [
-      "residents overstated their satisfaction in order to please the surveyors",
-      "the sample was too small to support any general conclusion",
-      "satisfaction with housing is not a meaningful thing to measure",
-      "the survey was conducted too soon after the demolition to be reliable",
-      "the people surveyed were selected by the outcome being evaluated"
+      "relies on figures for population growth that are unlikely to be achieved",
+      "counts riders who would have taken an existing bus service anyway",
+      "reaches too far into the future for any method to be reliable",
+      "was prepared by the same authority that stands to gain from approval",
+      "holds fixed the very conditions the project is meant to change"
     ],
     "correctIndex": 4,
-    "explanation": "The argument is that the surveyed group consists of households that stayed or came back, and staying is itself a favorable response to the redevelopment. The sample is therefore filtered by the very outcome the survey is supposed to assess. The complaint concerns who was counted rather than how many, and the passage says nothing about dishonest answers or about the timing of the fieldwork.",
+    "explanation": "The passage grants that the projection is not obviously wrong and objects instead that it is built from travel patterns formed by the absence of rail, then notes that the line would change who lives in the corridor and why they travel. A forecast that freezes those conditions cannot measure the effect of altering them. The passage never disputes the growth figures, and it says nothing about a bus service or about who prepared the numbers.",
     "source": "original"
   },
   {
@@ -755,16 +755,16 @@
     "kind": "multi",
     "prompt": "The instructions were so ______ that even the newest volunteers finished the setup without asking anyone for help.",
     "options": [
-      "lucid",
       "detailed",
+      "lucid",
       "concise",
-      "straightforward",
       "novel",
+      "straightforward",
       "tedious"
     ],
     "correctIndices": [
-      0,
-      3
+      1,
+      4
     ],
     "selectExactly": 2,
     "explanation": "The result clause says untrained volunteers needed no help, so the instructions must have been easy to understand. Lucid and straightforward both mean readily understood and yield the same sentence. Detailed and concise are tempting because both are praise, but a set of instructions can be long or short and still be confusing, so neither guarantees the stated result, and they would not match each other in meaning in any case.",
@@ -781,13 +781,13 @@
       "heartfelt",
       "perfunctory",
       "belated",
-      "pro forma",
       "incendiary",
-      "candid"
+      "candid",
+      "pro forma"
     ],
     "correctIndices": [
       1,
-      3
+      5
     ],
     "selectExactly": 2,
     "explanation": "The appositive describes an apology staged to close a controversy rather than to admit fault, so the blank needs a word for going through the motions. Perfunctory and pro forma both mean done as a formality and produce the same sentence. Belated fits grammatically but says the apology was late, which is a different complaint, and heartfelt and candid contradict the description outright.",
@@ -802,15 +802,15 @@
     "prompt": "Once celebrated for the boldness of her early canvases, the painter spent her last decade producing work so ______ that collectors stopped attending her openings.",
     "options": [
       "monumental",
-      "insipid",
       "contentious",
-      "prolific",
+      "insipid",
       "vapid",
+      "prolific",
       "somber"
     ],
     "correctIndices": [
-      1,
-      4
+      2,
+      3
     ],
     "selectExactly": 2,
     "explanation": "The sentence contrasts early boldness with late work that drove collectors away, so the blank calls for a word meaning dull and lacking flavor. Insipid and vapid are near synonyms in that sense and give the sentence one meaning. Contentious would explain the loss of an audience but describes work that provokes rather than bores, which reverses the contrast with boldness, and somber names a mood rather than a want of interest.",
@@ -824,16 +824,16 @@
     "kind": "multi",
     "prompt": "The proposal's supporters and its critics agree on almost nothing, so the chair's summary, which satisfied both camps, was a remarkably ______ document.",
     "options": [
-      "adroit",
       "candid",
-      "deft",
       "exhaustive",
+      "adroit",
       "partisan",
+      "deft",
       "provisional"
     ],
     "correctIndices": [
-      0,
-      2
+      2,
+      4
     ],
     "selectExactly": 2,
     "explanation": "Satisfying two camps that agree on almost nothing is a feat of skill, so the blank needs a word for skillful handling. Adroit and deft carry that sense and yield the same sentence. Partisan describes a document that would please only one side, and candid, while flattering, does not explain how a summary managed to satisfy opponents at once.",
@@ -851,12 +851,12 @@
       "meticulous",
       "untenable",
       "provisional",
-      "indefensible",
-      "derivative"
+      "derivative",
+      "indefensible"
     ],
     "correctIndices": [
       2,
-      4
+      5
     ],
     "selectExactly": 2,
     "explanation": "The reviewers accept the methods and reject the claim on the ground that it stretches one small case over a whole region, so the blank needs a word meaning impossible to sustain under scrutiny. Untenable and indefensible both carry that sense and give the sentence one meaning. Provisional is tempting because an overstretched claim is often called preliminary, but it describes a claim offered tentatively rather than one dismissed, and unremarkable faults the claim for dullness instead of for overreach.",
@@ -872,14 +872,14 @@
     "options": [
       "voluble",
       "abrasive",
-      "diffident",
       "meticulous",
-      "genial",
-      "retiring"
+      "diffident",
+      "retiring",
+      "genial"
     ],
     "correctIndices": [
-      2,
-      5
+      3,
+      4
     ],
     "selectExactly": 2,
     "explanation": "The surprise depends on a contrast between the public manner and ferocious private argument, so the blank needs a word for shrinking from notice. Diffident and retiring both describe a reserved, self effacing manner and produce the same sentence. Genial would supply a contrast of a different kind, warmth against ferocity rather than reticence against it, and abrasive removes the contrast altogether.",
@@ -894,15 +894,15 @@
     "prompt": "The essay is valuable less for its argument, which is thin, than for the ______ with which it assembles evidence that other historians had left scattered.",
     "options": [
       "brevity",
-      "assiduity",
       "detachment",
-      "diligence",
       "audacity",
-      "levity"
+      "assiduity",
+      "levity",
+      "diligence"
     ],
     "correctIndices": [
-      1,
-      3
+      3,
+      5
     ],
     "selectExactly": 2,
     "explanation": "The praise attaches to the patient gathering of evidence others had neglected, so the blank needs a word for sustained careful effort. Assiduity and diligence are synonyms in that sense and give the sentence one meaning. Audacity would praise nerve rather than labor, and detachment names an attitude toward the material rather than the effort spent collecting it.",
@@ -1001,7 +1001,7 @@
     "prompt": "Passage: \"Before official law reporting, the decisions of English judges reached the profession through volumes compiled privately by barristers who had been in court. The compilers differed in skill and in candor. Some wrote down the arguments they admired and passed over those they did not; some wrote from memory weeks later; a few were known to improve a judgment they thought had come out badly reasoned. Later courts cited these volumes as authority all the same, and a doctrine could rest for a century on one sentence that one man believed he had heard. The move to official reporting in the nineteenth century is usually told as a story about accuracy. It was just as much a story about who was permitted to decide which parts of a hearing would survive.\" The final sentence suggests that official reporting changed?",
     "options": [
       "the number of cases that the English courts were able to hear",
-      "control over what portion of a proceeding entered the record",
+      "control over which portion of a proceeding would enter the record",
       "the rule requiring later courts to follow earlier decisions",
       "the willingness of barristers to attend hearings in person",
       "the reasoning that judges were expected to give from the bench"
@@ -1089,7 +1089,7 @@
       "deserved",
       "gradual",
       "costly",
-      "widespread"
+      "regional"
     ],
     "correctIndex": 0,
     "explanation": "The colon supplies the evidence for the blank, and the evidence is a rush of custom that lasted one season and then stopped. Ephemeral means lasting a very short time, which is what a single crowded summer amounts to. Gradual would describe how the popularity arrived rather than how briefly it lasted, and nothing in the sentence bears on whether the crowds were earned or on what the food cost.",
@@ -1117,16 +1117,16 @@
     "section": "verbal",
     "topic": "Text Completion",
     "difficulty": "medium",
-    "prompt": "The commission's mandate was broad, but its powers were so ______ that it could compel neither testimony nor the production of a single document.",
+    "prompt": "The commission's mandate survived the committee stage intact, but its powers did not: successive amendments left them so ______ that it could compel neither testimony nor the production of a single document.",
     "options": [
       "contested",
       "attenuated",
       "expansive",
-      "novel",
-      "unenforceable"
+      "belated",
+      "provisional"
     ],
     "correctIndex": 1,
-    "explanation": "The word but opposes a broad mandate to weak powers, and the clause after the blank shows how weak: the commission can require nothing of anyone. Attenuated means reduced in force, which describes powers thinned to the point of uselessness. Expansive reverses the contrast the sentence is built on, and calling the powers contested or novel would say something about how they are viewed or how new they are rather than how little they accomplish.",
+    "explanation": "Successive amendments acted on the powers and the result is a commission that can require nothing of anyone, so the blank needs a word for force that has been reduced, which is what attenuated means. Expansive reverses the direction the amendments moved in. Contested says that others dispute the powers, and a disputed power can still compel while the dispute runs. Belated describes when the powers arrived, and powers that arrive late still compel once they exist. Provisional says the powers are temporary, and a temporary power compels for as long as it lasts.",
     "source": "original"
   },
   {
@@ -1170,14 +1170,14 @@
     "difficulty": "hard",
     "prompt": "Far from being the ______ reading his opponents alleged, the historian's account of the treaty gave more space to the evidence against his thesis than to the evidence for it.",
     "options": [
-      "conventional",
+      "orthodox",
       "cautious",
       "obsolete",
       "tendentious",
       "derivative"
     ],
     "correctIndex": 3,
-    "explanation": "Far from being denies the accusation, and what the historian actually did was dwell on evidence that cut against his own thesis. The charge denied must therefore be that he argued to a foregone conclusion, which is what tendentious means. Conventional and derivative would accuse him of unoriginality, a charge that weighing contrary evidence would do nothing to answer.",
+    "explanation": "Far from being denies the accusation, and what the historian actually did was dwell on evidence that cut against his own thesis. The charge denied must therefore be that he argued to a foregone conclusion, which is what tendentious means. Orthodox and derivative would accuse him of unoriginality, a charge that weighing contrary evidence would do nothing to answer.",
     "source": "original"
   },
   {
@@ -1205,16 +1205,16 @@
     "kind": "multi",
     "prompt": "At the concentrations found in tap water the compound is ______, although a laboratory dose thousands of times larger will kill a fish within minutes.",
     "options": [
-      "harmless",
       "volatile",
-      "innocuous",
       "expensive",
       "unstable",
-      "detectable"
+      "detectable",
+      "harmless",
+      "innocuous"
     ],
     "correctIndices": [
-      0,
-      2
+      4,
+      5
     ],
     "selectExactly": 2,
     "explanation": "The concession about a lethal laboratory dose is worth making only if the compound does no damage at ordinary strength, so the blank needs a word meaning not harmful. Harmless and innocuous carry that sense and produce one sentence. Detectable fits the grammar and is tempting because a substance can be present without doing harm, but it reports only that the compound can be found, which the contrast with a lethal dose does not turn on. Volatile and unstable describe chemical behavior rather than safety.",
@@ -1228,16 +1228,16 @@
     "kind": "multi",
     "prompt": "The company's apology did nothing to ______ the neighbors, who filed their complaint with the district the very next morning.",
     "options": [
-      "alarm",
       "mollify",
+      "placate",
+      "alarm",
       "reimburse",
       "impress",
-      "placate",
       "summon"
     ],
     "correctIndices": [
-      1,
-      4
+      0,
+      1
     ],
     "selectExactly": 2,
     "explanation": "An apology that fails to stop a complaint has failed to soothe the people it was addressed to, and mollify and placate both mean to calm someone's anger. Impress fits the grammar and is tempting, since an unimpressed neighbor might well complain, but being impressed is a judgment about quality rather than a settling of anger, and no other word here shares that sense. Alarm reverses the sense, and reimburse names a payment the sentence never mentions.",
@@ -1251,16 +1251,16 @@
     "kind": "multi",
     "prompt": "Faced with a smaller grant than it had budgeted for, the museum was obliged to ______ a summer program that had once filled the whole of July and August.",
     "options": [
-      "publicize",
-      "underwrite",
       "curtail",
+      "publicize",
+      "truncate",
+      "underwrite",
       "relocate",
-      "evaluate",
-      "truncate"
+      "evaluate"
     ],
     "correctIndices": [
-      2,
-      5
+      0,
+      2
     ],
     "selectExactly": 2,
     "explanation": "A shortfall forces the museum to make a program that once ran two full months into something less, so the blank calls for cutting it short. Curtail and truncate both mean exactly that and yield the same sentence. Relocate fits the grammar and is a plausible response to a budget problem, but moving a program says nothing about its length, and underwrite would require money the museum has just been denied.",
@@ -1297,16 +1297,16 @@
     "kind": "multi",
     "prompt": "The manual's instructions were so ______ that the technicians gave up on them and learned the procedure by watching one another.",
     "options": [
-      "abbreviated",
       "opaque",
+      "abbreviated",
       "self-explanatory",
       "informal",
-      "precise",
-      "impenetrable"
+      "impenetrable",
+      "precise"
     ],
     "correctIndices": [
-      1,
-      5
+      0,
+      4
     ],
     "selectExactly": 2,
     "explanation": "Technicians who abandon a manual and learn by imitation have found the text impossible to understand, and opaque and impenetrable both describe writing that cannot be seen through. Abbreviated fits the grammar and could explain the failure, but brevity is not the same as unintelligibility, and no other word here pairs with it. Self-explanatory and precise both describe a manual that would have worked, which the outcome rules out.",
@@ -1324,12 +1324,12 @@
       "frugal",
       "meticulous",
       "candid",
-      "profligate",
-      "punctilious"
+      "punctilious",
+      "profligate"
     ],
     "correctIndices": [
       0,
-      4
+      5
     ],
     "selectExactly": 2,
     "explanation": "A decade of spending that ends with the society unable to meet a booking it has already made points to money poured out without restraint, and prodigal and profligate both name that recklessness with funds. Frugal reverses it, and a frugal treasurer would leave the society solvent. Meticulous and punctilious describe care in handling records rather than the scale of spending, and a careful treasurer might still be honest and poor at forecasting, which is a different failing from the one the sentence reports.",
@@ -1345,14 +1345,14 @@
     "options": [
       "conciliatory",
       "trenchant",
-      "tedious",
       "incisive",
+      "tedious",
       "tentative",
       "voluble"
     ],
     "correctIndices": [
       1,
-      3
+      2
     ],
     "selectExactly": 2,
     "explanation": "Questions that cut through an hour of padding to the single buried number are sharp and penetrating, and trenchant and incisive both carry that sense. Voluble fits the grammar but describes a speaker who talks a great deal, which is the opposite of cutting through. Tentative would describe questions too hesitant to reach anything, and conciliatory names a wish to smooth things over rather than the force of the questioning.",
@@ -1469,7 +1469,7 @@
     "options": [
       "collectors recorded the tunes less carefully than the words",
       "ballads were carried chiefly by professional performers",
-      "the printed composites stand outside the living tradition",
+      "the printed composites stand entirely outside the living tradition",
       "singers in one village knew the versions sung in the next",
       "modern editors have given up the search for a best text"
     ],
@@ -1583,12 +1583,12 @@
     "options": [
       "elusive",
       "migratory",
-      "unpredictable",
+      "aggressive",
       "protected",
       "commonplace"
     ],
     "correctIndex": 4,
-    "explanation": "Observers stop recording a bird when seeing it tells them nothing, which happens once it is everywhere. Commonplace supplies that reason directly. A bird that was elusive would be worth recording precisely because sightings were rare, and protected status would ordinarily increase the pressure to log sightings rather than remove it.",
+    "explanation": "Observers stop recording a bird when seeing it tells them nothing, which happens once it is everywhere. Commonplace supplies that reason directly. A bird that was elusive would be worth recording precisely because sightings were rare, an aggressive one would draw more notice rather than less, and protected status would ordinarily increase the pressure to log a sighting.",
     "source": "original"
   },
   {
@@ -1664,16 +1664,16 @@
     "section": "verbal",
     "topic": "Text Completion",
     "difficulty": "hard",
-    "prompt": "The report presents itself as a neutral survey of the literature, but its choice of studies is so ______ that a reader would never guess the field is divided.",
+    "prompt": "The essay's boldest claims are also its most ______: not one of them is tied to a source, and the notes lead back to nothing but the author's own assertions.",
     "options": [
-      "exhaustive",
-      "impenetrable",
       "technical",
-      "tentative",
-      "tendentious"
+      "derivative",
+      "provocative",
+      "conventional",
+      "unsubstantiated"
     ],
     "correctIndex": 4,
-    "explanation": "The contrast with a neutral survey, plus the concealment of an existing division, calls for a word meaning slanted toward a position. Tendentious describes selection made to promote a cause rather than to represent a field. Exhaustive fails because a survey covering everything would reveal the division rather than hide it, and tentative describes how firmly claims are made rather than which studies were chosen.",
+    "explanation": "The colon supplies the reason for the blank: the claims rest on no evidence beyond the author's word, and unsubstantiated means exactly that, unsupported by proof. Provocative describes the effect a claim has on a reader rather than what stands behind it, and the sentence has already granted boldness. Derivative would say the claims were taken from other writers, which is the opposite of notes that lead back only to the author himself.",
     "source": "original"
   },
   {
@@ -1707,16 +1707,16 @@
     "kind": "multi",
     "prompt": "The storm did not ______ until well after midnight, by which time the roof of the equipment shed was gone.",
     "options": [
-      "subside",
       "intensify",
-      "abate",
+      "subside",
       "shift",
       "threaten",
+      "abate",
       "form"
     ],
     "correctIndices": [
-      0,
-      2
+      1,
+      4
     ],
     "selectExactly": 2,
     "explanation": "Damage accumulating through the night means the storm went on at full force until late, so the blank needs a word for becoming less severe. Subside and abate both carry that sense and yield the same sentence. Intensify reverses it, and form would place the storm's beginning after the roof had already been torn off.",
@@ -1728,21 +1728,21 @@
     "topic": "Sentence Equivalence",
     "difficulty": "medium",
     "kind": "multi",
-    "prompt": "The central clause of the lease was so ______ that two experienced lawyers reading it reached opposite conclusions about what the tenant owed.",
+    "prompt": "Since the ban on new licenses took effect, a trade that was once ______ for the stallholders near the terminal now barely covers their rent.",
     "options": [
-      "opaque",
-      "standard",
-      "impenetrable",
-      "generous",
-      "brief",
-      "punitive"
+      "seasonal",
+      "lucrative",
+      "precarious",
+      "unlicensed",
+      "crowded",
+      "remunerative"
     ],
     "correctIndices": [
-      0,
-      2
+      1,
+      5
     ],
     "selectExactly": 2,
-    "explanation": "Two skilled readers reaching opposite conclusions points to language that cannot be seen through, and opaque and impenetrable both describe writing that resists understanding. Brief fits the grammar and short clauses are often unclear, but shortness does not by itself produce contradictory readings, and no other choice matches it in meaning. Standard would suggest the clause was familiar and settled.",
+    "explanation": "The contrast with a trade that now barely covers rent points to one that used to pay well, and lucrative and remunerative both mean producing a good income. Precarious describes risk and fits the present state rather than the earlier one the sentence sets against it. Seasonal and crowded describe when the trade runs and how many compete in it, neither of which is what rent is being measured against, and neither has a partner here.",
     "source": "original"
   },
   {
@@ -1754,14 +1754,14 @@
     "prompt": "The chair ruled the question out of order, holding that it was not ______ to the motion then under debate.",
     "options": [
       "hostile",
-      "germane",
       "novel",
+      "germane",
       "pertinent",
       "audible",
       "urgent"
     ],
     "correctIndices": [
-      1,
+      2,
       3
     ],
     "selectExactly": 2,
@@ -1774,21 +1774,21 @@
     "topic": "Sentence Equivalence",
     "difficulty": "hard",
     "kind": "multi",
-    "prompt": "A treasurer celebrated for thrift in her own household proved surprisingly ______ with public funds, approving nearly every request that crossed her desk.",
+    "prompt": "The transfer of the collection was ______: the crates left the building at night, and the registrar learned of the move only when she found the shelves empty.",
     "options": [
-      "cautious",
-      "profligate",
-      "meticulous",
-      "prodigal",
-      "candid",
-      "punctual"
+      "routine",
+      "hurried",
+      "clandestine",
+      "illegal",
+      "surreptitious",
+      "expensive"
     ],
     "correctIndices": [
-      1,
-      3
+      2,
+      4
     ],
     "selectExactly": 2,
-    "explanation": "The surprise depends on a contrast with thrift, and approving nearly every request describes spending without restraint, which is what profligate and prodigal both mean. Cautious and meticulous fit the grammar but restore the thrift the sentence says was contradicted, leaving nothing surprising. Candid describes how openly she spoke rather than how freely she spent.",
+    "explanation": "Crates leaving at night and a registrar who learns of the move only from the empty shelves describe a transfer carried out in secret, and clandestine and surreptitious both mean done in a concealed way. Illegal is tempting, because concealment suggests wrongdoing, but nothing in the sentence says a law was broken and no other word here means unlawful. Routine, hurried and expensive describe how ordinary, how fast and how costly the move was rather than how hidden it was.",
     "source": "original"
   },
   {
@@ -1797,21 +1797,21 @@
     "topic": "Sentence Equivalence",
     "difficulty": "hard",
     "kind": "multi",
-    "prompt": "The lecture, advertised for a general audience, proved so ______ that even the graduate students left uncertain what had been claimed.",
+    "prompt": "The report is ______: ninety pages that state in three different ways what a single page could have carried.",
     "options": [
-      "abstruse",
-      "tedious",
-      "informal",
-      "recondite",
-      "brief",
-      "polemical"
+      "confidential",
+      "belated",
+      "prolix",
+      "cursory",
+      "technical",
+      "verbose"
     ],
     "correctIndices": [
-      0,
-      3
+      2,
+      5
     ],
     "selectExactly": 2,
-    "explanation": "Listeners already trained in the field could not say what the speaker had claimed, so the blank needs a word for being hard to understand, and abstruse and recondite both mean deep and obscure. Tedious is tempting because a dull lecture also loses its audience, but boredom is not incomprehension, and nothing else in the list matches it. Brief and informal would if anything make the argument easier to follow.",
+    "explanation": "Ninety pages that say three times over what one page could carry describe writing that uses far more words than it needs, and prolix and verbose both name that fault. Cursory reverses the sentence, since a cursory report would be too short rather than too long. Belated and confidential describe when the report arrived and who may read it, and technical describes its vocabulary, none of which is the length the sentence complains of.",
     "source": "original"
   }
 ]

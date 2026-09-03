@@ -315,7 +315,7 @@ function examHighlights(exam: ExamModule, bank: number): string[] {
       `You can flag questions, then change up to ${exam.rules.reviewEdit.maxChanges} answers if time remains`
     );
   }
-  if (exam.rules.sectionOrder === "chooseable") {
+  if (exam.rules.sectionOrder !== "fixed") {
     lines.push("You can take the sections in any order");
   }
   if (exam.scoring.kind === "scaled") {

@@ -108,13 +108,19 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
 
         <div className="mt-10">
           <p className="text-sm font-medium text-foreground">
-            {exam.rules.sectionOrder === "chooseable"
-              ? "Take the sections in any order"
-              : "Select a section to start"}
+            {exam.rules.sectionOrder === "fixed"
+              ? "Select a section to start"
+              : "Take the sections in any order"}
           </p>
           {exam.rules.sectionOrder === "chooseable" && (
             <p className="mt-1 text-xs text-muted">
               The real exam also lets you decide the order before you start.
+            </p>
+          )}
+          {exam.rules.sectionOrder === "chooseable-here-only" && (
+            <p className="mt-1 text-xs text-muted">
+              The real exam decides the order for you, so this part is a
+              convenience here.
             </p>
           )}
           <div className="mt-4 flex flex-col gap-4">
@@ -213,9 +219,17 @@ function expectations(exam: ExamModule): string[] {
     lines.push(
       `The score runs from ${exam.scoring.min} to ${exam.scoring.max}. It includes the difficulty of the questions you answered correctly, not only the count.`
     );
-    lines.push(
-      "A question you never reach costs you more than an incorrect answer. Finish the section, and do not spend all your time on one question."
-    );
+    // Only where the exam actually has a penalty. The GRE has none, and this
+    // sentence sat in a list whose other entries describe the real exam.
+    if (exam.scoring.unansweredPenaltyPerQuestion > 0) {
+      lines.push(
+        "A question you never reach costs you more than an incorrect answer. Finish the section, and do not spend all your time on one question."
+      );
+    } else {
+      lines.push(
+        "A question you never reach scores nothing, the same as an incorrect answer. Answer every question, because a guess costs you nothing."
+      );
+    }
   }
 
   /**

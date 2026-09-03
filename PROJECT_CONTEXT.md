@@ -258,6 +258,74 @@ ordinary copy becomes the hand-written blurb the generated list replaced.
   open select-all, all three statements being true is a real case, and forbidding
   it would itself be exploitable knowledge.
 
+### The scaled denominator depends on whether the exam is ADAPTIVE
+
+`ScoringModel` declares `denominator: "fixed-reference" | "served"`, and getting
+this wrong is silent.
+
+- **"fixed-reference"** measures the earned weight against a full section of the
+  hardest available material. Correct for an adaptive exam (GMAT Focus), because
+  there the candidate climbs to the hard questions by answering well, so
+  reaching them IS the achievement and the top of the band should demand it.
+- **"served"** measures against the weight of what was actually drawn. Correct
+  for a non-adaptive exam (GRE), where the mix is random and the candidate has
+  no influence over it.
+
+**The GRE shipped briefly with the fixed reference and could not reach its own
+band.** A 27-question draw averages about 2.28 weight per question against a 3.2
+ceiling, so a FLAWLESS attempt scored about 159 of 170, and two flawless
+attempts differed by up to 11 points purely on draw luck, while the setup page
+generated "the score runs from 130 to 170" as a statement of fact.
+
+**The assertion that was missing is the whole lesson.** `verify:engine` checked
+that the GRE score stayed BELOW its maximum. It did, by eleven points, on a
+perfect run. A ceiling test cannot see a floor problem. It now asserts that a
+flawless run REACHES the maximum whatever the draw held, and that difficulty
+still separates partial runs (hard half 160, easy half 140) so "served" did not
+quietly turn `difficultyWeight` into decoration.
+
+### An instruction against a tell can create its mirror image
+
+The GRE authors were told the correct answer must never be the longest option.
+They complied absolutely: **0 of 53** prose questions, against 20% by chance on
+a five-option set. "Never pick the longest" then became a free elimination on
+every question, worth exactly as much to a guesser as "always pick the longest"
+would have been.
+
+The audit could not see it, because the longest-option check had a ceiling
+(33%) and no floor, and was asserted on the ALL row only, so 192 new questions
+also diluted the bank-wide number from 20.4% to 14.8% and handed a future NMAT
+regression six points of fresh headroom. It is now **per bank, with a floor of
+8% and a ceiling of 33%.**
+
+Write the instruction as "aim for chance", never as "never do X".
+
+### Multi-select key positions were entirely unaudited
+
+Every statistic in `audit:bank` read `correctIndex`, so a question with
+`correctIndices` was invisible to all of them. That was 50 of the 192 new GRE
+questions, including Sentence Equivalence, which is the type where a position
+habit pays best: a blind guess is 1 in 15 rather than 1 in 5.
+
+Measured before the check existed: of 27 Sentence Equivalence items, 23 had one
+key in the front three options and one in the back three, 4 had both in front,
+and **zero** had both in the back, against a chance split near 60/20/20. The
+pair (2nd, 4th) alone was the key 7 times, so guessing that one pair every time
+scored 25.9% against a 6.7% chance. Separately the two keys were **never
+adjacent and never five apart**, so a third of the pair space was dead.
+
+Two checks now cover it, because they catch different things. The first asks how
+well the best single fixed guess does, which is the direct analogue of "always
+pick slot 1". The second requires both halves to actually be used, which catches
+a STRUCTURAL habit that no single key set reveals. The fix to the data was a
+permutation of the options array cycling through all 15 possible pairs, with the
+`id -> keyed values` snapshot proving no answer moved.
+
+**The open "select all that apply" variant is deliberately not covered** by these
+checks, because its `selectExactly` is null and its main defense is that the
+NUMBER of correct statements varies. If that type grows, check the count
+distribution rather than the positions.
+
 ### Known gaps, recorded rather than papered over
 
 - No Analytical Writing. An essay cannot be auto-scored, and a writing box that

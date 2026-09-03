@@ -94,8 +94,23 @@ export interface ExamRules {
    * `maxChanges` edits and only reachable with time left on the clock.
    */
   reviewEdit: ReviewEditRules | null;
-  /** Whether the candidate picks the order the sections are taken in. */
-  sectionOrder: "fixed" | "chooseable";
+  /**
+   * Who picks the order the sections are taken in.
+   *
+   * Three values, not two, because "you choose here" and "you choose on the
+   * real exam" are different facts and the setup page states both.
+   *
+   *  - "fixed": a set order here (NMAT).
+   *  - "chooseable": you choose here AND on the real exam (GMAT Focus).
+   *  - "chooseable-here-only": you choose here, but the real exam chooses for
+   *    you (the GRE, which fixes the writing task first and then orders the
+   *    remaining sections itself).
+   *
+   * Collapsing the last two printed "the real exam also lets you decide the
+   * order before you start" on a GRE page, which is simply untrue, and it is
+   * the exact failure this generated-copy design exists to prevent.
+   */
+  sectionOrder: "fixed" | "chooseable" | "chooseable-here-only";
   /**
    * True if starting a section locks the others until it is submitted. Both
    * current exams do this; it is declared rather than assumed so an untimed
