@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-04, at PR #24 / VERSION.txt `2.6.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-04, at PR #25 / VERSION.txt `2.7.0`.
 
 ## What this project is
 
@@ -326,16 +326,62 @@ checks, because its `selectExactly` is null and its main defense is that the
 NUMBER of correct statements varies. If that type grows, check the count
 distribution rather than the positions.
 
+### THERE ARE TWO CALCULATORS NOW, AND THEY MUST NOT BE MERGED
+
+`lib/calculator/basic-di.ts` is the GMAT Focus TI-108. `lib/calculator/gre-standard.ts`
+is the device ETS provides in GRE Quantitative Reasoning. They are different
+machines and the differences change answers:
+
+| | GMAT (`basic-di`) | GRE (`gre-standard`) |
+| --- | --- | --- |
+| `2 + 3 x 4` | **20**, strictly left to right | **14**, order of operations |
+| parentheses | none | yes |
+| percent key | yes, and contextual | none |
+| clear | one `ON/C` for entry and calculation | `C` clears the calculation, `MC` clears memory |
+
+`verify:engine` asserts both, and asserts that same key sequence against BOTH
+devices side by side, specifically so that a later "simplification" into one
+shared calculator fails the build. Merging them would teach the wrong arithmetic
+for whichever exam the candidate is not taking.
+
+**`CalculatorPanel` is a shell driven by a model** (`calculator-models.tsx`).
+Everything that took real work to get right lives in the shell and is shared:
+the sticky/absolute positioning, the MEASURED `--calc-max-h`, the
+width-and-breakpoint coupling, click-outside, Escape, and the memory indicator
+on the closed toggle. Only the keypad rows, the one-line banner and the
+disclosure detail differ per device. **Do not duplicate the shell to add a third
+calculator** — that component's own header records three separate layout bugs,
+each found once, and a copy would need each fixed twice.
+
+One bug the assertions caught while the GRE reducer was being written: `C`
+returned the initial state wholesale and wiped memory. Memory surviving a clear
+is exactly what makes it useful on a device whose only escape from precedence is
+banking a subtotal.
+
 ### Known gaps, recorded rather than papered over
 
 - No Analytical Writing. An essay cannot be auto-scored, and a writing box that
   awards a number nobody stands behind is worse than an honest absence.
 - No section-level adaptivity, and each measure is one section rather than two.
-- No calculator in Quantitative Reasoning (see above).
 - **Text Completion is single-blank only.** The real exam has one-, two- and
   three-blank variants, where each blank has its own three options. Rendering
   that needs a per-blank control the card does not have. One-blank items with
   five options are entirely real, so what ships is faithful as far as it goes.
+- Transfer Display is modeled in the reducer (`displayValue`) but is not wired
+  to the Numeric Entry box, so the value is read and retyped rather than
+  transferred.
+
+### Quantitative Comparison has its own layout
+
+All 32 QC questions store optional common information, then a line each for
+"Quantity A:" and "Quantity B:". `QuestionCard` splits that shape and renders
+two labeled, equal-width boxes, guarded exactly as `splitPassage` is: both
+labels present, on their own lines, B last, neither quantity spanning lines.
+Anything else falls through to plain rendering rather than showing a mangled
+card.
+
+Equal widths are deliberate. The question is which quantity is larger, and a
+wider box would answer it for the candidate.
 
 ## Copyright rule (critical, applies to ALL future content work)
 
@@ -1129,7 +1175,7 @@ that appears not to have applied is usually this.
 
 ---
 
-**Current state: `main` is at v2.6.0, and is the only branch.**
+**Current state: `main` is at v2.7.0, and is the only branch.**
 
 "Clean" is five commands rather than a claim, and all five pass on `main`:
 
