@@ -29,9 +29,7 @@ Watch the usual families: `-ise`/`-isation` to `-ize`/`-ization`, `-our` to `-or
 
 **Three traps, all hit during the v2.0.2 sweep.**
 
-**Never run the sweep over raw JSON text.** Operate on the PARSED values. A literal `
-` inside a JSON string glues the escape's `n` to the next word, so `"...by programme:
-Programme P:"` has no word boundary before the second `Programme` and `programme` silently skips it. That left one question reading "acceptances by program" above a table labeled "Programme P", which is exactly the mixed usage the sweep exists to remove. Parsing the file first makes the whole bug class impossible.
+**Never run the sweep over raw JSON text.** Operate on the PARSED values. A literal `\\n` inside a JSON string glues the escape's `n` to the next word, so `"...by programme:\\nProgramme P:"` has no word boundary before the second `Programme` and `programme` silently skips it. That left one question reading "acceptances by program" above a table labeled "Programme P", which is exactly the mixed usage the sweep exists to remove. Parsing the file first makes the whole bug class impossible.
 
 **Prefer stems to word lists for the `-our` family.** An enumerated list missed `labour` entirely and matched `neighbour` but not `neighbourhoods`. A stem pattern (`lab|col|fav|neighb|behavi|...` + `our` + any suffix) covers every inflection at once, and the words that genuinely end `-our` in American English (four, hour, tour, pour, flour, contour, devour) are simply absent from the stem list.
 
@@ -68,35 +66,73 @@ The rules that bind here, in the order they actually get broken:
 4. **No phrasal verbs** (Rule 9.3). "pick up where you left off", "carry over",
    "run out of time", "free this up" all went. Their meaning is not predictable
    from the parts.
-5. **One word, one meaning.** The settled choices in this app: **timer** (never
-   "clock"), **select** (never "pick" or "choose"), **incorrect** (never
-   "wrong"), **no answer** for a question left blank, **section**, **question**,
-   **answer**, **explanation**, **submit**, **score**. Reusing one word for one
-   concept is the rule, so a new synonym is a regression even when it reads
-   better in isolation.
+5. **One word, one meaning.** The settled choices in this app: **timer**
+   (never "clock"), **select** (never "pick" or "choose"), **incorrect** (never
+   "wrong"), **no answer** for a question left blank (never "skipped" or
+   "unanswered" as a label), **restart** (never "start over"), **section**,
+   **question**, **answer**, **explanation**, **submit**, **score**. Reusing one
+   word for one concept is the rule, so a new synonym is a regression even when
+   it reads better in isolation.
+
+   Two verbs were separated because they had drifted into carrying several
+   senses each. **"follows"** is now only *conforms to* ("each exam follows its
+   own published format"); difficulty **changes with** your answers and the
+   rules **depend on** the exam. **"continues"** is now only the timer.
 6. **Verb, not the noun made from it** (Rule 3.7). "This section tests
    arithmetic", not "the section provides testing of arithmetic".
 
-**`npm run audit:copy` enforces 1 through 5 mechanically** over the 25 files
-that carry prose, and exits non-zero on a finding. It does NOT check membership
-in ASD's approved dictionary: that list is not redistributable, and the official
-Issue 9 PDF is encrypted, so any word list committed here would be guesswork
-with a checkmark next to it. Rule 6 and dictionary compliance stay a judgment
-call for the author and the review lanes.
+**`npm run audit:copy` enforces 1 through 5 mechanically** and exits non-zero on
+a finding. It walks `app/` and `components/` plus the three `lib/` files that
+carry copy, rather than reading a hand-kept list: the list version shipped
+already missing `components/Timer.tsx`, which emits screen-reader strings. It
+does NOT check membership in ASD's approved dictionary, because that list is not
+redistributable and the official Issue 9 PDF is encrypted, so any word list
+committed here would be guesswork with a checkmark next to it. Rule 6 and
+dictionary compliance stay a judgment call for the author and the review lanes.
 
-**Two things about the script are worth knowing before you edit it.** Its prose
-extractor discards anything with punctuation that has no space after it, because
-a generic parameter (`useRef<HTMLElement | null>(null); const`) is
-indistinguishable from a JSX text node between a `>` and a `<`, and that alone
-produced ten of the script's first thirteen findings. It also decodes HTML
-entities first, or `Section &amp; progress` reads as a Rule 8.1 breach. Both
-exist because a script with false positives teaches the next reader to skim it.
+**THE FIRST VERSION OF THIS SCRIPT PASSED WHILE READING ALMOST NOTHING, and that
+is the part to remember.** It reported "no findings" over `SectionNav`'s
+`{n} wrong` and `{n} skipped`, which broke two settled terms at once, because
+two separate blind spots lined up:
+
+- Its JSX pass matched text between a `>` and a `<`, then discarded any string
+  containing `{`. Every paragraph interrupted by an interpolation was exempt.
+- Its literal pass paired quotes in scan order, so one mis-paired match (a
+  CLOSING quote joined to the next OPENING quote) swallowed everything between
+  them. That ate both runners' entire `ConfirmDialog` block.
+
+Three defenses now exist, and all three are load-bearing. Interpolations are
+collapsed to "N" **inside a captured run**, never across the file (collapse
+globally to a fixpoint and the outermost pair eaten is the component function's
+own body, which deletes every JSX node in the file — measured: 143 strings down
+to 99). String literals require a plausible delimiter before the opening quote
+and after the closing one, so a mis-pairing is unmatchable. And a file that
+yields zero strings while not on `NO_PROSE_EXPECTED` is a **failure**, not a
+quiet pass. The run prints how many strings it inspected, so a coverage collapse
+shows up as a number that moved: it reads **274** today, against 143 for the
+version that was effectively blind.
+
+The word floor is **two** words, not three. Three looks safer and is not:
+`{n} wrong` collapses to two words, and that was the only real vocabulary breach
+in the app. Two other filters are worth keeping as they are. Strings with
+punctuation that has no space after it are dropped, because
+`useRef<HTMLElement | null>(null); const` is indistinguishable from a JSX text
+node between a `>` and a `<`, and that alone produced ten of the script's first
+thirteen findings. HTML entities are decoded first, or `Section &amp; progress`
+reads as a Rule 8.1 breach. A script with false positives teaches the next
+reader to skim it.
 
 **The question bank is deliberately out of scope.** A Language Skills question
 about the present perfect has to be able to contain the present perfect, and
 exam prose should read like exam prose. STE governs what the SITE says, not what
 the questions say. American English still governs both -- see the section above,
 which this one does not replace.
+
+One consequence is visible on screen and was considered rather than missed: a
+GMAT stem can read "Choose the correct preposition" three lines under the app's
+own "Select an answer to continue". Real exam stems say "choose", changing them
+would make the practice less faithful, and faithfulness beats internal
+consistency here. Do not re-report it.
 
 ## Copyright rule (critical, applies to ALL future content work)
 
@@ -189,13 +225,25 @@ document for two releases and sent readers looking for files that were gone.
 
 - **PR #22** (v2.4.0) — every user-facing description rewritten to ASD-STE100,
   at the user's direction, because the old copy read as machine-written
-  marketing. 60 replacements across 22 files: the home page hero, stat band,
-  exam picker, three feature bands, seven FAQ answers and the closing CTA, the
-  generated "what to expect" list, both exam modules and all six section
-  descriptions, every quiz notice and confirm dialog, the results screen, the
-  calculator explainer and all four failure pages. Also `npm run audit:copy`,
-  which is the part that stops the copy drifting back. See "Language: Simplified
-  Technical English" above for the rules and the settled vocabulary.
+  marketing. The home page hero, stat band, exam picker, three feature bands,
+  seven FAQ answers and the closing CTA, the generated "what to expect" list,
+  both exam modules and all six section descriptions, every quiz notice and
+  confirm dialog, the results screen, the calculator explainer and all four
+  failure pages. Also `npm run audit:copy`. See "Language: Simplified Technical
+  English" above for the rules and the settled vocabulary.
+
+  **A shortening pass is how a hedge silently becomes a promise, and this one
+  did it five times before review caught them.** Worth reading as a list,
+  because the next copy pass will be tempted the same way: "written originally
+  for this site" became "a person writes every question", a stronger and
+  different claim, in four places including the legal disclaimer; the
+  affiliation notice narrowed its non-endorsement to GMAC alone and swapped
+  "reproduce" for the narrower "copy"; the expired-attempt banner stopped saying
+  the section had been SUBMITTED, above a score the reader did not ask for; the
+  resumed banner's "has been running since then" became "continued after that",
+  which permits "it ran on for a while and then stopped"; and the calculator
+  note's rewrite of the `%` key was wrong in its own worked example. Three
+  review lanes each found some of these and none found all of them.
 
 - **PR #21** (v2.3.0) — the full-department audit: six parallel review lanes (logic,
   visual design/motion, security, question-bank content, new-user UX, performance)
@@ -829,7 +877,7 @@ that appears not to have applied is usually this.
 
 ---
 
-**Current state: `main` is at v2.3.0, and is the only branch.**
+**Current state: `main` is at v2.4.0, and is the only branch.**
 
 "Clean" is five commands rather than a claim, and all five pass on `main`:
 
