@@ -9,10 +9,11 @@
       "276 dollars",
       "225 dollars",
       "216 dollars",
+      "236.40 dollars",
       "204 dollars"
     ],
-    "correctIndex": 3,
-    "explanation": "A 15 percent discount leaves 85 percent of the original price, so $240 \\times 0.85 = 204$ dollars. Applying a habitual 10 percent instead of 15 percent gives 216. Subtracting 15 dollars rather than 15 percent gives 225. Adding the 15 percent instead of subtracting it gives 276.",
+    "correctIndex": 4,
+    "explanation": "A 15 percent discount leaves 85 percent of the original price, so $240 \\times 0.85 = 204$ dollars. Applying a habitual 10 percent instead of 15 percent gives 216. Subtracting 15 dollars rather than 15 percent gives 225. Adding the 15 percent instead of subtracting it gives 276. Slipping the decimal point and taking 1.5 percent of 240 leaves 236.40 dollars.",
     "source": "original"
   },
   {
@@ -24,11 +25,12 @@
     "options": [
       "40",
       "5",
+      "20",
       "8",
       "15"
     ],
-    "correctIndex": 3,
-    "explanation": "The 5 parts of the ratio correspond to 25 pencils, so one part is 25 divided by 5, which is 5. Pens are 3 parts, so there are 15. Answering 5 stops at the value of a single part; 8 answers with the total number of parts in the ratio, 3 plus 5; and 40 gives the total number of items in the drawer, 15 pens plus 25 pencils, rather than the pens alone.",
+    "correctIndex": 4,
+    "explanation": "The 5 parts of the ratio correspond to 25 pencils, so one part is 25 divided by 5, which is 5. Pens are 3 parts, so there are 15. Answering 5 stops at the value of a single part; 8 answers with the total number of parts in the ratio, 3 plus 5; and 40 gives the total number of items in the drawer, 15 pens plus 25 pencils, rather than the pens alone. Reading the ratio as a difference, so that pens are simply 5 fewer than pencils, gives 20.",
     "source": "original"
   },
   {
@@ -41,10 +43,11 @@
       "-9",
       "1",
       "-1",
-      "9"
+      "9",
+      "2.25"
     ],
     "correctIndex": 3,
-    "explanation": "Collect the variable terms: $5x - 3x = 10 + 8$, so $2x = 18$ and $x = 9$. Substituting back, both sides equal 37. Moving the 8 across without changing its sign gives $2x = 10 - 8 = 2$ and $x = 1$. Flipping the sign on both constants gives $2x = -2$ and $x = -1$. Reversing the direction of both moves, so that each constant changes sides without changing sign, gives $2x = -18$ and $x = -9$.",
+    "explanation": "Collect the variable terms: $5x - 3x = 10 + 8$, so $2x = 18$ and $x = 9$. Substituting back, both sides equal 37. Moving the 8 across without changing its sign gives $2x = 10 - 8 = 2$ and $x = 1$. Flipping the sign on both constants gives $2x = -2$ and $x = -1$. Reversing the direction of both moves, so that each constant changes sides without changing sign, gives $2x = -18$ and $x = -9$. Adding the variable terms instead of subtracting them, so that $8x = 18$, gives 2.25.",
     "source": "original"
   },
   {
@@ -54,13 +57,14 @@
     "difficulty": "easy",
     "prompt": "The average of five numbers is 14. What is their sum?",
     "options": [
+      "2.8",
       "70",
       "64",
       "19",
       "56"
     ],
-    "correctIndex": 0,
-    "explanation": "An average is the sum divided by the count, so the sum is the average times the count: $14 \\times 5 = 70$.",
+    "correctIndex": 1,
+    "explanation": "An average is the sum divided by the count, so the sum is the average times the count: $14 \\times 5 = 70$. Dividing the average by the count instead of multiplying gives 2.8.",
     "source": "original"
   },
   {
@@ -73,10 +77,11 @@
       "53",
       "55",
       "51",
-      "57"
+      "57",
+      "91"
     ],
     "correctIndex": 0,
-    "explanation": "53 has no divisor other than 1 and itself. The others all factor: $51 = 3 \\times 17$, $55 = 5 \\times 11$, and $57 = 3 \\times 19$.",
+    "explanation": "53 has no divisor other than 1 and itself. The others all factor: $51 = 3 \\times 17$, $55 = 5 \\times 11$, and $57 = 3 \\times 19$. 91 is the classic near miss: it looks prime, but it is $7 \\times 13$.",
     "source": "original"
   },
   {
@@ -88,11 +93,12 @@
     "options": [
       "15 percent",
       "7 percent",
+      "1.15 percent",
       "13 percent",
       "12 percent"
     ],
     "correctIndex": 0,
-    "explanation": "The increase is 12, and percentage change is measured against the ORIGINAL value: $12/80 = 0.15$, so 15 percent. Dividing the change by the NEW value, $12/92$, gives about 13 percent, which is the usual trap. Reporting the raw difference of 12 as though it were already a percentage gives 12 percent. Dividing the change by the two values added together, $12/172$, gives about 7 percent.",
+    "explanation": "The increase is 12, and percentage change is measured against the ORIGINAL value: $12/80 = 0.15$, so 15 percent. Dividing the change by the NEW value, $12/92$, gives about 13 percent, which is the usual trap. Reporting the raw difference of 12 as though it were already a percentage gives 12 percent. Dividing the change by the two values added together, $12/172$, gives about 7 percent. Computing $92/80 = 1.15$ and reading that ratio itself as the percentage gives 1.15 percent.",
     "source": "original"
   },
   {
@@ -102,13 +108,14 @@
     "difficulty": "easy",
     "prompt": "A car travels 180 kilometers in 3 hours. At the same speed, how far does it travel in 5 hours?",
     "options": [
+      "108 kilometers",
       "240 kilometers",
       "300 kilometers",
       "360 kilometers",
       "270 kilometers"
     ],
-    "correctIndex": 1,
-    "explanation": "The speed is $180 \\div 3 = 60$ kilometers per hour, so in 5 hours it covers $60 \\times 5 = 300$ kilometers.",
+    "correctIndex": 2,
+    "explanation": "The speed is $180 \\div 3 = 60$ kilometers per hour, so in 5 hours it covers $60 \\times 5 = 300$ kilometers. Inverting the proportion, $180 \\times 3 \\div 5$, gives 108 kilometers.",
     "source": "original"
   },
   {
@@ -118,13 +125,14 @@
     "difficulty": "easy",
     "prompt": "What is the value of $2^5 \\times 2^3$?",
     "options": [
+      "32768",
       "256",
       "128",
       "1024",
       "64"
     ],
-    "correctIndex": 0,
-    "explanation": "Multiplying powers of the same base adds the exponents: $2^{5+3} = 2^8 = 256$. Each distractor is a different slip in that exponent: 128 is $2^7$, from adding 5 and 3 to 7; 1024 is $2^{10}$, from using the larger exponent twice; and 64 is $2^6$, from using the smaller one twice.",
+    "correctIndex": 1,
+    "explanation": "Multiplying powers of the same base adds the exponents: $2^{5+3} = 2^8 = 256$. Each distractor is a different slip in that exponent: 128 is $2^7$, from adding 5 and 3 to 7; 1024 is $2^{10}$, from using the larger exponent twice; and 64 is $2^6$, from using the smaller one twice. Multiplying the exponents rather than adding them gives $2^{15} = 32768$.",
     "source": "original"
   },
   {
@@ -137,10 +145,11 @@
       "3",
       "5",
       "12",
+      "33",
       "2"
     ],
     "correctIndex": 0,
-    "explanation": "By the inclusion-exclusion principle, $18 + 15 - \\text{both} = 30$, so both $= 33 - 30 = 3$.",
+    "explanation": "By the inclusion-exclusion principle, $18 + 15 - \\text{both} = 30$, so both $= 33 - 30 = 3$. Adding the two group sizes and stopping there gives 33, which counts every student in both languages twice.",
     "source": "original"
   },
   {
@@ -152,11 +161,12 @@
     "options": [
       "1/8",
       "1/12",
+      "5/24",
       "1/4",
       "1/24"
     ],
-    "correctIndex": 2,
-    "explanation": "Multiply straight across: $(2 \\times 3)/(3 \\times 8) = 6/24 = 1/4$. Losing the 3 in the numerator and computing $2/24$ gives $1/12$. Canceling the threes and then dropping the 2 that is left on top gives $1/8$. Multiplying only the denominators and keeping a bare 1 on top gives $1/24$.",
+    "correctIndex": 3,
+    "explanation": "Multiply straight across: $(2 \\times 3)/(3 \\times 8) = 6/24 = 1/4$. Losing the 3 in the numerator and computing $2/24$ gives $1/12$. Canceling the threes and then dropping the 2 that is left on top gives $1/8$. Multiplying only the denominators and keeping a bare 1 on top gives $1/24$. Adding the numerators while multiplying the denominators, a mix of the two rules, gives 5/24.",
     "source": "original"
   },
   {
@@ -167,12 +177,13 @@
     "prompt": "Machine A completes a job in 6 hours and machine B completes the same job in 12 hours. Working together, how long do they take?",
     "options": [
       "4 hours",
+      "6 hours",
       "9 hours",
       "18 hours",
       "3 hours"
     ],
     "correctIndex": 0,
-    "explanation": "Add the rates, not the times. A does $1/6$ of the job per hour and B does $1/12$, so together they do $1/6 + 1/12 = 3/12 = 1/4$ per hour, finishing in 4 hours. Averaging the two times would give 9 hours, which is the classic error.",
+    "explanation": "Add the rates, not the times. A does $1/6$ of the job per hour and B does $1/12$, so together they do $1/6 + 1/12 = 3/12 = 1/4$ per hour, finishing in 4 hours. Averaging the two times would give 9 hours, which is the classic error. Answering with the faster machine's own time alone gives 6 hours.",
     "source": "original"
   },
   {
@@ -182,13 +193,14 @@
     "difficulty": "medium",
     "prompt": "If $x^2 - 7x + 12 = 0$, what are the possible values of $x$?",
     "options": [
+      "3 and -4",
       "3 and 4",
       "1 and 12",
       "2 and 6",
       "-3 and -4"
     ],
-    "correctIndex": 0,
-    "explanation": "Factor into $(x-3)(x-4) = 0$, giving $x = 3$ or $x = 4$. Both signs are positive because the constant term is positive while the linear coefficient is negative.",
+    "correctIndex": 1,
+    "explanation": "Factor into $(x-3)(x-4) = 0$, giving $x = 3$ or $x = 4$. Both signs are positive because the constant term is positive while the linear coefficient is negative. A sign error on one factor, as in $(x-3)(x+4)$, gives 3 and -4, but that product has a constant term of $-12$.",
     "source": "original"
   },
   {
@@ -199,12 +211,13 @@
     "prompt": "The average of six numbers is 20. When one number is removed, the average of the remaining five is 22. What number was removed?",
     "options": [
       "18",
+      "20",
       "10",
       "2",
       "12"
     ],
-    "correctIndex": 1,
-    "explanation": "The original sum is $6 \\times 20 = 120$ and the remaining sum is $5 \\times 22 = 110$, so the removed number is $120 - 110 = 10$. Note the average ROSE when it was removed, so the removed value must be below the original average.",
+    "correctIndex": 2,
+    "explanation": "The original sum is $6 \\times 20 = 120$ and the remaining sum is $5 \\times 22 = 110$, so the removed number is $120 - 110 = 10$. Note the average ROSE when it was removed, so the removed value must be below the original average. Using the old average for the remaining five, $5 \\times 20 = 100$, gives 20.",
     "source": "original"
   },
   {
@@ -216,11 +229,12 @@
     "options": [
       "2",
       "6",
+      "12",
       "4",
       "3"
     ],
     "correctIndex": 1,
-    "explanation": "$12 = 2^2 \\times 3$. For $n^2$ to contain $3^1$ it must contain $3^2$, since every prime in a perfect square appears an even number of times, so $n$ must contain a 3. It must also contain a 2. The smallest such $n$ is $2 \\times 3 = 6$, and indeed $36$ is divisible by 12. Noticing only that $n$ must be even gives 2; noticing only the factor of 3 gives 3; and carrying the $2^2$ from the factorization of 12 straight into $n$ gives 4. None of those squares is divisible by 12.",
+    "explanation": "$12 = 2^2 \\times 3$. For $n^2$ to contain $3^1$ it must contain $3^2$, since every prime in a perfect square appears an even number of times, so $n$ must contain a 3. It must also contain a 2. The smallest such $n$ is $2 \\times 3 = 6$, and indeed $36$ is divisible by 12. Noticing only that $n$ must be even gives 2; noticing only the factor of 3 gives 3; and carrying the $2^2$ from the factorization of 12 straight into $n$ gives 4. None of those squares is divisible by 12. Answering 12 takes the divisor itself: $12^2$ is divisible by 12, but the question asks for the smallest such $n$.",
     "source": "original"
   },
   {
@@ -231,12 +245,13 @@
     "prompt": "A price rises by 20 percent and then falls by 20 percent. Compared with the original price, the final price is:",
     "options": [
       "the same",
+      "24 percent lower",
       "4 percent lower",
       "4 percent higher",
       "2 percent lower"
     ],
-    "correctIndex": 1,
-    "explanation": "Successive percentage changes multiply rather than cancel: $1.20 \\times 0.80 = 0.96$, which is 4 percent below the original. The second change is applied to the larger intermediate price, so the fall outweighs the rise.",
+    "correctIndex": 2,
+    "explanation": "Successive percentage changes multiply rather than cancel: $1.20 \\times 0.80 = 0.96$, which is 4 percent below the original. The second change is applied to the larger intermediate price, so the fall outweighs the rise. Computing the fall as 20 percent of the raised price, which is 24, and reading that figure as a percentage of the original gives 24 percent lower.",
     "source": "original"
   },
   {
@@ -246,13 +261,14 @@
     "difficulty": "medium",
     "prompt": "A 40-liter solution is 25 percent acid. How many liters of pure acid must be added to make it 40 percent acid?",
     "options": [
+      "16",
       "10",
       "6",
       "12",
       "8"
     ],
-    "correctIndex": 0,
-    "explanation": "Start with $0.25 \\times 40 = 10$ liters of acid. Adding $x$ liters of pure acid gives $(10 + x)$ acid in $(40 + x)$ total, and setting $(10+x)/(40+x) = 0.40$ yields $10 + x = 16 + 0.4x$, so $0.6x = 6$ and $x = 10$. The trap is forgetting that added acid raises the total volume too.",
+    "correctIndex": 1,
+    "explanation": "Start with $0.25 \\times 40 = 10$ liters of acid. Adding $x$ liters of pure acid gives $(10 + x)$ acid in $(40 + x)$ total, and setting $(10+x)/(40+x) = 0.40$ yields $10 + x = 16 + 0.4x$, so $0.6x = 6$ and $x = 10$. The trap is forgetting that added acid raises the total volume too. Answering 16 reports the liters of acid the final solution contains, not the liters added.",
     "source": "original"
   },
   {
@@ -265,10 +281,11 @@
       "12",
       "24",
       "6",
-      "4"
+      "4",
+      "64"
     ],
     "correctIndex": 1,
-    "explanation": "Order matters, so this is a permutation: $4 \\times 3 \\times 2 = 24$. Filling only two of the three slots stops at $4 \\times 3 = 12$. Arranging three letters without first choosing which three gives $3! = 6$. Treating the problem as a combination, where only the selection counts, gives 4.",
+    "explanation": "Order matters, so this is a permutation: $4 \\times 3 \\times 2 = 24$. Filling only two of the three slots stops at $4 \\times 3 = 12$. Arranging three letters without first choosing which three gives $3! = 6$. Treating the problem as a combination, where only the selection counts, gives 4. Letting a letter repeat, $4^3$, gives 64, which the condition about using no letter more than once rules out.",
     "source": "original"
   },
   {
@@ -280,11 +297,12 @@
     "options": [
       "$x > 2$",
       "$x < -2$",
+      "$x < 6$",
       "$x < 2$",
       "$x > -2$"
     ],
-    "correctIndex": 2,
-    "explanation": "Subtract 7 to get $-3x > -6$, then divide by $-3$. Dividing an inequality by a negative number reverses its direction, so $x < 2$. Forgetting to flip is the single most common error on inequality questions.",
+    "correctIndex": 3,
+    "explanation": "Subtract 7 to get $-3x > -6$, then divide by $-3$. Dividing an inequality by a negative number reverses its direction, so $x < 2$. Forgetting to flip is the single most common error on inequality questions. Flipping the direction but forgetting to divide by 3 gives $x < 6$.",
     "source": "original"
   },
   {
@@ -297,10 +315,11 @@
       "5",
       "7",
       "6",
+      "4.5",
       "6.5"
     ],
     "correctIndex": 2,
-    "explanation": "Sort first: 2, 3, 5, 7, 9, 11. With an even count the median is the average of the two middle values, $(5 + 7)/2 = 6$. Taking the middle of the unsorted list is the usual mistake.",
+    "explanation": "Sort first: 2, 3, 5, 7, 9, 11. With an even count the median is the average of the two middle values, $(5 + 7)/2 = 6$. Taking the middle of the unsorted list, the average of the two central entries 7 and 2, gives 4.5 and is the usual mistake.",
     "source": "original"
   },
   {
@@ -311,12 +330,13 @@
     "prompt": "A cyclist rides out at 15 kilometers per hour and returns along the same route at 10 kilometers per hour. What is the average speed for the whole trip?",
     "options": [
       "13 kilometers per hour",
+      "6 kilometers per hour",
       "11 kilometers per hour",
       "12 kilometers per hour",
       "12.5 kilometers per hour"
     ],
-    "correctIndex": 2,
-    "explanation": "Average speed is total distance over total time, not the average of the two speeds. For a distance $d$ each way, the time is $d/15 + d/10 = d/6$, and the total distance is $2d$, giving $2d \\div (d/6) = 12$. The 12.5 option is the tempting arithmetic mean.",
+    "correctIndex": 3,
+    "explanation": "Average speed is total distance over total time, not the average of the two speeds. For a distance $d$ each way, the time is $d/15 + d/10 = d/6$, and the total distance is $2d$, giving $2d \\div (d/6) = 12$. The 12.5 option is the tempting arithmetic mean. Reading the 6 in $d/6$ as a speed, when it is part of the total time, gives 6 kilometers per hour.",
     "source": "original"
   },
   {
@@ -329,10 +349,11 @@
       "2",
       "3",
       "1",
-      "0"
+      "0",
+      "The remainder depends on the value of $n$."
     ],
     "correctIndex": 2,
-    "explanation": "Since 7 is 4 plus 3, the remainder of $7^n$ matches that of $3^n$. Powers of 3 modulo 4 cycle 3, 1, 3, 1 for $n = 1, 2, 3, 4$, so every even power leaves remainder 1. Check it directly: $7^2 = 49$, and 49 is 12 fours plus 1.",
+    "explanation": "Since 7 is 4 plus 3, the remainder of $7^n$ matches that of $3^n$. Powers of 3 modulo 4 cycle 3, 1, 3, 1 for $n = 1, 2, 3, 4$, so every even power leaves remainder 1. Check it directly: $7^2 = 49$, and 49 is 12 fours plus 1. Testing only odd exponents leads to the claim that the remainder depends on $n$, but the cycle fixes it at 1 for every even $n$.",
     "source": "original"
   },
   {
@@ -343,12 +364,13 @@
     "prompt": "If $x + y = 10$ and $x^2 - y^2 = 40$, what is the value of $x$?",
     "options": [
       "20",
+      "11",
       "7",
       "10",
       "14"
     ],
-    "correctIndex": 1,
-    "explanation": "Factor the difference of squares: $x^2 - y^2 = (x+y)(x-y)$. With $x + y = 10$, this gives $10(x - y) = 40$, so $x - y = 4$. Adding that to $x + y = 10$ gives $2x = 14$ and $x = 7$. Halving the 40, as though $x^2 - y^2$ simplified to $2x$, gives 20. Mistaking the given sum for the answer gives 10. Stopping at $2x = 14$ without dividing gives 14.",
+    "correctIndex": 2,
+    "explanation": "Factor the difference of squares: $x^2 - y^2 = (x+y)(x-y)$. With $x + y = 10$, this gives $10(x - y) = 40$, so $x - y = 4$. Adding that to $x + y = 10$ gives $2x = 14$ and $x = 7$. Halving the 40, as though $x^2 - y^2$ simplified to $2x$, gives 20. Mistaking the given sum for the answer gives 10. Stopping at $2x = 14$ without dividing gives 14. Substituting $x = y + 4$ and then moving the 4 across without changing its sign, $2y = 10 + 4$, gives $y = 7$ and $x = 11$.",
     "source": "original"
   },
   {
@@ -360,11 +382,12 @@
     "options": [
       "60",
       "84",
+      "112",
       "74",
       "40"
     ],
-    "correctIndex": 2,
-    "explanation": "Count the complement. The total number of committees is $\\binom{9}{3} = 84$, and those with no women are $\\binom{5}{3} = 10$, so at least one woman gives $84 - 10 = 74$. Counting the cases directly also works but risks double counting.",
+    "correctIndex": 3,
+    "explanation": "Count the complement. The total number of committees is $\\binom{9}{3} = 84$, and those with no women are $\\binom{5}{3} = 10$, so at least one woman gives $84 - 10 = 74$. Counting the cases directly also works but risks double counting. Choosing one woman first and then any two of the remaining eight, $4 \\times 28$, gives 112, which counts a committee with two or three women more than once.",
     "source": "original"
   },
   {
@@ -377,10 +400,11 @@
       "Both the mean and the standard deviation increase by 5.",
       "The mean is unchanged and the standard deviation increases by 5.",
       "Both the mean and the standard deviation are unchanged.",
-      "The mean increases by 5 and the standard deviation is unchanged."
+      "The mean increases by 5 and the standard deviation is unchanged.",
+      "Both the mean and the standard deviation are multiplied by 5."
     ],
     "correctIndex": 3,
-    "explanation": "Adding a constant shifts every value equally, so the center moves by 5 while the spread around it does not change at all. Standard deviation measures dispersion, and dispersion is untouched by a translation. It would change if every value were MULTIPLIED by a constant.",
+    "explanation": "Adding a constant shifts every value equally, so the center moves by 5 while the spread around it does not change at all. Standard deviation measures dispersion, and dispersion is untouched by a translation. It would change if every value were MULTIPLIED by a constant. Confusing adding a constant with multiplying by one gives the answer that both are multiplied by 5.",
     "source": "original"
   },
   {
@@ -393,10 +417,11 @@
       "6 hours",
       "9 hours",
       "10 hours",
+      "7.2 hours",
       "8 hours"
     ],
     "correctIndex": 1,
-    "explanation": "Rates add. Together they do $1/4$ per hour, and the first two contribute $1/12 + 1/18 = 5/36$. The third therefore contributes $1/4 - 5/36 = 9/36 - 5/36 = 4/36 = 1/9$ per hour, so alone it would take 9 hours.",
+    "explanation": "Rates add. Together they do $1/4$ per hour, and the first two contribute $1/12 + 1/18 = 5/36$. The third therefore contributes $1/4 - 5/36 = 9/36 - 5/36 = 4/36 = 1/9$ per hour, so alone it would take 9 hours. Inverting the first two workers' combined rate of $5/36$ gives 7.2 hours, which is how long those two need together, not how long the third needs alone.",
     "source": "original"
   },
   {
@@ -409,10 +434,11 @@
       "5 percent loss",
       "no change",
       "5 percent profit",
+      "30 percent profit",
       "15 percent profit"
     ],
     "correctIndex": 2,
-    "explanation": "Apply the factors in sequence: $1.40 \\times 0.75 = 1.05$, a 5 percent gain over the original. Subtracting the percentages to get 15 percent ignores that the discount applies to the larger marked price, not to the original.",
+    "explanation": "Apply the factors in sequence: $1.40 \\times 0.75 = 1.05$, a 5 percent gain over the original. Subtracting the percentages to get 15 percent ignores that the discount applies to the larger marked price, not to the original. Taking the 25 percent off the 40 percent markup itself, which leaves a 30 percent markup, gives 30 percent profit.",
     "source": "original"
   },
   {
@@ -423,12 +449,13 @@
     "prompt": "If $f(x) = 2x - 3$, what is the value of $f(f(4))$?",
     "options": [
       "-2",
+      "3.5",
       "7",
       "2",
       "5"
     ],
-    "correctIndex": 1,
-    "explanation": "Work outward from the inside. $f(4) = 2(4) - 3 = 5$, then $f(5) = 2(5) - 3 = 7$. Reading the rule as $2(x - 3)$ gives $f(4) = 2$ and then $f(2) = -2$. Applying the rule twice but forgetting to double on the second pass gives $5 - 3 = 2$. Applying the rule only once gives 5, which is the intended trap.",
+    "correctIndex": 2,
+    "explanation": "Work outward from the inside. $f(4) = 2(4) - 3 = 5$, then $f(5) = 2(5) - 3 = 7$. Reading the rule as $2(x - 3)$ gives $f(4) = 2$ and then $f(2) = -2$. Applying the rule twice but forgetting to double on the second pass gives $5 - 3 = 2$. Applying the rule only once gives 5, which is the intended trap. Solving $f(x) = 4$ instead of evaluating the function gives 3.5, which answers a different question.",
     "source": "original"
   },
   {
@@ -439,12 +466,13 @@
     "prompt": "How many positive divisors does 360 have?",
     "options": [
       "20",
+      "9",
       "36",
       "18",
       "24"
     ],
-    "correctIndex": 3,
-    "explanation": "Factor into primes: $360 = 2^3 \\times 3^2 \\times 5^1$. The divisor count is the product of one more than each exponent: $(3+1)(2+1)(1+1) = 4 \\times 3 \\times 2 = 24$.",
+    "correctIndex": 4,
+    "explanation": "Factor into primes: $360 = 2^3 \\times 3^2 \\times 5^1$. The divisor count is the product of one more than each exponent: $(3+1)(2+1)(1+1) = 4 \\times 3 \\times 2 = 24$. Adding the incremented exponents, $4 + 3 + 2$, instead of multiplying them gives 9.",
     "source": "original"
   },
   {
@@ -454,13 +482,14 @@
     "difficulty": "hard",
     "prompt": "Two fair six-sided dice are rolled. What is the probability that the sum is 8?",
     "options": [
+      "1/11",
       "6/36",
       "1/9",
       "1/12",
       "5/36"
     ],
-    "correctIndex": 3,
-    "explanation": "There are 36 equally likely outcomes. A sum of 8 arises from (2,6), (3,5), (4,4), (5,3) and (6,2), which is 5 outcomes, giving 5/36. Counting (4,4) twice wrongly gives 6/36; dropping it gives 1/9; and counting only the unordered pairs {2,6}, {3,5} and {4,4}, as though order did not matter, gives 1/12.",
+    "correctIndex": 4,
+    "explanation": "There are 36 equally likely outcomes. A sum of 8 arises from (2,6), (3,5), (4,4), (5,3) and (6,2), which is 5 outcomes, giving 5/36. Counting (4,4) twice wrongly gives 6/36; dropping it gives 1/9; and counting only the unordered pairs {2,6}, {3,5} and {4,4}, as though order did not matter, gives 1/12. Treating the eleven possible sums, 2 through 12, as equally likely gives 1/11.",
     "source": "original"
   },
   {
@@ -473,10 +502,1031 @@
       "4 hours",
       "3 hours",
       "2.5 hours",
-      "2 hours"
+      "2 hours",
+      "30 hours"
     ],
     "correctIndex": 3,
-    "explanation": "When objects approach each other their speeds add, so the gap closes at $70 + 80 = 150$ kilometers per hour. The 300-kilometer gap therefore closes in $300 \\div 150 = 2$ hours. Using one train's speed alone gives the 4-hour style of wrong answer.",
+    "explanation": "When objects approach each other their speeds add, so the gap closes at $70 + 80 = 150$ kilometers per hour. The 300-kilometer gap therefore closes in $300 \\div 150 = 2$ hours. Using one train's speed alone gives the 4-hour style of wrong answer. Subtracting the speeds instead of adding them, as though the trains moved in the same direction, gives 30 hours.",
+    "source": "original"
+  },
+  {
+    "id": "gq-031",
+    "section": "quantitative",
+    "topic": "Arithmetic: Percents",
+    "difficulty": "easy",
+    "prompt": "A gym has 480 members, and 45 percent of them attend the weekly conditioning class. How many members do NOT attend the weekly conditioning class?",
+    "options": [
+      "264 members",
+      "216 members",
+      "240 members",
+      "192 members",
+      "435 members"
+    ],
+    "correctIndex": 0,
+    "explanation": "The members who stay away are the other 55 percent, and $0.55 \\times 480 = 264$. Computing 45 percent of 480 gives 216, which counts the members who do attend rather than those who do not. Treating 45 percent as though it were half gives 240. Using 40 percent instead of 45 gives 192. Subtracting 45 members rather than 45 percent of the membership gives 435.",
+    "source": "original"
+  },
+  {
+    "id": "gq-032",
+    "section": "quantitative",
+    "topic": "Arithmetic: Percents",
+    "difficulty": "medium",
+    "prompt": "The price of a laptop was reduced by 20 percent, and the reduced price was then reduced by a further 10 percent. The final price is what percent of the original price?",
+    "options": [
+      "70 percent",
+      "28 percent",
+      "90 percent",
+      "72 percent",
+      "80 percent"
+    ],
+    "correctIndex": 3,
+    "explanation": "Successive percentage changes multiply: $0.80 \\times 0.90 = 0.72$, so the final price is 72 percent of the original. Adding the two reductions to 30 percent and subtracting gives 70 percent, but the second cut applies to the already reduced price, not the original. Adding the reductions and reporting the discount itself gives 28 percent. Applying only the second reduction gives 90 percent, and applying only the first gives 80 percent.",
+    "source": "original"
+  },
+  {
+    "id": "gq-033",
+    "section": "quantitative",
+    "topic": "Arithmetic: Percents",
+    "difficulty": "medium",
+    "prompt": "A concert sold 1,200 tickets. Of these, 15 percent were student tickets, and 25 percent of the remaining tickets were sold at a senior discount. How many tickets were sold at either the student price or the senior price?",
+    "options": [
+      "180 tickets",
+      "300 tickets",
+      "255 tickets",
+      "435 tickets",
+      "480 tickets"
+    ],
+    "correctIndex": 3,
+    "explanation": "Student tickets number $0.15 \\times 1200 = 180$, which leaves 1,020 tickets. A quarter of those, $0.25 \\times 1020 = 255$, went at the senior price, so the two groups total $180 + 255 = 435$. Stopping at the student count gives 180, and stopping at the senior count gives 255. Taking 25 percent of the full 1,200 gives 300, because it ignores the instruction to work from the remaining tickets, and adding that 300 to the 180 students gives 480.",
+    "source": "original"
+  },
+  {
+    "id": "gq-034",
+    "section": "quantitative",
+    "topic": "Arithmetic: Percents",
+    "difficulty": "hard",
+    "prompt": "A merchant pays 6,000 dollars for a shipment. She plans to sell it at a 20 percent discount off her list price, and she wants her profit on the sale to equal 25 percent of the selling price. What must the list price be?",
+    "options": [
+      "8,000 dollars",
+      "9,000 dollars",
+      "7,500 dollars",
+      "9,375 dollars",
+      "10,000 dollars"
+    ],
+    "correctIndex": 4,
+    "explanation": "If the profit is 25 percent of the selling price, the cost is the other 75 percent, so the selling price is $6000 \\div 0.75 = 8000$ dollars. That selling price is 80 percent of the list price, so the list price is $8000 \\div 0.80 = 10{,}000$ dollars. Stopping at the selling price gives 8,000. Taking the 25 percent as a markup on cost gives a selling price of 7,500, and dividing that by 0.80 gives 9,375. Marking the cost up 25 percent and then adding 20 percent gives 9,000.",
+    "source": "original"
+  },
+  {
+    "id": "gq-035",
+    "section": "quantitative",
+    "topic": "Arithmetic: Ratios",
+    "difficulty": "easy",
+    "prompt": "In a parking lot the ratio of cars to vans is $7:2$. If the lot holds 63 cars, how many vans does it hold?",
+    "options": [
+      "45 vans",
+      "63 vans",
+      "18 vans",
+      "126 vans",
+      "81 vans"
+    ],
+    "correctIndex": 2,
+    "explanation": "The 7 parts correspond to 63 cars, so one part is $63 \\div 7 = 9$ vehicles, and the 2 parts of vans come to 18. Multiplying 63 by 2 without first dividing by 7 gives 126. Reporting the total number of vehicles, $63 + 18$, gives 81, and reporting how many more cars than vans there are, $63 - 18$, gives 45. Repeating the car count gives 63.",
+    "source": "original"
+  },
+  {
+    "id": "gq-036",
+    "section": "quantitative",
+    "topic": "Arithmetic: Ratios",
+    "difficulty": "medium",
+    "prompt": "Three partners divide 91 dollars in the ratio $2:3:8$. By how much does the largest share exceed the smallest share?",
+    "options": [
+      "42 dollars",
+      "56 dollars",
+      "35 dollars",
+      "21 dollars",
+      "14 dollars"
+    ],
+    "correctIndex": 0,
+    "explanation": "The ratio has $2 + 3 + 8 = 13$ parts and $91 \\div 13 = 7$ dollars per part, so the shares are 14, 21 and 56 dollars. The largest exceeds the smallest by $56 - 14 = 42$. Reporting the largest share alone gives 56, and reporting the smallest gives 14. Subtracting the middle share from the largest gives 35, and the middle share itself is 21.",
+    "source": "original"
+  },
+  {
+    "id": "gq-037",
+    "section": "quantitative",
+    "topic": "Arithmetic: Ratios",
+    "difficulty": "hard",
+    "prompt": "A bag of mixed nuts contains almonds and cashews in the ratio $5:3$. After 24 kilograms of cashews are added, the ratio of almonds to cashews becomes $5:6$. What is the total weight of the mixture after the addition?",
+    "options": [
+      "64 kilograms",
+      "40 kilograms",
+      "24 kilograms",
+      "88 kilograms",
+      "48 kilograms"
+    ],
+    "correctIndex": 3,
+    "explanation": "Write the original amounts as $5k$ and $3k$. After the addition, $\\frac{5k}{3k + 24} = \\frac{5}{6}$, so $30k = 15k + 120$ and $k = 8$. The bag started with 40 kilograms of almonds and 24 of cashews, and it now holds 40 and 48, for a total of 88 kilograms. Reporting the almonds gives 40, and reporting the cashews after the addition gives 48. The total before the addition is 64, and repeating the amount that was poured in gives 24.",
+    "source": "original"
+  },
+  {
+    "id": "gq-038",
+    "section": "quantitative",
+    "topic": "Arithmetic: Fractions",
+    "difficulty": "easy",
+    "prompt": "A recipe uses $\\frac{3}{4}$ cup of flour. A baker prepares $\\frac{2}{3}$ of the recipe. How much flour does the baker use?",
+    "options": [
+      "$\\frac{17}{12}$ cup",
+      "$\\frac{1}{2}$ cup",
+      "$\\frac{9}{8}$ cup",
+      "$\\frac{1}{12}$ cup",
+      "$\\frac{8}{9}$ cup"
+    ],
+    "correctIndex": 1,
+    "explanation": "Taking a fraction of a fraction means multiplying: $\\frac{2}{3} \\times \\frac{3}{4} = \\frac{6}{12} = \\frac{1}{2}$ cup. Adding the two fractions instead gives $\\frac{17}{12}$, and subtracting them gives $\\frac{1}{12}$. Dividing $\\frac{3}{4}$ by $\\frac{2}{3}$ gives $\\frac{9}{8}$, and dividing the other way gives $\\frac{8}{9}$.",
+    "source": "original"
+  },
+  {
+    "id": "gq-039",
+    "section": "quantitative",
+    "topic": "Arithmetic: Fractions",
+    "difficulty": "medium",
+    "prompt": "Maria spends $\\frac{2}{5}$ of her savings on rent and then $\\frac{1}{3}$ of what remains on food. She has 240 dollars left. How much did she have before she paid the rent?",
+    "options": [
+      "400 dollars",
+      "900 dollars",
+      "720 dollars",
+      "1,200 dollars",
+      "600 dollars"
+    ],
+    "correctIndex": 4,
+    "explanation": "Rent leaves $\\frac{3}{5}$ of the savings. Food takes $\\frac{1}{3}$ of that, which is $\\frac{1}{5}$ of the original, so what is left is $\\frac{3}{5} - \\frac{1}{5} = \\frac{2}{5}$ of the original. Since $\\frac{2}{5}$ of the savings is 240 dollars, the savings were 600 dollars. Stopping after the rent, so that 240 is $\\frac{3}{5}$ of the total, gives 400. Taking the food fraction from the original savings instead of from the remainder leaves $\\frac{4}{15}$ and gives 900. Treating 240 as $\\frac{1}{3}$ of the savings gives 720, and treating it as $\\frac{1}{5}$ gives 1,200.",
+    "source": "original"
+  },
+  {
+    "id": "gq-040",
+    "section": "quantitative",
+    "topic": "Algebra: Linear Equations",
+    "difficulty": "easy",
+    "prompt": "If $4(x - 3) = 2x + 6$, what is the value of $x$?",
+    "options": [
+      "$-3$",
+      "$4.5$",
+      "$9$",
+      "$3$",
+      "$18$"
+    ],
+    "correctIndex": 2,
+    "explanation": "Distribute first: $4x - 12 = 2x + 6$. Collecting terms gives $2x = 18$, so $x = 9$, and substituting back makes both sides 24. Failing to distribute the 4 over the 3 gives $4x - 3 = 2x + 6$ and $x = 4.5$. Moving the 12 across without changing its sign gives $2x = 6 - 12$ and $x = -3$. Adding the variable terms rather than subtracting gives $6x = 18$ and $x = 3$. Stopping at $2x = 18$ gives 18.",
+    "source": "original"
+  },
+  {
+    "id": "gq-041",
+    "section": "quantitative",
+    "topic": "Algebra: Linear Equations",
+    "difficulty": "medium",
+    "prompt": "The sum of three consecutive odd integers is 141. What is the largest of the three integers?",
+    "options": [
+      "49",
+      "45",
+      "47",
+      "48",
+      "46"
+    ],
+    "correctIndex": 0,
+    "explanation": "Call them $n$, $n + 2$ and $n + 4$. Then $3n + 6 = 141$, so $3n = 135$ and $n = 45$. The integers are 45, 47 and 49, and the largest is 49. Reporting the smallest gives 45 and reporting the middle one gives 47. Reading the integers as merely consecutive rather than consecutive odd gives 46, 47 and 48, whose largest is 48 and whose smallest is 46.",
+    "source": "original"
+  },
+  {
+    "id": "gq-042",
+    "section": "quantitative",
+    "topic": "Algebra: Linear Equations",
+    "difficulty": "hard",
+    "prompt": "A theater charges 14 dollars for an adult ticket and 9 dollars for a child ticket. One evening it sold 210 tickets and took in 2,510 dollars. How many child tickets did it sell?",
+    "options": [
+      "124",
+      "105",
+      "43",
+      "86",
+      "31"
+    ],
+    "correctIndex": 3,
+    "explanation": "Let $c$ be the number of child tickets, so adults number $210 - c$. Then $14(210 - c) + 9c = 2510$, which is $2940 - 5c = 2510$, so $5c = 430$ and $c = 86$. Solving correctly but reporting the adult count gives 124. Assuming the sales split evenly gives 105. Dividing 430 by 10 instead of by the 5-dollar price difference gives 43. Treating the whole 2,510 dollars as adult sales gives 179 adults and leaves 31.",
+    "source": "original"
+  },
+  {
+    "id": "gq-043",
+    "section": "quantitative",
+    "topic": "Algebra: Inequalities",
+    "difficulty": "easy",
+    "prompt": "If $5 - 2x \\le 11$, which of the following describes all values of $x$?",
+    "options": [
+      "$x \\le -3$",
+      "$x \\ge -3$",
+      "$x \\ge 3$",
+      "$x \\le 3$",
+      "$x \\ge -8$"
+    ],
+    "correctIndex": 1,
+    "explanation": "Subtracting 5 from both sides gives $-2x \\le 6$. Dividing by a negative number reverses the direction of the inequality, so $x \\ge -3$. Checking $x = 0$ confirms it, since $5 \\le 11$. Dividing without reversing the sign gives $x \\le -3$. Dropping the negative sign from the 6 gives $x \\ge 3$, or with both slips $x \\le 3$. Adding 5 rather than subtracting it gives $-2x \\le 16$ and $x \\ge -8$.",
+    "source": "original"
+  },
+  {
+    "id": "gq-044",
+    "section": "quantitative",
+    "topic": "Algebra: Inequalities",
+    "difficulty": "medium",
+    "prompt": "If $-4 < 3 - 2x < 9$, which of the following describes all values of $x$?",
+    "options": [
+      "$-\\frac{7}{2} < x < 3$",
+      "$-7 < x < 6$",
+      "$-6 < x < \\frac{1}{2}$",
+      "$x < -3$ or $x > \\frac{7}{2}$",
+      "$-3 < x < \\frac{7}{2}$"
+    ],
+    "correctIndex": 4,
+    "explanation": "Subtract 3 from all three parts to get $-7 < -2x < 6$. Dividing by $-2$ reverses both inequality signs, giving $\\frac{7}{2} > x > -3$, which is written as $-3 < x < \\frac{7}{2}$. Dividing without reversing gives $-\\frac{7}{2} < x < 3$. Failing to divide by 2 at all leaves $-7 < x < 6$. Adding 3 instead of subtracting it gives $-1 < -2x < 12$ and then $-6 < x < \\frac{1}{2}$. Splitting the compound inequality into a union rather than an overlap gives the two separate rays.",
+    "source": "original"
+  },
+  {
+    "id": "gq-045",
+    "section": "quantitative",
+    "topic": "Algebra: Inequalities",
+    "difficulty": "hard",
+    "prompt": "The integers $x$ and $y$ satisfy $2 < x < 9$ and $-5 < y < 3$. What is the greatest possible value of $x - 2y$?",
+    "options": [
+      "11",
+      "19",
+      "16",
+      "4",
+      "12"
+    ],
+    "correctIndex": 2,
+    "explanation": "Both bounds are strict and both variables are integers, so $x$ runs from 3 to 8 and $y$ runs from $-4$ to 2. To make $x - 2y$ as large as possible, take the largest $x$ and the smallest $y$: $8 - 2(-4) = 16$. Using the excluded endpoints 9 and $-5$ gives 19. Taking the largest $y$ instead of the smallest gives $8 - 4 = 4$. Dropping the coefficient 2 gives $8 + 4 = 12$, and using the smallest $x$ gives $3 + 8 = 11$.",
+    "source": "original"
+  },
+  {
+    "id": "gq-046",
+    "section": "quantitative",
+    "topic": "Algebra: Exponents",
+    "difficulty": "easy",
+    "prompt": "If $3^x = 81$, what is the value of $x$?",
+    "options": [
+      "4",
+      "27",
+      "3",
+      "78",
+      "9"
+    ],
+    "correctIndex": 0,
+    "explanation": "Write 81 as a power of 3: $3 \\times 3 \\times 3 \\times 3 = 81$, so $3^4 = 81$ and $x = 4$. Dividing 81 by 3 gives 27, and dividing by 9 gives 9, but neither is an exponent. Subtracting 3 from 81 gives 78. Counting one factor too few gives 3, and $3^3$ is only 27.",
+    "source": "original"
+  },
+  {
+    "id": "gq-047",
+    "section": "quantitative",
+    "topic": "Algebra: Exponents",
+    "difficulty": "medium",
+    "prompt": "If $2^{x + 3} = 64$, what is the value of $x$?",
+    "options": [
+      "6",
+      "32",
+      "61",
+      "3",
+      "8"
+    ],
+    "correctIndex": 3,
+    "explanation": "Since $64 = 2^6$, the exponents must match: $x + 3 = 6$, so $x = 3$. Checking, $2^{6} = 64$. Matching the exponents but forgetting to subtract the 3 gives 6. Dividing 64 by 2 gives 32 and dividing by 8 gives 8, neither of which is an exponent. Subtracting 3 from 64 gives 61.",
+    "source": "original"
+  },
+  {
+    "id": "gq-048",
+    "section": "quantitative",
+    "topic": "Algebra: Exponents",
+    "difficulty": "hard",
+    "prompt": "If $3^{2n} \\cdot 9^{\\,n - 1} = 3^{10}$, what is the value of $n$?",
+    "options": [
+      "12",
+      "3",
+      "2.5",
+      "6",
+      "5"
+    ],
+    "correctIndex": 1,
+    "explanation": "Rewrite the second factor on base 3: $9^{\\,n-1} = (3^2)^{\\,n-1} = 3^{2n - 2}$. Multiplying powers of the same base adds the exponents, so the left side is $3^{4n - 2}$. Setting $4n - 2 = 10$ gives $4n = 12$ and $n = 3$. Dropping the $-2$ gives $4n = 10$ and 2.5. Ignoring the second factor entirely gives $2n = 10$ and 5. Reaching $4n = 12$ but dividing by 2 gives 6, and not dividing at all gives 12.",
+    "source": "original"
+  },
+  {
+    "id": "gq-049",
+    "section": "quantitative",
+    "topic": "Word Problems: Rates",
+    "difficulty": "easy",
+    "prompt": "A bottling machine fills 45 bottles per minute. How many bottles does it fill in 1 hour and 20 minutes of continuous operation?",
+    "options": [
+      "2,700 bottles",
+      "5,400 bottles",
+      "900 bottles",
+      "3,240 bottles",
+      "3,600 bottles"
+    ],
+    "correctIndex": 4,
+    "explanation": "One hour and 20 minutes is 80 minutes, and $45 \\times 80 = 3600$ bottles. Counting only the first hour gives 2,700, and counting only the extra 20 minutes gives 900. Reading the time as 1.20 hours, that is 72 minutes, gives 3,240. Doubling the hourly output to cover the extra 20 minutes gives 5,400.",
+    "source": "original"
+  },
+  {
+    "id": "gq-050",
+    "section": "quantitative",
+    "topic": "Word Problems: Rates",
+    "difficulty": "medium",
+    "prompt": "A train travels for 45 minutes at 80 kilometers per hour and then for 1 hour and 15 minutes at 96 kilometers per hour. What is its average speed for the whole trip?",
+    "options": [
+      "88 kilometers per hour",
+      "96 kilometers per hour",
+      "90 kilometers per hour",
+      "86 kilometers per hour",
+      "80 kilometers per hour"
+    ],
+    "correctIndex": 2,
+    "explanation": "Average speed is total distance divided by total time. The first leg covers $80 \\times 0.75 = 60$ kilometers and the second covers $96 \\times 1.25 = 120$ kilometers, so the train covers 180 kilometers in 2 hours, an average of 90 kilometers per hour. Averaging the two speeds gives 88, which ignores that the train spends longer at the faster speed. Attaching each speed to the other leg's time gives 86. Reporting one of the two given speeds gives 96 or 80.",
+    "source": "original"
+  },
+  {
+    "id": "gq-051",
+    "section": "quantitative",
+    "topic": "Word Problems: Rates",
+    "difficulty": "hard",
+    "prompt": "Two runners start together at the same point on a circular track 400 meters around and run in opposite directions, one at 5 meters per second and the other at 3 meters per second. After how many seconds are they together at the same point for the fourth time?",
+    "options": [
+      "200 seconds",
+      "100 seconds",
+      "800 seconds",
+      "50 seconds",
+      "150 seconds"
+    ],
+    "correctIndex": 0,
+    "explanation": "Running in opposite directions, the two close the gap between them at $5 + 3 = 8$ meters per second, so together they cover the full 400 meters every $400 \\div 8 = 50$ seconds, and that is how often they meet. The fourth meeting is therefore at $4 \\times 50 = 200$ seconds. The first three meetings are at 50, 100 and 150 seconds. Using the difference of the speeds, which applies when runners go the same way, gives a meeting every 200 seconds and a fourth meeting at 800.",
+    "source": "original"
+  },
+  {
+    "id": "gq-052",
+    "section": "quantitative",
+    "topic": "Word Problems: Rates",
+    "difficulty": "hard",
+    "prompt": "A truck leaves a depot at 8:00 a.m. and drives at a steady 60 kilometers per hour. A van leaves the same depot at 9:00 a.m. along the same road and drives at a steady 90 kilometers per hour. At what time does the van draw level with the truck?",
+    "options": [
+      "10:40 a.m.",
+      "12:00 noon",
+      "10:00 a.m.",
+      "11:00 a.m.",
+      "1:00 p.m."
+    ],
+    "correctIndex": 3,
+    "explanation": "By 9:00 a.m. the truck is 60 kilometers ahead. The van gains on it at $90 - 60 = 30$ kilometers per hour, so it needs $60 \\div 30 = 2$ hours and draws level at 11:00 a.m. Dividing the 60-kilometer gap by the truck's own speed gives 1 hour and 10:00 a.m. Dividing it by the van's speed gives 40 minutes and 10:40 a.m. Treating the head start as 90 kilometers gives 3 hours and 12:00 noon, and adding the head start hour on top of that gives 1:00 p.m.",
+    "source": "original"
+  },
+  {
+    "id": "gq-053",
+    "section": "quantitative",
+    "topic": "Word Problems: Work",
+    "difficulty": "medium",
+    "prompt": "Ana can paint a wall alone in 3 hours and Ben can paint the same wall alone in 6 hours. They paint together for 1 hour, and then Ana leaves. How much longer does Ben need to finish the wall?",
+    "options": [
+      "4 hours",
+      "3 hours",
+      "6 hours",
+      "2 hours",
+      "5 hours"
+    ],
+    "correctIndex": 1,
+    "explanation": "Rates add. In one hour together they paint $\\frac{1}{3} + \\frac{1}{6} = \\frac{1}{2}$ of the wall, so half is left. Ben paints $\\frac{1}{6}$ of the wall per hour, so the remaining half takes $\\frac{1}{2} \\div \\frac{1}{6} = 3$ more hours. Finishing the remaining half at their combined rate gives 2 hours, but Ana has gone. Reporting the total elapsed time rather than the extra time gives 4 hours. Subtracting the shared hour from Ben's solo time gives 5 hours, and Ben's solo time itself is 6.",
+    "source": "original"
+  },
+  {
+    "id": "gq-054",
+    "section": "quantitative",
+    "topic": "Word Problems: Work",
+    "difficulty": "hard",
+    "prompt": "Machine X can complete an order in 9 hours and machine Y can complete the same order in 6 hours. Both start together, but machine X breaks down after 2 hours and machine Y finishes the order alone. How long does the order take in total?",
+    "options": [
+      "3 hours 36 minutes",
+      "2 hours 40 minutes",
+      "6 hours 40 minutes",
+      "6 hours",
+      "4 hours 40 minutes"
+    ],
+    "correctIndex": 4,
+    "explanation": "In the first 2 hours the machines complete $\\frac{2}{9} + \\frac{2}{6} = \\frac{2}{9} + \\frac{3}{9} = \\frac{5}{9}$ of the order, leaving $\\frac{4}{9}$. Machine Y works at $\\frac{1}{6}$ per hour, so it needs $\\frac{4}{9} \\div \\frac{1}{6} = \\frac{8}{3}$ hours, which is 2 hours and 40 minutes. The total is 2 hours plus that, or 4 hours and 40 minutes. Reporting only the time after the breakdown gives 2 hours 40 minutes. Assuming both machines run the whole way gives 3 hours 36 minutes. Ignoring machine Y's share of the first 2 hours leaves $\\frac{7}{9}$ and gives 6 hours 40 minutes, and machine Y's solo time alone is 6 hours.",
+    "source": "original"
+  },
+  {
+    "id": "gq-055",
+    "section": "quantitative",
+    "topic": "Word Problems: Work",
+    "difficulty": "hard",
+    "prompt": "Six identical machines working together fill 1,800 cartons in 4 hours. Working at the same constant rate, how long would 9 such machines take to fill 4,050 cartons?",
+    "options": [
+      "9 hours",
+      "13.5 hours",
+      "6 hours",
+      "4 hours",
+      "$\\frac{8}{3}$ hours"
+    ],
+    "correctIndex": 2,
+    "explanation": "Six machines for 4 hours is 24 machine-hours for 1,800 cartons, so one machine fills $1800 \\div 24 = 75$ cartons per hour. Filling 4,050 cartons takes $4050 \\div 75 = 54$ machine-hours, and 9 machines supply 54 machine-hours in 6 hours. Scaling for the larger order but ignoring the extra machines gives 9 hours. Multiplying by the machine ratio instead of dividing by it gives 13.5 hours. Scaling for the machines but ignoring the larger order gives $\\frac{8}{3}$ hours, and changing nothing gives 4 hours.",
+    "source": "original"
+  },
+  {
+    "id": "gq-056",
+    "section": "quantitative",
+    "topic": "Word Problems: Mixtures",
+    "difficulty": "medium",
+    "prompt": "A 30-liter mixture of juice and water is 20 percent juice. How many liters of water must evaporate so that the remaining mixture is 25 percent juice?",
+    "options": [
+      "6 liters",
+      "1.5 liters",
+      "24 liters",
+      "7.5 liters",
+      "5 liters"
+    ],
+    "correctIndex": 0,
+    "explanation": "Only water leaves, so the juice stays fixed at $0.20 \\times 30 = 6$ liters. If $x$ liters evaporate, then $\\frac{6}{30 - x} = 0.25$, so $30 - x = 24$ and $x = 6$ liters. Reporting the volume that remains rather than the volume lost gives 24. Taking 25 percent of the original 30 liters gives 7.5, and subtracting the 6 liters of juice from that gives 1.5. Reading the 5-percentage-point change as a number of liters gives 5.",
+    "source": "original"
+  },
+  {
+    "id": "gq-057",
+    "section": "quantitative",
+    "topic": "Word Problems: Mixtures",
+    "difficulty": "hard",
+    "prompt": "How many liters of a 15 percent salt solution must be mixed with 12 liters of a 40 percent salt solution to produce a solution that is 25 percent salt?",
+    "options": [
+      "12 liters",
+      "8 liters",
+      "30 liters",
+      "18 liters",
+      "20 liters"
+    ],
+    "correctIndex": 3,
+    "explanation": "Let $x$ be the liters of the weaker solution. The salt balances as $0.15x + 0.40(12) = 0.25(x + 12)$, which is $0.15x + 4.8 = 0.25x + 3$. That gives $0.1x = 1.8$ and $x = 18$ liters. Reversing the two distances from the target, 10 and 15, gives $12 \\times \\frac{10}{15} = 8$ liters, and using 25 and 15 instead gives 20. Reporting the total volume of the finished mixture gives 30, and assuming equal amounts of the two solutions gives 12.",
+    "source": "original"
+  },
+  {
+    "id": "gq-058",
+    "section": "quantitative",
+    "topic": "Number Properties",
+    "difficulty": "easy",
+    "prompt": "If $n$ is an odd integer, which of the following must be an even integer?",
+    "options": [
+      "$n + 2$",
+      "$n(n + 1)$",
+      "$3n$",
+      "$n^2 + 2$",
+      "$\\frac{n + 1}{2}$"
+    ],
+    "correctIndex": 1,
+    "explanation": "If $n$ is odd then $n + 1$ is even, and any product with an even factor is even, so $n(n + 1)$ is always even. Adding 2 to an odd number keeps it odd, so $n + 2$ is odd. An odd number times an odd number is odd, so $3n$ is odd, and $n^2$ is odd, which makes $n^2 + 2$ odd as well. Half of $n + 1$ can land either way: with $n = 3$ it is 2, but with $n = 5$ it is 3.",
+    "source": "original"
+  },
+  {
+    "id": "gq-059",
+    "section": "quantitative",
+    "topic": "Number Properties",
+    "difficulty": "medium",
+    "prompt": "What is the least positive integer that is divisible by each of 4, 6, and 15?",
+    "options": [
+      "30",
+      "120",
+      "45",
+      "360",
+      "60"
+    ],
+    "correctIndex": 4,
+    "explanation": "Take the highest power of each prime that appears: 4 contributes $2^2$, 6 contributes 2 and 3, and 15 contributes 3 and 5. The least common multiple is $2^2 \\times 3 \\times 5 = 60$, and 60 is divisible by all three numbers. Using 6 and 15 but overlooking the second factor of 2 in 4 gives 30, which 4 does not divide. Multiplying all three numbers together gives 360, and multiplying only 4 and 30 gives 120. Both are multiples but neither is the least. Combining 3 and 15 gives 45, which neither 4 nor 6 divides.",
+    "source": "original"
+  },
+  {
+    "id": "gq-060",
+    "section": "quantitative",
+    "topic": "Number Properties",
+    "difficulty": "hard",
+    "prompt": "When the positive integer $k$ is divided by 9, the remainder is 5. What is the remainder when $2k + 7$ is divided by 9?",
+    "options": [
+      "5",
+      "17",
+      "8",
+      "3",
+      "1"
+    ],
+    "correctIndex": 2,
+    "explanation": "Write $k = 9m + 5$ for some nonnegative integer $m$. Then $2k + 7 = 18m + 17$, and since $18m$ is a multiple of 9, the remainder comes from 17, which is $9 + 8$. The remainder is 8. Testing $k = 14$ confirms it, because $2(14) + 7 = 35$ and 35 is three nines plus 8. Stopping at 17 skips the reduction below 9. Forgetting to double the remainder gives $5 + 7 = 12$ and then 3. Doubling to 10 and reducing to 1 but never adding the 7 gives 1, and repeating the original remainder gives 5.",
+    "source": "original"
+  },
+  {
+    "id": "gq-061",
+    "section": "quantitative",
+    "topic": "Statistics: Averages",
+    "difficulty": "easy",
+    "prompt": "A student's average score on four tests is 78. What score on a fifth test would raise the average of all five tests to 80?",
+    "options": [
+      "78",
+      "80",
+      "82",
+      "86",
+      "88"
+    ],
+    "correctIndex": 4,
+    "explanation": "Four tests at an average of 78 total $4 \\times 78 = 312$. Five tests at an average of 80 must total $5 \\times 80 = 400$, so the fifth score is $400 - 312 = 88$. Targeting an average of 80 across only the four tests already taken asks for $320 - 312 = 86$. Adding twice the two-point gap to the old average gives 82. The remaining choices mistake the target average, 80, or the current average, 78, for the score the fifth test must earn.",
+    "source": "original"
+  },
+  {
+    "id": "gq-062",
+    "section": "quantitative",
+    "topic": "Statistics: Averages",
+    "difficulty": "medium",
+    "prompt": "The average weight of 8 boxes is 14 kilograms. Two boxes, weighing 10 kilograms and 12 kilograms, are then removed. What is the average weight of the remaining boxes?",
+    "options": [
+      "11 kilograms",
+      "11.25 kilograms",
+      "14 kilograms",
+      "15 kilograms",
+      "18 kilograms"
+    ],
+    "correctIndex": 3,
+    "explanation": "The eight boxes weigh $8 \\times 14 = 112$ kilograms in total. Removing 10 and 12 leaves 90 kilograms spread over 6 boxes, so the average is $90 \\div 6 = 15$ kilograms. Dividing the reduced total by the original count of 8 gives 11.25. Dividing it by 5, as though two boxes came out of a group of seven, gives 18. Averaging the two removed weights gives 11, and assuming an average cannot move when values leave gives 14.",
+    "source": "original"
+  },
+  {
+    "id": "gq-063",
+    "section": "quantitative",
+    "topic": "Statistics: Averages",
+    "difficulty": "medium",
+    "prompt": "One class of 20 students averages 72 on a quiz. A second class of 30 students averages 82 on the same quiz. What is the average score of all 50 students?",
+    "options": [
+      "78",
+      "72",
+      "76",
+      "77",
+      "82"
+    ],
+    "correctIndex": 0,
+    "explanation": "Combine totals, not averages. The first class scores $20 \\times 72 = 1440$ points and the second scores $30 \\times 82 = 2460$, so the 50 students score 3900 points, an average of $3900 \\div 50 = 78$. Averaging the two class averages without weighting them gives 77, which is too low because more students sit in the higher scoring class. Attaching each average to the other class size gives 76. The values 72 and 82 are the averages of a single class rather than of the whole group.",
+    "source": "original"
+  },
+  {
+    "id": "gq-064",
+    "section": "quantitative",
+    "topic": "Statistics: Averages",
+    "difficulty": "hard",
+    "prompt": "Five distinct positive integers have an average of 20, and the largest of them is 40. What is the greatest possible value of the median?",
+    "options": [
+      "18",
+      "28",
+      "20",
+      "25",
+      "27"
+    ],
+    "correctIndex": 1,
+    "explanation": "The five integers total $5 \\times 20 = 100$. With the largest fixed at 40, the other four total 60. To push the middle value as high as possible, make the two smallest as small as they can be, 1 and 2, which leaves 57 for the third and fourth values. Those two must be distinct and smaller than 40, so the closest split is 28 and 29, and the median is 28. The set 1, 2, 28, 29, 40 confirms it. Making the fourth value as large as allowed, 39, leaves only 18 for the median. Using 1 and 3 as the two smallest leaves 56 and a median of 27. Splitting the 57 unevenly, as 25 and 32, gives 25, and assuming the median must equal the mean gives 20.",
+    "source": "original"
+  },
+  {
+    "id": "gq-065",
+    "section": "quantitative",
+    "topic": "Statistics: Median",
+    "difficulty": "easy",
+    "prompt": "What is the median of the list 12, 3, 8, 3, 21, 5, 3?",
+    "options": [
+      "3",
+      "5",
+      "7.86",
+      "8",
+      "18"
+    ],
+    "correctIndex": 1,
+    "explanation": "Sort the list first: 3, 3, 3, 5, 8, 12, 21. With seven values the median is the fourth one, which is 5. The value 3 is the most frequent number and also the fourth entry of the list as it was written, which is the usual trap. Treating the three copies of 3 as one value and taking the middle of 3, 5, 8, 12, 21 gives 8. The mean is about 7.86, and 18 is the range.",
+    "source": "original"
+  },
+  {
+    "id": "gq-066",
+    "section": "quantitative",
+    "topic": "Statistics: Median",
+    "difficulty": "hard",
+    "prompt": "A list of 7 distinct positive integers has a median of 12 and a sum of 84. What is the greatest possible value of the largest integer in the list?",
+    "options": [
+      "45",
+      "42",
+      "41",
+      "39",
+      "27"
+    ],
+    "correctIndex": 3,
+    "explanation": "Sorted, the fourth value is the median, so it is 12. To leave as much as possible for the largest value, make the other five as small as they can be: 1, 2 and 3 below the median, and 13 and 14 above it, since all seven integers must be distinct. Those six total $1 + 2 + 3 + 12 + 13 + 14 = 45$, so the largest is $84 - 45 = 39$. Allowing a second 12 above the median gives 41, and allowing 0 among the small values gives 42. The value 45 is the total of the other six rather than the largest number, and subtracting the median a second time gives 27.",
+    "source": "original"
+  },
+  {
+    "id": "gq-067",
+    "section": "quantitative",
+    "topic": "Statistics: Standard Deviation",
+    "difficulty": "easy",
+    "prompt": "Which of the following lists has the greatest standard deviation?",
+    "options": [
+      "8, 9, 10, 11, 12",
+      "2, 6, 10, 14, 18",
+      "10, 10, 10, 10, 10",
+      "6, 8, 10, 12, 14",
+      "9, 10, 10, 10, 11"
+    ],
+    "correctIndex": 1,
+    "explanation": "Every list here has a mean of 10, so the only question is how far the values sit from that center. The values 2, 6, 10, 14, 18 step 4 units apart and reach 8 units from the mean, further than any other list, so its standard deviation is the greatest. The list of five 10s has a standard deviation of 0, because no value differs from the mean at all.",
+    "source": "original"
+  },
+  {
+    "id": "gq-068",
+    "section": "quantitative",
+    "topic": "Statistics: Standard Deviation",
+    "difficulty": "hard",
+    "prompt": "Set A has a standard deviation of 4. Set B is formed by multiplying each value in set A by 3 and then adding 7 to the result. What is the standard deviation of set B?",
+    "options": [
+      "4",
+      "7",
+      "12",
+      "11",
+      "19"
+    ],
+    "correctIndex": 2,
+    "explanation": "Multiplying every value by 3 stretches each distance from the mean by a factor of 3, so the standard deviation becomes $3 \\times 4 = 12$. Adding 7 moves every value the same distance, which shifts the center and leaves the spread untouched. Applying both steps to the standard deviation gives 19. Applying only the addition gives 11, assuming neither step matters gives 4, and 7 is the added constant on its own.",
+    "source": "original"
+  },
+  {
+    "id": "gq-069",
+    "section": "quantitative",
+    "topic": "Sets and Counting",
+    "difficulty": "easy",
+    "prompt": "A cafe offers 4 sandwiches, 6 drinks, and 3 side dishes. How many different meals of one sandwich, one drink, and one side dish can be ordered?",
+    "options": [
+      "12",
+      "13",
+      "18",
+      "24",
+      "72"
+    ],
+    "correctIndex": 4,
+    "explanation": "The three choices are independent, so the counts multiply: $4 \\times 6 \\times 3 = 72$. Adding the three counts instead gives 13. Multiplying only two of the three counts gives 24 for the sandwich and drink, 18 for the drink and side dish, and 12 for the sandwich and side dish.",
+    "source": "original"
+  },
+  {
+    "id": "gq-070",
+    "section": "quantitative",
+    "topic": "Sets and Counting",
+    "difficulty": "medium",
+    "prompt": "Of 120 people surveyed, 70 own a car, 55 own a bicycle, and 20 own neither. How many own both a car and a bicycle?",
+    "options": [
+      "5",
+      "15",
+      "25",
+      "20",
+      "45"
+    ],
+    "correctIndex": 2,
+    "explanation": "Set aside the 20 who own neither, which leaves $120 - 20 = 100$ people who own at least one. Inclusion and exclusion then gives $70 + 55 - \\text{both} = 100$, so both is $125 - 100 = 25$. Working from 120 rather than 100 gives 5. Subtracting one ownership count from the 100 gives 45, taking the difference of the two ownership counts gives 15, and 20 is the number who own neither.",
+    "source": "original"
+  },
+  {
+    "id": "gq-071",
+    "section": "quantitative",
+    "topic": "Sets and Counting",
+    "difficulty": "hard",
+    "prompt": "A team of 4 people is chosen from 10 employees, 3 of whom are managers. How many possible teams contain exactly one manager?",
+    "options": [
+      "35",
+      "105",
+      "120",
+      "210",
+      "252"
+    ],
+    "correctIndex": 1,
+    "explanation": "Choose the one manager in $\\binom{3}{1} = 3$ ways and the other three members from the 7 employees who are not managers in $\\binom{7}{3} = 35$ ways, so the count is $3 \\times 35 = 105$. Choosing a manager first and then any 3 of the remaining 9 gives $3 \\times 84 = 252$, which counts every team holding two or three managers more than once. The value 35 counts the teams with no manager at all, 210 is the number of teams of any composition, and 120 counts groups of 3 rather than 4.",
+    "source": "original"
+  },
+  {
+    "id": "gq-072",
+    "section": "quantitative",
+    "topic": "Sets and Counting",
+    "difficulty": "hard",
+    "prompt": "A bag holds 5 red marbles and 4 blue marbles. Two marbles are drawn at random without replacement. What is the probability that the two marbles are the same color?",
+    "options": [
+      "$\\frac{5}{18}$",
+      "$\\frac{1}{2}$",
+      "$\\frac{41}{81}$",
+      "$\\frac{4}{9}$",
+      "$\\frac{5}{9}$"
+    ],
+    "correctIndex": 3,
+    "explanation": "There are $\\binom{9}{2} = 36$ equally likely pairs. Two reds account for $\\binom{5}{2} = 10$ pairs and two blues for $\\binom{4}{2} = 6$, so the probability is $\\frac{16}{36} = \\frac{4}{9}$. Counting only the red pairs gives $\\frac{10}{36} = \\frac{5}{18}$. Drawing with replacement, which the question does not describe, gives $\\frac{25}{81} + \\frac{16}{81} = \\frac{41}{81}$. The probability of two different colors is $\\frac{5}{9}$, and assuming the two outcomes are equally likely gives $\\frac{1}{2}$.",
+    "source": "original"
+  },
+  {
+    "id": "gq-073",
+    "section": "quantitative",
+    "topic": "Sets and Counting",
+    "difficulty": "easy",
+    "prompt": "At a meeting, each of the 9 attendees shakes hands exactly once with every other attendee. How many handshakes take place?",
+    "options": [
+      "36",
+      "18",
+      "45",
+      "72",
+      "81"
+    ],
+    "correctIndex": 0,
+    "explanation": "A handshake is a pair of people, so the count is $\\binom{9}{2} = \\frac{9 \\times 8}{2} = 36$. Skipping the division by 2 counts each handshake once for each person in it and gives 72. Multiplying 9 by itself gives 81, which also lets a person shake their own hand. Using 10 people gives 45, and doubling the number of attendees gives 18.",
+    "source": "original"
+  },
+  {
+    "id": "gq-074",
+    "section": "quantitative",
+    "topic": "Algebra: Quadratics",
+    "difficulty": "easy",
+    "prompt": "If $x^2 = 5x$ and $x$ is not equal to 0, what is the value of $x$?",
+    "options": [
+      "-5",
+      "0",
+      "1",
+      "5",
+      "25"
+    ],
+    "correctIndex": 3,
+    "explanation": "Move everything to one side rather than dividing blindly: $x^2 - 5x = 0$, so $x(x - 5) = 0$ and $x$ is either 0 or 5. The question rules out 0, so $x = 5$. Squaring the 5 instead of solving gives 25, and a sign slip while factoring produces $-5$. Dividing both sides by $5x$ leaves 1.",
+    "source": "original"
+  },
+  {
+    "id": "gq-075",
+    "section": "quantitative",
+    "topic": "Algebra: Quadratics",
+    "difficulty": "medium",
+    "prompt": "The sum of a number and its square is 56. If the number is negative, what is the number?",
+    "options": [
+      "-8",
+      "-7",
+      "7",
+      "8",
+      "56"
+    ],
+    "correctIndex": 0,
+    "explanation": "Let the number be $n$, so $n + n^2 = 56$, which rearranges to $n^2 + n - 56 = 0$. That factors as $(n + 8)(n - 7) = 0$, giving $n = -8$ or $n = 7$. Only $-8$ is negative, and it checks out because $-8 + 64 = 56$. The value 7 is the positive root. Reading the signs off the factors backward gives $-7$ and 8, and 56 is the given total.",
+    "source": "original"
+  },
+  {
+    "id": "gq-076",
+    "section": "quantitative",
+    "topic": "Algebra: Quadratics",
+    "difficulty": "hard",
+    "prompt": "The equation $x^2 + kx + 24 = 0$ has two integer roots whose difference is 5. What is the greatest possible value of $k$?",
+    "options": [
+      "-11",
+      "-5",
+      "5",
+      "10",
+      "11"
+    ],
+    "correctIndex": 4,
+    "explanation": "For roots $r$ and $s$, the product $rs$ equals 24 and the sum $r + s$ equals $-k$. The integer factor pairs of 24 that differ by 5 are 8 and 3, and $-3$ and $-8$. The first pair sums to 11 and gives $k = -11$, while the second sums to $-11$ and gives $k = 11$, so the greatest value is 11. Reading the sum as $k$ itself rather than as its opposite gives $-11$. The pair 6 and 4 also multiplies to 24 but differs by 2, and its sum produces 10. The remaining choices simply repeat the given difference of 5.",
+    "source": "original"
+  },
+  {
+    "id": "gq-077",
+    "section": "quantitative",
+    "topic": "Algebra: Systems",
+    "difficulty": "easy",
+    "prompt": "If $2x + y = 11$ and $x - y = 1$, what is the value of $xy$?",
+    "options": [
+      "1",
+      "3",
+      "4",
+      "7",
+      "12"
+    ],
+    "correctIndex": 4,
+    "explanation": "Add the two equations to eliminate $y$: $3x = 12$, so $x = 4$, and substituting back gives $y = 3$. The product is $4 \\times 3 = 12$. The values 4 and 3 are the variables themselves, 7 is their sum, and 1 is their difference.",
+    "source": "original"
+  },
+  {
+    "id": "gq-078",
+    "section": "quantitative",
+    "topic": "Algebra: Systems",
+    "difficulty": "medium",
+    "prompt": "Two notebooks and three pens cost 31 dollars. Four notebooks and one pen cost 37 dollars. What is the cost of one notebook?",
+    "options": [
+      "5 dollars",
+      "8 dollars",
+      "9.25 dollars",
+      "13 dollars",
+      "15.50 dollars"
+    ],
+    "correctIndex": 1,
+    "explanation": "Let $n$ and $p$ be the two prices. The second statement gives $p = 37 - 4n$, and substituting into the first gives $2n + 111 - 12n = 31$, so $10n = 80$ and $n = 8$. Then $p = 5$, and both original statements check out. The value 5 is the price of a pen rather than a notebook, and 13 is one of each. Dividing 37 by 4 as though the pen were free gives 9.25, and dividing 31 by 2 the same way gives 15.50.",
+    "source": "original"
+  },
+  {
+    "id": "gq-079",
+    "section": "quantitative",
+    "topic": "Algebra: Systems",
+    "difficulty": "hard",
+    "prompt": "If $x + y = 7$, $y + z = 12$, and $x + z = 9$, what is the value of $xyz$?",
+    "options": [
+      "70",
+      "10",
+      "14",
+      "28",
+      "35"
+    ],
+    "correctIndex": 0,
+    "explanation": "Adding all three equations counts each variable twice: $2(x + y + z) = 28$, so $x + y + z = 14$. Subtracting each original equation from that total gives $z = 7$, $x = 2$, and $y = 5$, and all three statements check out. The product is $2 \\times 5 \\times 7 = 70$. The value 14 is the sum of the three variables and 28 is that sum before halving. The remaining choices multiply only two of the three values.",
+    "source": "original"
+  },
+  {
+    "id": "gq-080",
+    "section": "quantitative",
+    "topic": "Algebra: Functions",
+    "difficulty": "easy",
+    "prompt": "If $g(x) = x^2 - 4x$, what is the value of $g(-2)$?",
+    "options": [
+      "-12",
+      "-4",
+      "4",
+      "8",
+      "12"
+    ],
+    "correctIndex": 4,
+    "explanation": "Substitute carefully and keep both signs: $g(-2) = (-2)^2 - 4(-2) = 4 + 8 = 12$. Treating $(-2)^2$ as $-4$ gives 4. Losing the sign on the second term gives $4 - 8 = -4$, and making both slips gives $-12$. The value 8 is the second term on its own.",
+    "source": "original"
+  },
+  {
+    "id": "gq-081",
+    "section": "quantitative",
+    "topic": "Algebra: Functions",
+    "difficulty": "medium",
+    "prompt": "The function $h$ is defined by $h(x) = \\frac{3x + 1}{x - 2}$ for every $x$ other than 2. If $h(a) = 4$, what is the value of $a$?",
+    "options": [
+      "9",
+      "-7",
+      "2",
+      "3",
+      "7"
+    ],
+    "correctIndex": 0,
+    "explanation": "Multiply both sides by $a - 2$: $3a + 1 = 4(a - 2) = 4a - 8$. Subtracting $3a$ from both sides and adding 8 gives $a = 9$, and substituting back gives $\\frac{28}{7} = 4$. Failing to distribute the 4 leaves $3a + 1 = 4a - 2$ and gives 3. Subtracting the 1 instead of adding it gives 7, and a sign error while distributing, giving $4a + 8$, produces $-7$. The value 2 is the input the definition excludes.",
+    "source": "original"
+  },
+  {
+    "id": "gq-082",
+    "section": "quantitative",
+    "topic": "Algebra: Functions",
+    "difficulty": "hard",
+    "prompt": "A function $f$ satisfies $f(n + 1) = f(n) + 2n$ for every positive integer $n$, and $f(1) = 3$. What is the value of $f(6)$?",
+    "options": [
+      "13",
+      "23",
+      "30",
+      "33",
+      "45"
+    ],
+    "correctIndex": 3,
+    "explanation": "Step up one value at a time: $f(2) = 3 + 2 = 5$, $f(3) = 5 + 4 = 9$, $f(4) = 9 + 6 = 15$, $f(5) = 15 + 8 = 23$, and $f(6) = 23 + 10 = 33$. The same total comes from $3 + 2(1 + 2 + 3 + 4 + 5)$. Stopping one step early gives 23 and taking one step too many gives 45. Leaving out the starting value of 3 gives 30, and applying the rule only once, with $n = 5$, gives 13.",
+    "source": "original"
+  },
+  {
+    "id": "gq-083",
+    "section": "quantitative",
+    "topic": "Number Properties",
+    "difficulty": "medium",
+    "prompt": "If $n$ is an integer, which of the following must be an odd integer?",
+    "options": [
+      "$n + 2$",
+      "$2n$",
+      "$3n$",
+      "$n^2 + n$",
+      "$n^2 + n + 1$"
+    ],
+    "correctIndex": 4,
+    "explanation": "The expression $n^2 + n$ factors as $n(n + 1)$, a product of two consecutive integers, so one of them is even and the product is always even. One more than an even number is always odd, so $n^2 + n + 1$ is odd for every integer $n$. Doubling an integer is always even. Adding 2 keeps whatever parity $n$ had, and tripling $n$ does the same, so both are odd only when $n$ is odd.",
+    "source": "original"
+  },
+  {
+    "id": "gq-084",
+    "section": "quantitative",
+    "topic": "Number Properties",
+    "difficulty": "medium",
+    "prompt": "What is the greatest common divisor of 84 and 126?",
+    "options": [
+      "6",
+      "14",
+      "42",
+      "21",
+      "252"
+    ],
+    "correctIndex": 2,
+    "explanation": "Factor both numbers: $84 = 2^2 \\times 3 \\times 7$ and $126 = 2 \\times 3^2 \\times 7$. The greatest common divisor takes the lower power of each shared prime, $2 \\times 3 \\times 7 = 42$, and 42 does divide both. The value 252 is the least common multiple, which is what you get by taking the higher power of each prime instead. The remaining choices are common divisors, but each one is smaller than 42.",
+    "source": "original"
+  },
+  {
+    "id": "gq-085",
+    "section": "quantitative",
+    "topic": "Number Properties",
+    "difficulty": "medium",
+    "prompt": "What is the units digit of $3^{46} + 4^{15}$?",
+    "options": [
+      "1",
+      "3",
+      "5",
+      "7",
+      "9"
+    ],
+    "correctIndex": 1,
+    "explanation": "The units digits of the powers of 3 repeat in the cycle 3, 9, 7, 1. Since 46 leaves a remainder of 2 when divided by 4, the units digit of $3^{46}$ is 9. The powers of 4 alternate between 4 and 6, and an odd exponent gives 4. The two units digits add to 13, so the sum ends in 3. Landing one place early in the cycle of 3 gives a units digit of 7 and a sum ending in 1, landing one place late gives 1 and a sum ending in 5, and using the first entry of the cycle gives 3 and a sum ending in 7. Stopping at the first term gives 9.",
+    "source": "original"
+  },
+  {
+    "id": "gq-086",
+    "section": "quantitative",
+    "topic": "Number Properties",
+    "difficulty": "hard",
+    "prompt": "How many trailing zeros does $50!$ have when it is written out in full?",
+    "options": [
+      "12",
+      "5",
+      "10",
+      "11",
+      "14"
+    ],
+    "correctIndex": 0,
+    "explanation": "Each trailing zero comes from a factor of 10, and in a factorial the factors of 5 are scarcer than the factors of 2, so count the fives. There are $\\lfloor 50 \\div 5 \\rfloor = 10$ multiples of 5 among the numbers from 1 to 50, and 25 and 50 each supply a second factor of 5, adding 2 more, for 12 in total. Counting only the multiples of 5 gives 10, and crediting only one of the two multiples of 25 gives 11. Crediting each of those two with two extra fives gives 14, and counting only the multiples of 10 gives 5.",
+    "source": "original"
+  },
+  {
+    "id": "gq-087",
+    "section": "quantitative",
+    "topic": "Word Problems: Interest",
+    "difficulty": "medium",
+    "prompt": "A sum of 4000 dollars is invested at a simple annual interest rate of 6 percent. What is the total value of the investment after 5 years?",
+    "options": [
+      "1200 dollars",
+      "4240 dollars",
+      "4720 dollars",
+      "5000 dollars",
+      "5200 dollars"
+    ],
+    "correctIndex": 4,
+    "explanation": "Simple interest is earned on the original sum every year and never on the interest already earned, so the interest is $4000 \\times 0.06 \\times 5 = 1200$ dollars and the total is $4000 + 1200 = 5200$ dollars. The value 1200 is the interest by itself, without the original sum. Counting only one year gives 4240 and counting only three gives 4720. Using the term of 5 years as the rate, so that 5 percent is earned for 5 years, gives 5000.",
+    "source": "original"
+  },
+  {
+    "id": "gq-088",
+    "section": "quantitative",
+    "topic": "Word Problems: Interest",
+    "difficulty": "hard",
+    "prompt": "A deposit of 5000 dollars earns 10 percent interest compounded annually. What is the value of the deposit at the end of 3 years?",
+    "options": [
+      "6655 dollars",
+      "1655 dollars",
+      "5500 dollars",
+      "6050 dollars",
+      "6500 dollars"
+    ],
+    "correctIndex": 0,
+    "explanation": "Each year multiplies the balance by 1.10, because the interest earned in one year earns interest in the next. After three years the value is $5000 \\times 1.1^3 = 5000 \\times 1.331 = 6655$ dollars. Treating the interest as simple, at a flat 500 dollars a year, gives 6500 and misses the 155 dollars earned on earlier interest. Stopping after one year gives 5500 and stopping after two gives 6050. The value 1655 is the interest alone rather than the total.",
+    "source": "original"
+  },
+  {
+    "id": "gq-089",
+    "section": "quantitative",
+    "topic": "Word Problems: Profit and Loss",
+    "difficulty": "medium",
+    "prompt": "A retailer buys an item for 80 dollars and sells it at a loss of 15 percent of the cost. What is the selling price?",
+    "options": [
+      "12 dollars",
+      "65 dollars",
+      "68 dollars",
+      "72 dollars",
+      "92 dollars"
+    ],
+    "correctIndex": 2,
+    "explanation": "A loss of 15 percent leaves 85 percent of the cost, so the selling price is $80 \\times 0.85 = 68$ dollars. The value 12 is the size of the loss rather than the price. Subtracting 15 dollars instead of 15 percent gives 65, applying a habitual 10 percent gives 72, and adding the 15 percent rather than subtracting it gives 92.",
+    "source": "original"
+  },
+  {
+    "id": "gq-090",
+    "section": "quantitative",
+    "topic": "Word Problems: Profit and Loss",
+    "difficulty": "hard",
+    "prompt": "A merchant sells two paintings for 990 dollars each. On the first painting he makes a profit of 10 percent of what it cost him, and on the second he takes a loss of 10 percent of what it cost him. Taking the two sales together, what is the result?",
+    "options": [
+      "A loss of 20 dollars",
+      "A loss of 10 dollars",
+      "Neither a profit nor a loss",
+      "A profit of 10 dollars",
+      "A profit of 20 dollars"
+    ],
+    "correctIndex": 0,
+    "explanation": "Work back to each cost. A profit of 10 percent means 990 is 1.1 times the cost, so the first painting cost 900 dollars. A loss of 10 percent means 990 is 0.9 times the cost, so the second cost 1100 dollars. The two together cost 2000 dollars and sold for 1980 dollars, a loss of 20 dollars. The two percentages look as though they cancel, but the loss is taken on the more expensive painting and the profit on the cheaper one, so equal rates always leave a net loss.",
     "source": "original"
   }
 ]
