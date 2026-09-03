@@ -85,10 +85,13 @@ export default async function Home() {
 
       <StatBand
         stats={[
-          { value: String(availableCount), label: availableCount === 1 ? "exam" : "exams, fully timed" },
-          { value: totalBank.toLocaleString("en-US"), label: "questions written by hand" },
-          { value: "Every one", label: "explained after you submit" },
-          { value: "Free", label: "no account, no card" },
+          {
+            value: String(availableCount),
+            label: availableCount === 1 ? "exam, fully timed" : "exams, fully timed",
+          },
+          { value: totalBank.toLocaleString("en-US"), label: "original questions" },
+          { value: "Every", label: "answer has an explanation" },
+          { value: "Free", label: "no account and no payment" },
         ]}
       />
 
@@ -123,16 +126,17 @@ function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) 
       />
       <div className="relative mx-auto w-full max-w-5xl px-6 py-20 text-center sm:py-28">
         <p className="text-xs font-semibold tracking-widest uppercase opacity-90">
-          Graduate admissions practice
+          Graduate admission practice
         </p>
         <h1 className="mx-auto mt-4 max-w-3xl text-3xl leading-tight font-bold text-balance sm:text-4xl md:text-5xl">
-          Sit the real thing before you sit the real thing.
+          Take a full timed section before you take the real exam.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed opacity-90 sm:text-lg">
-          Full-length timed practice for the <strong className="font-semibold">{names}</strong>,
-          each built to its own published format: real section timings,{" "}
-          {totalBank.toLocaleString("en-US")} questions written by hand, and a written explanation
-          waiting behind every single answer. No sign-up, no paywall.
+          This site gives you full practice exams for the{" "}
+          <strong className="font-semibold">{names}</strong>. Each exam follows its own published
+          format and its own section time limits. A person writes every one of the{" "}
+          {totalBank.toLocaleString("en-US")} questions. Every answer has a written explanation.
+          You need no account, and you pay nothing.
         </p>
 
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -140,7 +144,7 @@ function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) 
             href="#exams"
             className="flex min-h-12 w-full items-center justify-center rounded-lg bg-accent-foreground px-7 text-sm font-semibold text-accent transition hover:opacity-90 active:scale-[0.98] sm:w-auto"
           >
-            Choose your exam
+            Select your exam
           </Link>
           <Link
             href="#how-it-works"
@@ -156,7 +160,7 @@ function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) 
             they are still the primary action, so these sit underneath as text
             rather than competing as a second row of buttons. */}
         <p className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm opacity-90">
-          <span>Already know which one?</span>
+          <span>Do you know which exam you want?</span>
           {exams.map((exam, i) => (
             <span key={exam.id} className="flex items-center gap-2">
               {i > 0 && (
@@ -175,11 +179,11 @@ function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) 
         </p>
 
         <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-xs font-medium opacity-80 sm:text-sm">
-          <li>Real section timings</li>
+          <li>Real section time limits</li>
           <li aria-hidden>&middot;</li>
-          <li>Every answer explained</li>
+          <li>An explanation for every answer</li>
           <li aria-hidden>&middot;</li>
-          <li>One section at a time, on the clock</li>
+          <li>One timed section at a time</li>
         </ul>
       </div>
     </section>
@@ -228,15 +232,14 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
       <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-20">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold tracking-widest text-accent-text uppercase">
-            Pick your exam
+            Select your exam
           </p>
           <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
-            Each one built to its own format
+            Each exam follows its own format
           </h2>
           <p className="mt-3 leading-relaxed text-muted">
-            These are different exams, not one quiz with the names swapped. Section lengths,
-            timings, whether you can skip, and whether the questions adapt to you all follow the
-            exam being practiced.
+            These are different exams, not one quiz under different names. The section lengths, the
+            time limits, the skip rules and the adaptive difficulty all follow the exam you select.
           </p>
         </div>
 
@@ -314,60 +317,63 @@ function examHighlights(exam: ExamModule, bank: number): string[] {
   const sectionMinutes = new Set(exam.sections.map((s) => s.minutes));
   lines.push(
     sectionMinutes.size === 1
-      ? `Every section is ${[...sectionMinutes][0]} minutes on its own clock`
-      : "Each section runs its own independent clock"
+      ? `Each section has its own ${[...sectionMinutes][0]}-minute time limit`
+      : "Each section has its own time limit"
   );
 
   lines.push(
     exam.rules.adaptive
-      ? "Questions get harder as you get them right, and easier when you slip"
-      : "A fresh random set drawn from the bank on every attempt"
+      ? "The questions become harder after correct answers and easier after incorrect ones"
+      : "Each attempt uses a new random set of questions"
   );
   // Stated rather than implied: a section that draws most of its bank repeats
   // itself on a retake, and claiming "a different set every time" for such an
   // exam would be false.
   const perSitting = Math.max(...exam.sections.map((s) => s.questionCount));
   if (bank > 0 && perSitting / (bank / exam.sections.length) > 0.5) {
-    lines.push("Bank is still small, so retakes repeat a fair share of the questions");
+    lines.push("The question bank is small, so a second attempt repeats many questions");
   }
 
   if (!exam.rules.allowSkip) {
-    lines.push("No skipping: answer each question before the next one appears");
+    lines.push("You must answer each question before the next question appears");
   }
   if (exam.rules.reviewEdit) {
     lines.push(
-      `Flag as you go, then change up to ${exam.rules.reviewEdit.maxChanges} answers if time is left`
+      `You can flag questions, then change up to ${exam.rules.reviewEdit.maxChanges} answers if time remains`
     );
   }
   if (exam.rules.sectionOrder === "chooseable") {
-    lines.push("Take the sections in whatever order you like");
+    lines.push("You can take the sections in any order");
   }
   if (exam.scoring.kind === "scaled") {
-    lines.push(`Scored ${exam.scoring.min} to ${exam.scoring.max}, weighted by difficulty`);
+    lines.push(
+      `The score runs from ${exam.scoring.min} to ${exam.scoring.max} and includes question difficulty`
+    );
   }
 
   lines.push(
     bank > 0
-      ? `${bank.toLocaleString("en-US")} questions in the bank so far`
-      : "Question bank still being written"
+      ? `${bank.toLocaleString("en-US")} questions in the question bank`
+      : "The question bank is not ready yet"
   );
   return lines;
 }
 
 /* ---------------------------------------------------------- how it works -- */
 
+/** Steps are instructions, so ASD-STE100 caps them at 20 words a sentence. */
 const STEPS = [
   {
-    title: "Pick an exam, then a section",
-    body: "Each section starts its own clock the moment you open it and locks the others until you submit, exactly like the real sitting.",
+    title: "Select an exam and a section",
+    body: "The timer starts when you open the section. The other sections stay locked until you submit this one.",
   },
   {
-    title: "Answer under time",
-    body: "A live countdown and a pause button for when life interrupts. Run out of time and the section closes itself out and scores what you had.",
+    title: "Answer the questions",
+    body: "Watch the timer as you work. Press Pause to stop the timer. At zero the section submits your answers.",
   },
   {
-    title: "Read why you were wrong",
-    body: "You get a score, a per-topic breakdown, and every question again with the correct answer marked and the reasoning spelled out. That part is the actual studying.",
+    title: "Read the explanations",
+    body: "You then see your score and a result for each topic. You also see every question, its correct answer and an explanation.",
   },
 ];
 
@@ -380,7 +386,7 @@ function HowItWorks() {
             How it works
           </p>
           <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
-            Three steps, and none of them is creating an account
+            Three steps, and none of them needs an account
           </h2>
         </div>
 
@@ -407,33 +413,33 @@ function HowItWorks() {
 
 const FEATURES = [
   {
-    eyebrow: "Built to the real format",
-    title: "The pressure is the point",
-    body: "Question counts and time limits are taken from each exam's published structure, not rounded off for convenience. Sections lock while you are inside one, the countdown keeps running if you wander off to another tab, and pausing is a deliberate act you can see on screen. Practicing without the clock teaches you the material but not the exam.",
+    eyebrow: "The real exam format",
+    title: "Practice with the real time limits",
+    body: "The question counts and the time limits come from each exam's published structure. A section locks the other sections while you work in it. The timer continues if you open a different browser tab. A pause is a deliberate act, and the screen shows it. Practice without a time limit teaches you the topics but not the exam.",
     points: [
-      "A per-section countdown that survives a reload",
-      "Pause blurs the questions, so a break is a real break",
-      "Auto-submits and scores honestly when time is up",
+      "Each section has its own timer, and a page reload does not reset it",
+      "Pause hides the questions and stops the timer",
+      "At zero the section submits and scores your answers",
     ],
   },
   {
-    eyebrow: "Written, not generated",
-    title: "Every answer comes with its reasoning",
-    body: "The banks are composed by hand and kept under version control, so an explanation is the author's reasoning rather than a language model improvising at request time. Wrong options are written to be genuinely tempting: the job of a distractor is to catch a real misunderstanding, not to be obviously silly.",
+    eyebrow: "Written by a person",
+    title: "Every answer has an explanation",
+    body: "A person writes each question and each explanation. The explanation is therefore the author's reasoning, not the output of a language model at the moment you ask. The incorrect options are plausible on purpose. A good incorrect option matches a real mistake.",
     points: [
-      "A full written explanation on every question",
-      "Answer position and answer length both balanced, so pattern-guessing fails",
-      "A per-topic breakdown showing where you actually lost points",
+      "A written explanation on every question",
+      "Balanced answer positions and answer lengths, so a guess pattern fails",
+      "A result for each topic, so you see where you lost the points",
     ],
   },
   {
-    eyebrow: "One engine, honest to each exam",
-    title: "An adaptive exam actually adapts",
-    body: "Where an exam is computer-adaptive, the practice is too: questions come one at a time, they get harder while you are getting them right, and the score weighs how hard the ones you answered actually were. Where an exam is a fixed paper, you get the whole section at once and can skip and come back. Neither is a reskin of the other.",
+    eyebrow: "One engine, two formats",
+    title: "An adaptive exam adapts",
+    body: "Some exams adapt to the candidate, and the practice here adapts too. The questions come one at a time. They become harder after correct answers. The score includes the difficulty of each question you answered. Other exams are a fixed paper. There you see the whole section at once, and you can skip a question and return to it later.",
     points: [
-      "Difficulty that responds to your streak, not a fixed shuffle",
-      "Scoring that reflects question difficulty, not just the count",
-      "Exam-specific rules on skipping, flagging, and revisiting answers",
+      "The difficulty follows your recent answers",
+      "The score includes question difficulty, not only the count",
+      "Each exam has its own rules for skips, flags and answer changes",
     ],
   },
 ];
@@ -497,35 +503,35 @@ function buildFaqs(totalBank: number, examCount: number): FaqEntry[] {
   return [
     {
       q: "Is it really free?",
-      a: "Yes, and there is nothing to sign up for. Open a section and start. Accounts and saved attempt history are on the roadmap, but practicing here is not what you would ever be paying for.",
+      a: "Yes. There is no payment and no account. Select a section and start. Accounts and a saved attempt history are future plans, and the practice itself stays free.",
     },
     {
       q: "Are these real exam questions?",
-      a: `No, and they legally could not be. All ${totalBank.toLocaleString(
+      a: `No. Real exam questions are copyright material. A person writes every one of the ${totalBank.toLocaleString(
         "en-US"
-      )} questions are written originally for this site and calibrated against each exam's published structure, so the topic mix, difficulty spread, and phrasing match what you will sit. Anyone selling you leaked questions is selling you a problem.`,
+      )} questions here for this site. The topic mix, the difficulty and the style follow each exam's published structure. Do not trust any site that offers you real exam questions.`,
     },
     {
       q: "Which exams can I practice?",
       a: `${
         examCount === 1 ? "One exam is" : `${examCount} exams are`
-      } live right now, each built to its own published format rather than sharing one generic quiz. More can be added without changing how the existing ones behave.`,
+      } ready now. Each exam follows its own published format, and none of them shares one generic quiz. A new exam does not change how the current exams behave.`,
     },
     {
       q: "Does my progress save?",
-      a: "Within a browser tab, yes. Your answers and your remaining time survive a reload and moving between pages, so a stray refresh does not cost you the attempt. Closing the tab clears everything, which is deliberate: coming back days later to a half-spent clock is worse than starting clean.",
+      a: "Yes, but only in this browser tab. Your answers and your remaining time survive a page reload. They also survive a move to another page on this site. When you close the tab, the site deletes them. This is deliberate. A half-spent timer from three days ago is worse than a new attempt.",
     },
     {
       q: "Can I retake a section?",
-      a: "As many times as you like. How different the retake is depends on the exam and how large its bank is: a section drawing 36 questions from a bank of 100 is close to a new paper every time, while a smaller bank will repeat more of itself. Each exam's card above says how many questions its bank currently holds.",
+      a: "Yes, as many times as you want. The difference between two attempts depends on the size of the question bank. A section that draws 36 questions from a bank of 100 is almost a new paper each time. A small bank repeats more of its questions. Each exam card above shows the size of its bank.",
     },
     {
-      q: "What happens if I run out of time?",
-      a: "The section submits itself, scores what you had answered, and tells you plainly that time ran out. You still get the full review with explanations for every question, including the ones you never reached. On an adaptive exam the unanswered ones cost more than wrong ones would, which is exactly how the real test behaves.",
+      q: "What happens when the time ends?",
+      a: "The section submits your answers and scores them. It also tells you that the time ended. You still see every question, its correct answer and an explanation. On an adaptive exam an unanswered question costs you more than an incorrect answer. The real exam behaves the same way.",
     },
     {
       q: "Does it work on a phone?",
-      a: "Yes. On exams that show a whole section at once, the question navigator moves into a bottom sheet on small screens; on one-question-at-a-time exams there is nothing to navigate. Everything stays tappable either way. A long reading passage is still easier on a bigger screen, but nothing is out of reach.",
+      a: "Yes. On an exam that shows a whole section at once, the question list moves into a bottom sheet on a small screen. On an exam that shows one question at a time, there is no list to open. Every control is large enough to tap. A long reading passage is easier on a large screen.",
     },
   ];
 }
@@ -582,20 +588,19 @@ function ClosingCta() {
     <section className="bg-accent/5 dark:bg-accent/10">
       <div className="mx-auto w-full max-w-3xl px-6 py-16 text-center sm:py-20">
         <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
-          The first timed section is the one that tells you the truth
+          One timed section shows you where you stand
         </h2>
         <p className="mx-auto mt-4 max-w-xl leading-relaxed text-muted">
-          Give it one sitting now, find out where you actually stand, and let the explanations do
-          the rest.
+          Take one section now. The explanations then show you what to study next.
         </p>
         <Link
           href="#exams"
           className="mt-8 inline-flex min-h-12 items-center justify-center rounded-lg bg-accent px-8 text-sm font-semibold text-accent-foreground transition hover:opacity-90 active:scale-[0.98]"
         >
-          Choose your exam
+          Select your exam
         </Link>
         <p className="mt-4 text-xs text-muted">
-          Free, and no account needed. {SITE_NAME} is an independent study tool.
+          Free, and no account. {SITE_NAME} is an independent study tool.
         </p>
       </div>
     </section>
