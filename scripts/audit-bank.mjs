@@ -31,7 +31,41 @@ const BANKS = [
   ["gmat/data-insights", "data/questions/gmat/data-insights.json"],
   ["gmat/quantitative", "data/questions/gmat/quantitative.json"],
   ["gmat/verbal", "data/questions/gmat/verbal.json"],
+  ["gre/verbal", "data/questions/gre/verbal.json"],
+  ["gre/quantitative", "data/questions/gre/quantitative.json"],
 ];
+
+/*
+ * THREE QUESTION KINDS, and most of the statistics below only mean anything for
+ * one of them.
+ *
+ * "single" is an option index, and every heuristic here was written for it.
+ * "multi" has a set of correct indices, so "which slot holds the key" has no
+ * single answer. "numeric" has no options at all, so slot spread, longest
+ * option and the middle-two test are all undefined rather than merely unusual.
+ *
+ * They are therefore EXCLUDED from those samples rather than crashing them or,
+ * worse, silently counting `undefined` as slot 0 and reporting a bias that does
+ * not exist. Their own integrity is checked separately, below.
+ */
+/*
+ * Types whose option set is FIXED and memorized on the real exam. Two separate
+ * heuristics have to skip them, which is why this sits with the helpers rather
+ * than beside either one.
+ *
+ * Data Sufficiency (GMAT) and Quantitative Comparison (GRE) both present the
+ * same options in the same order on every question of the type. Re-slotting
+ * them would train a habit that fails on test day, so the per-topic slot check
+ * skips them. The longest-option check has to skip them too, for a subtler
+ * reason: the same option is always the longest string, so every time it
+ * happens to be the answer the heuristic scores a "hit" that tells a candidate
+ * nothing they could ever act on.
+ */
+const SLOT_EXEMPT_TOPICS = new Set(["Data Sufficiency", "Quantitative Comparison"]);
+
+const kindOf = (q) => q.kind ?? "single";
+const isSingle = (q) => kindOf(q) === "single";
+const optionsOf = (q) => (Array.isArray(q.options) ? q.options : []);
 
 const failures = [];
 const notes = [];
@@ -64,17 +98,69 @@ for (const q of all) {
     if (typeof q[field] !== "string" || q[field].trim() === "")
       failures.push(`${q.id}: missing or empty "${field}"`);
   }
-  if (!Array.isArray(q.options) || q.options.length < 2)
-    failures.push(`${q.id}: needs at least two options`);
-  if (!Number.isInteger(q.correctIndex) || q.correctIndex < 0 || q.correctIndex >= q.options.length)
-    failures.push(`${q.id}: correctIndex ${q.correctIndex} is out of range`);
-  if (new Set(q.options).size !== q.options.length)
-    failures.push(`${q.id}: two options are the same string`);
+  const kind = kindOf(q);
+  if (!["single", "multi", "numeric"].includes(kind))
+    failures.push(`${q.id}: unknown kind "${kind}"`);
+
+  if (kind === "numeric") {
+    // No options at all. The answer is typed, so the only thing to validate is
+    // that there is a finite value to mark it against.
+    if (typeof q.correctValue !== "number" || !Number.isFinite(q.correctValue))
+      failures.push(`${q.id}: numeric question needs a finite correctValue`);
+    if (q.options !== undefined) failures.push(`${q.id}: numeric question must not carry options`);
+    if (q.tolerance !== undefined && !(q.tolerance >= 0))
+      failures.push(`${q.id}: tolerance must be zero or greater`);
+  } else {
+    if (!Array.isArray(q.options) || q.options.length < 2)
+      failures.push(`${q.id}: needs at least two options`);
+    if (new Set(optionsOf(q)).size !== optionsOf(q).length)
+      failures.push(`${q.id}: two options are the same string`);
+  }
+
+  if (kind === "single") {
+    if (!Number.isInteger(q.correctIndex) || q.correctIndex < 0 || q.correctIndex >= optionsOf(q).length)
+      failures.push(`${q.id}: correctIndex ${q.correctIndex} is out of range`);
+  }
+
+  if (kind === "multi") {
+    const indices = q.correctIndices;
+    if (!Array.isArray(indices) || indices.length === 0) {
+      failures.push(`${q.id}: multi question needs a non-empty correctIndices`);
+    } else {
+      if (new Set(indices).size !== indices.length)
+        failures.push(`${q.id}: correctIndices repeats an index`);
+      for (const i of indices) {
+        if (!Number.isInteger(i) || i < 0 || i >= optionsOf(q).length)
+          failures.push(`${q.id}: correctIndices entry ${i} is out of range`);
+      }
+      // The count the UI prints and the count the marker requires have to be
+      // the same number. A question that says "select exactly 2" and keys three
+      // options is unanswerable, and nothing else here would catch it.
+      if (q.selectExactly != null && q.selectExactly !== indices.length)
+        failures.push(
+          `${q.id}: selectExactly is ${q.selectExactly} but ${indices.length} options are keyed`
+        );
+      /*
+       * Only for a FIXED-COUNT multi-select.
+       *
+       * On Sentence Equivalence, which says "select exactly 2", keying every
+       * option would make the question a formality. On the GRE's open "select
+       * all that apply", all three statements being true is a legitimate and
+       * genuinely occurring case, and forbidding it would itself become
+       * exploitable: a candidate who knows the answer is never all three has
+       * been handed information the real exam does not give them.
+       */
+      if (q.selectExactly != null && indices.length >= optionsOf(q).length)
+        failures.push(`${q.id}: every option is keyed, so there are no distractors`);
+    }
+    if (q.correctIndex !== undefined)
+      failures.push(`${q.id}: multi question must not also carry correctIndex`);
+  }
 
   for (const [label, text] of [
     ["prompt", q.prompt],
     ["explanation", q.explanation],
-    ...q.options.map((o, i) => [`option ${i}`, o]),
+    ...optionsOf(q).map((o, i) => [`option ${i}`, o]),
   ]) {
     // An odd count of "$" means a math span is unclosed, which makes KaTeX
     // swallow the rest of the string.
@@ -104,7 +190,7 @@ for (const q of all) {
   // Every math span must actually compile. This is the check that catches the
   // corruption described above on its own, and it catches ordinary LaTeX typos
   // that would otherwise reach a candidate as a red error string mid-question.
-  for (const text of [q.prompt, q.explanation, ...q.options]) {
+  for (const text of [q.prompt, q.explanation, ...optionsOf(q)]) {
     for (const span of text.match(/\$[^$]+\$/g) ?? []) {
       try {
         katex.renderToString(span.slice(1, -1), { throwOnError: true });
@@ -160,18 +246,25 @@ for (const bank of [...banks, { name: "ALL", questions: all }]) {
   const qs = bank.questions;
 
   const slots = [0, 0, 0, 0, 0];
-  for (const q of qs) slots[q.correctIndex] += 1;
+  for (const q of qs) if (isSingle(q)) slots[q.correctIndex] += 1;
 
   // Longest option. Restricted to prose questions, where length is a usable
   // signal; on numeric options "longest" is meaningless.
   let longestN = 0;
   let longestHit = 0;
   for (const q of qs) {
-    if (q.options.some((o) => numeric(o) !== null)) continue;
-    const max = Math.max(...q.options.map((o) => o.length));
-    if (q.options.filter((o) => o.length === max).length !== 1) continue;
+    if (!isSingle(q)) continue;
+    // A fixed, memorized option set has the same longest string on every
+    // question of the type. On Quantitative Comparison "the relationship cannot
+    // be determined from the information given" is always the longest, so every
+    // time it is the answer this heuristic scores a hit that tells a candidate
+    // nothing they could act on.
+    if (SLOT_EXEMPT_TOPICS.has(q.topic)) continue;
+    if (optionsOf(q).some((o) => numeric(o) !== null)) continue;
+    const max = Math.max(...optionsOf(q).map((o) => o.length));
+    if (optionsOf(q).filter((o) => o.length === max).length !== 1) continue;
     longestN += 1;
-    if (q.options[q.correctIndex].length === max) longestHit += 1;
+    if (optionsOf(q)[q.correctIndex].length === max) longestHit += 1;
   }
 
   // The middle-two heuristic: on a question whose options are all distinct
@@ -187,8 +280,9 @@ for (const bank of [...banks, { name: "ALL", questions: all }]) {
   let maxHit = 0;
   let minHit = 0;
   for (const q of qs) {
-    const values = q.options.map(numeric);
-    if (values.some((v) => v === null)) continue;
+    if (!isSingle(q)) continue;
+    const values = optionsOf(q).map(numeric);
+    if (values.length === 0 || values.some((v) => v === null)) continue;
     if (new Set(values).size !== values.length) continue;
     const sorted = [...values].sort((a, b) => a - b);
     const rank = sorted.indexOf(values[q.correctIndex]);
@@ -201,6 +295,18 @@ for (const bank of [...banks, { name: "ALL", questions: all }]) {
   rows.push({
     name: bank.name,
     n: qs.length,
+    /*
+     * The denominator for the slot spread is the number of questions that HAVE
+     * a slot, not the size of the file.
+     *
+     * Only single-choice questions carry a `correctIndex`. Measuring five slot
+     * counts against a file that also holds multi-select and numeric-entry
+     * questions makes every slot look under-used: GRE Verbal is 31 single of
+     * 48, so a perfectly even spread reads as 12.9% per slot against a floor of
+     * 10%, and one more multi-select question would fail a bank that is not
+     * biased at all.
+     */
+    singleN: qs.filter(isSingle).length,
     slots,
     longest: [longestHit, longestN],
     mid: [midHit, midN],
@@ -212,8 +318,9 @@ console.log("\nQuestion bank audit\n" + "=".repeat(72));
 
 console.log("\nAnswer-key slot distribution");
 for (const r of rows) {
-  const spread = r.slots.map((c) => fmt(pct(c, r.n)).padStart(6)).join(" ");
-  console.log(`  ${r.name.padEnd(20)} n=${String(r.n).padStart(3)}  ${spread}`);
+  const spread = r.slots.map((c) => fmt(pct(c, r.singleN)).padStart(6)).join(" ");
+  const label = r.singleN === r.n ? `n=${String(r.n).padStart(3)}` : `n=${String(r.singleN).padStart(3)}*`;
+  console.log(`  ${r.name.padEnd(20)} ${label}  ${spread}`);
 }
 
 console.log("\nKey is the longest option (prose questions only) — chance is 25%");
@@ -251,10 +358,10 @@ for (const r of rows) {
  * memorized order on the real exam, deliberately identical across every DS
  * question, so they cannot be re-slotted without training the wrong habit.
  */
-const SLOT_EXEMPT_TOPICS = new Set(["Data Sufficiency"]);
 const topicSlots = new Map();
 for (const q of all) {
   if (SLOT_EXEMPT_TOPICS.has(q.topic)) continue;
+  if (!isSingle(q)) continue;
   const key = `${q.__bank} / ${q.topic}`;
   if (!topicSlots.has(key)) topicSlots.set(key, []);
   topicSlots.get(key).push(q.correctIndex);
@@ -321,7 +428,7 @@ for (const q of all) {
   for (const [label, text] of [
     ["prompt", q.prompt],
     ["explanation", q.explanation],
-    ...q.options.map((o, i) => [`option ${i}`, o]),
+    ...optionsOf(q).map((o, i) => [`option ${i}`, o]),
   ]) {
     for (const [re, name] of BRITISH) {
       const hit = text.match(re);
@@ -348,12 +455,16 @@ for (const r of rows.slice(0, -1)) {
    *
    * The band widens for small files instead of vanishing.
    */
-  const [lo, hi] = r.n >= 100 ? [14, 36] : [10, 42];
+  // singleN, not n: see the note on it above. Only single-choice questions
+  // have a slot, so a file that also holds multi-select and numeric-entry
+  // questions would otherwise be judged against a denominator it cannot reach.
+  if (r.singleN === 0) continue;
+  const [lo, hi] = r.singleN >= 100 ? [14, 36] : [10, 42];
   r.slots.slice(0, 4).forEach((c, i) => {
-    const p = pct(c, r.n);
+    const p = pct(c, r.singleN);
     if (p < lo || p > hi)
       failures.push(
-        `${r.name}: slot ${i + 1} is the key ${fmt(p)} of the time (want ${lo}-${hi}% at n=${r.n})`
+        `${r.name}: slot ${i + 1} is the key ${fmt(p)} of the time (want ${lo}-${hi}% at n=${r.singleN})`
       );
   });
 }

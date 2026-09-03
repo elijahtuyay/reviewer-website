@@ -4,6 +4,7 @@ import { AVAILABLE_EXAMS, EXAM_LIST, totalMinutes, totalQuestions } from "@/lib/
 import { ExamModule } from "@/lib/exams/types";
 import { loadSection } from "@/lib/question-bank";
 import { AFFILIATION_DISCLAIMER, SITE_NAME, SITE_TAGLINE } from "@/lib/site";
+import { joinWithAnd } from "@/lib/text";
 import { SITE_URL } from "@/lib/site-url";
 
 export const metadata: Metadata = {
@@ -102,7 +103,9 @@ function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) 
   // The names now sit in the eyebrow rather than mid-paragraph, which is where
   // a visitor scanning the fold actually looks, and it lets the paragraph below
   // spend its first sentence on something other than repeating the nav.
-  const names = exams.map((e) => e.shortLabel).join(" and ");
+  // joinWithAnd, not .join(" and "): at three exams a plain join reads
+  // "NMAT and GMAT and GRE".
+  const names = joinWithAnd(exams.map((e) => e.shortLabel));
   return (
     // The one saturated surface on the site, and deliberately the ROOT accent
     // rather than an exam's: this page sits above every exam, so borrowing one
@@ -205,7 +208,15 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        {/* Three exams do not fit a two-column grid without leaving an orphan
+            in the second row, and they do not need the width a two-up card
+            gets. Both class strings are written out in full, because Tailwind
+            scans source text and a computed class name is not emitted. */}
+        <div
+          className={`mt-10 grid gap-6 ${
+            exams.length >= 3 ? "md:grid-cols-2 lg:grid-cols-3" : "lg:grid-cols-2"
+          }`}
+        >
           {exams.map(({ exam, bank }) => (
             <article
               key={exam.id}

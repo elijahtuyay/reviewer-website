@@ -2,6 +2,7 @@ import { ExamId, SectionId } from "@/data/schema";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import nmat from "@/lib/exams/nmat";
 import gmat from "@/lib/exams/gmat";
+import gre from "@/lib/exams/gre";
 
 /**
  * THE ONLY FILE THAT LISTS EXAMS.
@@ -15,7 +16,7 @@ import gmat from "@/lib/exams/gmat";
  * Order matters only for display: the first available exam is what the home
  * page features.
  */
-const MODULES: ExamModule[] = [nmat, gmat];
+const MODULES: ExamModule[] = [nmat, gmat, gre];
 
 export const EXAMS: Record<ExamId, ExamModule> = Object.fromEntries(
   MODULES.map((m) => [m.id, m])

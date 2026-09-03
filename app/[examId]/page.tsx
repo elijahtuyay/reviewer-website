@@ -232,12 +232,30 @@ function expectations(exam: ExamModule): string[] {
    * with one open in another tab, which is precisely the habit that section is
    * built to punish.
    */
-  const withCalculator = exam.sections.filter((s) => s.calculator !== null);
-  if (withCalculator.length > 0 && withCalculator.length < exam.sections.length) {
+  /*
+   * THREE states, not two, and the third is the reason `CalculatorKind` has a
+   * "not-simulated" value at all.
+   *
+   * A two-way split treats "this app has no calculator here" and "the real exam
+   * has no calculator here" as the same fact. They are opposites on the GRE,
+   * which grants one in Quantitative Reasoning that this app does not model.
+   * Collapsing them printed a flat lie on the page a candidate reads
+   * immediately before starting a timed section.
+   */
+  const simulated = exam.sections.filter((s) => s.calculator === "basic-di");
+  const realOnly = exam.sections.filter((s) => s.calculator === "not-simulated");
+
+  if (simulated.length > 0) {
     lines.push(
-      `This exam gives you an on-screen calculator in ${joinWithAnd(withCalculator.map((s) => s.label))} only, exactly as the real exam does. It is a copy of the exam calculator, with the same limits. The display holds 8 digits, and it calculates strictly left to right with no order of operations.`
+      `This exam gives you an on-screen calculator in ${joinWithAnd(simulated.map((s) => s.label))} only, exactly as the real exam does. It is a copy of the exam calculator, with the same limits. The display holds 8 digits, and it calculates strictly left to right with no order of operations.`
     );
-  } else if (withCalculator.length === 0) {
+  }
+  if (realOnly.length > 0) {
+    lines.push(
+      `The real exam gives you an on-screen calculator in ${joinWithAnd(realOnly.map((s) => s.label))}. This site does not include that calculator yet, so work the arithmetic by hand here.`
+    );
+  }
+  if (simulated.length === 0 && realOnly.length === 0) {
     lines.push(
       "No section gives you a calculator, on screen or otherwise. The real exam does not give you one either."
     );
@@ -261,6 +279,10 @@ function expectations(exam: ExamModule): string[] {
   lines.push(
     "After you submit a section, you see your score and a result for each topic. You also see every question, its correct answer and an explanation."
   );
+
+  // Last, and verbatim: where this app and the real exam differ. See the note
+  // on `notes` in lib/exams/types.ts for why these cannot be generated.
+  lines.push(...(exam.notes ?? []));
 
   return lines;
 }

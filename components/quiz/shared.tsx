@@ -143,13 +143,38 @@ export function NoCalculatorNote({ exam }: { exam: ExamModule }) {
    * being redundant with the setup page, which already says NMAT gives you
    * none in any section.
    */
-  const elsewhere = exam.sections.filter((s) => s.calculator !== null);
+  const elsewhere = exam.sections.filter((s) => s.calculator === "basic-di");
   if (elsewhere.length === 0) return null;
 
   return (
     <p className="mb-4 text-xs leading-relaxed text-muted">
       <span className="font-medium text-foreground">No calculator in this section.</span> The{" "}
       {exam.label} gives you one in {elsewhere.map((s) => s.label).join(", ")} only.
+    </p>
+  );
+}
+
+/**
+ * Shown in a section where the REAL exam provides a calculator and this app
+ * does not.
+ *
+ * Separate from NoCalculatorNote on purpose, because the two say opposite
+ * things. "No calculator in this section" is a rule of the exam, and printing
+ * it on GRE Quantitative Reasoning would tell a candidate the real test
+ * withholds a tool it actually hands them. Saying nothing is no better: someone
+ * who expects the calculator will read its absence as a broken page.
+ *
+ * It states the gap and stops. It does not apologise, and it does not tell the
+ * candidate their practice is worth less, which is a lecture delivered on every
+ * question of a timed section with no way to dismiss it.
+ */
+export function CalculatorNotSimulatedNote() {
+  return (
+    <p className="mb-4 text-xs leading-relaxed text-muted">
+      <span className="font-medium text-foreground">
+        The real exam gives you a calculator here.
+      </span>{" "}
+      This site does not include it yet, so work the arithmetic by hand.
     </p>
   );
 }

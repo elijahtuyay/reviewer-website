@@ -1,0 +1,756 @@
+[
+  {
+    "id": "grq-001",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "easy",
+    "prompt": "$x = 3$\\nQuantity A: $2x + 5$\\nQuantity B: $x + 7$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 0,
+    "explanation": "Substitute $x = 3$ into both expressions. Quantity A becomes $2(3) + 5 = 11$, and Quantity B becomes $3 + 7 = 10$, so Quantity A is greater. A candidate who reads the coefficient as part of the constant and computes $2 + 3 + 5 = 10$ finds the two quantities equal, which is the most common slip here.",
+    "source": "original"
+  },
+  {
+    "id": "grq-002",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "$0 < y < 1$\\nQuantity A: $y$\\nQuantity B: $y^2$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 0,
+    "explanation": "Multiplying a number strictly between 0 and 1 by itself makes it smaller, so $y^2 < y$ throughout the given interval. With $y = 0.5$, Quantity A is $0.5$ and Quantity B is $0.25$, and the same ordering holds for every allowed value. The trap is the habit that squaring makes a number larger, which is true only for values greater than 1.",
+    "source": "original"
+  },
+  {
+    "id": "grq-003",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "The average (arithmetic mean) of 5 numbers is 12. The average of 3 of those numbers is 15.\\nQuantity A: The average of the other 2 numbers\\nQuantity B: $8$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 1,
+    "explanation": "All 5 numbers sum to $5 \\times 12 = 60$, and the 3 named numbers sum to $3 \\times 15 = 45$, so the other 2 sum to 15 and average $7.5$. That is less than 8, so Quantity B is greater. Averaging the two averages gives $13.5$ or subtracting them gives 3, and neither shortcut is valid, because the two groups hold different counts of numbers.",
+    "source": "original"
+  },
+  {
+    "id": "grq-004",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "Quantity A: The number of distinct prime factors of $210$\\nQuantity B: The number of distinct prime factors of $2310$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 1,
+    "explanation": "Factoring gives $210 = 2 \\times 3 \\times 5 \\times 7$, which has 4 distinct primes, and $2310 = 2 \\times 3 \\times 5 \\times 7 \\times 11$, which has 5. Quantity B is therefore greater by exactly one prime. Noticing only that $2310 = 210 \\times 11$ and treating 11 as already counted leads to calling the quantities equal.",
+    "source": "original"
+  },
+  {
+    "id": "grq-005",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "hard",
+    "prompt": "$x \\neq 0$\\nQuantity A: $\\frac{x^6}{x^2}$\\nQuantity B: $(x^2)^2$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 2,
+    "explanation": "Dividing powers subtracts exponents, so Quantity A is $x^{6-2} = x^4$, and raising a power to a power multiplies exponents, so Quantity B is $x^{2 \\times 2} = x^4$. The two expressions are identical for every nonzero $x$, positive or negative, so the quantities are equal. The trap is to see an unrestricted sign for $x$ and conclude that nothing can be determined, but the fourth power of any nonzero number is positive and both sides carry the same exponent.",
+    "source": "original"
+  },
+  {
+    "id": "grq-006",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "easy",
+    "prompt": "In triangle $PQR$, the measure of angle $P$ is 40 degrees and the measure of angle $Q$ is 65 degrees.\\nQuantity A: The measure of angle $R$, in degrees\\nQuantity B: $75$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 2,
+    "explanation": "The three angles of a triangle sum to 180 degrees, so angle $R$ measures $180 - 40 - 65 = 75$ degrees. That matches Quantity B exactly, so the quantities are equal. No figure is needed, because the two given angles fix the third.",
+    "source": "original"
+  },
+  {
+    "id": "grq-007",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "hard",
+    "prompt": "A rectangle has a perimeter of 24.\\nQuantity A: The area of the rectangle\\nQuantity B: $36$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 3,
+    "explanation": "A perimeter of 24 makes the length and the width sum to 12, so the area is $w(12 - w)$. A 6 by 6 rectangle gives an area of exactly 36, while a 4 by 8 rectangle gives 32, so the area is sometimes equal to 36 and sometimes less. Because both outcomes are possible, the relationship cannot be determined. Assuming the rectangle is the square that maximizes area gives equality, and assuming it is not a square gives the other answer, and the problem allows both.",
+    "source": "original"
+  },
+  {
+    "id": "grq-008",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "hard",
+    "prompt": "$xy > 0$ and $x + y = -6$\\nQuantity A: $x$\\nQuantity B: $-3$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 3,
+    "explanation": "A positive product with a negative sum forces both $x$ and $y$ to be negative, but it does not fix which one is farther from zero. Taking $x = -1$ and $y = -5$ makes Quantity A greater, while $x = -5$ and $y = -1$ makes Quantity B greater, so the relationship cannot be determined. Splitting the sum evenly into $x = y = -3$ gives equality, but nothing in the problem requires the two values to be equal.",
+    "source": "original"
+  },
+  {
+    "id": "grq-009",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "hard",
+    "prompt": "$k \\neq 0$\\nQuantity A: $k^2$\\nQuantity B: $k^3$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 3,
+    "explanation": "With $k = 2$ the quantities are 4 and 8, so Quantity B is greater, but with $k = 0.5$ they are $0.25$ and $0.125$, so Quantity A is greater. Any negative value also makes Quantity A positive and Quantity B negative. Since the comparison changes with the value, the relationship cannot be determined. The trap is to test only integers greater than 1, which hides both the fractional case and the negative case.",
+    "source": "original"
+  },
+  {
+    "id": "grq-010",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "easy",
+    "prompt": "A shirt is priced at 60 dollars. During a sale the price is reduced by 15 percent. What is the sale price, in dollars?",
+    "options": [
+      "$57$",
+      "$63$",
+      "$51$",
+      "$69$",
+      "$54$"
+    ],
+    "correctIndex": 2,
+    "explanation": "A 15 percent reduction leaves 85 percent of the price, and $0.85 \\times 60 = 51$ dollars. Subtracting only 5 percent gives 57 dollars and subtracting 10 percent gives 54 dollars, both of which come from misreading the rate. Adding 15 percent instead of subtracting it gives 69 dollars.",
+    "source": "original"
+  },
+  {
+    "id": "grq-011",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "In a club, the ratio of juniors to seniors is 3 to 5. There are 32 more seniors than juniors. How many members does the club have in total?",
+    "options": [
+      "$128$",
+      "$48$",
+      "$64$",
+      "$80$",
+      "$96$"
+    ],
+    "correctIndex": 0,
+    "explanation": "The ratio splits the club into 8 equal parts, 3 for juniors and 5 for seniors, so the 2 part difference equals 32 and each part is 16. Total membership is $8 \\times 16 = 128$. Stopping at the junior count gives 48 and stopping at the senior count gives 80, and both are counts of one group rather than the whole club.",
+    "source": "original"
+  },
+  {
+    "id": "grq-012",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "One printer produces 12 pages per minute and a second printer produces 18 pages per minute. Working at the same time, how many minutes do the two printers need to produce 450 pages?",
+    "options": [
+      "$25$",
+      "$30$",
+      "$37.5$",
+      "$45$",
+      "$15$"
+    ],
+    "correctIndex": 4,
+    "explanation": "Combined output is $12 + 18 = 30$ pages per minute, and $450 \\div 30 = 15$ minutes. Using only the faster printer gives 25 minutes and using only the slower one gives $37.5$ minutes, so each of those answers ignores one machine. Averaging the two individual times instead of adding the rates gives $30$ minutes and doubles the true answer.",
+    "source": "original"
+  },
+  {
+    "id": "grq-013",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "The average (arithmetic mean) of 6 numbers is 21. One of the numbers is removed, and the average of the remaining 5 numbers is 19. What is the value of the removed number?",
+    "options": [
+      "$26$",
+      "$31$",
+      "$20$",
+      "$23$",
+      "$2$"
+    ],
+    "correctIndex": 1,
+    "explanation": "The original 6 numbers sum to $6 \\times 21 = 126$, and the remaining 5 sum to $5 \\times 19 = 95$, so the removed number is $126 - 95 = 31$. Subtracting the averages gives 2, which is the drop in the average rather than the value removed. Averaging the two averages gives 20, which describes neither quantity.",
+    "source": "original"
+  },
+  {
+    "id": "grq-014",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "If $2^{x-3} = 8^{3}$, what is the value of $x$?",
+    "options": [
+      "$9$",
+      "$6$",
+      "$4$",
+      "$12$",
+      "$3$"
+    ],
+    "correctIndex": 3,
+    "explanation": "Rewrite the right side with the same base: $8^3 = (2^3)^3 = 2^9$. Setting the exponents equal gives $x - 3 = 9$, so $x = 12$. Forgetting to undo the subtraction leaves 9, and treating $8^3$ as $2^3$ gives $x - 3 = 3$ and the value 6.",
+    "source": "original"
+  },
+  {
+    "id": "grq-015",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "hard",
+    "prompt": "If $x + \\frac{1}{x} = 5$, what is the value of $x^2 + \\frac{1}{x^2}$?",
+    "options": [
+      "$23$",
+      "$25$",
+      "$27$",
+      "$29$",
+      "$10$"
+    ],
+    "correctIndex": 0,
+    "explanation": "Squaring both sides gives $x^2 + 2 + \\frac{1}{x^2} = 25$, because the cross term is $2 \\times x \\times \\frac{1}{x} = 2$. Subtracting that 2 leaves $x^2 + \\frac{1}{x^2} = 23$. Squaring 5 and stopping gives 25, and adding the cross term instead of subtracting it gives 27. Doubling the original 5 gives 10 and ignores the squaring entirely.",
+    "source": "original"
+  },
+  {
+    "id": "grq-016",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "The price of a share rose by 20 percent during one year and then fell by 25 percent during the next year. The price at the end of the second year is what percent of the price at the start of the first year?",
+    "options": [
+      "$95$",
+      "$100$",
+      "$105$",
+      "$85$",
+      "$90$"
+    ],
+    "correctIndex": 4,
+    "explanation": "Apply the two changes as multipliers to a starting price: $1.20 \\times 0.75 = 0.90$, so the final price is 90 percent of the original. Adding and subtracting the percents to get a net loss of 5 percent gives 95, which fails because the 25 percent drop applies to the larger, already increased price. Assuming a rise and a fall cancel gives 100.",
+    "source": "original"
+  },
+  {
+    "id": "grq-017",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "In the coordinate plane, what is the distance between the points $(2, 3)$ and $(7, 15)$?",
+    "options": [
+      "$12$",
+      "$13$",
+      "$5$",
+      "$7$",
+      "$10$"
+    ],
+    "correctIndex": 1,
+    "explanation": "The horizontal separation is $7 - 2 = 5$ and the vertical separation is $15 - 3 = 12$, so the distance is $\\sqrt{5^2 + 12^2} = \\sqrt{169} = 13$. Reporting 5 or 12 gives one leg of the right triangle rather than the hypotenuse. Taking the difference of the two legs gives 7, and no distance is shorter than the longer leg.",
+    "source": "original"
+  },
+  {
+    "id": "grq-018",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "hard",
+    "prompt": "Pipe X alone fills a tank in 6 hours, and pipe Y alone fills the same tank in 9 hours. Both pipes are opened together, and pipe X is closed after 2 hours. How many additional hours does pipe Y need to finish filling the tank?",
+    "options": [
+      "$5$",
+      "$6$",
+      "$2$",
+      "$4$",
+      "$9$"
+    ],
+    "correctIndex": 3,
+    "explanation": "Together the pipes fill $\\frac{1}{6} + \\frac{1}{9} = \\frac{5}{18}$ of the tank each hour, so 2 hours fill $\\frac{10}{18} = \\frac{5}{9}$ of it. The remaining $\\frac{4}{9}$ at pipe Y's rate of $\\frac{1}{9}$ per hour takes 4 more hours. Answering 9 gives the time pipe Y needs for an empty tank and ignores the head start.",
+    "source": "original"
+  },
+  {
+    "id": "grq-019",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "hard",
+    "prompt": "A bag holds 5 green chips and 3 yellow chips. Two chips are drawn at random, one after the other, without replacement. What is the probability that both chips are green?",
+    "options": [
+      "$\\frac{25}{64}$",
+      "$\\frac{1}{2}$",
+      "$\\frac{5}{14}$",
+      "$\\frac{5}{8}$",
+      "$\\frac{5}{7}$"
+    ],
+    "correctIndex": 2,
+    "explanation": "The first chip is green with probability $\\frac{5}{8}$, and after that draw 4 of the 7 remaining chips are green, so the probability is $\\frac{5}{8} \\times \\frac{4}{7} = \\frac{20}{56} = \\frac{5}{14}$. Treating the draws as independent gives $\\frac{5}{8} \\times \\frac{5}{8} = \\frac{25}{64}$, which is the with replacement answer. Stopping after one draw gives $\\frac{5}{8}$.",
+    "source": "original"
+  },
+  {
+    "id": "grq-020",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "easy",
+    "prompt": "A recipe uses 3 cups of flour for every 4 cups of water. How many cups of water does the recipe use with 9 cups of flour?",
+    "kind": "numeric",
+    "correctValue": 12,
+    "explanation": "Nine cups of flour is 3 times the 3 cups in the stated ratio, so the water scales by the same factor: $3 \\times 4 = 12$ cups. Adding 6 to the 4 cups because the flour rose by 6 gives 10 cups and treats a ratio as a fixed difference.",
+    "source": "original"
+  },
+  {
+    "id": "grq-021",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "medium",
+    "prompt": "In a survey of 250 people, 90 people chose blue as their favorite color. What percent of the people surveyed chose blue?",
+    "kind": "numeric",
+    "correctValue": 36,
+    "answerSuffix": "%",
+    "explanation": "Divide the part by the whole and convert: $\\frac{90}{250} = 0.36$, which is 36 percent. Dividing the whole by the part instead gives about $2.78$, a ratio greater than 1 that cannot be a share of the group.",
+    "source": "original"
+  },
+  {
+    "id": "grq-022",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "medium",
+    "prompt": "Set $S$ consists of the numbers 4, 6, 9, 13, 15, and 22. What is the positive difference between the median of $S$ and the mean of $S$?",
+    "kind": "numeric",
+    "correctValue": 0.5,
+    "explanation": "The list is already in increasing order and holds 6 numbers, so the median is the average of the third and fourth values: $\\frac{9 + 13}{2} = 11$. The mean is $\\frac{69}{6} = 11.5$. The positive difference is $11.5 - 11 = 0.5$. Taking the single middle value 9 or 13 as the median is the usual error with an even count of numbers.",
+    "source": "original"
+  },
+  {
+    "id": "grq-023",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "hard",
+    "prompt": "A container holds 12 liters of a solution that is 25 percent acid. How many liters of pure acid must be added so that the resulting mixture is 40 percent acid?",
+    "kind": "numeric",
+    "correctValue": 3,
+    "explanation": "The container starts with $0.25 \\times 12 = 3$ liters of acid. Adding $a$ liters of pure acid raises the acid to $3 + a$ and the total volume to $12 + a$, so $\\frac{3 + a}{12 + a} = 0.40$. Solving gives $3 + a = 4.8 + 0.4a$, then $0.6a = 1.8$ and $a = 3$. Applying 40 percent to the original 12 liters and subtracting the 3 liters already present gives $1.8$, which wrongly holds the total volume fixed while adding liquid.",
+    "source": "original"
+  },
+  {
+    "id": "grq-024",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "hard",
+    "prompt": "Machine A completes a job alone in 5 hours, and machine B completes the same job alone in 8 hours. Working at the same time, how many hours do the two machines need to complete one job? Give your answer to the nearest hundredth.",
+    "kind": "numeric",
+    "correctValue": 3.08,
+    "tolerance": 0.01,
+    "explanation": "The machines complete $\\frac{1}{5} + \\frac{1}{8} = \\frac{13}{40}$ of the job each hour, so the time is the reciprocal, $\\frac{40}{13} \\approx 3.0769$, which rounds to $3.08$ hours. Averaging the two times gives $6.5$ hours, which is longer than machine A needs by itself and so cannot be right. The combined time is always less than the faster machine's time alone.",
+    "source": "original"
+  },
+  {
+    "id": "grq-025",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "easy",
+    "prompt": "$n$ is a positive integer and $3n = 51$.\\nQuantity A: $n$\\nQuantity B: $16$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 0,
+    "explanation": "Dividing both sides of $3n = 51$ by 3 gives $n = 17$, and $17 > 16$, so Quantity A is greater. The equation fixes $n$ at a single value, so nothing here is undetermined. A candidate who compares $3n$ itself with 16 rather than solving for $n$ first is comparing 51 with 16 and answering a different question.",
+    "source": "original"
+  },
+  {
+    "id": "grq-026",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "$-1 < w < 0$\\nQuantity A: $w^3$\\nQuantity B: $w^2$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 1,
+    "explanation": "An odd power of a negative number stays negative and an even power turns positive, so $w^3 < 0 < w^2$ for every allowed value. With $w = -0.5$, Quantity A is $-0.125$ and Quantity B is $0.25$, so Quantity B is greater. The sign settles the comparison before any size comparison is needed, which is why the answer does not depend on where $w$ sits in the interval.",
+    "source": "original"
+  },
+  {
+    "id": "grq-027",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "A circle has a circumference of $10\\pi$.\\nQuantity A: the area of the circle\\nQuantity B: $25\\pi$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 2,
+    "explanation": "Circumference is $2\\pi r$, so $2\\pi r = 10\\pi$ gives $r = 5$. The area is then $\\pi r^2 = 25\\pi$, and the two quantities are equal. Treating the 10 in $10\\pi$ as the radius gives an area of $100\\pi$ and makes Quantity A look far larger, which is the usual way this comparison goes wrong.",
+    "source": "original"
+  },
+  {
+    "id": "grq-028",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "$a$ and $b$ are nonzero numbers and $a > b$.\\nQuantity A: $a^2$\\nQuantity B: $b^2$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 3,
+    "explanation": "Squaring does not preserve order once negative values are allowed. With $a = 3$ and $b = 1$, Quantity A is larger, but with $a = 1$ and $b = -3$, Quantity B is larger, and both pairs satisfy $a > b$. Since two allowed cases point opposite ways, the relationship cannot be determined. The comparison would be settled only if both numbers were known to be positive.",
+    "source": "original"
+  },
+  {
+    "id": "grq-029",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "hard",
+    "prompt": "$f$ is the function defined by $f(x) = x^2 - 6x + k$, where $k$ is a constant. The graph of $f$ in the $xy$-plane crosses the $x$-axis at two distinct points.\\nQuantity A: $k$\\nQuantity B: $0$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 3,
+    "explanation": "Two distinct $x$-intercepts require a positive discriminant, so $36 - 4k > 0$ and $k < 9$. That leaves $k$ free to be negative, zero, or positive: $k = 5$ factors as $(x-1)(x-5)$ and $k = -1$ also gives two crossings. Since $k$ can sit on either side of 0, the comparison cannot be settled. Reversing the inequality to $k > 9$ produces a definite answer that the condition does not support.",
+    "source": "original"
+  },
+  {
+    "id": "grq-030",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "In the $xy$-plane, point $P$ is at $(-2, 5)$ and point $Q$ is at $(4, -3)$.\\nQuantity A: the distance from $P$ to $Q$\\nQuantity B: $10$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 2,
+    "explanation": "The horizontal separation is $4 - (-2) = 6$ and the vertical separation is $5 - (-3) = 8$, so the distance is $\\sqrt{6^2 + 8^2} = \\sqrt{100} = 10$. The two quantities are equal. Dropping either negative sign shrinks a separation to 2, which makes the distance come out well under 10 and makes Quantity B look greater.",
+    "source": "original"
+  },
+  {
+    "id": "grq-031",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "hard",
+    "prompt": "List X: 3, 5, 7, 9, 11\\nList Y: 4, 5, 7, 9, 10\\nQuantity A: the standard deviation of List X\\nQuantity B: the standard deviation of List Y",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 0,
+    "explanation": "Both lists hold 5 values with a mean of 7, so the comparison depends only on how far the values sit from 7. The squared deviations for List X sum to $16 + 4 + 0 + 4 + 16 = 40$, while those for List Y sum to $9 + 4 + 0 + 4 + 9 = 26$. With equal counts, the larger sum gives the larger standard deviation, so Quantity A is greater. The two lists share a mean, a median and three of their five values, which is what makes them look interchangeable.",
+    "source": "original"
+  },
+  {
+    "id": "grq-032",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "hard",
+    "prompt": "$x > 1$\\nQuantity A: $\\frac{x}{x+1}$\\nQuantity B: $\\frac{x+1}{x+2}$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 1,
+    "explanation": "Both denominators are positive when $x > 1$, so cross multiplying is safe: compare $x(x+2) = x^2 + 2x$ with $(x+1)^2 = x^2 + 2x + 1$. The second exceeds the first by exactly 1 for every allowed $x$, so Quantity B is greater. Testing $x = 2$ gives $\\frac{2}{3}$ against $\\frac{3}{4}$, which agrees. Both fractions approach 1 as $x$ grows, so testing only very large values can suggest the quantities are equal when the gap is merely shrinking.",
+    "source": "original"
+  },
+  {
+    "id": "grq-033",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "easy",
+    "prompt": "A store recorded the number of bicycles it sold in each of four months.\\nMonth: Bicycles sold\\nMarch: 120\\nApril: 150\\nMay: 180\\nJune: 90\\n\\nWhat was the average (arithmetic mean) number of bicycles sold per month over these four months?",
+    "options": [
+      "135",
+      "140",
+      "150",
+      "160",
+      "180"
+    ],
+    "correctIndex": 0,
+    "explanation": "The four months total $120 + 150 + 180 + 90 = 540$ bicycles, and $540 \\div 4 = 135$. Dividing by 3 instead of 4 gives 180, which is also the single best month and therefore looks convincing. Reading 150 as typical ignores June, whose 90 units pull the mean below the middle of the range.",
+    "source": "original"
+  },
+  {
+    "id": "grq-034",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "easy",
+    "prompt": "A library recorded the number of books it lent in one week, by category.\\nCategory: Books lent\\nFiction: 240\\nHistory: 150\\nScience: 130\\nPoetry: 80\\n\\nBooks in the Fiction category were what percent of all the books lent that week?",
+    "options": [
+      "20%",
+      "24%",
+      "25%",
+      "30%",
+      "40%"
+    ],
+    "correctIndex": 4,
+    "explanation": "The week's total is $240 + 150 + 130 + 80 = 600$ books, and $\\frac{240}{600} = 0.40$, or 40 percent. Rounding the total to 1,000 gives 24 percent, and assuming the four categories are close to equal gives 25 percent. Fiction is larger than any other single category, so its share has to exceed one quarter.",
+    "source": "original"
+  },
+  {
+    "id": "grq-035",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "medium",
+    "prompt": "A company reported its annual revenue, in millions of dollars, for four years.\\nYear: Revenue\\n2018: 44\\n2019: 55\\n2020: 48\\n2021: 66\\n\\nThe revenue in 2021 was what percent greater than the revenue in 2019?",
+    "options": [
+      "37.5%",
+      "20%",
+      "25%",
+      "50%",
+      "120%"
+    ],
+    "correctIndex": 1,
+    "explanation": "The increase is $66 - 55 = 11$ million dollars, and a percent increase compares that difference with the earlier value: $\\frac{11}{55} = 0.20$, or 20 percent. Using 2020 as the base gives 37.5 percent and using 2018 gives 50 percent, and each answers a comparison the question did not ask for. Dividing 66 by 55 gives 120 percent, which is the ratio of the two revenues rather than the increase between them.",
+    "source": "original"
+  },
+  {
+    "id": "grq-036",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "medium",
+    "prompt": "A regional office recorded the number of support tickets it closed in one week, by channel.\\nChannel: Tickets closed\\nPhone: 540\\nEmail: 360\\nChat: 180\\nIn person: 120\\n\\nThe number of tickets closed by phone was how many times the number closed by chat?",
+    "options": [
+      "1.5",
+      "2",
+      "3",
+      "4.5",
+      "$\\frac{1}{3}$"
+    ],
+    "correctIndex": 2,
+    "explanation": "Dividing gives $\\frac{540}{180} = 3$, so phone closed 3 times as many tickets as chat. Dividing chat by phone reverses the comparison and gives $\\frac{1}{3}$. Answering 2 comes from reading the stem as how many times greater and subtracting 1 from the ratio. Comparing phone with email gives 1.5 and comparing phone with in person gives 4.5, each using a channel the question did not name.",
+    "source": "original"
+  },
+  {
+    "id": "grq-037",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "medium",
+    "prompt": "A school recorded its enrollment in three programs in two different years.\\nProgram: 2022 enrollment: 2023 enrollment\\nArts: 240: 300\\nScience: 400: 360\\nTrades: 160: 240\\n\\nWhich program had the greatest percent increase from 2022 to 2023, and what was that percent increase?",
+    "options": [
+      "Arts, 25%",
+      "Arts, 60%",
+      "Science, 10%",
+      "Trades, 50%",
+      "Trades, 80%"
+    ],
+    "correctIndex": 3,
+    "explanation": "Arts rose by 60 students on a base of 240, which is 25 percent. Science fell from 400 to 360, so it cannot hold the greatest increase. Trades rose by 80 on a base of 160, which is 50 percent and the largest of the three. Reporting 80 percent for Trades treats the raw gain of 80 students as a percent, and the 60 percent figure for Arts does the same with its gain of 60.",
+    "source": "original"
+  },
+  {
+    "id": "grq-038",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "hard",
+    "prompt": "A distributor sold three product lines in one quarter.\\nProduct line: Units sold: Price per unit (dollars)\\nAlpha: 1,200: 15\\nBeta: 800: 25\\nGamma: 400: 30\\n\\nRevenue from Gamma was what percent of the total revenue from the three lines?",
+    "options": [
+      "16.7%",
+      "30%",
+      "36%",
+      "40%",
+      "24%"
+    ],
+    "correctIndex": 4,
+    "explanation": "Revenue is units times price, so Alpha earned 18,000 dollars, Beta 20,000 and Gamma 12,000, for a total of 50,000. Gamma's share is $\\frac{12000}{50000} = 0.24$, or 24 percent. Gamma's share of the units sold is only $\\frac{400}{2400}$, about 16.7 percent, and that gap is the point of the question: Gamma sells the fewest units at the highest price. The 36 percent and 40 percent figures are the revenue shares of Alpha and Beta, and 30 is Gamma's price rather than a percent.",
+    "source": "original"
+  },
+  {
+    "id": "grq-039",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "hard",
+    "prompt": "A store recorded the number of items sold and the average price per item, in dollars, in each of three departments on one day.\\nDepartment: Items sold: Average price per item\\nGarden: 40: 12\\nKitchen: 60: 20\\nHardware: 100: 8\\n\\nWhat was the average price per item across all the items sold that day, in dollars?",
+    "options": [
+      "12.40",
+      "13.33",
+      "15.50",
+      "20.00",
+      "24.80"
+    ],
+    "correctIndex": 0,
+    "explanation": "Total sales come to $40 \\times 12 = 480$, $60 \\times 20 = 1200$ and $100 \\times 8 = 800$ dollars, or 2,480 dollars across 200 items, which is 12.40 dollars per item. Averaging the three departmental prices without weighting them gives 13.33, and it overstates the result because the cheapest department sold half of all the items. Dividing 2,480 by 160 or by 100 drops a department from the item count and inflates the average further.",
+    "source": "original"
+  },
+  {
+    "id": "grq-040",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "easy",
+    "prompt": "A rectangular box has a length of 8 centimeters, a width of 5 centimeters, and a height of 3 centimeters. What is the volume of the box, in cubic centimeters?",
+    "options": [
+      "120",
+      "40",
+      "24",
+      "16",
+      "15"
+    ],
+    "correctIndex": 0,
+    "explanation": "Volume is length times width times height, so $8 \\times 5 \\times 3 = 120$ cubic centimeters. The values 40, 24 and 15 are the areas of the three different faces, and each uses only two of the three dimensions. Adding the dimensions rather than multiplying them gives 16, which is a length rather than a volume.",
+    "source": "original"
+  },
+  {
+    "id": "grq-041",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "In the $xy$-plane, a circle has its center at $(3, -1)$ and passes through the point $(3, 4)$. What is the area of the circle?",
+    "options": [
+      "$10\\pi$",
+      "$25\\pi$",
+      "$5\\pi$",
+      "$100\\pi$",
+      "$16\\pi$"
+    ],
+    "correctIndex": 1,
+    "explanation": "The center and the given point share an $x$-coordinate, so the radius is the vertical distance $4 - (-1) = 5$, and the area is $\\pi r^2 = 25\\pi$. The value $10\\pi$ is the circumference, and $100\\pi$ comes from squaring the diameter instead of the radius. Using the $y$-coordinate 4 as the radius gives $16\\pi$, and multiplying the radius by $\\pi$ without squaring it gives $5\\pi$.",
+    "source": "original"
+  },
+  {
+    "id": "grq-042",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "A jar contains 5 green marbles, 4 yellow marbles, and 3 white marbles. Two marbles are drawn at random, one after the other, without replacement. What is the probability that both marbles are green?",
+    "options": [
+      "$\\frac{25}{144}$",
+      "$\\frac{5}{12}$",
+      "$\\frac{5}{33}$",
+      "$\\frac{10}{33}$",
+      "$\\frac{1}{6}$"
+    ],
+    "correctIndex": 2,
+    "explanation": "The first draw is green with probability $\\frac{5}{12}$, and once a green marble is gone, 4 of the remaining 11 marbles are green, so the probability is $\\frac{5}{12} \\times \\frac{4}{11} = \\frac{20}{132} = \\frac{5}{33}$. Squaring $\\frac{5}{12}$ gives $\\frac{25}{144}$, which is the answer only if the first marble is put back. Using $\\frac{4}{10}$ for the second draw removes two marbles from the total instead of one and gives $\\frac{1}{6}$, and doubling the result to allow for order gives $\\frac{10}{33}$ even though the draws are already counted in sequence.",
+    "source": "original"
+  },
+  {
+    "id": "grq-043",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "In a right triangle, one leg has a length of 9 and the hypotenuse has a length of 15. What is the area of the triangle?",
+    "options": [
+      "108",
+      "67.5",
+      "90",
+      "54",
+      "12"
+    ],
+    "correctIndex": 3,
+    "explanation": "The missing leg is $\\sqrt{15^2 - 9^2} = \\sqrt{144} = 12$, so the area is $\\frac{1}{2} \\times 9 \\times 12 = 54$. The value 12 is that second leg, not the area, and it is the easiest place to stop early. Treating the hypotenuse as a leg gives 67.5, pairing the hypotenuse with the computed leg gives 90, and omitting the factor of $\\frac{1}{2}$ gives 108.",
+    "source": "original"
+  },
+  {
+    "id": "grq-044",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "hard",
+    "prompt": "A committee of 3 people is to be selected from a group of 5 engineers and 4 analysts. How many different committees include at least one analyst?",
+    "options": [
+      "10",
+      "70",
+      "40",
+      "84",
+      "74"
+    ],
+    "correctIndex": 4,
+    "explanation": "There are $\\binom{9}{3} = 84$ committees in all, and $\\binom{5}{3} = 10$ of them contain no analyst, so $84 - 10 = 74$ contain at least one. Counting the cases directly gives $40$ committees with one analyst, $30$ with two and $4$ with three; stopping after the first two cases gives 70 and quietly drops the all-analyst committees. The values 84 and 10 are the two totals the subtraction is built from, and 40 counts only the committees with exactly one analyst.",
+    "source": "original"
+  },
+  {
+    "id": "grq-045",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "hard",
+    "prompt": "In the $xy$-plane, the line $y = -\\frac{3}{4}x + 6$ crosses the $x$-axis at point $P$ and the $y$-axis at point $Q$. What is the distance from the origin to this line?",
+    "options": [
+      "4.8",
+      "6",
+      "8",
+      "10",
+      "24"
+    ],
+    "correctIndex": 0,
+    "explanation": "Setting $y = 0$ puts $P$ at $(8, 0)$ and setting $x = 0$ puts $Q$ at $(0, 6)$, so segment $PQ$ has length $\\sqrt{8^2 + 6^2} = 10$. The right triangle formed with the origin has area $\\frac{1}{2} \\times 8 \\times 6 = 24$, and that same area equals $\\frac{1}{2} \\times 10 \\times d$, where $d$ is the perpendicular distance from the origin to the line. So $d = \\frac{48}{10} = 4.8$. The values 6 and 8 are distances measured along the axes, 10 is the length of the segment, and 24 is the area of the triangle.",
+    "source": "original"
+  },
+  {
+    "id": "grq-046",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "medium",
+    "kind": "numeric",
+    "prompt": "A rectangle has a perimeter of 48 meters, and its length is 3 times its width. What is the area of the rectangle, in square meters?",
+    "correctValue": 108,
+    "explanation": "Half the perimeter is one width plus one length, so $w + 3w = 24$ and $w = 6$. The length is then 18 meters, and the area is $6 \\times 18 = 108$ square meters. Setting $w + 3w = 48$ forgets that the perimeter counts each side twice, and it gives a width of 12 and an area four times too large.",
+    "source": "original"
+  },
+  {
+    "id": "grq-047",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "hard",
+    "kind": "numeric",
+    "prompt": "The average (arithmetic mean) of 6 numbers is 14. One of the numbers is removed, and the average of the remaining 5 numbers is 15. What is the value of the number that was removed?",
+    "correctValue": 9,
+    "explanation": "The 6 numbers total $6 \\times 14 = 84$, and the 5 that remain total $5 \\times 15 = 75$. The number removed is the difference, $84 - 75 = 9$. Because the average rose after the removal, the missing number has to be below the original average of 14, so any answer above 14 contradicts the setup.",
+    "source": "original"
+  },
+  {
+    "id": "grq-048",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "hard",
+    "kind": "numeric",
+    "prompt": "A circle has an area of 50 square centimeters. What is the radius of the circle, in centimeters, rounded to the nearest hundredth?",
+    "correctValue": 3.99,
+    "tolerance": 0.01,
+    "explanation": "From $\\pi r^2 = 50$, divide first to get $r^2 = \\frac{50}{\\pi} \\approx 15.92$, then take the square root for $r \\approx 3.99$ centimeters. The square root must come last, after the division by $\\pi$. Dividing 50 by $2\\pi$ instead gives about 7.96, which applies the circumference formula to an area.",
+    "source": "original"
+  }
+]

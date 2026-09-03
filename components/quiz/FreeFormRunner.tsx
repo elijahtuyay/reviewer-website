@@ -4,7 +4,12 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import { Attempt } from "@/components/quiz/useAttempt";
-import { AttemptNotice, BackToSetup, NoCalculatorNote } from "@/components/quiz/shared";
+import {
+  AttemptNotice,
+  BackToSetup,
+  CalculatorNotSimulatedNote,
+  NoCalculatorNote,
+} from "@/components/quiz/shared";
 import { scrollBehavior } from "@/lib/motion";
 import CalculatorPanel from "@/components/quiz/CalculatorPanel";
 import Timer from "@/components/Timer";
@@ -273,6 +278,8 @@ export default function FreeFormRunner({
             {!reviewMode &&
               (section.calculator === "basic-di" ? (
                 <CalculatorPanel open={calcVisible} onOpenChange={setCalcOpen} />
+              ) : section.calculator === "not-simulated" ? (
+                <CalculatorNotSimulatedNote />
               ) : (
                 <NoCalculatorNote exam={exam} />
               ))}

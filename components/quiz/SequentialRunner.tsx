@@ -4,7 +4,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import { Attempt } from "@/components/quiz/useAttempt";
-import { AttemptNotice, BackToSetup, NoCalculatorNote } from "@/components/quiz/shared";
+import {
+  AttemptNotice,
+  BackToSetup,
+  CalculatorNotSimulatedNote,
+  NoCalculatorNote,
+} from "@/components/quiz/shared";
 import CalculatorPanel from "@/components/quiz/CalculatorPanel";
 import Timer from "@/components/Timer";
 import QuestionCard from "@/components/QuestionCard";
@@ -157,6 +162,8 @@ export default function SequentialRunner({
           {!reviewMode &&
             (section.calculator === "basic-di" ? (
               <CalculatorPanel open={calcVisible} onOpenChange={setCalcOpen} />
+            ) : section.calculator === "not-simulated" ? (
+              <CalculatorNotSimulatedNote />
             ) : (
               <NoCalculatorNote exam={exam} />
             ))}

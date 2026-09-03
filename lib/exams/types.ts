@@ -175,6 +175,24 @@ export interface ExamModule {
   rules: ExamRules;
   scoring: ScoringModel;
   /**
+   * True things about the REAL exam that this app does not model as a rule.
+   *
+   * The setup page's "what to expect" list is generated from `rules` on
+   * purpose, so the copy cannot claim behavior the engine does not have. That
+   * design has one gap: a fact that is true of the real exam and deliberately
+   * NOT implemented here has no rule to be generated from, so it silently goes
+   * unsaid. The GRE opens with a 30-minute essay this site does not simulate,
+   * and a candidate who meets that for the first time on test day was failed by
+   * this page, not by the engine.
+   *
+   * Each entry is appended to the generated list verbatim. Use it only for
+   * differences between the real exam and this app. Anything the engine
+   * actually does belongs in `rules`, where it cannot drift: this field is an
+   * escape hatch, and an escape hatch used for ordinary copy becomes the
+   * hand-written blurb the generated list was built to replace.
+   */
+  notes?: string[];
+  /**
    * Loads one section's questions. Deliberately async and per-section: it is a
    * dynamic import, so a section's questions are a separate chunk that is only
    * fetched when someone actually opens that section. The previous design
