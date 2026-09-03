@@ -1,10 +1,10 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-04, at PR #25 / VERSION.txt `2.7.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-04, at PR #26 / VERSION.txt `2.8.0`.
 
 ## What this project is
 
-An exam-prep web app for **NMAT by GMAC** (a Philippine business-school admission test), built with Next.js 16.3.0 (Turbopack), React 19, TypeScript, and Tailwind v4, with a Neon Postgres database behind Drizzle and better-auth as of v2.1.0 (backend only, no sign-in UI yet). A second exam, **GMAT Focus**, is fully playable on a deliberate 90-question seed bank (30 per section, 10 per difficulty) — enough to exercise the adaptive engine, not a finished bank. See "THE MODULAR EXAM ARCHITECTURE" below. The repo lives at:
+An exam-prep web app for **NMAT by GMAC** (a Philippine business-school admission test), built with Next.js 16.3.0 (Turbopack), React 19, TypeScript, and Tailwind v4, with a Neon Postgres database behind Drizzle and better-auth as of v2.1.0 (backend only, no sign-in UI yet). A second exam, **GMAT Focus**, is fully playable on a 270-question bank (90 per section, 32 hard in each), which stopped being a seed bank in v2.8.0. A third, **GRE General**, arrived in v2.6.0 with 192 questions. See "THE MODULAR EXAM ARCHITECTURE" below. The repo lives at:
 
 ```
 C:\Users\elija\Documents\Personal Files\AI_ML\Codes\reviewer-website
@@ -200,7 +200,8 @@ the opposite of GMAT Focus and the easiest way to write a wrong bank.
 real totals (Verbal 27 questions / 41 minutes, Quantitative 27 / 47), but the
 real split into two separately timed sub-sections is not reproduced. Splitting
 the bank four ways would leave each section a pool barely larger than one
-sitting, which is the repeat problem the GMAT seed bank already demonstrates.
+sitting, which is the problem the GMAT seed bank demonstrated before v2.8.0
+tripled it.
 
 **The GRE is far closer to a paper exam than the GMAT**, which is the part people
 assume wrongly because both are computer-delivered. Inside a section you move
@@ -697,25 +698,55 @@ Small shared modules added in v2.3.0, each existing because the same bug was abo
 
 ### GMAT specifics
 
-GMAT Focus: Data Insights 20q, Quantitative 21q, Verbal 23q, 45 minutes each, 64 questions, 205-805. Verbal has NO sentence correction; Quantitative has NO geometry; Data Sufficiency belongs to **Data Insights**, not Quantitative. Bank is a **90-question seed** (30 per section, 10 per difficulty), not a finished bank: a perfect run exhausts the ten hard questions and falls back to medium.
+GMAT Focus: Data Insights 20q, Quantitative 21q, Verbal 23q, 45 minutes each, 64 questions, 205-805. Verbal has NO sentence correction; Quantitative has NO geometry; Data Sufficiency belongs to **Data Insights**, not Quantitative. The bank is **270 questions** as of v2.8.0, 90 per section with 32 hard in each, so the adaptive ladder no longer runs dry.
 
-**Known GMAT fidelity gaps, recorded rather than papered over.** The seed bank
-approximates several things the real exam does differently, and a relabel would
-hide the gap instead of closing it:
+**The GMAT bank was a 90-question seed until v2.8.0, and every gap that came
+with it is now closed.** The list is kept because the fixes are the interesting
+part, and because the same holes are the ones a future exam will dig:
 
-- **`gd-005`, `gd-010`, `gd-016` and `gd-026` are tagged Two-Part Analysis but
-  are ordinary single-answer questions.** Real Two-Part Analysis is a two-column
-  table requiring two selections, which the runner cannot render today. Closing
-  this needs a question type and a UI, not a new topic string.
-- **GMAT Verbal items have 4 options; the real exam has 5.** That moves the
-  blind-guess baseline from 20% to 25% and feeds a scoring model calibrated on
-  five.
-- CR stimuli run 18-34 words against a real 60-120, and RC passages 110-121
-  words with 2 questions each against a real 200-350 with 3-4. There are only 4
-  distinct Verbal passages, so a 23-of-30 draw often serves the same one twice.
-- 10 of 25 GMAT CR items use the same "find the alternative cause" template, and
-  that is the same shape of hole that reached 94.7% on NMAT Critical Reasoning
-  before it was measured. It is unmeasured here.
+- **Four options where the real exam has five.** Verbal, Quantitative and the
+  non-Data-Sufficiency half of Data Insights all used four. That moves a blind
+  guess from 20% to 25%, and on an ADAPTIVE exam it is not a rounding error: it
+  shifts every difficulty estimate the ladder makes. All 270 questions now carry
+  five, each retrofitted distractor tracing to one named mistake.
+- **30 questions per section against sections of 20 to 23.** A retake re-served
+  about 77% of the same paper, and a strong run exhausted the ten hard questions
+  and fell back to medium. Now 90 per section: the draw ratio is about 0.24 and
+  there are 32 hard questions per section.
+- **CR stimuli ran 18 to 34 words** against a real 60 to 120, which is not an
+  argument. New items run 74 to 126.
+- **RC passages ran 110 to 121 words** against a real 200 to 350, and worse,
+  **four PAIRS of questions were sharing one passage** (`gv-006`/`gv-007`,
+  `gv-013`/`gv-014`, `gv-020`/`gv-021`, `gv-028`/`gv-029`), so a draw could
+  serve the same text twice. Every question now carries its own passage of 250
+  to 320 words.
+- **10 of 25 CR items used one "find the alternative cause" template.** The new
+  set spans eight stems and a deliberate range of argument structures: sampling,
+  analogy, cost-benefit, plans and predictions, statistical fallacies,
+  definitional shifts, survivorship, and boldface role.
+- **Four questions were tagged Two-Part Analysis and were not.** Real Two-Part
+  Analysis is a two-column table taking one selection per column. The `multi`
+  question kind does NOT close that gap either, because picking two options from
+  one shared list loses which column each belongs to. Rather than mislabel or
+  delete them, they were rewritten as genuine Table Analysis questions with
+  embedded tables. **If Two-Part Analysis is ever built properly it needs a new
+  question kind, not a reuse of `multi`.**
+
+Two lessons from the pass itself, both worth more than the numbers:
+
+**Adding an option cannot rescue a key that is already bracketed.** A key
+sitting mid-range among four values stays mid-range whatever fifth value is
+added, so a retrofit can only protect the extremes that already exist. Two more
+were surrendered deliberately, because the only realistic distractor sat above
+the key and a rank-preserving alternative would have been contrived. **A weaker
+distractor is a worse question than a slightly worse statistic**, and that is the
+right way to resolve the tension.
+
+**A fixed option set forked without anyone noticing.** The second authoring pass
+wrote Data Sufficiency's five statements with different capitalization from the
+first, giving one bank two variants of a set whose entire point is that it never
+varies. `audit:bank` now fails on that, per bank rather than globally, since
+NMAT and GMAT may legitimately word theirs differently.
 
 `npm run verify:engine` asserts (and exits non-zero) on the adaptive ladder and both scoring models. It has already caught three real bugs: a perfect attempt scoring 810 on a band whose maximum is 805, difficulty weighting being a no-op, and timing out scoring higher than finishing. **Run it after touching `lib/adaptive.ts` or `lib/scoring.ts`.**
 
@@ -892,6 +923,66 @@ small to judge at all". The band now widens for small files instead of
 disappearing, and the fix was verified by running the new audit against the
 committed regressed bank and watching it fail.
 
+### Every guessing heuristic is now scored in standard errors, not percent
+
+Three of the four holes the v2.8.0 review lanes found in `audit-bank.mjs` were
+the same hole: **a threshold written as a literal, calibrated on conditions that
+had since changed.** Every band in the script assumed four options and a
+hundred-question file. Five of the eight banks now offer five options, and the
+GMAT banks went from 30 questions to 90.
+
+What that cost, measured rather than guessed:
+
+- The slot band was `[14, 36]` at n>=100 and `[10, 42]` below it. The GMAT banks
+  tripled and stayed in the wide bucket, where a slot holding 42% of the keys at
+  n=90 is **more than five standard errors from chance** and still passed.
+- On a five-option bank those same literals mean 1.7x and 2.1x chance, not the
+  1.44x and 1.68x they were chosen to mean. The printed labels said "chance is
+  25%" over numbers where chance was 20%.
+- The two numeric-extreme caps and the middle-two cap were asserted **on the ALL
+  row only**, so their spare headroom grew with the bank rather than with the
+  evidence: 31 hits to 44, and 26 to 43, at an unchanged percentage. NMAT
+  Logical Reasoning could go to 100% middle-keyed and the ALL row would still
+  pass.
+
+Every one of them is now `|share - chance|` divided by the standard error of
+that share, per bank, with the chance rate derived from the bank's own modal
+option count. **The threshold is 3 SE to fail and 2 SE to print a watch line.**
+Three is about one false alarm in 370 checks and a run makes about sixty, which
+is the point: a green build has to mean green, or the next author learns to
+shrug at this script.
+
+**The watch list is the half that will matter later.** It prints anything past
+2 SE without failing, so a drift is visible one release before it breaks the
+build, and nobody has to re-derive it by hand. Both of this project's real
+biases were found by a person measuring something the script did not print.
+
+Two entries sit on it today and are known, not overlooked: `gmat/quantitative`
+keys the smallest numeric option 9.3% of the time against 20% by chance
+(-2.3 SE), and `logical-reasoning` keys the largest 4.3% of the time (-2.3 SE).
+Both are the mirror-image tell — "never pick the smallest" is a free
+elimination — and both were left rather than fixed, because moving them means
+changing distractor VALUES, and every distractor in that bank had just been
+verified as reachable by a named arithmetic mistake. **A weaker distractor is a
+worse question than a worse statistic.**
+
+### The check that was structurally unable to see the bias it was built for
+
+The longest-option check asks "is the key THE longest option". GMAT Verbal
+passed it at 26.2% against 20% by chance while a candidate guessing between the
+**two** longest scored 58.0% against 40% (+3.1 SE). One rank down was invisible.
+
+It passed because two opposite artifacts cancelled inside one file. The 60
+newly written questions keyed the longest option 40.7% of the time, the classic
+long-hedged-key-beside-short-dismissive-distractors shape. The 30 that had a
+fifth option retrofitted keyed it **0%** of the time, because the added
+distractor was usually the longest string in the question. A file average hid
+both, and either one alone would have failed.
+
+`audit:bank` now measures the top-two length rank as well, skipping questions
+where the second and third longest options tie, because there is no "top two"
+for a candidate to see there.
+
 Two rules fall out of this for any future bank-wide mechanical pass:
 1. **Snapshot `id -> options[correctIndex]` before, compare after.** Both
    re-slot passes did, which is the only reason "no answer key moved" is a fact
@@ -899,6 +990,13 @@ Two rules fall out of this for any future bank-wide mechanical pass:
 2. **Re-measure EVERY statistic afterwards, not just the one you set out to
    move.** The pass fixed its target metric and broke a neighboring one, and
    both were already in the audit.
+3. **Prove no key moved, and say what "moved" means.** The v2.8.0 retrofit
+   touched **82** pre-existing questions (the other 8 already carried five
+   options), and a review lane found the PR body's "byte-identical keys" claim
+   was false: six Data Sufficiency keys were re-cased by the canonical-set
+   normalization the new audit invariant forces. No answer moved, but the
+   correct claim is "semantically identical, six re-cased", and the looser one
+   would have hidden a real edit if there had been one.
 
 Data Sufficiency remains in **canonical A-E statement order** (PR #7's bank-wide
 option shuffle had scrambled all 11, which trains the wrong habit, since real DS
@@ -1218,7 +1316,7 @@ that appears not to have applied is usually this.
 
 ---
 
-**Current state: `main` is at v2.7.0, and is the only branch.**
+**Current state: `main` is at v2.8.0, and is the only branch.**
 
 "Clean" is five commands rather than a claim, and all five pass on `main`:
 
