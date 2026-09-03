@@ -516,6 +516,40 @@ document for two releases and sent readers looking for files that were gone.
 
 ## PR/version history (what shipped, in order)
 
+- **PR #26** (v2.8.0) — the GMAT bank stops being a seed: 90 questions per
+  section, 32 hard in each, and five options everywhere the real exam has five.
+  See "GMAT specifics" above for the gap list it closes.
+
+  **Its review lanes found the same thing from two directions, and the audit
+  could not see it.** The longest-option check asks "is the key THE longest
+  option", and GMAT Verbal passed at 26.7% against 20% by chance while a
+  candidate guessing between the TWO longest scored 57.5% against 40%. It
+  passed because two opposite artifacts cancelled inside one file: the 60 newly
+  written questions keyed the longest option 40.7% of the time, and the 30 that
+  had a fifth option retrofitted keyed it 0%, because the added distractor was
+  usually the longest string. Either half alone would have failed.
+
+  Three of the four holes in `audit-bank.mjs` were one hole: **a threshold
+  written as a literal, calibrated on conditions that had since changed.** Every
+  band assumed four options and a hundred-question file, and both assumptions
+  had expired. Bands are now standard errors from a per-bank chance rate. See
+  "Every guessing heuristic is now scored in standard errors" above.
+
+- **PR #27** (v2.8.1) — the content items #26's lanes raised that were not worth
+  rushing into that merge. Four pairs of Reading Comprehension questions had
+  their own passages but shared a SUBJECT, so a 23-of-90 draw served the same
+  topic twice; one of each pair moved to a new subject. Nine Critical Reasoning
+  stimuli ran 19 to 44 words against a real 60 to 120 and were arguments only in
+  outline. Three items tested one interchangeable analogy-transfer move.
+
+  **The interesting constraint was not doing harm.** #26 had just removed an
+  option-length bias, and writing 14 new option sets in one pass is exactly how
+  it would come back. The two statistics were set as hard targets and measured
+  before and after, landing at 23.6% and 36.6% against chance rates of 20% and
+  40%. **A pass that fixes its own target and breaks a neighboring one is this
+  project's most repeated mistake**, and it is why every bank-wide edit here now
+  re-measures everything rather than the one number it set out to move.
+
 - **PR #23** (v2.5.0) — the copy reads as written by a person, at the user's
   direction: "they reeked too much of AI slop." This is a different complaint
   from the one v2.4.0 answered, and **v2.4.0 is part of what caused it.** STE
