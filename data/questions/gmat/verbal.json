@@ -4,7 +4,7 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Inference",
     "difficulty": "easy",
-    "prompt": "Halverd Freight requires every one of its employees to complete a one-day safety course before the end of the calendar year. The course is offered several times a month at each of the company's depots, and the personnel office issues a numbered certificate to each employee who completes it, without exception and usually within a week. Marcus has worked at the Ashfield depot for the whole of this year, and the personnel office holds no certificate on file in his name. Which of the following must be true on the basis of the statements above?",
+    "prompt": "Halverd Freight requires every one of its employees to complete a one-day safety course before the end of the calendar year. The course is offered several times a month at each of the company's depots, and the personnel office issues a numbered certificate to each employee who completes it, without exception, on the day the course is completed. Marcus has worked at the Ashfield depot for the whole of this year, and the personnel office holds no certificate on file in his name. Which of the following must be true on the basis of the statements above?",
     "options": [
       "The safety course is harder than most of Halverd's employees expect it to be.",
       "Every employee who holds a numbered certificate has completed the safety course.",
@@ -1366,9 +1366,9 @@
     "difficulty": "medium",
     "prompt": "Sales of electric delivery vans in the province have doubled in each of the last four years, and electric vans now make up eight percent of the delivery fleet on the road. The provincial haulage association projects that on the same trajectory they will make up more than half the fleet within four more years. On the strength of that projection it has asked the province to begin converting the roadside inspection stations to handle electric drivetrains, and to pay for the work by cutting the budget for diesel emissions testing. Which of the following, if true, most seriously weakens the association's projection?",
     "options": [
-      "The province's roadside inspection stations were last refitted more than twenty years ago.",
-      "An electric van still costs more to buy than a diesel van of comparable capacity.",
-      "The electric vans sold so far run short routes from depots with charging, and nearly every such route in the province now uses one.",
+      "The province's roadside inspection stations were last refitted more than twenty years ago, before the first electric van reached the road.",
+      "An electric van still costs more to buy than a diesel van of comparable capacity, and that gap has not narrowed in four years.",
+      "The vans sold so far serve short depot routes, and almost every such route already has one.",
       "Several manufacturers have announced longer-range electric vans for delivery in two years.",
       "The number of diesel vans registered in the province has fallen for three years running."
     ],
