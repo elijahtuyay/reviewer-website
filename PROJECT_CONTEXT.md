@@ -516,6 +516,40 @@ document for two releases and sent readers looking for files that were gone.
 
 ## PR/version history (what shipped, in order)
 
+- **PR #26** (v2.8.0) — the GMAT bank stops being a seed: 90 questions per
+  section, 32 hard in each, and five options everywhere the real exam has five.
+  See "GMAT specifics" above for the gap list it closes.
+
+  **Its review lanes found the same thing from two directions, and the audit
+  could not see it.** The longest-option check asks "is the key THE longest
+  option", and GMAT Verbal passed at 26.7% against 20% by chance while a
+  candidate guessing between the TWO longest scored 57.5% against 40%. It
+  passed because two opposite artifacts cancelled inside one file: the 60 newly
+  written questions keyed the longest option 40.7% of the time, and the 30 that
+  had a fifth option retrofitted keyed it 0%, because the added distractor was
+  usually the longest string. Either half alone would have failed.
+
+  Three of the four holes in `audit-bank.mjs` were one hole: **a threshold
+  written as a literal, calibrated on conditions that had since changed.** Every
+  band assumed four options and a hundred-question file, and both assumptions
+  had expired. Bands are now standard errors from a per-bank chance rate. See
+  "Every guessing heuristic is now scored in standard errors" above.
+
+- **PR #27** (v2.8.1) — the content items #26's lanes raised that were not worth
+  rushing into that merge. Four pairs of Reading Comprehension questions had
+  their own passages but shared a SUBJECT, so a 23-of-90 draw served the same
+  topic twice; one of each pair moved to a new subject. Nine Critical Reasoning
+  stimuli ran 19 to 44 words against a real 60 to 120 and were arguments only in
+  outline. Three items tested one interchangeable analogy-transfer move.
+
+  **The interesting constraint was not doing harm.** #26 had just removed an
+  option-length bias, and writing 14 new option sets in one pass is exactly how
+  it would come back. The two statistics were set as hard targets and measured
+  before and after, landing at 23.6% and 36.6% against chance rates of 20% and
+  40%. **A pass that fixes its own target and breaks a neighboring one is this
+  project's most repeated mistake**, and it is why every bank-wide edit here now
+  re-measures everything rather than the one number it set out to move.
+
 - **PR #23** (v2.5.0) — the copy reads as written by a person, at the user's
   direction: "they reeked too much of AI slop." This is a different complaint
   from the one v2.4.0 answered, and **v2.4.0 is part of what caused it.** STE
@@ -1041,6 +1075,22 @@ Write bank edits from a real script file, never a heredoc.
 3. ~~**Six specific question defects**: `ls-055`, `lr-072`, `ls-063`, `ls-101`, `ls-045`, `qs-030`.~~ **CLOSED in v2.3.0.** All six were re-checked against the files on disk and **all six had already been fixed** by earlier passes without this list being updated. `lr-072` no longer offers an "opposite" option and its puzzle was brute-forced as uniquely solvable; `ls-055` has exactly one part-to-whole match; `ls-063`'s explanation says a cobbler *works on* shoes; `ls-101` is now a vocabulary item that does not contain the phrase; `ls-045` and `qs-030` were verified correct. **The lesson is about the list, not the questions:** a stale to-do that reads as an open defect costs the next reader an investigation each time. Re-verify before re-reporting.
    The v2.3.0 audit did find three genuinely wrong keys, all in GMAT Data Insights — see "Three wrong answer keys" above.
 4. ~~`ProgressTracker` cells are 28px.~~ **CLOSED in v2.3.0** — 36px, with the sidebar widened `w-56` to `w-72` to fit (6 x 36px + 5 x 6px gaps = 246px inside a 254px content box). Still under the app's 44px floor, and deliberately: 36 cells at 44px do not fit any column width this layout can give them, and 36px clears WCAG 2.5.8 comfortably.
+6. **`audit:bank` has no PER-TOPIC length band, and one topic is past 3 SE.**
+   The slot checks learned this lesson already: a per-file average hides a
+   loaded topic completely, which is how Para Forming came to key the last
+   option 8 times in 10 while every file-level number looked healthy. The
+   length checks never got the same treatment. Measured across all 762
+   questions while reviewing v2.8.1: **GRE Verbal Reading Comprehension keys
+   the SHORTEST option 15 of 36 times (42%, +3.2 SE against a 20% chance
+   rate)**, and nothing is watching it. GMAT Critical Reasoning: Inference sits
+   at 4 of 11 (36%, +1.4 SE), which is noise on n=11 but the same shape.
+   There is a real tension to resolve first, which is why this is logged rather
+   than fixed in a hurry: a must-be-true key is usually the most minimal claim
+   in the set, so on Inference it is NATURALLY the shortest string. A band that
+   ignores that will fail honest questions. Adding the check means deciding
+   whether the topic is exempt like Data Sufficiency, or whether the
+   distractors should be trimmed to match.
+
 5. `ConfirmDialog` styles the confirming action as a red outline and the cancel as solid green. A reviewer called this inverted; it is a **documented deliberate choice** from an earlier PR (green = keeps your work). Left alone pending a decision.
 
 

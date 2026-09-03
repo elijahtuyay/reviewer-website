@@ -4,16 +4,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Inference",
     "difficulty": "easy",
-    "prompt": "Every employee who completed the safety course received a certificate. Marcus did not receive a certificate. Which conclusion follows?",
+    "prompt": "Halverd Freight requires every one of its employees to complete a one-day safety course before the end of the calendar year. The course is offered several times a month at each of the company's depots, and the personnel office issues a numbered certificate to each employee who completes it, without exception, on the day the course is completed. Marcus has worked at the Ashfield depot for the whole of this year, and the personnel office holds no certificate on file in his name. Which of the following must be true on the basis of the statements above?",
     "options": [
-      "The safety course is harder than most employees had expected.",
-      "Everyone who received a certificate had completed the safety course.",
-      "Marcus did not complete the safety course.",
-      "Marcus was never told about the safety course by his supervisor.",
-      "Marcus is planning to take the safety course later this year."
+      "The safety course is harder than most of Halverd's employees expect it to be.",
+      "Every employee who holds a numbered certificate has completed the safety course.",
+      "Marcus has not completed the required safety course this year.",
+      "Nobody at the Ashfield depot told Marcus that the safety course was available.",
+      "Marcus will complete the course before the year ends."
     ],
     "correctIndex": 2,
-    "explanation": "This is the contrapositive: if completing the course guarantees a certificate, then no certificate means the course was not completed. The other options add facts the statements never supply. The claim that a certificate proves completion reverses the conditional the statements give, which is a different claim and not one they support.",
+    "explanation": "Completing the course guarantees a certificate, so the absence of a certificate rules out completion. That is the contrapositive and the only conclusion the statements force. Reading the rule backward, so that a certificate proves completion, is a different claim, and nothing here rules out a certificate issued for some other reason. The difficulty of the course, what Marcus was told and what he will do next are matters the statements never touch.",
     "source": "original"
   },
   {
@@ -21,16 +21,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Weaken",
     "difficulty": "easy",
-    "prompt": "A cafe owner says: \"We introduced free wireless internet last month, and sales rose 20 percent, so the internet caused the increase.\" Which finding would most weaken this?",
+    "prompt": "The owner of the Bellamy Street cafe installed free wireless internet on the first of March, hoping to attract customers who would stay longer and order more while they worked. Sales for March came in twenty percent above the figure for February and above the figure for the same month a year earlier. In a note to her staff the owner wrote that the wireless internet was clearly responsible for the increase, and that she will therefore install it at the second branch she opens in the autumn. Which of the following, if true, most seriously weakens the owner's reasoning?",
     "options": [
-      "Sales at nearby cafes that offer no wireless internet fell slightly over the same month.",
-      "Some customers said they liked having the internet available.",
-      "The wireless internet cost considerably less to install than the owner had expected it to.",
-      "The cafe also began opening two hours earlier on the same day the internet was installed.",
-      "A few regular customers do not own laptops or tablets."
+      "Sales at two nearby cafes that offer no wireless internet fell slightly in March.",
+      "Several regular customers told the owner they were glad the internet was there.",
+      "The wireless installation cost considerably less than the owner had expected.",
+      "The cafe began opening two hours earlier on the first of March.",
+      "A number of the cafe's regular customers own neither a laptop nor a tablet."
     ],
     "correctIndex": 3,
-    "explanation": "A second change made at the same time offers a rival explanation for the same rise, which is what undercuts a causal claim. The other options are about cost or opinion and leave the causal link untouched. A fall at cafes without internet points the other way and supports the owner rather than weakening him.",
+    "explanation": "A second change made on the same day gives the same rise a rival explanation, and two extra trading hours a day is easily large enough to account for a fifth more sales. Installation cost and customer goodwill leave the causal step untouched, and customers without a device were presumably buying coffee before March as well. A fall at cafes with no internet is the comparison the owner would want, so it supports her rather than weakening her.",
     "source": "original"
   },
   {
@@ -72,16 +72,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Inference",
     "difficulty": "easy",
-    "prompt": "All the paintings in the north gallery were produced after 1900. The museum's oldest painting hangs in the south gallery. Which statement must be true?",
+    "prompt": "The Harnwell Museum hangs its permanent collection in two rooms. When the north gallery was rearranged in the spring the curators applied a single condition to it, that every painting hung there be one produced after 1900, and the room has not been rehung since. The museum's oldest painting, which the catalog identifies by title and by date, hangs in the south gallery. The catalog records no dates for the other works in the south gallery. Which of the following must be true on the basis of the statements above?",
     "options": [
-      "The museum's oldest painting was produced before 1900.",
-      "Every painting in the south gallery predates every painting in the north.",
-      "The museum's oldest painting is not in the north gallery.",
-      "No painting produced before 1900 hangs anywhere in the museum.",
-      "The south gallery holds more paintings than the north gallery does."
+      "The museum's oldest painting was produced at some point before 1900.",
+      "Every painting in the south gallery is older than every painting in the north.",
+      "The museum's oldest painting is not hanging in the north gallery.",
+      "The museum holds no painting at all that was produced before 1900.",
+      "The south gallery holds more paintings than the north gallery holds."
     ],
     "correctIndex": 2,
-    "explanation": "The second sentence states directly where the oldest painting hangs, so it is not in the north gallery. It does NOT follow that it predates 1900: the oldest painting could still be from 1950 if the whole collection is modern. It also does not follow that the museum holds nothing from before 1900, because the contents of the south gallery are never described.",
+    "explanation": "The statements place the oldest painting in the south gallery, so it is not in the north, and that is all they settle. The oldest painting could still date from 1950 if the whole collection is modern, so no date before 1900 follows, and for the same reason the museum may hold nothing at all from before 1900 or a great deal. The other works in the south gallery are undated in the catalog, so neither their ages nor their number can be compared with the north gallery's.",
     "source": "original"
   },
   {
@@ -106,16 +106,16 @@
     "section": "verbal",
     "topic": "Reading Comprehension",
     "difficulty": "easy",
-    "prompt": "Passage: \"Few findings in transport research are as well established as induced demand, and few are as contested in what they are taken to prove. The finding itself is simple. When a congested road is widened, the new capacity is absorbed by journeys the old road did not carry. Some of those journeys belong to drivers who had been leaving early or taking a longer route to avoid the queue. Others are wholly new, made by people who had judged the trip not worth the time it used to take. Studies across many cities report that traffic volumes on widened roads return to near their former levels within about five years, and researchers on every side of the argument accept that pattern.\n\nWhere they part company is in what the pattern means. One group treats the return of congestion as evidence that widening fails on its own terms. The road was built to make journeys faster, speeds after five years are no better than before, and the promise on which the project was sold has not been kept. Members of this group tend to favor pricing the road at peak times, or moving the same passengers by rail or bus, on the ground that only a measure which changes behavior can hold a speed gain in place.\n\nThe second group accepts that description line by line and rejects the conclusion. A road carrying more vehicles at the same speed is carrying more people to more destinations. The journeys that appear are not phantom traffic but errands, deliveries and commutes that congestion had been holding back, and a policy that keeps the road empty by keeping those trips unmade has bought its speed at their expense. Judged by trips served rather than by travel speed, they argue, the widened road is doing more work than it was.\" How do the two groups of planners in the passage differ?",
+    "prompt": "Passage: \"Most songbirds are not born knowing their songs. A young male hears adult singing during a limited period early in life, stores what he hears, and then spends weeks practicing a rambling subsong that gradually converges on the model he memorized. Birds raised in isolation produce a crude and simplified song. Birds deafened after the memorizing period but before practice begins never converge on anything at all, which indicates that the young bird is matching his own output against a remembered target rather than unfolding a fixed motor program.\n\nOne consequence is that song varies by place. Neighboring populations of a single species often sing versions distinct enough that a trained listener can place a bird within a few valleys, and the boundaries between these dialects can be surprisingly sharp. Because each generation learns from the adults it happens to hear, a small variation introduced by one bird can spread through a local population and persist for decades after the bird that introduced it is gone.\n\nWhy the learning period closes is less settled. One account treats the closure as a fact about development: the circuits that support memorization mature, stabilize, and stop accepting new material, in much the way other sensory systems fix their wiring early and keep it. A second account treats the closure as an adaptation. A bird that kept revising its song would keep drifting away from the dialect its neighbors recognize, and a song that neighbors do not recognize is a poor advertisement to females and a poor warning to rivals. On the second view the window closes because a settled song is worth more than a flexible one, not because the machinery has worn out.\" According to the passage, what do birds deafened before practice begins demonstrate?",
     "options": [
-      "They disagree about whether drivers respond to changes in journey times.",
-      "They disagree about whether traffic returns to its former level after a road is widened.",
-      "They disagree about whether induced demand exists at all in modern cities.",
-      "They disagree about how expensive road widening projects usually are.",
-      "They disagree about which measure should count as success."
+      "That a young bird compares the song it produces with a song it has stored.",
+      "That the period available for memorizing a song closes early in life.",
+      "That a bird raised in isolation sings a simpler song than other birds.",
+      "That neighboring populations of one species sing noticeably different songs.",
+      "That a variation introduced by one bird can persist for many decades."
     ],
-    "correctIndex": 4,
-    "explanation": "Both groups accept that traffic returns; they part company over whether to judge a road by travel speed or by total trips served. Neither disputes the existence of induced demand or the responsiveness of drivers, and cost is never mentioned. The option that has them disputing the return of traffic contradicts the one finding the passage says every side accepts.",
+    "correctIndex": 0,
+    "explanation": "A bird that cannot hear itself has the memorized model and nothing to compare against it, and the passage says such a bird never converges, so the comparison is what the practice period performs. The simplified song of an isolated bird shows that the model has to be heard, which is a separate point. Dialects, their persistence and the closing of the learning period are all discussed elsewhere in the passage and none of them rests on the deafening result.",
     "source": "original"
   },
   {
@@ -191,16 +191,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Evaluate",
     "difficulty": "medium",
-    "prompt": "A city claims its new recycling campaign worked because the tonnage sent to landfill fell last year. Which question would be most useful in evaluating that claim?",
+    "prompt": "Two years ago the city of Doverel began a recycling campaign, placing sorting bins on residential streets and mailing an illustrated guide to every household. Doverel measures its performance by the tonnage its trucks deliver to the regional landfill, and that figure fell by eleven percent last year, the first decline since the landfill opened. The city's environment office has reported the campaign a success and has asked the council to fund a second campaign of the same design in the neighboring district. Which of the following would be most useful to know in evaluating the environment office's conclusion?",
     "options": [
-      "How much did the city spend designing the recycling campaign?",
-      "Did the total amount of waste generated in the city also fall last year?",
-      "Which neighborhoods received the campaign materials first?",
-      "Do most residents say they support recycling in principle?",
-      "How many residents recall having seen the recycling campaign's advertisements last year?"
+      "How much the city spent on designing and mailing the campaign's materials.",
+      "Whether the total quantity of waste Doverel generated also fell last year.",
+      "Which of Doverel's neighborhoods received the campaign materials earliest.",
+      "Whether most residents of Doverel say that they support recycling in principle.",
+      "How many residents remember seeing the campaign's advertisements last year."
     ],
     "correctIndex": 1,
-    "explanation": "If total waste fell, landfill tonnage would drop whether or not anyone recycled more, so this question separates the two explanations. Spending, rollout order, and recall do not distinguish them. Support in principle is an attitude, and it would not show whether behavior or the volume of waste actually changed.",
+    "explanation": "Landfill tonnage falls when residents sort more and also when they throw less away in the first place, so the answer to this question either supports the office's reading or supplies the whole of the decline without it. Spending, rollout order and advertising recall measure the campaign's reach and cost rather than its effect on the tonnage. Support in principle is an attitude, and residents have held attitudes about recycling for years without the landfill figure moving.",
     "source": "original"
   },
   {
@@ -225,16 +225,16 @@
     "section": "verbal",
     "topic": "Reading Comprehension",
     "difficulty": "medium",
-    "prompt": "Passage: \"Escalation of commitment is the tendency to put further resources into a course of action that is already failing. Laboratory work has documented it for decades. Participants who personally chose an initial investment allocate more to it after learning that it is losing money than participants who inherited the same investment from somebody else. The effect survives when the stakes are raised, and it survives when participants are warned about it in advance.\n\nEconomists who model the firm as a cost minimizer have found the pattern awkward. Money already spent cannot be recovered, so a decision about the next unit of spending should depend only on what that unit will earn. A manager who reasons instead from the sum already committed is, on the standard account, simply making an error, and the error should be trained away.\n\nDefenders of the standard account have offered a reply that keeps the rationality assumption and moves the objective. A manager does not face the problem the firm faces. Canceling a project is a public and dated admission that an earlier judgment was wrong, and it is the manager, not the firm, who carries that admission into the next promotion review. Continuing the project keeps the verdict open for another year. Seen this way the manager is choosing well, given what the manager is trying to protect, and the apparent error is an artifact of assuming that the manager's objective and the firm's objective are one and the same.\n\nCritics of the reply note that it explains the behavior without excusing it. If the incentive is the cause, a firm that understands the cause can remove it, by having interim reviews conducted by managers who had no part in approving the original proposal, and by treating an early cancellation as a decision worth crediting rather than a failure worth recording.\" The defenders' response suggests that escalation of commitment is:",
+    "prompt": "Passage: \"For most of the twentieth century a factory held inventory the way a household holds a pantry. Parts arrived in large lots, sat in a warehouse, and were drawn down as the line needed them. The buffer absorbed everything: a late delivery, a bad batch, a machine that stopped. It also concealed the causes. A plant that can always reach for another bin has little reason to find out why the last bin was defective.\n\nThe alternative, developed in postwar Japanese manufacturing and adopted widely afterward, delivers parts in small quantities shortly before they are used. The immediate saving is the capital tied up in stock and the floor space it occupies. Supporters have generally argued that the larger gain is informational. With no buffer, a defect stops the line within hours instead of surfacing weeks later in a finished product, and the plant is forced to trace it to its source. Inventory, on this view, is not merely idle money. It is an anesthetic.\n\nCritics of the system have concentrated on what happens when supply fails. A plant holding two days of parts cannot absorb a port closure, a fire at a supplier, or a shortage that lasts a quarter, and the firms that had driven their stock lowest were the ones that stopped first when several such disruptions arrived in succession.\n\nDefenders reply that the criticism confuses the method with one way of applying it. Nothing in the approach requires a single supplier on another continent, and a firm may hold a deliberate buffer at each point where failure is both plausible and expensive while running the rest of the line lean. What the critics have identified, on this reading, is a purchasing decision that spread alongside the method rather than a defect in the method itself.\" In replying to the critics, the defenders of the method do which of the following?",
     "options": [
-      "less common among executives than the behavioral research claims.",
-      "rational for the firm as a whole once the full cost of abandoning a project is counted.",
-      "rational once the manager's own interests are the thing being optimized.",
-      "a phenomenon that appears only in firms already facing serious financial difficulty.",
-      "irrational from any point of view that could reasonably be adopted."
+      "Deny that firms holding little stock were harmed by the disruptions.",
+      "Separate the method itself from a purchasing practice that accompanied it.",
+      "Concede that the informational gain has been considerably overstated.",
+      "Argue that the capital saved outweighs the cost of a stopped line.",
+      "Claim that disruptions of the kind the critics describe are too rare to plan for."
     ],
-    "correctIndex": 2,
-    "explanation": "Their reply relocates the objective rather than denying the behavior: it is rational, but with respect to the manager's career rather than the firm's costs. They do not dispute how often it occurs or restrict it to struggling firms. The reply moves the objective to the manager, so reading the persistence as rational for the firm keeps the wrong party in view.",
+    "correctIndex": 1,
+    "explanation": "The reply grants the harm and locates its cause elsewhere, in the choice of a distant single supplier, which the defenders say the method does not require. They therefore neither deny the harm nor call the disruptions rare. They also do not weigh saved capital against a stopped line, and far from conceding that the informational gain was overstated, they leave that claim standing and defend it.",
     "source": "original"
   },
   {
@@ -344,16 +344,16 @@
     "section": "verbal",
     "topic": "Reading Comprehension",
     "difficulty": "hard",
-    "prompt": "Passage: \"Antibiotic resistance is not a new biological phenomenon. Resistance genes predate medicine, and bacteria have always traded them across species lines. What medicine changed is how strongly those genes are favored. A drug that kills susceptible cells efficiently hands the survivors an empty field, and widespread clinical and agricultural use applies that pressure to very large populations without pause.\n\nSeveral responses are available in principle. New drugs can be developed, though the commercial case for them is weak, since a genuinely novel antibiotic would be held in reserve and sold sparingly. Diagnostics can be improved, so that a physician learns within minutes whether an infection is bacterial at all rather than prescribing against the possibility that it is. Infection control can be tightened, so that resistant strains move less readily from one patient to the next. Each of these helps. None of them removes the pressure that creates resistance in the first place.\n\nThat leaves reducing total antibiotic use as the primary lever, and surveys find remarkably little disagreement about it. Physicians describe resistance as a serious threat and report prescribing more than they believe is necessary. Farmers and veterinarians report the same discomfort about routine additives in animal feed. The obstacle, then, is not doubt about the science, and it is not a shortage of other measures to try alongside restraint. It is that restraint pays out to the wrong person at the wrong time: the benefit is diffuse and delayed, spread thinly across patients who will fall ill years from now, while the cost falls at once and in full on the patient sent home without a prescription and on the farmer asked to go without.\" The final sentence suggests that the main obstacle to reducing antibiotic use is:",
+    "prompt": "Passage: \"A painting that has hung for three centuries is not the object that left the studio. Varnish yellows, glazes abrade, earlier restorers have repainted losses in colors that have since shifted, and the wooden support has moved with every change of season. A conservator asked to clean such a picture is therefore not uncovering an original that waited intact beneath the grime. She is choosing, among several defensible states, the one the picture will now occupy.\n\nThe traditional case for thorough cleaning is that the artist's own surface is the only state with a claim to authority and that everything above it is accretion. Against this, an older European school held that centuries of settled varnish belong to the work as it has been received, and that stripping them substitutes a modern appetite for bright color in place of the muted harmony that generations actually saw. The argument has been fought most publicly over pictures whose cleaned state proved far more vivid than anyone had predicted.\n\nBoth positions share an assumption that recent decades have weakened, namely that one correct state exists and the conservator's task is to identify it. Analytical work has made the alternative harder to avoid. Cross sections show that some artists varnished their own pictures and toned those varnishes deliberately, so the line between the artist's surface and later accretion is not always a line at all, and in some pictures nobody can locate it.\n\nThe response has been procedural rather than doctrinal. An intervention is expected to be reversible where reversibility is possible, documented in full where it is not, and limited to what the present condition of the object requires. None of that settles which state is authentic. It shifts the burden onto the conservator to record what was done, so that a later judgment is not foreclosed by this one.\" The passage indicates that the procedural response described in the final paragraph does which of the following?",
     "options": [
-      "the difficulty of measuring how much antibiotic is used in agriculture.",
-      "a lack of scientific agreement about how resistance actually spreads.",
-      "the reluctance of patients and farmers to accept that resistance is a real problem.",
-      "the absence of any effective alternative treatment for common infections.",
-      "an asymmetry between who bears the cost and who receives the benefit."
+      "Establishes the artist's own surface as the state a cleaning should recover.",
+      "Shows that the boundary between original surface and accretion can be located.",
+      "Settles the dispute by showing that one of the two schools rests on an error.",
+      "Leaves a later conservator free to reach a judgment that differs from this one.",
+      "Forbids any intervention whose effects cannot afterward be undone."
     ],
-    "correctIndex": 4,
-    "explanation": "The passage contrasts a diffuse, delayed benefit with an immediate, concentrated cost, which is precisely a cost-benefit asymmetry. It reports no scientific disagreement, and neither alternatives nor measurement are mentioned. Disbelief is ruled out directly, since the passage reports that the people asked to show restraint already describe resistance as serious.",
+    "correctIndex": 3,
+    "explanation": "The passage says outright that the procedure does not settle which state is authentic and that its point is to keep a later judgment from being foreclosed, which is what full documentation buys. It therefore does not decide for the artist's surface and does not resolve the dispute. It asks for reversibility only where reversibility is possible, so an irreversible step is documented rather than forbidden, and the analytical work is cited for the opposite of a locatable boundary.",
     "source": "original"
   },
   {
@@ -395,16 +395,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Paradox",
     "difficulty": "hard",
-    "prompt": "A hospital introduced a checklist that measurably reduced surgical errors, yet its reported complication rate rose in the following year. Which of the following, if true, best explains this?",
+    "prompt": "Two years ago Merrow General Hospital adopted a surgical checklist requiring the team to confirm the patient's identity, the site of the operation and the count of instruments both before and after each procedure. An independent audit of operating room video found that errors of the kind the checklist targets fell by more than half in the year after it was introduced. Over that same year, however, the complication rate the hospital reports to the regional health authority rose from 3.1 percent to 4.4 percent. Which of the following, if true, best explains the discrepancy described above?",
     "options": [
-      "The hospital performed slightly fewer operations than it had the previous year.",
-      "Several surgeons at the hospital said that the checklist made them more careful during the operations themselves.",
-      "The checklist added several minutes to the preparation time before each and every operation.",
-      "The checklist also introduced systematic reporting of complications that had previously gone unrecorded.",
-      "Surgeons at the hospital were initially skeptical about adopting the checklist."
+      "The hospital performed slightly fewer operations that year than the year before.",
+      "Several of the hospital's surgeons said the checklist made them more careful.",
+      "The checklist added several minutes to the preparation before each operation.",
+      "The checklist added a form on which complications formerly left unrecorded are logged.",
+      "Many of the hospital's surgeons were skeptical of the checklist when it was proposed."
     ],
     "correctIndex": 3,
-    "explanation": "If more complications are now being recorded, the reported rate can rise while the true rate falls; the paradox dissolves once measurement changes. Preparation time, skepticism, and volume do not reconcile fewer errors with more reported complications. Greater care reported by surgeons explains the fall in errors and leaves the rise in reported complications exactly as puzzling as before.",
+    "explanation": "A reported rate can climb while the underlying rate falls if the hospital has started counting cases it used to miss, which dissolves the discrepancy without disputing either figure. A slightly smaller number of operations changes the denominator of both measures together and so explains neither. Longer preparation and early skepticism concern how the checklist was received. Surgeons reporting greater care fits the fall in errors and leaves the rise in reported complications exactly as puzzling as before.",
     "source": "original"
   },
   {
@@ -412,16 +412,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Flaw",
     "difficulty": "hard",
-    "prompt": "The chief executive of Landry Instruments told the board last week that the company faces a plain choice. Either it cuts the research budget by a third, she said, or it will not hold enough cash to reach the far side of the downturn. The board is plainly not willing to see the company fail. She concluded that the board must therefore approve the cut to the research budget when it meets this month. Which of the following most accurately describes a flaw in the chief executive's reasoning?",
+    "prompt": "At last week's board meeting the chief executive of Landry Instruments made the case for a cut. Orders have fallen for three consecutive quarters, she said, and the company holds enough cash for eleven months of operation at its present rate of spending. Research consumes a third of that spending. Either the board cuts the research budget by a third, she argued, or Landry will run short of cash before demand recovers. No director on this board is willing to see the company fail. The board must therefore approve the cut when it votes this month. Which of the following most accurately describes a flaw in the chief executive's reasoning?",
     "options": [
-      "It uses a key term in one sense in its premise and in a different sense in its conclusion.",
+      "It uses a key term in one sense in its premise and in another in its conclusion.",
       "It treats two courses of action as the only ones open to the company.",
       "It mistakes a condition that is necessary for one that is by itself sufficient.",
-      "It generalizes from a sample unlikely to represent the wider population it is drawn from.",
+      "It generalizes from a sample unlikely to represent the population drawn from.",
       "It rests on the judgment of a person who is not an expert on the matter at issue."
     ],
     "correctIndex": 1,
-    "explanation": "A choice between two options binds only when there is no third. A company facing a downturn can also raise capital, defer other spending, sell a product line or slow its hiring, and the chief executive rules out none of these. No term shifts meaning between the premise and the conclusion, no sample is drawn, and the necessary and sufficient distinction is not what goes wrong here. Her own standing is not the issue either, since the objection is to the structure of the choice she offers.",
+    "explanation": "A choice between two options binds only when there is no third, and the chief executive closes off none of the obvious alternatives. A company in a downturn can raise capital, defer other spending, sell a product line, slow its hiring or cut research by less than a third. No term shifts meaning between the premise and the conclusion, no sample is drawn, and nothing is treated as sufficient that is merely necessary. Her own standing is not in question either, since the objection is to the structure of the choice she offers.",
     "source": "original"
   },
   {
@@ -429,7 +429,7 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Inference",
     "difficulty": "hard",
-    "prompt": "Every applicant who was interviewed had passed the written test. Some applicants who passed the written test were not offered a position. Which statement must be true?",
+    "prompt": "Corran Analytics filled a number of positions this spring. Under the firm's hiring policy an applicant had to pass a written test before being scheduled for an interview, and the policy was applied without exception, so every applicant who was interviewed had passed the test. One of the specialties the test covered turned out to have no vacancy at all this year, and some applicants who passed the written test were not offered a position. Which of the following must be true on the basis of the statements above?",
     "options": [
       "Some applicants who were interviewed were not offered a position.",
       "Some applicants were not offered a position.",
@@ -438,7 +438,7 @@
       "Some applicants who passed the written test were interviewed."
     ],
     "correctIndex": 1,
-    "explanation": "The second premise states outright that some applicants passed the written test and were not offered a position, so it follows with certainty that some applicants were not offered a position. Nothing else here is guaranteed. The first premise makes interviewees a subset of test-passers, not the reverse, so it does not establish that every passer was interviewed, and it does not establish that a position required an interview. The claim that some interviewees were rejected does not follow either, because the rejected passers could all be people who were never interviewed. It is not even guaranteed that anyone was interviewed at all, so the claim that some test-passers reached an interview does not follow either.",
+    "explanation": "One premise states outright that some applicants passed the test and were not offered a position, so some applicants were not offered a position. Nothing else here is guaranteed. Interviewees are a subset of those who passed, not the reverse, so the passers need not all have been interviewed, and the rejected passers could be exactly the people who never reached an interview. The policy makes a pass a condition of an interview and says nothing about what an offer requires. It is not even guaranteed that anyone was interviewed.",
     "source": "original"
   },
   {
@@ -480,16 +480,16 @@
     "section": "verbal",
     "topic": "Reading Comprehension",
     "difficulty": "hard",
-    "prompt": "Passage: \"Why did mechanized industry take hold where and when it did? The standard answer points to invention. A newer answer points to prices. Machines substitute fuel and capital for human labor, so a machine is worth installing where labor is dear and fuel is cheap, and not worth installing where the ratio runs the other way. Historians working in this tradition have reconstructed wage and fuel series for a number of eighteenth-century regions, and they argue that the earliest adopters were the places with the most expensive labor relative to coal.\n\nThe argument makes a testable prediction rather than merely redescribing what happened. If prices drove adoption, then ranking regions by the ratio of wages to fuel prices should broadly predict the order in which they mechanized, and a machine available everywhere should arrive last where labor was cheapest. Supporters point to spinning and to mine pumping as cases that behave in just that way, and to the later spread of the same machines into lower-wage regions once improvements in design cut the fuel each one consumed.\n\nOpponents attack the prediction directly. They point to industries that mechanized in low-wage settings well before any wage advantage can be documented, which is the kind of case the account is not supposed to allow. They add that the explanation leaves the inventions themselves unaccounted for. A price signal tells a manufacturer that a machine would be profitable. It does not produce the machine, and the institutions that trained instrument makers and circulated experimental results have to carry that part of the story. Supporters reply that the two explanations answer different questions, one about invention and one about use, and are therefore not in competition at all.\" Which finding would most undermine the wage explanation?",
+    "prompt": "Passage: \"Scores on standardized intelligence tests rose steadily through most of the twentieth century in every country whose records run long enough to measure the change. The rise was large, roughly three points a decade on the usual scale, and it fell mainly on the parts of the test that ask for abstract classification and pattern completion rather than on vocabulary or arithmetic. Because publishers renormalize their scales every few decades, the increase was invisible to anyone comparing scores within a single edition, and it came to light only when old and new versions were given to the same people.\n\nThe finding is awkward for any account that treats a test score as a fixed measure of an underlying capacity. Taken at face value it implies that the average person of a century ago would score near the threshold once used to identify serious impairment, which the historical record of that period plainly does not support.\n\nThe leading explanation holds that what rose is not general capacity but familiarity with one particular way of handling a question. Schooling, clerical work and a scientific vocabulary all train people to treat a problem as an abstraction to be sorted by rule, rather than as a concrete situation to be described from experience, and the subtests that gained most are exactly the ones that reward that habit. On this account the tests measure something real and worth measuring, but something narrower and more historically contingent than the word intelligence suggests.\n\nThe account carries a prediction that can be checked. If the gains come from the spread of abstract habits of mind through schooling and office work, they should slow or halt in populations where that spread has already run its course, and several countries with long educational records have reported flat or falling scores since the 1990s.\" Which of the following findings would most undermine the leading explanation described in the passage?",
     "options": [
-      "A region with high wages that also happened to have unusually strong scientific institutions.",
-      "A high-wage region that adopted machinery only once its fuel prices had fallen.",
-      "A region with low wages and cheap fuel that mechanized earlier than high-wage regions did.",
-      "Evidence that some inventors were motivated by curiosity rather than profit.",
-      "Evidence that fuel prices varied considerably between neighboring regions."
+      "Gains of similar size in populations whose schooling and work changed little.",
+      "Publishers renormalized their scales more often than the passage reports.",
+      "Average scores in several long-schooled countries have stopped rising.",
+      "People of a century ago would score poorly on a test written today.",
+      "Gains were larger on abstract classification than on vocabulary subtests."
     ],
-    "correctIndex": 2,
-    "explanation": "The explanation predicts that mechanization follows high wages, so a low-wage region mechanizing first is a direct counterexample, and the passage itself flags adoption preceding wage advantage as the critics' line of attack. The other options are compatible with the wage account. A high-wage region that mechanized once fuel became cheaper fits the wage account, since falling fuel prices are what the account says makes the machine worth installing.",
+    "correctIndex": 0,
+    "explanation": "The explanation makes the gains a byproduct of schooling and office work, so an equal gain where neither changed leaves the proposed cause with nothing to do. The uneven pattern across subtests and the recent flattening are both offered in the passage as support for the explanation rather than against it. Poor scores for people of a century ago restate the puzzle the explanation was built to answer, and how often a scale is renormalized bears on when the rise was noticed, not on what caused it.",
     "source": "original"
   },
   {
@@ -497,16 +497,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Evaluate",
     "difficulty": "hard",
-    "prompt": "A publisher concludes that its new cover design increased sales, because titles with the new design outsold those with the old one last quarter. Which question would be most useful in evaluating that conclusion?",
+    "prompt": "Last year the publisher Vantry and Hale commissioned a new cover style for its paperback list and applied that style to eighteen of the sixty titles it reissued during the year. Across the fourth quarter those eighteen titles sold on average forty percent more copies than the reissued titles that kept the previous style. The publisher's marketing director has concluded that the new covers caused the difference, and she has proposed extending the style to the whole list before the spring catalog goes to print. Which of the following would be most useful to know in evaluating the marketing director's conclusion?",
     "options": [
-      "Which printing house produced the covers for the new titles?",
-      "How much did the publisher pay the designer for the new covers?",
-      "Do the new covers use colors that stand out on a crowded shelf?",
-      "Were the titles given the new design already expected to sell better?",
-      "Do readers actually say they notice cover designs when browsing shelves in a shop?"
+      "Which printing house produced the covers for the eighteen reissued titles.",
+      "How much the publisher paid the designer who developed the new cover style.",
+      "Whether the new covers use colors that stand out on a crowded shelf.",
+      "Whether the eighteen titles were already expected to outsell the other reissues.",
+      "Whether readers say they notice cover designs while browsing in a shop."
     ],
     "correctIndex": 3,
-    "explanation": "If stronger titles were the ones chosen for the redesign, the sales gap reflects the books rather than the covers, so this question targets the assignment mechanism that the conclusion depends on. Cost, stated attention, and printer identity leave the comparison untouched. Whether the colors stand out speaks to the merit of the design and not to why those particular titles outsold the others.",
+    "explanation": "The eighteen titles were selected rather than drawn at random, so the gap measures the covers only if the two groups were comparable to begin with. An answer either removes that rival explanation or supplies it whole. The designer's fee and the printing house have no bearing on why those titles sold. Standing out on a shelf and what readers say they notice speak to the merits of the design in general rather than to why these particular titles outsold the rest.",
     "source": "original"
   },
   {
@@ -820,16 +820,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Weaken",
     "difficulty": "medium",
-    "prompt": "Two years ago the publisher Lindhurst Press stopped printing its quarterly journal and moved it entirely online, and its subscriber numbers rose by a third. The board of the Ashwell Historical Review, a quarterly of similar length and price, has voted to do the same, reasoning that a print edition is an expense its subscribers do not require. The board expects an increase in subscriptions comparable to the one Lindhurst enjoyed, and it has already canceled its printing contract for next year. Which of the following, if true, most seriously weakens the board's expectation?",
+    "prompt": "A management consultancy studied the fifty independent manufacturers in the region that have stayed in business for more than forty years. Forty-one of the fifty fill the post of plant manager by promoting from within rather than by recruiting from outside, a far higher share than in the region's manufacturing sector as a whole. The consultancy's report concludes that promotion from within is what allows a manufacturer to survive over the long term, and it advises its own clients to stop recruiting plant managers externally. Which of the following, if true, most seriously weakens the consultancy's conclusion?",
     "options": [
-      "Lindhurst Press kept its printing equipment in service for several of the other titles on its list.",
-      "Printing costs across the publishing industry have risen considerably faster than postal delivery costs.",
-      "Most subscribers to the Ashwell Historical Review are retired, and a survey of them found that a majority read nothing on a screen.",
-      "The Ashwell Historical Review publishes articles that are on average longer than Lindhurst's articles.",
-      "Lindhurst Press advertised its new online edition in several widely circulated academic newsletters."
+      "The manufacturers that closed over those forty years promoted from within at a similar rate.",
+      "A plant manager recruited from outside needs several months to learn a plant's equipment.",
+      "The fifty manufacturers studied differ considerably in size and in what they produce.",
+      "At least one third of the fifty manufacturers have changed owners in the past forty years.",
+      "Promoting from within costs a manufacturer less in recruitment fees than hiring outside does."
     ],
-    "correctIndex": 2,
-    "explanation": "The board reasons by analogy from one publication to another, so the analogy fails if the two readerships differ in the respect that matters. A subscriber base that reads nothing on a screen is likely to shrink rather than grow when print disappears. Retained equipment, industry cost trends, article length and Lindhurst's advertising do not touch the comparison between the two readerships.",
+    "correctIndex": 0,
+    "explanation": "The study looked only at the firms that lasted, so a practice common among them is evidence of nothing until the firms that failed are counted too. If those closed firms promoted from within just as often, the practice fails to separate the survivors from anyone and the advice rests on the way the sample was chosen. A shorter learning period and lower recruitment fees are reasons to promote internally and so run with the conclusion rather than against it. Variety of size and product, and a change of owner, leave the missing comparison missing.",
     "source": "original"
   },
   {
@@ -1364,16 +1364,16 @@
     "section": "verbal",
     "topic": "Critical Reasoning: Weaken",
     "difficulty": "medium",
-    "prompt": "When the town of Keld closed its central square to cars, retail revenue in the square rose by twelve percent within two years. Keld's square is almost exactly the size of the central square in the town of Marrow, and the two squares hold a comparable number of shops of comparable kinds. The chamber of commerce of Marrow therefore argues that closing Marrow's square to cars would produce a comparable increase in retail revenue in that square.\n\nWhich of the following, if true, most seriously weakens the chamber of commerce's argument?",
+    "prompt": "Sales of electric delivery vans in the province have doubled in each of the last four years, and electric vans now make up eight percent of the delivery fleet on the road. The provincial haulage association projects that on the same trajectory they will make up more than half the fleet within four more years. On the strength of that projection it has asked the province to begin converting the roadside inspection stations to handle electric drivetrains, and to pay for the work by cutting the budget for diesel emissions testing. Which of the following, if true, most seriously weakens the association's projection?",
     "options": [
-      "Marrow's square contains several restaurants and cafes, whereas Keld's square contains only one, and evening trade is a larger share of Marrow's total.",
-      "Retail revenue across the surrounding region rose by three percent over the same two year period.",
-      "Keld introduced its ban in stages, beginning with weekends only.",
-      "The shops in Marrow's square employ more people in total than the shops in Keld's square do, and they keep longer hours through the week and on Sundays.",
-      "Nearly all shoppers reach Keld's square on foot from nearby streets, while most who shop in Marrow's square drive in from outside the town."
+      "The province's roadside inspection stations were last refitted more than twenty years ago, before the first electric van reached the road.",
+      "An electric van still costs more to buy than a diesel van of comparable capacity, and that gap has not narrowed in four years.",
+      "The vans sold so far serve short depot routes, and almost every such route already has one.",
+      "Several manufacturers have announced longer-range electric vans for delivery in two years.",
+      "The number of diesel vans registered in the province has fallen for three years running."
     ],
-    "correctIndex": 4,
-    "explanation": "The argument rests on an analogy, so it is weakened by a difference that matters to the outcome. Size and the number of shops are alike, but how shoppers arrive is not, and a ban on cars takes away the means of access for most of Marrow's customers while costing Keld's almost nothing. The regional three percent leaves most of Keld's twelve percent unaccounted for, and the other differences do not bear on access.",
+    "correctIndex": 2,
+    "explanation": "A projection that extends a trend has to assume the conditions that produced it will hold. If the doubling came from converting one narrow part of the fleet, and that part is now almost fully converted, the next doubling would have to come from routes the vehicles do not yet suit, so the trajectory breaks well short of half the fleet. Longer-range models and a shrinking diesel count both push the other way. Price is a standing condition through the four years of doubling rather than a change, and the age of the stations bears on the cost of the work, not on the forecast.",
     "source": "original"
   },
   {
