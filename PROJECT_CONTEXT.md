@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-04, at PR #23 / VERSION.txt `2.5.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-04, at PR #24 / VERSION.txt `2.6.0`.
 
 ## What this project is
 
@@ -134,6 +134,141 @@ own "Select an answer to continue". Real exam stems say "choose", changing them
 would make the practice less faithful, and faithfulness beats internal
 consistency here. Do not re-report it.
 
+## THE GRE, AND THE QUESTION KINDS IT REQUIRED (v2.6.0)
+
+The third exam, and the first one that could not be expressed with the engine as
+it stood. NMAT and GMAT are both "pick one of four or five"; the GRE is not, and
+the two types it adds are whole question types rather than variants.
+
+### An answer is no longer an option index
+
+`Question.kind` is `"single" | "multi" | "numeric"`, and **it is OPTIONAL, with
+absent meaning "single"**. That is why all 390 pre-existing questions and every
+attempt already sitting in a user's sessionStorage needed no migration.
+
+| kind | fields | why it exists |
+| --- | --- | --- |
+| `single` | `options`, `correctIndex` | everything NMAT and GMAT ask |
+| `multi` | `options`, `correctIndices`, `selectExactly` | **Sentence Equivalence**: six options, exactly two right, and both are required. Roughly a sixth of GRE Verbal. |
+| `numeric` | `correctValue`, `tolerance`, `answerPrefix/Suffix` | **Numeric Entry**: no options at all, you type the number. |
+
+**`lib/answers.ts` is the only place that knows how each kind is stored, marked
+and compared, and every comparison must go through it.** The trap it exists to
+close is that `answers[id] !== original` is correct for a number and silently
+WRONG for an array, because two arrays with the same contents are never
+`!==`-equal. The review allowance and the adaptive ladder both used that test.
+A null check has the mirror-image problem: an empty numeric string and an empty
+selection array are both truthy, so a section reads as fully answered before the
+candidate types anything.
+
+Numeric marking is deliberately lenient. Commas, currency signs and simple
+fractions parse, and questions carry a `tolerance`. Being marked wrong over a
+comma teaches nothing about mathematics.
+
+### THE BUG A BROWSER FOUND AND NOTHING ELSE COULD
+
+QuestionCard used to receive the current answer as a PROP and compute the new
+array itself. Two clicks inside one frame both read the same prop, because React
+has not re-rendered between them, so the second click derived its array from the
+pre-click answer and **overwrote the first**. Measured in headless Chrome:
+clicking two options of a Sentence Equivalence in one tick left exactly ONE
+selected, on the question type whose entire rule is that you select two.
+
+The card now sends the INTENT (`onToggle`) and `toggleOption` derives the answer
+inside the state updater, where `prev` is the freshest answers by definition.
+This is the third time this repo has had to move a computation into the updater
+for exactly this reason (see also `select` and the review allowance). **If you
+find yourself deriving new state from a prop in a click handler here, that is
+the bug.**
+
+Two harness bugs produced convincing false failures on the way, and both are
+worth knowing before writing another browser check: reading `aria-checked` in
+the same synchronous block as `.click()` reads the DOM before React commits, and
+dispatching the period key with `windowsVirtualKeyCode: 46` sends VK_DELETE, so
+"12.5" arrived as "125" and looked exactly like input filtering that does not
+exist. Use `Input.dispatchKeyEvent` with `type: "char"`.
+
+### The exam itself
+
+Structure is ETS's published structure for the shortened test that began
+22 September 2023. Three things are easy to get wrong from older material,
+because the 2023 revision changed all of them: there is **one** essay now rather
+than two, the sections are much shorter, and **geometry IS on the GRE**, which is
+the opposite of GMAT Focus and the easiest way to write a wrong bank.
+
+**Modeled as TWO sections where the real exam has four.** Each measure keeps its
+real totals (Verbal 27 questions / 41 minutes, Quantitative 27 / 47), but the
+real split into two separately timed sub-sections is not reproduced. Splitting
+the bank four ways would leave each section a pool barely larger than one
+sitting, which is the repeat problem the GMAT seed bank already demonstrates.
+
+**The GRE is far closer to a paper exam than the GMAT**, which is the part people
+assume wrongly because both are computer-delivered. Inside a section you move
+freely, skip, and change any answer until time ends, so `navigation` is `"free"`
+and `reviewEdit` is null. Its adaptivity is BETWEEN sections, not between
+questions, which is why `adaptive` is null on an adaptive test.
+
+**`scoreStep` is now declared by the exam.** GMAT Focus is 205-805 in tens; the
+GRE is 130-170 in ones. Inheriting the old hard-coded ten would have left a
+candidate five reachable scores across an entire measure.
+
+### `CalculatorKind` has three values now, not two
+
+`null` already meant something load-bearing: "the real exam gives you none
+either", which the setup page states as a rule. The GRE grants one in
+Quantitative Reasoning, so `null` there would print a flat lie on the page a
+candidate reads immediately before starting. Hence **`"not-simulated"`**.
+
+It is emphatically NOT `"basic-di"`. That models a TI-108: strictly left to
+right, so `2 + 3 x 4` is 20. **The GRE's calculator honors order of operations
+and gives 14**, has parentheses, has a Transfer Display key that types the result
+into a Numeric Entry box, and takes keyboard input. This repo has already shipped
+a calculator that borrowed three details from the wrong device. A subtly wrong
+calculator is worse than an absent one, because the candidate practices habits
+that break on test day.
+
+### `ExamModule.notes`, and the gap it closes
+
+The setup page's "what to expect" list is generated from `rules` so the copy
+cannot claim behavior the engine lacks. That design had one hole: a fact that is
+true of the real exam and deliberately NOT implemented has no rule to generate
+from, so it goes silently unsaid. `notes` is appended verbatim to the generated
+list, and the GRE uses it for the missing 30-minute essay and the missing
+section-level adaptivity.
+
+**Use it only for differences between the real exam and this app.** Anything the
+engine does belongs in `rules`, where it cannot drift. An escape hatch used for
+ordinary copy becomes the hand-written blurb the generated list replaced.
+
+### Audit changes, which are the audit LEARNING the new kinds
+
+- Multi and numeric questions are excluded from the slot, longest-option and
+  middle-two samples, where those statistics are undefined rather than unusual.
+  Counting `undefined` as slot 0 would report a bias that does not exist.
+- **The slot denominator is the count of questions that HAVE a slot.** GRE Verbal
+  is single-choice for only part of its file, so measuring five slots against the
+  file total made an even spread look under-used and would have failed a bank
+  with no bias at all. Files where the two differ print `n=NN*`.
+- **Quantitative Comparison joins Data Sufficiency as a fixed-option topic**,
+  exempt from slot re-balancing AND from the longest-option heuristic. Its four
+  options are memorized and identical on every question, so "the relationship
+  cannot be determined from the information given" is always the longest string
+  and being the answer proves nothing about guessability.
+- "every option is keyed" applies only to FIXED-COUNT multi-select. On the GRE's
+  open select-all, all three statements being true is a real case, and forbidding
+  it would itself be exploitable knowledge.
+
+### Known gaps, recorded rather than papered over
+
+- No Analytical Writing. An essay cannot be auto-scored, and a writing box that
+  awards a number nobody stands behind is worse than an honest absence.
+- No section-level adaptivity, and each measure is one section rather than two.
+- No calculator in Quantitative Reasoning (see above).
+- **Text Completion is single-blank only.** The real exam has one-, two- and
+  three-blank variants, where each blank has its own three options. Rendering
+  that needs a per-blank control the card does not have. One-blank items with
+  five options are entirely real, so what ships is faithful as far as it goes.
+
 ## Copyright rule (critical, applies to ALL future content work)
 
 Three reference books live at **`internal docs/nmat test files/`, inside the repo working tree** (with markdown conversions in its `md/` subfolder, plus the user's own GMAT notes as .txt files, and a generated answer-key PDF one level up). An earlier version of this document placed them at `C:\Users\elija\Downloads\nmat test files\`; they moved, and nobody updated the path or added an ignore rule.
@@ -256,6 +391,21 @@ document for two releases and sent readers looking for files that were gone.
   before this PR and passes after, at 268 strings against 274 (the drop is the
   deleted bands). Rhythm, pull-quotes and triads stay an author-and-reviewer
   judgment, in the same bucket as Rule 3.7 and dictionary membership.
+
+- **PR #24** (v2.6.0) — the GRE General Test, and the engine work it forced. An
+  answer stopped being an option index: `Question.kind` adds multi-select and
+  numeric entry, because GRE Sentence Equivalence requires exactly two of six and
+  Numeric Entry has no options at all. `lib/answers.ts` owns every comparison,
+  since `!==` is silently wrong for an array. 192 original questions across two
+  sections, written by eight authors one file each. `CalculatorKind` gained
+  "not-simulated", `ScoringModel` gained `scoreStep`, and `ExamModule` gained
+  `notes`. See "THE GRE, AND THE QUESTION KINDS IT REQUIRED" above.
+
+  **A real browser found a bug nothing else could**, and it is the third
+  instance of one pattern in this repo: two multi-select clicks in one frame
+  collapsed to one, because the card computed the new answer from a PROP that
+  React had not re-rendered yet. Deriving new state from a prop inside a click
+  handler is the bug; the state updater's `prev` is the only fresh source.
 
 - **PR #22** (v2.4.0) — every user-facing description rewritten to ASD-STE100,
   at the user's direction, because the old copy read as machine-written
@@ -911,7 +1061,7 @@ that appears not to have applied is usually this.
 
 ---
 
-**Current state: `main` is at v2.5.0, and is the only branch.**
+**Current state: `main` is at v2.6.0, and is the only branch.**
 
 "Clean" is five commands rather than a claim, and all five pass on `main`:
 
