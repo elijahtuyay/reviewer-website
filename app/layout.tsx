@@ -4,6 +4,7 @@ import ThemeInitScript from "@/components/ThemeInitScript";
 import SiteHeader from "@/components/SiteHeader";
 import PageTransition from "@/components/PageTransition";
 import SiteFooter from "@/components/SiteFooter";
+import { AVAILABLE_EXAMS } from "@/lib/exams/registry";
 import { SITE_NAME, SITE_TAGLINE } from "@/lib/site";
 import { SITE_URL } from "@/lib/site-url";
 import "./globals.css";
@@ -19,6 +20,17 @@ const geistMono = Geist_Mono({
 });
 
 /**
+ * "the NMAT and the GMAT". Read from the registry rather than written out: this
+ * description named only NMAT for two releases after the GMAT shipped, which is
+ * the same drift the rest of the app avoids by generating its copy.
+ */
+const EXAM_NAMES = AVAILABLE_EXAMS.map((exam) => `the ${exam.shortLabel}`).join(" and ");
+
+/** One sentence per claim, per ASD-STE100. Also the OG and Twitter description. */
+const SITE_DESCRIPTION =
+  `Free practice exams for ${EXAM_NAMES}. Each section has its own time limit. Every answer has a written explanation.`;
+
+/**
  * `metadataBase` is what turns the relative OG/canonical URLs below into
  * absolute ones. Without it Next warns at build time and social cards resolve
  * against nothing. The title template lets each exam page set only its own
@@ -31,8 +43,7 @@ export const metadata: Metadata = {
     default: `${SITE_NAME} — ${SITE_TAGLINE}`,
     template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Free timed practice exams for NMAT by GMAC. Three independently-timed sections, a fresh question set every attempt, and a written explanation for every answer.",
+  description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   openGraph: {
     type: "website",
@@ -42,14 +53,12 @@ export const metadata: Metadata = {
     // layout made every quiz page declare itself a duplicate of the home page.
     // app/page.tsx sets both for "/" itself.
     title: `${SITE_NAME} — ${SITE_TAGLINE}`,
-    description:
-      "Free timed practice exams for NMAT by GMAC, with a written explanation for every answer.",
+    description: SITE_DESCRIPTION,
   },
   twitter: {
     card: "summary",
     title: `${SITE_NAME} — ${SITE_TAGLINE}`,
-    description:
-      "Free timed practice exams for NMAT by GMAC, with a written explanation for every answer.",
+    description: SITE_DESCRIPTION,
   },
 };
 
