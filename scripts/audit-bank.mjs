@@ -416,6 +416,48 @@ for (const c of clustered) {
   );
 }
 
+/* --------------------------------------- fixed option sets are FIXED ------ */
+
+/*
+ * A memorized option set must be identical on every question that uses it.
+ *
+ * Data Sufficiency and Quantitative Comparison are exempt from re-slotting
+ * precisely BECAUSE their options are the same five (or four) strings in the
+ * same order every time, which is what a real candidate learns to recognize
+ * without reading. That exemption is only safe if the claim is true.
+ *
+ * It was not. A second authoring pass wrote the Data Sufficiency options with
+ * different capitalization from the existing ones ("BOTH statements TOGETHER"
+ * against "BOTH statements together"), giving one bank two variants of a set
+ * whose whole point is that it never varies. The authoring agent noticed and
+ * said so, which is the only reason it was caught before merge.
+ */
+for (const bank of banks) {
+  for (const topic of SLOT_EXEMPT_TOPICS) {
+    /*
+     * PER BANK, not across all of them. NMAT and GMAT both have Data
+     * Sufficiency and word the five statements slightly differently, which is
+     * each exam's own business: a candidate memorizes the set for the exam they
+     * are sitting. What must never happen is two variants inside ONE bank,
+     * which is what a second authoring pass produced here.
+     */
+    const variants = new Map();
+    for (const q of bank.questions) {
+      if (q.topic !== topic) continue;
+      const key = JSON.stringify(optionsOf(q));
+      if (!variants.has(key)) variants.set(key, []);
+      variants.get(key).push(q.id);
+    }
+    if (variants.size > 1) {
+      const shapes = [...variants.values()].map((ids) => `${ids.length} starting ${ids[0]}`);
+      failures.push(
+        `${bank.name} / ${topic}: ${variants.size} different option sets (${shapes.join(", ")}) — ` +
+          `this type's options are memorized and must be identical within a bank`
+      );
+    }
+  }
+}
+
 /* ------------------------------------------ multi-select key positions ---- */
 
 /*
@@ -535,7 +577,14 @@ const BRITISH = [
   [/\b\w*(?:lab|col|fav|neighb|behavi|hono|hum|rum|vig|end|harb)our\w*\b/i, "-our: use -or"],
   [/\bwhilst\b/i, "whilst: use while"],
   [/\bdefence\b/i, "defence: use defense"],
-  [/\banalys(?:e|ed|es|ing)\b/i, "analyse: use analyze"],
+  /*
+   * NOT "analyses". It is the plural of "analysis" and is correct American
+   * English, so flagging it fails perfectly good prose: "later analyses found
+   * some heterogeneity". Only the verb forms are British, and "analyses" as a
+   * British third-person verb is rare enough in this register that catching it
+   * is not worth failing every plural noun.
+   */
+  [/\banalys(?:e|ed|ing)\b/i, "analyse: use analyze"],
   [/\bprogramme\b/i, "programme: use program"],
   [/\bgrey\b/i, "grey: use gray"],
   [/\bjudgement\b/i, "judgement: use judgment"],
