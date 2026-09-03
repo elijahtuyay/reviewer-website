@@ -752,5 +752,762 @@
     "tolerance": 0.01,
     "explanation": "From $\\pi r^2 = 50$, divide first to get $r^2 = \\frac{50}{\\pi} \\approx 15.92$, then take the square root for $r \\approx 3.99$ centimeters. The square root must come last, after the division by $\\pi$. Dividing 50 by $2\\pi$ instead gives about 7.96, which applies the circumference formula to an area.",
     "source": "original"
+  },
+  {
+    "id": "grq-049",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "easy",
+    "prompt": "Quantity A: $\\sqrt{4} + \\sqrt{9}$\\nQuantity B: $\\sqrt{25}$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 2,
+    "explanation": "Each root is taken on its own, so Quantity A is $2 + 3 = 5$, and Quantity B is $5$ as well. The two quantities are equal. The trap is to merge the radicals into $\\sqrt{4 + 9} = \\sqrt{13}$, which is about $3.6$ and would make Quantity B look greater, but a sum of square roots is not the square root of the sum.",
+    "source": "original"
+  },
+  {
+    "id": "grq-050",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "$|m| = 8$\\nQuantity A: $m$\\nQuantity B: $-8$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 3,
+    "explanation": "An absolute value equation leaves the sign of the variable open, so $m$ is either $8$ or $-8$. The first value makes Quantity A greater and the second makes the two quantities equal, so the comparison changes with the case and cannot be settled. Reading $|m| = 8$ as $m = 8$ produces a confident answer that only covers half of the allowed values.",
+    "source": "original"
+  },
+  {
+    "id": "grq-051",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "$0 < r < \\frac{1}{3}$\\nQuantity A: $\\frac{1}{r}$\\nQuantity B: $r + 2$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 0,
+    "explanation": "Because $r$ is a positive fraction below $\\frac{1}{3}$, its reciprocal is greater than 3, while $r + 2$ stays below $\\frac{7}{3}$, which is less than $2.34$. Quantity A is therefore greater for every allowed value, and $r = 0.2$ illustrates it with $5$ against $2.2$. The trap is to treat $r$ as though it could be a large number, since adding 2 feels like the bigger operation, but shrinking $r$ only pushes $\\frac{1}{r}$ higher.",
+    "source": "original"
+  },
+  {
+    "id": "grq-052",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "hard",
+    "prompt": "$y$ is a number and $2 < y < 4$.\\nQuantity A: $y^2$\\nQuantity B: $9$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 3,
+    "explanation": "Nothing says $y$ is an integer, so it ranges over every value strictly between 2 and 4. Taking $y = 2.5$ gives $6.25$, which is less than 9, and taking $y = 3.5$ gives $12.25$, which is greater, so the relationship cannot be determined. A candidate who assumes the only value available is the integer 3 gets $y^2 = 9$ and calls the quantities equal.",
+    "source": "original"
+  },
+  {
+    "id": "grq-053",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "Points $P$, $Q$, and $R$ lie on a line in that order, in a figure that is not drawn to scale. $PQ = 3x$, $QR = x + 8$, and $PR = 20$.\\nQuantity A: $PQ$\\nQuantity B: $QR$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 1,
+    "explanation": "The two shorter segments make up the whole, so $3x + (x + 8) = 20$, which gives $4x = 12$ and $x = 3$. Then $PQ = 9$ and $QR = 11$, so Quantity B is greater. Because the figure is not drawn to scale, a segment that is printed longer may be shorter, and judging by the picture rather than solving is what this setup punishes. Stopping at $x = 3$ and comparing 3 with 11 compares the variable rather than the segment it defines.",
+    "source": "original"
+  },
+  {
+    "id": "grq-054",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "hard",
+    "prompt": "In triangle $ABC$, the measure of angle $A$ is 59 degrees and the measure of angle $B$ is 61 degrees. No figure is provided.\\nQuantity A: the length of side $BC$\\nQuantity B: the length of side $AC$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 1,
+    "explanation": "In any triangle the longer side lies opposite the larger angle. Side $BC$ is opposite angle $A$ and side $AC$ is opposite angle $B$, and 61 degrees exceeds 59 degrees, so $AC$ is longer and Quantity B is greater. The comparison holds no matter how large the triangle is, so the missing side lengths do not make it undetermined. Two angles this close look identical in any sketch, which is why the rule has to be applied rather than the shape estimated.",
+    "source": "original"
+  },
+  {
+    "id": "grq-055",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "Quantity A: 15 percent of 80\\nQuantity B: 80 percent of 15",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 2,
+    "explanation": "Both quantities are the product $0.15 \\times 80 = 12$, written in a different order, so they are equal. Taking a percent is multiplication, and multiplication does not care which factor comes first. The trap is the feeling that 80 percent is a large share and 15 percent a small one, which invites the answer that Quantity B is greater without noticing that the bases are swapped too.",
+    "source": "original"
+  },
+  {
+    "id": "grq-056",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "hard",
+    "prompt": "List $L$ consists of the numbers 2, 3, 4, 5, and 46.\\nQuantity A: the mean of List $L$\\nQuantity B: the median of List $L$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 0,
+    "explanation": "The five values sum to 60, so the mean is 12, while the middle value of the ordered list is 4, so the median is 4. Quantity A is therefore greater. A single very large value drags the mean far above the median but moves the median not at all, since the median depends only on position. Expecting the two measures of center to agree is what makes this comparison look undetermined when it is fully fixed.",
+    "source": "original"
+  },
+  {
+    "id": "grq-057",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "easy",
+    "prompt": "The function $f$ is defined by $f(x) = 3x^2 - 2x$. What is the value of $f(-2)$?",
+    "options": [
+      "$-16$",
+      "$-8$",
+      "$8$",
+      "$14$",
+      "$16$"
+    ],
+    "correctIndex": 4,
+    "explanation": "Substituting gives $3(-2)^2 - 2(-2) = 3(4) + 4 = 16$. Squaring before applying the coefficient matters: reading the first term as $3(-2^2) = -12$ gives $-8$, and compounding that with a sign slip on the second term gives $-16$. Subtracting instead of adding the second term yields 8, and adding only 2 rather than 4 yields 14.",
+    "source": "original"
+  },
+  {
+    "id": "grq-058",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "easy",
+    "prompt": "The annual fee for a service rose from 45 dollars to 54 dollars. By what percent did the fee increase?",
+    "options": [
+      "9%",
+      "20%",
+      "16.7%",
+      "83.3%",
+      "120%"
+    ],
+    "correctIndex": 1,
+    "explanation": "The rise is $54 - 45 = 9$ dollars, and a percent increase compares that rise with the original amount: $\\frac{9}{45} = 0.20$, or 20 percent. Reporting 9 percent treats the raw dollar increase as a percent. Dividing the rise by the new fee gives about 16.7 percent, and dividing the new fee by the old one gives 120 percent, which is the ratio of the two fees rather than the growth between them.",
+    "source": "original"
+  },
+  {
+    "id": "grq-059",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "Working at the same constant rate, 6 workers can build a wall in 10 days. How many days would 4 workers, working at that same rate, need to build the same wall?",
+    "options": [
+      "6.7",
+      "8",
+      "15",
+      "10",
+      "12"
+    ],
+    "correctIndex": 2,
+    "explanation": "The job takes $6 \\times 10 = 60$ worker-days, so 4 workers need $\\frac{60}{4} = 15$ days. Fewer workers must take longer, so any answer at or below 10 days contradicts the setup. Scaling in the wrong direction with $10 \\times \\frac{4}{6}$ gives about 6.7 days, and subtracting the two missing workers from the 10 days gives 8.",
+    "source": "original"
+  },
+  {
+    "id": "grq-060",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "A 40-liter mixture is 30 percent juice and the rest water. How many liters of water must be added so that the new mixture is 24 percent juice?",
+    "options": [
+      "2.4",
+      "6",
+      "9.6",
+      "10",
+      "12"
+    ],
+    "correctIndex": 3,
+    "explanation": "The juice stays fixed at $0.30 \\times 40 = 12$ liters while only the total grows, so $\\frac{12}{40 + w} = 0.24$ gives $40 + w = 50$ and $w = 10$ liters. Computing the target amount of juice as $0.24 \\times 40 = 9.6$ liters and subtracting from 12 gives 2.4, which wrongly holds the total volume at 40 while pouring water in. The value 12 is the liters of juice already present, not the water to add.",
+    "source": "original"
+  },
+  {
+    "id": "grq-061",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "In a sequence, the first term is 7 and each term after the first is 5 greater than the term before it. What is the 20th term of the sequence?",
+    "options": [
+      "$102$",
+      "$97$",
+      "$100$",
+      "$105$",
+      "$107$"
+    ],
+    "correctIndex": 0,
+    "explanation": "Reaching the 20th term takes 19 steps of 5 from the first term, so the value is $7 + 19(5) = 102$. Counting 20 steps instead of 19 gives 107, the classic off-by-one in an arithmetic sequence, and counting 18 steps gives 97. Multiplying $20 \\times 5$ and adding 5 gives 105, which drops the starting value entirely.",
+    "source": "original"
+  },
+  {
+    "id": "grq-062",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "How many integers $x$ satisfy the inequality $|2x - 7| < 5$?",
+    "options": [
+      "$4$",
+      "$5$",
+      "$6$",
+      "$9$",
+      "$11$"
+    ],
+    "correctIndex": 0,
+    "explanation": "The inequality unfolds into $-5 < 2x - 7 < 5$, then $2 < 2x < 12$, then $1 < x < 6$, so the integers are 2, 3, 4, and 5, which is 4 of them. Because both inequalities are strict, 1 and 6 are excluded; including one endpoint gives 5 and including both gives 6. Reading the expression as $|x - 7| < 5$ or dropping the factor of 2 widens the interval and gives a count of 9 or 11.",
+    "source": "original"
+  },
+  {
+    "id": "grq-063",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "hard",
+    "prompt": "If $|x - 3| = |2x + 1|$, what is the sum of all possible values of $x$?",
+    "options": [
+      "$-4$",
+      "$\\frac{2}{3}$",
+      "$-\\frac{10}{3}$",
+      "$-\\frac{14}{3}$",
+      "$\\frac{10}{3}$"
+    ],
+    "correctIndex": 2,
+    "explanation": "Two absolute values are equal when the expressions inside are equal or opposite. Setting $x - 3 = 2x + 1$ gives $x = -4$, and setting $x - 3 = -(2x + 1)$ gives $3x = 2$, so $x = \\frac{2}{3}$. Both satisfy the original equation, and their sum is $-4 + \\frac{2}{3} = -\\frac{10}{3}$. Solving only the first case gives $-4$ and solving only the second gives $\\frac{2}{3}$, and each reports a single root rather than the sum the question asks for.",
+    "source": "original"
+  },
+  {
+    "id": "grq-064",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "hard",
+    "prompt": "The price of a lamp was increased by 25 percent, and the increased price was then decreased by 20 percent. The final price is 96 dollars. What was the price of the lamp before the increase, in dollars?",
+    "options": [
+      "$76.8$",
+      "$96$",
+      "$80$",
+      "$100$",
+      "$120$"
+    ],
+    "correctIndex": 1,
+    "explanation": "Applying the two changes as multipliers gives $1.25 \\times 0.80 = 1.00$, so the final price equals the starting price and the lamp cost 96 dollars to begin with. Applying only the 25 percent step to 96 gives 120, and applying only the 20 percent step gives 76.8, so each of those answers uses one change and drops the other. Dividing 96 by $1.20$ gives 80, which subtracts the wrong percent, and 100 is the round number a candidate reaches by assuming the two percents leave a small net gain.",
+    "source": "original"
+  },
+  {
+    "id": "grq-065",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "hard",
+    "prompt": "A bacteria culture doubles in size every 3 hours. After 15 hours the culture contains 3,200 cells. How many cells did the culture contain at the start?",
+    "options": [
+      "$200$",
+      "$320$",
+      "$640$",
+      "$100$",
+      "$1{,}600$"
+    ],
+    "correctIndex": 3,
+    "explanation": "Fifteen hours hold $\\frac{15}{3} = 5$ doubling periods, so the culture grew by a factor of $2^5 = 32$, and the starting count is $\\frac{3200}{32} = 100$ cells. Counting 4 doubling periods instead of 5 gives 200. Dividing by 5 rather than by $2^5$ gives 640, dividing by 10 gives 320, and undoing only one doubling gives 1,600.",
+    "source": "original"
+  },
+  {
+    "id": "grq-066",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "hard",
+    "prompt": "Rosa can paint a room alone in 4 hours. Working together with Dan, she can paint the same room in 2.4 hours. How many hours would Dan need to paint the room alone?",
+    "options": [
+      "$1.6$",
+      "$2.4$",
+      "$3.2$",
+      "$4$",
+      "$6$"
+    ],
+    "correctIndex": 4,
+    "explanation": "Rates add, so Dan's hourly rate is $\\frac{1}{2.4} - \\frac{1}{4} = \\frac{5}{12} - \\frac{3}{12} = \\frac{1}{6}$ of the room per hour, and the reciprocal gives 6 hours alone. Subtracting the times rather than the rates gives $4 - 2.4 = 1.6$ hours, which would make Dan faster than the pair working together and is impossible. Dan must be slower than Rosa here, because the pair saves her only $1.6$ hours.",
+    "source": "original"
+  },
+  {
+    "id": "grq-067",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "hard",
+    "prompt": "If $-3 \\leq x \\leq 2$ and $1 \\leq y \\leq 4$, what is the greatest possible value of $x^2 - y$?",
+    "options": [
+      "$0$",
+      "$3$",
+      "$5$",
+      "$8$",
+      "$13$"
+    ],
+    "correctIndex": 3,
+    "explanation": "The expression is largest when $x^2$ is largest and $y$ is smallest. The square is maximized at the endpoint farthest from zero, $x = -3$, giving $x^2 = 9$, and the smallest allowed $y$ is 1, so the greatest value is $9 - 1 = 8$. Taking the largest $x$ rather than the largest square gives $4 - 1 = 3$, and pairing $x = 2$ with $y = 4$ gives 0. Treating $-y$ as though $y = -4$ were allowed gives 13, but $y$ is never negative here.",
+    "source": "original"
+  },
+  {
+    "id": "grq-068",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "easy",
+    "kind": "numeric",
+    "prompt": "A jacket originally priced at 80 dollars was later sold for 52 dollars. By what percent was the original price reduced?",
+    "correctValue": 35,
+    "answerSuffix": "%",
+    "explanation": "The reduction is $80 - 52 = 28$ dollars, and a percent reduction compares that with the original price: $\\frac{28}{80} = 0.35$, or 35 percent. Dividing by the sale price of 52 instead gives about 54 percent, which uses the wrong base. The sale price itself is 65 percent of the original, so reporting 65 answers a different question.",
+    "source": "original"
+  },
+  {
+    "id": "grq-069",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "medium",
+    "kind": "numeric",
+    "prompt": "In a sequence, $a_1 = 4$, and each term after the first is given by $a_{n+1} = 2a_n - 3$. What is the value of $a_5$?",
+    "correctValue": 19,
+    "explanation": "Applying the rule one step at a time gives $a_2 = 2(4) - 3 = 5$, then $a_3 = 7$, then $a_4 = 11$, then $a_5 = 19$. Running the rule five times instead of four reaches 35 and answers for the sixth term, since only four steps separate the first term from the fifth. Doubling first and subtracting 3 once at the end gives 61 and applies the rule incorrectly.",
+    "source": "original"
+  },
+  {
+    "id": "grq-070",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "medium",
+    "kind": "numeric",
+    "prompt": "In the $xy$-plane, what is the slope of the line that passes through the points $(-3, 7)$ and $(5, -1)$?",
+    "correctValue": -1,
+    "explanation": "Slope is the change in $y$ over the change in $x$: $\\frac{-1 - 7}{5 - (-3)} = \\frac{-8}{8} = -1$. The line falls from left to right, so the slope has to be negative, and any positive answer contradicts the two points. Mishandling the double negative in the denominator turns it into $5 - 3 = 2$ and gives a slope of $-4$.",
+    "source": "original"
+  },
+  {
+    "id": "grq-071",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "medium",
+    "kind": "numeric",
+    "prompt": "A right circular cylinder has a radius of 3 centimeters and a height of 7 centimeters. What is the volume of the cylinder, in cubic centimeters, rounded to the nearest tenth?",
+    "correctValue": 197.9,
+    "tolerance": 0.1,
+    "explanation": "The volume of a cylinder is the area of the circular base times the height: $\\pi r^2 h = \\pi (9)(7) = 63\\pi$, which is about $197.92$ and rounds to $197.9$ cubic centimeters. Multiplying the radius by the height without squaring the radius gives $21\\pi$, or about $66.0$, which is the volume of a much thinner solid. Using the diameter of 6 in place of the radius multiplies the true volume by 4.",
+    "source": "original"
+  },
+  {
+    "id": "grq-072",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "hard",
+    "kind": "numeric",
+    "prompt": "Of the 120 students in a program, 70 study French, 55 study German, and 20 study neither language. How many of the students study both French and German?",
+    "correctValue": 25,
+    "explanation": "Since 20 students study neither language, $120 - 20 = 100$ study at least one. The two groups together are counted as $70 + 55 = 125$, and the excess over 100 is exactly the students counted twice, so 25 study both. Subtracting the two counts from 120 without removing the 20 who study neither gives a negative figure, and answering 5 comes from comparing 125 with 120 rather than with 100.",
+    "source": "original"
+  },
+  {
+    "id": "grq-073",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "easy",
+    "prompt": "$n$ is the remainder when $47$ is divided by $5$.\nQuantity A: $n$\nQuantity B: $3$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 1,
+    "explanation": "Since $47 = 9 \\times 5 + 2$, the remainder is $2$, so Quantity A equals $2$ and Quantity B is larger. A candidate who divides and reads the quotient digit, or who rounds $47 \\div 5$ to $9.4$ and keeps the $4$, gets a different value; the remainder is what is left over after the largest multiple of $5$ below $47$ is subtracted.",
+    "source": "original"
+  },
+  {
+    "id": "grq-074",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "Line $\\ell$ passes through the points $(-2, 1)$ and $(2, 9)$.\nQuantity A: the slope of line $\\ell$\nQuantity B: the slope of the line $2y = 4x + 7$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 2,
+    "explanation": "The slope of line $\\ell$ is $\\frac{9 - 1}{2 - (-2)} = \\frac{8}{4} = 2$. Dividing $2y = 4x + 7$ by $2$ gives $y = 2x + \\frac{7}{2}$, so its slope is also $2$; the constant $\\frac{7}{2}$ shifts the line but does not tilt it. Reading the coefficient $4$ straight off the unsimplified equation is the trap, and it makes the second slope look twice as large.",
+    "source": "original"
+  },
+  {
+    "id": "grq-075",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "In a group of 60 students, 35 study French, 40 study German, and every student studies at least one of the two languages.\nQuantity A: the number of students who study both languages\nQuantity B: $12$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 0,
+    "explanation": "Because nobody studies neither language, $35 + 40 - \\text{both} = 60$, so the overlap is $15$, which is greater than $12$. The count $35 + 40 = 75$ exceeds the group size by exactly the number of students counted twice. A reader who treats the two subject counts as disjoint gets a total larger than the group and no overlap at all.",
+    "source": "original"
+  },
+  {
+    "id": "grq-076",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "hard",
+    "prompt": "$x$ and $y$ are positive integers, $x^2 - y^2 = 21$, and $x + y = 7$.\nQuantity A: $x$\nQuantity B: $5$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 2,
+    "explanation": "Factoring gives $x^2 - y^2 = (x + y)(x - y) = 21$, and since $x + y = 7$, it follows that $x - y = 3$. Adding the two linear equations gives $2x = 10$, so $x = 5$ and the quantities are equal. Trying to solve the quadratic directly, or assuming that two equations in two unknowns with a squared term must give two answers, wastes time and can suggest the relationship is undetermined.",
+    "source": "original"
+  },
+  {
+    "id": "grq-077",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "hard",
+    "prompt": "$|x - 3| = 7$\nQuantity A: $x$\nQuantity B: $10$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 3,
+    "explanation": "An absolute value equation has two solutions here: $x - 3 = 7$ gives $x = 10$, and $x - 3 = -7$ gives $x = -4$. One solution makes the quantities equal and the other makes Quantity B far greater, so no single relationship holds. Solving only the positive case is the common slip, and it produces a confident but incorrect claim that the quantities are equal.",
+    "source": "original"
+  },
+  {
+    "id": "grq-078",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "medium",
+    "prompt": "List $L$ consists of 5 different positive integers, and the median of $L$ is 12.\nQuantity A: the mean of $L$\nQuantity B: $12$",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 3,
+    "explanation": "The median fixes only the middle value. The list $1, 2, 12, 13, 14$ has a mean of $8.4$, which is below $12$, while $10, 11, 12, 100, 200$ has a mean far above $12$. A symmetric example such as $10, 11, 12, 13, 14$ makes the two look equal, but one example never settles a comparison.",
+    "source": "original"
+  },
+  {
+    "id": "grq-079",
+    "section": "quantitative",
+    "topic": "Quantitative Comparison",
+    "difficulty": "hard",
+    "prompt": "Quantity A: the number of integers from 1 to 100, inclusive, that are divisible by 4\nQuantity B: the number of integers from 1 to 100, inclusive, that are divisible by 6",
+    "options": [
+      "Quantity A is greater.",
+      "Quantity B is greater.",
+      "The two quantities are equal.",
+      "The relationship cannot be determined from the information given."
+    ],
+    "correctIndex": 0,
+    "explanation": "The multiples of $4$ up to $100$ run from $4$ to $100$, and there are $\\frac{100}{4} = 25$ of them. The multiples of $6$ stop at $96$, giving $16$ of them, since $\\frac{100}{6}$ is between $16$ and $17$ and only the whole multiples count. Dividing $100$ by $6$ and rounding up to $17$ is the usual error, and it still leaves Quantity A greater.",
+    "source": "original"
+  },
+  {
+    "id": "grq-080",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "easy",
+    "prompt": "A class of 30 students reported the number of siblings each student has.\nNumber of siblings: Number of students\n0: 5\n1: 12\n2: 9\n3: 4\n\nHow many students in the class have fewer than 2 siblings?",
+    "options": [
+      "17",
+      "21",
+      "25",
+      "26",
+      "30"
+    ],
+    "correctIndex": 0,
+    "explanation": "Fewer than 2 siblings means 0 siblings or 1 sibling, which is $5 + 12 = 17$ students. Including the row for 2 siblings gives $26$, and that is the misreading the phrase invites. Adding the 1 and 2 rows alone gives $21$, and subtracting only the 0 row from the class gives the count of students with at least one sibling instead.",
+    "source": "original"
+  },
+  {
+    "id": "grq-081",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "medium",
+    "prompt": "A city divided its annual budget of 240 million dollars among five categories.\nCategory: Percent of budget\nHousing: 28\nTransit: 22\nParks: 9\nEducation: 31\nOther: 10\n\nThe amount budgeted for Education exceeds the amount budgeted for Transit by how many million dollars?",
+    "options": [
+      "9",
+      "21.6",
+      "52.8",
+      "74.4",
+      "127.2"
+    ],
+    "correctIndex": 1,
+    "explanation": "Education and Transit differ by $31 - 22 = 9$ percentage points, and $9$ percent of $240$ is $21.6$ million dollars. Stopping at the $9$ reports a percentage difference as if it were an amount of money. The two individual allocations, $74.4$ million and $52.8$ million, are each a partial step, and their sum is the total spent on the two categories rather than the gap between them.",
+    "source": "original"
+  },
+  {
+    "id": "grq-082",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "medium",
+    "prompt": "A transit authority recorded the average one-way commute time, in minutes, in five districts in two different years.\nDistrict: 2019: 2024\nNorthgate: 80: 66\nBriarwood: 25: 20\nCastleton: 52: 39\nDunmore: 30: 27\nEllerslie: 45: 36\n\nWhich district had the greatest percent decrease in average commute time from 2019 to 2024?",
+    "options": [
+      "Northgate",
+      "Briarwood",
+      "Castleton",
+      "Dunmore",
+      "Ellerslie"
+    ],
+    "correctIndex": 2,
+    "explanation": "A percent decrease is the drop divided by the starting value. The drops are $\\frac{14}{80} = 17.5$ percent, $\\frac{5}{25} = 20$ percent, $\\frac{13}{52} = 25$ percent, $\\frac{3}{30} = 10$ percent, and $\\frac{9}{45} = 20$ percent. Northgate fell by the largest number of minutes, $14$, which is the trap, but it started from the highest base and so fell by the smaller share.",
+    "source": "original"
+  },
+  {
+    "id": "grq-083",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "medium",
+    "prompt": "A hiker recorded the total distance walked, in kilometers, from the start of a trip through the end of each day.\nDay: Cumulative distance\nDay 1: 12\nDay 2: 27\nDay 3: 39\nDay 4: 58\nDay 5: 70\n\nOn which day did the hiker walk the greatest distance?",
+    "options": [
+      "Day 1",
+      "Day 2",
+      "Day 3",
+      "Day 4",
+      "Day 5"
+    ],
+    "correctIndex": 3,
+    "explanation": "The figures are running totals, so each day's own distance is the difference between consecutive entries: $12$, $15$, $12$, $19$, and $12$ kilometers. The largest single day is the fourth, at $19$ kilometers. Reading the table as daily distances instead of totals makes the last day look largest, since $70$ is the biggest number shown.",
+    "source": "original"
+  },
+  {
+    "id": "grq-084",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "hard",
+    "prompt": "A company reported its staff by department and by level.\nDepartment: Junior: Senior\nFinance: 24: 16\nMarketing: 30: 10\nResearch: 18: 22\nSupport: 28: 12\n\nIf the company hires 20 additional junior employees and no additional senior employees, the percent of all employees who are junior increases by approximately how many percentage points?",
+    "options": [
+      "2.1",
+      "4.2",
+      "6.7",
+      "12.5",
+      "20"
+    ],
+    "correctIndex": 1,
+    "explanation": "Before the hiring there are $100$ junior and $60$ senior employees, so juniors are $\\frac{100}{160} = 62.5$ percent of the staff. After the hiring there are $120$ juniors out of $180$ employees, or about $66.7$ percent, an increase of about $4.2$ percentage points. Dividing the $20$ new hires by the original $160$ employees gives $12.5$, which measures the growth of the staff rather than the change in the junior share.",
+    "source": "original"
+  },
+  {
+    "id": "grq-085",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "hard",
+    "prompt": "A survey of 800 commuters recorded the main way each commuter travels to work.\nMode: Percent of commuters\nCar: 45\nBus: 25\nTrain: 20\nBicycle: 10\n\nOf the commuters who travel by car, 40 percent share the car with at least one other person. How many of the surveyed commuters travel by car without sharing it?",
+    "options": [
+      "90",
+      "144",
+      "216",
+      "320",
+      "360"
+    ],
+    "correctIndex": 2,
+    "explanation": "Car commuters number $45$ percent of $800$, or $360$. Of those, $60$ percent travel alone, and $0.6 \\times 360 = 216$. Taking $40$ percent of $360$ gives $144$, the number who share rather than the number who travel alone, and applying the $40$ percent to all $800$ commuters gives $320$.",
+    "source": "original"
+  },
+  {
+    "id": "grq-086",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "medium",
+    "prompt": "Eighty students took a placement test. The table gives the number of students whose score was at most the value shown.\nScore: Number of students at or below that score\n60: 8\n70: 20\n80: 44\n90: 68\n100: 80\n\nWhat percent of the students scored more than 80 but at most 90?",
+    "options": [
+      "10",
+      "15",
+      "24",
+      "30",
+      "55"
+    ],
+    "correctIndex": 3,
+    "explanation": "The counts are cumulative, so the number of students in the band is $68 - 44 = 24$, and $\\frac{24}{80} = 30$ percent. Reporting $24$ answers with a count where a percent was asked for. Reading the $68$ row as a band by itself, rather than as a running total, gives $85$ percent and overstates the group badly.",
+    "source": "original"
+  },
+  {
+    "id": "grq-087",
+    "section": "quantitative",
+    "topic": "Data Interpretation",
+    "difficulty": "hard",
+    "prompt": "Two classes took the same final examination.\nClass: Number of students: Percent who earned a grade of A\nClass A: 30: 40\nClass B: 20: 25\n\nOf the 50 students in the two classes combined, what percent earned a grade of A?",
+    "options": [
+      "17",
+      "25",
+      "30",
+      "32.5",
+      "34"
+    ],
+    "correctIndex": 4,
+    "explanation": "Class A produced $0.40 \\times 30 = 12$ top grades and Class B produced $0.25 \\times 20 = 5$, so $17$ of the $50$ students earned an A, which is $34$ percent. Averaging the two rates as $\\frac{40 + 25}{2}$ gives $32.5$ and is wrong because the classes are not the same size, so the larger class deserves more weight. The count $17$ is the number of students, not a percent.",
+    "source": "original"
+  },
+  {
+    "id": "grq-088",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "easy",
+    "prompt": "For the list $12$, $7$, $19$, $4$, $15$, the range is how much greater than the median?",
+    "options": [
+      "3",
+      "4",
+      "7",
+      "12",
+      "15"
+    ],
+    "correctIndex": 0,
+    "explanation": "Sorted, the list is $4$, $7$, $12$, $15$, $19$, so the median is $12$ and the range is $19 - 4 = 15$. The difference is $15 - 12 = 3$. Reading the median off the unsorted list gives $19$ as the middle entry, and reporting the range or the median alone answers a question that was not asked.",
+    "source": "original"
+  },
+  {
+    "id": "grq-089",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "The four numbers $4$, $9$, $11$, and $x$ have an average (arithmetic mean) of $12$. What is the median of the four numbers?",
+    "options": [
+      "9",
+      "10",
+      "11",
+      "12",
+      "24"
+    ],
+    "correctIndex": 1,
+    "explanation": "The four numbers total $4 \\times 12 = 48$, so $x = 48 - 24 = 24$. Sorted, the list is $4$, $9$, $11$, $24$, and the median of an even-sized list is the average of the two middle values, $\\frac{9 + 11}{2} = 10$. Choosing one of the two middle numbers instead of averaging them gives $9$ or $11$, and assuming the median equals the mean gives $12$.",
+    "source": "original"
+  },
+  {
+    "id": "grq-090",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "hard",
+    "prompt": "Each of the following lists contains five numbers. Which list has the greatest standard deviation?",
+    "options": [
+      "3, 5, 7, 9, 11",
+      "6, 6, 6, 6, 6",
+      "1, 6, 6, 6, 11",
+      "4, 5, 6, 7, 8",
+      "5, 6, 6, 6, 7"
+    ],
+    "correctIndex": 2,
+    "explanation": "Standard deviation measures the typical distance from the mean, so it depends on the spread, not on the number of distinct values. The list containing $1$ and $11$ around a mean of $6$ has squared deviations $25, 0, 0, 0, 25$, an average of $10$. The evenly spaced list from $3$ to $11$ has the same range but its middle values sit closer to the mean, giving an average squared deviation of $8$, and the constant list has a standard deviation of zero.",
+    "source": "original"
+  },
+  {
+    "id": "grq-091",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "Of the 120 students in a school year, 70 take biology, 55 take chemistry, and 20 take neither subject. How many students take both biology and chemistry?",
+    "options": [
+      "5",
+      "25",
+      "30",
+      "45",
+      "100"
+    ],
+    "correctIndex": 1,
+    "explanation": "Since $20$ students take neither subject, $120 - 20 = 100$ take at least one, so the overlap is $70 + 55 - 100 = 25$. Subtracting from $120$ instead of from $100$ ignores the students outside both subjects and gives $5$. The values $45$ and $30$ are the students who take only biology and only chemistry.",
+    "source": "original"
+  },
+  {
+    "id": "grq-092",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "hard",
+    "prompt": "In a survey of 200 people, 90 like tea, 85 like coffee, and 60 like juice. Also, 30 like both tea and coffee, 25 like both coffee and juice, 20 like both tea and juice, and 10 like all three drinks. How many of the people surveyed like none of the three drinks?",
+    "options": [
+      "20",
+      "25",
+      "30",
+      "40",
+      "50"
+    ],
+    "correctIndex": 2,
+    "explanation": "By inclusion and exclusion, the number who like at least one drink is $90 + 85 + 60 - 30 - 25 - 20 + 10 = 170$, so $200 - 170 = 30$ like none. The triple overlap must be added back because subtracting all three pairwise groups removes it three times after it was counted three times. Leaving that final step out gives $160$ and an answer of $40$, and subtracting the $10$ instead of adding it gives $50$.",
+    "source": "original"
+  },
+  {
+    "id": "grq-093",
+    "section": "quantitative",
+    "topic": "Problem Solving",
+    "difficulty": "medium",
+    "prompt": "Five people are to be seated in a row of 5 chairs. In how many different orders can they be seated if two particular people must sit next to each other?",
+    "options": [
+      "12",
+      "20",
+      "24",
+      "40",
+      "48"
+    ],
+    "correctIndex": 4,
+    "explanation": "Treat the pair as a single block, which leaves 4 items to arrange in $4! = 24$ ways. The two people inside the block can sit in either order, so the total is $24 \\times 2 = 48$. Stopping at $24$ is the usual slip, because it counts the block as if the pair had a fixed order.",
+    "source": "original"
+  },
+  {
+    "id": "grq-094",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "easy",
+    "kind": "numeric",
+    "prompt": "A rectangle has a length of 12 centimeters and a width of 5 centimeters. What is the length of a diagonal of the rectangle, in centimeters?",
+    "correctValue": 13,
+    "explanation": "A diagonal splits the rectangle into two right triangles whose legs are the length and the width. So the diagonal is $\\sqrt{12^2 + 5^2} = \\sqrt{144 + 25} = \\sqrt{169} = 13$ centimeters. Adding the sides instead of using the Pythagorean theorem gives $17$, which is longer than any straight path across the rectangle.",
+    "source": "original"
+  },
+  {
+    "id": "grq-095",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "medium",
+    "kind": "numeric",
+    "prompt": "The measures of the interior angles of a polygon add up to 1260 degrees. How many sides does the polygon have?",
+    "correctValue": 9,
+    "explanation": "The interior angles of a polygon with $n$ sides sum to $(n - 2) \\times 180$ degrees. Setting $(n - 2) \\times 180 = 1260$ gives $n - 2 = 7$, so $n = 9$. Dividing $1260$ by $180$ and stopping gives $7$, which forgets that the formula subtracts $2$ from the number of sides.",
+    "source": "original"
+  },
+  {
+    "id": "grq-096",
+    "section": "quantitative",
+    "topic": "Numeric Entry",
+    "difficulty": "hard",
+    "kind": "numeric",
+    "prompt": "A quantity is increased by 20 percent, and the result is then decreased by 15 percent. The final value is what percent of the original value?",
+    "correctValue": 102,
+    "tolerance": 0.01,
+    "answerSuffix": "%",
+    "explanation": "Take the original value as $1$. After the increase it is $1.20$, and after the decrease it is $1.20 \\times 0.85 = 1.02$, which is $102$ percent of the original. Adding and subtracting the percents to get a net increase of $5$ percent is wrong, because the $15$ percent decrease applies to the larger amount, not to the original.",
+    "source": "original"
   }
 ]

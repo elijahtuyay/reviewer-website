@@ -53,7 +53,7 @@
  * purpose: a Language Skills question about the present perfect has to be able
  * to contain the present perfect.
  */
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -61,7 +61,23 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 /** Everything under these carries user-facing copy, plus the lib files that do. */
 const ROOTS = ["app", "components"];
-const EXTRA_FILES = ["lib/site.ts", "lib/exams/nmat/index.ts", "lib/exams/gmat/index.ts"];
+
+/*
+ * The exam modules are DISCOVERED, not listed.
+ *
+ * They were listed once, and adding the GRE made the list wrong the same day:
+ * a whole exam's description, six section descriptions and its `notes` were
+ * invisible to this audit while it reported "no findings". That is precisely
+ * the drift the app/ and components/ walk exists to prevent, so the same
+ * treatment applies here. A new exam is now covered the moment it exists.
+ */
+const EXTRA_FILES = [
+  "lib/site.ts",
+  ...readdirSync(join(root, "lib/exams"), { withFileTypes: true })
+    .filter((e) => e.isDirectory())
+    .map((e) => `lib/exams/${e.name}/index.ts`)
+    .filter((rel) => existsSync(join(root, rel))),
+];
 
 /**
  * Files with no user-facing prose. Listed rather than silently tolerated, so
