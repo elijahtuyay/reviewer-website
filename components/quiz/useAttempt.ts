@@ -2,7 +2,14 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { preloadMath, questionNeedsMath } from "@/components/MathText";
-import { AnswerValue, isAnswered, isComplete, isCorrectAnswer, sameAnswer } from "@/lib/answers";
+import {
+  AnswerValue,
+  isAnswered,
+  isComplete,
+  isCorrectAnswer,
+  sameAnswer,
+  toggleMultiAnswer,
+} from "@/lib/answers";
 import type { ExamId, Question, SectionId } from "@/data/schema";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import {
@@ -83,6 +90,13 @@ export interface Attempt {
   canChangeAnswer: (questionId: string) => boolean;
 
   select: (questionId: string, value: AnswerValue) => void;
+  /**
+   * Toggle ONE option of a multi-select answer.
+   *
+   * Separate from `select` because the new answer has to be derived from the
+   * freshest state, not from a prop. See the note on the implementation.
+   */
+  toggleOption: (questionId: string, optionIndex: number, selectExactly: number | null) => void;
   toggleFlag: (questionId: string) => void;
   advance: () => void;
   submit: (expired?: boolean) => void;
@@ -495,6 +509,53 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     [phase, rules.reviewEdit, persist, cleanAnswers]
   );
 
+  /**
+   * Toggle one option inside a multi-select answer.
+   *
+   * THE COMPUTATION HAPPENS INSIDE THE STATE UPDATER, and that is the whole
+   * point of this function existing rather than the card calling `select` with
+   * an array it worked out itself.
+   *
+   * QuestionCard receives the current answer as a PROP. Two clicks inside one
+   * frame both read the same prop, because React has not re-rendered between
+   * them, so the second click computes its array from the pre-click answer and
+   * overwrites the first. Measured in a real browser: clicking two options of a
+   * Sentence Equivalence in the same tick left exactly one selected. A human
+   * clicking at human speed never sees it, and a fast pair of clicks does.
+   *
+   * `prev` inside the updater is the freshest answers by definition. This is
+   * the same correction already applied to the review allowance, for the same
+   * reason, and recorded on `select` above.
+   */
+  const toggleOption = useCallback(
+    (questionId: string, optionIndex: number, selectExactly: number | null) => {
+      if (phase !== "taking" && phase !== "reviewEdit") return;
+
+      setAnswers((prev) => {
+        if (phase === "reviewEdit" && rules.reviewEdit) {
+          const baseline = reviewBaselineRef.current;
+          const original = baseline[questionId];
+          const used = Object.entries(baseline).filter(
+            ([id, was]) => isAnswered(prev[id]) && !sameAnswer(prev[id], was)
+          ).length;
+          const blocked =
+            original !== undefined &&
+            sameAnswer(prev[questionId], original) &&
+            used >= rules.reviewEdit.maxChanges;
+          if (blocked) return prev;
+        }
+
+        const next = {
+          ...prev,
+          [questionId]: toggleMultiAnswer(prev[questionId], optionIndex, selectExactly),
+        };
+        persist({ answers: cleanAnswers(next), inReview: phase === "reviewEdit" });
+        return next;
+      });
+    },
+    [phase, rules.reviewEdit, persist, cleanAnswers]
+  );
+
   const toggleFlag = useCallback(
     (questionId: string) => {
       setFlagged((prev) => {
@@ -688,6 +749,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     reviewChangesLeft,
     canChangeAnswer,
     select,
+    toggleOption,
     toggleFlag,
     advance,
     submit,

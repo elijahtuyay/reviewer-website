@@ -9,7 +9,6 @@ import {
   isCorrectAnswer,
   kindOf,
   parseNumericAnswer,
-  toggleMultiAnswer,
 } from "@/lib/answers";
 
 /**
@@ -66,6 +65,16 @@ interface QuestionCardProps {
    * every render and made the memo below useless.
    */
   onSelect?: (questionId: string, value: AnswerValue) => void;
+  /**
+   * Multi-select only. Sends the INTENT (toggle this option) rather than a
+   * computed array, so the new answer is derived from the freshest state.
+   *
+   * Two clicks inside one frame both read the same `value` prop, because React
+   * has not re-rendered between them, so a computed array from the second click
+   * overwrote the first. Measured in a real browser: two picks on a Sentence
+   * Equivalence in one tick left exactly one selected.
+   */
+  onToggle?: (questionId: string, optionIndex: number, selectExactly: number | null) => void;
   reviewMode?: boolean;
   /**
    * Set while a capped review pass has run out of changes and this question is
@@ -81,6 +90,7 @@ function QuestionCard({
   index,
   value,
   onSelect,
+  onToggle,
   reviewMode = false,
   lockedReason,
 }: QuestionCardProps) {
@@ -256,12 +266,11 @@ function QuestionCard({
               tabIndex={kind === "multi" || optionIndex === tabStop ? 0 : -1}
               onClick={() => {
                 if (!interactive) return;
-                onSelect?.(
-                  question.id,
-                  kind === "multi"
-                    ? toggleMultiAnswer(value, optionIndex, question.selectExactly)
-                    : optionIndex
-                );
+                if (kind === "multi") {
+                  onToggle?.(question.id, optionIndex, question.selectExactly ?? null);
+                } else {
+                  onSelect?.(question.id, optionIndex);
+                }
               }}
               onKeyDown={(event) => {
                 // Arrows are the radiogroup pattern and do not belong in a

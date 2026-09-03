@@ -44,7 +44,7 @@ export default function SequentialRunner({
   const {
     phase, notice, questions, answers, flagged, cursor, totalQuestions, deadline,
     paused, frozenTimeLabel, answeredCount, result, reviewChangesLeft,
-    select, toggleFlag, advance, submit, restart, pause, resume, onDeadlineChange,
+    select, toggleOption, toggleFlag, advance, submit, restart, pause, resume, onDeadlineChange,
   } = attempt;
 
   /**
@@ -216,6 +216,7 @@ export default function SequentialRunner({
                 index={cursor}
                 value={answers[current.id] ?? null}
                 onSelect={select}
+                onToggle={toggleOption}
                 reviewMode={false}
               />
 
@@ -328,7 +329,8 @@ function ReviewPass({
   attempt: Attempt;
   onSubmit: () => void;
 }) {
-  const { questions, answers, flagged, select, reviewChangesLeft, canChangeAnswer } = attempt;
+  const { questions, answers, flagged, select, toggleOption, reviewChangesLeft, canChangeAnswer } =
+    attempt;
   const limit = exam.rules.reviewEdit?.maxChanges ?? 0;
   const exhausted = reviewChangesLeft !== null && reviewChangesLeft <= 0;
   const flaggedQuestions = questions
@@ -385,6 +387,7 @@ function ReviewPass({
                 index={index}
                 value={answers[question.id] ?? null}
                 onSelect={select}
+                onToggle={toggleOption}
                 reviewMode={false}
                 lockedReason={
                   locked
