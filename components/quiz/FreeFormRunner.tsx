@@ -343,7 +343,14 @@ export default function FreeFormRunner({
         }
         body={
           pendingAction === "submit"
-            ? `${questions.length - answeredCount} of ${questions.length} questions have no answer. After you submit, you can read every explanation. You cannot change an answer.`
+            ? // The count is recomputed here rather than trusted from the click
+              // that opened the dialog. Answers can change in the same frame as
+              // the click, and the dialog then rendered "0 of 27 questions have
+              // no answer", which is a nonsense sentence in a modal asking for
+              // an irreversible decision.
+              questions.length - answeredCount <= 0
+              ? "Every question has an answer. After you submit, you can read every explanation. You cannot change an answer."
+              : `${questions.length - answeredCount} of ${questions.length} questions have no answer. After you submit, you can read every explanation. You cannot change an answer.`
             : "This deletes your answers for this section. It draws a new set of questions and starts a new timer. You cannot undo this."
         }
         confirmLabel={pendingAction === "submit" ? "Submit section" : "Restart section"}

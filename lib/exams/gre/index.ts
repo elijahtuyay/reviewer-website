@@ -33,7 +33,7 @@ const gre: ExamModule = {
   label: "GRE General Test",
   shortLabel: "GRE",
   description:
-    `This exam has two measures, Verbal Reasoning and Quantitative Reasoning. Each is scored from ${SCORE_MIN} to ${SCORE_MAX}. Every answer has a written explanation.`,
+    `This exam has two measures, Verbal Reasoning and Quantitative Reasoning. Each is scored from ${SCORE_MIN} to ${SCORE_MAX}. The real exam also has a writing task, which this site does not include.`,
   /**
    * Measured against the surfaces it sits on, not picked by eye, and chosen to
    * match the profile the other two accents were tuned to.
@@ -176,7 +176,7 @@ const gre: ExamModule = {
    */
   notes: [
     "The real exam starts with one 30-minute writing task. This site does not include it, so practice that task somewhere else.",
-    "The real exam splits each measure into two shorter timed sections, and the second one gets harder or easier from how the first went. Here each measure is one section with the same total questions and the same total time.",
+    "The real exam splits each measure into two shorter timed sections. The difficulty of the second section depends on your result in the first. Here each measure is one section, with the same total questions and the same total time.",
   ],
 
   loadSection: jsonBank({

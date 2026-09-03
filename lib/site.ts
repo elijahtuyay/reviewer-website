@@ -23,4 +23,4 @@ export const SITE_TAGLINE = "Free practice exams with every answer explained.";
  * site. A legal notice is the last place to spend a subordinate clause.
  */
 export const AFFILIATION_DISCLAIMER =
-  "This site is an independent study tool. It has no affiliation and no connection with the Graduate Management Admission Council (GMAC) or with any other testing body. No testing body endorses this site. Every question here is original, and written for practice only. No question reproduces real exam content. Practice on this site does not guarantee any particular result on your exam.";
+  "This site is an independent study tool. It has no affiliation and no connection with the Graduate Management Admission Council (GMAC), with Educational Testing Service (ETS), or with any other testing body. No testing body endorses this site. Every question here is original, and written for practice only. No question reproduces real exam content. Practice on this site does not guarantee any particular result on your exam.";

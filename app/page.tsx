@@ -310,6 +310,18 @@ function examHighlights(exam: ExamModule, bank: number): string[] {
   if (!exam.rules.allowSkip) {
     lines.push("You must answer each question before the next question appears");
   }
+  // Two lines that describe a FIXED-PAPER exam, which had almost nothing to say
+  // about itself: every other rule here is phrased as a departure from that
+  // shape, so NMAT generated three bullets against GMAT eight and its card read
+  // as the unfinished one beside them.
+  if (exam.rules.navigation === "free") {
+    lines.push("The whole section is on one page, so you can answer in any order");
+  }
+  if (exam.scoring.kind === "points") {
+    lines.push(
+      `Each correct answer is worth ${exam.scoring.pointsPerCorrectAnswer} points, and an incorrect one costs nothing`
+    );
+  }
   if (exam.rules.reviewEdit) {
     lines.push(
       `You can flag questions, then change up to ${exam.rules.reviewEdit.maxChanges} answers if time remains`
@@ -329,6 +341,17 @@ function examHighlights(exam: ExamModule, bank: number): string[] {
       ? `${bank.toLocaleString("en-US")} questions in the question bank`
       : "The question bank is not ready yet"
   );
+  /*
+   * Capped, because the cards stretch to a shared height and the lists ran 3,
+   * 8 and 5. The three-item card carried roughly 300px of dead space above its
+   * button and read as the unfinished one, which is the opposite of what a
+   * bank of 300 questions has earned.
+   *
+   * The bank count is pushed last and is the line worth keeping, so the cap
+   * drops from the middle rather than the end.
+   */
+  const CAP = 5;
+  if (lines.length > CAP) return [...lines.slice(0, CAP - 1), lines[lines.length - 1]];
   return lines;
 }
 
