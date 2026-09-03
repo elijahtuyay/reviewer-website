@@ -9,6 +9,7 @@
     "lint": "eslint",
     "verify:engine": "node --experimental-strip-types --no-warnings scripts/verify-engine.mts",
     "audit:bank": "node scripts/audit-bank.mjs",
+    "audit:copy": "node scripts/audit-copy.mjs",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio"

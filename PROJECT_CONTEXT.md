@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-02, at PR #21 / VERSION.txt `2.3.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-03, at PR #22 / VERSION.txt `2.4.0`.
 
 ## What this project is
 
@@ -36,6 +36,67 @@ Programme P:"` has no word boundary before the second `Programme` and `programm
 **Prefer stems to word lists for the `-our` family.** An enumerated list missed `labour` entirely and matched `neighbour` but not `neighbourhoods`. A stem pattern (`lab|col|fav|neighb|behavi|...` + `our` + any suffix) covers every inflection at once, and the words that genuinely end `-our` in American English (four, hour, tour, pour, flour, contour, devour) are simply absent from the stem list.
 
 **Keep an `-ise` exception list.** A blanket `-ise` to `-ize` rule breaks words that are legitimately `-ise` in American English: it turned `advertise` into `advertize` and, worse, `counterclockwise` into `counterclockwize` inside the circular-seating puzzles. Keep an exception list (advise, comprise, compromise, exercise, improvise, revise, supervise, surprise, promise, and every `-wise` compound). And never rewrite an identifier: `cancelLabel` is a prop, `color` is a CSS property, and `Content-Security-Policy` is a header name. Word-boundary patterns plus a grep for identifiers afterwards is the check that caught this.
+
+## Language: Simplified Technical English (ASD-STE100) for all UI copy
+
+**Every user-facing description on this site is written to ASD-STE100**, the
+controlled-English standard from ASD (the AeroSpace and Defense Industries
+Association of Europe): 53 writing rules plus a ~900-word approved dictionary,
+built so a non-native reader working from a manual cannot misread an
+instruction. It was adopted here at the user's direction in v2.4.0, because the
+previous copy read as machine-written marketing. Run `npm run audit:copy`
+rather than trusting this paragraph.
+
+Why it fits rather than merely being a constraint: most NMAT and GMAT
+candidates in the Philippines are non-native English readers, and the copy they
+are reading explains a timed exam they are about to start. The rules that
+protect an airline mechanic from a misread torque spec protect a candidate from
+a misread section rule.
+
+The rules that bind here, in the order they actually get broken:
+
+1. **Simple tenses only.** Infinitive, imperative, simple present, simple past,
+   simple future, and a past participle used only as an adjective. No perfect
+   ("you have used them all") and no progressive ("its timer is running").
+   `unanswered` is fine, because it is a participle acting as an adjective.
+2. **No semicolon at all** (Rule 8.1). Not "not as a clause join" -- the mark is
+   banned outright. Every other mark, the em dash included, is permitted, though
+   this repo already avoids em dashes in user-facing text for its own reasons.
+3. **25 words per sentence** for descriptive text, 20 for an instruction. One
+   instruction per sentence. Do NOT hit the limit by dropping a subject, a verb
+   or an article -- the standard warns that ellipsis buys ambiguity, not clarity.
+4. **No phrasal verbs** (Rule 9.3). "pick up where you left off", "carry over",
+   "run out of time", "free this up" all went. Their meaning is not predictable
+   from the parts.
+5. **One word, one meaning.** The settled choices in this app: **timer** (never
+   "clock"), **select** (never "pick" or "choose"), **incorrect** (never
+   "wrong"), **no answer** for a question left blank, **section**, **question**,
+   **answer**, **explanation**, **submit**, **score**. Reusing one word for one
+   concept is the rule, so a new synonym is a regression even when it reads
+   better in isolation.
+6. **Verb, not the noun made from it** (Rule 3.7). "This section tests
+   arithmetic", not "the section provides testing of arithmetic".
+
+**`npm run audit:copy` enforces 1 through 5 mechanically** over the 25 files
+that carry prose, and exits non-zero on a finding. It does NOT check membership
+in ASD's approved dictionary: that list is not redistributable, and the official
+Issue 9 PDF is encrypted, so any word list committed here would be guesswork
+with a checkmark next to it. Rule 6 and dictionary compliance stay a judgment
+call for the author and the review lanes.
+
+**Two things about the script are worth knowing before you edit it.** Its prose
+extractor discards anything with punctuation that has no space after it, because
+a generic parameter (`useRef<HTMLElement | null>(null); const`) is
+indistinguishable from a JSX text node between a `>` and a `<`, and that alone
+produced ten of the script's first thirteen findings. It also decodes HTML
+entities first, or `Section &amp; progress` reads as a Rule 8.1 breach. Both
+exist because a script with false positives teaches the next reader to skim it.
+
+**The question bank is deliberately out of scope.** A Language Skills question
+about the present perfect has to be able to contain the present perfect, and
+exam prose should read like exam prose. STE governs what the SITE says, not what
+the questions say. American English still governs both -- see the section above,
+which this one does not replace.
 
 ## Copyright rule (critical, applies to ALL future content work)
 
@@ -125,6 +186,16 @@ document for two releases and sent readers looking for files that were gone.
 12. Two pre-existing lint false-positives were cleaned up (`ThemeToggle`'s `react-hooks/set-state-in-effect`, `ThemeInitScript`'s `@next/next/no-before-interactive-script-outside-document` — both are legitimate patterns the lint rules don't account for; each has an inline `eslint-disable` comment explaining why).
 
 ## PR/version history (what shipped, in order)
+
+- **PR #22** (v2.4.0) — every user-facing description rewritten to ASD-STE100,
+  at the user's direction, because the old copy read as machine-written
+  marketing. 60 replacements across 22 files: the home page hero, stat band,
+  exam picker, three feature bands, seven FAQ answers and the closing CTA, the
+  generated "what to expect" list, both exam modules and all six section
+  descriptions, every quiz notice and confirm dialog, the results screen, the
+  calculator explainer and all four failure pages. Also `npm run audit:copy`,
+  which is the part that stops the copy drifting back. See "Language: Simplified
+  Technical English" above for the rules and the settled vocabulary.
 
 - **PR #21** (v2.3.0) — the full-department audit: six parallel review lanes (logic,
   visual design/motion, security, question-bank content, new-user UX, performance)
@@ -222,6 +293,7 @@ Small shared modules added in v2.3.0, each existing because the same bug was abo
 | `lib/motion.ts` | `prefersReducedMotion()` / `scrollBehavior()`, for motion CSS cannot reach — a `scrollIntoView` option has to be chosen at the call site. |
 | `components/MathSpan.tsx` | The KaTeX boundary. Dynamically imported by `MathText`, and the ONLY place `react-katex` and `katex.min.css` are referenced. |
 | `scripts/audit-bank.mjs` | `npm run audit:bank`. See "Answer-key statistics". |
+| `scripts/audit-copy.mjs` | `npm run audit:copy`. See "Language: Simplified Technical English". Added v2.4.0. |
 | `.githooks/pre-commit` | Blocks staging copyrighted material or a credential. Needs `git config core.hooksPath .githooks` once per clone. |
 
 `useAttempt` holds ALL attempt state for every exam: storage, timing, pause, expiry, the section lock, adaptive serving, scoring, the review pass. Runners are presentation only.
@@ -759,13 +831,14 @@ that appears not to have applied is usually this.
 
 **Current state: `main` is at v2.3.0, and is the only branch.**
 
-"Clean" is four commands rather than a claim, and all four pass on `main`:
+"Clean" is five commands rather than a claim, and all five pass on `main`:
 
 ```bash
 npx tsc --noEmit        # zero errors
 npm run lint            # zero errors, zero warnings
 npm run verify:engine   # adaptive ladder, both scoring models, the calculator
 npm run audit:bank      # every statistical guarantee about the question bank
+npm run audit:copy      # ASD-STE100 compliance of every user-facing description
 ```
 
 `npm run build` must also still print exactly ONE dynamic route
