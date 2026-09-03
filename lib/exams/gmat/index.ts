@@ -18,12 +18,25 @@ import { ExamModule, jsonBank } from "@/lib/exams/types";
  * NMAT, and they are the reason the quiz engine was made rule-driven rather
  * than being NMAT's flow with switches bolted on.
  */
+/**
+ * The scaled band, declared once and used by both the scoring rule and the
+ * description.
+ *
+ * The description used to repeat "205 to 805" as a literal, which the registry
+ * already owns thirty lines below. Nothing would have caught the drift: the
+ * description flows into the home page card, the OpenGraph description and the
+ * JSON-LD `Course.description`, so tuning `scoring` would have published a
+ * wrong score range in three places with no compiler or audit signal.
+ */
+const SCORE_MIN = 205;
+const SCORE_MAX = 805;
+
 const gmat: ExamModule = {
   id: "gmat",
   label: "GMAT Focus Edition",
   shortLabel: "GMAT",
   description:
-    "This exam is adaptive, and it gives you one question at a time. It has three sections of 45 minutes and a score from 205 to 805. Every answer has a written explanation.",
+    `This exam is adaptive, and it gives you one question at a time. It has three sections of 45 minutes and a score from ${SCORE_MIN} to ${SCORE_MAX}. Every answer has a written explanation.`,
   /**
    * Measured, not picked by eye. The first choice (#1e3a8a) was only 1.59:1
    * against the dark background, half of NMAT green's 3.11:1, which left the
@@ -121,8 +134,8 @@ const gmat: ExamModule = {
    */
   scoring: {
     kind: "scaled",
-    min: 205,
-    max: 805,
+    min: SCORE_MIN,
+    max: SCORE_MAX,
     difficultyWeight: { easy: 1, medium: 2, hard: 3.2 },
     // Leaving questions unreached costs far more than getting them wrong,
     // which is the single most important pacing lesson the real exam teaches.
