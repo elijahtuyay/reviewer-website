@@ -1121,21 +1121,62 @@ Write bank edits from a real script file, never a heredoc.
 3. ~~**Six specific question defects**: `ls-055`, `lr-072`, `ls-063`, `ls-101`, `ls-045`, `qs-030`.~~ **CLOSED in v2.3.0.** All six were re-checked against the files on disk and **all six had already been fixed** by earlier passes without this list being updated. `lr-072` no longer offers an "opposite" option and its puzzle was brute-forced as uniquely solvable; `ls-055` has exactly one part-to-whole match; `ls-063`'s explanation says a cobbler *works on* shoes; `ls-101` is now a vocabulary item that does not contain the phrase; `ls-045` and `qs-030` were verified correct. **The lesson is about the list, not the questions:** a stale to-do that reads as an open defect costs the next reader an investigation each time. Re-verify before re-reporting.
    The v2.3.0 audit did find three genuinely wrong keys, all in GMAT Data Insights — see "Three wrong answer keys" above.
 4. ~~`ProgressTracker` cells are 28px.~~ **CLOSED in v2.3.0** — 36px, with the sidebar widened `w-56` to `w-72` to fit (6 x 36px + 5 x 6px gaps = 246px inside a 254px content box). Still under the app's 44px floor, and deliberately: 36 cells at 44px do not fit any column width this layout can give them, and 36px clears WCAG 2.5.8 comfortably.
-6. **`audit:bank` has no PER-TOPIC length band, and one topic is past 3 SE.**
-   The slot checks learned this lesson already: a per-file average hides a
-   loaded topic completely, which is how Para Forming came to key the last
-   option 8 times in 10 while every file-level number looked healthy. The
-   length checks never got the same treatment. Measured across all 762
-   questions while reviewing v2.8.1: **GRE Verbal Reading Comprehension keys
-   the SHORTEST option 15 of 36 times (42%, +3.2 SE against a 20% chance
-   rate)**, and nothing is watching it. GMAT Critical Reasoning: Inference sits
-   at 4 of 11 (36%, +1.4 SE), which is noise on n=11 but the same shape.
-   There is a real tension to resolve first, which is why this is logged rather
-   than fixed in a hurry: a must-be-true key is usually the most minimal claim
-   in the set, so on Inference it is NATURALLY the shortest string. A band that
-   ignores that will fail honest questions. Adding the check means deciding
-   whether the topic is exempt like Data Sufficiency, or whether the
-   distractors should be trimmed to match.
+6. ~~**`audit:bank` has no PER-TOPIC length band.**~~ **CLOSED in v2.8.2.**
+   The slot check had learned this lesson already and the length checks had not:
+   a per-bank average hides a loaded topic, which is how Para Forming came to
+   key the last option 8 times in 10 while every file-level number looked
+   healthy. Measured when the band was added, **GRE Verbal Reading Comprehension
+   keyed the SHORTEST option 14 of 30 times, 46.7% against 20% by chance,
+   +3.7 SE**, inside a bank that read 20.0% overall and passed comfortably. It
+   was the only failure across all eight banks.
+
+   **The tension that made this look hard turned out to be measurable rather
+   than a matter of taste.** The worry was that a must-be-true or primary-purpose
+   key is NATURALLY the most minimal claim in its set, so a band would fail
+   honest questions. Two things settled it. First, at a floor of eight questions
+   per topic, Critical Reasoning: Inference does not even qualify, so the topic
+   that prompted the worry is not judged at all. Second, "naturally shortest"
+   does not help the candidate who has noticed: a reason for a tell is not a
+   defense of it.
+
+   The floor is **eight**, not the slot check's four. A slot check has five
+   buckets and a lopsided split shows early; a length check has one bucket
+   against a 20% expectation, where 3 of 8 is already 1.4 SE and means nothing.
+
+   **That floor was also a hole, and a review lane proved it by exploiting it.**
+   This bank names topics at two levels, so "Critical Reasoning: Weaken" and
+   "Critical Reasoning: Assumption" are separate strings. Splitting a topic
+   finely enough makes any bias inside it invisible to a per-topic check: the
+   lane relabelled the 30 biased GRE Reading Comprehension questions into six
+   sub-topics and the same +3.7 SE breach vanished, with not even a watch line.
+   It was not hypothetical. NMAT Logical Reasoning's Critical Reasoning family
+   is 19 questions across four sub-topics, none reaching eight alone, so the
+   whole family was unjudged -- and Critical Reasoning is the topic this project
+   records hitting 94.7% on the longest-option heuristic. Every sub-topic is now
+   measured BOTH alone and rolled up to its family.
+
+   **Only the two extreme ranks were measured, so a habit one rank in passed
+   clean.** A bank keying rank 0 in 8 of 36 and rank 1 in 14 has its extremes at
+   chance, and the audit exited 0 while "guess between the two shortest" scored
+   61% against 40%. There was a bank-level two-longest band and no mirror.
+   There is now a per-topic two-shortest band as well.
+
+   **MARGIN IS DELIBERATELY UNMEASURED, and it is the honest limit of all of
+   this.** A key one character shorter than the runner-up counts the same as one
+   twenty-four characters shorter, though only the second is a tell anyone can
+   see. So a future author can clear a failure by adding a character to enough
+   keys and the audit will bless it. Read the margins before acting on a
+   failure. A minimum-margin rule was considered and refused, because it adds a
+   second threshold to argue about and the count-based rule is what the slot and
+   longest-option checks already use.
+
+   **The fix restated the KEY, and did not trim distractors.** Cutting a
+   distractor below the key buys the statistic by making the question worse, and
+   this repo had already settled that trade the other way. It also happened to
+   move both statistics the same direction, since GRE RC's key-is-longest rate
+   was 15.6%, BELOW its own chance rate. Only the six items whose margin a
+   candidate could see were touched; the other eight sat within 7% of the next
+   shortest option, which is invisible. GRE RC now reads 8 of 30, +0.9 SE.
 
 5. `ConfirmDialog` styles the confirming action as a red outline and the cancel as solid green. A reviewer called this inverted; it is a **documented deliberate choice** from an earlier PR (green = keeps your work). Left alone pending a decision.
 
