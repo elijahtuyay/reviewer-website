@@ -489,6 +489,52 @@ document for two releases and sent readers looking for files that were gone.
   - **Press feedback is `scale`, never `opacity`.** Fading an accent fill toward the page erodes the text contrast the tokens exist to guarantee. Before v2.3.0 there were ZERO `:active` states in the app — fifty hover affordances and no press feedback, on a product whose audience is mostly touch, where `:hover` does not exist at all.
   - `.btn` / `.btn-primary` / `.btn-secondary` exist because the primary button was written out byte-for-byte in **seven** files and the secondary in six, which is exactly why their motion had drifted apart. Add a button variant there, not at a call site.
   - `prefers-reduced-motion` is a global net that collapses durations rather than four hand-placed classes (which meant anything added later was unguarded by default). It cannot reach JS-driven motion, so `lib/motion.ts` supplies `scrollBehavior()` for `scrollIntoView`.
+- **Typography is a system as of v2.9.0, and the complaint that produced it is
+  worth keeping.** The user said the type felt "too repetitive and bland, very
+  amateurish". It was: every heading, label and paragraph on the site was Geist,
+  separated only by a Tailwind size class. Size alone is a weak signal, because
+  it says how important a thing is and nothing about what KIND of thing it is,
+  so a page of headings, labels and prose in one face reads as undifferentiated
+  however the sizes are arranged.
+
+  Four changes, and only one of them touches a component:
+
+  - **Headings take a display serif** (`Source Serif 4`, `--font-display`).
+    Tailwind sets size and weight on heading elements but never a family, so a
+    single `h1, h2, h3, h4` rule in `globals.css` reaches every heading in the
+    app without editing a call site.
+  - **NOT the serif a font-pairing article recommends first.** Playfair Display
+    and Cormorant Garamond lead those lists and are wrong here: they are
+    high-contrast display faces whose thin strokes break up below about 24px,
+    and this site sets most headings between 18px and 30px. Source Serif is a
+    text face with sturdy stems, so it holds at a section heading and still has
+    presence in the hero, and it reads institutional rather than editorial,
+    which is the right register for an exam.
+  - **Headings get their own leading (1.15) and tracking (-0.018em).** Type set
+    large needs less of both than body text and Tailwind's defaults are tuned
+    for body. The tracking is deliberately small: past about -0.03em the letters
+    collide in the strings this app actually sets, like "Quantitative Skills".
+  - **The 19 small caps labels are one class** (`.label-caps`). They had drifted
+    into several combinations of `text-xs`/`text-sm`, `font-medium`/
+    `font-semibold` and `tracking-wide`/`tracking-widest` across nine files. No
+    single one looked wrong, which is why it survived, and together they were a
+    large part of why the type read as unconsidered.
+
+  Two things were deliberately NOT done. **No new sizes and no new colors**: the
+  size ramp and the color tokens were measured for contrast and are left alone.
+  And **question prose stays in the sans**, because the real NMAT, GMAT and GRE
+  all set their stems in a sans, and practice should look like the thing it
+  practices for.
+
+  **One claim was written and then removed after checking, which is the part to
+  remember.** A `.tabular` utility was added with a comment calling it a bug fix
+  for digit jitter on the timer. `components/Timer.tsx` already carried
+  `tabular-nums`, and Tailwind ships that utility anyway, so the class was a
+  duplicate API for something that already existed. It was dropped, and the two
+  counters that genuinely lacked tabular figures got the utility instead. Adding
+  CSS that nothing consumes is the same shape as the model fields this project
+  shipped that no component ever read.
+
 - Design philosophy: the user explicitly asked to model UI conventions on **first-world government websites (US/Canada/Singapore)** — USWDS, Canada.ca (GC Design System), Singapore's SGDS — researched live via WebSearch. Applied *principles* (restraint, accessibility, clear typographic hierarchy, minimal functional-only motion, visible focus states, 44px tap targets) rather than a visual reskin. Explicit user instruction: **"don't go for anything too fancy."** Do not redesign colors/spacing/typography wholesale without being asked again.
 - Attempt state is **session-scoped and never resumed silently** (v1.6.0). The quiz shows a banner distinguishing resumed / already-submitted / expired attempts, each with a Retake action, and `components/SessionResetNotice.tsx` on the section-select page warns that progress is cleared when the tab closes, lists sections holding saved work, and offers "Clear saved progress". If you touch this area, keep the invariant: **any state restored from a previous visit must be stated in the UI.**
 - **The timer is announced, not just colored** (v2.3.0). It carries a polite

@@ -63,7 +63,7 @@ export default function ProgressTracker({
 
   return (
     <div className="rounded-lg border border-line p-4">
-      <p className="text-xs font-medium tracking-wide text-muted uppercase">
+      <p className="label-caps text-muted">
         {/* In review this counter is answered-out-of-total, which sitting
             under the heading "Results" next to "0 correct" read as a score. */}
         {reviewMode

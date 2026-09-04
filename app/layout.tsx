@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import ThemeInitScript from "@/components/ThemeInitScript";
 import SiteHeader from "@/components/SiteHeader";
 import PageTransition from "@/components/PageTransition";
@@ -18,6 +18,32 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+/**
+ * The display face, used on headings and nowhere else.
+ *
+ * Every heading, label and paragraph on this site was Geist, separated only by
+ * a size class, which is what made the type read as repetitive. A second family
+ * gives the eye a way to tell what KIND of thing it is looking at rather than
+ * only how big it is.
+ *
+ * Source Serif 4 rather than the display serifs a font-pairing article will
+ * suggest first. Playfair Display and Cormorant Garamond are high-contrast
+ * faces built for large sizes: their thin strokes break up below about 24px,
+ * and this site sets most of its headings between 18px and 30px. Source Serif
+ * is a text face with sturdy stems, so it holds at a section heading and still
+ * has presence in the hero. It also reads as institutional rather than
+ * editorial, which is the right register for an exam.
+ *
+ * Two weights, not the full range. Each one is a download on a site whose
+ * whole hosting story is that every page is static.
+ */
+const displaySerif = Source_Serif_4({
+  variable: "--font-display-serif",
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "swap",
 });
 
 /**
@@ -67,7 +93,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${displaySerif.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">

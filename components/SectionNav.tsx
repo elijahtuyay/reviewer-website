@@ -47,7 +47,7 @@ export default function SectionNav({
 
   return (
     <nav className="flex flex-col gap-1.5">
-      <p className="mb-1 px-1 text-xs font-medium tracking-wide text-muted uppercase">Sections</p>
+      <p className="label-caps mb-1 px-1 text-muted">Sections</p>
       {sections.map((section) => {
         const isCurrent = section.id === currentSection;
         const isNavigable = isCurrent || !locked;

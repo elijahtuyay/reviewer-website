@@ -113,7 +113,7 @@ export default function SequentialRunner({
                     paused={paused}
                     onDeadlineChange={onDeadlineChange}
                   />
-                  <p className="mt-1 text-xs text-muted">
+                  <p className="mt-1 text-xs tabular-nums text-muted">
                     {inReviewPass
                       ? `${answeredCount}/${totalQuestions} answered`
                       : `Question ${Math.min(cursor + 1, totalQuestions)} of ${totalQuestions}`}

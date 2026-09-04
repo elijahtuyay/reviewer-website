@@ -87,7 +87,7 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
   return (
     <div className="flex flex-1 justify-center bg-background">
       <main className="w-full max-w-2xl px-6 py-16 sm:py-24">
-        <p className="text-sm font-medium tracking-wide text-muted uppercase">Exam Format</p>
+        <p className="label-caps text-muted">Exam Format</p>
         <h1 className="mt-2 text-3xl font-semibold text-foreground">{exam.label}</h1>
         <p className="mt-4 text-foreground/90">
           This exam has {totalQuestions(exam)} questions across {exam.sections.length} sections, and
@@ -318,7 +318,7 @@ function ComingSoon({ exam }: { exam: ExamModule }) {
     <div className="flex flex-1 justify-center bg-background">
       <main className="w-full max-w-2xl px-6 py-16 sm:py-24">
         <div className="text-center">
-          <p className="text-sm font-medium tracking-wide text-muted uppercase">Exam Format</p>
+          <p className="label-caps text-muted">Exam Format</p>
           <h1 className="mt-2 text-3xl font-semibold text-foreground">{exam.label}</h1>
           <p className="mx-auto mt-4 max-w-md text-foreground/90">
             {exam.shortLabel} practice is not ready yet. The format below is final. The question
