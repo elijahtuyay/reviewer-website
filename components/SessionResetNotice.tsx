@@ -104,7 +104,7 @@ export default function SessionResetNotice({ examId }: SessionResetNoticeProps) 
 
       {saved.length > 0 && (
         <div className="mt-3 border-t border-line pt-3">
-          <p className="text-xs font-medium tracking-wide text-muted uppercase">
+          <p className="label-caps text-muted">
             Saved earlier in this session
           </p>
           <ul className="mt-2 flex flex-col gap-1">

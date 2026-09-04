@@ -87,7 +87,7 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
   return (
     <div className="flex flex-1 justify-center bg-background">
       <main className="w-full max-w-2xl px-6 py-16 sm:py-24">
-        <p className="text-sm font-medium tracking-wide text-muted uppercase">Exam Format</p>
+        <p className="label-caps label-caps-page text-muted">Exam Format</p>
         <h1 className="mt-2 text-3xl font-semibold text-foreground">{exam.label}</h1>
         <p className="mt-4 text-foreground/90">
           This exam has {totalQuestions(exam)} questions across {exam.sections.length} sections, and
@@ -107,7 +107,7 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
         <SessionResetNotice examId={exam.id} />
 
         <div className="mt-10">
-          <p className="text-sm font-medium text-foreground">
+          <p className="font-sans text-sm font-medium text-foreground">
             {exam.rules.sectionOrder === "fixed"
               ? "Select a section to start"
               : "Take the sections in any order"}
@@ -127,7 +127,7 @@ export default async function ExamSetupPage({ params }: { params: Promise<{ exam
             {exam.sections.map((section) => (
               <div key={section.id} className="rounded-lg border border-line bg-panel p-5">
                 <div className="flex items-baseline justify-between gap-4">
-                  <h2 className="text-sm font-medium text-foreground">{section.label}</h2>
+                  <h2 className="font-sans text-sm font-medium text-foreground">{section.label}</h2>
                   <span className="shrink-0 text-xs text-muted">
                     {section.questionCount} questions &middot; {section.minutes} min
                     {poolSizes.get(section.id) ? (
@@ -318,7 +318,7 @@ function ComingSoon({ exam }: { exam: ExamModule }) {
     <div className="flex flex-1 justify-center bg-background">
       <main className="w-full max-w-2xl px-6 py-16 sm:py-24">
         <div className="text-center">
-          <p className="text-sm font-medium tracking-wide text-muted uppercase">Exam Format</p>
+          <p className="label-caps label-caps-page text-muted">Exam Format</p>
           <h1 className="mt-2 text-3xl font-semibold text-foreground">{exam.label}</h1>
           <p className="mx-auto mt-4 max-w-md text-foreground/90">
             {exam.shortLabel} practice is not ready yet. The format below is final. The question
@@ -333,7 +333,7 @@ function ComingSoon({ exam }: { exam: ExamModule }) {
           {exam.sections.map((section) => (
             <div key={section.id} className="flex items-center justify-between gap-4 px-5 py-4">
               <div>
-                <h2 className="text-sm font-medium text-foreground">{section.label}</h2>
+                <h2 className="font-sans text-sm font-medium text-foreground">{section.label}</h2>
                 <p className="mt-0.5 text-xs text-muted">{section.description}</p>
               </div>
               <div className="shrink-0 text-right text-xs text-muted">{section.minutes} min</div>

@@ -28,7 +28,7 @@ export default function ResultSummary({ result, sectionLabel, exam }: ResultSumm
 
   return (
     <div className="border-b border-line pb-8">
-      <p className="text-sm font-medium tracking-wide text-muted uppercase">
+      <p className="label-caps label-caps-page text-muted">
         {sectionLabel}: Results
       </p>
 

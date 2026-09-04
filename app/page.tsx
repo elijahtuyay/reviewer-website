@@ -119,7 +119,7 @@ function Hero({ exams, totalBank }: { exams: ExamModule[]; totalBank: number }) 
         className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/0 via-black/10 to-black/30"
       />
       <div className="relative mx-auto w-full max-w-5xl px-6 py-20 text-center sm:py-28">
-        <p className="text-xs font-semibold tracking-widest uppercase opacity-90">
+        <p className="label-caps opacity-90">
           {names} practice
         </p>
         <h1 className="mx-auto mt-4 max-w-3xl text-3xl leading-tight font-bold text-balance sm:text-4xl md:text-5xl">
@@ -196,7 +196,7 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
     <section id="exams" className="scroll-mt-16 border-b border-line">
       <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-20">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold tracking-widest text-accent-text uppercase">
+          <p className="label-caps text-accent-text">
             Select your exam
           </p>
           <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
@@ -248,15 +248,15 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
 
               <dl className="mt-5 grid grid-cols-3 gap-3 border-y border-line py-4 text-center">
                 <div>
-                  <dd className="text-lg font-semibold text-foreground">{exam.sections.length}</dd>
+                  <dd className="text-lg font-semibold tabular-nums text-foreground">{exam.sections.length}</dd>
                   <dt className="text-xs text-muted">sections</dt>
                 </div>
                 <div>
-                  <dd className="text-lg font-semibold text-foreground">{totalQuestions(exam)}</dd>
+                  <dd className="text-lg font-semibold tabular-nums text-foreground">{totalQuestions(exam)}</dd>
                   <dt className="text-xs text-muted">questions</dt>
                 </div>
                 <div>
-                  <dd className="text-lg font-semibold text-foreground">{totalMinutes(exam)} min</dd>
+                  <dd className="text-lg font-semibold tabular-nums text-foreground">{totalMinutes(exam)} min</dd>
                   <dt className="text-xs text-muted">of testing</dt>
                 </div>
               </dl>
@@ -387,7 +387,7 @@ function HowItWorks() {
     <section id="how-it-works" className="scroll-mt-16 border-b border-line bg-panel">
       <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-20">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold tracking-widest text-accent-text uppercase">
+          <p className="label-caps text-accent-text">
             How it works
           </p>
           <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
@@ -472,7 +472,7 @@ function FeatureBands() {
                 position without touching DOM order, which keeps each heading
                 ahead of its own list for screen readers. */}
             <div className={i % 2 === 1 ? "lg:order-2" : undefined}>
-              <p className="text-xs font-semibold tracking-widest text-accent-text uppercase">
+              <p className="label-caps text-accent-text">
                 {feature.eyebrow}
               </p>
               <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
@@ -557,7 +557,7 @@ function Faq({ faqs }: { faqs: FaqEntry[] }) {
   return (
     <section className="border-b border-line">
       <div className="mx-auto w-full max-w-3xl px-6 py-16 sm:py-20">
-        <p className="text-xs font-semibold tracking-widest text-accent-text uppercase">
+        <p className="label-caps text-accent-text">
           Common questions
         </p>
         <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">Before you start</h2>

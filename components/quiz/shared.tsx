@@ -78,7 +78,7 @@ export function SectionLockScreen({
   return (
     <div className="flex flex-1 justify-center bg-background">
       <main className="w-full max-w-lg px-6 py-16 text-center sm:py-24">
-        <p className="text-sm font-medium tracking-wide text-muted uppercase">Section locked</p>
+        <p className="label-caps label-caps-page text-muted">Section locked</p>
         <h1 className="mt-2 text-2xl font-semibold text-foreground sm:text-3xl">
           Finish {blockedBy.label} first
         </h1>

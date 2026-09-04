@@ -18,7 +18,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
   return (
     <div className="flex flex-1 justify-center bg-background">
       <main className="w-full max-w-lg px-6 py-24 text-center">
-        <p className="text-sm font-medium tracking-wide text-muted uppercase">Error</p>
+        <p className="label-caps label-caps-page text-muted">Error</p>
         <h1 className="mt-2 text-3xl font-semibold text-foreground">This page has an error</h1>
         <p className="mt-4 text-foreground/90">
           This browser tab still holds your answers for every section you started. Press Try again.

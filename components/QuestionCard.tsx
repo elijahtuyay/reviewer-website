@@ -209,8 +209,8 @@ function QuestionCard({
         <span className="text-sm font-medium text-muted">{index + 1}</span>
         {passageParts ? (
           <div className="min-w-0 flex-1">
-            <div className="rounded-md border-l-2 border-line-strong bg-panel py-3 pr-4 pl-4">
-              <p className="text-xs font-medium tracking-wide text-muted uppercase">Passage</p>
+            <div className="measure rounded-md border-l-2 border-line-strong bg-panel py-3 pr-4 pl-4">
+              <p className="label-caps text-muted">Passage</p>
               <p className="mt-2 text-sm leading-relaxed text-foreground/90">
                 <MathText text={passageParts.passage} />
               </p>
@@ -235,7 +235,7 @@ function QuestionCard({
                 ["Quantity B", quantities.b],
               ] as const).map(([label, value]) => (
                 <div key={label} className="rounded-md border border-line bg-panel px-4 py-3">
-                  <p className="text-xs font-medium tracking-wide text-muted uppercase">{label}</p>
+                  <p className="label-caps text-muted">{label}</p>
                   <p className="mt-1 leading-relaxed text-foreground">
                     <MathText text={value} />
                   </p>
