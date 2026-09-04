@@ -463,6 +463,79 @@ for (const [key, slots] of topicSlots) {
 }
 clustered.sort((a, b) => b.share - a.share);
 
+/*
+ * The same argument as the slot check above, applied to option LENGTH.
+ *
+ * A per-bank length average hides a loaded topic exactly the way a per-file
+ * slot average hid Para Forming keying the last option 8 times in 10. Measured
+ * when this check was added: GRE Verbal Reading Comprehension keyed the
+ * SHORTEST option 14 of 30 times, 46.7% against a 20% chance rate, +3.7 SE,
+ * while the bank it lives in read 20.0% overall and passed comfortably.
+ *
+ * Both directions are measured, because a floor and a ceiling catch different
+ * habits and this project has now created BOTH. Long hedged keys beside curt
+ * distractors is the familiar one. Its mirror shows up on Reading
+ * Comprehension, where the correct answer to a "primary purpose" stem is the
+ * most minimal claim the passage supports and every distractor carries the
+ * extra clause that makes it wrong, so the key is naturally the shortest
+ * string. "Naturally" does not help the candidate who has noticed.
+ *
+ * A tie at the boundary is skipped rather than resolved: if two options share
+ * the longest or shortest length there is nothing for a candidate to pick out
+ * by eye.
+ */
+const topicLengths = new Map();
+for (const q of all) {
+  if (SLOT_EXEMPT_TOPICS.has(q.topic)) continue;
+  if (!isSingle(q)) continue;
+  const opts = optionsOf(q);
+  if (opts.length === 0) continue;
+  if (opts.some((o) => numeric(o) !== null)) continue;
+  const key = `${q.__bank} / ${q.topic}`;
+  if (!topicLengths.has(key))
+    topicLengths.set(key, { bank: q.__bank, longest: [0, 0], shortest: [0, 0] });
+  const rec = topicLengths.get(key);
+  const lens = opts.map((o) => o.length);
+  const keyLen = opts[q.correctIndex].length;
+  const top = Math.max(...lens);
+  if (lens.filter((l) => l === top).length === 1) {
+    rec.longest[1] += 1;
+    if (keyLen === top) rec.longest[0] += 1;
+  }
+  const bottom = Math.min(...lens);
+  if (lens.filter((l) => l === bottom).length === 1) {
+    rec.shortest[1] += 1;
+    if (keyLen === bottom) rec.shortest[0] += 1;
+  }
+}
+
+/*
+ * Eight is the floor, not four as it is for the slot check.
+ *
+ * A slot check has five buckets and a lopsided split shows up early. A length
+ * check has one bucket against a 20% expectation, where 3 of 8 is already 1.4
+ * standard errors and means nothing. Below eight the answer is always "cannot
+ * tell", and a check that fires on noise teaches the next reader to skim it.
+ */
+const TOPIC_LENGTH_MIN = 8;
+
+const lengthBiased = [];
+for (const [key, rec] of topicLengths) {
+  for (const which of ["longest", "shortest"]) {
+    const [hit, n] = rec[which];
+    if (n < TOPIC_LENGTH_MIN) continue;
+    lengthBiased.push({ key, bank: rec.bank, which, hit, n, share: pct(hit, n) });
+  }
+}
+lengthBiased.sort((a, b) => b.share - a.share);
+
+console.log("\nMost length-biased topics (is the key the longest or shortest option)");
+for (const c of lengthBiased.slice(0, 5)) {
+  console.log(
+    `  ${c.key.padEnd(46)} ${c.which.padEnd(8)} ${c.hit}/${c.n} (${fmt(c.share)})`
+  );
+}
+
 console.log("\nMost concentrated topics (which slot the key sits in)");
 for (const c of clustered.slice(0, 5)) {
   console.log(
@@ -814,6 +887,25 @@ band(
  * already banded separately just above. Its chance rate is the share of ranks
  * that are neither end.
  */
+/*
+ * Per topic, against that topic's own bank's chance rate.
+ *
+ * A topic belongs to one bank, so a four-option NMAT topic is judged against
+ * 25% and a five-option GRE topic against 20%, the same way the per-bank checks
+ * are.
+ */
+for (const c of lengthBiased) {
+  const row = rows.find((r) => r.name === c.bank);
+  const chance = 100 / (row?.optCount ?? 5);
+  const z = zOf(c.hit, c.n, chance);
+  const label = c.which === "longest" ? "the longest" : "the shortest";
+  const line =
+    `${c.key}: the key is ${label} option ${fmt(c.share)} of the time ` +
+    `(${c.hit}/${c.n}, chance ${fmt(chance)}, ${z > 0 ? "+" : ""}${z.toFixed(1)} SE)`;
+  if (Math.abs(z) >= FAIL_Z) failures.push(line);
+  else if (Math.abs(z) >= WATCH_Z) WATCH.push(line);
+}
+
 band(
   "the middle-two heuristic",
   (r) => r.mid,

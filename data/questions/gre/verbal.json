@@ -91,7 +91,7 @@
     "difficulty": "hard",
     "prompt": "Passage: \"Economists once treated remittances sent home by migrant workers as a straightforward transfer, a sum leaving one economy and arriving in another. Household surveys complicate that view. In several receiving regions, the arrival of regular remittances coincides with a measurable withdrawal of adult household members from local wage labor, so that total household income rises by less than the sum received. The effect is strongest where local wages are low and weakest where they approach what the migrant earns abroad. None of this makes remittances unhelpful. Recipient households are better off, and the money is spent locally. It does mean that a policy costed on the assumption that every dollar received is a dollar added will overstate what the flow accomplishes.\" The passage implies that the shortfall it describes would be smallest in a region where?",
     "options": [
-      "local wages are close to what migrants earn abroad",
+      "local wages at home approach what migrants can earn abroad",
       "remittances arrive irregularly rather than on a schedule",
       "recipient households spend the money outside the region",
       "the number of migrants working abroad has recently declined",
@@ -936,7 +936,7 @@
       "justified whenever the relevant background theories are themselves well confirmed",
       "the reason that most background assumptions are never tested at all",
       "the mistake that has most often delayed the acceptance of new instruments",
-      "judged sound or unsound only in hindsight"
+      "judged sound or unsound only in hindsight, after the results are in"
     ],
     "correctIndex": 4,
     "explanation": "The closing sentence says that what separates a productive doubt of the apparatus from a sheltering one is not a rule of method but a judgment made afterward, once it is clear which repair paid. That places the assessment after the fact rather than at the moment of choice. The passage does not forbid the move, since it reports cases where it was the sensible one, and it offers no test based on how well the background theories are confirmed.",
@@ -1020,7 +1020,7 @@
       "cannot be loaded above the stress that would break it outright",
       "fails only after a visible crack has already appeared in it",
       "was entirely unknown to the engineers of the nineteenth century",
-      "must be withdrawn from service after a specified life",
+      "must be withdrawn from service after a specified service life",
       "survives an unlimited number of cycles below a threshold stress"
     ],
     "correctIndex": 3,
@@ -1034,7 +1034,7 @@
     "difficulty": "easy",
     "prompt": "Passage: \"In the eighteenth century French cartographers began leaving parts of their maps blank. Earlier maps had filled the interior of every continent with rivers, mountains and kingdoms drawn from rumor, and a patron read an empty space as a failure of the mapmaker rather than a failure of the evidence. The new convention treated a blank as a claim in its own right, a statement that nothing reliable was known. Sales suffered at first, and rival houses advertised their own crowded sheets as more complete. Within a generation the blank had become a mark of seriousness, and maps still full of invented detail were dismissed as decorative. The change owed nothing to new surveys. It was a change in what a map was understood to be for.\" The passage is primarily concerned with?",
     "options": [
-      "a shift in what mapmakers treated a map as claiming",
+      "a shift in what mapmakers treated a map as claiming to depict",
       "the surveys that first filled in the interiors of the continents",
       "the commercial failure of eighteenth century French cartography",
       "techniques for distinguishing rumor from reliable geographic evidence",
@@ -1383,7 +1383,7 @@
     "prompt": "Passage: \"Concrete piers built by Roman engineers two thousand years ago still stand in coastal water, while harbor works poured a century ago have crumbled. The difference is not craftsmanship but chemistry. Roman builders combined volcanic ash with lime and seawater, and the resulting material does not merely resist the sea. Water percolating through it dissolves parts of the ash and deposits interlocking crystals in the cracks, so the concrete grows stronger across decades. Modern cement, by contrast, is formulated to reach its full strength within weeks and then to hold it, and the same crystal growth that heals a Roman pier would be read as damage in a modern slab. The Roman recipe is not a lost superior technology. It is a different bargain, one that trades early strength for very slow repair, and few contemporary projects can wait.\" The passage suggests that the Roman recipe is poorly suited to contemporary construction chiefly because it:",
     "options": [
       "cannot be poured where salt water is present",
-      "gains its strength far too slowly",
+      "gains its strength much too slowly for modern use",
       "depends on volcanic ash that no longer exists",
       "produces crystals that weaken the material over time",
       "was intended for piers rather than for structures on land"
@@ -1437,7 +1437,7 @@
       "the queen has inspected the chosen cavity herself",
       "no scout on the branch is still advertising a rival site",
       "the cavity is the nearest of those the scouts have located",
-      "enough scouts are present at the cavity itself"
+      "enough scouts have gathered at the cavity site itself"
     ],
     "correctIndex": 4,
     "explanation": "The passage says scouts revisiting a promising cavity count the scouts present there and act once that number passes a threshold, and it states outright that the choice is settled at the site rather than in the cluster. The closing sentence rules out any requirement that rival dancing has stopped, since the swarm can commit while bees still dance for somewhere else. Distance is never given as a criterion, and the queen is not described as inspecting anything.",
