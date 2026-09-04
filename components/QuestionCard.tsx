@@ -209,9 +209,9 @@ function QuestionCard({
         <span className="text-sm font-medium text-muted">{index + 1}</span>
         {passageParts ? (
           <div className="min-w-0 flex-1">
-            <div className="rounded-md border-l-2 border-line-strong bg-panel py-3 pr-4 pl-4">
+            <div className="measure rounded-md border-l-2 border-line-strong bg-panel py-3 pr-4 pl-4">
               <p className="label-caps text-muted">Passage</p>
-              <p className="measure mt-2 text-sm leading-relaxed text-foreground/90">
+              <p className="mt-2 text-sm leading-relaxed text-foreground/90">
                 <MathText text={passageParts.passage} />
               </p>
             </div>

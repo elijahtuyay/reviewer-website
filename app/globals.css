@@ -225,25 +225,61 @@ body {
  * look like the thing it practices for.
  * ========================================================================== */
 
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+@layer base {
+  /*
+   * INSIDE @layer base, and that is load-bearing rather than tidiness.
+   *
+   * An unlayered declaration beats everything inside a layer regardless of
+   * specificity, so while this block sat outside one, a bare `h1` selector
+   * outranked every Tailwind utility. Measured: `text-wrap: balance` resets
+   * text-wrap-mode to `wrap`, which overrode `.truncate`'s `white-space:
+   * nowrap` on the quiz header, so a sticky h-20 header's only overflow guard
+   * had quietly become decorative. `line-height` did the same to
+   * `leading-tight` on the hero.
+   *
+   * Nothing was visibly broken, because the longest real section name still
+   * fits one line at 320px. It would have broken on the first longer one.
+   */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display), Georgia, "Times New Roman", serif;
   /*
    * Tracking tightens as type grows. A face draws its side bearings for text
    * sizes, so at 30px and up the same spacing reads as gappy. The value is
    * small on purpose: past about -0.03em the letters start to collide in the
    * condensed strings this site actually sets, like "Quantitative Skills".
    */
-  letter-spacing: -0.018em;
+    letter-spacing: -0.018em;
+    /*
+     * 1.15 rather than Tailwind's inherited body leading. A two-line heading
+     * set at body leading looks like two separate lines rather than one.
+     */
+    line-height: 1.15;
+    /* Keeps a two-line heading from leaving one orphaned word on line two. */
+    text-wrap: balance;
+  }
+
   /*
-   * 1.15 rather than Tailwind's inherited body leading. A two-line heading set
-   * at body leading looks like two separate lines rather than one heading.
+   * The serif is a DISPLAY face here, and 14px is below where it pays.
+   *
+   * The section headings on the three exam pages are 14px, where the serif has
+   * no size left to read as display and "Quantitative Reasoning" goes cramped
+   * at this tracking. Worse, they are declared font-medium: only 600 and 700
+   * are loaded, so 500 rounds to 600 and the heading ends up the same weight
+   * as the 18px cards above it while being 4px smaller.
+   *
+   * Opting them back into the sans is the honest fix. Making them bigger would
+   * be redesigning a page this change was not asked to touch.
    */
-  line-height: 1.15;
-  /* Keeps a two-line heading from leaving one orphaned word on line two. */
-  text-wrap: balance;
+  h1.font-sans,
+  h2.font-sans,
+  h3.font-sans,
+  h4.font-sans {
+    font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+    letter-spacing: normal;
+  }
 }
 
 /*
@@ -261,6 +297,25 @@ h4 {
   font-weight: 600;
   font-size: 0.6875rem;
   line-height: 1;
+}
+
+/*
+ * The page-level eyebrow, one step up.
+ *
+ * Six of the nineteen labels were 14px before the unification and would have
+ * dropped to 11px, a 21% cut on the line that NAMES the screen: "Language
+ * Skills: Results" would have become the smallest text on the results page.
+ * A label that titles a page is not the same thing as a label inside a card,
+ * so it is not the same size.
+ *
+ * Two classes rather than one, deliberately. What the unification removed was
+ * four ACCIDENTAL variants of a single level. This is a second level, and
+ * collapsing it into the first would be flattening real hierarchy to make a
+ * count look tidier.
+ */
+.label-caps-page {
+  font-size: 0.8125rem;
+  letter-spacing: 0.07em;
 }
 
 

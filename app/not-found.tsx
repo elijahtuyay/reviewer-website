@@ -19,7 +19,7 @@ export default function NotFound() {
   return (
     <div className="flex flex-1 justify-center bg-background">
       <main className="w-full max-w-lg px-6 py-24 text-center">
-        <p className="label-caps text-muted">Error 404</p>
+        <p className="label-caps label-caps-page text-muted">Error 404</p>
         <h1 className="mt-2 text-3xl font-semibold text-foreground">This page does not exist</h1>
         <p className="mt-4 text-foreground/90">
           The link may be old. The exam in the link may also have no question bank yet.

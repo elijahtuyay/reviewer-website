@@ -248,15 +248,15 @@ function ExamPicker({ exams }: { exams: { exam: ExamModule; bank: number }[] }) 
 
               <dl className="mt-5 grid grid-cols-3 gap-3 border-y border-line py-4 text-center">
                 <div>
-                  <dd className="text-lg font-semibold text-foreground">{exam.sections.length}</dd>
+                  <dd className="text-lg font-semibold tabular-nums text-foreground">{exam.sections.length}</dd>
                   <dt className="text-xs text-muted">sections</dt>
                 </div>
                 <div>
-                  <dd className="text-lg font-semibold text-foreground">{totalQuestions(exam)}</dd>
+                  <dd className="text-lg font-semibold tabular-nums text-foreground">{totalQuestions(exam)}</dd>
                   <dt className="text-xs text-muted">questions</dt>
                 </div>
                 <div>
-                  <dd className="text-lg font-semibold text-foreground">{totalMinutes(exam)} min</dd>
+                  <dd className="text-lg font-semibold tabular-nums text-foreground">{totalMinutes(exam)} min</dd>
                   <dt className="text-xs text-muted">of testing</dt>
                 </div>
               </dl>
