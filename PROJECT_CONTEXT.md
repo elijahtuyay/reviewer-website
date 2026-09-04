@@ -1082,7 +1082,7 @@ Write bank edits from a real script file, never a heredoc.
    healthy. Measured when the band was added, **GRE Verbal Reading Comprehension
    keyed the SHORTEST option 14 of 30 times, 46.7% against 20% by chance,
    +3.7 SE**, inside a bank that read 20.0% overall and passed comfortably. It
-   was the only failure across all eight banks and 20 topic/direction pairs.
+   was the only failure across all eight banks.
 
    **The tension that made this look hard turned out to be measurable rather
    than a matter of taste.** The worry was that a must-be-true or primary-purpose
@@ -1096,6 +1096,33 @@ Write bank edits from a real script file, never a heredoc.
    The floor is **eight**, not the slot check's four. A slot check has five
    buckets and a lopsided split shows early; a length check has one bucket
    against a 20% expectation, where 3 of 8 is already 1.4 SE and means nothing.
+
+   **That floor was also a hole, and a review lane proved it by exploiting it.**
+   This bank names topics at two levels, so "Critical Reasoning: Weaken" and
+   "Critical Reasoning: Assumption" are separate strings. Splitting a topic
+   finely enough makes any bias inside it invisible to a per-topic check: the
+   lane relabelled the 30 biased GRE Reading Comprehension questions into six
+   sub-topics and the same +3.7 SE breach vanished, with not even a watch line.
+   It was not hypothetical. NMAT Logical Reasoning's Critical Reasoning family
+   is 19 questions across four sub-topics, none reaching eight alone, so the
+   whole family was unjudged -- and Critical Reasoning is the topic this project
+   records hitting 94.7% on the longest-option heuristic. Every sub-topic is now
+   measured BOTH alone and rolled up to its family.
+
+   **Only the two extreme ranks were measured, so a habit one rank in passed
+   clean.** A bank keying rank 0 in 8 of 36 and rank 1 in 14 has its extremes at
+   chance, and the audit exited 0 while "guess between the two shortest" scored
+   61% against 40%. There was a bank-level two-longest band and no mirror.
+   There is now a per-topic two-shortest band as well.
+
+   **MARGIN IS DELIBERATELY UNMEASURED, and it is the honest limit of all of
+   this.** A key one character shorter than the runner-up counts the same as one
+   twenty-four characters shorter, though only the second is a tell anyone can
+   see. So a future author can clear a failure by adding a character to enough
+   keys and the audit will bless it. Read the margins before acting on a
+   failure. A minimum-margin rule was considered and refused, because it adds a
+   second threshold to argue about and the count-based rule is what the slot and
+   longest-option checks already use.
 
    **The fix restated the KEY, and did not trim distractors.** Cutting a
    distractor below the key buys the statistic by making the question worse, and

@@ -491,21 +491,74 @@ for (const q of all) {
   const opts = optionsOf(q);
   if (opts.length === 0) continue;
   if (opts.some((o) => numeric(o) !== null)) continue;
-  const key = `${q.__bank} / ${q.topic}`;
-  if (!topicLengths.has(key))
-    topicLengths.set(key, { bank: q.__bank, longest: [0, 0], shortest: [0, 0] });
-  const rec = topicLengths.get(key);
+  if (opts.length < 4) continue;
+  /*
+   * Measured at BOTH the sub-topic and the family it belongs to.
+   *
+   * The floor of eight is statistically right and it was also a hole, because
+   * this bank names topics at two levels: "Critical Reasoning: Weaken" and
+   * "Critical Reasoning: Assumption" are separate strings. Splitting one topic
+   * finely enough makes any bias in it invisible to a per-topic check, and a
+   * review lane demonstrated exactly that by relabelling the 30 biased GRE
+   * Reading Comprehension questions into six sub-topics: the same +3.7 SE
+   * breach vanished, with not even a watch line.
+   *
+   * That is not hypothetical here. NMAT Logical Reasoning's Critical Reasoning
+   * family is 19 questions across four sub-topics, none of which reaches eight
+   * on its own, so the whole family was unjudged — and Critical Reasoning is
+   * precisely the topic this project already records hitting 94.7% on the
+   * longest-option heuristic.
+   *
+   * Rolling up does not replace the sub-topic measurement, it adds to it. A
+   * bias confined to one sub-topic large enough to judge still shows there.
+   */
+  const family = q.topic.includes(": ") ? q.topic.split(": ")[0] : null;
+  const scopes = [`${q.__bank} / ${q.topic}`];
+  if (family) scopes.push(`${q.__bank} / ${family} (all)`);
+
   const lens = opts.map((o) => o.length);
   const keyLen = opts[q.correctIndex].length;
   const top = Math.max(...lens);
-  if (lens.filter((l) => l === top).length === 1) {
-    rec.longest[1] += 1;
-    if (keyLen === top) rec.longest[0] += 1;
-  }
   const bottom = Math.min(...lens);
-  if (lens.filter((l) => l === bottom).length === 1) {
-    rec.shortest[1] += 1;
-    if (keyLen === bottom) rec.shortest[0] += 1;
+  const sorted = [...lens].sort((a, b) => a - b);
+
+  for (const key of scopes) {
+    if (!topicLengths.has(key))
+      topicLengths.set(key, {
+        bank: q.__bank,
+        options: [],
+        longest: [0, 0],
+        shortest: [0, 0],
+        bottom2: [0, 0],
+      });
+    const rec = topicLengths.get(key);
+    /*
+     * Chance comes from the questions actually in the sample, not the bank's
+     * modal option count. They agree everywhere today, and would not for a
+     * four-option topic inside a five-option bank.
+     */
+    rec.options.push(opts.length);
+    if (lens.filter((l) => l === top).length === 1) {
+      rec.longest[1] += 1;
+      if (keyLen === top) rec.longest[0] += 1;
+    }
+    if (lens.filter((l) => l === bottom).length === 1) {
+      rec.shortest[1] += 1;
+      if (keyLen === bottom) rec.shortest[0] += 1;
+    }
+    /*
+     * "Guess between the two SHORTEST" had no check at all.
+     *
+     * Only the two extreme ranks were measured, so a habit one rank in passed
+     * clean: a lane built a bank keying rank 0 in 8 of 36 and rank 1 in 14,
+     * extremes at chance, and the audit exited 0 while "guess between the two
+     * shortest" scored 61% against 40%. The bank-level check already had a
+     * two-longest band and no mirror.
+     */
+    if (sorted[1] !== sorted[2]) {
+      rec.bottom2[1] += 1;
+      if (keyLen <= sorted[1]) rec.bottom2[0] += 1;
+    }
   }
 }
 
@@ -521,18 +574,33 @@ const TOPIC_LENGTH_MIN = 8;
 
 const lengthBiased = [];
 for (const [key, rec] of topicLengths) {
-  for (const which of ["longest", "shortest"]) {
+  const meanOptions = rec.options.reduce((a, b) => a + b, 0) / rec.options.length;
+  for (const which of ["longest", "shortest", "bottom2"]) {
     const [hit, n] = rec[which];
     if (n < TOPIC_LENGTH_MIN) continue;
-    lengthBiased.push({ key, bank: rec.bank, which, hit, n, share: pct(hit, n) });
+    const chance = (which === "bottom2" ? 200 : 100) / meanOptions;
+    lengthBiased.push({ key, bank: rec.bank, which, hit, n, chance, share: pct(hit, n) });
   }
 }
-lengthBiased.sort((a, b) => b.share - a.share);
 
-console.log("\nMost length-biased topics (is the key the longest or shortest option)");
-for (const c of lengthBiased.slice(0, 5)) {
+/*
+ * Sorted by DISTANCE from chance, not by share.
+ *
+ * Sorting by share and taking the top five meant a floor breach could never
+ * appear in the printed table, and a floor breach is the exact failure this
+ * project records under "an instruction against a tell can create its mirror
+ * image" — 0 of 53 is as exploitable as 20 of 53. It reached the failure list
+ * either way, but the table a human actually reads showed five unrelated rows.
+ */
+const distance = (c) => Math.abs(c.share - c.chance);
+lengthBiased.sort((a, b) => distance(b) - distance(a));
+
+const WHICH_LABEL = { longest: "longest", shortest: "shortest", bottom2: "two shortest" };
+console.log("\nMost length-biased topics (where the key sits by option length)");
+for (const c of lengthBiased.slice(0, 6)) {
   console.log(
-    `  ${c.key.padEnd(46)} ${c.which.padEnd(8)} ${c.hit}/${c.n} (${fmt(c.share)})`
+    `  ${c.key.padEnd(44)} ${WHICH_LABEL[c.which].padEnd(13)} ` +
+      `${c.hit}/${c.n} (${fmt(c.share)}, chance ${fmt(c.chance)})`
   );
 }
 
@@ -894,14 +962,31 @@ band(
  * 25% and a five-option GRE topic against 20%, the same way the per-bank checks
  * are.
  */
+/*
+ * MARGIN IS DELIBERATELY NOT MEASURED, and that is a real limit of this check.
+ *
+ * A key one character shorter than the runner-up counts exactly the same as one
+ * twenty-four characters shorter, though only the second is a tell a candidate
+ * can see. The six GRE Reading Comprehension items fixed in v2.8.2 had margins
+ * of 6% to 37%; the eight left alone were between 1.5% and 5.8%, which is
+ * invisible. That gap is a fact about that data, and this check cannot
+ * reproduce the judgment.
+ *
+ * The consequence to know: a future author can clear a failure here by adding
+ * one character to enough keys, and the audit will bless it. A minimum-margin
+ * rule was considered and not adopted, because it adds a second threshold to
+ * argue about and the count-based rule is what the slot and longest-option
+ * checks already use. Read the margins before acting on a failure.
+ */
 for (const c of lengthBiased) {
-  const row = rows.find((r) => r.name === c.bank);
-  const chance = 100 / (row?.optCount ?? 5);
-  const z = zOf(c.hit, c.n, chance);
-  const label = c.which === "longest" ? "the longest" : "the shortest";
+  const z = zOf(c.hit, c.n, c.chance);
+  const label =
+    c.which === "bottom2" ? "in the two shortest" : `the ${c.which}`;
+  const verb = c.which === "bottom2" ? "sits" : "is";
   const line =
-    `${c.key}: the key is ${label} option ${fmt(c.share)} of the time ` +
-    `(${c.hit}/${c.n}, chance ${fmt(chance)}, ${z > 0 ? "+" : ""}${z.toFixed(1)} SE)`;
+    `${c.key}: the key ${verb} ${label} option${c.which === "bottom2" ? "s" : ""} ` +
+    `${fmt(c.share)} of the time (${c.hit}/${c.n}, chance ${fmt(c.chance)}, ` +
+    `${z > 0 ? "+" : ""}${z.toFixed(1)} SE)`;
   if (Math.abs(z) >= FAIL_Z) failures.push(line);
   else if (Math.abs(z) >= WATCH_Z) WATCH.push(line);
 }
