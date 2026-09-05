@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
+import localFont from "next/font/local";
 import ThemeInitScript from "@/components/ThemeInitScript";
 import SiteHeader from "@/components/SiteHeader";
 import PageTransition from "@/components/PageTransition";
@@ -10,14 +10,45 @@ import { joinWithAnd } from "@/lib/text";
 import { SITE_URL } from "@/lib/site-url";
 import "./globals.css";
 
-const geistSans = Geist({
+/*
+ * The fonts are committed under `app/fonts/` and loaded from disk.
+ *
+ * They used to come from `next/font/google`, which downloads them from
+ * fonts.gstatic.com at BUILD time. Its docs say it removes external network
+ * requests, and that is true of the VISITOR but not of the build. Nothing here
+ * held a copy, so the project could not be built without a connection.
+ *
+ * Dev was the worse half, and not in the way it first looked: `next dev` did
+ * NOT fail offline. The Google loader catches a download failure, logs one
+ * line, and substitutes `src: local("Arial")`, so the whole site quietly
+ * rendered in Arial. Only `next build` threw.
+ *
+ * `npm run fonts:vendor` refreshes the files and is the only step that needs a
+ * network. The rationale, and what else does and does not work offline, is in
+ * the "Working offline" section of PROJECT_CONTEXT.md rather than repeated
+ * here.
+ */
+const geistSans = localFont({
+  src: "./fonts/Geist-latin.woff2",
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  weight: "100 900",
+  display: "swap",
+  adjustFontFallback: "Arial",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "./fonts/GeistMono-latin.woff2",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: "100 900",
+  display: "swap",
+  /*
+   * Not "Arial". Next only accepts Arial, Times New Roman or false here, and
+   * computing metric overrides for a monospace stack against a proportional
+   * face is worse than declining to compute them.
+   */
+  adjustFontFallback: false,
+  fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
 });
 
 /**
@@ -35,15 +66,14 @@ const geistMono = Geist_Mono({
  * is a text face with sturdy stems, so it holds at a section heading and still
  * has presence in the hero. It also reads as institutional rather than
  * editorial, which is the right register for an exam.
- *
- * Two weights, not the full range. Each one is a download on a site whose
- * whole hosting story is that every page is static.
  */
-const displaySerif = Source_Serif_4({
+const displaySerif = localFont({
+  src: "./fonts/SourceSerif4-latin.woff2",
   variable: "--font-display-serif",
-  subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: "200 900",
   display: "swap",
+  adjustFontFallback: "Times New Roman",
+  fallback: ["Georgia", "Times New Roman", "serif"],
 });
 
 /**
