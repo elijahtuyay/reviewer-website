@@ -62,16 +62,20 @@ export function hasMath(text: string): boolean {
 /**
  * True when any part of a question needs KaTeX.
  *
- * The explanation counts. Checking only the prompt and options looked
- * sufficient and was correct by luck: Logical Reasoning has math in exactly ONE
- * of 100 prompts but 28 explanations, so the whole section's preload hung on a
- * single question, and Language Skills was skipped only because it happens to
- * have no explanation math either. Adding one formula to any Language Skills
- * explanation would have silently stopped the preload for that section.
+ * The explanation counts, and it is the reason this is not just the prompt.
+ * Logical Reasoning has math in exactly ONE of 100 prompts but 29 explanations,
+ * so the whole section's preload hangs on a single question, and Language
+ * Skills is skipped only because it happens to have no explanation math either.
+ * Adding one formula to any Language Skills explanation would silently stop the
+ * preload for that section.
+ *
+ * Explanations no longer ship with the questions, so this reads the
+ * `explanationHasMath` flag that `scripts/split-bank.mjs` computes in their
+ * place. A boolean survives the split; the prose does not need to.
  */
 export function questionNeedsMath(question: {
   prompt: string;
-  explanation: string;
+  explanationHasMath?: boolean;
   // Optional since the GRE brought numeric-entry questions, which have no
   // options at all. A required array here would have made the preloader the
   // one thing standing between a new question kind and a compile.
@@ -79,7 +83,7 @@ export function questionNeedsMath(question: {
 }): boolean {
   return (
     hasMath(question.prompt) ||
-    hasMath(question.explanation) ||
+    question.explanationHasMath === true ||
     (question.options ?? []).some(hasMath)
   );
 }

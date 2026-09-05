@@ -1,4 +1,4 @@
-import { Difficulty, ExamId, Question, SectionId } from "@/data/schema";
+import { Difficulty, ExamId, Question, SectionId, ExplanationMap } from "@/data/schema";
 
 /**
  * THE CONTRACT EVERY EXAM IMPLEMENTS.
@@ -245,6 +245,15 @@ export interface ExamModule {
    * them at all.
    */
   loadSection: (sectionId: SectionId) => Promise<Question[]>;
+
+  /**
+   * The same section's explanations, loaded separately and later.
+   *
+   * Split out because none of them can be seen until the candidate submits,
+   * while the questions have to be there before the timer starts. See
+   * `scripts/split-bank.mjs`.
+   */
+  loadExplanations: (sectionId: SectionId) => Promise<ExplanationMap>;
 }
 
 /** Convenience for the common case of a section whose bank is one JSON file. */
@@ -256,5 +265,17 @@ export function jsonBank(
     if (!loader) return [];
     const mod = await loader();
     return mod.default as Question[];
+  };
+}
+
+/** The `jsonBank` of explanations: same shape, other half of the split. */
+export function jsonExplanations(
+  loaders: Record<string, () => Promise<{ default: unknown }>>
+): (sectionId: SectionId) => Promise<ExplanationMap> {
+  return async (sectionId) => {
+    const loader = loaders[sectionId];
+    if (!loader) return {};
+    const mod = await loader();
+    return mod.default as ExplanationMap;
   };
 }

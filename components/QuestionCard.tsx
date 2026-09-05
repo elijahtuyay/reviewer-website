@@ -81,6 +81,16 @@ interface QuestionCardProps {
   question: Question;
   index: number;
   /**
+   * The explanation, in review mode only.
+   *
+   * A prop rather than a field on `question`, because explanations load as
+   * their own chunk at submit time — they are up to 47% of a section's bank
+   * and none of them can be read before then. Undefined while that chunk is
+   * still arriving, which is why the block below renders a waiting line
+   * rather than an empty space.
+   */
+  explanation?: string;
+  /**
    * The candidate's answer: an option index, an array of them, or typed text.
    * See `lib/answers.ts` for why this is not a bare number any more.
    */
@@ -118,6 +128,7 @@ function QuestionCard({
   value,
   onSelect,
   onToggle,
+  explanation,
   reviewMode = false,
   lockedReason,
 }: QuestionCardProps) {
@@ -495,7 +506,13 @@ function QuestionCard({
             {isAnswered ? (isCorrect ? "Correct" : "Incorrect") : "No answer"}
           </p>
           <p className="mt-2 leading-relaxed text-foreground">
-            <MathText text={question.explanation} />
+            {explanation ? (
+              <MathText text={explanation} />
+            ) : (
+              // The chunk is in flight. Saying so beats a blank line that reads
+              // as an explanation nobody wrote.
+              <span className="text-muted">The explanation is loading.</span>
+            )}
           </p>
         </div>
       )}

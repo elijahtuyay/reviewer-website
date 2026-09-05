@@ -1,4 +1,4 @@
-import { ExamModule, jsonBank } from "@/lib/exams/types";
+import { ExamModule, jsonBank, jsonExplanations } from "@/lib/exams/types";
 
 /**
  * GRE General Test.
@@ -178,8 +178,12 @@ const gre: ExamModule = {
   ],
 
   loadSection: jsonBank({
-    verbal: () => import("@/data/questions/gre/verbal.json"),
-    quantitative: () => import("@/data/questions/gre/quantitative.json"),
+    verbal: () => import("@/data/generated/gre/verbal.questions.json"),
+    quantitative: () => import("@/data/generated/gre/quantitative.questions.json"),
+  }),
+  loadExplanations: jsonExplanations({
+    verbal: () => import("@/data/generated/gre/verbal.explanations.json"),
+    quantitative: () => import("@/data/generated/gre/quantitative.explanations.json"),
   }),
 };
 

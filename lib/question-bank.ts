@@ -1,4 +1,4 @@
-import { ExamId, Question, SectionId } from "@/data/schema";
+import { ExamId, ExplanationMap, Question, SectionId } from "@/data/schema";
 import { findExam } from "@/lib/exams/registry";
 
 /**
@@ -71,6 +71,62 @@ export function loadSection(examId: ExamId, sectionId: SectionId): Promise<Quest
  */
 export function getLoadedSection(examId: ExamId, sectionId: SectionId): Question[] {
   return cache.get(key(examId, sectionId)) ?? [];
+}
+
+/*
+ * EXPLANATIONS ARE A SECOND, LATER LOAD.
+ *
+ * They are 20% to 47% of a section's bank and not one of them can be seen until
+ * the candidate submits, so shipping them with the questions put up to 35 KB of
+ * prose in front of a timed section that had not started yet. They now arrive
+ * as their own chunk, requested at submit time.
+ *
+ * Same cache-and-inflight discipline as the questions, and the same refusal to
+ * cache a failure, so a retry can actually retry. What this must NOT do is
+ * resolve to an empty map on failure: the review screen would then render every
+ * explanation blank, which reads as an explanation nobody wrote rather than as
+ * a chunk that never arrived. The caller catches and the card says it is still
+ * loading.
+ */
+const explanationCache = new Map<string, ExplanationMap>();
+const explanationInflight = new Map<string, Promise<ExplanationMap>>();
+
+export function loadExplanations(
+  examId: ExamId,
+  sectionId: SectionId
+): Promise<ExplanationMap> {
+  const k = key(examId, sectionId);
+  const cached = explanationCache.get(k);
+  if (cached) return Promise.resolve(cached);
+
+  const existing = explanationInflight.get(k);
+  if (existing) return existing;
+
+  const exam = findExam(examId);
+  if (!exam) return Promise.resolve({});
+
+  const promise = exam
+    .loadExplanations(sectionId)
+    .then((map) => {
+      explanationCache.set(k, map);
+      explanationInflight.delete(k);
+      return map;
+    })
+    .catch((error) => {
+      explanationInflight.delete(k);
+      throw error;
+    });
+
+  explanationInflight.set(k, promise);
+  return promise;
+}
+
+/**
+ * The already-loaded explanations for a section, or an empty map. Safe during
+ * render, like `getLoadedSection`.
+ */
+export function getLoadedExplanations(examId: ExamId, sectionId: SectionId): ExplanationMap {
+  return explanationCache.get(key(examId, sectionId)) ?? {};
 }
 
 function shuffle<T>(items: T[]): T[] {

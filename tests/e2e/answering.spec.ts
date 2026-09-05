@@ -159,3 +159,41 @@ test.describe("answer persistence", () => {
     await expect(options(page).first()).toHaveAttribute("aria-checked", "true");
   });
 });
+
+test.describe("explanations", () => {
+  /**
+   * THE EXPLANATION MUST ARRIVE AFTER SUBMITTING.
+   *
+   * Explanations are no longer part of a section's bank. They are 20% to 47% of
+   * it and none of them can be read before the candidate submits, so they load
+   * as their own chunk at that moment.
+   *
+   * The failure that buys is specific and silent: the review screen renders,
+   * the score is right, and every explanation is blank — which reads as an
+   * explanation nobody wrote rather than as a chunk that never arrived. So this
+   * asserts real prose, and asserts the loading placeholder is gone.
+   */
+  test("load after submitting and render real prose", async ({ page }) => {
+    await startSection(page, "nmat", "Language Skills");
+
+    await page.getByRole("button", { name: /^Submit/ }).click();
+    await page.getByRole("alertdialog").getByRole("button", { name: /submit section/i }).click();
+    await expect(page.getByRole("timer")).toHaveCount(0);
+
+    const explanation = page.getByText(/Correct answer|Your answer/).first();
+    await expect(explanation).toBeVisible();
+
+    await expect(page.getByText("The explanation is loading.")).toHaveCount(0, {
+      timeout: 20_000,
+    });
+
+    // Every served question must have one, not just the first.
+    const words = await page.evaluate(() => {
+      const marks = [...document.querySelectorAll("p")]
+        .map((p) => p.textContent?.trim() ?? "")
+        .filter((t) => t.length > 40);
+      return marks.length;
+    });
+    expect(words, "review must show explanation prose").toBeGreaterThan(5);
+  });
+});

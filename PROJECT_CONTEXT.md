@@ -724,6 +724,62 @@ A separate Claude session reported (2026-08-21) that the correct answer sits in 
 python -c "import json,io,collections; c=collections.Counter(); [c.update([q['correctIndex']]) for n in ['language-skills','quantitative-skills','logical-reasoning'] for q in json.load(io.open(f'data/questions/{n}.json',encoding='utf-8'))]; print(c)"
 ```
 
+## The question bank is split at build time (v2.12.0)
+
+**`data/questions/` is the source. `data/generated/` is what ships, and it is
+gitignored.** `scripts/split-bank.mjs` writes two artifacts per bank: the
+questions without their explanations, and an id-to-explanation map.
+
+**Why.** Opening a section downloads its ENTIRE bank, because the draw happens
+in the browser, which is what keeps every page static and the hosting free. The
+explanations rode along in the same file, were 20% to 47% of it, and not one of
+them can be seen until the candidate submits. GMAT Quantitative was shipping
+34.5 KB of prose to someone who had not yet answered a question, over Philippine
+mobile data, in the seconds before a timed section starts.
+
+```
+bank                          before   answer   review   saved
+  gmat/quantitative             74.4    28.0    35.7   62%
+  gre/quantitative              80.4    34.7    35.3   57%
+  quantitative-skills           70.1    36.8    24.4   48%
+  gmat/data-insights            95.5    50.0    34.8   48%
+  logical-reasoning             83.6    46.6    26.5   44%
+  gre/verbal                   127.8    74.7    40.5   42%
+  language-skills               97.3    56.0    30.1   42%
+  gmat/verbal                  194.6   144.1    39.8   26%
+  ALL                          823.8   476.2           42% off the answering path
+```
+
+The quantitative sections gain most, because their prompts are short and their
+explanations do the work. Dropping the pretty-printing helps too: the generated
+files are for a machine.
+
+**What did NOT change, deliberately.** An author still edits one file per
+section with the explanation next to the question it explains, and `audit:bank`
+still reads exactly those files. The split is a build artifact, regenerated
+before `dev` and `build`, so it cannot drift from the source. It needs no
+network, so the offline property holds.
+
+**`Question` no longer HAS an `explanation` field**, and that is what made the
+change safe: removing it turned every consumer into a compile error rather than
+a silent blank. There were two, and one was not obvious — `questionNeedsMath`
+reads the explanation to decide whether to preload KaTeX, and its own comment
+records that Logical Reasoning has math in one of 100 prompts but 29
+explanations, so the whole section's preload hangs on it. The split therefore
+keeps one bit behind: `explanationHasMath`, a boolean, computed at split time.
+A boolean survives; the prose does not need to.
+
+**A missing `data/generated/` breaks `tsc`, not just the app.** The imports are
+typed, so a fresh clone cannot even typecheck until the split has run. `prepare`
+runs it after `npm install` and `npm ci` for exactly that reason, alongside
+`predev` and `prebuild`.
+
+**The review path fails loudly rather than blankly.** `loadExplanations` refuses
+to resolve to an empty map on error, and `QuestionCard` renders "The explanation
+is loading." while the chunk is in flight. An empty string in that slot reads as
+an explanation nobody wrote, which is a worse failure than an honest one, and
+the browser suite asserts real prose after submitting.
+
 ## Browser tests (v2.11.0)
 
 `npm run test:e2e`, Playwright, in `tests/e2e/`. **Every spec names the defect
@@ -871,6 +927,7 @@ What still needs a connection, and when:
 | `git commit`, `git branch`, `git log` | Yes |
 | `git push`, `gh pr create`, `npx vercel` | **No.** Queue the commits and push on landing. |
 | `npm run test:e2e` | Yes, given a Chrome on the machine |
+| `npm run bank:split` | Yes, and it runs before `dev` and `build` anyway |
 | `npm run fonts:vendor` | **No**, and it should almost never run |
 
 **`.env.local` must exist or the build fails**, because `lib/auth/server.ts`

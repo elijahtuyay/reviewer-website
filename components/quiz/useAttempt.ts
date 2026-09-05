@@ -10,7 +10,7 @@ import {
   sameAnswer,
   toggleMultiAnswer,
 } from "@/lib/answers";
-import type { ExamId, Question, SectionId } from "@/data/schema";
+import type { ExamId, ExplanationMap, Question, SectionId } from "@/data/schema";
 import { ExamModule, SectionConfig } from "@/lib/exams/types";
 import {
   AdaptiveState,
@@ -20,7 +20,9 @@ import {
 } from "@/lib/adaptive";
 import {
   drawRandomQuestionIds,
+  getLoadedExplanations,
   getLoadedSection,
+  loadExplanations,
   getQuestionsByIds,
   loadSection,
 } from "@/lib/question-bank";
@@ -71,6 +73,11 @@ export interface Attempt {
   /** Questions served so far, in display order. */
   questions: Question[];
   answers: Record<string, AnswerValue | null>;
+  /**
+   * Question id to explanation, populated only once the attempt is closed.
+   * Empty while the chunk is in flight, which is a state the card renders.
+   */
+  explanations: ExplanationMap;
   flagged: string[];
 
   /** Index of the question on screen. Only meaningful for sequential navigation. */
@@ -439,6 +446,38 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     [phase, rules.reviewEdit, reviewBaseline, answers, reviewChangesUsed]
   );
 
+  /*
+   * Explanations, fetched when the attempt closes and not before.
+   *
+   * They are their own chunk because none of them can be read until this
+   * moment, and they were up to 47% of a section's download. The state exists
+   * so review re-renders once the chunk lands; `getLoadedExplanations` is the
+   * synchronous read, mirroring the questions.
+   */
+  const [explanations, setExplanations] = useState<ExplanationMap>(() =>
+    getLoadedExplanations(examId, sectionId)
+  );
+
+  useEffect(() => {
+    if (phase !== "done" && phase !== "reviewEdit") return;
+    let cancelled = false;
+    loadExplanations(examId, sectionId)
+      .then((map) => {
+        if (!cancelled) setExplanations(map);
+      })
+      .catch(() => {
+        /*
+         * Swallowed on purpose. The section is already submitted and the score
+         * is already stored, so a failed explanation chunk costs the reasoning
+         * and nothing else. QuestionCard says one is still loading rather than
+         * rendering a blank that reads as an explanation nobody wrote.
+         */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [phase, examId, sectionId]);
+
   // ---------------------------------------------------------------- actions --
 
   const closeOut = useCallback(
@@ -752,6 +791,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     blockedBy,
     questions,
     answers,
+    explanations,
     flagged,
     cursor,
     totalQuestions: section.questionCount,
