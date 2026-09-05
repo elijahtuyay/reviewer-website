@@ -43,6 +43,19 @@ const geistMono = localFont({
   weight: "100 900",
   display: "swap",
   /*
+   * NOT preloaded, unlike the other two.
+   *
+   * next/font preloads every face declared in the layout, which meant 22.9 KB
+   * of monospace arrived on the home page, the exam pages and everywhere else
+   * it is never used. It appears in exactly four places, all of them behind a
+   * started attempt or an error: the paused overlay's frozen clock, the two
+   * calculator explainers, and the error page's reference code.
+   *
+   * Without the preload the browser fetches it when a rule first needs it,
+   * which on those screens is not a page-load cost at all.
+   */
+  preload: false,
+  /*
    * Not "Arial". Next only accepts Arial, Times New Roman or false here, and
    * computing metric overrides for a monospace stack against a proportional
    * face is worse than declining to compute them.

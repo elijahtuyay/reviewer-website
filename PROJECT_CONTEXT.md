@@ -724,6 +724,50 @@ A separate Claude session reported (2026-08-21) that the correct answer sits in 
 python -c "import json,io,collections; c=collections.Counter(); [c.update([q['correctIndex']]) for n in ['language-skills','quantitative-skills','logical-reasoning'] for q in json.load(io.open(f'data/questions/{n}.json',encoding='utf-8'))]; print(c)"
 ```
 
+## Page weight, measured in a browser (v2.13.0)
+
+**Measure with `performance.getEntriesByType("resource")` and read
+`transferSize`.** Two earlier attempts at this number were wrong: summing
+`content-length` reports ZERO for every compressed response, and summing the
+files in `.next/static/chunks` counts all eight question banks plus KaTeX, which
+no single page loads. What a page actually pulls, against a production server:
+
+```
+                    before    after
+home                 313.4    271.4 KB
+gmat setup           306.9    265.0 KB
+nmat language quiz   342.9    323.8 KB
+gmat quant quiz      458.4    439.3 KB
+```
+
+Two things were being paid for on every page and used on almost none.
+
+**The favicon was 25.3 KB.** An `.ico` is a container and the browser downloads
+ALL of it before choosing one image, so four sizes meant every visitor paid for
+the three they never see -- the 48x48 alone was 11.3 KB and the 256x256 another
+7.6 KB. Trimmed to 16 and 32, which is what a tab and a retina tab use, it is
+6.4 KB. `scripts/trim-favicon.mjs` does it as byte surgery on the container, so
+the pixels are untouched and there is no re-encoding to disagree with the
+original. The larger sizes are for OS shortcuts and pinned tiles, which this
+site does not ask to be.
+
+**Geist Mono was preloaded everywhere and is used in four places**, all behind a
+started attempt or an error: the timer, the paused overlay's frozen clock, the
+two calculator explainers, and the error page's reference code. `next/font`
+preloads every face declared in the layout, so 22.9 KB of monospace arrived on
+the home page forever. `preload: false` leaves it to load when a rule first
+needs it, which on those screens is not a page-load cost.
+
+**Still on the table, and measured rather than guessed: KaTeX is 62.0 KB brotli
+of JavaScript**, the largest single asset on a math section. Rendering the
+bank's 1,982 math spans at build time with `katex.renderToString` and shipping
+the HTML would cost **26.4 KB brotli spread across eight banks** and remove that
+runtime entirely. The CSS and fonts would still be needed, so it is the JS alone
+that goes. It is a real refactor rather than a tweak: `MathText` would move to
+`dangerouslySetInnerHTML`, which is defensible for build-time-generated content
+from our own bank but must be stated out loud, and the rendered HTML and the
+stylesheet would have to stay version-locked.
+
 ## The question bank is split at build time (v2.12.0)
 
 **`data/questions/` is the source. `data/generated/` is what ships, and it is
