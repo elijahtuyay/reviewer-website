@@ -44,7 +44,7 @@ export default function SequentialRunner({
 
   const {
     phase, notice, questions, answers, flagged, cursor, totalQuestions, deadline,
-    paused, frozenTimeLabel, answeredCount, result, reviewChangesLeft, explanations,
+    paused, frozenTimeLabel, answeredCount, result, reviewChangesLeft, explanations, explanationsFailed,
     select, toggleOption, toggleFlag, advance, submit, restart, pause, resume, onDeadlineChange,
   } = attempt;
 
@@ -222,6 +222,7 @@ export default function SequentialRunner({
                 index={cursor}
                 value={answers[current.id] ?? null}
                 explanation={explanations[current.id]}
+                explanationFailed={explanationsFailed}
                 onSelect={select}
                 onToggle={toggleOption}
                 reviewMode={false}
@@ -289,6 +290,7 @@ export default function SequentialRunner({
                 index={index}
                 value={answers[question.id] ?? null}
                 explanation={explanations[question.id]}
+                explanationFailed={explanationsFailed}
                 reviewMode
               />
             ))}

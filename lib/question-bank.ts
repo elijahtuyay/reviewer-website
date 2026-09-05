@@ -103,7 +103,9 @@ export function loadExplanations(
   if (existing) return existing;
 
   const exam = findExam(examId);
-  if (!exam) return Promise.resolve({});
+  // Same reasoning as the loader above: rejecting keeps "nothing was found" and
+  // "nothing arrived" distinguishable, and keeps the failure out of the cache.
+  if (!exam) return Promise.reject(new Error(`unknown exam "${examId}"`));
 
   const promise = exam
     .loadExplanations(sectionId)

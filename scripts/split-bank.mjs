@@ -20,7 +20,7 @@
  * source. It costs about a second and needs no network, so it does not weaken
  * the offline property.
  */
-import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -41,6 +41,13 @@ async function banks(dir) {
 
 /** Mirrors `hasMath` in components/MathText.tsx: a `$...$` span. */
 const MATH = /\$[^$]+\$/;
+
+/*
+ * Wiped and rebuilt, not written over. Writing over left an orphan behind
+ * whenever a source bank was renamed or removed, and a stale import would
+ * still resolve it.
+ */
+await rm(OUT, { recursive: true, force: true });
 
 const files = (await banks(SRC)).sort();
 if (files.length === 0) throw new Error("no question banks found");
@@ -75,7 +82,7 @@ for (const file of files) {
      *
      * `questionNeedsMath` decides whether to preload the KaTeX chunk, and it
      * reads the explanation for a reason its own comment records: Logical
-     * Reasoning has math in exactly ONE of 100 prompts but 28 explanations, so
+     * Reasoning has math in exactly ONE of 100 prompts but 29 explanations, so
      * the whole section's preload hung on a single question. Deferring the
      * explanations would have silently removed that signal and left the KaTeX
      * fetch to happen mid-review, which is the round trip the preload exists to

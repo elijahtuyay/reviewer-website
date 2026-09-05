@@ -90,6 +90,8 @@ interface QuestionCardProps {
    * rather than an empty space.
    */
   explanation?: string;
+  /** True once the explanations chunk has failed, so this can stop promising it. */
+  explanationFailed?: boolean;
   /**
    * The candidate's answer: an option index, an array of them, or typed text.
    * See `lib/answers.ts` for why this is not a bare number any more.
@@ -129,6 +131,7 @@ function QuestionCard({
   onSelect,
   onToggle,
   explanation,
+  explanationFailed = false,
   reviewMode = false,
   lockedReason,
 }: QuestionCardProps) {
@@ -505,13 +508,34 @@ function QuestionCard({
           >
             {isAnswered ? (isCorrect ? "Correct" : "Incorrect") : "No answer"}
           </p>
-          <p className="mt-2 leading-relaxed text-foreground">
+          <p
+            /*
+             * A reserved height and a polite live region, because this text
+             * arrives over the network AFTER the screen is painted.
+             *
+             * Without the height, every card on a free-form section grows at
+             * once when the chunk lands and the page jumps under anyone who
+             * submitted and started scrolling. Without the live region, a
+             * screen-reader user gets no signal that it arrived at all.
+             */
+            aria-live="polite"
+            className="mt-2 min-h-12 leading-relaxed text-foreground"
+          >
             {explanation ? (
               <MathText text={explanation} />
             ) : (
-              // The chunk is in flight. Saying so beats a blank line that reads
-              // as an explanation nobody wrote.
-              <span className="text-muted">The explanation is loading.</span>
+              /*
+               * The chunk is not here yet. Saying so beats a blank line, which
+               * reads as an explanation nobody wrote.
+               *
+               * Imperative rather than "the explanation is loading", which is a
+               * progressive tense and fails `audit:copy` under ASD-STE100 rule
+               * 1. That gate caught this, after I ran it through a pipe to
+               * `tail` and read `tail`'s exit code instead of its own.
+               */
+              <span className="text-muted">
+                {explanationFailed ? "The explanation did not load." : "Wait for the explanation."}
+              </span>
             )}
           </p>
         </div>

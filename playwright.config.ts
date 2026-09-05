@@ -102,7 +102,9 @@ export default defineConfig({
     // did not forward the flag, so Next fell back to 3000 and found the dev
     // server already there.
     command: useDev
-      ? `npx next dev --port ${PORT}`
+      // `npx next` bypasses npm, so `predev` never fires and the split would
+      // not run. The production path gets it through `prebuild`.
+      ? `npm run bank:split && npx next dev --port ${PORT}`
       : `npm run build && npx next start --port ${PORT}`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,

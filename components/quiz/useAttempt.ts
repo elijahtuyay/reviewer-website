@@ -78,6 +78,8 @@ export interface Attempt {
    * Empty while the chunk is in flight, which is a state the card renders.
    */
   explanations: ExplanationMap;
+  /** True once the explanations chunk has failed, so the UI can say so. */
+  explanationsFailed: boolean;
   flagged: string[];
 
   /** Index of the question on screen. Only meaningful for sequential navigation. */
@@ -457,15 +459,34 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
   const [explanations, setExplanations] = useState<ExplanationMap>(() =>
     getLoadedExplanations(examId, sectionId)
   );
+  /*
+   * Tracked so the review screen can stop promising something that is not
+   * coming. Without it a failed chunk left "Wait for the explanation." on
+   * screen permanently, since nothing re-requests it: the effect's deps do not
+   * change after the failure.
+   */
+  const [explanationsFailed, setExplanationsFailed] = useState(false);
 
   useEffect(() => {
-    if (phase !== "done" && phase !== "reviewEdit") return;
+    /*
+     * "done" ONLY, and `reviewEdit` is deliberately excluded.
+     *
+     * A review lane measured this rather than reading it: `reviewEdit` is
+     * GMAT's capped pre-submit review pass, where the TIMER IS STILL RUNNING,
+     * and including it pulled 34.8 KB down mid-clock. Three places in this repo
+     * said explanations arrive at submit and not before; only the code
+     * disagreed.
+     */
+    if (phase !== "done") return;
     let cancelled = false;
     loadExplanations(examId, sectionId)
       .then((map) => {
-        if (!cancelled) setExplanations(map);
+        if (cancelled) return;
+        setExplanations(map);
+        setExplanationsFailed(false);
       })
       .catch(() => {
+        if (!cancelled) setExplanationsFailed(true);
         /*
          * Swallowed on purpose. The section is already submitted and the score
          * is already stored, so a failed explanation chunk costs the reasoning
@@ -792,6 +813,7 @@ export function useAttempt({ exam, section, enabled }: Options): Attempt {
     questions,
     answers,
     explanations,
+    explanationsFailed,
     flagged,
     cursor,
     totalQuestions: section.questionCount,

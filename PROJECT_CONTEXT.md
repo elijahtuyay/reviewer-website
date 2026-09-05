@@ -739,16 +739,29 @@ mobile data, in the seconds before a timed section starts.
 
 ```
 bank                          before   answer   review   saved
-  gmat/quantitative             74.4    28.0    35.7   62%
-  gre/quantitative              80.4    34.7    35.3   57%
-  quantitative-skills           70.1    36.8    24.4   48%
-  gmat/data-insights            95.5    50.0    34.8   48%
-  logical-reasoning             83.6    46.6    26.5   44%
+  gmat/data-insights            95.5    50.8    34.8   47%
+  gmat/quantitative             74.4    30.1    35.7   60%
+  gmat/verbal                  194.6   144.1    39.8   26%
+  gre/quantitative              80.4    37.1    35.3   54%
   gre/verbal                   127.8    74.7    40.5   42%
   language-skills               97.3    56.0    30.1   42%
-  gmat/verbal                  194.6   144.1    39.8   26%
+  logical-reasoning             83.6    46.6    26.5   44%
+  quantitative-skills           70.1    36.8    24.4   48%
   ALL                          823.8   476.2           42% off the answering path
 ```
+
+Paste that table from a fresh `npm run bank:split` rather than editing it. The
+first version of this section was written before `explanationHasMath` existed
+and three of its rows were wrong by a percentage point or two, which a review
+lane caught by running the script.
+
+**The saving survives compression, which is the number that actually matters.**
+Responses are served compressed and prose compresses well, so a raw-byte figure
+could have been mostly an artifact of dropping the pretty-printing. Measured
+with gzip -9 and brotli q11 over source against generated questions, the total
+is **42% gzipped and 43% brotli** against 41% raw. The quantitative sections do
+BETTER compressed (66% against 59% raw) because their explanations are the
+repetitive part; the two verbal banks do slightly worse.
 
 The quantitative sections gain most, because their prompts are short and their
 explanations do the work. Dropping the pretty-printing helps too: the generated
@@ -768,6 +781,12 @@ records that Logical Reasoning has math in one of 100 prompts but 29
 explanations, so the whole section's preload hangs on it. The split therefore
 keeps one bit behind: `explanationHasMath`, a boolean, computed at split time.
 A boolean survives; the prose does not need to.
+
+**Editing a question while `next dev` runs changes nothing on screen.** The
+split is one-shot with no watcher, and the dev server watches `data/generated/`,
+which is what it imports, not `data/questions/`. Run `npm run bank:split` and
+restart. The failure reads as a caching bug and will cost someone an hour if
+they have not been told.
 
 **A missing `data/generated/` breaks `tsc`, not just the app.** The imports are
 typed, so a fresh clone cannot even typecheck until the split has run. `prepare`
@@ -961,7 +980,7 @@ All four lanes ran. Beyond the items above they surfaced, and this PR fixes:
 
 ## THE MODULAR EXAM ARCHITECTURE (read this before adding anything)
 
-As of v2.0.0 exams are drop-in modules. **`lib/exams/registry.ts` is the only file that lists exams.** To add one: write `lib/exams/<id>/index.ts` default-exporting an `ExamModule`, put its JSON under `data/questions/<id>/`, and add one line to that registry. Routes, home page, setup page, section lock, sitemap, footer and the quiz engine all read from it.
+As of v2.0.0 exams are drop-in modules. **`lib/exams/registry.ts` is the only file that lists exams.** To add one: write `lib/exams/<id>/index.ts` default-exporting an `ExamModule`, put its JSON under `data/questions/<id>/`, and add one line to that registry. **Point `loadSection` and `loadExplanations` at `data/generated/<id>/<section>.questions.json` and `.explanations.json`, never at `data/questions/`** — see the split section above. Importing the source compiles and works, and silently ships the explanations you were trying to defer, so `jsonBank` throws in development if it is handed a record that still has one. Routes, home page, setup page, section lock, sitemap, footer and the quiz engine all read from it.
 
 The contract is `lib/exams/types.ts`. The crucial idea is that an exam declares how it BEHAVES as data, so the engine never branches on an exam id:
 

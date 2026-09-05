@@ -90,3 +90,33 @@ export async function setDeadlineIn(page: Page, examId: string, sectionId: strin
   await page.reload();
   await expect(page.getByRole("timer")).toBeVisible({ timeout: 30_000 });
 }
+
+/**
+ * Force the attempt to serve exactly these questions, and reload onto them.
+ *
+ * The draw is random per attempt, so a test that needs a KNOWN question cannot
+ * wait for one to turn up. Rewriting `questionIds` is the same lever
+ * `setDeadlineIn` uses on the deadline.
+ */
+export async function pinQuestions(
+  page: Page,
+  examId: string,
+  sectionId: string,
+  ids: string[]
+) {
+  await page.evaluate(
+    ([exam, section, questionIds]) => {
+      const key = `progress:${exam}:${section}`;
+      const raw = sessionStorage.getItem(key);
+      if (!raw) throw new Error(`no attempt at ${key}`);
+      const record = JSON.parse(raw);
+      record.questionIds = questionIds;
+      record.answers = {};
+      record.cursor = 0;
+      sessionStorage.setItem(key, JSON.stringify(record));
+    },
+    [examId, sectionId, ids] as const
+  );
+  await page.reload();
+  await expect(page.getByRole("timer")).toBeVisible({ timeout: 30_000 });
+}

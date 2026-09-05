@@ -45,7 +45,7 @@ export default function FreeFormRunner({
 
   const {
     phase, notice, questions, answers, deadline, paused, frozenTimeLabel,
-    answeredCount, result, explanations, select, toggleOption, submit, restart, pause, resume,
+    answeredCount, result, explanations, explanationsFailed, select, toggleOption, submit, restart, pause, resume,
     onDeadlineChange,
   } = attempt;
 
@@ -318,6 +318,7 @@ export default function FreeFormRunner({
                 index={index}
                 value={answers[question.id] ?? null}
                 explanation={explanations[question.id]}
+                explanationFailed={explanationsFailed}
                 onSelect={select}
                 onToggle={toggleOption}
                 reviewMode={reviewMode}
