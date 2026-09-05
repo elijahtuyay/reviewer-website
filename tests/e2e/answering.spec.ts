@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
+import { readFileSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { options, startSection } from "./helpers";
+import { options, pinQuestions, startSection } from "./helpers";
 
 /**
  * The first Sentence Equivalence question in the draw.
@@ -157,5 +158,57 @@ test.describe("answer persistence", () => {
 
     await page.reload();
     await expect(options(page).first()).toHaveAttribute("aria-checked", "true");
+  });
+});
+
+test.describe("explanations", () => {
+  /**
+   * THE EXPLANATION MUST ARRIVE AFTER SUBMITTING, AND BE THE RIGHT ONE.
+   *
+   * Explanations are no longer part of a section's bank. They are 20% to 47% of
+   * it and none can be read before the candidate submits, so they load as their
+   * own chunk at that moment, keyed by question id.
+   *
+   * THE FIRST VERSION OF THIS TEST PASSED AGAINST DELETED CODE. It asserted
+   * that the waiting placeholder was absent and that some paragraphs were long,
+   * which a review lane showed is trivially true when the explanation block
+   * renders NOTHING at all — prompts and passages satisfy the length count on
+   * their own. That is the second time in this suite's short life, and both
+   * times the fix was the same: assert the actual content, not its shadow.
+   *
+   * So this pins a known question, reads its explanation from the generated map
+   * on disk, and requires that exact prose on screen. It therefore also proves
+   * the id-to-explanation mapping survived the split, which is the thing most
+   * worth checking about the split at all.
+   */
+  test("load after submitting, and are the right explanation", async ({ page }) => {
+    const questions = JSON.parse(
+      readFileSync("data/generated/language-skills.questions.json", "utf8")
+    ) as { id: string }[];
+    const map = JSON.parse(
+      readFileSync("data/generated/language-skills.explanations.json", "utf8")
+    ) as Record<string, string>;
+
+    // A question whose explanation carries no math, so what is asserted is the
+    // plain text rather than something KaTeX has re-rendered.
+    const pick = questions.find(
+      (q) => !map[q.id].includes("$") && map[q.id].length > 120
+    );
+    if (!pick) throw new Error("no math-free explanation in the bank");
+    const expected = map[pick.id];
+
+    await startSection(page, "nmat", "Language Skills");
+    await pinQuestions(page, "nmat", "language-skills", [pick.id]);
+
+    // Before submitting there must be no explanation at all.
+    await expect(page.getByText(expected.slice(0, 60))).toHaveCount(0);
+
+    await page.getByRole("button", { name: /^Submit/ }).click();
+    await page.getByRole("alertdialog").getByRole("button", { name: /submit section/i }).click();
+    await expect(page.getByRole("timer")).toHaveCount(0);
+
+    await expect(page.getByText(expected.slice(0, 60))).toBeVisible({ timeout: 20_000 });
+    await expect(page.getByText("Wait for the explanation.")).toHaveCount(0);
+    await expect(page.getByText("The explanation did not load.")).toHaveCount(0);
   });
 });

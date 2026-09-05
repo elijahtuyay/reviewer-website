@@ -53,3 +53,6 @@ next-env.d.ts
 /playwright-report/
 /blob-report/
 /.playwright/
+
+# Generated question-bank split (see scripts/split-bank.mjs)
+/data/generated/

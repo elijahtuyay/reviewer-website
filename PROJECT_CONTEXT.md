@@ -724,6 +724,81 @@ A separate Claude session reported (2026-08-21) that the correct answer sits in 
 python -c "import json,io,collections; c=collections.Counter(); [c.update([q['correctIndex']]) for n in ['language-skills','quantitative-skills','logical-reasoning'] for q in json.load(io.open(f'data/questions/{n}.json',encoding='utf-8'))]; print(c)"
 ```
 
+## The question bank is split at build time (v2.12.0)
+
+**`data/questions/` is the source. `data/generated/` is what ships, and it is
+gitignored.** `scripts/split-bank.mjs` writes two artifacts per bank: the
+questions without their explanations, and an id-to-explanation map.
+
+**Why.** Opening a section downloads its ENTIRE bank, because the draw happens
+in the browser, which is what keeps every page static and the hosting free. The
+explanations rode along in the same file, were 20% to 47% of it, and not one of
+them can be seen until the candidate submits. GMAT Quantitative was shipping
+34.5 KB of prose to someone who had not yet answered a question, over Philippine
+mobile data, in the seconds before a timed section starts.
+
+```
+bank                          before   answer   review   saved
+  gmat/data-insights            95.5    50.8    34.8   47%
+  gmat/quantitative             74.4    30.1    35.7   60%
+  gmat/verbal                  194.6   144.1    39.8   26%
+  gre/quantitative              80.4    37.1    35.3   54%
+  gre/verbal                   127.8    74.7    40.5   42%
+  language-skills               97.3    56.0    30.1   42%
+  logical-reasoning             83.6    46.6    26.5   44%
+  quantitative-skills           70.1    36.8    24.4   48%
+  ALL                          823.8   476.2           42% off the answering path
+```
+
+Paste that table from a fresh `npm run bank:split` rather than editing it. The
+first version of this section was written before `explanationHasMath` existed
+and three of its rows were wrong by a percentage point or two, which a review
+lane caught by running the script.
+
+**The saving survives compression, which is the number that actually matters.**
+Responses are served compressed and prose compresses well, so a raw-byte figure
+could have been mostly an artifact of dropping the pretty-printing. Measured
+with gzip -9 and brotli q11 over source against generated questions, the total
+is **42% gzipped and 43% brotli** against 41% raw. The quantitative sections do
+BETTER compressed (66% against 59% raw) because their explanations are the
+repetitive part; the two verbal banks do slightly worse.
+
+The quantitative sections gain most, because their prompts are short and their
+explanations do the work. Dropping the pretty-printing helps too: the generated
+files are for a machine.
+
+**What did NOT change, deliberately.** An author still edits one file per
+section with the explanation next to the question it explains, and `audit:bank`
+still reads exactly those files. The split is a build artifact, regenerated
+before `dev` and `build`, so it cannot drift from the source. It needs no
+network, so the offline property holds.
+
+**`Question` no longer HAS an `explanation` field**, and that is what made the
+change safe: removing it turned every consumer into a compile error rather than
+a silent blank. There were two, and one was not obvious — `questionNeedsMath`
+reads the explanation to decide whether to preload KaTeX, and its own comment
+records that Logical Reasoning has math in one of 100 prompts but 29
+explanations, so the whole section's preload hangs on it. The split therefore
+keeps one bit behind: `explanationHasMath`, a boolean, computed at split time.
+A boolean survives; the prose does not need to.
+
+**Editing a question while `next dev` runs changes nothing on screen.** The
+split is one-shot with no watcher, and the dev server watches `data/generated/`,
+which is what it imports, not `data/questions/`. Run `npm run bank:split` and
+restart. The failure reads as a caching bug and will cost someone an hour if
+they have not been told.
+
+**A missing `data/generated/` breaks `tsc`, not just the app.** The imports are
+typed, so a fresh clone cannot even typecheck until the split has run. `prepare`
+runs it after `npm install` and `npm ci` for exactly that reason, alongside
+`predev` and `prebuild`.
+
+**The review path fails loudly rather than blankly.** `loadExplanations` refuses
+to resolve to an empty map on error, and `QuestionCard` renders "The explanation
+is loading." while the chunk is in flight. An empty string in that slot reads as
+an explanation nobody wrote, which is a worse failure than an honest one, and
+the browser suite asserts real prose after submitting.
+
 ## Browser tests (v2.11.0)
 
 `npm run test:e2e`, Playwright, in `tests/e2e/`. **Every spec names the defect
@@ -871,6 +946,7 @@ What still needs a connection, and when:
 | `git commit`, `git branch`, `git log` | Yes |
 | `git push`, `gh pr create`, `npx vercel` | **No.** Queue the commits and push on landing. |
 | `npm run test:e2e` | Yes, given a Chrome on the machine |
+| `npm run bank:split` | Yes, and it runs before `dev` and `build` anyway |
 | `npm run fonts:vendor` | **No**, and it should almost never run |
 
 **`.env.local` must exist or the build fails**, because `lib/auth/server.ts`
@@ -904,7 +980,7 @@ All four lanes ran. Beyond the items above they surfaced, and this PR fixes:
 
 ## THE MODULAR EXAM ARCHITECTURE (read this before adding anything)
 
-As of v2.0.0 exams are drop-in modules. **`lib/exams/registry.ts` is the only file that lists exams.** To add one: write `lib/exams/<id>/index.ts` default-exporting an `ExamModule`, put its JSON under `data/questions/<id>/`, and add one line to that registry. Routes, home page, setup page, section lock, sitemap, footer and the quiz engine all read from it.
+As of v2.0.0 exams are drop-in modules. **`lib/exams/registry.ts` is the only file that lists exams.** To add one: write `lib/exams/<id>/index.ts` default-exporting an `ExamModule`, put its JSON under `data/questions/<id>/`, and add one line to that registry. **Point `loadSection` and `loadExplanations` at `data/generated/<id>/<section>.questions.json` and `.explanations.json`, never at `data/questions/`** — see the split section above. Importing the source compiles and works, and silently ships the explanations you were trying to defer, so `jsonBank` throws in development if it is handed a record that still has one. Routes, home page, setup page, section lock, sitemap, footer and the quiz engine all read from it.
 
 The contract is `lib/exams/types.ts`. The crucial idea is that an exam declares how it BEHAVES as data, so the engine never branches on an exam id:
 

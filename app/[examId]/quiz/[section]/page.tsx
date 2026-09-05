@@ -119,4 +119,5 @@ const PLACEHOLDER_EXAM = {
   },
   scoring: { kind: "points" as const, pointsPerCorrectAnswer: 1 },
   loadSection: async () => [],
+  loadExplanations: async () => ({}),
 };

@@ -44,8 +44,33 @@ export interface Question {
   topic: string;
   difficulty: Difficulty;
   prompt: string;
-  explanation: string;
   source: QuestionSource;
+
+  /**
+   * THERE IS NO `explanation` HERE, AND THAT IS THE POINT.
+   *
+   * Opening a section downloads its whole bank, because the draw is made in the
+   * browser — which is what keeps every page static. Explanations were 20% to
+   * 47% of that download and NONE of them can be seen before the candidate
+   * submits, so `scripts/split-bank.mjs` moves them into a second artifact that
+   * loads at submit time. See `lib/question-bank.ts`.
+   *
+   * The source files under `data/questions/` are unchanged: an author still
+   * edits one file per section with the explanation next to the question it
+   * explains, and `audit:bank` still reads exactly that. `SourceQuestion` below
+   * is that shape. The split is a build artifact.
+   */
+
+  /**
+   * Whether this question's explanation contains a `$...$` span, computed at
+   * split time.
+   *
+   * Kept because `questionNeedsMath` decides whether to preload KaTeX and used
+   * to read the explanation text directly. Logical Reasoning has math in one of
+   * 100 prompts but 29 explanations, so dropping the signal would have silently
+   * moved that fetch to mid-review. Absent means false.
+   */
+  explanationHasMath?: boolean;
 
   /** Absent means "single". See the note above before making this required. */
   kind?: "single" | "multi" | "numeric";
@@ -83,6 +108,19 @@ export interface Question {
   answerPrefix?: string;
   answerSuffix?: string;
 }
+
+/**
+ * A question as an AUTHOR writes it, in `data/questions/`.
+ *
+ * Identical to `Question` plus the explanation, and it is deliberately not used
+ * by the app: nothing in `app/` or `components/` should ever load a source
+ * bank, because that is the download the split exists to avoid. It exists so
+ * tooling has a name for the shape it reads.
+ */
+export type SourceQuestion = Question & { explanation: string };
+
+/** Question id to explanation, the second half of a split bank. */
+export type ExplanationMap = Record<string, string>;
 
 /**
  * One question and what the candidate put for it.

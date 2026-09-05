@@ -1,4 +1,4 @@
-import { ExamModule, jsonBank } from "@/lib/exams/types";
+import { ExamModule, jsonBank, jsonExplanations } from "@/lib/exams/types";
 
 /**
  * NMAT by GMAC — a Philippine business-school admission test.
@@ -70,9 +70,14 @@ const nmat: ExamModule = {
   scoring: { kind: "points", pointsPerCorrectAnswer: 3 },
 
   loadSection: jsonBank({
-    "language-skills": () => import("@/data/questions/language-skills.json"),
-    "quantitative-skills": () => import("@/data/questions/quantitative-skills.json"),
-    "logical-reasoning": () => import("@/data/questions/logical-reasoning.json"),
+    "language-skills": () => import("@/data/generated/language-skills.questions.json"),
+    "quantitative-skills": () => import("@/data/generated/quantitative-skills.questions.json"),
+    "logical-reasoning": () => import("@/data/generated/logical-reasoning.questions.json"),
+  }),
+  loadExplanations: jsonExplanations({
+    "language-skills": () => import("@/data/generated/language-skills.explanations.json"),
+    "quantitative-skills": () => import("@/data/generated/quantitative-skills.explanations.json"),
+    "logical-reasoning": () => import("@/data/generated/logical-reasoning.explanations.json"),
   }),
 };
 

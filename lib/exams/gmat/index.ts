@@ -1,4 +1,4 @@
-import { ExamModule, jsonBank } from "@/lib/exams/types";
+import { ExamModule, jsonBank, jsonExplanations } from "@/lib/exams/types";
 
 /**
  * GMAT Focus Edition.
@@ -148,9 +148,14 @@ const gmat: ExamModule = {
   },
 
   loadSection: jsonBank({
-    "data-insights": () => import("@/data/questions/gmat/data-insights.json"),
-    quantitative: () => import("@/data/questions/gmat/quantitative.json"),
-    verbal: () => import("@/data/questions/gmat/verbal.json"),
+    "data-insights": () => import("@/data/generated/gmat/data-insights.questions.json"),
+    quantitative: () => import("@/data/generated/gmat/quantitative.questions.json"),
+    verbal: () => import("@/data/generated/gmat/verbal.questions.json"),
+  }),
+  loadExplanations: jsonExplanations({
+    "data-insights": () => import("@/data/generated/gmat/data-insights.explanations.json"),
+    quantitative: () => import("@/data/generated/gmat/quantitative.explanations.json"),
+    verbal: () => import("@/data/generated/gmat/verbal.explanations.json"),
   }),
 };
 

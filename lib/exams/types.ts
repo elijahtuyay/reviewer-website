@@ -1,4 +1,4 @@
-import { Difficulty, ExamId, Question, SectionId } from "@/data/schema";
+import { Difficulty, ExamId, Question, SectionId, ExplanationMap } from "@/data/schema";
 
 /**
  * THE CONTRACT EVERY EXAM IMPLEMENTS.
@@ -245,6 +245,15 @@ export interface ExamModule {
    * them at all.
    */
   loadSection: (sectionId: SectionId) => Promise<Question[]>;
+
+  /**
+   * The same section's explanations, loaded separately and later.
+   *
+   * Split out because none of them can be seen until the candidate submits,
+   * while the questions have to be there before the timer starts. See
+   * `scripts/split-bank.mjs`.
+   */
+  loadExplanations: (sectionId: SectionId) => Promise<ExplanationMap>;
 }
 
 /** Convenience for the common case of a section whose bank is one JSON file. */
@@ -255,6 +264,48 @@ export function jsonBank(
     const loader = loaders[sectionId];
     if (!loader) return [];
     const mod = await loader();
-    return mod.default as Question[];
+    const questions = mod.default as Question[];
+    /*
+     * A LOUD FAILURE FOR THE ONE MISTAKE THAT OTHERWISE SHIPS SILENTLY.
+     *
+     * Questions come from `data/generated/`, where the explanations have been
+     * split out. Pointing a new exam's loader at `data/questions/` instead is
+     * the natural thing to do, compiles cleanly because of the cast above, and
+     * works — while putting every explanation back on the answering path, which
+     * is the entire regression this split exists to prevent. No gate would see
+     * it: the app behaves correctly, only larger.
+     *
+     * Development only. In production the check is dead weight, and by then the
+     * mistake has already been made or not.
+     */
+    if (process.env.NODE_ENV !== "production") {
+      const stowaway = questions.find((q) => "explanation" in (q as object));
+      if (stowaway) {
+        throw new Error(
+          `section "${sectionId}" was loaded from an unsplit bank (question ` +
+            `"${stowaway.id}" still carries an explanation). Point the loader at ` +
+            `data/generated/, not data/questions/.`
+        );
+      }
+    }
+    return questions;
+  };
+}
+
+/** The `jsonBank` of explanations: same shape, other half of the split. */
+export function jsonExplanations(
+  loaders: Record<string, () => Promise<{ default: unknown }>>
+): (sectionId: SectionId) => Promise<ExplanationMap> {
+  return async (sectionId) => {
+    const loader = loaders[sectionId];
+    /*
+     * THROWS rather than returning {}. An empty map is indistinguishable from
+     * a section whose explanations genuinely failed to arrive, and it would be
+     * CACHED as a success, so review would sit at the waiting message forever
+     * with nothing left to retry it.
+     */
+    if (!loader) throw new Error(`no explanations registered for section "${sectionId}"`);
+    const mod = await loader();
+    return mod.default as ExplanationMap;
   };
 }

@@ -81,6 +81,18 @@ interface QuestionCardProps {
   question: Question;
   index: number;
   /**
+   * The explanation, in review mode only.
+   *
+   * A prop rather than a field on `question`, because explanations load as
+   * their own chunk at submit time — they are up to 47% of a section's bank
+   * and none of them can be read before then. Undefined while that chunk is
+   * still arriving, which is why the block below renders a waiting line
+   * rather than an empty space.
+   */
+  explanation?: string;
+  /** True once the explanations chunk has failed, so this can stop promising it. */
+  explanationFailed?: boolean;
+  /**
    * The candidate's answer: an option index, an array of them, or typed text.
    * See `lib/answers.ts` for why this is not a bare number any more.
    */
@@ -118,6 +130,8 @@ function QuestionCard({
   value,
   onSelect,
   onToggle,
+  explanation,
+  explanationFailed = false,
   reviewMode = false,
   lockedReason,
 }: QuestionCardProps) {
@@ -494,8 +508,35 @@ function QuestionCard({
           >
             {isAnswered ? (isCorrect ? "Correct" : "Incorrect") : "No answer"}
           </p>
-          <p className="mt-2 leading-relaxed text-foreground">
-            <MathText text={question.explanation} />
+          <p
+            /*
+             * A reserved height and a polite live region, because this text
+             * arrives over the network AFTER the screen is painted.
+             *
+             * Without the height, every card on a free-form section grows at
+             * once when the chunk lands and the page jumps under anyone who
+             * submitted and started scrolling. Without the live region, a
+             * screen-reader user gets no signal that it arrived at all.
+             */
+            aria-live="polite"
+            className="mt-2 min-h-12 leading-relaxed text-foreground"
+          >
+            {explanation ? (
+              <MathText text={explanation} />
+            ) : (
+              /*
+               * The chunk is not here yet. Saying so beats a blank line, which
+               * reads as an explanation nobody wrote.
+               *
+               * Imperative rather than "the explanation is loading", which is a
+               * progressive tense and fails `audit:copy` under ASD-STE100 rule
+               * 1. That gate caught this, after I ran it through a pipe to
+               * `tail` and read `tail`'s exit code instead of its own.
+               */
+              <span className="text-muted">
+                {explanationFailed ? "The explanation did not load." : "Wait for the explanation."}
+              </span>
+            )}
           </p>
         </div>
       )}
