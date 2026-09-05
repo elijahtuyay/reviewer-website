@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-04, at PR #26 / VERSION.txt `2.8.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-05, at PR #31 / VERSION.txt `2.11.0`.
 
 ## What this project is
 
@@ -541,7 +541,8 @@ document for two releases and sent readers looking for files that were gone.
   live region that speaks at 10, 5 and 1 minutes; before that it was a plain div
   with no role, so a screen-reader user got no warning of any kind before the
   section submitted itself under them. **The digits are NOT `aria-hidden`, and
-  this document said they were for three releases.** Hiding them did stop the
+  this document said they were from v2.3.0 until v2.11.0, seven minor releases,
+  during which it was never true.** Hiding them did stop the
   per-second chatter and also removed the only way for a screen-reader user to
   ASK how much time is left, which they need before committing to a long reading
   passage. They carry `role="timer"` instead: readable on demand, and not an
@@ -745,7 +746,45 @@ The app has zero `data-testid` and should keep it that way. Every query
 therefore doubles as an assertion that the accessibility work still holds: if a
 dialog loses its role or a control loses its name, these fail.
 
-Three things learned while writing it, all of which cost a failing test first:
+**IT RUNS AGAINST A PRODUCTION BUILD, on port 3100.** Two attempts were needed.
+Port 3000 with `reuseExistingServer` was wrong, and the comment defending it had
+the trap backwards: Playwright only probes that the URL answers 2xx, never WHAT
+is answering, so a `next start` of an older build on 3000 would be silently
+tested and reported green. A dedicated port fixed the ambiguity but broke
+running the suite while developing, because **Next 16 refuses to start a second
+dev server for the same project directory whatever port you give it**.
+`next start` has no such lock, so the suite owns 3100 and coexists with a dev
+server on 3000 -- and it tests the artifact that ships, which matters for the
+one spec that asserts a computed style to guard a cascade-ordering bug.
+`E2E_DEV=1` runs it against the dev server instead.
+
+**TWO OF THE FIRST TESTS PASSED AGAINST BROKEN CODE**, and a review lane found
+both by deleting the feature and watching them stay green. This is the failure
+mode a test suite exists to prevent and is perfectly capable of having itself:
+
+- The timer's live-region test used an unscoped
+  `[role="status"][aria-live="polite"]`. `QuestionCard` renders one PER
+  QUESTION, so on a 36-question section it matched 36 regions and passed with
+  the timer's own deleted. It is now scoped to the timer's own sibling and
+  drives the deadline to 10:02 so it can assert what the region actually SAYS.
+  The announcement fires on CROSSING a threshold, never on mounting below one,
+  which is why the deadline is set above ten minutes rather than below.
+- The backgrounded-tab test faked `document.visibilityState`, which throttles
+  nothing: the tab stays foregrounded, timers still fire, and a naive counter
+  loses the same three seconds and passes. It now uses Playwright's clock, where
+  `setSystemTime` advances wall-clock time WITHOUT running a timer and
+  `runFor(1000)` then allows one tick. Deadline arithmetic drops two minutes; a
+  counter drops one second.
+
+Both were re-verified by mutation after the fix. **The first attempt at that
+verification produced a FALSE NEGATIVE**, because the mutation script matched on
+`
+` against a CRLF file and reported "applied" without checking -- the same
+class of harness error as the two this document already records. Assert that a
+mutation applied before trusting what it proves.
+
+Three more things learned while writing it, all of which cost a failing test
+first:
 
 - **A test that passes on the draw is worse than no test.** The passage spec
   first read GMAT Verbal, which is SEQUENTIAL and serves one question at a time,
@@ -760,7 +799,25 @@ Three things learned while writing it, all of which cost a failing test first:
 - **The suite was proved to fire before it was trusted**, the same standard
   `audit:bank` is held to. Re-introducing the cascade bug by changing
   `@layer base` back to an unlayered block makes the truncate spec fail, and
-  restoring it makes it pass.
+  restoring it makes it pass. A lane independently mutated five more: the
+  section lock, the submitted summary, focus restoration, the truncate, and the
+  two-clicks-in-one-frame spec, which failed under a faithful reproduction of
+  the prop-derivation bug while the sequential-click version passed -- confirming
+  the reasoning that spec is built on.
+- **Selectors are accessible names, and that is load-bearing rather than
+  stylistic.** Calculator keys render their label twice, once `aria-hidden` for
+  the eye and once `sr-only`, so a digit button's textContent is "22" and
+  matching visible text finds nothing. Naming keys the way assistive technology
+  sees them is both the only thing that works and a free assertion that every
+  key is correctly announced.
+
+**Known coverage gaps, recorded rather than implied.** GMAT's SEQUENTIAL runner
+is exercised only by the calculator spec, so its own `onToggle` wiring -- two
+more call sites of the exact bug the headline test guards -- is uncovered, as are
+the review-pass allowance, the resumed and expired banners, `restart()`,
+KaTeX rendering, and MobileNavSheet's focus TRAP (its role and Escape are
+covered; the trap is the part that was once recorded as fixed while never
+shipping).
 
 `workers: 1` and `retries: 0` are both deliberate. Attempt state is per-origin
 sessionStorage and the section lock is global to an exam, so parallel workers
@@ -813,6 +870,7 @@ What still needs a connection, and when:
 | `tsc`, `lint`, `verify:engine`, `audit:bank`, `audit:copy` | Yes, all pure local Node |
 | `git commit`, `git branch`, `git log` | Yes |
 | `git push`, `gh pr create`, `npx vercel` | **No.** Queue the commits and push on landing. |
+| `npm run test:e2e` | Yes, given a Chrome on the machine |
 | `npm run fonts:vendor` | **No**, and it should almost never run |
 
 **`.env.local` must exist or the build fails**, because `lib/auth/server.ts`
@@ -1556,9 +1614,9 @@ that appears not to have applied is usually this.
 
 ---
 
-**Current state: `main` is at v2.8.0, and is the only branch.**
+**Current state: `main` is at v2.11.0, and is the only branch.**
 
-"Clean" is five commands rather than a claim, and all five pass on `main`:
+"Clean" is six commands rather than a claim, and all six pass on `main`:
 
 ```bash
 npx tsc --noEmit        # zero errors
@@ -1566,6 +1624,7 @@ npm run lint            # zero errors, zero warnings
 npm run verify:engine   # adaptive ladder, both scoring models, the calculator
 npm run audit:bank      # every statistical guarantee about the question bank
 npm run audit:copy      # ASD-STE100 compliance of every user-facing description
+npm run test:e2e        # 42 browser tests, desktop and a phone viewport
 ```
 
 `npm run build` must also still print exactly ONE dynamic route

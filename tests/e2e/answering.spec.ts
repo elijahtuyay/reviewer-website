@@ -1,12 +1,35 @@
 import { expect, test } from "@playwright/test";
-import { clearAttempts, options, startSection } from "./helpers";
+import type { Page } from "@playwright/test";
+import { options, startSection } from "./helpers";
+
+/**
+ * The first Sentence Equivalence question in the draw.
+ *
+ * Picking "the first group containing checkboxes" was draw-dependent, and a
+ * review lane measured the cost: GRE Verbal also holds seven open
+ * "select all that apply" items, which have THREE options and no
+ * `selectExactly`, so all three picks legitimately stick. Simulated over 20,000
+ * draws, one of those lands first in 1.2% of them, which with `retries: 0`
+ * meant a hard failure roughly one run in forty for a reason that is not a bug.
+ *
+ * Six options is what identifies Sentence Equivalence, and a 27-question GRE
+ * Verbal draw from a bank holding 27 of them essentially always contains one.
+ * So this asserts rather than skips: a draw with none is itself worth knowing
+ * about.
+ */
+function sentenceEquivalence(page: Page) {
+  return page
+    .locator('[role="group"]')
+    .filter({ has: page.locator('[role="checkbox"]:nth-child(6)') })
+    .first();
+}
+
 
 /**
  * Answering behavior, and the two defects that only a real browser found.
  */
 
 test.describe("multi-select", () => {
-  test.beforeEach(async ({ page }) => clearAttempts(page, "gre"));
 
   /**
    * THE BUG THIS SUITE EXISTS FOR.
@@ -27,14 +50,9 @@ test.describe("multi-select", () => {
   test("two clicks in one frame both register", async ({ page }) => {
     await startSection(page, "gre", "Verbal Reasoning");
 
-    const checkboxes = page.locator('[role="checkbox"]');
-    await expect(checkboxes.first()).toBeVisible();
-
-    // Options belong to a question via their group; take the first group that
-    // has at least two, rather than assuming the draw put one first.
-    const group = page.locator('[role="group"]').filter({ has: page.locator('[role="checkbox"]') }).first();
+    const group = sentenceEquivalence(page);
     const inGroup = group.locator('[role="checkbox"]');
-    expect(await inGroup.count()).toBeGreaterThanOrEqual(2);
+    await expect(inGroup).toHaveCount(6);
 
     await group.evaluate((el) => {
       const boxes = el.querySelectorAll('[role="checkbox"]');
@@ -54,12 +72,8 @@ test.describe("multi-select", () => {
   test("a third pick replaces the oldest, never silently fails", async ({ page }) => {
     await startSection(page, "gre", "Verbal Reasoning");
 
-    const group = page
-      .locator('[role="group"]')
-      .filter({ has: page.locator('[role="checkbox"]') })
-      .first();
-    const boxes = group.locator('[role="checkbox"]');
-    if ((await boxes.count()) < 3) test.skip(true, "this draw has no 3+ option multi-select");
+    const boxes = sentenceEquivalence(page).locator('[role="checkbox"]');
+    await expect(boxes).toHaveCount(6);
 
     await boxes.nth(0).click();
     await boxes.nth(1).click();
@@ -72,7 +86,6 @@ test.describe("multi-select", () => {
 });
 
 test.describe("numeric entry", () => {
-  test.beforeEach(async ({ page }) => clearAttempts(page, "gre"));
 
   /**
    * A decimal point must survive being typed.
@@ -94,7 +107,6 @@ test.describe("numeric entry", () => {
 });
 
 test.describe("reading comprehension", () => {
-  test.beforeEach(async ({ page }) => clearAttempts(page, "gre"));
 
   /**
    * The passage renders in its own block, in full, above the stem.
@@ -134,7 +146,6 @@ test.describe("reading comprehension", () => {
 });
 
 test.describe("answer persistence", () => {
-  test.beforeEach(async ({ page }) => clearAttempts(page, "nmat"));
 
   /** An answer survives a reload, because the attempt is stored per section. */
   test("an answer survives a reload", async ({ page }) => {

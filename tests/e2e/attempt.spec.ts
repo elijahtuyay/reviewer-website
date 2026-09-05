@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { clearAttempts, secondsLeft, startSection } from "./helpers";
+import { secondsLeft, startSection, storedAttempt } from "./helpers";
 
 /**
  * The attempt lifecycle: the timer, the section lock, and submitting.
@@ -7,8 +7,6 @@ import { clearAttempts, secondsLeft, startSection } from "./helpers";
  */
 
 test.describe("the timer", () => {
-  test.beforeEach(async ({ page }) => clearAttempts(page, "nmat"));
-
   /**
    * A reload must not grant a fresh section.
    *
@@ -23,7 +21,7 @@ test.describe("the timer", () => {
     const before = await secondsLeft(page);
     await page.waitForTimeout(3000);
     await page.reload();
-    await expect(page.getByRole("timer")).toBeVisible();
+    await expect(page.getByRole("timer")).toBeVisible({ timeout: 30_000 });
     const after = await secondsLeft(page);
 
     // Time must have moved forward, and must not have been handed back.
@@ -33,31 +31,42 @@ test.describe("the timer", () => {
   });
 
   /**
-   * The clock is computed from a stored deadline, not by decrementing a
-   * counter, because browsers throttle timers in backgrounded tabs and the
-   * counter version silently granted free exam time.
+   * THE CLOCK IS ARITHMETIC ON A DEADLINE, NOT A COUNTER THAT TICKS.
+   *
+   * Browsers throttle timers in a backgrounded tab, so a decrementing
+   * `setInterval` silently granted free exam time — a real bug this project
+   * shipped and fixed.
+   *
+   * The first version of this test faked `document.visibilityState` and
+   * dispatched `visibilitychange`, which proves nothing: the tab is still
+   * foregrounded, timers still fire, and a naive counter loses the same three
+   * seconds and passes. A review lane demonstrated that by deleting the
+   * `visibilitychange` listener outright and watching the test stay green.
+   *
+   * Playwright's clock is the only way to tell the two implementations apart in
+   * process. `setSystemTime` moves wall-clock time WITHOUT running any pending
+   * timer, which is exactly what a throttled tab looks like; `runFor(1000)`
+   * then lets a single tick happen. A deadline-based clock recomputes from
+   * `Date.now()` and drops two minutes. A counter drops one second.
    */
-  test("the clock keeps falling while the tab is hidden", async ({ page }) => {
+  test("a throttled tab does not win back time", async ({ page }) => {
+    await page.clock.install();
     await startSection(page, "nmat", "Language Skills");
+
     const before = await secondsLeft(page);
 
-    await page.evaluate(() => {
-      Object.defineProperty(document, "visibilityState", { value: "hidden", configurable: true });
-      document.dispatchEvent(new Event("visibilitychange"));
-    });
-    await page.waitForTimeout(3000);
-    await page.evaluate(() => {
-      Object.defineProperty(document, "visibilityState", { value: "visible", configurable: true });
-      document.dispatchEvent(new Event("visibilitychange"));
-    });
+    const now = await page.evaluate(() => Date.now());
+    await page.clock.setSystemTime(now + 120_000);
+    await page.clock.runFor(1000);
 
-    expect(before - (await secondsLeft(page))).toBeGreaterThanOrEqual(2);
+    const after = await secondsLeft(page);
+    // Two minutes of wall clock passed. Anything close to one second means the
+    // countdown is counting ticks rather than reading the deadline.
+    expect(before - after).toBeGreaterThan(100);
   });
 });
 
 test.describe("the section lock", () => {
-  test.beforeEach(async ({ page }) => clearAttempts(page, "nmat"));
-
   /**
    * Starting a second section while one is live must be refused.
    *
@@ -80,18 +89,35 @@ test.describe("the section lock", () => {
     await expect(page.getByRole("timer")).toHaveCount(0);
   });
 
-  /** The first section is still there, and still running, afterwards. */
-  test("the running section is untouched by the attempt", async ({ page }) => {
+  /**
+   * The blocked attempt must not have started a second clock.
+   *
+   * The first version of this test only checked that the original section still
+   * rendered a timer, which a review lane showed passes with the lock removed
+   * entirely — it proved a page renders, not that a rule held. The deadline is
+   * the thing that matters: if the blocked section had been allowed to begin,
+   * it would have written its own attempt record.
+   */
+  test("the blocked section never starts a clock of its own", async ({ page }) => {
     await startSection(page, "nmat", "Language Skills");
+    const before = await storedAttempt(page, "nmat", "language-skills");
+
     await page.goto("/nmat/quiz/logical-reasoning");
+    await expect(page.getByText(/section locked/i)).toBeVisible();
+
+    expect(
+      await storedAttempt(page, "nmat", "logical-reasoning"),
+      "a locked-out section must not write an attempt"
+    ).toBeNull();
+
     await page.goto("/nmat/quiz/language-skills");
-    await expect(page.getByRole("timer")).toBeVisible();
+    await expect(page.getByRole("timer")).toBeVisible({ timeout: 30_000 });
+    const after = await storedAttempt(page, "nmat", "language-skills");
+    expect(after?.deadline, "the running section's deadline must not move").toBe(before?.deadline);
   });
 });
 
 test.describe("submitting", () => {
-  test.beforeEach(async ({ page }) => clearAttempts(page, "nmat"));
-
   /**
    * Submitting is irreversible, so it asks first — and the dialog is an
    * `alertdialog`, which is what makes a screen reader interrupt for it.
@@ -114,7 +140,7 @@ test.describe("submitting", () => {
    * The score is written into sessionStorage at submit time, which is what
    * keeps the question bank off the critical path of every other screen. A
    * submitted attempt that reports no score is the specific failure that once
-   * made every screen outside the quiz show a real result as 0 correct.
+   * made every screen outside the quiz report a real result as 0 correct.
    */
   test("submitting scores the attempt and stops the clock", async ({ page }) => {
     await startSection(page, "nmat", "Language Skills");
@@ -124,11 +150,10 @@ test.describe("submitting", () => {
 
     await expect(page.getByRole("timer")).toHaveCount(0);
 
-    const summary = await page.evaluate(() => {
-      const raw = sessionStorage.getItem("progress:nmat:language-skills");
-      return raw ? JSON.parse(raw).summary : null;
-    });
-    expect(summary, "a submitted attempt must carry a summary").not.toBeNull();
-    expect(typeof summary.correct).toBe("number");
+    const record = await storedAttempt(page, "nmat", "language-skills");
+    expect(record?.submitted).toBe(true);
+    const summary = record?.summary as { correct?: unknown } | null | undefined;
+    expect(summary, "a submitted attempt must carry a summary").toBeTruthy();
+    expect(typeof summary?.correct).toBe("number");
   });
 });
