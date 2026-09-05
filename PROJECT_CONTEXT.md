@@ -718,6 +718,52 @@ A separate Claude session reported (2026-08-21) that the correct answer sits in 
 python -c "import json,io,collections; c=collections.Counter(); [c.update([q['correctIndex']]) for n in ['language-skills','quantitative-skills','logical-reasoning'] for q in json.load(io.open(f'data/questions/{n}.json',encoding='utf-8'))]; print(c)"
 ```
 
+## Working offline
+
+**Everything except `npm install`, `git push` and the Vercel CLI runs with no
+network.** That is a property worth protecting, because the author works on
+trips where the connection is unreliable, and it was NOT true until v2.10.0.
+
+The one thing that broke it was fonts. `next/font/google` self-hosts fonts for
+the VISITOR, and its documentation says so plainly, which is easy to read as
+"there is no network dependency". There is: it downloads the files from
+`fonts.gstatic.com` **at build time**, every build. Next ships
+`fetch-css-from-google-fonts.js` and a `NEXT_FONT_GOOGLE_MOCKED_RESPONSES`
+escape hatch precisely because of this. Nothing in this repo held a copy -- zero
+font files were tracked -- so `next build` and a cold `next dev` both failed
+without a connection.
+
+The latin subsets of all three faces are now committed under `app/fonts/`,
+101 KB in total, loaded with `next/font/local`, with the SIL Open Font License
+they are released under. `npm run fonts:vendor` refreshes them and is the only
+part that needs a network. It selects the latin block out of Google's
+stylesheet **by its unicode-range**, not by position: Google orders the subsets
+consistently today, so taking the last `@font-face` works until it does not, and
+it would fail by silently shipping the wrong alphabet rather than by erroring.
+
+All three are variable fonts, so one file covers each family's whole weight
+range. One consequence: Source Serif previously loaded only weights 600 and 700,
+so a `font-medium` heading rounded UP to 600, and it now renders a true 500.
+Nothing depends on the old rounding -- the two 14px headings that did are in the
+sans -- but a heading that looks lighter than it did is this, not a regression.
+
+What still needs a connection, and when:
+
+| Step | Offline? |
+| --- | --- |
+| `npm install` | **No.** Run it before travelling, and do not delete `node_modules`. |
+| `npm run dev`, `npm run build` | Yes |
+| `tsc`, `lint`, `verify:engine`, `audit:bank`, `audit:copy` | Yes, all pure local Node |
+| `git commit`, `git branch`, `git log` | Yes |
+| `git push`, `gh pr create`, `npx vercel` | **No.** Queue the commits and push on landing. |
+| `npm run fonts:vendor` | **No**, and it should almost never run |
+
+**`.env.local` must exist or the build fails**, because `lib/auth/server.ts`
+throws at module scope on a missing `BETTER_AUTH_SECRET`. That throw is
+deliberate (see the accounts section) and it is gitignored, so a fresh clone on
+a plane cannot build until it is recreated. Nothing in the build TALKS to the
+database, so an unreachable Neon host is fine.
+
 ## Hosting
 
 **Deployed on Vercel (Hobby), as of v2.0.1.** Chosen over Cloudflare because Next.js is Vercel's own framework, so there is no adapter and no build configuration, and because API routes run natively there when the accounts backend arrives. The Hobby plan never bills (it pauses at the limit) but **forbids commercial use** — ads, payments or a paid plan mean upgrading or migrating to Cloudflare Workers, which is about a day's work since nothing depends on Vercel-specific APIs.

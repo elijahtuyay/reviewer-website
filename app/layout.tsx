@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
+import localFont from "next/font/local";
 import ThemeInitScript from "@/components/ThemeInitScript";
 import SiteHeader from "@/components/SiteHeader";
 import PageTransition from "@/components/PageTransition";
@@ -10,14 +10,45 @@ import { joinWithAnd } from "@/lib/text";
 import { SITE_URL } from "@/lib/site-url";
 import "./globals.css";
 
-const geistSans = Geist({
+/*
+ * THE FONTS ARE IN THIS REPO, AND THAT IS THE POINT.
+ *
+ * These used to come from `next/font/google`. Its docs say it removes external
+ * network requests, and that is true of the VISITOR: the files are self-hosted
+ * and a browser never talks to Google. It is not true of the BUILD, which
+ * downloads them from fonts.gstatic.com every time. Nothing here held a copy —
+ * zero font files were tracked — so `next build` and a cold `next dev` both
+ * needed a working connection, which is a poor property for a site whose author
+ * works on planes and in places with bad internet.
+ *
+ * The latin subsets are committed under `app/fonts/`, 101 KB for all three,
+ * with the SIL Open Font License they are released under. Downloading them is
+ * `scripts/vendor-fonts.mjs`, which picks the latin block out of Google's
+ * stylesheet by its unicode-range rather than by position.
+ *
+ * All three are VARIABLE fonts, so one file covers the whole weight range and
+ * a `weight` range is declared rather than a list. One consequence to know:
+ * Source Serif previously loaded only 600 and 700, so a `font-medium` heading
+ * rounded up to 600. It now renders a true 500. Nothing in the app relies on
+ * the old rounding — the 14px headings that did are in the sans now — but a
+ * heading that looks lighter than it used to is this, not a regression.
+ */
+const geistSans = localFont({
+  src: "./fonts/Geist-latin.woff2",
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  weight: "100 900",
+  display: "swap",
+  adjustFontFallback: "Arial",
+  fallback: ["Arial", "Helvetica", "sans-serif"],
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "./fonts/GeistMono-latin.woff2",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: "100 900",
+  display: "swap",
+  adjustFontFallback: "Arial",
+  fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
 });
 
 /**
@@ -35,15 +66,14 @@ const geistMono = Geist_Mono({
  * is a text face with sturdy stems, so it holds at a section heading and still
  * has presence in the hero. It also reads as institutional rather than
  * editorial, which is the right register for an exam.
- *
- * Two weights, not the full range. Each one is a download on a site whose
- * whole hosting story is that every page is static.
  */
-const displaySerif = Source_Serif_4({
+const displaySerif = localFont({
+  src: "./fonts/SourceSerif4-latin.woff2",
   variable: "--font-display-serif",
-  subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: "200 900",
   display: "swap",
+  adjustFontFallback: "Times New Roman",
+  fallback: ["Georgia", "Times New Roman", "serif"],
 });
 
 /**
