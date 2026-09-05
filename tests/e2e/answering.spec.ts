@@ -1,0 +1,150 @@
+import { expect, test } from "@playwright/test";
+import { clearAttempts, options, startSection } from "./helpers";
+
+/**
+ * Answering behavior, and the two defects that only a real browser found.
+ */
+
+test.describe("multi-select", () => {
+  test.beforeEach(async ({ page }) => clearAttempts(page, "gre"));
+
+  /**
+   * THE BUG THIS SUITE EXISTS FOR.
+   *
+   * QuestionCard used to receive the current answer as a PROP and compute the
+   * new array itself. Two clicks inside one frame both read the same prop,
+   * because React has not re-rendered between them, so the second derived its
+   * array from the pre-click answer and overwrote the first. Measured in
+   * headless Chrome at the time: clicking two options of a Sentence Equivalence
+   * in one tick left exactly ONE selected, on the question type whose entire
+   * rule is that you select two.
+   *
+   * The clicks are dispatched inside a single `evaluate` on purpose. Playwright
+   * clicks are sequential and each waits for the app to settle, which is
+   * exactly the interleaving that hides this. A test that clicks normally
+   * passes against the broken code.
+   */
+  test("two clicks in one frame both register", async ({ page }) => {
+    await startSection(page, "gre", "Verbal Reasoning");
+
+    const checkboxes = page.locator('[role="checkbox"]');
+    await expect(checkboxes.first()).toBeVisible();
+
+    // Options belong to a question via their group; take the first group that
+    // has at least two, rather than assuming the draw put one first.
+    const group = page.locator('[role="group"]').filter({ has: page.locator('[role="checkbox"]') }).first();
+    const inGroup = group.locator('[role="checkbox"]');
+    expect(await inGroup.count()).toBeGreaterThanOrEqual(2);
+
+    await group.evaluate((el) => {
+      const boxes = el.querySelectorAll('[role="checkbox"]');
+      (boxes[0] as HTMLElement).click();
+      (boxes[1] as HTMLElement).click();
+    });
+
+    await expect(inGroup.nth(0)).toHaveAttribute("aria-checked", "true");
+    await expect(inGroup.nth(1)).toHaveAttribute("aria-checked", "true");
+  });
+
+  /**
+   * Sentence Equivalence takes exactly two. A third pick must push the OLDEST
+   * out rather than being ignored, or a candidate who changes their mind has to
+   * work out which one to clear first.
+   */
+  test("a third pick replaces the oldest, never silently fails", async ({ page }) => {
+    await startSection(page, "gre", "Verbal Reasoning");
+
+    const group = page
+      .locator('[role="group"]')
+      .filter({ has: page.locator('[role="checkbox"]') })
+      .first();
+    const boxes = group.locator('[role="checkbox"]');
+    if ((await boxes.count()) < 3) test.skip(true, "this draw has no 3+ option multi-select");
+
+    await boxes.nth(0).click();
+    await boxes.nth(1).click();
+    await boxes.nth(2).click();
+
+    await expect(boxes.nth(0)).toHaveAttribute("aria-checked", "false");
+    await expect(boxes.nth(1)).toHaveAttribute("aria-checked", "true");
+    await expect(boxes.nth(2)).toHaveAttribute("aria-checked", "true");
+  });
+});
+
+test.describe("numeric entry", () => {
+  test.beforeEach(async ({ page }) => clearAttempts(page, "gre"));
+
+  /**
+   * A decimal point must survive being typed.
+   *
+   * This looked broken once and was not: the harness sent the period with
+   * `windowsVirtualKeyCode: 46`, which is VK_DELETE, so "12.5" arrived as "125"
+   * and looked exactly like input filtering the app does not have. Worth a real
+   * test precisely because the false failure was so convincing.
+   */
+  test("accepts a decimal", async ({ page }) => {
+    await startSection(page, "gre", "Quantitative Reasoning");
+
+    const box = page.locator('input[inputmode="decimal"]').first();
+    await expect(box).toBeVisible();
+    await box.fill("");
+    await box.pressSequentially("12.5", { delay: 30 });
+    await expect(box).toHaveValue("12.5");
+  });
+});
+
+test.describe("reading comprehension", () => {
+  test.beforeEach(async ({ page }) => clearAttempts(page, "gre"));
+
+  /**
+   * The passage renders in its own block, in full, above the stem.
+   *
+   * Both halves matter. The split is guarded by a regex that falls back to
+   * unsplit rather than showing a mangled card, so a silent regression shows up
+   * as a missing "Passage" label. And a truncation scare during the v2.8.0
+   * review turned out to be a probe artifact, which is the sort of thing a real
+   * assertion settles once instead of every time.
+   */
+  test("the passage is split out and not truncated", async ({ page }) => {
+    // GRE Verbal, not GMAT Verbal. GRE navigation is "free", so the whole
+    // 27-question draw is on one page, and 43 of its 96 questions carry a
+    // passage. GMAT Verbal is sequential, so whether a passage was visible
+    // depended on the draw, and a test that passes on luck is worse than none.
+    await startSection(page, "gre", "Verbal Reasoning");
+
+    const label = page.getByText("Passage", { exact: true }).first();
+    await expect(label).toBeVisible();
+
+    const passage = label.locator("xpath=following-sibling::p[1]");
+    const words = (await passage.innerText()).trim().split(/\s+/).length;
+    /*
+     * 90, and the number is measured rather than picked. Passage length varies
+     * by exam far more than it looks: GRE runs 110 to 145 words, GMAT 246 to
+     * 314, NMAT 99 to 177. A floor calibrated on GMAT fails honestly-short GRE
+     * passages, which is how this assertion first failed.
+     *
+     * The floor is set below the shortest passage in the bank this test reads,
+     * because the failure it exists to catch is TRUNCATION -- a passage cut off
+     * mid-way renders a fraction of its words, not ten percent fewer. Asserting
+     * the bank's real range here would duplicate audit:bank and break every
+     * time an author writes a slightly shorter passage.
+     */
+    expect(words).toBeGreaterThan(90);
+  });
+});
+
+test.describe("answer persistence", () => {
+  test.beforeEach(async ({ page }) => clearAttempts(page, "nmat"));
+
+  /** An answer survives a reload, because the attempt is stored per section. */
+  test("an answer survives a reload", async ({ page }) => {
+    await startSection(page, "nmat", "Language Skills");
+
+    const first = options(page).first();
+    await first.click();
+    await expect(first).toHaveAttribute("aria-checked", "true");
+
+    await page.reload();
+    await expect(options(page).first()).toHaveAttribute("aria-checked", "true");
+  });
+});

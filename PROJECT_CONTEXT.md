@@ -540,8 +540,13 @@ document for two releases and sent readers looking for files that were gone.
 - **The timer is announced, not just colored** (v2.3.0). It carries a polite
   live region that speaks at 10, 5 and 1 minutes; before that it was a plain div
   with no role, so a screen-reader user got no warning of any kind before the
-  section submitted itself under them. The digits are `aria-hidden` so the clock
-  is not re-announced every second. Five minutes also changes the color, because
+  section submitted itself under them. **The digits are NOT `aria-hidden`, and
+  this document said they were for three releases.** Hiding them did stop the
+  per-second chatter and also removed the only way for a screen-reader user to
+  ASK how much time is left, which they need before committing to a long reading
+  passage. They carry `role="timer"` instead: readable on demand, and not an
+  implicit live region, so it does not announce itself. Found by writing a
+  browser test against the claim in this paragraph. Five minutes also changes the color, because
   the old sixty-second threshold is very late for a visual warning too.
 - Timer (`components/Timer.tsx`): **deadline-based, not tick-counted.** As of v1.6.0 the deadline is owned by the quiz page and persisted (prop `endAt`, not `minutes`), so a reload resumes the same clock instead of granting a fresh section. Pausing persists `pausedAt` so a reload while paused doesn't charge the user for time spent paused; resuming reports the shifted deadline back via `onDeadlineChange`. It computes remaining time from `Date.now()` vs. a stored deadline on every tick, not by decrementing a counter — this was a real bug fix (browsers throttle `setInterval` in backgrounded tabs, which used to silently grant free exam time). Pause shifts the deadline forward by the paused duration. Has a `visibilitychange` listener for immediate correction on tab refocus. If you touch this file, do NOT reintroduce `Date.now()` calls inside the render body — React's `react-hooks/purity` lint rule will fail the build; deadline initialization must happen inside a `useEffect`.
 
@@ -717,6 +722,49 @@ A separate Claude session reported (2026-08-21) that the correct answer sits in 
 ```bash
 python -c "import json,io,collections; c=collections.Counter(); [c.update([q['correctIndex']]) for n in ['language-skills','quantitative-skills','logical-reasoning'] for q in json.load(io.open(f'data/questions/{n}.json',encoding='utf-8'))]; print(c)"
 ```
+
+## Browser tests (v2.11.0)
+
+`npm run test:e2e`, Playwright, in `tests/e2e/`. **Every spec names the defect
+it exists to catch, and all of them shipped.**
+
+The three verification scripts cover pure logic and data well. What had nothing
+was component and browser behavior, and that is where this project's bugs
+actually appear: the multi-select collapse that only real Chrome could find,
+focus restoration that never worked while a comment said it did, a `truncate`
+that a CSS layering mistake silently disabled. Each was found by a person
+driving a browser by hand, and each harness written to find it was deleted
+afterwards.
+
+**It uses the installed Chrome** (`channel: "chrome"`), so there is no 150 MB
+Chromium download and the suite runs offline like everything else here. Only
+`npm i` needs a network.
+
+**Selectors are roles and accessible names, never a class and never a test id.**
+The app has zero `data-testid` and should keep it that way. Every query
+therefore doubles as an assertion that the accessibility work still holds: if a
+dialog loses its role or a control loses its name, these fail.
+
+Three things learned while writing it, all of which cost a failing test first:
+
+- **A test that passes on the draw is worse than no test.** The passage spec
+  first read GMAT Verbal, which is SEQUENTIAL and serves one question at a time,
+  so whether a passage was on screen depended on the random draw. It reads GRE
+  Verbal now, where navigation is `free` and 43 of 96 questions carry a passage,
+  so the whole draw is on one page.
+- **Passage length varies by exam far more than it looks**: GRE 110 to 145
+  words, GMAT 246 to 314, NMAT 99 to 177. A floor calibrated on GMAT failed an
+  honestly-short GRE passage. The assertion is set below the shortest passage in
+  the bank it reads, because the failure it catches is TRUNCATION, which removes
+  most of a passage rather than a tenth of it.
+- **The suite was proved to fire before it was trusted**, the same standard
+  `audit:bank` is held to. Re-introducing the cascade bug by changing
+  `@layer base` back to an unlayered block makes the truncate spec fail, and
+  restoring it makes it pass.
+
+`workers: 1` and `retries: 0` are both deliberate. Attempt state is per-origin
+sessionStorage and the section lock is global to an exam, so parallel workers
+would race it; and a test that passes on a retry is a test that found something.
 
 ## Working offline
 
