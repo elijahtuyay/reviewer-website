@@ -730,12 +730,21 @@ the VISITOR, and its documentation says so plainly, which is easy to read as
 `fonts.gstatic.com` **at build time**, every build. Next ships
 `fetch-css-from-google-fonts.js` and a `NEXT_FONT_GOOGLE_MOCKED_RESPONSES`
 escape hatch precisely because of this. Nothing in this repo held a copy -- zero
-font files were tracked -- so `next build` and a cold `next dev` both failed
-without a connection.
+font files were tracked.
+
+**Only `next build` actually failed, and dev was the worse half.** The Google
+loader catches a download failure, logs one line, and substitutes
+`src: local("Arial")` when `isDev`, so a cold `next dev` offline did not error:
+the entire site quietly rendered in Arial. A build that stops is a problem you
+notice.
 
 The latin subsets of all three faces are now committed under `app/fonts/`,
-101 KB in total, loaded with `next/font/local`, with the SIL Open Font License
-they are released under. `npm run fonts:vendor` refreshes them and is the only
+101 KB in total, loaded with `next/font/local`, with the licenses they are
+released under. **Two license files, not one:** all three fonts are OFL 1.1 and
+the license body is identical, which made a single `OFL.txt` tempting, but OFL
+clause 2 requires each copy to carry "the above copyright notice", and that is
+the part that differs. Shipping only Geist's distributed Adobe's font under
+Vercel's copyright line. A review lane caught it before merge. `npm run fonts:vendor` refreshes them and is the only
 part that needs a network. It selects the latin block out of Google's
 stylesheet **by its unicode-range**, not by position: Google orders the subsets
 consistently today, so taking the last `@font-face` works until it does not, and

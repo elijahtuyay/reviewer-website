@@ -11,27 +11,22 @@ import { SITE_URL } from "@/lib/site-url";
 import "./globals.css";
 
 /*
- * THE FONTS ARE IN THIS REPO, AND THAT IS THE POINT.
+ * The fonts are committed under `app/fonts/` and loaded from disk.
  *
- * These used to come from `next/font/google`. Its docs say it removes external
- * network requests, and that is true of the VISITOR: the files are self-hosted
- * and a browser never talks to Google. It is not true of the BUILD, which
- * downloads them from fonts.gstatic.com every time. Nothing here held a copy —
- * zero font files were tracked — so `next build` and a cold `next dev` both
- * needed a working connection, which is a poor property for a site whose author
- * works on planes and in places with bad internet.
+ * They used to come from `next/font/google`, which downloads them from
+ * fonts.gstatic.com at BUILD time. Its docs say it removes external network
+ * requests, and that is true of the VISITOR but not of the build. Nothing here
+ * held a copy, so the project could not be built without a connection.
  *
- * The latin subsets are committed under `app/fonts/`, 101 KB for all three,
- * with the SIL Open Font License they are released under. Downloading them is
- * `scripts/vendor-fonts.mjs`, which picks the latin block out of Google's
- * stylesheet by its unicode-range rather than by position.
+ * Dev was the worse half, and not in the way it first looked: `next dev` did
+ * NOT fail offline. The Google loader catches a download failure, logs one
+ * line, and substitutes `src: local("Arial")`, so the whole site quietly
+ * rendered in Arial. Only `next build` threw.
  *
- * All three are VARIABLE fonts, so one file covers the whole weight range and
- * a `weight` range is declared rather than a list. One consequence to know:
- * Source Serif previously loaded only 600 and 700, so a `font-medium` heading
- * rounded up to 600. It now renders a true 500. Nothing in the app relies on
- * the old rounding — the 14px headings that did are in the sans now — but a
- * heading that looks lighter than it used to is this, not a regression.
+ * `npm run fonts:vendor` refreshes the files and is the only step that needs a
+ * network. The rationale, and what else does and does not work offline, is in
+ * the "Working offline" section of PROJECT_CONTEXT.md rather than repeated
+ * here.
  */
 const geistSans = localFont({
   src: "./fonts/Geist-latin.woff2",
@@ -47,7 +42,12 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
   display: "swap",
-  adjustFontFallback: "Arial",
+  /*
+   * Not "Arial". Next only accepts Arial, Times New Roman or false here, and
+   * computing metric overrides for a monospace stack against a proportional
+   * face is worse than declining to compute them.
+   */
+  adjustFontFallback: false,
   fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
 });
 
