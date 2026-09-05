@@ -1,6 +1,6 @@
 # Project Context — NMAT Reviewer
 
-**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-05, at PR #31 / VERSION.txt `2.11.0`.
+**Read this file fully before doing anything.** It's a handoff document written for a brand-new Claude Code session with zero memory of prior work on this repo. Last updated: 2026-09-05, on branch `perf/page-weight` / VERSION.txt `2.13.0`. **`main` is at v2.12.0 — read the WORK IN FLIGHT note at the end of this file first.**
 
 ## What this project is
 
@@ -1734,7 +1734,39 @@ that appears not to have applied is usually this.
 
 ---
 
-**Current state: `main` is at v2.11.0, and is the only branch.**
+## WORK IN FLIGHT — read this before starting anything
+
+**`main` is at v2.12.0. This file is on `perf/page-weight`, which is at v2.13.0,
+is one commit ahead, is pushed, and HAS NO PULL REQUEST.** Opening that PR is
+the next action. The tree was clean at handoff and every gate was green.
+
+What is on the branch is described under "Page weight, measured in a browser"
+above: the favicon trimmed from 25.3 KB to 6.4 KB, and Geist Mono no longer
+preloaded. The home page goes from 313.4 KB to 271.4 KB.
+
+Do the usual: open the PR, dispatch the review lanes CLAUDE.md requires, apply
+what they find, merge with the version in the merge title, delete the branch.
+
+**Recommended next and NOT started**, all measured rather than estimated:
+
+1. **Pre-render the math at build time.** KaTeX is 62.0 KB brotli of JavaScript,
+   the largest single asset on a math section and bigger than the questions
+   themselves. Rendering the bank's 1,982 spans with `katex.renderToString`
+   costs 26.4 KB brotli across eight banks and removes the runtime entirely; the
+   CSS and fonts are needed either way. It is a refactor rather than a tweak,
+   since `MathText` would move to `dangerouslySetInnerHTML` and the generated
+   HTML would have to stay version-locked to the stylesheet. **The user was
+   asked whether to pursue this and had not answered.**
+2. **The browser-test gaps** listed at the end of the "Browser tests" section,
+   worst first: GMAT's sequential runner has two more `onToggle` call sites, the
+   exact bug the headline multi-select test guards, and neither is covered.
+3. **GRE reading passages run 110 to 145 words.** The real GRE mixes ~150-word
+   passages with a long one nearer 450, so they are short — the same fidelity
+   gap closed for GMAT in v2.8.0. Measured across the banks: GRE 110-145, GMAT
+   246-314, NMAT 99-177.
+
+**Current state: `main` is at v2.12.0. `perf/page-weight` is the only other
+branch and is waiting for a PR.**
 
 "Clean" is six commands rather than a claim, and all six pass on `main`:
 
